@@ -479,6 +479,9 @@ img{max-width:100%}
 .trend small{color:var(--ink-3)}
 .exbook .empty{display:flex;flex-direction:column;align-items:center;gap:8px;color:var(--ink-3);padding-top:40px}
 @media (prefers-reduced-motion: reduce){.hwgo,.caret{animation:none}}
+.wb.moving canvas{cursor:grab}
+.stools{flex-wrap:wrap}
+.linkbtn.danger{color:var(--red)}
 /* ---------- setup and sign in ---------- */
 .setup{max-width:560px;margin:0 auto;padding:24px 16px 56px;display:flex;flex-direction:column;gap:16px}
 .setup h1{margin:0;font-size:28px;line-height:1.15}
@@ -1168,9 +1171,27 @@ notify pgrst, 'reload schema';
     }
   }
 
+  // The class's Supabase project, from Netlify (SUPABASE_URL and SUPABASE_KEY), so no phone needs connecting by hand.
+  async function serverCfg() {
+    try {
+      const ctl = window.AbortController ? new AbortController() : null;
+      const t = ctl ? setTimeout(() => ctl.abort(), 6000) : 0;
+      const r = await fetch("/.netlify/functions/config", ctl ? { signal: ctl.signal } : {});
+      clearTimeout(t);
+      if (!r.ok) return null;
+      const j = await r.json();
+      if (j && /^https:\/\//.test(j.url || "") && String(j.key || "").length > 20) {
+        const c = { url: String(j.url).replace(/\/+$/, ""), key: String(j.key) };
+        localStorage.setItem(CFG_KEY, JSON.stringify(c));
+        return c;
+      }
+    } catch (e) {}
+    return null;
+  }
   async function boot() {
     consumeJoinLink();
     cfg = readCfg();
+    if (!cfg) cfg = await serverCfg();
     if (!cfg) { store.set({ phase: "setup" }); return; }
     if (!window.supabase || !window.supabase.createClient) { store.set({ phase: "offline" }); return; }
     try {
@@ -1245,7 +1266,7 @@ notify pgrst, 'reload schema';
     if (classRec.active) { try { await classRec.stop(true); } catch (e) {} }
     live.leave();
     try { await sb.auth.signOut(); } catch (e) {}
-    store.set({ phase: "signin", isOwner: false, sid: null, lessons: [], recs: [], students: [], msgs: [], email: "" });
+    store.set({ phase: "signin", wantTeacher: true, fresh: false, isOwner: false, sid: null, lessons: [], recs: [], students: [], msgs: [], email: "" });
   }
   function forgetProject() { localStorage.removeItem(CFG_KEY); location.reload(); }
   async function connectProject(url, key) {
@@ -1439,10 +1460,22 @@ notify pgrst, 'reload schema';
         this.open.delete(m.id);
         this.strokes = this.strokes.filter(x => x.id !== m.id);
         if (t.text.trim()) this.strokes.push(t);
-      } else this.open.set(m.id, t);
+      } else { this.strokes = this.strokes.filter(x => x.id !== m.id); this.open.set(m.id, t); }
       this.emit({ kind: "redraw" });
     },
     wipe() { this.strokes = []; this.open.clear(); this.emit({ kind: "wipe" }); },
+    edit(m) {
+      const rm = new Set(m.remove || []);
+      this.strokes = this.strokes.filter(x => !rm.has(x.id));
+      for (const x of m.add || []) if (x && x.id && !this.strokes.some(y => y.id === x.id)) this.strokes.push(x);
+      this.emit({ kind: "redraw" });
+    },
+    move(m) {
+      const i = this.strokes.findIndex(x => x.id === m.id);
+      if (i < 0) return;
+      this.strokes[i] = Object.assign({}, this.strokes[i], { x: +m.x, y: +m.y });
+      this.emit({ kind: "redraw" });
+    },
   };
 
   // Live class. The class itself is a row in the database ("live"), so it survives app switches, dropped signal
@@ -1518,6 +1551,7 @@ notify pgrst, 'reload schema';
     setHolder(holder) { this.set({ holder }); this.hb(); },
     setRec(rec) { if (this.role === "teacher") { this.set({ rec }); this.hb(); } },
     wipe() { wb.wipe(); this.send({ type: "wb-wipe" }); },
+    edit(remove, add) { wb.edit({ remove, add }); this.send({ type: "wb-edit", remove, add }); },
     good() { wb.emit({ kind: "good" }); chime(true); this.send({ type: "wb-good" }); },
     point(tile, r, c, lesson) {
       this.set({ point: { tile, r, c, lesson, at: Date.now() } });
@@ -1557,6 +1591,8 @@ notify pgrst, 'reload schema';
       if (m.type === "wb-seg") { wb.remoteSeg(m); if (this.role === "teacher") this.lastHere = now; return; }
       if (m.type === "wb-end") { wb.remoteEnd(m); return; }
       if (m.type === "wb-text") { wb.remoteText(m); if (this.role === "teacher") this.lastHere = now; return; }
+      if (m.type === "wb-edit") { wb.edit(m); if (this.role === "teacher") this.lastHere = now; return; }
+      if (m.type === "wb-move") { wb.move(m); if (this.role === "teacher") this.lastHere = now; return; }
       if (this.role === "student") {
         if (m.type === "hb" || m.type === "point") {
           const back = !this.st.on || this.st.away;
@@ -1650,6 +1686,33 @@ notify pgrst, 'reload schema';
     for (const s of wb.open.values()) drawPts(ctx, s, k, 0);
   }
 
+  /* ================= words on the board: find them to move or fix them ================= */
+  let measureCtx = null;
+  function textBox(s) {
+    if (!measureCtx) measureCtx = document.createElement("canvas").getContext("2d");
+    let size = s.h || 120;
+    measureCtx.font = "400 " + size + "px Andika, sans-serif";
+    let w = measureCtx.measureText(s.text || "").width;
+    const maxW = WB_W - 60;
+    if (w > maxW) { size = size * maxW / w; w = maxW; }
+    return { x0: s.x - w / 2 - 18, x1: s.x + w / 2 + 18, y0: s.y - size * 0.62 - 12, y1: s.y + size * 0.62 + 12 };
+  }
+  function hitText(x, y) {
+    for (let i = wb.strokes.length - 1; i >= 0; i--) {
+      const s = wb.strokes[i];
+      if (s.tool !== "text" || !s.text) continue;
+      const b = textBox(s);
+      if (x >= b.x0 && x <= b.x1 && y >= b.y0 && y <= b.y1) return s;
+    }
+    return null;
+  }
+  function strokeBox(s) {
+    const p = s.pts || [];
+    if (!p.length) return null;
+    let x0 = 1e9, y0 = 1e9, x1 = -1e9, y1 = -1e9;
+    for (let i = 0; i < p.length; i += 2) { x0 = Math.min(x0, p[i]); x1 = Math.max(x1, p[i]); y0 = Math.min(y0, p[i + 1]); y1 = Math.max(y1, p[i + 1]); }
+    return { x0, y0, x1, y1, cx: (x0 + x1) / 2, cy: (y0 + y1) / 2 };
+  }
   /* ================= letter keyboard: big keys, a to z, no predictions ================= */
   const KEY_ROWS = ["abcdefg", "hijklmn", "opqrstu", "vwxyz"];
   function lettersLesson(lessons) {
@@ -2125,6 +2188,17 @@ notify pgrst, 'reload schema';
     }, [full]);
     const typingRef = useRef(null);
     const [, bump] = useState(0);
+    // Keep the whole board above the message bar so every part of it can be written on.
+    useEffect(() => {
+      if (full) return;
+      const t = setTimeout(() => {
+        const cv = cvRef.current;
+        if (!cv) return;
+        const r = cv.getBoundingClientRect(), over = r.bottom - (window.innerHeight - 120);
+        if (over > 0) window.scrollBy({ top: over, behavior: "smooth" });
+      }, 250);
+      return () => clearTimeout(t);
+    }, [full]);
     const C = useCall();
     const kRef = useRef(1), cssK = useRef(1);
     const place = (el, x, y) => {
@@ -2158,6 +2232,7 @@ notify pgrst, 'reload schema';
       redraw(); wb.emit({ kind: "redraw" }); bump(n => n + 1);
     }
     function setTool(t) { if (toolRef.current === "type" && t !== "type") commitTyping(); setToolState(t); }
+
     useEffect(() => { if (!canWrite) { commitTyping(); setToolState("chalk"); } }, [canWrite]);
     useEffect(() => { if (!stamp) return; const t = setTimeout(() => setStamp(0), 2000); return () => clearTimeout(t); }, [stamp]);
 
@@ -2248,7 +2323,14 @@ notify pgrst, 'reload schema';
     // my own finger
     useEffect(() => {
       const cv = cvRef.current, ctx = cv.getContext("2d");
-      let cur = null, queue = [], timer = null;
+      let cur = null, queue = [], timer = null, drag = null, dragSent = 0;
+      const dragTo = (x, y, final) => {
+        x = Math.round(Math.max(40, Math.min(WB_W - 40, x))); y = Math.round(Math.max(30, Math.min(WB_H - 30, y)));
+        drag.lx = x; drag.ly = y;
+        wb.move({ id: drag.id, x, y });
+        const now = Date.now();
+        if (final || now - dragSent > 60) { dragSent = now; live.send({ type: "wb-move", id: drag.id, x, y }); }
+      };
       const units = e => {
         const r = cv.getBoundingClientRect();
         if (rotRef.current) { const u = WB_W / r.height; return [Math.round((e.clientY - r.top) * u), Math.round((r.right - e.clientX) * u)]; }
@@ -2276,9 +2358,24 @@ notify pgrst, 'reload schema';
         if (!canRef.current || cur) return;
         e.preventDefault();
         const t = toolRef.current;
-        if (t === "type") {
-          // tap where the next word should go
+        if (t === "move") {
           const [x, y] = units(e);
+          const hit = hitText(x, y);
+          if (hit) { drag = { id: hit.id, dx: x - hit.x, dy: y - hit.y, lx: hit.x, ly: hit.y }; try { cv.setPointerCapture(e.pointerId); } catch (x2) {} }
+          return;
+        }
+        if (t === "type") {
+          // tap a word on the board to fix it with the letter keys, or tap empty space for a new word
+          const [x, y] = units(e);
+          const hit = hitText(x, y);
+          if (hit && !(typingRef.current && typingRef.current.id === hit.id)) {
+            commitTyping();
+            wb.strokes = wb.strokes.filter(z => z.id !== hit.id);
+            typingRef.current = Object.assign({}, hit);
+            wb.open.set(hit.id, typingRef.current);
+            redraw(); wb.emit({ kind: "redraw" }); sendText(typingRef.current, false); bump(n => n + 1);
+            return;
+          }
           const tt = typingRef.current;
           if (tt) { typingRef.current = Object.assign({}, tt, { x, y }); wb.open.set(tt.id, typingRef.current); redraw(); wb.emit({ kind: "redraw" }); sendText(typingRef.current, false); }
           else { typingRef.current = { id: uid(), tool: "text", text: "", x, y, h: 120 }; }
@@ -2291,12 +2388,19 @@ notify pgrst, 'reload schema';
         add(x, y);
       };
       const move = e => {
+        if (drag) {
+          e.preventDefault();
+          const [x, y] = units(e);
+          dragTo(x - drag.dx, y - drag.dy, false);
+          return;
+        }
         if (!cur) return;
         e.preventDefault();
         const list = e.getCoalescedEvents ? e.getCoalescedEvents() : null;
         for (const ev of list && list.length ? list : [e]) { const [x, y] = units(ev); add(x, y); }
       };
       const up = () => {
+        if (drag) { dragTo(drag.lx, drag.ly, true); drag = null; return; }
         if (!cur) return;
         clearTimeout(timer);
         flush();
@@ -2321,7 +2425,7 @@ notify pgrst, 'reload schema';
 
     const mine = !teacher && canWrite;
     const sz = full ? 22 : 16;
-    const toolList = canWrite ? [["chalk", Ic.chalk, "Chalk"], ["rub", Ic.duster, "Duster"], ["type", Ic.keys, "Type"]] : [];
+    const toolList = canWrite ? [["chalk", Ic.chalk, "Chalk"], ["rub", Ic.duster, "Duster"], ["type", Ic.keys, "Type"], ["move", Ic.hand, "Move"]] : [];
     const label = (t) => (teacher ? t : null);
     const toolBtns = toolList.map(([k, I, t]) => html`<button key=${k} class=${"tool" + (tool === k ? " on" : "")} onClick=${() => setTool(k)} aria-label=${t}><${I} size=${sz}/>${label(t)}</button>`);
     const rotStyle = rot ? "width:" + window.innerHeight + "px;height:" + window.innerWidth + "px;left:" + window.innerWidth + "px" : "";
@@ -2338,7 +2442,7 @@ notify pgrst, 'reload schema';
         ${full && C.joined ? html`<button class=${"tool" + (C.muted ? " on" : "")} onClick=${() => call.toggleMute()} aria-label=${C.muted ? "Unmute" : "Mute"}>${C.muted ? html`<${Ic.micoff} size=${sz}/>` : html`<${Ic.mic} size=${sz}/>`}${label(C.muted ? "Unmute" : "Mute")}</button>` : null}
       </div>` : null}
       <div class="wbmain">
-        <div class=${"wb" + (mine ? " mine" : "") + (canWrite ? " can" : "") + (tool === "type" && canWrite ? " typing" : "")} ref=${wrapRef}>
+        <div class=${"wb" + (mine ? " mine" : "") + (canWrite ? " can" : "") + (tool === "type" && canWrite ? " typing" : "") + (tool === "move" && canWrite ? " moving" : "")} ref=${wrapRef}>
           <canvas ref=${cvRef} aria-label="Writing board"></canvas>
           <div class="wbduster" ref=${dusterRef} aria-hidden="true"><i></i></div>
           <div class="wbhead" ref=${headRef} aria-hidden="true"><i></i></div>
@@ -3053,7 +3157,6 @@ notify pgrst, 'reload schema';
         <button class="btn" disabled=${busy} onClick=${go}>${busy ? "One moment…" : create ? "Create account" : "Sign in"}</button>
         <button class="linkbtn" onClick=${() => { setCreate(!create); setErr(""); setNote(""); }}>${create ? "I already have an account" : "Create the teacher account"}</button>
       </div>
-      <button class="linkbtn" onClick=${forgetProject}>Connect a different Supabase project</button>
     </div>`;
   }
 
@@ -3679,6 +3782,12 @@ notify pgrst, 'reload schema';
     </div>`;
   }
 
+  function SignOutBtn() {
+    const [arm, setArm] = useState(false);
+    useEffect(() => { if (!arm) return; const t = setTimeout(() => setArm(false), 3500); return () => clearTimeout(t); }, [arm]);
+    return html`<button class=${"linkbtn" + (arm ? " danger" : "")} onClick=${() => (arm ? signOut() : setArm(true))}>${arm ? "Tap again to sign out" : "Sign out"}</button>`;
+  }
+
   function StudentsList({ s, onOpen }) {
     const unread = {}, last = {};
     for (const m of s.msgs) {
@@ -3707,7 +3816,7 @@ notify pgrst, 'reload schema';
         <p>Tap your student, then the pencil, then Send on WhatsApp. They don't need an account or a password.</p>
         <p>On a call, have them open the link in Chrome, allow the microphone the first time they record, then add the page to their home screen (Chrome menu, then Add to Home screen). After that they just tap the icon.</p>
       </div>
-      <div class="acct"><span>${s.email ? "Signed in as " + s.email : ""}</span><button class="linkbtn" onClick=${signOut}>Sign out</button></div>
+      <div class="acct"><span>${s.email ? "Signed in as " + s.email : ""}</span><${SignOutBtn}/></div>
     </section>`;
   }
 
