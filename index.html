@@ -358,6 +358,127 @@ img{max-width:100%}
 .recitem{gap:12px}
 .rechead{display:flex;gap:12px;align-items:center}
 @media (prefers-reduced-motion: reduce){.joinbtn{animation:none}}
+/* ---------- big board, letter keyboard, exercises, exercise book ---------- */
+.wbwrap.full{position:fixed;inset:0;z-index:85;margin:0;display:flex;flex-direction:row;background:#16241D;padding:env(safe-area-inset-top,0px) env(safe-area-inset-right,0px) env(safe-area-inset-bottom,0px) env(safe-area-inset-left,0px);touch-action:none}
+.wbwrap.full.rot{inset:auto;top:0;right:auto;bottom:auto;transform-origin:0 0;transform:rotate(90deg);flex-direction:row}
+.wbwrap.full.rot .wbtools.side{flex-direction:column;flex-wrap:nowrap;max-width:150px;overflow-y:auto}
+.wbwrap.full .wbmain{flex:1;min-width:0;display:flex;flex-direction:column;min-height:0}
+.wbwrap.full .wb{flex:1;min-height:0;display:flex;align-items:center;justify-content:center;border-radius:0;box-shadow:none}
+.wbwrap.full .wb canvas{flex:0 0 auto}
+.wbtools.side{flex-direction:column;flex-wrap:nowrap;align-items:stretch;justify-content:flex-start;margin:0;padding:8px 6px;gap:6px;overflow-y:auto;background:#1E3128;width:auto;max-width:150px}
+.wbtools.side .tool{justify-content:flex-start;background:rgba(255,255,255,.08);color:var(--chalk);padding:9px 10px}
+.wbtools.side .tool.on{background:var(--chalk);color:var(--board)}
+.wbtools.side .tool.good{background:none;color:#F08A80;box-shadow:inset 0 0 0 2px #F08A80}
+@media (orientation: portrait){.wbwrap.full:not(.rot){flex-direction:column}.wbwrap.full:not(.rot) .wbtools.side{flex-direction:row;flex-wrap:wrap;max-width:none;overflow:visible}}
+.wbexpand{position:absolute;right:8px;bottom:8px;z-index:3;width:44px;height:44px;border-radius:50%;border:0;background:rgba(255,255,255,.12);color:var(--chalk);display:grid;place-items:center;padding:0}
+.wb.typing canvas{cursor:text}
+.keys{display:flex;flex-direction:column;gap:6px;padding:10px 8px calc(10px + env(safe-area-inset-bottom,0px));background:var(--paper-2);user-select:none;-webkit-user-select:none;touch-action:manipulation}
+.wbmain .keys{margin-top:10px;border-radius:14px}
+.wbwrap.full .keys{margin:0;border-radius:0;background:#1E3128;padding:6px}
+.krow{display:flex;gap:6px}
+.key{flex:1;min-width:0;height:48px;border:0;border-radius:10px;background:var(--card);color:var(--ink);font-family:var(--font);font-size:24px;box-shadow:0 1px 0 rgba(0,0,0,.12);display:grid;place-items:center;padding:0}
+.key:active{background:var(--blue-soft)}
+.key.fn{flex:1.3;background:var(--line);font-size:18px;font-weight:700}
+.key.fn.on{background:var(--blue);color:var(--on-blue)}
+.key.done{background:var(--blue);color:var(--on-blue)}
+.key.space{flex:4}
+.keys.compact .key{height:38px;font-size:20px}
+.wbwrap.full .key{background:rgba(255,255,255,.1);color:var(--chalk);box-shadow:none}
+.wbwrap.full .key.fn{background:rgba(255,255,255,.2)}
+.wbwrap.full .key.done{background:var(--chalk);color:var(--board)}
+.railbook{flex:0 0 auto;width:44px;height:44px;border-radius:12px;border:0;background:var(--board);background-image:var(--noise);color:var(--chalk);display:grid;place-items:center;padding:0}
+.full.sheetpage,.full.hwrun{background:var(--paper);color:var(--ink);padding-left:0;padding-right:0}
+.full.sheetpage .fhead,.full.hwrun .fhead{padding:0 6px 0 16px;color:var(--ink);gap:8px}
+.full.sheetpage .fhead>span:first-child{flex:1;min-width:0;font-size:17px}
+.full.sheetpage .fhead .iconbtn,.full.hwrun .fhead .iconbtn{color:var(--ink);margin-left:auto}
+.qcard{gap:10px}
+.qhead{display:flex;align-items:center;gap:10px;min-height:36px}
+.qhead b{flex:1}
+.clip{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.hwcard{display:flex;flex-direction:column;gap:8px;min-width:220px;text-align:left;border:0;border-radius:16px 16px 16px 6px;padding:12px;background:var(--board);background-image:var(--noise);color:var(--chalk);box-shadow:var(--lift)}
+.me .hwcard{border-radius:16px 16px 6px 16px}
+.hwcard.test{box-shadow:inset 0 0 0 2px var(--chalk-hi),var(--lift)}
+.hwtop{display:flex;align-items:center;gap:8px;font-size:17px}
+.hwn{margin-left:auto;min-width:26px;height:26px;border-radius:13px;background:rgba(255,255,255,.14);display:grid;place-items:center;font-weight:700;font-size:14px;padding:0 7px}
+.hwdots{display:flex;gap:6px;flex-wrap:wrap}
+.hwdots i{width:14px;height:14px;border-radius:50%;background:rgba(255,255,255,.18);display:inline-block}
+.hwdots i.done{background:var(--chalk)}
+.hwdots i.ok{background:#6FD3A3}
+.hwdots i.no{background:#F08A80}
+.bkrow .hwdots i{background:var(--line)}
+.bkrow .hwdots i.done{background:var(--blue)}
+.hwfoot{display:flex;align-items:center;gap:8px;font-size:14px;color:var(--chalk-2)}
+.hwgo{margin-left:auto;width:48px;height:48px;border-radius:50%;background:var(--chalk);color:var(--board);display:grid;place-items:center;animation:pulsebtn 1.4s infinite}
+.score{font-weight:700;font-size:20px;color:#F08A80;margin-left:auto;font-variant-numeric:tabular-nums}
+.anschip{display:inline-flex;align-items:center;gap:8px;border:0;border-radius:99px;padding:8px 14px;background:var(--blue-soft);color:var(--ink);font-weight:700}
+.anschip .score{font-size:16px;color:var(--red)}
+.anschip .markit{color:var(--red)}
+.hwtitle{display:inline-flex;align-items:center;color:var(--ink-2)}
+.hwprog{flex:1;display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;padding:6px 0}
+.pd{flex:0 0 auto;width:34px;height:34px;border-radius:50%;border:2px solid var(--line);background:var(--card);color:var(--ink-2);font-weight:700;padding:0}
+.pd.done{background:var(--blue-soft);border-color:var(--blue-soft)}
+.pd.cur{border-color:var(--blue);color:var(--blue)}
+.pd.ok{background:#DDF3E8;border-color:#2E9E6B;color:#1E6B48}
+.pd.no{background:#FBE3E1;border-color:var(--red);color:var(--red)}
+.hwq{display:flex;flex-direction:column;gap:14px;padding:14px 12px}
+.qboard{position:relative;min-height:150px;border-radius:12px;background:var(--board);background-image:var(--noise);color:var(--chalk);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;padding:40px 14px 18px;box-shadow:inset 0 18px 44px rgba(0,0,0,.28)}
+.qboard.tall{min-height:260px}
+.qtext{font-size:clamp(30px,9vw,46px);line-height:1.2;text-align:center;word-break:break-word}
+.qtext.small{font-size:26px}
+.qplay{background:var(--chalk)!important;color:var(--board)!important}
+.qmark{position:absolute;top:8px;right:10px}
+.mk{display:inline-grid;place-items:center;width:40px;height:40px;border-radius:50%}
+.mk.ok{color:#2E9E6B}
+.mk.no{color:var(--red)}
+.qboard .mk.ok{color:#6FD3A3}
+.qboard .mk.no{color:#F08A80}
+.ansbox{position:relative;display:flex;flex-direction:column;gap:10px;padding:10px 12px 14px 30px;border-radius:12px;background-color:var(--card);background-image:linear-gradient(90deg,transparent 19px,var(--margin) 19px,var(--margin) 20.5px,transparent 20.5px);box-shadow:var(--lift)}
+.howsw{display:flex;gap:6px;align-self:flex-end}
+.howsw button{width:42px;height:42px;border-radius:10px;border:0;background:var(--paper-2);color:var(--ink-2);display:grid;place-items:center;padding:0}
+.howsw button.on{background:var(--blue);color:var(--on-blue)}
+.ansline{min-height:64px;font-size:clamp(34px,10vw,48px);line-height:1.3;color:#1F4FA3;border-bottom:2px solid var(--rule);padding:0 4px;word-break:break-word}
+.ansline.done{border-bottom:0}
+.ansline.small{font-size:22px;min-height:0;padding:0}
+.caret{display:inline-block;width:3px;height:1em;background:#1F4FA3;vertical-align:-0.12em;margin-left:2px;animation:blink 1s infinite}
+.inkpad{display:flex;flex-direction:column;gap:8px}
+.padwrap{border-radius:10px;background-color:#fff;background-image:repeating-linear-gradient(180deg,transparent 0,transparent 43px,#CFDCEA 43px,#CFDCEA 45px);box-shadow:inset 0 0 0 1px var(--line)}
+.padwrap canvas{display:block;width:100%;touch-action:none}
+.inkpad.small .padwrap{background-image:none;box-shadow:none;background:transparent}
+.inkpad.small{width:140px}
+.padtools{display:flex;gap:10px;justify-content:flex-end}
+.ansvoice{display:flex;align-items:center;gap:14px;min-height:70px}
+.correct{align-self:flex-start;font-size:28px;color:var(--red);font-family:var(--font);border-bottom:2px solid var(--red);padding:0 6px;transform:rotate(-2deg)}
+.hwnav{display:flex;align-items:center;gap:12px;padding:10px 16px;border-top:1px solid var(--line)}
+.big.send{background:var(--blue)}
+.hwsum{padding:16px 12px;display:flex;flex-direction:column;gap:14px}
+.bigscore{align-self:center;font-size:56px;font-weight:700;color:var(--red);transform:rotate(-4deg);border:4px solid var(--red);border-radius:18px;padding:0 20px}
+.sentok{align-self:center;width:90px;height:90px;border-radius:50%;background:var(--blue-soft);color:var(--blue);display:grid;place-items:center}
+.sumlist{display:flex;flex-direction:column;gap:8px}
+.sumrow{display:flex;align-items:center;gap:12px;border:0;border-radius:12px;background:var(--card);padding:10px 12px;box-shadow:var(--lift);text-align:left;min-height:64px}
+.sumans{flex:1;min-width:0}
+.noans{color:var(--ink-3);font-size:22px}
+.revrow{gap:10px}
+.expect{font-size:20px;color:var(--ink-2);background:var(--paper-2);border-radius:8px;padding:2px 10px}
+.markrow{display:flex;gap:12px}
+.markbtn{width:56px;height:48px;border-radius:12px;border:2px solid var(--line);background:var(--card);display:grid;place-items:center;padding:0}
+.markbtn.ok{color:#2E9E6B}.markbtn.no{color:var(--red)}
+.markbtn.ok.on{background:#2E9E6B;border-color:#2E9E6B;color:#fff}
+.markbtn.no.on{background:var(--red);border-color:var(--red);color:#fff}
+.bktitle{display:inline-flex;align-items:center;gap:8px;font-weight:700}
+.bktabs{display:flex;gap:8px;padding:8px 12px}
+.bktabs button{flex:1;display:inline-flex;align-items:center;justify-content:center;gap:6px;border:0;border-radius:12px;padding:10px;background:var(--paper-2);color:var(--ink-2);font-weight:700;min-height:48px}
+.bktabs button.on{background:var(--card);color:var(--ink);box-shadow:inset 0 0 0 2px var(--blue)}
+.bklist{display:flex;flex-direction:column;gap:8px;padding:6px 12px 30px}
+.bkrow{display:flex;align-items:center;gap:12px;border:0;border-radius:14px;background:var(--card);padding:12px;box-shadow:var(--lift);text-align:left}
+.bkmain{flex:1;min-width:0;display:flex;flex-direction:column;gap:6px}
+.bkname{display:flex;align-items:center;gap:6px;font-weight:700}
+.bkname small{color:var(--ink-3);font-weight:400;margin-left:4px}
+.trend{display:flex;gap:10px;overflow-x:auto;padding:4px 12px 10px}
+.trend span{display:flex;flex-direction:column;align-items:center;background:var(--card);border-radius:12px;padding:8px 12px;box-shadow:var(--lift)}
+.trend b{color:var(--red);font-size:20px}
+.trend small{color:var(--ink-3)}
+.exbook .empty{display:flex;flex-direction:column;align-items:center;gap:8px;color:var(--ink-3);padding-top:40px}
+@media (prefers-reduced-motion: reduce){.hwgo,.caret{animation:none}}
 /* ---------- setup and sign in ---------- */
 .setup{max-width:560px;margin:0 auto;padding:24px 16px 56px;display:flex;flex-direction:column;gap:16px}
 .setup h1{margin:0;font-size:28px;line-height:1.15}
@@ -386,7 +507,7 @@ a.btn{text-decoration:none}
 <script src="https://cdn.jsdelivr.net/npm/htm@3.1.1/dist/htm.umd.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.117.2/dist/umd/supabase.js"></script>
 <script type="text/plain" id="update-sql">
--- Reading class: update for the teacher's stick, in-app voice classes and recording.
+-- Reading class: database update. Safe to run more than once.
 -- Safe to run more than once.
 alter table public.lessons add column if not exists cues jsonb not null default '[]'::jsonb;
 
@@ -409,6 +530,17 @@ exception when duplicate_object or undefined_object then null;
 end
 $$;
 
+notify pgrst, 'reload schema';
+
+-- Version 3: homework, spelling and tests travel as messages.
+alter table public.msgs drop constraint if exists msgs_kind_check;
+alter table public.msgs add constraint msgs_kind_check check (kind in ('voice', 'photo', 'text', 'pass', 'hw', 'hwans', 'hwmark'));
+drop policy if exists "send msgs" on public.msgs;
+create policy "send msgs" on public.msgs for insert to authenticated with check (
+  public.is_teacher() or (student = public.my_student() and sender = 'student' and kind in ('voice', 'photo', 'text', 'hwans'))
+);
+create or replace function public.schema_version() returns int language sql immutable as $$ select 3 $$;
+grant execute on function public.schema_version() to anon, authenticated;
 notify pgrst, 'reload schema';
 </script>
 <script type="text/plain" id="setup-sql">
@@ -725,6 +857,17 @@ The bus is red.
 I got ten cups.
 Tom and Pat run to the bus.$q$, $q$Five small words to know by sight for now: the, a, I, is, to. Tell him they don't follow the rules yet and we'll explain them later. Re-record 'a' and 'to' in this lesson: the ones reused from earlier are the letter sound and the sound piece, not the words. Then real sentences using only what he's learned. Record each sentence at a natural speed and have him read them to you.$q$)
 on conflict (id) do nothing;
+
+-- Version 3: homework, spelling and tests travel as messages.
+alter table public.msgs drop constraint if exists msgs_kind_check;
+alter table public.msgs add constraint msgs_kind_check check (kind in ('voice', 'photo', 'text', 'pass', 'hw', 'hwans', 'hwmark'));
+drop policy if exists "send msgs" on public.msgs;
+create policy "send msgs" on public.msgs for insert to authenticated with check (
+  public.is_teacher() or (student = public.my_student() and sender = 'student' and kind in ('voice', 'photo', 'text', 'hwans'))
+);
+create or replace function public.schema_version() returns int language sql immutable as $$ select 3 $$;
+grant execute on function public.schema_version() to anon, authenticated;
+notify pgrst, 'reload schema';
 </script>
 <script>
 (function () {
@@ -1079,7 +1222,9 @@ on conflict (id) do nothing;
     let hasLive = false, hasCues = true;
     try { const a = await sb.from("live").select("id").limit(1); hasLive = !a.error; } catch (e) {}
     if (who.teacher) { try { const pr = await sb.from("lessons").select("cues").limit(1); hasCues = !pr.error; } catch (e) {} }
-    store.set({ hasLive, needsUpdate: !!who.teacher && (!hasLive || !hasCues) });
+    let ver = 0;
+    if (who.teacher) { try { const v = await sb.rpc("schema_version"); ver = v.error ? 0 : Number(v.data) || 0; } catch (e) {} }
+    store.set({ hasLive, needsUpdate: !!who.teacher && (!hasLive || !hasCues || ver < 3) });
     await loadAll();
     subscribe();
     store.set({ phase: "ready" });
@@ -1266,7 +1411,7 @@ on conflict (id) do nothing;
     return active;
   }
 
-  // Writing board: strokes in board units (1000 across, 800 down), shared live between both phones.
+  // Writing board: strokes in board units (1000 across, 560 down), shared live between both phones.
   const wb = {
     strokes: [], open: new Map(), listeners: new Set(),
     emit(evt) { this.listeners.forEach(f => { try { f(evt); } catch (e) {} }); },
@@ -1286,6 +1431,16 @@ on conflict (id) do nothing;
       const s = { id: m.id, tool: m.tool === "rub" ? "rub" : "chalk", w: m.w || 13, pts: m.pts || [] };
       this.commit(s);
       this.emit({ kind: "end", s });
+    },
+    remoteText(m) {
+      if (!m.id) return;
+      const t = { id: m.id, tool: "text", text: String(m.text || "").slice(0, 30), x: +m.x || 500, y: +m.y || 280, h: +m.h || 120 };
+      if (m.done) {
+        this.open.delete(m.id);
+        this.strokes = this.strokes.filter(x => x.id !== m.id);
+        if (t.text.trim()) this.strokes.push(t);
+      } else this.open.set(m.id, t);
+      this.emit({ kind: "redraw" });
     },
     wipe() { this.strokes = []; this.open.clear(); this.emit({ kind: "wipe" }); },
   };
@@ -1401,6 +1556,7 @@ on conflict (id) do nothing;
       if (m.type === "rtc") { if (this.role === "teacher") this.lastHere = now; call.onRtc(m); return; }
       if (m.type === "wb-seg") { wb.remoteSeg(m); if (this.role === "teacher") this.lastHere = now; return; }
       if (m.type === "wb-end") { wb.remoteEnd(m); return; }
+      if (m.type === "wb-text") { wb.remoteText(m); if (this.role === "teacher") this.lastHere = now; return; }
       if (this.role === "student") {
         if (m.type === "hb" || m.type === "point") {
           const back = !this.st.on || this.st.away;
@@ -1440,7 +1596,7 @@ on conflict (id) do nothing;
     return st;
   }
 
-  const WB_W = 1000;
+  const WB_W = 1000, WB_H = 560;
   const WB_SIZE = { chalk: 13, rub: 72 };
   const chalkPatterns = new WeakMap();
   function chalkPattern(ctx) {
@@ -1458,12 +1614,26 @@ on conflict (id) do nothing;
     chalkPatterns.set(ctx, p);
     return p;
   }
+  function drawText(ctx, s, k) {
+    if (!s.text) return;
+    ctx.globalCompositeOperation = "source-over"; ctx.globalAlpha = 0.95;
+    ctx.fillStyle = chalkPattern(ctx);
+    let size = (s.h || 120) * k;
+    ctx.font = "400 " + size + "px Andika, sans-serif";
+    const maxW = (WB_W - 60) * k, w = ctx.measureText(s.text).width;
+    if (w > maxW) { size = size * maxW / w; ctx.font = "400 " + size + "px Andika, sans-serif"; }
+    ctx.textAlign = "center"; ctx.textBaseline = "middle";
+    ctx.fillText(s.text, s.x * k, s.y * k);
+    ctx.globalAlpha = 1;
+  }
   function drawPts(ctx, s, k, from) {
-    const p = s.pts, n = p.length / 2;
+    if (s.tool === "text") { drawText(ctx, s, k); return; }
+    const p = s.pts || [], n = p.length / 2;
     if (!n) return;
     ctx.lineCap = "round"; ctx.lineJoin = "round";
     ctx.lineWidth = s.w * k;
     if (s.tool === "rub") { ctx.globalCompositeOperation = "destination-out"; ctx.globalAlpha = s.hard ? 1 : 0.8; ctx.strokeStyle = "#000"; }
+    else if (s.tool === "pen") { ctx.globalCompositeOperation = "source-over"; ctx.globalAlpha = 1; ctx.strokeStyle = s.ink || "#1F4FA3"; }
     else { ctx.globalCompositeOperation = "source-over"; ctx.globalAlpha = 0.95; ctx.strokeStyle = chalkPattern(ctx); }
     const i0 = Math.max(0, from - 1);
     ctx.beginPath();
@@ -1480,51 +1650,569 @@ on conflict (id) do nothing;
     for (const s of wb.open.values()) drawPts(ctx, s, k, 0);
   }
 
-  function WriteBoard({ canWrite, teacher, holder, name }) {
+  /* ================= letter keyboard: big keys, a to z, no predictions ================= */
+  const KEY_ROWS = ["abcdefg", "hijklmn", "opqrstu", "vwxyz"];
+  function lettersLesson(lessons) {
+    return (lessons || []).find(l => l.id === "s1-02") || (lessons || []).find(l => /letters have sounds/i.test(l.title || "")) || null;
+  }
+  function useNow(active, ms) {
+    const [n, setN] = useState(Date.now());
+    useEffect(() => { if (!active) return; setN(Date.now()); const i = setInterval(() => setN(Date.now()), ms || 250); return () => clearInterval(i); }, [active]);
+    return n;
+  }
+  function LetterKeys({ onKey, onBack, onDone, ix, lessons, compact }) {
+    const [caps, setCaps] = useState(false);
+    const ll = lettersLesson(lessons);
+    const tap = (e, fn) => { e.preventDefault(); fn(); };
+    function press(ch) {
+      onKey(caps ? ch.toUpperCase() : ch);
+      if (caps) setCaps(false);
+      if (ix && ll) { const x = soundFor(ix, ll.id, ch); if (x) tilePlayer.play("key:" + ch, srcFor(x.rec.audio)); }
+    }
+    return html`<div class=${"keys" + (compact ? " compact" : "")} role="group" aria-label="Letters">
+      ${KEY_ROWS.map((row, ri) => html`<div class="krow" key=${ri}>
+        ${row.split("").map(ch => html`<button key=${ch} class="key" onPointerDown=${e => tap(e, () => press(ch))}>${caps ? ch.toUpperCase() : ch}</button>`)}
+        ${ri === 3 ? html`<button class="key fn" onPointerDown=${e => tap(e, onBack)} aria-label="Delete"><${Ic.bksp} size=${24}/></button>` : null}
+      </div>`)}
+      <div class="krow">
+        <button class=${"key fn" + (caps ? " on" : "")} onPointerDown=${e => tap(e, () => setCaps(!caps))} aria-label="Capital letter">Aa</button>
+        <button class="key space" onPointerDown=${e => tap(e, () => onKey(" "))} aria-label="Space"></button>
+        <button class="key fn done" onPointerDown=${e => tap(e, onDone)} aria-label="Done"><${Ic.tick} size=${24} sw=${2.6}/></button>
+      </div>
+    </div>`;
+  }
+
+  /* ================= exercises: homework, spelling, tests ================= */
+  const EX_TYPES = { spelling: "Spelling", homework: "Homework", test: "Test" };
+  const hwCache = new Map();
+  function hwData(m) {
+    if (!m) return {};
+    const key = m.id + ":" + (m.text || "").length;
+    if (hwCache.has(key)) return hwCache.get(key);
+    let d = {};
+    try { d = JSON.parse(m.text || "{}") || {}; } catch (e) {}
+    hwCache.set(key, d);
+    return d;
+  }
+  const exLabel = d => EX_TYPES[d.type] || "Homework";
+  const exIcon = d => (d.type === "spelling" ? Ic.speaker : d.type === "test" ? Ic.test : Ic.book);
+  function latestOf(list) { list.sort((a, b) => (a.at || 0) - (b.at || 0)); return list[list.length - 1] || null; }
+  function answersFor(hwId, msgs) { return latestOf(msgs.filter(m => m.kind === "hwans" && hwData(m).hw === hwId)); }
+  function marksFor(ansId, msgs) { const m = latestOf(msgs.filter(x => x.kind === "hwmark" && hwData(x).ans === ansId)); return m ? hwData(m) : null; }
+  function scoreOf(mk) {
+    if (!mk || !Array.isArray(mk.marks)) return null;
+    const right = mk.marks.filter(x => x === true).length, total = mk.marks.filter(x => x === true || x === false).length;
+    return total ? { right, total } : null;
+  }
+  function hasAnswer(a) { return !!(a && ((a.text && a.text.trim()) || (a.strokes && a.strokes.length) || a.blob || a.audio)); }
+  async function sendRow(data) {
+    await retry(() => rt.db.collection("msgs").doc().set(Object.assign({ hw: false, point: [], seen: false, secs: 0, asset: null, cid: uid() }, data)));
+  }
+
+  // A short recording made by the teacher (a spelling word, a question, instructions).
+  function RecClip({ value, onChange, pst, label }) {
+    const [rec, setRec] = useState(false);
+    const [t0, setT0] = useState(0);
+    const now = useNow(rec);
+    const recRef = useRef(null), st = useRef(null), fileRef = useRef(null), key = useRef("clip:" + uid());
+    useEffect(() => () => { if (recRef.current) recRef.current.cancel(); recorder.close(st.current); }, []);
+    async function start() {
+      if (recorder.blocked) { fileRef.current && fileRef.current.click(); return; }
+      player.stop();
+      try { st.current = await recorder.open(); recRef.current = recorder.start(st.current); setRec(true); setT0(Date.now()); }
+      catch (e) { toast("The microphone isn't available. Tap again to choose a recording file."); }
+    }
+    async function stop() {
+      const r = recRef.current; recRef.current = null; setRec(false);
+      if (!r) return;
+      const out = await r.stop(); recorder.close(st.current); st.current = null;
+      if (out.secs < 0.4 || !out.blob.size) { toast("Too short. Try again."); return; }
+      onChange({ blob: out.blob, secs: out.secs, url: URL.createObjectURL(out.blob) });
+    }
+    async function onFile(e) {
+      const f = e.target.files && e.target.files[0]; e.target.value = ""; if (!f) return;
+      try { const out = await audioFromFile(f); onChange({ blob: out.blob, secs: out.secs, url: URL.createObjectURL(out.blob) }); }
+      catch (err) { toast(errText(err, "That file couldn't be used.")); }
+    }
+    const on = pst.key === key.current;
+    return html`<div class="clip">
+      ${rec ? html`<button class="btn rec slim" onClick=${stop}><${Ic.stop} size=${16}/>Stop ${fmtDur((now - t0) / 1000)}</button>`
+        : value ? html`
+          <button class="btn quiet slim" onClick=${() => player.play(key.current, value.url)}>${on && pst.playing ? html`<${Ic.pause} size=${16}/>` : html`<${Ic.play} size=${16}/>`}${fmtDur(value.secs)}</button>
+          <button class="btn quiet slim" onClick=${start}><${Ic.mic} size=${16}/>Again</button>
+          <button class="iconbtn" onClick=${() => onChange(null)} aria-label="Remove recording"><${Ic.x} size=${18}/></button>`
+        : html`<button class="btn sec slim" onClick=${start}><${Ic.mic} size=${16}/>${label || "Record"}</button>`}
+      <input ref=${fileRef} type="file" accept="audio/*" style="display:none" onChange=${onFile}/>
+    </div>`;
+  }
+
+  function HwEditor({ lesson, number, student, onClose }) {
+    const pst = usePlayer();
+    const [type, setType] = useState("spelling");
+    const blank = t => ({ id: uid(), text: "", mode: t === "spelling" ? "write" : "type", rec: null });
+    const [items, setItems] = useState(() => [blank("spelling")]);
+    const [intro, setIntro] = useState(null);
+    const [busy, setBusy] = useState(false);
+    const upd = (id, patch) => setItems(xs => xs.map(x => (x.id === id ? Object.assign({}, x, patch) : x)));
+    const ready = items.length > 0 && items.every(x => x.text.trim() || x.rec) && (type !== "spelling" || items.every(x => x.rec));
+    const who = student.name || "your student";
+    async function send() {
+      if (!ready || busy) return;
+      setBusy(true);
+      player.stop();
+      try {
+        const out = [];
+        for (const x of items) out.push({ id: x.id, text: x.text.trim(), mode: x.mode, audio: x.rec ? await uploadBlob(x.rec.blob) : null, secs: x.rec ? round1(x.rec.secs) : 0 });
+        const introPath = intro ? await uploadBlob(intro.blob) : null;
+        await sendRow({ student: student.id, lesson: lesson.id, from: "teacher", kind: "hw", hw: true, asset: introPath, secs: intro ? round1(intro.secs) : 0, text: JSON.stringify({ v: 1, type, items: out }) });
+        toast(EX_TYPES[type] + " sent to " + who + ".");
+        onClose();
+      } catch (e) { toast(errText(e)); setBusy(false); }
+    }
+    const spell = type === "spelling";
+    return html`<div class="full sheetpage" role="dialog" aria-label="New exercise">
+      <div class="fhead"><span>New exercise, lesson ${number}</span><button class="iconbtn" onClick=${onClose} aria-label="Close"><${Ic.x}/></button></div>
+      <div class="sbody"><div class="ed">
+        <div class="field"><span class="lbl">Type</span>
+          <div class="segsmall">${Object.keys(EX_TYPES).map(k => html`<button key=${k} class=${type === k ? "on" : ""} onClick=${() => setType(k)}>${EX_TYPES[k]}</button>`)}</div>
+          <p class="help">${spell ? "Record yourself saying each word. They hear it and write it underneath. The word you type stays hidden from them; it helps you mark."
+            : type === "test" ? "Like homework, but it's saved in their book as a test with a score, so you can see how far they've come."
+            : "Put what they should read on the board, and record what you want them to do."}</p>
+        </div>
+        <div class="field"><span class="lbl">Instructions for the whole exercise (optional)</span>
+          <${RecClip} value=${intro} onChange=${setIntro} pst=${pst} label="Record instructions"/></div>
+        ${items.map((x, i) => html`<div class="card qcard" key=${x.id}>
+          <div class="qhead"><b>${spell ? "Word" : "Question"} ${i + 1}</b>${items.length > 1 ? html`<button class="iconbtn" onClick=${() => setItems(xs => xs.filter(y => y.id !== x.id))} aria-label="Remove"><${Ic.trash} size=${18}/></button>` : null}</div>
+          <${RecClip} value=${x.rec} onChange=${v => upd(x.id, { rec: v })} pst=${pst} label=${spell ? "Record the word" : "Record the question"}/>
+          <div class="field"><label for=${"qt" + x.id}>${spell ? "The word (only you see it)" : "On the board (optional)"}</label>
+            <input id=${"qt" + x.id} value=${x.text} onInput=${e => upd(x.id, { text: e.target.value })} autocomplete="off" autocapitalize="off" spellcheck=${false} placeholder=${spell ? "e.g. cat" : "e.g. c _ t"}/></div>
+          <div class="field"><span class="lbl">They answer by</span>
+            <div class="segsmall">${[["write", "Writing"], ["type", "Typing"], ["say", "Speaking"]].map(([k, l]) => html`<button key=${k} class=${x.mode === k ? "on" : ""} onClick=${() => upd(x.id, { mode: k })}>${l}</button>`)}</div></div>
+        </div>`)}
+        <button class="btn sec" onClick=${() => setItems(xs => xs.concat(blank(type)))}><${Ic.plus} size=${18}/>${spell ? "Add a word" : "Add a question"}</button>
+        ${!ready ? html`<p class="help">${spell ? "Record every word before sending." : "Each question needs a recording or something on the board."}</p>` : null}
+        <button class="btn" disabled=${!ready || busy} onClick=${send}>${busy ? "Sending…" : "Send to " + who}</button>
+      </div></div>
+    </div>`;
+  }
+
+  // Writing an answer in the exercise book, in blue pen.
+  const PAD_W = 1000, PAD_H = 360;
+  function InkPad({ strokes, onChange, readOnly, small }) {
+    const wrapRef = useRef(null), cvRef = useRef(null), kRef = useRef(1);
+    const sRef = useRef(strokes || []);
+    sRef.current = strokes || [];
+    const cbRef = useRef(onChange);
+    cbRef.current = onChange;
+    const paint = () => {
+      const cv = cvRef.current; if (!cv) return;
+      const ctx = cv.getContext("2d");
+      ctx.clearRect(0, 0, cv.width, cv.height);
+      for (const s of sRef.current) drawPts(ctx, s, kRef.current, 0);
+    };
+    useEffect(() => {
+      const cv = cvRef.current, wrap = wrapRef.current;
+      let lastW = 0;
+      const fit = () => {
+        const w = wrap.clientWidth; if (!w || w === lastW) return; lastW = w;
+        const dpr = Math.min(window.devicePixelRatio || 1, 2);
+        cv.width = Math.round(w * dpr); cv.height = Math.round(w * PAD_H / PAD_W * dpr);
+        cv.style.height = w * PAD_H / PAD_W + "px";
+        kRef.current = cv.width / PAD_W;
+        paint();
+      };
+      fit();
+      const ro = window.ResizeObserver ? new ResizeObserver(fit) : null;
+      if (ro) ro.observe(wrap);
+      return () => { if (ro) ro.disconnect(); };
+    }, []);
+    useEffect(paint, [strokes]);
+    useEffect(() => {
+      if (readOnly) return;
+      const cv = cvRef.current, ctx = cv.getContext("2d");
+      let cur = null;
+      const units = e => { const r = cv.getBoundingClientRect(), u = PAD_W / r.width; return [Math.round((e.clientX - r.left) * u), Math.round((e.clientY - r.top) * u)]; };
+      const add = (x, y) => {
+        const p = cur.pts, n = p.length;
+        if (n >= 2) { const dx = x - p[n - 2], dy = y - p[n - 1]; if (dx * dx + dy * dy < 9) return; }
+        const from = n / 2; p.push(x, y); drawPts(ctx, cur, kRef.current, from);
+      };
+      const down = e => { e.preventDefault(); try { cv.setPointerCapture(e.pointerId); } catch (x) {} cur = { tool: "pen", w: 11, pts: [] }; const [x, y] = units(e); add(x, y); };
+      const move = e => {
+        if (!cur) return; e.preventDefault();
+        const list = e.getCoalescedEvents ? e.getCoalescedEvents() : null;
+        for (const ev of list && list.length ? list : [e]) { const [x, y] = units(ev); add(x, y); }
+      };
+      const up = () => { if (!cur) return; const s = cur; cur = null; cbRef.current(sRef.current.concat([s])); };
+      cv.addEventListener("pointerdown", down); cv.addEventListener("pointermove", move);
+      cv.addEventListener("pointerup", up); cv.addEventListener("pointercancel", up);
+      return () => { cv.removeEventListener("pointerdown", down); cv.removeEventListener("pointermove", move); cv.removeEventListener("pointerup", up); cv.removeEventListener("pointercancel", up); };
+    }, [readOnly]);
+    return html`<div class=${"inkpad" + (small ? " small" : "") + (readOnly ? " ro" : "")}>
+      <div class="padwrap" ref=${wrapRef}><canvas ref=${cvRef}></canvas></div>
+      ${!readOnly && !small ? html`<div class="padtools">
+        <button class="mid" onClick=${() => cbRef.current(sRef.current.slice(0, -1))} aria-label="Undo"><${Ic.undo} size=${22}/></button>
+        <button class="mid" onClick=${() => cbRef.current([])} aria-label="Clear"><${Ic.trash} size=${22}/></button>
+      </div>` : null}
+    </div>`;
+  }
+
+  function AnsVoice({ value, onChange, readOnly, pst }) {
+    const [rec, setRec] = useState(false);
+    const [t0, setT0] = useState(0);
+    const now = useNow(rec);
+    const recRef = useRef(null), st = useRef(null), key = useRef("ans:" + uid());
+    useEffect(() => () => { if (recRef.current) recRef.current.cancel(); recorder.close(st.current); }, []);
+    async function start() {
+      player.stop();
+      try { st.current = await recorder.open(); recRef.current = recorder.start(st.current); setRec(true); setT0(Date.now()); }
+      catch (e) { toast("The microphone isn't available here."); }
+    }
+    async function stop() {
+      const r = recRef.current; recRef.current = null; setRec(false);
+      if (!r) return;
+      const out = await r.stop(); recorder.close(st.current); st.current = null;
+      if (out.secs < 0.5 || !out.blob.size) return;
+      onChange({ blob: out.blob, secs: out.secs, url: URL.createObjectURL(out.blob) });
+    }
+    const on = pst.key === key.current;
+    return html`<div class="ansvoice">
+      ${rec ? html`<button class="big red" onClick=${stop} aria-label="Stop"><${Ic.stop} size=${30}/></button><span class="recind"><span class="recdot"></span>${fmtDur((now - t0) / 1000)}</span>`
+        : value && value.url ? html`
+          <button class="big" onClick=${() => player.play(key.current, value.url)} aria-label="Listen">${on && pst.playing ? html`<${Ic.pause} size=${30}/>` : html`<${Ic.play} size=${30}/>`}</button>
+          <span class="vdur">${fmtDur(value.secs)}</span>
+          ${!readOnly ? html`<button class="mid" onClick=${start} aria-label="Record again"><${Ic.mic} size=${22}/></button>` : null}`
+        : readOnly ? html`<span class="help">No answer</span>`
+        : html`<button class="big red" onClick=${start} aria-label="Record your answer"><${Ic.mic} size=${30}/></button>`}
+    </div>`;
+  }
+
+  function AnswerView({ a, pst, small }) {
+    if (!hasAnswer(a)) return html`<span class="noans">—</span>`;
+    if (a.text && a.text.trim()) return html`<div class=${"ansline done" + (small ? " small" : "")}>${a.text}</div>`;
+    if (a.strokes && a.strokes.length) return html`<${InkPad} strokes=${a.strokes} readOnly=${true} small=${small}/>`;
+    const url = a.url || (a.audio ? srcFor(a.audio) : null);
+    return small ? html`<span class="noans"><${Ic.speaker} size=${20}/></span>` : html`<${AnsVoice} value=${{ url, secs: a.secs }} readOnly=${true} pst=${pst}/>`;
+  }
+  const MarkIcon = ({ v, size }) => (v === true ? html`<span class="mk ok"><${Ic.tick} size=${size || 22} sw=${3}/></span>` : v === false ? html`<span class="mk no"><${Ic.x} size=${size || 22} sw=${3}/></span>` : null);
+
+  // The student does an exercise, one question at a time. Answers are kept on the phone until sent.
+  function HwRunner({ hw, msgs, student, ix, lessons, preview, onClose }) {
+    const pst = usePlayer();
+    const d = hwData(hw), items = d.items || [], spelling = d.type === "spelling";
+    const ans = preview ? null : answersFor(hw.id, msgs);
+    const mk = ans ? marksFor(ans.id, msgs) : null;
+    const sc = scoreOf(mk);
+    const done = !!ans;
+    const draftKey = "rc.hw." + hw.id;
+    const [answers, setAnswers] = useState(() => {
+      if (done) return (hwData(ans).answers || []).map(a => Object.assign({}, a));
+      try { return JSON.parse(localStorage.getItem(draftKey) || "[]") || []; } catch (e) { return []; }
+    });
+    const [i, setI] = useState(done ? -1 : hw.asset ? -2 : 0);
+    const [how, setHow] = useState({});
+    const [busy, setBusy] = useState(false);
+    useEffect(() => {
+      if (done || preview) return;
+      try { localStorage.setItem(draftKey, JSON.stringify(answers.map(a => (a ? { text: a.text, strokes: a.strokes } : null)))); } catch (e) {}
+    }, [answers]);
+    useEffect(() => {
+      if (i === -2 && hw.asset) player.play("hwi:" + hw.id, srcFor(hw.asset), true);
+      else if (i >= 0 && items[i] && items[i].audio) player.play("hwq:" + hw.id + ":" + i, srcFor(items[i].audio), true);
+      else player.stop();
+    }, [i]);
+    useEffect(() => () => { player.stop(); tilePlayer.stop(); }, []);
+    const setA = (k, fn) => setAnswers(xs => { const n = xs.slice(); n[k] = Object.assign({}, n[k] || {}, typeof fn === "function" ? fn(n[k] || {}) : fn); return n; });
+    const it = i >= 0 ? items[i] : null;
+    const a = i >= 0 ? answers[i] || {} : {};
+    let mode = it ? (it.mode === "say" ? "say" : how[i] || it.mode || "type") : null;
+    if (done && it) mode = a.text ? "type" : a.strokes && a.strokes.length ? "write" : a.audio ? "say" : mode;
+    const next = () => setI(k => (k < 0 ? 0 : k + 1 >= items.length ? -1 : k + 1));
+    const prev = () => setI(k => (k === -1 ? items.length - 1 : k <= 0 ? (hw.asset ? -2 : 0) : k - 1));
+    async function submit() {
+      if (busy) return;
+      setBusy(true);
+      try {
+        const out = [];
+        for (let k = 0; k < items.length; k++) {
+          const x = answers[k] || {}, o = { id: items[k].id };
+          if (x.text && x.text.trim()) o.text = x.text.trim();
+          if (x.strokes && x.strokes.length) o.strokes = x.strokes;
+          if (x.blob) { o.audio = await uploadBlob(x.blob); o.secs = round1(x.secs); }
+          out.push(o);
+        }
+        await sendRow({ student: student.id, lesson: hw.lesson, from: "student", kind: "hwans", text: JSON.stringify({ v: 1, hw: hw.id, answers: out }) });
+        try { localStorage.removeItem(draftKey); } catch (e) {}
+        chime(true);
+      } catch (e) { toast(errText(e)); }
+      setBusy(false);
+    }
+    const Dots = html`<div class="hwprog">${items.map((_, k) => html`<button key=${k} onClick=${() => setI(k)} aria-label=${"Question " + (k + 1)}
+      class=${"pd" + (k === i ? " cur" : "") + (mk ? (mk.marks[k] === true ? " ok" : mk.marks[k] === false ? " no" : "") : hasAnswer(answers[k]) ? " done" : "")}>${k + 1}</button>`)}</div>`;
+    let body;
+    if (i === -2) {
+      body = html`<div class="hwq"><div class="qboard tall">
+        <${exIcon(d)} size=${44}/><div class="qtext small">${exLabel(d)}</div>
+        <button class="big qplay" onClick=${() => player.play("hwi:" + hw.id, srcFor(hw.asset))} aria-label="Hear the instructions"><${Ic.speaker} size=${30}/></button>
+      </div></div>`;
+    } else if (i === -1) {
+      body = html`<div class="hwsum">
+        ${sc ? html`<div class="bigscore">${sc.right}/${sc.total}</div>` : done ? html`<div class="sentok"><${Ic.tick} size=${44} sw=${3}/></div>` : null}
+        <div class="sumlist">${items.map((q, k) => html`<button class="sumrow" key=${k} onClick=${() => setI(k)}>
+          <span class="num">${k + 1}</span>
+          <span class="sumans"><${AnswerView} a=${answers[k]} pst=${pst} small=${true}/></span>
+          ${mk ? html`<${MarkIcon} v=${mk.marks[k]}/>` : hasAnswer(answers[k]) ? null : html`<span class="noans">?</span>`}
+        </button>`)}</div>
+        ${preview ? html`<p class="help c">Preview: this is what they see.</p>` : null}
+      </div>`;
+    } else {
+      const wrongSpell = mk && mk.marks[i] === false && it.text;
+      body = html`<div class="hwq">
+        <div class="qboard">
+          <span class="bnum">${i + 1}</span>
+          ${!spelling && it.text ? html`<div class="qtext">${it.text}</div>` : null}
+          ${it.audio ? html`<button class="big qplay" onClick=${() => player.play("hwq:" + hw.id + ":" + i, srcFor(it.audio))} aria-label="Hear it again"><${Ic.speaker} size=${30}/></button>` : null}
+          ${mk ? html`<div class="qmark"><${MarkIcon} v=${mk.marks[i]} size=${34}/></div>` : null}
+        </div>
+        <div class="ansbox">
+          ${it.mode !== "say" && !done ? html`<div class="howsw">
+            <button class=${mode === "write" ? "on" : ""} onClick=${() => setHow(h => Object.assign({}, h, { [i]: "write" }))} aria-label="Write with your finger"><${Ic.edit} size=${20}/></button>
+            <button class=${mode === "type" ? "on" : ""} onClick=${() => setHow(h => Object.assign({}, h, { [i]: "type" }))} aria-label="Type"><${Ic.keys} size=${20}/></button>
+          </div>` : null}
+          ${mode === "type" ? html`<div class="ansline">${a.text || ""}${!done ? html`<span class="caret"></span>` : null}</div>` : null}
+          ${mode === "write" ? html`<${InkPad} strokes=${a.strokes || []} onChange=${s => setA(i, { strokes: s })} readOnly=${done}/>` : null}
+          ${mode === "say" ? html`<${AnsVoice} value=${a.url ? a : a.audio ? { url: srcFor(a.audio), secs: a.secs } : null} readOnly=${done} pst=${pst}
+            onChange=${v => setA(i, v ? { blob: v.blob, secs: v.secs, url: v.url } : { blob: null, url: null })}/>` : null}
+          ${wrongSpell ? html`<div class="correct" aria-label="Correct spelling">${it.text}</div>` : null}
+        </div>
+      </div>`;
+    }
+    const typing = it && mode === "type" && !done;
+    return html`<div class="full hwrun" role="dialog" aria-label=${exLabel(d)}>
+      <div class="fhead">
+        <span class="hwtitle"><${exIcon(d)} size=${20}/></span>
+        ${Dots}
+        <button class="iconbtn" onClick=${onClose} aria-label="Close"><${Ic.x}/></button>
+      </div>
+      <div class="sbody">${body}</div>
+      <div class="hwnav">
+        <button class="big grey" onClick=${prev} disabled=${i === -2 || (i === 0 && !hw.asset)} aria-label="Back"><${Ic.back} size=${28}/></button>
+        <div class="grow"></div>
+        ${i === -1
+          ? (!done && !preview ? html`<button class="big send" onClick=${submit} disabled=${busy} aria-label="Send to your teacher">${busy ? html`<span class="spin"></span>` : html`<${Ic.send} size=${28}/>`}</button>` : html`<button class="big" onClick=${onClose} aria-label="Close"><${Ic.tick} size=${28} sw=${2.6}/></button>`)
+          : html`<button class="big" onClick=${next} aria-label="Next"><${Ic.next} size=${28}/></button>`}
+      </div>
+      ${typing ? html`<${LetterKeys} ix=${ix} lessons=${lessons} onDone=${next}
+        onKey=${ch => setA(i, x => ({ text: ((x.text || "") + ch).slice(0, 40) }))}
+        onBack=${() => setA(i, x => ({ text: (x.text || "").slice(0, -1) }))}/>` : null}
+    </div>`;
+  }
+
+  // The teacher marks answers in red pen. Typed spellings are pre-marked; handwriting and speech are up to you.
+  function HwReview({ ans, msgs, onClose }) {
+    const pst = usePlayer();
+    const ad = hwData(ans), hw = msgs.find(m => m.id === ad.hw), d = hwData(hw), items = d.items || [];
+    const answers = ad.answers || [];
+    const prev = marksFor(ans.id, msgs);
+    const auto = k => {
+      const it = items[k] || {}, a = answers[k] || {};
+      if (a.text && it.text) return a.text.trim().toLowerCase() === it.text.trim().toLowerCase();
+      return null;
+    };
+    const [marks, setMarks] = useState(() => (prev && Array.isArray(prev.marks) ? prev.marks.slice() : items.map((_, k) => auto(k))));
+    const [busy, setBusy] = useState(false);
+    const setM = (k, v) => setMarks(ms => { const n = ms.slice(); n[k] = n[k] === v ? null : v; return n; });
+    async function send() {
+      setBusy(true);
+      try {
+        await sendRow({ student: ans.student, lesson: ans.lesson, from: "teacher", kind: "hwmark", text: JSON.stringify({ v: 1, ans: ans.id, marks }) });
+        toast("Marks sent.");
+        onClose();
+      } catch (e) { toast(errText(e)); setBusy(false); }
+    }
+    const sc = scoreOf({ marks });
+    useEffect(() => () => player.stop(), []);
+    return html`<div class="full sheetpage" role="dialog" aria-label="Mark the answers">
+      <div class="fhead"><span>Mark: ${exLabel(d)}</span><button class="iconbtn" onClick=${onClose} aria-label="Close"><${Ic.x}/></button></div>
+      <div class="sbody"><div class="ed">
+        ${!hw ? html`<p class="help">The exercise these answers belong to was deleted.</p>` : null}
+        ${items.map((it, k) => html`<div class="card revrow" key=${k}>
+          <div class="qhead"><b>${d.type === "spelling" ? "Word" : "Question"} ${k + 1}</b>
+            ${it.text ? html`<span class="expect">${it.text}</span>` : null}
+            ${it.audio ? html`<button class="iconbtn" onClick=${() => player.play("rq:" + k, srcFor(it.audio))} aria-label="Hear the question"><${Ic.speaker} size=${20}/></button>` : null}</div>
+          <${AnswerView} a=${answers[k]} pst=${pst}/>
+          <div class="markrow">
+            <button class=${"markbtn ok" + (marks[k] === true ? " on" : "")} onClick=${() => setM(k, true)} aria-label="Right"><${Ic.tick} size=${22} sw=${3}/></button>
+            <button class=${"markbtn no" + (marks[k] === false ? " on" : "")} onClick=${() => setM(k, false)} aria-label="Wrong"><${Ic.x} size=${22} sw=${3}/></button>
+          </div>
+        </div>`)}
+        <button class="btn" disabled=${busy || !hw} onClick=${send}>${busy ? "Sending…" : "Send marks" + (sc ? " (" + sc.right + "/" + sc.total + ")" : "")}</button>
+      </div></div>
+    </div>`;
+  }
+
+  function HwCard({ m, msgs, teacher, onOpen }) {
+    const d = hwData(m), items = d.items || [];
+    const ans = answersFor(m.id, msgs), mk = ans ? marksFor(ans.id, msgs) : null, sc = scoreOf(mk);
+    return html`<button class=${"hwcard" + (d.type === "test" ? " test" : "")} onClick=${onOpen}>
+      <span class="hwtop"><${exIcon(d)} size=${22}/><b>${exLabel(d)}</b><span class="hwn">${items.length}</span></span>
+      <span class="hwdots">${items.map((_, k) => html`<i key=${k} class=${mk ? (mk.marks[k] === true ? "ok" : mk.marks[k] === false ? "no" : "") : ans ? "done" : ""}></i>`)}</span>
+      <span class="hwfoot">${sc ? html`<span class="score">${sc.right}/${sc.total}</span>`
+        : ans ? html`<${Ic.tick} size=${18} sw=${2.6}/>${teacher ? html`<span>Answered: tap to mark</span>` : null}`
+        : teacher ? html`<span>Not done yet</span>` : html`<span class="hwgo"><${Ic.edit} size=${22}/></span>`}</span>
+    </button>`;
+  }
+  function AnsChip({ m, msgs, teacher, onOpen }) {
+    const mk = marksFor(m.id, msgs), sc = scoreOf(mk), hw = msgs.find(x => x.id === hwData(m).hw);
+    return html`<button class="anschip" onClick=${onOpen}>
+      <${Ic.book} size=${18}/><span>${hw ? exLabel(hwData(hw)) : "Answers"}</span>
+      ${sc ? html`<b class="score">${sc.right}/${sc.total}</b>` : teacher ? html`<b class="markit">Mark it</b>` : html`<${Ic.tick} size=${18} sw=${2.6}/>`}
+    </button>`;
+  }
+
+  // Everything the student has done, with the teacher's marks. "To practise" shows the ones with mistakes.
+  function ExBook({ student, msgs, lessons, teacher, onOpen, onClose }) {
+    const [tab, setTab] = useState("all");
+    const rows = msgs.filter(m => m.kind === "hw" && m.student === student.id).map(hw => {
+      const d = hwData(hw), ans = answersFor(hw.id, msgs), mk = ans ? marksFor(ans.id, msgs) : null;
+      return { hw, d, ans, mk, sc: scoreOf(mk), wrong: !!(mk && mk.marks.some(x => x === false)) };
+    }).sort((a, b) => (b.hw.at || 0) - (a.hw.at || 0));
+    const shown = rows.filter(r => (tab === "practise" ? r.wrong : tab === "tests" ? r.d.type === "test" : true));
+    const tests = rows.filter(r => r.d.type === "test" && r.sc).slice().reverse();
+    const lessonNo = id => { const i = lessons.findIndex(l => l.id === id); return i >= 0 ? i + 1 : "?"; };
+    return html`<div class="full sheetpage exbook" role="dialog" aria-label="Exercise book">
+      <div class="fhead"><span class="bktitle"><${Ic.book} size=${22}/>${teacher ? (student.name || "Student") + "'s book" : ""}</span>
+        <button class="iconbtn" onClick=${onClose} aria-label="Close"><${Ic.x}/></button></div>
+      <div class="bktabs">
+        <button class=${tab === "all" ? "on" : ""} onClick=${() => setTab("all")} aria-label="Everything"><${Ic.book} size=${22}/>${teacher ? "All" : ""}</button>
+        <button class=${tab === "practise" ? "on" : ""} onClick=${() => setTab("practise")} aria-label="To practise"><span class="mk no"><${Ic.x} size=${20} sw=${3}/></span>${teacher ? "To practise" : ""}</button>
+        <button class=${tab === "tests" ? "on" : ""} onClick=${() => setTab("tests")} aria-label="Tests"><${Ic.test} size=${22}/>${teacher ? "Tests" : ""}</button>
+      </div>
+      <div class="sbody">
+        ${teacher && tab === "tests" && tests.length ? html`<div class="trend">${tests.map((r, k) => html`<span key=${k}><b>${r.sc.right}/${r.sc.total}</b><small>${fmtDay(r.hw.at)}</small></span>`)}</div>` : null}
+        ${shown.length ? html`<div class="bklist">${shown.map(r => html`<button class="bkrow" key=${r.hw.id} onClick=${() => onOpen(r.hw)}>
+          <span class="num">${lessonNo(r.hw.lesson)}</span>
+          <span class="bkmain"><span class="bkname"><${exIcon(r.d)} size=${18}/>${exLabel(r.d)}<small>${fmtDay(r.hw.at)}</small></span>
+            <span class="hwdots">${(r.d.items || []).map((_, k) => html`<i key=${k} class=${r.mk ? (r.mk.marks[k] === true ? "ok" : r.mk.marks[k] === false ? "no" : "") : r.ans ? "done" : ""}></i>`)}</span></span>
+          ${r.sc ? html`<span class="score">${r.sc.right}/${r.sc.total}</span>` : r.ans ? html`<${Ic.tick} size=${20}/>` : html`<${Ic.edit} size=${20}/>`}
+        </button>`)}</div>` : html`<div class="empty"><${Ic.book} size=${44} sw=${1.6}/>${teacher ? html`<p>${tab === "practise" ? "Nothing to practise: no mistakes marked yet." : "No exercises yet."}</p>` : null}</div>`}
+      </div>
+    </div>`;
+  }
+
+  function WriteBoard({ canWrite, teacher, holder, name, ix, lessons }) {
     const wrapRef = useRef(null), cvRef = useRef(null), dusterRef = useRef(null), headRef = useRef(null);
-    const [tool, setTool] = useState("chalk");
+    const [tool, setToolState] = useState("chalk");
     const toolRef = useRef(tool);
     toolRef.current = tool;
     const canRef = useRef(canWrite);
     canRef.current = canWrite;
     const [stamp, setStamp] = useState(0);
+    const [full, setFull] = useState(false);
+    const fullRef = useRef(false);
+    fullRef.current = full;
+    // If the phone won't turn sideways, turn the board ourselves so it still fills the screen.
+    const [rot, setRot] = useState(false);
+    const rotRef = useRef(false);
+    rotRef.current = rot;
+    const [, setVp] = useState(0);
+    useEffect(() => {
+      if (!full) { setRot(false); return; }
+      const check = () => { setRot(window.innerHeight > window.innerWidth * 1.15); setVp(v => v + 1); };
+      const t = setTimeout(check, 450);
+      window.addEventListener("resize", check);
+      return () => { clearTimeout(t); window.removeEventListener("resize", check); };
+    }, [full]);
+    const typingRef = useRef(null);
+    const [, bump] = useState(0);
+    const C = useCall();
     const kRef = useRef(1), cssK = useRef(1);
-    useEffect(() => { if (!canWrite) setTool("chalk"); }, [canWrite]);
-    useEffect(() => { if (!stamp) return; const t = setTimeout(() => setStamp(0), 2000); return () => clearTimeout(t); }, [stamp]);
-    const place = (el, x, y) => { if (!el) return; el.style.opacity = "1"; el.style.transform = "translate(" + x * cssK.current + "px," + y * cssK.current + "px)"; };
+    const place = (el, x, y) => {
+      const cv = cvRef.current;
+      if (!el || !cv) return;
+      el.style.opacity = "1";
+      el.style.transform = "translate(" + (cv.offsetLeft + x * cssK.current) + "px," + (cv.offsetTop + y * cssK.current) + "px)";
+    };
     const hide = el => { if (el) el.style.opacity = "0"; };
+    const redraw = () => { const cv = cvRef.current; if (cv) renderAll(cv.getContext("2d"), kRef.current); };
 
-    // size the canvas to the screen, sharp on phones
+    // typing on the board with the letter keyboard
+    function sendText(t, done) { live.send({ type: "wb-text", id: t.id, text: t.text, x: t.x, y: t.y, h: t.h, done: !!done }); }
+    function nextLine() { const n = wb.strokes.filter(s => s.tool === "text").length; return [140, 290, 430][n % 3]; }
+    function typeEdit(fn) {
+      let t = typingRef.current;
+      if (!t) t = { id: uid(), tool: "text", text: "", x: 500, y: nextLine(), h: 120 };
+      t = Object.assign({}, t, { text: fn(t.text).slice(0, 30) });
+      typingRef.current = t;
+      wb.open.set(t.id, t);
+      redraw(); wb.emit({ kind: "redraw" }); bump(n => n + 1);
+      sendText(t, false);
+    }
+    function commitTyping() {
+      const t = typingRef.current;
+      if (!t) return;
+      typingRef.current = null;
+      wb.open.delete(t.id);
+      if (t.text.trim()) wb.commit(t);
+      sendText(t, true);
+      redraw(); wb.emit({ kind: "redraw" }); bump(n => n + 1);
+    }
+    function setTool(t) { if (toolRef.current === "type" && t !== "type") commitTyping(); setToolState(t); }
+    useEffect(() => { if (!canWrite) { commitTyping(); setToolState("chalk"); } }, [canWrite]);
+    useEffect(() => { if (!stamp) return; const t = setTimeout(() => setStamp(0), 2000); return () => clearTimeout(t); }, [stamp]);
+
+    // full screen, turned sideways, so thumbs have room
+    async function goFull() {
+      setFull(true);
+      try { const el = document.documentElement; if (el.requestFullscreen && !document.fullscreenElement) await el.requestFullscreen({ navigationUI: "hide" }); } catch (e) {}
+      try { if (screen.orientation && screen.orientation.lock) await screen.orientation.lock("landscape"); } catch (e) {}
+    }
+    function leaveFull() {
+      setFull(false);
+      try { if (screen.orientation && screen.orientation.unlock) screen.orientation.unlock(); } catch (e) {}
+      try { if (document.fullscreenElement) document.exitFullscreen(); } catch (e) {}
+    }
+    useEffect(() => {
+      const f = () => { if (!document.fullscreenElement && fullRef.current) { setFull(false); try { screen.orientation.unlock(); } catch (e) {} } };
+      document.addEventListener("fullscreenchange", f);
+      return () => {
+        document.removeEventListener("fullscreenchange", f);
+        commitTyping();
+        if (fullRef.current) { try { screen.orientation.unlock(); } catch (e) {} try { if (document.fullscreenElement) document.exitFullscreen(); } catch (e) {} }
+      };
+    }, []);
+
+    // size the canvas: the full width inline, or as big as fits when full screen
     useEffect(() => {
       const cv = cvRef.current, wrap = wrapRef.current;
-      let lastW = 0;
+      let last = "";
       const fit = () => {
-        const w = wrap.clientWidth;
-        if (!w || w === lastW) return;
-        lastW = w;
+        const W = wrap.clientWidth, H = wrap.clientHeight;
+        const w = Math.floor(fullRef.current ? Math.min(W, H * WB_W / WB_H) : W);
+        const key = w + ":" + (fullRef.current ? 1 : 0);
+        if (!w || key === last) return;
+        last = key;
         const dpr = Math.min(window.devicePixelRatio || 1, 2);
-        cv.width = Math.round(w * dpr); cv.height = Math.round(w * 0.8 * dpr);
-        cv.style.height = w * 0.8 + "px";
+        cv.width = Math.round(w * dpr); cv.height = Math.round(w * WB_H / WB_W * dpr);
+        cv.style.width = w + "px"; cv.style.height = w * WB_H / WB_W + "px";
         kRef.current = cv.width / WB_W; cssK.current = w / WB_W;
         renderAll(cv.getContext("2d"), kRef.current);
       };
+      wrap.__fit = fit;
       fit();
       const ro = window.ResizeObserver ? new ResizeObserver(fit) : null;
-      if (ro) ro.observe(wrap); else window.addEventListener("resize", fit);
-      return () => { if (ro) ro.disconnect(); else window.removeEventListener("resize", fit); };
+      if (ro) ro.observe(wrap);
+      window.addEventListener("resize", fit);
+      return () => { if (ro) ro.disconnect(); window.removeEventListener("resize", fit); };
     }, []);
+    useEffect(() => { const w = wrapRef.current; if (w && w.__fit) { requestAnimationFrame(() => w.__fit()); setTimeout(() => w.__fit(), 350); } }, [full, tool, rot]);
 
-    // the other person's writing, wiping and "good" arrive here
+    // the other person's writing, typing, wiping and "good" arrive here
     useEffect(() => {
       const cv = cvRef.current, ctx = cv.getContext("2d");
       let wiping = 0;
       const runWipe = () => {
-        const path = [];
-        for (let r = 0; r < 6; r++) {
-          const y = 70 + r * 132, a = r % 2 ? 960 : 40, b = r % 2 ? 40 : 960;
-          for (let i = 0; i <= 24; i++) { const t = i / 24; path.push(Math.round(a + (b - a) * t), Math.round(y + Math.sin(t * 9 + r) * 12)); }
-        }
-        const s = { id: "wipe", tool: "rub", w: 200, hard: true, pts: [] };
+        const path = wipePath(), s = { id: "wipe", tool: "rub", w: 200, hard: true, pts: [] };
         const total = path.length / 2, t0 = performance.now(), my = ++wiping;
         let done = 0;
         const step = now => {
@@ -1549,8 +2237,8 @@ on conflict (id) do nothing;
           const p = evt.s.pts, n = p.length;
           if (n >= 2) place(evt.s.tool === "rub" ? dusterRef.current : headRef.current, p[n - 2], p[n - 1]);
         } else if (evt.kind === "end") { hide(headRef.current); hide(dusterRef.current); renderAll(ctx, k); }
-        else if (evt.kind === "reset") renderAll(ctx, k);
-        else if (evt.kind === "wipe") runWipe();
+        else if (evt.kind === "reset" || evt.kind === "redraw") renderAll(ctx, k);
+        else if (evt.kind === "wipe") { typingRef.current = null; runWipe(); }
         else if (evt.kind === "good") setStamp(Date.now());
       };
       wb.listeners.add(f);
@@ -1561,7 +2249,12 @@ on conflict (id) do nothing;
     useEffect(() => {
       const cv = cvRef.current, ctx = cv.getContext("2d");
       let cur = null, queue = [], timer = null;
-      const units = e => { const r = cv.getBoundingClientRect(), u = WB_W / r.width; return [Math.round((e.clientX - r.left) * u), Math.round((e.clientY - r.top) * u)]; };
+      const units = e => {
+        const r = cv.getBoundingClientRect();
+        if (rotRef.current) { const u = WB_W / r.height; return [Math.round((e.clientY - r.top) * u), Math.round((r.right - e.clientX) * u)]; }
+        const u = WB_W / r.width;
+        return [Math.round((e.clientX - r.left) * u), Math.round((e.clientY - r.top) * u)];
+      };
       const flush = () => {
         timer = null;
         if (!cur || !queue.length) return;
@@ -1569,7 +2262,7 @@ on conflict (id) do nothing;
         queue = [];
       };
       const add = (x, y) => {
-        x = Math.max(0, Math.min(1000, x)); y = Math.max(0, Math.min(800, y));
+        x = Math.max(0, Math.min(WB_W, x)); y = Math.max(0, Math.min(WB_H, y));
         const p = cur.pts, n = p.length;
         if (n >= 2) { const dx = x - p[n - 2], dy = y - p[n - 1]; if (dx * dx + dy * dy < 9) return; }
         const from = n / 2;
@@ -1582,8 +2275,16 @@ on conflict (id) do nothing;
       const down = e => {
         if (!canRef.current || cur) return;
         e.preventDefault();
-        try { cv.setPointerCapture(e.pointerId); } catch (x) {}
         const t = toolRef.current;
+        if (t === "type") {
+          // tap where the next word should go
+          const [x, y] = units(e);
+          const tt = typingRef.current;
+          if (tt) { typingRef.current = Object.assign({}, tt, { x, y }); wb.open.set(tt.id, typingRef.current); redraw(); wb.emit({ kind: "redraw" }); sendText(typingRef.current, false); }
+          else { typingRef.current = { id: uid(), tool: "text", text: "", x, y, h: 120 }; }
+          return;
+        }
+        try { cv.setPointerCapture(e.pointerId); } catch (x) {}
         cur = { id: uid(), tool: t, w: WB_SIZE[t], pts: [] };
         wb.open.set(cur.id, cur);
         const [x, y] = units(e);
@@ -1619,28 +2320,39 @@ on conflict (id) do nothing;
     }, []);
 
     const mine = !teacher && canWrite;
-    return html`<div class="wbwrap">
-      ${teacher ? html`<div class="wbtools">
-        <div class="segsmall" role="group" aria-label="Tool">
-          <button class=${tool === "chalk" ? "on" : ""} onClick=${() => setTool("chalk")}><${Ic.chalk} size=${16}/>Chalk</button>
-          <button class=${tool === "rub" ? "on" : ""} onClick=${() => setTool("rub")}><${Ic.duster} size=${16}/>Duster</button>
+    const sz = full ? 22 : 16;
+    const toolList = canWrite ? [["chalk", Ic.chalk, "Chalk"], ["rub", Ic.duster, "Duster"], ["type", Ic.keys, "Type"]] : [];
+    const label = (t) => (teacher ? t : null);
+    const toolBtns = toolList.map(([k, I, t]) => html`<button key=${k} class=${"tool" + (tool === k ? " on" : "")} onClick=${() => setTool(k)} aria-label=${t}><${I} size=${sz}/>${label(t)}</button>`);
+    const rotStyle = rot ? "width:" + window.innerHeight + "px;height:" + window.innerWidth + "px;left:" + window.innerWidth + "px" : "";
+    return html`<div class=${"wbwrap" + (full ? " full" : "") + (rot ? " rot" : "")} style=${rotStyle}>
+      ${teacher || full ? html`<div class=${"wbtools" + (full ? " side" : "")}>
+        ${full
+          ? html`<button class="tool exit" onClick=${leaveFull} aria-label="Smaller board"><${Ic.shrink} size=${sz}/>${label("Smaller")}</button>`
+          : html`<button class="tool" onClick=${goFull}><${Ic.expand} size=${sz}/>Full screen</button>`}
+        ${toolBtns}
+        ${teacher ? html`
+          <button class="tool" onClick=${() => { commitTyping(); live.wipe(); }} aria-label="Wipe board"><${Ic.wipe} size=${sz}/>${full ? "Wipe" : "Wipe board"}</button>
+          <button class=${"tool" + (holder === "student" ? " on" : "")} onClick=${() => live.setHolder(holder === "student" ? "teacher" : "student")}><${Ic.chalk} size=${sz}/>${holder === "student" ? "Take the chalk back" : "Give " + name + " the chalk"}</button>
+          <button class="tool good" onClick=${() => live.good()} aria-label="Good"><${Ic.tick} size=${sz} sw=${2.6}/>Good</button>` : null}
+        ${full && C.joined ? html`<button class=${"tool" + (C.muted ? " on" : "")} onClick=${() => call.toggleMute()} aria-label=${C.muted ? "Unmute" : "Mute"}>${C.muted ? html`<${Ic.micoff} size=${sz}/>` : html`<${Ic.mic} size=${sz}/>`}${label(C.muted ? "Unmute" : "Mute")}</button>` : null}
+      </div>` : null}
+      <div class="wbmain">
+        <div class=${"wb" + (mine ? " mine" : "") + (canWrite ? " can" : "") + (tool === "type" && canWrite ? " typing" : "")} ref=${wrapRef}>
+          <canvas ref=${cvRef} aria-label="Writing board"></canvas>
+          <div class="wbduster" ref=${dusterRef} aria-hidden="true"><i></i></div>
+          <div class="wbhead" ref=${headRef} aria-hidden="true"><i></i></div>
+          ${mine && !full ? html`<div class="wbhint" aria-hidden="true"><${Ic.chalk} size=${30}/></div>` : null}
+          ${stamp ? html`<div class="wbstamp" key=${stamp} aria-label="Good"><${Ic.tick} size=${72} sw=${3}/></div>` : null}
+          ${!full && !teacher ? html`<button class="wbexpand" onClick=${goFull} aria-label="Make the board bigger"><${Ic.expand} size=${22}/></button>` : null}
         </div>
-        <button class="tool" onClick=${() => live.wipe()}><${Ic.wipe} size=${16}/>Wipe board</button>
-        <button class=${"tool" + (holder === "student" ? " on" : "")} onClick=${() => live.setHolder(holder === "student" ? "teacher" : "student")}><${Ic.chalk} size=${16}/>${holder === "student" ? "Take the chalk back" : "Give " + name + " the chalk"}</button>
-        <button class="tool good" onClick=${() => live.good()}><${Ic.tick} size=${16} sw=${2.6}/>Good</button>
-      </div>` : null}
-      <div class=${"wb" + (mine ? " mine" : "") + (canWrite ? " can" : "")} ref=${wrapRef}>
-        <canvas ref=${cvRef} aria-label="Writing board"></canvas>
-        <div class="wbduster" ref=${dusterRef} aria-hidden="true"><i></i></div>
-        <div class="wbhead" ref=${headRef} aria-hidden="true"><i></i></div>
-        ${mine ? html`<div class="wbhint" aria-hidden="true"><${Ic.chalk} size=${30}/></div>` : null}
-        ${stamp ? html`<div class="wbstamp" key=${stamp} aria-label="Good"><${Ic.tick} size=${72} sw=${3}/></div>` : null}
+        ${!full ? html`<div class="ledge"><i></i></div>` : null}
+        ${canWrite && tool === "type" ? html`<${LetterKeys} ix=${ix} lessons=${lessons} compact=${full}
+          onKey=${ch => typeEdit(t => t + ch)} onBack=${() => typeEdit(t => t.slice(0, -1))} onDone=${commitTyping}/>` : null}
+        ${!full && mine ? html`<div class="stools">
+          ${toolList.map(([k, I, t]) => html`<button key=${k} class=${"big" + (tool === k ? "" : " alt")} onClick=${() => setTool(k)} aria-label=${t}><${I} size=${28}/></button>`)}
+        </div>` : null}
       </div>
-      <div class="ledge"><i></i></div>
-      ${!teacher && mine ? html`<div class="stools">
-        <button class=${"big" + (tool === "chalk" ? "" : " alt")} onClick=${() => setTool("chalk")} aria-label="Chalk"><${Ic.chalk} size=${28}/></button>
-        <button class=${"big" + (tool === "rub" ? "" : " alt")} onClick=${() => setTool("rub")} aria-label="Duster"><${Ic.duster} size=${28}/></button>
-      </div>` : null}
     </div>`;
   }
 
@@ -1844,8 +2556,8 @@ on conflict (id) do nothing;
   }
   function wipePath() {
     const path = [];
-    for (let r = 0; r < 6; r++) {
-      const y = 70 + r * 132, a = r % 2 ? 960 : 40, b = r % 2 ? 40 : 960;
+    for (let r = 0; r < 5; r++) {
+      const y = 60 + r * 110, a = r % 2 ? 960 : 40, b = r % 2 ? 40 : 960;
       for (let i = 0; i <= 24; i++) { const t = i / 24; path.push(Math.round(a + (b - a) * t), Math.round(y + Math.sin(t * 9 + r) * 12)); }
     }
     return path;
@@ -1898,13 +2610,13 @@ on conflict (id) do nothing;
       if (this.active) return;
       if (!window.MediaRecorder || !HTMLCanvasElement.prototype.captureStream) { toast("This phone's browser can't record video."); return; }
       try { await document.fonts.load("700 32px Andika"); await document.fonts.load("400 60px Andika"); } catch (e) {}
-      this.cv = document.createElement("canvas"); this.cv.width = 1280; this.cv.height = 720; this.cx = this.cv.getContext("2d");
-      this.wbc = document.createElement("canvas"); this.wbc.width = 1000; this.wbc.height = 800; this.wbx = this.wbc.getContext("2d");
+      this.cv = document.createElement("canvas"); this.cv.width = 854; this.cv.height = 480; this.cx = this.cv.getContext("2d");
+      this.wbc = document.createElement("canvas"); this.wbc.width = 1000; this.wbc.height = WB_H; this.wbx = this.wbc.getContext("2d");
       renderAll(this.wbx, 1);
       this.listen();
       this.t0 = Date.now();
       this.draw();
-      const vs = this.cv.captureStream(15);
+      const vs = this.cv.captureStream(10);
       const AC = window.AudioContext || window.webkitAudioContext;
       this.actx = new AC();
       try { await this.actx.resume(); } catch (e) {}
@@ -1914,7 +2626,7 @@ on conflict (id) do nothing;
       this.addSource(call.remoteStream);
       const stream = new MediaStream([].concat(vs.getVideoTracks(), this.dest.stream.getAudioTracks()));
       const want = this.pickMime();
-      const opts = { videoBitsPerSecond: 900000, audioBitsPerSecond: 64000 };
+      const opts = { videoBitsPerSecond: 600000, audioBitsPerSecond: 48000 };
       if (want) opts.mimeType = want;
       let mr;
       try { mr = new MediaRecorder(stream, opts); } catch (e) { mr = new MediaRecorder(stream); }
@@ -1934,7 +2646,7 @@ on conflict (id) do nothing;
       };
       this.mr = mr;
       mr.start(4000);
-      this.drawT = setInterval(() => this.draw(), 66);
+      this.drawT = setInterval(() => this.draw(), 100);
       this.active = true;
       this.set({ on: true, since: this.t0 });
       live.setRec(true);
@@ -1964,8 +2676,9 @@ on conflict (id) do nothing;
     // ---- the recording keeps its own copy of the writing board ----
     listen() {
       this.wbL = evt => {
+        this.ver = (this.ver || 0) + 1;
         if (evt.kind === "seg" || evt.kind === "lseg") drawPts(this.wbx, evt.s, 1, evt.from);
-        else if (evt.kind === "end" || evt.kind === "lend" || evt.kind === "reset") renderAll(this.wbx, 1);
+        else if (evt.kind === "end" || evt.kind === "lend" || evt.kind === "reset" || evt.kind === "redraw") renderAll(this.wbx, 1);
         else if (evt.kind === "wipe") this.mirrorWipe();
         else if (evt.kind === "good") this.stampUntil = Date.now() + 1900;
       };
@@ -1990,7 +2703,17 @@ on conflict (id) do nothing;
       }, 40);
     },
     // ---- one video frame ----
+    shouldDraw() {
+      // Redraw only when something changed or the clock ticked: much lighter on slower phones.
+      const now = Date.now(), sig = Math.floor((now - this.t0) / 1000) + "|" + (this.ver || 0) + "|" + (tilePlayer.key || "") + "|" + (call.st.phase || "");
+      const moving = this.duster || now < (this.stampUntil || 0) + 150;
+      if (!moving && sig === this.lastSig && live.st === this.lastL) return false;
+      this.lastSig = sig; this.lastL = live.st;
+      return true;
+    },
     draw() {
+      if (!this.shouldDraw()) return;
+      this.cx.setTransform(this.cv.width / 1280, 0, 0, this.cv.height / 720, 0, 0);
       const c = this.cx; if (!c) return;
       const W = 1280, H = 720, L = live.st, now = Date.now();
       c.globalAlpha = 1; c.globalCompositeOperation = "source-over"; c.shadowBlur = 0;
@@ -2006,7 +2729,7 @@ on conflict (id) do nothing;
       c.fillStyle = "#F1ECDC"; rr(c, bx + bw * 0.78, by + bh - 5, 44, 10, 4); c.fill();
       c.save(); rr(c, bx, by, bw, bh, 14); c.clip();
       if (L.mode === "write") {
-        const s = Math.min((bw - 40) / 1000, (bh - 20) / 800), dw = 1000 * s, dh = 800 * s, ox = bx + (bw - dw) / 2, oy = by + (bh - dh) / 2;
+        const s = Math.min((bw - 40) / 1000, (bh - 20) / WB_H), dw = 1000 * s, dh = WB_H * s, ox = bx + (bw - dw) / 2, oy = by + (bh - dh) / 2;
         c.drawImage(this.wbc, ox, oy, dw, dh);
         if (this.duster) {
           const dx = ox + this.duster.x * s, dy = oy + this.duster.y * s;
@@ -2218,6 +2941,14 @@ on conflict (id) do nothing;
     return html`<svg width=${size} height=${size} viewBox="0 0 24 24" fill=${p.fill ? "currentColor" : "none"} stroke=${p.fill ? "none" : "currentColor"} stroke-width=${sw} stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">${p.children}</svg>`;
   }
   const Ic = {
+    expand: p => html`<${Svg} ...${p}><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></${Svg}>`,
+    shrink: p => html`<${Svg} ...${p}><path d="M9 4v5H4M15 4v5h5M9 20v-5H4M15 20v-5h5"/></${Svg}>`,
+    keys: p => html`<${Svg} ...${p}><rect x="2.5" y="6" width="19" height="12" rx="2"/><path d="M6.5 10h.01M9.5 10h.01M12.5 10h.01M15.5 10h.01M18 10h.01M7.5 14h9"/></${Svg}>`,
+    undo: p => html`<${Svg} ...${p}><path d="M9 14L4 9l5-5"/><path d="M4 9h10.5a5.5 5.5 0 0 1 0 11H11"/></${Svg}>`,
+    next: p => html`<${Svg} ...${p}><path d="M9 5l7 7-7 7"/></${Svg}>`,
+    bksp: p => html`<${Svg} ...${p}><path d="M9 5h11a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H9l-6-7z"/><path d="M12 9.5l5 5M17 9.5l-5 5"/></${Svg}>`,
+    test: p => html`<${Svg} ...${p}><rect x="5" y="4" width="14" height="17" rx="2"/><path d="M9 4V3h6v1M8.5 10h7M8.5 14h7M8.5 18h4"/></${Svg}>`,
+    micoff: p => html`<${Svg} ...${p}><rect x="9" y="2.8" width="6" height="11.4" rx="3"/><path d="M5.5 11a6.5 6.5 0 0 0 13 0M12 17.5V21M4 4l16 16"/></${Svg}>`,
     play: p => html`<${Svg} ...${p} fill=${true}><path d="M8 5.2v13.6a1 1 0 0 0 1.53.85l10.6-6.8a1 1 0 0 0 0-1.7L9.53 4.35A1 1 0 0 0 8 5.2z"/></${Svg}>`,
     pause: p => html`<${Svg} ...${p} fill=${true}><rect x="6" y="5" width="4.2" height="14" rx="1.3"/><rect x="13.8" y="5" width="4.2" height="14" rx="1.3"/></${Svg}>`,
     mic: p => html`<${Svg} ...${p}><rect x="9" y="2.8" width="6" height="11.4" rx="3"/><path d="M5.5 11a6.5 6.5 0 0 0 13 0M12 17.5V21"/></${Svg}>`,
@@ -2429,15 +3160,15 @@ on conflict (id) do nothing;
     </div>`;
   }
 
-  function Rail({ lessons, uIdx, vIdx, unreadBy, teacher, onPick }) {
+  function Rail({ lessons, uIdx, vIdx, unreadBy, teacher, onPick, onBook }) {
     const ref = useRef(null);
     useEffect(() => {
       const rail = ref.current; if (!rail) return;
-      const el = rail.children[vIdx]; if (!el) return;
+      const el = rail.querySelectorAll(".dot")[vIdx]; if (!el) return;
       const left = el.offsetLeft - rail.clientWidth / 2 + el.clientWidth / 2;
       try { rail.scrollTo({ left, behavior: "smooth" }); } catch (e) { rail.scrollLeft = left; }
     }, [vIdx, lessons.length]);
-    return html`<nav class="rail" ref=${ref} aria-label="Lessons">${lessons.map((l, i) => {
+    return html`<nav class="rail" ref=${ref} aria-label="Lessons">${onBook ? html`<button class="railbook" onClick=${onBook} aria-label="My exercise book"><${Ic.book} size=${22}/></button>` : null}${lessons.map((l, i) => {
       const state = i < uIdx ? "done" : i === uIdx ? "cur" : "locked";
       const can = teacher || i <= uIdx;
       return html`<button key=${l.id} class=${"dot " + state + (i === vIdx ? " view" : "") + (teacher && i === vIdx ? " tview" : "")} disabled=${!can} onClick=${() => onPick(l.id)} aria-label=${"Lesson " + (i + 1)} aria-current=${i === vIdx ? "true" : null}>
@@ -2477,7 +3208,15 @@ on conflict (id) do nothing;
     </div>`;
   }
 
-  function Msg({ m, role, teacher, pst, lessons, onGoto, onRetry, onDel, onPhoto }) {
+  function Msg({ m, role, teacher, pst, lessons, onGoto, onRetry, onDel, onPhoto, msgs, onHw, onAns }) {
+    if (m.kind === "hwmark") return null;
+    if (m.kind === "hw" || m.kind === "hwans") {
+      const mine = m.from === role;
+      return html`<div class=${"msg " + (mine ? "me" : "them")}>
+        ${m.kind === "hw" ? html`<${HwCard} m=${m} msgs=${msgs || []} teacher=${teacher} onOpen=${() => onHw && onHw(m)}/>` : html`<${AnsChip} m=${m} msgs=${msgs || []} teacher=${teacher} onOpen=${() => onAns && onAns(m)}/>`}
+        <${Meta} m=${m} me=${mine} teacher=${teacher} onDel=${onDel} onRetry=${onRetry}/>
+      </div>`;
+    }
     const me = m.from === role;
     if (m.kind === "pass") {
       const ni = m.next ? lessons.findIndex(l => l.id === m.next) : -1;
@@ -2676,6 +3415,20 @@ on conflict (id) do nothing;
     const [hw, setHw] = useState(false);
     const [lightbox, setLightbox] = useState(null);
     const [editing, setEditing] = useState(!!startEditing);
+    const [hwEdit, setHwEdit] = useState(false);
+    const [hwRun, setHwRun] = useState(null);
+    const [hwRev, setHwRev] = useState(null);
+    const [bookOpen, setBookOpen] = useState(false);
+    function openHw(hw) {
+      const a = answersFor(hw.id, s.msgs.filter(x => x.student === student.id));
+      if (teacher) { if (a) setHwRev(a); else setHwRun({ hw, preview: true }); }
+      else setHwRun({ hw });
+    }
+    function openAns(a) {
+      if (teacher) { setHwRev(a); return; }
+      const hw = s.msgs.find(x => x.id === hwData(a).hw);
+      if (hw) setHwRun({ hw });
+    }
     const [endVis, setEndVis] = useState(false);
     const [vis, setVis] = useState(document.visibilityState !== "hidden");
     const [turn, setTurn] = useState(null);
@@ -2828,7 +3581,8 @@ on conflict (id) do nothing;
       const dk = dayKey(m.at);
       if (dk !== lastDay) { nodes.push(html`<div class="day" key=${"d" + dk}>${fmtDay(m.at)}</div>`); lastDay = dk; }
       nodes.push(html`<${Msg} key=${m.cid || m.id} m=${m} role=${role} teacher=${teacher} pst=${pst} lessons=${lessons}
-        onGoto=${id => setViewId(id)} onRetry=${() => deliver(m)} onDel=${() => delMsg(m)} onPhoto=${setLightbox}/>`);
+        onGoto=${id => setViewId(id)} onRetry=${() => deliver(m)} onDel=${() => delMsg(m)} onPhoto=${setLightbox}
+        msgs=${mine} onHw=${openHw} onAns=${openAns}/>`);
     }
 
     const hint = turn && turn.cue.tile && turn.tries >= 2 ? turn.cue : null;
@@ -2843,19 +3597,21 @@ on conflict (id) do nothing;
         <button class="iconbtn" onClick=${onBack} aria-label="Back to students"><${Ic.back}/></button>
         <span class="av" style=${"background:" + (student.color || COLORS[0])}>${initial(student.name)}</span>
         <div class="rtitle"><b>${student.name || "Student"}</b><small>On lesson ${uIdx + 1} of ${lessons.length}</small></div>
+        <button class="iconbtn" onClick=${() => setBookOpen(true)} aria-label="Their exercise book"><${Ic.book} size=${22}/></button>
         <button class="iconbtn" onClick=${() => setEditing(true)} aria-label="Student settings and join link"><${Ic.edit} size=${22}/></button>
       </header>` : null}
-      <${Rail} lessons=${lessons} uIdx=${uIdx} vIdx=${vIdx} unreadBy=${unreadBy} teacher=${teacher} onPick=${setViewId}/>
+      <${Rail} lessons=${lessons} uIdx=${uIdx} vIdx=${vIdx} unreadBy=${unreadBy} teacher=${teacher} onPick=${setViewId} onBook=${teacher ? null : () => setBookOpen(true)}/>
       ${teacher ? html`<div class="tact">
         ${vIdx === uIdx
           ? html`<button class="btn pass" onClick=${pass}><${Ic.tick} size=${20} sw=${2.8}/>Pass lesson ${vIdx + 1}</button>`
           : html`<button class="btn sec" onClick=${makeCurrent}>Make lesson ${vIdx + 1} the current one</button>`}
+        <button class="btn quiet" onClick=${() => setHwEdit(true)}><${Ic.book} size=${18}/>Exercise</button>
         ${!L.on ? html`<button class="btn golive" onClick=${startClass}><${Ic.phone} size=${18}/>Start class</button>` : null}
         <span class="tl">${lesson.title}</span>
       </div>` : null}
       ${teacher && L.on ? html`<${ClassPanel} who=${who} lessonTitle=${lesson.title} lessonNo=${vIdx + 1} studentId=${student.id}/>` : null}
       ${L.on && L.mode === "write"
-        ? html`<${WriteBoard} canWrite=${teacher || L.holder === "student"} teacher=${teacher} holder=${L.holder} name=${who}/>`
+        ? html`<${WriteBoard} canWrite=${teacher || L.holder === "student"} teacher=${teacher} holder=${L.holder} name=${who} ix=${ix} lessons=${lessons}/>`
         : html`<${Board} lesson=${lesson} number=${vIdx + 1} ix=${ix} tkey=${tkey} onTile=${onTile} points=${points}
         cue=${explCue || livePoint} mark=${liveMark} turn=${!!turn} flash=${flash} hint=${hint} follow=${!!explCue && pst.playing}/>`}
       <section class="book" aria-label="Messages">
@@ -2868,6 +3624,10 @@ on conflict (id) do nothing;
         points=${points} setPoints=${setPoints} hw=${hw} setHw=${setHw} turn=${teacher ? null : turn} onResume=${resume}/>
       ${lightbox ? html`<div class="lb" role="dialog" aria-label="Photo" onClick=${() => setLightbox(null)}><div class="imgwrap"><img src=${lightbox} alt="Photo"/></div></div>` : null}
       ${editing ? html`<${StudentSheet} student=${student} onClose=${() => setEditing(false)} onDeleted=${() => { setEditing(false); onBack && onBack(); }}/>` : null}
+      ${hwEdit ? html`<${HwEditor} lesson=${lesson} number=${vIdx + 1} student=${student} onClose=${() => setHwEdit(false)}/>` : null}
+      ${hwRun ? html`<${HwRunner} key=${hwRun.hw.id} hw=${hwRun.hw} msgs=${mine} student=${student} ix=${ix} lessons=${lessons} preview=${!!hwRun.preview} onClose=${() => setHwRun(null)}/>` : null}
+      ${hwRev ? html`<${HwReview} ans=${hwRev} msgs=${mine} onClose=${() => setHwRev(null)}/>` : null}
+      ${bookOpen ? html`<${ExBook} student=${student} msgs=${mine} lessons=${lessons} teacher=${teacher} onOpen=${hw => { setBookOpen(false); openHw(hw); }} onClose=${() => setBookOpen(false)}/>` : null}
     </div>`;
   }
 
@@ -3542,7 +4302,7 @@ on conflict (id) do nothing;
         })}
       <div class="note">
         <b>About recordings</b>
-        <p>Recordings stay on this phone until you download or delete them. Download saves the video to your phone's Downloads; Share sends it to another app, like WhatsApp.</p>
+        <p>Recordings stay on this phone until you download or delete them. Download saves the video to your phone's Downloads; Share sends it straight to another app, like YouTube or WhatsApp.</p>
         <p>The video shows the board and the lesson title, with both your voices. Ask your student before you post it.</p>
       </div>
     </section>`;
