@@ -266,6 +266,71 @@ img{max-width:100%}
 .sw.on{box-shadow:0 0 0 3px var(--paper),0 0 0 5px var(--ink)}
 .exrow{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
 .exrow .btn{flex:1 1 130px}
+/* ---------- the stick, your turn, live class ---------- */
+.board{overflow:hidden}
+.tile{transition:background-color .15s,color .15s,opacity .3s,transform .2s,box-shadow .2s}
+.board.cueing .tile:not(.cue):not(.mark){opacity:.42}
+.tile.cue{color:#fff;opacity:1;background:rgba(244,211,107,.2);box-shadow:0 0 0 2px var(--chalk-hi),0 0 22px rgba(244,211,107,.45);transform:scale(1.08);z-index:1}
+.tile.mark{opacity:1;box-shadow:0 0 0 3px #6FD3A3,0 0 18px rgba(111,211,163,.5)}
+.tile.good{opacity:1;color:#fff;background:rgba(111,211,163,.3);box-shadow:0 0 0 3px #6FD3A3}
+.tile.bad{animation:shake .4s;box-shadow:0 0 0 3px #F08A80}
+.tile.hint{animation:glow .9s infinite alternate}
+@keyframes shake{25%{transform:translateX(-7px)}75%{transform:translateX(7px)}}
+@keyframes glow{from{box-shadow:0 0 0 2px rgba(244,211,107,.3)}to{box-shadow:0 0 0 3px var(--chalk-hi),0 0 24px rgba(244,211,107,.7)}}
+.stick{position:absolute;left:0;top:0;width:8px;height:190px;margin-left:-4px;transform-origin:50% 0;border-radius:4px;background:linear-gradient(90deg,#6E4526,#B8834F 45%,#7C5535);box-shadow:3px 4px 8px rgba(0,0,0,.35);opacity:0;transition:transform .4s cubic-bezier(.3,.7,.3,1),opacity .25s;pointer-events:none;z-index:3}
+.stick i{position:absolute;left:0;top:0;width:8px;height:13px;border-radius:4px 4px 2px 2px;background:var(--chalk)}
+.board.turn{box-shadow:inset 0 0 0 3px var(--chalk-hi),inset 0 18px 44px rgba(0,0,0,.28)}
+.turnhint{position:absolute;top:10px;right:14px;color:var(--chalk-hi);animation:bob .8s infinite alternate;z-index:2}
+@keyframes bob{to{transform:translateY(-6px)}}
+.big.turnbtn{animation:pulsebtn 1.1s infinite}
+@keyframes pulsebtn{50%{box-shadow:0 0 0 12px rgba(31,79,163,.18)}}
+.livebar{display:flex;align-items:center;justify-content:center;gap:8px;background:var(--rec);color:#fff;font-weight:700;letter-spacing:.12em;font-size:14px;padding:5px}
+.livedot{display:inline-block;width:10px;height:10px;border-radius:50%;background:currentColor;animation:blink 1s infinite}
+.btn.golive{background:var(--card);color:var(--rec);box-shadow:inset 0 0 0 2px var(--rec)}
+.livepanel{margin:12px 12px 0;padding:10px 12px;border-radius:14px;background:var(--card);box-shadow:inset 0 0 0 2px var(--rec),var(--lift);display:flex;flex-wrap:wrap;align-items:center;gap:10px}
+.livepanel .help{flex-basis:100%;margin:0}
+.livetag{display:inline-flex;align-items:center;gap:6px;color:var(--rec);font-weight:700}
+.livepanel .who{flex:1;min-width:150px;font-size:14px;color:var(--ink-2);display:flex;align-items:center}
+.pres{display:inline-block;width:10px;height:10px;border-radius:50%;background:var(--ink-3);margin-right:6px;flex:0 0 auto}
+.pres.on{background:#2E9E6B}
+.chip2{display:inline-flex;align-items:center;gap:6px;border:0;border-radius:99px;padding:8px 12px;background:var(--paper-2);color:var(--ink-2);font-size:14px}
+.chip2.on{background:var(--blue);color:var(--on-blue)}
+.btn.slim{min-height:38px;padding:7px 14px}
+.full.studio{background:var(--paper);color:var(--ink);padding-left:0;padding-right:0}
+.full.studio .fhead{padding:0 6px 0 16px;color:var(--ink-2)}
+.full.studio .fhead span{flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.full.studio .fhead .iconbtn{color:var(--ink);margin-left:0}
+.sbody{flex:1;min-height:0;overflow:auto}
+.sbody .boardwrap{margin:8px 10px 20px}
+.sfoot{padding:12px 16px 0;display:flex;flex-direction:column;gap:12px;align-items:center;border-top:1px solid var(--line)}
+.sfoot .help{text-align:center;max-width:46ch;margin:0}
+.srow{display:flex;align-items:center;justify-content:center;gap:14px;flex-wrap:wrap;width:100%}
+.srow .recind{flex:0 0 auto}
+.armnote{margin:0;color:var(--blue);font-weight:700;text-align:center}
+.update{margin:12px 12px 0;padding:14px;border-radius:14px;background:var(--card);box-shadow:inset 0 0 0 2px var(--blue),var(--lift);display:flex;flex-direction:column;gap:10px}
+.update p{margin:0}
+@media (prefers-reduced-motion: reduce){.tile.bad,.tile.hint,.turnhint,.big.turnbtn,.livedot{animation:none}.stick{transition:opacity .2s}}
+/* ---------- writing board ---------- */
+.wbwrap{margin:16px 12px 30px}
+.wb{position:relative;border-radius:12px 12px 5px 5px;background-color:var(--board);background-image:var(--noise);box-shadow:inset 0 0 0 1px rgba(255,255,255,.05),inset 0 18px 44px rgba(0,0,0,.28);overflow:hidden}
+.wb canvas{display:block;width:100%;touch-action:none;-webkit-user-select:none;user-select:none}
+.wb.can canvas{cursor:crosshair}
+.wb.mine{box-shadow:inset 0 0 0 3px var(--chalk-hi),inset 0 18px 44px rgba(0,0,0,.28)}
+.wbduster,.wbhead{position:absolute;left:0;top:0;opacity:0;pointer-events:none;transition:opacity .15s;z-index:2}
+.wbduster i{position:absolute;left:-34px;top:-17px;width:68px;height:34px;border-radius:7px;background:linear-gradient(#8A5D38 0,#8A5D38 40%,#D8D2C6 40%);box-shadow:0 4px 8px rgba(0,0,0,.4)}
+.wbhead i{position:absolute;left:-2px;top:-5px;width:26px;height:9px;border-radius:3px;background:var(--chalk);transform:rotate(-40deg);transform-origin:0 50%;box-shadow:0 1px 3px rgba(0,0,0,.4)}
+.wbhint{position:absolute;top:8px;right:12px;color:var(--chalk-hi);animation:bob .8s infinite alternate;pointer-events:none;z-index:2}
+.wbstamp{position:absolute;left:50%;top:50%;width:130px;height:130px;margin:-65px 0 0 -65px;border-radius:50%;border:4px solid #E8675F;color:#E8675F;display:grid;place-items:center;background:rgba(20,30,25,.35);animation:stamp 1.9s ease forwards;pointer-events:none;z-index:3}
+@keyframes stamp{0%{transform:scale(1.7) rotate(-8deg);opacity:0}14%{transform:scale(1) rotate(-8deg);opacity:1}78%{opacity:1;transform:scale(1) rotate(-8deg)}100%{opacity:0;transform:scale(1) rotate(-8deg)}}
+.wbtools{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:0 0 12px}
+.tool{display:inline-flex;align-items:center;gap:6px;border:0;border-radius:12px;padding:9px 12px;background:var(--paper-2);color:var(--ink);font-weight:700;font-size:14px}
+.tool.on{background:var(--blue);color:var(--on-blue)}
+.tool.good{background:var(--card);color:var(--red);box-shadow:inset 0 0 0 2px var(--red)}
+.stools{display:flex;justify-content:center;gap:18px;margin-top:14px}
+.segsmall{display:inline-flex;background:var(--paper-2);border-radius:99px;padding:3px}
+.segsmall button{display:inline-flex;align-items:center;gap:5px;border:0;background:none;padding:7px 12px;border-radius:99px;font-weight:700;font-size:14px;color:var(--ink-2)}
+.segsmall button.on{background:var(--card);color:var(--ink);box-shadow:var(--lift)}
+@media (prefers-reduced-motion: reduce){.wbhint{animation:none}}
 /* ---------- setup and sign in ---------- */
 .setup{max-width:560px;margin:0 auto;padding:24px 16px 56px;display:flex;flex-direction:column;gap:16px}
 .setup h1{margin:0;font-size:28px;line-height:1.15}
@@ -311,8 +376,11 @@ create table if not exists public.lessons (
   board text not null default '',
   explain text,
   explain_secs real not null default 0,
+  cues jsonb not null default '[]'::jsonb,
   updated_at timestamptz not null default now()
 );
+-- For projects set up before the teacher's stick existed:
+alter table public.lessons add column if not exists cues jsonb not null default '[]'::jsonb;
 
 create table if not exists public.recs (
   id text primary key,
@@ -599,7 +667,7 @@ on conflict (id) do nothing;
     return;
   }
   const { h, render, Fragment } = window.preact;
-  const { useState, useEffect, useRef, useMemo } = window.preactHooks;
+  const { useState, useEffect, useRef, useMemo, useLayoutEffect } = window.preactHooks;
   const html = window.htm.bind(h);
 
   /* ================= utilities ================= */
@@ -679,7 +747,7 @@ on conflict (id) do nothing;
 
   /* ================= store ================= */
   const store = {
-    s: { phase: "loading", isOwner: false, canSend: false, lessons: [], recs: [], students: [], msgs: [], sid: null, toast: null, email: "", hint: "", err: "", wantTeacher: false, fresh: false },
+    s: { phase: "loading", isOwner: false, canSend: false, lessons: [], recs: [], students: [], msgs: [], sid: null, toast: null, email: "", hint: "", err: "", wantTeacher: false, fresh: false, needsUpdate: false },
     subs: new Set(),
     set(patch) { this.s = Object.assign({}, this.s, patch); this.subs.forEach(f => f(this.s)); },
   };
@@ -731,7 +799,7 @@ on conflict (id) do nothing;
 
   // App field names <-> database columns
   const FIELDS = {
-    lessons: { stage: "stage", order: "ord", title: "title", note: "note", board: "board", explain: "explain", explainSecs: "explain_secs", updatedAt: "updated_at" },
+    lessons: { stage: "stage", order: "ord", title: "title", note: "note", board: "board", explain: "explain", explainSecs: "explain_secs", updatedAt: "updated_at", cues: "cues" },
     recs: { lesson: "lesson", text: "tile", audio: "audio", secs: "secs" },
     students: { name: "name", color: "color", unlocked: "unlocked", invite: "invite" },
     msgs: { student: "student", lesson: "lesson", from: "sender", kind: "kind", asset: "media", secs: "secs", text: "body", hw: "hw", point: "point", next: "next", seen: "seen", cid: "cid" },
@@ -748,7 +816,7 @@ on conflict (id) do nothing;
   }
   const ms = t => (t ? Date.parse(t) || 0 : 0);
   const FROM = {
-    lessons: r => ({ id: r.id, stage: r.stage, order: r.ord, title: r.title, note: r.note, board: r.board, explain: r.explain, explainSecs: r.explain_secs, updatedAt: ms(r.updated_at) }),
+    lessons: r => ({ id: r.id, stage: r.stage, order: r.ord, title: r.title, note: r.note, board: r.board, explain: r.explain, explainSecs: r.explain_secs, updatedAt: ms(r.updated_at), cues: Array.isArray(r.cues) ? r.cues : [] }),
     recs: r => ({ id: r.id, lesson: r.lesson, text: r.tile, audio: r.audio, secs: r.secs }),
     students: r => ({ id: r.id, name: r.name, color: r.color, unlocked: r.unlocked, invite: r.invite, createdAt: ms(r.created_at) }),
     msgs: r => ({ id: r.id, student: r.student, lesson: r.lesson, from: r.sender, kind: r.kind, asset: r.media, secs: r.secs, text: r.body, hw: r.hw, point: r.point || [], next: r.next, seen: r.seen, cid: r.cid, at: ms(r.created_at) }),
@@ -935,6 +1003,7 @@ on conflict (id) do nothing;
       return;
     }
     store.set({ isOwner: !!who.teacher, sid: who.teacher ? null : who.student, canSend: true, email: session.user.email || "" });
+    if (who.teacher) { try { const pr = await sb.from("lessons").select("cues").limit(1); store.set({ needsUpdate: !!pr.error }); } catch (e) {} }
     await loadAll();
     subscribe();
     store.set({ phase: "ready" });
@@ -951,6 +1020,7 @@ on conflict (id) do nothing;
   async function signOut() {
     try { if (channel) await sb.removeChannel(channel); } catch (e) {}
     channel = null;
+    live.leave();
     try { await sb.auth.signOut(); } catch (e) {}
     store.set({ phase: "signin", isOwner: false, sid: null, lessons: [], recs: [], students: [], msgs: [], email: "" });
   }
@@ -993,7 +1063,7 @@ on conflict (id) do nothing;
   }
 
   const player = {
-    a: null, key: null, st: { key: null, playing: false, cur: 0, dur: 0 }, subs: new Set(),
+    a: null, key: null, pos: {}, st: { key: null, playing: false, cur: 0, dur: 0 }, subs: new Set(),
     emit() {
       const a = this.a;
       this.st = { key: this.key, playing: !!a && !a.paused && !a.ended, cur: a ? a.currentTime || 0 : 0, dur: a && isFinite(a.duration) ? a.duration : 0 };
@@ -1012,14 +1082,19 @@ on conflict (id) do nothing;
     },
     play(key, src, restart) {
       const a = this.el();
+      tilePlayer.stop();
       if (this.key === key && !restart) { if (a.paused) a.play().catch(() => {}); else a.pause(); return; }
       if (this.key === key && restart) { a.currentTime = 0; a.play().catch(() => {}); return; }
+      // remember where an explanation was, so it carries on from there later
+      if (this.key && this.key.indexOf("explain:") === 0 && !a.ended) this.pos[this.key] = a.currentTime || 0;
       this.key = key;
       a.src = src;
+      if (this.pos[key]) { try { a.currentTime = this.pos[key]; } catch (e) {} delete this.pos[key]; }
       const p = a.play();
       if (p && p.catch) p.catch(() => {});
       this.emit();
     },
+    pauseOnly() { if (this.a && !this.a.paused) this.a.pause(); },
     stop() { if (this.a) this.a.pause(); if (this.key) { this.key = null; this.emit(); } },
     seek(d) { const a = this.a; if (a && this.key) a.currentTime = Math.max(0, (a.currentTime || 0) + d); },
   };
@@ -1027,6 +1102,419 @@ on conflict (id) do nothing;
     const [st, set] = useState(player.st);
     useEffect(() => { player.subs.add(set); return () => { player.subs.delete(set); }; }, []);
     return st;
+  }
+
+  // Tile sounds get their own player, so tapping a letter never loses your place in the explanation.
+  const tilePlayer = {
+    a: null, key: null, subs: new Set(),
+    emit() { this.subs.forEach(f => f(this.key)); },
+    play(key, src) {
+      if (!this.a) {
+        const a = new Audio();
+        a.preload = "auto";
+        a.addEventListener("ended", () => { this.key = null; this.emit(); });
+        a.addEventListener("error", () => { this.key = null; this.emit(); });
+        this.a = a;
+      }
+      player.pauseOnly();
+      const a = this.a;
+      this.key = key;
+      if (a.src !== src) a.src = src; else a.currentTime = 0;
+      const p = a.play();
+      if (p && p.catch) p.catch(() => {});
+      this.emit();
+    },
+    stop() { if (this.a) this.a.pause(); if (this.key) { this.key = null; this.emit(); } },
+  };
+  function useTileKey() {
+    const [k, set] = useState(tilePlayer.key);
+    useEffect(() => { tilePlayer.subs.add(set); return () => { tilePlayer.subs.delete(set); }; }, []);
+    return k;
+  }
+  let actx = null;
+  function chime(ok) {
+    try {
+      actx = actx || new (window.AudioContext || window.webkitAudioContext)();
+      if (actx.state === "suspended") actx.resume();
+      const t0 = actx.currentTime + 0.01;
+      (ok ? [660, 990] : [196]).forEach((f, i) => {
+        const o = actx.createOscillator(), g = actx.createGain(), t = t0 + i * 0.12;
+        o.type = "sine"; o.frequency.value = f;
+        g.gain.setValueAtTime(0.0001, t);
+        g.gain.exponentialRampToValueAtTime(ok ? 0.22 : 0.12, t + 0.02);
+        g.gain.exponentialRampToValueAtTime(0.0001, t + 0.28);
+        o.connect(g); g.connect(actx.destination);
+        o.start(t); o.stop(t + 0.3);
+      });
+    } catch (e) {}
+  }
+  const round2 = n => Math.round((n || 0) * 100) / 100;
+
+  // Follows an explanation as it plays: which tile the stick points at, and when to stop for "your turn".
+  function useCueSync(key, cues, pauseOnTurn, onTurn, pst) {
+    const [active, setActive] = useState(null);
+    const turnRef = useRef(onTurn);
+    turnRef.current = onTurn;
+    const prevRef = useRef(-1);
+    const running = pst.key === key && pst.playing;
+    useEffect(() => { prevRef.current = -1; setActive(null); }, [key]);
+    useEffect(() => { if (pst.key !== key) setActive(null); }, [pst.key]);
+    useEffect(() => {
+      if (!running || !cues || !cues.length) return;
+      let raf = 0, cur = active;
+      const tick = () => {
+        raf = requestAnimationFrame(tick);
+        const a = player.a;
+        if (!a || player.key !== key) return;
+        const now = a.currentTime || 0, prev = prevRef.current;
+        let p = null;
+        for (const c of cues) { if (c.t > now) break; p = c.k === "p" ? c : null; }
+        const show = p && now - p.t < 8 ? p : null;
+        if (show !== cur) { cur = show; setActive(show); }
+        prevRef.current = now;
+        if (!a.paused && prev >= 0 && now > prev && now - prev < 1.5) {
+          for (const c of cues) {
+            if (c.k === "w" && c.t > prev && c.t <= now) {
+              if (pauseOnTurn) a.pause();
+              if (turnRef.current) turnRef.current(c);
+              break;
+            }
+          }
+        }
+      };
+      raf = requestAnimationFrame(tick);
+      return () => cancelAnimationFrame(raf);
+    }, [running, key, cues]);
+    return active;
+  }
+
+  // Writing board: strokes in board units (1000 across, 800 down), shared live between both phones.
+  const wb = {
+    strokes: [], open: new Map(), listeners: new Set(),
+    emit(evt) { this.listeners.forEach(f => { try { f(evt); } catch (e) {} }); },
+    reset(strokes) { this.strokes = Array.isArray(strokes) ? strokes.slice() : []; this.open.clear(); this.emit({ kind: "reset" }); },
+    commit(s) { if (!this.strokes.some(x => x.id === s.id)) this.strokes.push(s); },
+    remoteSeg(m) {
+      if (!m.id || this.strokes.some(x => x.id === m.id)) return;
+      let s = this.open.get(m.id);
+      if (!s) { s = { id: m.id, tool: m.tool === "rub" ? "rub" : "chalk", w: m.w || 13, pts: [] }; this.open.set(m.id, s); }
+      const from = s.pts.length / 2;
+      for (const v of m.pts || []) s.pts.push(v);
+      this.emit({ kind: "seg", s, from });
+    },
+    remoteEnd(m) {
+      if (!m.id) return;
+      this.open.delete(m.id);
+      const s = { id: m.id, tool: m.tool === "rub" ? "rub" : "chalk", w: m.w || 13, pts: m.pts || [] };
+      this.commit(s);
+      this.emit({ kind: "end", s });
+    },
+    wipe() { this.strokes = []; this.open.clear(); this.emit({ kind: "wipe" }); },
+  };
+
+  // Live class: the lesson board, both pointers and the writing board stay in sync over a Supabase broadcast channel.
+  const live = {
+    ch: null, sid: null, role: null, subs: new Set(), onSound: null, lastHb: 0, lastHere: 0,
+    st: { on: false, here: false, lesson: null, point: null, mark: null, sound: false, mode: "tiles", holder: "teacher" },
+    set(p) { this.st = Object.assign({}, this.st, p); this.subs.forEach(f => f(this.st)); },
+    send(p) {
+      if (!this.ch) return;
+      try { Promise.resolve(this.ch.send({ type: "broadcast", event: "live", payload: p })).catch(() => {}); } catch (e) {}
+    },
+    join(sid, role) {
+      if (!sb || (this.ch && this.sid === sid && this.role === role)) return;
+      this.leave();
+      this.sid = sid; this.role = role;
+      const ch = sb.channel("live-" + sid, { config: { broadcast: { self: false } } });
+      ch.on("broadcast", { event: "live" }, msg => this.recv((msg && msg.payload) || {}));
+      ch.subscribe();
+      this.ch = ch;
+      this.watchT = setInterval(() => this.watch(), 2000);
+    },
+    leave() {
+      if (this.role === "teacher" && this.st.on) this.send({ type: "end" });
+      clearInterval(this.hbT); clearInterval(this.watchT); clearInterval(this.hereT);
+      if (this.ch) { try { sb.removeChannel(this.ch); } catch (e) {} }
+      this.ch = null; this.sid = null; this.role = null;
+      wb.reset([]);
+      this.set({ on: false, here: false, lesson: null, point: null, mark: null, mode: "tiles", holder: "teacher" });
+    },
+    stopStudent() { clearInterval(this.hereT); wb.reset([]); this.set({ on: false, point: null, mode: "tiles", holder: "teacher" }); },
+    watch() {
+      const now = Date.now();
+      if (this.role === "student" && this.st.on && now - this.lastHb > 11000) this.stopStudent();
+      if (this.role === "teacher" && this.st.on) { const here = now - this.lastHere < 10000; if (here !== this.st.here) this.set({ here }); }
+      if (this.st.point && now - this.st.point.at > 12000) this.set({ point: null });
+      if (this.st.mark && now - this.st.mark.at > 6000) this.set({ mark: null });
+    },
+    // teacher
+    start(lesson) {
+      wb.reset([]);
+      this.set({ on: true, lesson, here: false, point: null, mark: null, mode: "tiles", holder: "teacher" });
+      this.hb();
+      clearInterval(this.hbT);
+      this.hbT = setInterval(() => this.hb(), 3000);
+    },
+    hb() { this.send({ type: "hb", lesson: this.st.lesson, sound: this.st.sound, mode: this.st.mode, holder: this.st.holder }); },
+    setLesson(lesson) { if (this.st.lesson !== lesson) { this.set({ lesson, point: null, mark: null }); this.hb(); } },
+    setSound(sound) { this.set({ sound }); this.hb(); },
+    setMode(mode) { this.set({ mode, holder: mode === "write" ? this.st.holder : "teacher", point: null, mark: null }); this.hb(); },
+    setHolder(holder) { this.set({ holder }); this.hb(); },
+    wipe() { wb.wipe(); this.send({ type: "wb-wipe" }); },
+    good() { wb.emit({ kind: "good" }); chime(true); this.send({ type: "wb-good" }); },
+    point(tile, r, c, lesson) {
+      this.set({ point: { tile, r, c, lesson, at: Date.now() } });
+      this.send({ type: "point", tile, r, c, lesson, sound: this.st.sound });
+    },
+    end() {
+      this.send({ type: "end" });
+      clearInterval(this.hbT);
+      wb.reset([]);
+      this.set({ on: false, here: false, point: null, mark: null, mode: "tiles", holder: "teacher" });
+    },
+    // student
+    spoint(tile, r, c, lesson) { this.send({ type: "spoint", tile, r, c, lesson }); },
+    recv(m) {
+      const now = Date.now();
+      if (m.type === "wb-seg") { wb.remoteSeg(m); if (this.role === "teacher") this.lastHere = now; return; }
+      if (m.type === "wb-end") { wb.remoteEnd(m); return; }
+      if (this.role === "student") {
+        if (m.type === "hb" || m.type === "point") {
+          const first = !this.st.on;
+          this.lastHb = now;
+          const patch = { on: true, lesson: m.lesson || this.st.lesson, sound: !!m.sound };
+          if (m.type === "hb") {
+            const mode = m.mode === "write" ? "write" : "tiles";
+            if (mode === "write" && (first || this.st.mode !== "write")) this.send({ type: "wb-req" });
+            patch.mode = mode;
+            patch.holder = m.holder === "student" ? "student" : "teacher";
+          }
+          if (m.type === "point") patch.point = { tile: m.tile, r: m.r, c: m.c, lesson: m.lesson, at: now };
+          else if (m.lesson !== this.st.lesson) patch.point = null;
+          this.set(patch);
+          if (first) {
+            this.send({ type: "here" });
+            clearInterval(this.hereT);
+            this.hereT = setInterval(() => { if (this.st.on) this.send({ type: "here" }); }, 4000);
+          }
+          if (m.type === "point" && m.sound && this.onSound) this.onSound(m.tile, m.lesson);
+        } else if (m.type === "end") this.stopStudent();
+        else if (m.type === "wb-wipe") wb.wipe();
+        else if (m.type === "wb-good") { wb.emit({ kind: "good" }); chime(true); }
+        else if (m.type === "wb-state") { wb.reset(m.strokes || []); if (m.holder) this.set({ holder: m.holder === "student" ? "student" : "teacher" }); }
+      } else if (this.role === "teacher") {
+        if (m.type === "here") { this.lastHere = now; if (this.st.on && !this.st.here) this.set({ here: true }); }
+        else if (m.type === "spoint") { this.lastHere = now; this.set({ mark: { tile: m.tile, r: m.r, c: m.c, lesson: m.lesson, at: now }, here: this.st.on }); }
+        else if (m.type === "wb-req") { this.lastHere = now; this.send({ type: "wb-state", strokes: wb.strokes, holder: this.st.holder }); }
+      }
+    },
+  };
+  function useLive() {
+    const [st, set] = useState(live.st);
+    useEffect(() => { live.subs.add(set); set(live.st); return () => { live.subs.delete(set); }; }, []);
+    return st;
+  }
+
+  const WB_W = 1000;
+  const WB_SIZE = { chalk: 13, rub: 72 };
+  const chalkPatterns = new WeakMap();
+  function chalkPattern(ctx) {
+    let p = chalkPatterns.get(ctx);
+    if (p) return p;
+    const n = document.createElement("canvas");
+    n.width = n.height = 48;
+    const g = n.getContext("2d"), img = g.createImageData(48, 48);
+    for (let i = 0; i < img.data.length; i += 4) {
+      img.data[i] = 241; img.data[i + 1] = 236; img.data[i + 2] = 220;
+      img.data[i + 3] = Math.random() < 0.14 ? 50 + Math.random() * 70 : 185 + Math.random() * 70;
+    }
+    g.putImageData(img, 0, 0);
+    p = ctx.createPattern(n, "repeat");
+    chalkPatterns.set(ctx, p);
+    return p;
+  }
+  function drawPts(ctx, s, k, from) {
+    const p = s.pts, n = p.length / 2;
+    if (!n) return;
+    ctx.lineCap = "round"; ctx.lineJoin = "round";
+    ctx.lineWidth = s.w * k;
+    if (s.tool === "rub") { ctx.globalCompositeOperation = "destination-out"; ctx.globalAlpha = s.hard ? 1 : 0.8; ctx.strokeStyle = "#000"; }
+    else { ctx.globalCompositeOperation = "source-over"; ctx.globalAlpha = 0.95; ctx.strokeStyle = chalkPattern(ctx); }
+    const i0 = Math.max(0, from - 1);
+    ctx.beginPath();
+    ctx.moveTo(p[i0 * 2] * k, p[i0 * 2 + 1] * k);
+    if (n - i0 === 1) ctx.lineTo(p[i0 * 2] * k + 0.1, p[i0 * 2 + 1] * k);
+    for (let i = i0 + 1; i < n; i++) ctx.lineTo(p[i * 2] * k, p[i * 2 + 1] * k);
+    ctx.stroke();
+    ctx.globalCompositeOperation = "source-over"; ctx.globalAlpha = 1;
+  }
+  function renderAll(ctx, k) {
+    ctx.globalCompositeOperation = "source-over"; ctx.globalAlpha = 1;
+    ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
+    for (const s of wb.strokes) drawPts(ctx, s, k, 0);
+    for (const s of wb.open.values()) drawPts(ctx, s, k, 0);
+  }
+
+  function WriteBoard({ canWrite, teacher, holder, name }) {
+    const wrapRef = useRef(null), cvRef = useRef(null), dusterRef = useRef(null), headRef = useRef(null);
+    const [tool, setTool] = useState("chalk");
+    const toolRef = useRef(tool);
+    toolRef.current = tool;
+    const canRef = useRef(canWrite);
+    canRef.current = canWrite;
+    const [stamp, setStamp] = useState(0);
+    const kRef = useRef(1), cssK = useRef(1);
+    useEffect(() => { if (!canWrite) setTool("chalk"); }, [canWrite]);
+    useEffect(() => { if (!stamp) return; const t = setTimeout(() => setStamp(0), 2000); return () => clearTimeout(t); }, [stamp]);
+    const place = (el, x, y) => { if (!el) return; el.style.opacity = "1"; el.style.transform = "translate(" + x * cssK.current + "px," + y * cssK.current + "px)"; };
+    const hide = el => { if (el) el.style.opacity = "0"; };
+
+    // size the canvas to the screen, sharp on phones
+    useEffect(() => {
+      const cv = cvRef.current, wrap = wrapRef.current;
+      let lastW = 0;
+      const fit = () => {
+        const w = wrap.clientWidth;
+        if (!w || w === lastW) return;
+        lastW = w;
+        const dpr = Math.min(window.devicePixelRatio || 1, 2);
+        cv.width = Math.round(w * dpr); cv.height = Math.round(w * 0.8 * dpr);
+        cv.style.height = w * 0.8 + "px";
+        kRef.current = cv.width / WB_W; cssK.current = w / WB_W;
+        renderAll(cv.getContext("2d"), kRef.current);
+      };
+      fit();
+      const ro = window.ResizeObserver ? new ResizeObserver(fit) : null;
+      if (ro) ro.observe(wrap); else window.addEventListener("resize", fit);
+      return () => { if (ro) ro.disconnect(); else window.removeEventListener("resize", fit); };
+    }, []);
+
+    // the other person's writing, wiping and "good" arrive here
+    useEffect(() => {
+      const cv = cvRef.current, ctx = cv.getContext("2d");
+      let wiping = 0;
+      const runWipe = () => {
+        const path = [];
+        for (let r = 0; r < 6; r++) {
+          const y = 70 + r * 132, a = r % 2 ? 960 : 40, b = r % 2 ? 40 : 960;
+          for (let i = 0; i <= 24; i++) { const t = i / 24; path.push(Math.round(a + (b - a) * t), Math.round(y + Math.sin(t * 9 + r) * 12)); }
+        }
+        const s = { id: "wipe", tool: "rub", w: 200, hard: true, pts: [] };
+        const total = path.length / 2, t0 = performance.now(), my = ++wiping;
+        let done = 0;
+        const step = now => {
+          if (my !== wiping) return;
+          const want = Math.min(total, Math.max(1, Math.ceil(((now - t0) / 1300) * total)));
+          if (want > done) {
+            const from = done;
+            for (let i = done; i < want; i++) s.pts.push(path[i * 2], path[i * 2 + 1]);
+            done = want;
+            drawPts(ctx, s, kRef.current, from);
+            place(dusterRef.current, path[(done - 1) * 2], path[(done - 1) * 2 + 1]);
+          }
+          if (done < total) requestAnimationFrame(step);
+          else { hide(dusterRef.current); renderAll(ctx, kRef.current); }
+        };
+        requestAnimationFrame(step);
+      };
+      const f = evt => {
+        const k = kRef.current;
+        if (evt.kind === "seg") {
+          drawPts(ctx, evt.s, k, evt.from);
+          const p = evt.s.pts, n = p.length;
+          if (n >= 2) place(evt.s.tool === "rub" ? dusterRef.current : headRef.current, p[n - 2], p[n - 1]);
+        } else if (evt.kind === "end") { hide(headRef.current); hide(dusterRef.current); renderAll(ctx, k); }
+        else if (evt.kind === "reset") renderAll(ctx, k);
+        else if (evt.kind === "wipe") runWipe();
+        else if (evt.kind === "good") setStamp(Date.now());
+      };
+      wb.listeners.add(f);
+      return () => { wb.listeners.delete(f); wiping++; };
+    }, []);
+
+    // my own finger
+    useEffect(() => {
+      const cv = cvRef.current, ctx = cv.getContext("2d");
+      let cur = null, queue = [], timer = null;
+      const units = e => { const r = cv.getBoundingClientRect(), u = WB_W / r.width; return [Math.round((e.clientX - r.left) * u), Math.round((e.clientY - r.top) * u)]; };
+      const flush = () => {
+        timer = null;
+        if (!cur || !queue.length) return;
+        live.send({ type: "wb-seg", id: cur.id, tool: cur.tool, w: cur.w, pts: queue });
+        queue = [];
+      };
+      const add = (x, y) => {
+        x = Math.max(0, Math.min(1000, x)); y = Math.max(0, Math.min(800, y));
+        const p = cur.pts, n = p.length;
+        if (n >= 2) { const dx = x - p[n - 2], dy = y - p[n - 1]; if (dx * dx + dy * dy < 9) return; }
+        const from = n / 2;
+        p.push(x, y); queue.push(x, y);
+        drawPts(ctx, cur, kRef.current, from);
+        if (cur.tool === "rub") place(dusterRef.current, x, y);
+        if (!timer) timer = setTimeout(flush, 70);
+      };
+      const down = e => {
+        if (!canRef.current || cur) return;
+        e.preventDefault();
+        try { cv.setPointerCapture(e.pointerId); } catch (x) {}
+        const t = toolRef.current;
+        cur = { id: uid(), tool: t, w: WB_SIZE[t], pts: [] };
+        wb.open.set(cur.id, cur);
+        const [x, y] = units(e);
+        add(x, y);
+      };
+      const move = e => {
+        if (!cur) return;
+        e.preventDefault();
+        const list = e.getCoalescedEvents ? e.getCoalescedEvents() : null;
+        for (const ev of list && list.length ? list : [e]) { const [x, y] = units(ev); add(x, y); }
+      };
+      const up = () => {
+        if (!cur) return;
+        clearTimeout(timer);
+        flush();
+        const s = cur;
+        cur = null;
+        wb.open.delete(s.id);
+        wb.commit(s);
+        live.send({ type: "wb-end", id: s.id, tool: s.tool, w: s.w, pts: s.pts });
+        hide(dusterRef.current);
+        renderAll(ctx, kRef.current);
+      };
+      cv.addEventListener("pointerdown", down);
+      cv.addEventListener("pointermove", move);
+      cv.addEventListener("pointerup", up);
+      cv.addEventListener("pointercancel", up);
+      return () => {
+        cv.removeEventListener("pointerdown", down); cv.removeEventListener("pointermove", move);
+        cv.removeEventListener("pointerup", up); cv.removeEventListener("pointercancel", up);
+      };
+    }, []);
+
+    const mine = !teacher && canWrite;
+    return html`<div class="wbwrap">
+      ${teacher ? html`<div class="wbtools">
+        <div class="segsmall" role="group" aria-label="Tool">
+          <button class=${tool === "chalk" ? "on" : ""} onClick=${() => setTool("chalk")}><${Ic.chalk} size=${16}/>Chalk</button>
+          <button class=${tool === "rub" ? "on" : ""} onClick=${() => setTool("rub")}><${Ic.duster} size=${16}/>Duster</button>
+        </div>
+        <button class="tool" onClick=${() => live.wipe()}><${Ic.wipe} size=${16}/>Wipe board</button>
+        <button class=${"tool" + (holder === "student" ? " on" : "")} onClick=${() => live.setHolder(holder === "student" ? "teacher" : "student")}><${Ic.chalk} size=${16}/>${holder === "student" ? "Take the chalk back" : "Give " + name + " the chalk"}</button>
+        <button class="tool good" onClick=${() => live.good()}><${Ic.tick} size=${16} sw=${2.6}/>Good</button>
+      </div>` : null}
+      <div class=${"wb" + (mine ? " mine" : "") + (canWrite ? " can" : "")} ref=${wrapRef}>
+        <canvas ref=${cvRef} aria-label="Writing board"></canvas>
+        <div class="wbduster" ref=${dusterRef} aria-hidden="true"><i></i></div>
+        <div class="wbhead" ref=${headRef} aria-hidden="true"><i></i></div>
+        ${mine ? html`<div class="wbhint" aria-hidden="true"><${Ic.chalk} size=${30}/></div>` : null}
+        ${stamp ? html`<div class="wbstamp" key=${stamp} aria-label="Good"><${Ic.tick} size=${72} sw=${3}/></div>` : null}
+      </div>
+      <div class="ledge"><i></i></div>
+      ${!teacher && mine ? html`<div class="stools">
+        <button class=${"big" + (tool === "chalk" ? "" : " alt")} onClick=${() => setTool("chalk")} aria-label="Chalk"><${Ic.chalk} size=${28}/></button>
+        <button class=${"big" + (tool === "rub" ? "" : " alt")} onClick=${() => setTool("rub")} aria-label="Duster"><${Ic.duster} size=${28}/></button>
+      </div>` : null}
+    </div>`;
   }
 
   const recorder = {
@@ -1188,6 +1676,10 @@ on conflict (id) do nothing;
     speaker: p => html`<${Svg} ...${p}><path d="M4 9.5h3.5L12 5.5v13l-4.5-4H4z"/><path d="M15.5 9a4 4 0 0 1 0 6M18 6.5a7.5 7.5 0 0 1 0 11"/></${Svg}>`,
     chat: p => html`<${Svg} ...${p}><path d="M4.5 18.5V7a2.5 2.5 0 0 1 2.5-2.5h10A2.5 2.5 0 0 1 19.5 7v6.5A2.5 2.5 0 0 1 17 16H8z"/></${Svg}>`,
     arrow: p => html`<${Svg} ...${p}><path d="M5 12h13M13 6.5l5.5 5.5-5.5 5.5"/></${Svg}>`,
+    hand: p => html`<${Svg} ...${p}><path d="M8.5 13.5V5a1.5 1.5 0 0 1 3 0v6"/><path d="M11.5 10.5a1.5 1.5 0 0 1 3 0v1"/><path d="M14.5 11a1.5 1.5 0 0 1 3 0v1"/><path d="M17.5 12a1.5 1.5 0 0 1 3 0v3a6.5 6.5 0 0 1-6.5 6.5h-1.3a6 6 0 0 1-4.6-2.2l-3.3-4a1.6 1.6 0 0 1 2.4-2.1l1.8 1.8"/></${Svg}>`,
+    chalk: p => html`<${Svg} ...${p}><path d="M5 19.5l-1.5-1.5L15.5 6a2.1 2.1 0 0 1 3 3z"/><path d="M13.5 8l3 3"/><path d="M3 21h4"/></${Svg}>`,
+    duster: p => html`<${Svg} ...${p}><path d="M6 9V7.5A1.5 1.5 0 0 1 7.5 6h9A1.5 1.5 0 0 1 18 7.5V9"/><rect x="3.5" y="9" width="17" height="8" rx="1.6"/><path d="M3.5 13h17"/></${Svg}>`,
+    wipe: p => html`<${Svg} ...${p}><rect x="9" y="4" width="12" height="6" rx="1.3"/><path d="M9 7h12"/><path d="M3 15c3-2 6 2 9 0s6 2 9 0M3 19.5c3-2 6 2 9 0s6 2 9 0"/></${Svg}>`,
     link: p => html`<${Svg} ...${p}><path d="M10 14a4.5 4.5 0 0 0 6.36 0l3-3a4.5 4.5 0 0 0-6.36-6.36l-1.2 1.2"/><path d="M14 10a4.5 4.5 0 0 0-6.36 0l-3 3a4.5 4.5 0 0 0 6.36 6.36l1.2-1.2"/></${Svg}>`,
     wifi: p => html`<${Svg} ...${p}><path d="M2.5 8.5a14.5 14.5 0 0 1 19 0M6 12.2a9.5 9.5 0 0 1 12 0M9.5 15.8a4.5 4.5 0 0 1 5 0M12 19.5h.01M3.5 3.5l17 17"/></${Svg}>`,
   };
@@ -1325,28 +1817,44 @@ on conflict (id) do nothing;
     <p class="help">The first lesson isn't ready yet.</p>
     ${onBack ? html`<button class="btn quiet" onClick=${onBack}>Back</button>` : null}
   </div></div>`;
-  function Board({ lesson, number, ix, pst, onTile, points, edit }) {
+  function posOf(rowsOf, cue) {
+    if (!cue || !cue.tile) return null;
+    if (cue.r != null && rowsOf[cue.r] && rowsOf[cue.r][cue.c] && rowsOf[cue.r][cue.c].t === cue.tile) return { r: cue.r, c: cue.c };
+    for (let r = 0; r < rowsOf.length; r++) for (let c = 0; c < rowsOf[r].length; c++) if (rowsOf[r][c].t === cue.tile) return { r, c };
+    return null;
+  }
+  function Board({ lesson, number, ix, tkey, onTile, points, edit, cue, mark, turn, flash, hint, follow }) {
     const rowsOf = useMemo(() => parseBoard(lesson.board), [lesson.board]);
-    const cols = useMemo(() => {
-      let maxLen = 0, maxCount = 1;
-      for (const r of rowsOf) {
-        if (r[0] && r[0].s) continue;
-        maxCount = Math.max(maxCount, r.length);
-        for (const t of r) maxLen = Math.max(maxLen, Array.from(t.t).length);
+    const boardRef = useRef(null), stickRef = useRef(null);
+    const cp = posOf(rowsOf, cue), mp = posOf(rowsOf, mark), hp = posOf(rowsOf, hint);
+    const cpKey = cp ? cp.r + "-" + cp.c : "";
+    useLayoutEffect(() => {
+      const b = boardRef.current, stick = stickRef.current;
+      if (!b || !stick) return;
+      const el = cpKey ? b.querySelector('[data-rc="' + cpKey + '"]') : null;
+      if (!el) { stick.style.opacity = "0"; return; }
+      const x = el.offsetLeft + el.offsetWidth * 0.5, y = el.offsetTop + el.offsetHeight - 6;
+      stick.style.opacity = "1";
+      stick.style.transform = "translate(" + x + "px," + y + "px) rotate(-38deg)";
+      if (follow) {
+        const r = el.getBoundingClientRect();
+        if (r.top < 80 || r.bottom > window.innerHeight - 130) el.scrollIntoView({ block: "center", behavior: "smooth" });
       }
-      const limit = maxLen <= 2 ? 7 : maxLen <= 4 ? 5 : maxLen <= 6 ? 4 : 3;
-      return Math.max(1, Math.min(maxCount, limit));
-    }, [rowsOf]);
+    }, [cpKey, lesson.board, follow]);
+    const at = (p, ri, ti) => p && p.r === ri && p.c === ti;
     return html`<div class=${"boardwrap" + (edit ? " edit" : "")}>
-      <div class=${"board" + (cols >= 6 ? " dense" : "")} style=${"--cols:" + cols}>
+      <div class=${"board" + (cp ? " cueing" : "") + (turn ? " turn" : "")} ref=${boardRef}>
         <div class="bnum" aria-label=${"Lesson " + number}>${number}</div>
+        ${turn ? html`<div class="turnhint" aria-label="Your turn"><${Ic.hand} size=${32}/></div>` : null}
         ${rowsOf.length ? rowsOf.map((row, ri) => html`<div class="brow" key=${ri}>${row.map((t, ti) => {
           const snd = soundFor(ix, lesson.id, t.t);
-          const on = pst.key === "tile:" + lesson.id + ":" + t.t;
-          const cls = "tile" + (t.s ? " sent" : "") + (on ? " on" : "") + (!snd ? " mute" : "") +
-            (edit ? (snd ? (snd.own ? " own" : " borrow") : " miss") : "") + (points && points.indexOf(t.t) >= 0 ? " pt" : "");
-          return html`<button key=${ti} class=${cls} onClick=${() => onTile(t, snd)}>${t.t}</button>`;
+          const cls = "tile" + (t.s ? " sent" : "") + (tkey === "tile:" + lesson.id + ":" + t.t ? " on" : "") + (!snd ? " mute" : "") +
+            (edit ? (snd ? (snd.own ? " own" : " borrow") : " miss") : "") + (points && points.indexOf(t.t) >= 0 ? " pt" : "") +
+            (at(cp, ri, ti) ? " cue" : "") + (at(mp, ri, ti) ? " mark" : "") + (at(hp, ri, ti) ? " hint" : "") +
+            (flash && flash.r === ri && flash.c === ti ? (flash.ok ? " good" : " bad") : "");
+          return html`<button key=${ti} class=${cls} data-rc=${ri + "-" + ti} onClick=${() => onTile(t, snd, ri, ti)}>${t.t}</button>`;
         })}</div>`) : html`<div class="bempty">${edit ? "The board is empty. Write its rows below." : html`<${Ic.wait} size=${40} sw=${1.6}/>`}</div>`}
+        <div class="stick" ref=${stickRef} aria-hidden="true"><i></i></div>
       </div>
       <div class="ledge"><i></i></div>
     </div>`;
@@ -1423,15 +1931,23 @@ on conflict (id) do nothing;
     </div>`;
   }
 
-  function Listen({ lesson, pst }) {
+  function Listen({ lesson, pst, turn, onResume }) {
     const key = "explain:" + lesson.id;
     const on = pst.key === key;
     const dur = lesson.explainSecs || (on ? pst.dur : 0);
     const frac = on && dur ? Math.min(1, pst.cur / dur) : 0;
     const C = 2 * Math.PI * 35;
+    const ring = html`<svg class="ring" viewBox="0 0 78 78" aria-hidden="true"><circle class="rbg" cx="39" cy="39" r="35"/><circle class="rfg" cx="39" cy="39" r="35" style=${"stroke-dasharray:" + C + ";stroke-dashoffset:" + C * (1 - frac)}/></svg>`;
+    if (turn) {
+      return html`<div class="listen">
+        ${turn.cue.tile
+          ? html`<button class="big grey" onClick=${onResume} aria-label="Skip this question">${ring}<${Ic.hand} size=${30}/></button>`
+          : html`<button class="big turnbtn" onClick=${onResume} aria-label="Continue">${ring}<${Ic.play} size=${30}/></button>`}
+      </div>`;
+    }
     return html`<div class="listen">
       <button class="big" disabled=${!lesson.explain} onClick=${() => lesson.explain && player.play(key, srcFor(lesson.explain))} aria-label=${on && pst.playing ? "Pause the teacher" : "Play the teacher"}>
-        <svg class="ring" viewBox="0 0 78 78" aria-hidden="true"><circle class="rbg" cx="39" cy="39" r="35"/><circle class="rfg" cx="39" cy="39" r="35" style=${"stroke-dasharray:" + C + ";stroke-dashoffset:" + C * (1 - frac)}/></svg>
+        ${ring}
         ${on && pst.playing ? html`<${Ic.pause} size=${30}/>` : html`<${Ic.play} size=${30}/>`}
       </button>
       ${on ? html`<button class="mid" onClick=${() => player.seek(-10)} aria-label="Back 10 seconds"><${Ic.replay} size=${24}/></button>` : null}
@@ -1439,7 +1955,7 @@ on conflict (id) do nothing;
   }
 
   /* ================= composer (bottom bar) ================= */
-  function Composer({ teacher, lesson, pst, canSend, onSend, points, setPoints, hw, setHw }) {
+  function Composer({ teacher, lesson, pst, canSend, onSend, points, setPoints, hw, setHw, turn, onResume }) {
     const [mode, setMode] = useState("idle");
     const [t0, setT0] = useState(0);
     const [now, setNow] = useState(0);
@@ -1464,6 +1980,7 @@ on conflict (id) do nothing;
     }
     async function startRec() {
       player.stop();
+      tilePlayer.stop();
       try {
         const st = await recorder.open();
         streamRef.current = st;
@@ -1548,7 +2065,7 @@ on conflict (id) do nothing;
       </div></div>`;
     } else {
       bar = html`<div class="bar"><div class="bar-in">
-        <${Listen} lesson=${lesson} pst=${pst}/>
+        <${Listen} lesson=${lesson} pst=${pst} turn=${turn} onResume=${onResume}/>
         <div class="grow"></div>
         ${canSend ? html`
           <button class="big alt" onClick=${() => camRef.current && camRef.current.click()} aria-label="Send a photo"><${Ic.cam} size=${30}/></button>
@@ -1575,11 +2092,14 @@ on conflict (id) do nothing;
     const role = teacher ? "teacher" : "student";
     const lessons = s.lessons;
     const pst = usePlayer();
+    const tkey = useTileKey();
+    const L = useLive();
     const uFound = lessons.findIndex(l => l.id === student.unlocked);
     const uIdx = uFound >= 0 ? uFound : 0;
     const [viewId, setViewId] = useState(() => (lessons[uIdx] ? lessons[uIdx].id : null));
     let vIdx = lessons.findIndex(l => l.id === viewId);
-    if (vIdx < 0 || (!teacher && vIdx > uIdx)) vIdx = uIdx;
+    const liveView = !teacher && L.on && vIdx >= 0 && lessons[vIdx].id === L.lesson;
+    if (vIdx < 0 || (!teacher && vIdx > uIdx && !liveView)) vIdx = uIdx;
     const lesson = lessons[vIdx];
     const [pending, setPending] = useState([]);
     const [points, setPoints] = useState(null);
@@ -1588,21 +2108,32 @@ on conflict (id) do nothing;
     const [editing, setEditing] = useState(!!startEditing);
     const [endVis, setEndVis] = useState(false);
     const [vis, setVis] = useState(document.visibilityState !== "hidden");
+    const [turn, setTurn] = useState(null);
+    const [flash, setFlash] = useState(null);
     const endRef = useRef(null);
     const uploaded = useRef(new Map());
     const lid = lesson ? lesson.id : null;
 
     const mine = s.msgs.filter(m => m.student === student.id);
     const cids = new Set(mine.map(m => m.cid).filter(Boolean));
-    const live = pending.filter(p => !cids.has(p.cid));
-    const thread = mine.filter(m => m.lesson === lid).concat(live.filter(p => p.lesson === lid)).sort((a, b) => a.at - b.at);
+    const unsent = pending.filter(p => !cids.has(p.cid));
+    const thread = mine.filter(m => m.lesson === lid).concat(unsent.filter(p => p.lesson === lid)).sort((a, b) => a.at - b.at);
     const unreadBy = {};
     for (const m of mine) if (m.from !== role && !m.seen) unreadBy[m.lesson] = (unreadBy[m.lesson] || 0) + 1;
     const unreadHere = lid ? unreadBy[lid] || 0 : 0;
     const unseenIds = thread.filter(m => !m.pending && m.from !== role && !m.seen).map(m => m.id);
 
     useEffect(() => { if (pending.some(p => cids.has(p.cid))) setPending(ps => ps.filter(p => !cids.has(p.cid))); }, [s.msgs]);
-    useEffect(() => { player.stop(); window.scrollTo(0, 0); }, [lid]);
+    const explCue = useCueSync("explain:" + lid, lesson ? lesson.cues : null, true, c => setTurn({ cue: c, tries: 0 }), pst);
+    useEffect(() => { player.stop(); tilePlayer.stop(); setTurn(null); setFlash(null); window.scrollTo(0, 0); }, [lid]);
+    useEffect(() => { if (!flash) return; const t = setTimeout(() => setFlash(null), 800); return () => clearTimeout(t); }, [flash]);
+    // live class
+    useEffect(() => { live.join(student.id, role); return () => { if (teacher) live.leave(); }; }, [student.id, role]);
+    useEffect(() => { if (!teacher && L.on && L.lesson && L.lesson !== viewId && lessons.some(l => l.id === L.lesson)) setViewId(L.lesson); }, [L.on, L.lesson]);
+    useEffect(() => { if (teacher && L.on && lid) live.setLesson(lid); }, [lid, L.on]);
+    useEffect(() => {
+      if (!teacher) live.onSound = (tile, lessonId) => { const x = soundFor(ix, lessonId, tile); if (x) tilePlayer.play("tile:" + lessonId + ":" + tile, srcFor(x.rec.audio)); };
+    });
     useEffect(() => {
       if (!lesson) return;
       const ids = [];
@@ -1668,10 +2199,23 @@ on conflict (id) do nothing;
         if (m.asset && rt.assets) { try { await rt.assets.delete(m.asset); } catch (e) {} }
       } catch (e) { toast(errText(e)); }
     }
-    function onTile(t) {
+    function resume() {
+      setTurn(null);
+      if (player.key === "explain:" + lid && player.a) player.a.play().catch(() => {});
+    }
+    function onTile(t, snd, r, c) {
       if (points) { setPoints(ps => (ps.indexOf(t.t) >= 0 ? ps.filter(x => x !== t.t) : ps.concat(t.t).slice(-6))); return; }
-      const snd = soundFor(ix, lesson.id, t.t);
-      if (snd) player.play("tile:" + lesson.id + ":" + t.t, srcFor(snd.rec.audio), true);
+      if (turn && turn.cue.tile) {
+        const ok = t.t === turn.cue.tile;
+        setFlash({ r, c, ok });
+        chime(ok);
+        if (ok) setTimeout(resume, 700);
+        else setTurn(x => (x ? Object.assign({}, x, { tries: x.tries + 1 }) : x));
+        return;
+      }
+      if (teacher && L.on) { live.point(t.t, r, c, lid); return; }
+      if (snd) tilePlayer.play("tile:" + lid + ":" + t.t, srcFor(snd.rec.audio));
+      if (!teacher && L.on) live.spoint(t.t, r, c, lid);
     }
     async function pass() {
       const next = lessons[uIdx + 1];
@@ -1699,7 +2243,13 @@ on conflict (id) do nothing;
         onGoto=${id => setViewId(id)} onRetry=${() => deliver(m)} onDel=${() => delMsg(m)} onPhoto=${setLightbox}/>`);
     }
 
+    const hint = turn && turn.cue.tile && turn.tries >= 2 ? turn.cue : null;
+    const livePoint = L.on && L.point && L.point.lesson === lid ? L.point : null;
+    const liveMark = teacher && L.on && L.mark && L.mark.lesson === lid ? L.mark : null;
+    const who = student.name || "your student";
+
     return html`<div class="room">
+      ${!teacher && L.on ? html`<div class="livebar" role="status" aria-label="Live class"><span class="livedot"></span>LIVE</div>` : null}
       ${teacher ? html`<header class="rhead">
         <button class="iconbtn" onClick=${onBack} aria-label="Back to students"><${Ic.back}/></button>
         <span class="av" style=${"background:" + (student.color || COLORS[0])}>${initial(student.name)}</span>
@@ -1711,9 +2261,24 @@ on conflict (id) do nothing;
         ${vIdx === uIdx
           ? html`<button class="btn pass" onClick=${pass}><${Ic.tick} size=${20} sw=${2.8}/>Pass lesson ${vIdx + 1}</button>`
           : html`<button class="btn sec" onClick=${makeCurrent}>Make lesson ${vIdx + 1} the current one</button>`}
+        ${!L.on ? html`<button class="btn golive" onClick=${() => live.start(lid)}><span class="livedot"></span>Go live</button>` : null}
         <span class="tl">${lesson.title}</span>
       </div>` : null}
-      <${Board} lesson=${lesson} number=${vIdx + 1} ix=${ix} pst=${pst} onTile=${onTile} points=${points}/>
+      ${teacher && L.on ? html`<div class="livepanel">
+        <span class="livetag"><span class="livedot"></span>Live</span>
+        <div class="segsmall" role="group" aria-label="Which board">
+          <button class=${L.mode !== "write" ? "on" : ""} onClick=${() => live.setMode("tiles")}>Lesson board</button>
+          <button class=${L.mode === "write" ? "on" : ""} onClick=${() => live.setMode("write")}>Writing board</button>
+        </div>
+        <span class="who"><span class=${"pres" + (L.here ? " on" : "")}></span>${L.here ? who + " is watching" : "Waiting for " + who + " to open the class"}</span>
+        <button class=${"chip2" + (L.sound ? " on" : "")} onClick=${() => live.setSound(!L.sound)} aria-pressed=${L.sound ? "true" : "false"}><${Ic.speaker} size=${16}/>Sounds on their phone</button>
+        <button class="btn danger slim" onClick=${() => live.end()}>End</button>
+        <p class="help">${L.mode === "write" ? "Call on WhatsApp for your voice. Write with your finger: they watch it appear." : "Call on WhatsApp for your voice. Tap a tile to point at it; their taps show in green."}</p>
+      </div>` : null}
+      ${L.on && L.mode === "write"
+        ? html`<${WriteBoard} canWrite=${teacher || L.holder === "student"} teacher=${teacher} holder=${L.holder} name=${who}/>`
+        : html`<${Board} lesson=${lesson} number=${vIdx + 1} ix=${ix} tkey=${tkey} onTile=${onTile} points=${points}
+        cue=${explCue || livePoint} mark=${liveMark} turn=${!!turn} flash=${flash} hint=${hint} follow=${!!explCue && pst.playing}/>`}
       <section class="book" aria-label="Messages">
         <div class="thread">${nodes}</div>
         <div class="end" ref=${endRef}></div>
@@ -1721,7 +2286,7 @@ on conflict (id) do nothing;
       <div class="spacer"></div>
       ${!endVis && unreadHere ? html`<button class="newpill" onClick=${scrollEnd} aria-label="New messages"><${Ic.chat} size=${20}/><${Ic.down} size=${18}/></button>` : null}
       <${Composer} teacher=${teacher} lesson=${lesson} pst=${pst} canSend=${teacher || s.canSend} onSend=${send}
-        points=${points} setPoints=${setPoints} hw=${hw} setHw=${setHw}/>
+        points=${points} setPoints=${setPoints} hw=${hw} setHw=${setHw} turn=${teacher ? null : turn} onResume=${resume}/>
       ${lightbox ? html`<div class="lb" role="dialog" aria-label="Photo" onClick=${() => setLightbox(null)}><div class="imgwrap"><img src=${lightbox} alt="Photo"/></div></div>` : null}
       ${editing ? html`<${StudentSheet} student=${student} onClose=${() => setEditing(false)} onDeleted=${() => { setEditing(false); onBack && onBack(); }}/>` : null}
     </div>`;
@@ -1841,30 +2406,23 @@ on conflict (id) do nothing;
     </section>`;
   }
 
-  function ExplainRecorder({ lesson, pst }) {
+  const cueCount = cues => {
+    const np = (cues || []).filter(c => c.k === "p").length, nw = (cues || []).filter(c => c.k === "w").length;
+    return np + " point" + (np === 1 ? "" : "s") + ", " + nw + " your-turn" + (nw === 1 ? "" : "s");
+  };
+  function ExplainRecorder({ lesson, pst, onStudio }) {
     const [mode, setMode] = useState("idle");
-    const [t0, setT0] = useState(0), [now, setNow] = useState(0);
     const [take, setTake] = useState(null);
     const [arm, setArm] = useState(false);
-    const r = useRef(null), st = useRef(null), fileRef = useRef(null);
-    useEffect(() => { if (mode !== "rec") return; const i = setInterval(() => setNow(Date.now()), 250); return () => clearInterval(i); }, [mode]);
-    useEffect(() => () => { if (r.current) r.current.cancel(); recorder.close(st.current); }, []);
+    const fileRef = useRef(null);
     useEffect(() => { if (!arm) return; const t = setTimeout(() => setArm(false), 3500); return () => clearTimeout(t); }, [arm]);
-    async function start() {
-      if (recorder.blocked) { fileRef.current && fileRef.current.click(); return; }
-      player.stop();
-      try { st.current = await recorder.open(); r.current = recorder.start(st.current); setT0(Date.now()); setNow(Date.now()); setMode("rec"); }
-      catch (e) { toast("The microphone isn't available here. Tap again to choose a recording file."); }
+    const withCues = (patch, cues) => (store.s.needsUpdate ? patch : Object.assign(patch, { cues }));
+    async function onFile(e) {
+      const f = e.target.files && e.target.files[0]; e.target.value = ""; if (!f) return;
+      try { toast("Getting the recording ready…"); const out = await audioFromFile(f); setTake({ blob: out.blob, secs: out.secs, url: URL.createObjectURL(out.blob) }); setMode("review"); }
+      catch (err) { toast(errText(err, "That file couldn't be used.")); }
     }
-    async function stop() {
-      const c = r.current; r.current = null; if (!c) return;
-      const out = await c.stop();
-      recorder.close(st.current); st.current = null;
-      if (out.secs < 1) { setMode("idle"); toast("That was too short."); return; }
-      setTake({ blob: out.blob, secs: out.secs, url: URL.createObjectURL(out.blob) });
-      setMode("review");
-    }
-    function cancel() { if (r.current) { r.current.cancel(); r.current = null; } recorder.close(st.current); st.current = null; if (player.key === "etake") player.stop(); setTake(null); setMode("idle"); }
+    function cancel() { if (player.key === "etake") player.stop(); setTake(null); setMode("idle"); }
     async function save() {
       const tk = take;
       if (player.key === "etake") player.stop();
@@ -1872,7 +2430,7 @@ on conflict (id) do nothing;
       try {
         const id = await uploadBlob(tk.blob);
         const old = lesson.explain;
-        await update("lessons/" + lesson.id, { explain: id, explainSecs: round1(tk.secs), updatedAt: Date.now() });
+        await update("lessons/" + lesson.id, withCues({ explain: id, explainSecs: round1(tk.secs), updatedAt: Date.now() }, []));
         if (old && old !== id && rt.assets) { try { await rt.assets.delete(old); } catch (e) {} }
         toast("Explanation saved.");
         setTake(null); setMode("idle");
@@ -1882,20 +2440,12 @@ on conflict (id) do nothing;
       if (!arm) { setArm(true); return; }
       const old = lesson.explain;
       try {
-        await update("lessons/" + lesson.id, { explain: null, explainSecs: 0, updatedAt: Date.now() });
+        await update("lessons/" + lesson.id, withCues({ explain: null, explainSecs: 0, updatedAt: Date.now() }, []));
         if (old && rt.assets) { try { await rt.assets.delete(old); } catch (e) {} }
         setArm(false);
       } catch (e) { toast(errText(e)); }
     }
-    async function onFile(e) {
-      const f = e.target.files && e.target.files[0]; e.target.value = ""; if (!f) return;
-      try { toast("Getting the recording ready…"); const out = await audioFromFile(f); setTake({ blob: out.blob, secs: out.secs, url: URL.createObjectURL(out.blob) }); setMode("review"); }
-      catch (err) { toast(errText(err, "That file couldn't be used.")); }
-    }
     const fileInput = html`<input ref=${fileRef} type="file" accept="audio/*" style="display:none" onChange=${onFile}/>`;
-    if (mode === "rec") return html`<div class="exrow">
-      <button class="btn rec" onClick=${stop}><${Ic.stop} size=${18}/>Stop, ${fmtDur((now - t0) / 1000)}</button>
-      <button class="btn quiet" onClick=${cancel}>Cancel</button></div>`;
     if (mode === "review" || mode === "saving") {
       const on = pst.key === "etake";
       return html`<div class="exrow">
@@ -1903,13 +2453,117 @@ on conflict (id) do nothing;
         <button class="btn" disabled=${mode === "saving"} onClick=${save}>${mode === "saving" ? "Saving…" : "Save it"}</button>
         <button class="btn quiet" disabled=${mode === "saving"} onClick=${cancel}>Discard</button></div>`;
     }
-    const key = "explain:" + lesson.id, on = pst.key === key;
+    const key = "explain:" + lesson.id, on = pst.key === key, cues = lesson.cues || [];
     return html`<div class="exrow">
       ${lesson.explain ? html`<button class="btn quiet" onClick=${() => player.play(key, srcFor(lesson.explain))}>${on && pst.playing ? html`<${Ic.pause} size=${18}/>` : html`<${Ic.play} size=${18}/>`}Play, ${fmtDur(on && pst.cur > 0 ? pst.cur : lesson.explainSecs)}</button>` : null}
-      <button class="btn" onClick=${start}><${Ic.mic} size=${18}/>${lesson.explain ? "Record again" : "Record explanation"}</button>
+      <button class="btn" onClick=${onStudio}><${Ic.mic} size=${18}/>${lesson.explain ? "Record again with the board" : "Record with the board"}</button>
       <button class="btn quiet" onClick=${() => fileRef.current && fileRef.current.click()}><${Ic.upload} size=${18}/>Use a file</button>
       ${lesson.explain ? html`<button class=${"btn danger" + (arm ? " arm" : "")} onClick=${del}>${arm ? "Tap again to remove" : "Remove"}</button>` : null}
       ${fileInput}
+    </div>
+    ${lesson.explain ? html`<p class="help">${cues.length ? "Stick: " + cueCount(cues) + "." : "No stick pointing on this one. Record with the board to add it."}</p>` : null}`;
+  }
+
+  function ExplainStudio({ ix, lesson, number, onClose }) {
+    const pst = usePlayer();
+    const tkey = useTileKey();
+    const [mode, setMode] = useState("ready");
+    const [now, setNow] = useState(0);
+    const [cues, setCuesState] = useState([]);
+    const cuesRef = useRef([]);
+    const [arming, setArming] = useState(null);
+    const armRef = useRef(null);
+    const [pointer, setPointer] = useState(null);
+    const [take, setTake] = useState(null);
+    const [turnFlash, setTurnFlash] = useState(false);
+    const r = useRef(null), st = useRef(null), t0 = useRef(0);
+    const setCues = list => { cuesRef.current = list; setCuesState(list); };
+    useEffect(() => { if (mode !== "rec") return; const i = setInterval(() => setNow(Date.now()), 250); return () => clearInterval(i); }, [mode]);
+    useEffect(() => () => { if (r.current) r.current.cancel(); recorder.close(st.current); if (player.key === "studio") player.stop(); }, []);
+    const preview = useCueSync("studio", cues, false, () => { setTurnFlash(true); setTimeout(() => setTurnFlash(false), 1500); }, pst);
+    const elapsed = () => round2((Date.now() - t0.current) / 1000);
+    async function start() {
+      player.stop(); tilePlayer.stop();
+      try {
+        st.current = await recorder.open();
+        r.current = recorder.start(st.current);
+        t0.current = r.current.t0;
+        setCues([]); setPointer(null); armRef.current = null; setArming(null); setNow(Date.now()); setMode("rec");
+      } catch (e) {
+        toast("The microphone isn't available here. Use a recording file instead (it won't have the stick).");
+        onClose();
+      }
+    }
+    function onTile(t, snd, ri, ti) {
+      if (mode === "rec") {
+        if (armRef.current != null) {
+          setCues(cuesRef.current.concat({ t: armRef.current, k: "w", tile: t.t, r: ri, c: ti }));
+          armRef.current = null; setArming(null); setPointer(null);
+          return;
+        }
+        const c = { t: elapsed(), k: "p", tile: t.t, r: ri, c: ti };
+        setCues(cuesRef.current.concat(c)); setPointer(c);
+        return;
+      }
+      if (snd) tilePlayer.play("tile:" + lesson.id + ":" + t.t, srcFor(snd.rec.audio));
+    }
+    function yourTurn() { armRef.current = elapsed(); setArming(armRef.current); setPointer(null); }
+    function noAnswer() {
+      if (armRef.current == null) return;
+      setCues(cuesRef.current.concat({ t: armRef.current, k: "w", tile: null }));
+      armRef.current = null; setArming(null);
+    }
+    async function stop() {
+      const c = r.current; r.current = null; if (!c) return;
+      noAnswer();
+      const out = await c.stop(); recorder.close(st.current); st.current = null;
+      if (out.secs < 1) { setMode("ready"); toast("That was too short."); return; }
+      setTake({ blob: out.blob, secs: out.secs, url: URL.createObjectURL(out.blob) }); setPointer(null); setMode("review");
+    }
+    function discard() { if (player.key === "studio") player.stop(); setTake(null); setCues([]); setMode("ready"); }
+    async function save() {
+      if (store.s.needsUpdate) { toast("Do the one-time database update first. It's at the top of your home screen."); return; }
+      if (player.key === "studio") player.stop();
+      setMode("saving");
+      try {
+        const id = await uploadBlob(take.blob);
+        const old = lesson.explain;
+        const list = cuesRef.current.slice().sort((a, b) => a.t - b.t);
+        await update("lessons/" + lesson.id, { explain: id, explainSecs: round1(take.secs), cues: list, updatedAt: Date.now() });
+        if (old && old !== id && rt.assets) { try { await rt.assets.delete(old); } catch (e) {} }
+        toast("Explanation saved: " + cueCount(list) + ".");
+        onClose();
+      } catch (e) { toast(errText(e)); setMode("review"); }
+    }
+    const on = pst.key === "studio";
+    return html`<div class="full studio" role="dialog" aria-label="Record the explanation">
+      <div class="fhead">
+        <span>Lesson ${number}: ${lesson.title}</span>
+        <button class="iconbtn" onClick=${onClose} aria-label="Close"><${Ic.x}/></button>
+      </div>
+      <div class="sbody">
+        <${Board} lesson=${lesson} number=${number} ix=${ix} tkey=${tkey} onTile=${onTile}
+          cue=${mode === "rec" ? pointer : mode === "review" ? preview : null} turn=${arming != null || turnFlash}/>
+      </div>
+      <div class="sfoot">
+        ${mode === "ready" ? html`
+          <p class="help">Talk them through the board. Tap each tile as you mention it: they'll see your stick point at it at that exact moment. Tap <b>Your turn</b> when they should answer, then tap the right tile, or <b>No answer</b> if they should just say it or write it. The recording stops there until they do.</p>
+          <button class="big red" onClick=${start} aria-label="Start recording"><${Ic.mic} size=${30}/></button>` : null}
+        ${mode === "rec" ? html`
+          <div class="srow"><span class="recind"><span class="recdot"></span>${fmtDur((now - t0.current) / 1000)}</span><span class="help">${cueCount(cues)}</span></div>
+          ${arming != null ? html`<p class="armnote">Now tap the right answer on the board, or <button class="linkbtn" onClick=${noAnswer}>No answer</button></p>` : null}
+          <div class="srow">
+            <button class="btn quiet" disabled=${arming != null} onClick=${yourTurn}><${Ic.hand} size=${20}/>Your turn</button>
+            <button class="big red" onClick=${stop} aria-label="Stop recording"><${Ic.stop} size=${28}/></button>
+          </div>` : null}
+        ${mode === "review" || mode === "saving" ? html`
+          <p class="help">${fmtDur(take.secs)}, ${cueCount(cues)}. Listen to check the stick, then save.</p>
+          <div class="srow">
+            <button class="btn quiet" disabled=${mode === "saving"} onClick=${discard}>Discard</button>
+            <button class="btn quiet" onClick=${() => player.play("studio", take.url)}>${on && pst.playing ? html`<${Ic.pause} size=${18}/>` : html`<${Ic.play} size=${18}/>`}Listen</button>
+            <button class="btn" disabled=${mode === "saving"} onClick=${save}>${mode === "saving" ? "Saving…" : "Save"}</button>
+          </div>` : null}
+      </div>
     </div>`;
   }
 
@@ -2052,6 +2706,7 @@ on conflict (id) do nothing;
     const [board, setBoard] = useState(lesson.board || "");
     const [dirty, setDirty] = useState(false);
     const [stepOpen, setStepOpen] = useState(false);
+    const [studio, setStudio] = useState(false);
     const [tile, setTile] = useState(null);
     const [armDel, setArmDel] = useState(false);
     useEffect(() => { if (!dirty) setBoard(lesson.board || ""); }, [lesson.board]);
@@ -2111,8 +2766,8 @@ on conflict (id) do nothing;
           <p class="help">Only you see this.</p></div>
         <div class="card">
           <div class="lbl">Your explanation</div>
-          <p class="help">They play this while looking at the board. Speak in the language they're most comfortable with, and tell them when to write in their book.</p>
-          <${ExplainRecorder} lesson=${lesson} pst=${pst}/>
+          <p class="help">They play this while looking at the board. Record with the board so your stick points at each tile as you talk, and add Your turn moments so they have to answer. Speak in the language they're most comfortable with.</p>
+          <${ExplainRecorder} lesson=${lesson} pst=${pst} onStudio=${() => { player.stop(); setStudio(true); }}/>
         </div>
         <div class="card">
           <div class="lbl">The board</div>
@@ -2139,7 +2794,23 @@ on conflict (id) do nothing;
         <button class=${"btn danger" + (armDel ? " arm" : "")} onClick=${delLesson}>${armDel ? "Tap again to delete this lesson" : "Delete lesson"}</button>
       </div>
       ${stepOpen ? html`<${StepRecorder} ix=${ix} lesson=${lesson} onClose=${() => setStepOpen(false)}/>` : null}
+      ${studio ? html`<${ExplainStudio} ix=${ix} lesson=${lesson} number=${idx + 1} onClose=${() => setStudio(false)}/>` : null}
       ${tile ? html`<${TileSheet} ix=${ix} lesson=${lesson} lessons=${s.lessons} text=${tile} onClose=${() => setTile(null)}/>` : null}
+    </div>`;
+  }
+
+  const UPDATE_SQL = "alter table public.lessons add column if not exists cues jsonb not null default '[]'::jsonb;\nnotify pgrst, 'reload schema';\n";
+  function UpdateBanner() {
+    const [copied, setCopied] = useState(false);
+    async function copy() {
+      try { await navigator.clipboard.writeText(UPDATE_SQL); setCopied(true); }
+      catch (e) { toast("Couldn't copy. Open “Show the code” and copy it from there."); }
+    }
+    return html`<div class="update">
+      <b>One-time database update</b>
+      <p class="help">The teacher's stick needs one small change in Supabase. Copy this, paste it into SQL Editor, tap Run, then reopen this page.</p>
+      <button class=${"btn" + (copied ? " sec" : "")} onClick=${copy}>${copied ? html`<${Ic.tick} size=${18}/>Copied` : "Copy update code"}</button>
+      <details><summary>Show the code</summary><textarea class="sqlbox" readonly value=${UPDATE_SQL}></textarea></details>
     </div>`;
   }
 
@@ -2166,6 +2837,7 @@ on conflict (id) do nothing;
           <button role="tab" aria-selected=${tab === "lessons" ? "true" : "false"} class=${tab === "lessons" ? "on" : ""} onClick=${() => setTab("lessons")}>Lessons</button>
         </div>
       </header>
+      ${s.needsUpdate ? html`<${UpdateBanner}/>` : null}
       ${tab === "students" ? html`<${StudentsList} s=${s} onOpen=${(id, isNew) => { setFresh(!!isNew); setOpenStudent(id); }}/>` : html`<${LessonsList} s=${s} ix=${ix} onOpen=${setOpenLesson}/>`}
     </div>`;
   }
