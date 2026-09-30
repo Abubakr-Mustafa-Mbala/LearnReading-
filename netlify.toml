@@ -1,3 +1,7 @@
 # Plain static site: no build step. Netlify publishes the files as they are.
 [build]
   publish = "."
+
+# The voice relay (turn.mjs) sits next to index.html.
+[functions]
+  directory = "."
