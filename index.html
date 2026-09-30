@@ -1,0 +1,2202 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="color-scheme" content="light dark">
+<title>Reading class</title>
+<meta name="theme-color" content="#233A2F">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" type="image/png" href="icon-192.png">
+<link rel="apple-touch-icon" href="icon-192.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Andika:wght@400;700&display=swap">
+<style>
+:root{
+  --paper:#F5F7F3; --paper-2:#E8EDE7; --rule:#DCE6EF; --margin:#EBB9B5;
+  --ink:#18202E; --ink-2:#475366; --ink-3:#7B8797;
+  --blue:#1F4FA3; --blue-soft:#E1E9F7; --on-blue:#FFFFFF;
+  --board:#233A2F; --chalk:#F1ECDC; --chalk-2:rgba(241,236,220,.45); --chalk-hi:#F4D36B;
+  --wood:#7C5535;
+  --red:#C3352D; --rec:#DE3129;
+  --card:#FFFFFF; --line:#D8DFE6;
+  --lift:0 1px 1px rgba(24,32,46,.05),0 8px 20px -12px rgba(24,32,46,.3);
+  --noise:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 .07 0'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23n)'/%3E%3C/svg%3E");
+  --font:"Andika","Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px);
+  padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --paper:#0F141B; --paper-2:#18202A; --rule:#19222D; --margin:#4B2C2C;
+    --ink:#E8ECF2; --ink-2:#AFB9C8; --ink-3:#7E8A9B;
+    --blue:#7BA3EE; --blue-soft:#1A2740; --on-blue:#0B1220;
+    --board:#1C3027; --chalk:#EEE8D7; --chalk-2:rgba(238,232,215,.42); --chalk-hi:#F2CF63;
+    --wood:#5E4029; --red:#EE6B62; --rec:#F0554C;
+    --card:#17202B; --line:#263241;
+    --lift:0 1px 1px rgba(0,0,0,.3),0 10px 24px -14px rgba(0,0,0,.75);
+  }
+}
+:root[data-theme="dark"]{
+  --paper:#0F141B; --paper-2:#18202A; --rule:#19222D; --margin:#4B2C2C;
+  --ink:#E8ECF2; --ink-2:#AFB9C8; --ink-3:#7E8A9B;
+  --blue:#7BA3EE; --blue-soft:#1A2740; --on-blue:#0B1220;
+  --board:#1C3027; --chalk:#EEE8D7; --chalk-2:rgba(238,232,215,.42); --chalk-hi:#F2CF63;
+  --wood:#5E4029; --red:#EE6B62; --rec:#F0554C;
+  --card:#17202B; --line:#263241;
+  --lift:0 1px 1px rgba(0,0,0,.3),0 10px 24px -14px rgba(0,0,0,.75);
+}
+*,*::before,*::after{box-sizing:inherit}
+html{height:100%;scroll-padding-top:env(safe-area-inset-top,0px);-webkit-text-size-adjust:100%}
+body{margin:0;height:100%;background:var(--paper);color:var(--ink);font-family:var(--font);font-size:16px;line-height:1.45;-webkit-tap-highlight-color:transparent}
+#app{min-height:100%;display:flex;flex-direction:column}
+button{font:inherit;color:inherit;cursor:pointer}
+button:disabled{cursor:default}
+:focus-visible{outline:3px solid var(--blue);outline-offset:2px}
+img{max-width:100%}
+
+/* ---------- screens ---------- */
+.page,.room{width:100%;max-width:640px;margin:0 auto}
+.center{flex:1;display:grid;place-items:center;padding:24px}
+.msgbox{text-align:center;max-width:34ch;display:flex;flex-direction:column;align-items:center;gap:6px}
+.msgbox p{margin:0}
+.bigicon{width:104px;height:104px;border-radius:50%;display:grid;place-items:center;background:var(--board);color:var(--chalk);margin-bottom:10px}
+.loader{display:flex;gap:10px}
+.loader i{width:14px;height:14px;border-radius:50%;background:var(--blue);opacity:.3;animation:pulse 1.2s infinite}
+.loader i:nth-child(2){animation-delay:.2s}.loader i:nth-child(3){animation-delay:.4s}
+@keyframes pulse{40%{opacity:1;transform:scale(1.15)}}
+.picker{display:flex;flex-wrap:wrap;gap:22px;justify-content:center;max-width:420px}
+.av{flex:0 0 auto;width:44px;height:44px;border-radius:50%;display:grid;place-items:center;color:#fff;font-weight:700;font-size:19px;border:0}
+.big-av{width:96px;height:96px;font-size:40px;box-shadow:var(--lift)}
+
+/* ---------- teacher chrome ---------- */
+.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:var(--paper);padding:14px 16px 12px;border-bottom:1px solid var(--line)}
+.top h1{margin:0 0 10px;font-size:27px;line-height:1.1;letter-spacing:-.01em}
+.seg{display:inline-flex;background:var(--paper-2);border-radius:99px;padding:3px}
+.seg button{border:0;background:none;color:var(--ink-2);font-weight:700;padding:8px 18px;border-radius:99px;position:relative}
+.seg button.on{background:var(--card);color:var(--ink);box-shadow:var(--lift)}
+.segdot{position:absolute;top:6px;right:7px;width:8px;height:8px;border-radius:50%;background:var(--rec)}
+.list{padding:14px 12px 48px;display:flex;flex-direction:column;gap:8px}
+.row{display:flex;align-items:center;gap:12px;width:100%;text-align:left;background:var(--card);border:0;border-radius:14px;padding:12px;box-shadow:var(--lift)}
+.rowmain{flex:1;min-width:0;display:flex;flex-direction:column;gap:2px}
+.rowmain b{font-size:17px;line-height:1.25}
+.rowmain small{color:var(--ink-2);font-size:14px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.count{min-width:26px;height:26px;border-radius:13px;background:var(--rec);color:#fff;font-size:14px;font-weight:700;display:grid;place-items:center;padding:0 8px}
+.when{font-size:13px;color:var(--ink-3)}
+.stagehead{margin:18px 4px 2px;font-size:16px;color:var(--ink-2)}
+.stagehead:first-child{margin-top:4px}
+.num{flex:0 0 auto;width:38px;height:38px;border-radius:50%;display:grid;place-items:center;background:var(--board);background-image:var(--noise);color:var(--chalk);font-weight:700}
+.pills{display:flex;gap:6px;margin-top:3px;flex-wrap:wrap}
+.pill{display:inline-flex;align-items:center;gap:4px;font-size:13px;color:var(--ink-2);background:var(--paper-2);border-radius:99px;padding:2px 9px 2px 7px}
+.pill.ok{color:var(--blue);background:var(--blue-soft)}
+.empty{padding:24px 8px;color:var(--ink-2);text-align:center}
+.empty p{margin:0}
+.note{margin-top:14px;padding:14px;border-radius:14px;background:var(--paper-2);color:var(--ink-2);font-size:15px}
+.note b{color:var(--ink)}
+.note p{margin:6px 0 0}
+.rhead{display:flex;align-items:center;gap:10px;padding:10px 12px 6px}
+.rtitle{flex:1;min-width:0;display:flex;flex-direction:column}
+.rtitle b{font-size:18px;line-height:1.2}
+.rtitle small{color:var(--ink-2);font-size:14px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.iconbtn{flex:0 0 auto;width:44px;height:44px;border-radius:50%;border:0;background:none;display:grid;place-items:center}
+.iconbtn:active{background:var(--paper-2)}
+.tact{display:flex;align-items:center;gap:12px;padding:12px 12px 0;flex-wrap:wrap}
+.tact .tl{color:var(--ink-2);font-size:15px;flex:1 1 140px;min-width:0}
+
+/* ---------- buttons ---------- */
+.btn{border:0;border-radius:12px;padding:11px 16px;min-height:46px;background:var(--blue);color:var(--on-blue);font-weight:700;display:inline-flex;align-items:center;justify-content:center;gap:8px;text-align:center}
+.btn.sec{background:var(--card);color:var(--blue);box-shadow:inset 0 0 0 1.5px var(--blue)}
+.btn.quiet{background:var(--paper-2);color:var(--ink)}
+.btn.danger{background:none;color:var(--red);box-shadow:inset 0 0 0 1.5px var(--red)}
+.btn.danger.arm{background:var(--red);color:#fff}
+.btn.rec{background:var(--rec);color:#fff}
+.btn.pass{background:var(--card);color:var(--red);box-shadow:inset 0 0 0 2px var(--red)}
+.btn.light{background:var(--chalk);color:var(--board)}
+.btn:disabled{opacity:.45}
+.row2{display:flex;gap:10px;flex-wrap:wrap}
+.row2 .btn{flex:1 1 140px}
+
+/* ---------- lesson rail ---------- */
+.rail{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;display:flex;gap:10px;overflow-x:auto;padding:10px 14px;background:var(--paper);border-bottom:1px solid var(--line);scrollbar-width:none}
+.rail::-webkit-scrollbar{display:none}
+.dot{position:relative;flex:0 0 auto;width:44px;height:44px;border-radius:50%;display:grid;place-items:center;font-weight:700;font-size:18px;color:var(--ink-2);background:var(--card);border:2px solid var(--line);padding:0}
+.dot.done{background:var(--paper-2);border-color:transparent}
+.dot.cur{border-color:var(--blue);color:var(--blue)}
+.dot.view{background:var(--blue);border-color:var(--blue);color:var(--on-blue)}
+.dot.locked{opacity:.38}
+.dot.locked.tview{opacity:1}
+.dot .tk{position:absolute;right:-4px;bottom:-4px;width:20px;height:20px;border-radius:50%;background:var(--card);color:var(--red);display:grid;place-items:center;box-shadow:0 0 0 2px var(--paper)}
+.dot .bd{position:absolute;top:-3px;right:-3px;width:14px;height:14px;border-radius:50%;background:var(--rec);box-shadow:0 0 0 2px var(--paper)}
+
+/* ---------- the board ---------- */
+.boardwrap{margin:16px 12px 30px}
+.board{position:relative;background-color:var(--board);background-image:var(--noise);border-radius:12px 12px 5px 5px;padding:48px 10px 16px;min-height:150px;box-shadow:inset 0 0 0 1px rgba(255,255,255,.05),inset 0 18px 44px rgba(0,0,0,.28)}
+.ledge{position:relative;height:9px;margin:0 6px;background:var(--wood);border-radius:0 0 5px 5px;box-shadow:0 4px 9px -5px rgba(0,0,0,.45)}
+.ledge i{position:absolute;right:18%;top:-5px;width:28px;height:7px;border-radius:3px;background:var(--chalk);opacity:.9}
+.bnum{position:absolute;top:10px;left:14px;font-size:22px;font-weight:700;line-height:1.1;color:var(--chalk-2);border-bottom:2px solid var(--chalk-2);padding:0 3px}
+.brow{display:grid;grid-template-columns:repeat(var(--cols,5),minmax(0,1fr));gap:4px;margin:0 0 6px}
+.tile{position:relative;font-family:var(--font);font-size:clamp(24px,7.8vw,38px);line-height:1.1;color:var(--chalk);background:none;border:0;border-radius:10px;padding:6px 2px 8px;min-width:0;min-height:52px;text-align:center;white-space:nowrap;transition:background-color .15s,color .15s}
+.board.dense .tile{font-size:clamp(21px,6.5vw,34px)}
+.tile:active{background:rgba(255,255,255,.08)}
+.tile.on{color:var(--chalk-hi);background:rgba(244,211,107,.14)}
+.tile.mute{color:var(--chalk-2)}
+.tile.sent,.board.dense .tile.sent{grid-column:1/-1;font-size:clamp(21px,6vw,27px);text-align:left;white-space:normal;padding:6px 8px}
+.tile.pt{box-shadow:inset 0 0 0 2.5px var(--chalk-hi)}
+.tile:focus-visible{outline-color:var(--chalk-hi)}
+.boardwrap.edit .tile.own{color:var(--chalk)}
+.boardwrap.edit .tile.borrow::after{content:"";position:absolute;right:3px;top:4px;width:7px;height:7px;border-radius:50%;background:var(--chalk-hi)}
+.boardwrap.edit .tile.miss{color:var(--chalk-2);outline:1.5px dashed var(--chalk-2);outline-offset:-3px}
+.bempty{color:var(--chalk-2);margin:0;padding:8px 6px 18px;display:flex;justify-content:center}
+.legend{display:flex;gap:14px;flex-wrap:wrap;font-size:14px;color:var(--ink-2)}
+.legend span{display:inline-flex;align-items:center;gap:6px}
+.lg{width:14px;height:14px;border-radius:4px;background:var(--board);display:inline-block;position:relative}
+.lg.bor::after{content:"";position:absolute;right:2px;top:2px;width:5px;height:5px;border-radius:50%;background:var(--chalk-hi)}
+.lg.miss{background:none;outline:1.5px dashed var(--ink-3);outline-offset:-2px}
+
+/* ---------- exercise book thread ---------- */
+.book{position:relative;min-height:36vh;padding:4px 12px 16px 32px;background-image:linear-gradient(90deg,transparent 20px,var(--margin) 20px,var(--margin) 21.5px,transparent 21.5px),repeating-linear-gradient(180deg,transparent 0,transparent 35px,var(--rule) 35px,var(--rule) 36px)}
+.thread{display:flex;flex-direction:column}
+.day{align-self:center;margin:14px 0 6px;font-size:13px;color:var(--ink-3);background:var(--paper);padding:2px 10px;border-radius:99px;box-shadow:0 0 0 1px var(--line)}
+.msg{display:flex;flex-direction:column;max-width:88%;margin:6px 0}
+.msg.me{align-self:flex-end;align-items:flex-end}
+.msg.them{align-self:flex-start;align-items:flex-start}
+.bub{position:relative;background:var(--card);border-radius:16px 16px 16px 6px;padding:8px 10px;box-shadow:var(--lift)}
+.me .bub{background:var(--blue-soft);border-radius:16px 16px 6px 16px}
+.bub.hw{box-shadow:inset 0 0 0 2px var(--blue),var(--lift);padding-top:34px}
+.hwtag{position:absolute;top:8px;left:10px;display:flex;align-items:center;gap:5px;color:var(--blue);font-size:14px;font-weight:700}
+.meta{display:flex;gap:6px;align-items:center;font-size:12px;color:var(--ink-3);margin:3px 6px 0;min-height:18px}
+.ticks{font-size:12px;letter-spacing:-2px}
+.ticks.seen{color:var(--blue)}
+.delbtn{border:0;background:none;color:var(--ink-3);padding:2px 4px;border-radius:6px;display:inline-flex;align-items:center;font-size:12px}
+.delbtn.arm{background:var(--red);color:#fff;padding:2px 8px}
+.failbtn{border:0;width:22px;height:22px;border-radius:50%;background:var(--rec);color:#fff;font-weight:700;font-size:14px;display:grid;place-items:center;padding:0}
+.spin{width:13px;height:13px;border-radius:50%;border:2px solid currentColor;border-right-color:transparent;display:inline-block;animation:spin .8s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.voice{display:flex;align-items:center;gap:10px;min-width:216px}
+.vplay{flex:0 0 auto;width:46px;height:46px;border-radius:50%;border:0;background:var(--blue);color:var(--on-blue);display:grid;place-items:center;padding:0}
+.vplay:disabled{opacity:.45}
+.wave{flex:1;display:flex;align-items:center;gap:2px;height:30px}
+.wave i{flex:1;min-width:2px;border-radius:2px;background:var(--ink-3);opacity:.45}
+.wave i.f{background:var(--blue);opacity:1}
+.vdur{font-size:13px;color:var(--ink-2);min-width:36px;text-align:right;font-variant-numeric:tabular-nums}
+.ph{display:block;width:auto;max-width:min(64vw,300px);max-height:300px;border-radius:12px;cursor:zoom-in;background:var(--paper-2)}
+.txt{font-size:20px;line-height:1.4;white-space:pre-wrap;word-break:break-word;padding:1px 2px}
+.pts{display:flex;flex-wrap:wrap;gap:4px;margin-bottom:6px}
+.pts span{background:var(--board);color:var(--chalk);border-radius:8px;padding:1px 8px;font-size:18px}
+.stamp{align-self:center;display:flex;flex-direction:column;align-items:center;gap:10px;margin:16px 0 10px}
+.stamp-ring{width:88px;height:88px;border-radius:50%;border:3px solid var(--red);color:var(--red);display:grid;place-items:center;transform:rotate(-8deg);background:var(--paper)}
+.nextbtn{display:flex;align-items:center;gap:8px;background:var(--blue);color:var(--on-blue);border:0;border-radius:99px;padding:10px 18px 10px 20px;font-size:24px;font-weight:700;box-shadow:var(--lift)}
+.end{height:1px}
+.spacer{height:calc(108px + env(safe-area-inset-bottom,0px))}
+
+/* ---------- bottom bar ---------- */
+.bar{position:fixed;left:0;right:0;bottom:0;z-index:30;background:var(--paper);border-top:1px solid var(--line);padding:10px 14px calc(10px + env(safe-area-inset-bottom,0px))}
+.bar-in{max-width:640px;margin:0 auto;display:flex;align-items:center;gap:12px;min-height:74px}
+.big{position:relative;flex:0 0 auto;width:66px;height:66px;border-radius:50%;border:0;display:grid;place-items:center;padding:0;color:var(--on-blue);background:var(--blue);box-shadow:var(--lift)}
+.big.alt{background:var(--card);color:var(--blue);box-shadow:inset 0 0 0 2px var(--blue),var(--lift)}
+.big.red{background:var(--rec);color:#fff}
+.big.grey{background:var(--paper-2);color:var(--ink-2);box-shadow:none}
+.big.chalk{background:var(--chalk);color:var(--board)}
+.big:disabled{opacity:.3;box-shadow:none}
+.bar.t .big{width:54px;height:54px}
+.mid{flex:0 0 auto;width:48px;height:48px;border-radius:50%;border:0;background:var(--paper-2);display:grid;place-items:center;padding:0}
+.grow{flex:1;min-width:0}
+.listen{display:flex;align-items:center;gap:10px}
+.ring{position:absolute;left:-6px;top:-6px;width:78px;height:78px;transform:rotate(-90deg);pointer-events:none}
+.ring circle{fill:none;stroke-width:4}
+.ring .rbg{stroke:var(--blue-soft)}
+.ring .rfg{stroke:var(--blue);transition:stroke-dashoffset .25s linear}
+.recind{flex:1;display:flex;align-items:center;justify-content:center;gap:10px;font-size:24px;font-weight:700;font-variant-numeric:tabular-nums;color:var(--rec)}
+.recdot{width:14px;height:14px;border-radius:50%;background:var(--rec);animation:blink 1s infinite}
+@keyframes blink{50%{opacity:.2}}
+.take{flex:1;display:flex;align-items:center;justify-content:center;gap:10px}
+.hwbtn{flex:0 0 auto;width:46px;height:46px;border-radius:50%;border:0;background:var(--paper-2);color:var(--ink-2);display:grid;place-items:center;padding:0}
+.hwbtn.on{background:var(--blue);color:var(--on-blue)}
+.tin{flex:1;min-width:0;font:inherit;font-size:17px;border:1.5px solid var(--line);background:var(--card);color:var(--ink);border-radius:22px;padding:11px 14px;resize:none;max-height:132px;line-height:1.35;height:48px}
+.nosend{color:var(--ink-3);display:flex;align-items:center;gap:6px;font-size:13px;max-width:18ch;text-align:right}
+.newpill{position:fixed;right:16px;bottom:calc(104px + env(safe-area-inset-bottom,0px));z-index:31;display:flex;align-items:center;gap:2px;border:0;border-radius:99px;padding:10px 12px;background:var(--rec);color:#fff;box-shadow:var(--lift)}
+.pointbar{position:fixed;left:0;right:0;bottom:calc(102px + env(safe-area-inset-bottom,0px));z-index:31;display:flex;flex-wrap:wrap;justify-content:center;gap:6px;padding:0 16px;pointer-events:none}
+.pointbar span{background:var(--board);color:var(--chalk);border-radius:10px;padding:4px 10px;font-size:20px;box-shadow:var(--lift)}
+
+/* ---------- overlays ---------- */
+.lb{position:fixed;inset:0;z-index:70;background:rgba(0,0,0,.92);display:flex;flex-direction:column}
+.lb .imgwrap{flex:1;min-height:0;display:grid;place-items:center;padding:calc(12px + env(safe-area-inset-top,0px)) 12px 12px}
+.lb img{max-width:100%;max-height:100%;object-fit:contain;border-radius:8px}
+.lb .bar{position:static;background:#000;border-top:0}
+.lb .big.grey{background:#2a2f36;color:#fff}
+.scrim{position:fixed;inset:0;z-index:50;background:rgba(10,14,20,.55);display:flex;align-items:flex-end;justify-content:center}
+.sheet{width:100%;max-width:640px;background:var(--paper);border-radius:20px 20px 0 0;padding:20px 16px calc(18px + env(safe-area-inset-bottom,0px));display:flex;flex-direction:column;gap:12px;max-height:92%;overflow:auto}
+.sheettile{align-self:center;min-width:120px;text-align:center;font-size:44px;line-height:1.15;padding:14px 22px;border-radius:12px;background:var(--board);background-image:var(--noise);color:var(--chalk)}
+.full{position:fixed;inset:0;z-index:60;background-color:var(--board);background-image:var(--noise);color:var(--chalk);display:flex;flex-direction:column;padding:calc(8px + env(safe-area-inset-top,0px)) 16px calc(16px + env(safe-area-inset-bottom,0px))}
+.fhead{display:flex;align-items:center;gap:12px;font-size:17px;font-weight:700;color:var(--chalk-2);min-height:48px}
+.fhead .iconbtn{margin-left:auto;color:var(--chalk)}
+.saving{display:inline-flex;align-items:center;gap:6px;font-weight:400;font-size:14px}
+.fbody{flex:1;display:grid;place-items:center;text-align:center;padding:12px}
+.ftile{font-size:clamp(64px,26vw,160px);line-height:1.05;color:var(--chalk);word-break:break-word}
+.ftile.sent{font-size:clamp(28px,8vw,48px);line-height:1.3}
+.fdone{display:flex;flex-direction:column;align-items:center;gap:10px;color:var(--chalk)}
+.fdone p{margin:0;color:var(--chalk-2)}
+.ffoot{display:flex;flex-direction:column;gap:14px;align-items:center}
+.frow{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:18px;width:100%;max-width:420px}
+.frow>:first-child{justify-self:end}
+.frow>:last-child{justify-self:start}
+.chip{display:inline-flex;align-items:center;gap:6px;border:0;border-radius:99px;padding:9px 14px;background:rgba(255,255,255,.1);color:var(--chalk);font-size:15px}
+.chip:disabled{opacity:.35}
+.ftime{font-size:20px;font-weight:700;font-variant-numeric:tabular-nums;color:var(--chalk-hi)}
+.lastrow{display:flex;align-items:center;gap:8px;color:var(--chalk-2);font-size:15px;flex-wrap:wrap;justify-content:center}
+.lastrow b{color:var(--chalk)}
+.fhelp{color:var(--chalk-2);text-align:center;margin:0;max-width:36ch}
+.toast{position:fixed;left:50%;transform:translateX(-50%);top:calc(10px + env(safe-area-inset-top,0px));z-index:90;background:var(--ink);color:var(--paper);padding:10px 16px;border-radius:12px;font-size:15px;width:max-content;max-width:calc(100% - 32px);box-shadow:var(--lift)}
+
+/* ---------- lesson editor ---------- */
+.ed{padding:8px 14px 64px;display:flex;flex-direction:column;gap:18px}
+.field{display:flex;flex-direction:column;gap:6px}
+.field label,.lbl{font-weight:700;font-size:16px}
+.field input,.field textarea,.field select,.boardtxt{font:inherit;font-size:17px;border:1.5px solid var(--line);border-radius:12px;padding:10px 12px;background:var(--card);color:var(--ink);width:100%}
+.field textarea{line-height:1.5;resize:vertical}
+.boardtxt{font-size:19px;line-height:1.6;resize:vertical}
+.help{font-size:14px;color:var(--ink-2);margin:0}
+.help.c{text-align:center}
+.card{background:var(--card);border-radius:16px;padding:14px;box-shadow:var(--lift);display:flex;flex-direction:column;gap:12px}
+.card .boardwrap{margin:4px 0 12px}
+.swatches{display:flex;gap:12px;flex-wrap:wrap}
+.sw{width:42px;height:42px;border-radius:50%;border:0;padding:0}
+.sw.on{box-shadow:0 0 0 3px var(--paper),0 0 0 5px var(--ink)}
+.exrow{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+.exrow .btn{flex:1 1 130px}
+/* ---------- setup and sign in ---------- */
+.setup{max-width:560px;margin:0 auto;padding:24px 16px 56px;display:flex;flex-direction:column;gap:16px}
+.setup h1{margin:0;font-size:28px;line-height:1.15}
+.setup>.help{font-size:16px}
+.step{display:flex;gap:12px;align-items:flex-start;background:var(--card);border-radius:16px;padding:14px;box-shadow:var(--lift)}
+.stepn{flex:0 0 auto;width:34px;height:34px;border-radius:50%;background:var(--board);background-image:var(--noise);color:var(--chalk);display:grid;place-items:center;font-weight:700}
+.stepb{flex:1;min-width:0;display:flex;flex-direction:column;gap:12px}
+.stepb p{margin:0}
+.sqlbox{width:100%;min-height:180px;margin-top:8px;font:12px/1.4 ui-monospace,Menlo,Consolas,monospace;border:1.5px solid var(--line);border-radius:12px;padding:10px;background:var(--paper);color:var(--ink)}
+details summary{cursor:pointer;color:var(--blue);font-weight:700;padding:4px 0}
+.err{color:var(--red);font-size:15px;margin:0}
+.msgbox.wide{max-width:440px;width:100%}
+.linkbtn{background:none;border:0;color:var(--blue);font-weight:700;padding:10px 6px;text-decoration:underline;text-underline-offset:3px}
+.acct{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-top:6px;color:var(--ink-3);font-size:14px;overflow-wrap:anywhere}
+a.btn{text-decoration:none}
+@media (prefers-reduced-motion: reduce){
+  .recdot,.loader i,.spin{animation:none}
+  .ring .rfg,.tile{transition:none}
+}
+</style>
+</head>
+<body>
+<div id="app"><div class="center"><div class="loader" aria-label="Loading"><i></i><i></i><i></i></div></div></div>
+<script src="https://cdn.jsdelivr.net/npm/preact@10.24.3/dist/preact.min.umd.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/preact@10.24.3/hooks/dist/hooks.umd.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/htm@3.1.1/dist/htm.umd.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.117.2/dist/umd/supabase.js"></script>
+<script type="text/plain" id="setup-sql">
+-- Reading class: database setup. Paste all of this into Supabase > SQL Editor and tap Run.
+-- Safe to run more than once. It never deletes anything.
+
+create table if not exists public.teachers (
+  user_id uuid primary key references auth.users(id) on delete cascade,
+  created_at timestamptz not null default now()
+);
+
+create table if not exists public.lessons (
+  id text primary key default gen_random_uuid()::text,
+  stage int not null default 1,
+  ord int not null default 1,
+  title text not null default 'New lesson',
+  note text not null default '',
+  board text not null default '',
+  explain text,
+  explain_secs real not null default 0,
+  updated_at timestamptz not null default now()
+);
+
+create table if not exists public.recs (
+  id text primary key,
+  lesson text not null references public.lessons(id) on delete cascade,
+  tile text not null,
+  audio text not null,
+  secs real not null default 0,
+  created_at timestamptz not null default now()
+);
+create index if not exists recs_lesson_idx on public.recs (lesson);
+
+create table if not exists public.students (
+  id text primary key default gen_random_uuid()::text,
+  name text not null default 'Student',
+  color text not null default '#2E7D5B',
+  unlocked text,
+  invite text not null unique default replace(gen_random_uuid()::text, '-', ''),
+  created_at timestamptz not null default now()
+);
+
+create table if not exists public.devices (
+  user_id uuid primary key references auth.users(id) on delete cascade,
+  student text not null references public.students(id) on delete cascade,
+  created_at timestamptz not null default now()
+);
+create index if not exists devices_student_idx on public.devices (student);
+
+create table if not exists public.msgs (
+  id text primary key default gen_random_uuid()::text,
+  student text not null references public.students(id) on delete cascade,
+  lesson text not null,
+  sender text not null check (sender in ('teacher', 'student')),
+  kind text not null check (kind in ('voice', 'photo', 'text', 'pass')),
+  media text,
+  secs real not null default 0,
+  body text not null default '',
+  hw boolean not null default false,
+  point text[] not null default '{}',
+  next text,
+  seen boolean not null default false,
+  cid text unique,
+  created_at timestamptz not null default now()
+);
+create index if not exists msgs_student_time_idx on public.msgs (student, created_at desc);
+
+-- Who is who
+create or replace function public.is_teacher() returns boolean
+language sql stable security definer set search_path = public as $$
+  select exists (select 1 from public.teachers where user_id = auth.uid())
+$$;
+
+create or replace function public.my_student() returns text
+language sql stable security definer set search_path = public as $$
+  select student from public.devices where user_id = auth.uid()
+$$;
+
+create or replace function public.is_member() returns boolean
+language sql stable security definer set search_path = public as $$
+  select public.is_teacher() or public.my_student() is not null
+$$;
+
+create or replace function public.whoami() returns json
+language sql stable security definer set search_path = public as $$
+  select json_build_object('teacher', public.is_teacher(), 'student', public.my_student())
+$$;
+
+-- The first real (non-anonymous) account to sign in becomes the teacher.
+create or replace function public.claim_teacher() returns boolean
+language plpgsql security definer set search_path = public as $$
+begin
+  if auth.uid() is null or coalesce((auth.jwt() ->> 'is_anonymous')::boolean, false) then
+    return false;
+  end if;
+  if public.is_teacher() then
+    return true;
+  end if;
+  if exists (select 1 from public.teachers) then
+    return false;
+  end if;
+  insert into public.teachers (user_id) values (auth.uid());
+  return true;
+end
+$$;
+
+-- A student's phone opens the join link: link this sign-in to that student.
+create or replace function public.claim_invite(code text) returns text
+language plpgsql security definer set search_path = public as $$
+declare
+  sid text;
+begin
+  if auth.uid() is null then
+    raise exception 'not signed in';
+  end if;
+  select id into sid from public.students where invite = code;
+  if sid is null then
+    raise exception 'invalid invite';
+  end if;
+  insert into public.devices (user_id, student) values (auth.uid(), sid)
+  on conflict (user_id) do update set student = excluded.student, created_at = now();
+  return sid;
+end
+$$;
+
+-- Teacher makes a new join link; the old link and all linked phones stop working.
+create or replace function public.reset_invite(sid text) returns text
+language plpgsql security definer set search_path = public as $$
+declare
+  code text := replace(gen_random_uuid()::text, '-', '');
+begin
+  if not public.is_teacher() then
+    raise exception 'teacher only';
+  end if;
+  update public.students set invite = code where id = sid;
+  delete from public.devices where student = sid;
+  return code;
+end
+$$;
+
+grant execute on function public.whoami() to anon, authenticated;
+grant execute on function public.claim_teacher() to authenticated;
+grant execute on function public.claim_invite(text) to authenticated;
+grant execute on function public.reset_invite(text) to authenticated;
+
+-- Row level security
+alter table public.teachers enable row level security;
+alter table public.lessons enable row level security;
+alter table public.recs enable row level security;
+alter table public.students enable row level security;
+alter table public.devices enable row level security;
+alter table public.msgs enable row level security;
+
+drop policy if exists "teacher sees self" on public.teachers;
+create policy "teacher sees self" on public.teachers for select to authenticated using (user_id = auth.uid());
+
+drop policy if exists "members read lessons" on public.lessons;
+create policy "members read lessons" on public.lessons for select to authenticated using (public.is_member());
+drop policy if exists "teacher writes lessons" on public.lessons;
+create policy "teacher writes lessons" on public.lessons for all to authenticated using (public.is_teacher()) with check (public.is_teacher());
+
+drop policy if exists "members read recs" on public.recs;
+create policy "members read recs" on public.recs for select to authenticated using (public.is_member());
+drop policy if exists "teacher writes recs" on public.recs;
+create policy "teacher writes recs" on public.recs for all to authenticated using (public.is_teacher()) with check (public.is_teacher());
+
+drop policy if exists "read students" on public.students;
+create policy "read students" on public.students for select to authenticated using (public.is_teacher() or id = public.my_student());
+drop policy if exists "teacher writes students" on public.students;
+create policy "teacher writes students" on public.students for all to authenticated using (public.is_teacher()) with check (public.is_teacher());
+
+drop policy if exists "teacher manages devices" on public.devices;
+create policy "teacher manages devices" on public.devices for all to authenticated using (public.is_teacher()) with check (public.is_teacher());
+
+drop policy if exists "read msgs" on public.msgs;
+create policy "read msgs" on public.msgs for select to authenticated using (public.is_teacher() or student = public.my_student());
+drop policy if exists "send msgs" on public.msgs;
+create policy "send msgs" on public.msgs for insert to authenticated with check (
+  public.is_teacher() or (student = public.my_student() and sender = 'student' and kind <> 'pass')
+);
+drop policy if exists "mark msgs seen" on public.msgs;
+create policy "mark msgs seen" on public.msgs for update to authenticated
+  using (public.is_teacher() or student = public.my_student())
+  with check (public.is_teacher() or student = public.my_student());
+drop policy if exists "teacher deletes msgs" on public.msgs;
+create policy "teacher deletes msgs" on public.msgs for delete to authenticated using (public.is_teacher());
+
+-- Messages can only be changed to mark them seen.
+revoke update on public.msgs from anon, authenticated;
+grant update (seen) on public.msgs to authenticated;
+
+-- Storage for voice notes, recordings and photos (file names are long random codes).
+insert into storage.buckets (id, name, public, file_size_limit, allowed_mime_types)
+values ('class', 'class', true, 26214400,
+  array['audio/webm', 'audio/mp4', 'audio/mpeg', 'audio/ogg', 'audio/wav', 'audio/aac', 'image/jpeg', 'image/png', 'image/webp', 'image/gif'])
+on conflict (id) do update set public = excluded.public, file_size_limit = excluded.file_size_limit,
+  allowed_mime_types = excluded.allowed_mime_types;
+
+drop policy if exists "class members read files" on storage.objects;
+create policy "class members read files" on storage.objects for select to authenticated
+  using (bucket_id = 'class' and public.is_member());
+drop policy if exists "class members upload files" on storage.objects;
+create policy "class members upload files" on storage.objects for insert to authenticated
+  with check (bucket_id = 'class' and public.is_member());
+drop policy if exists "teacher deletes files" on storage.objects;
+create policy "teacher deletes files" on storage.objects for delete to authenticated
+  using (bucket_id = 'class' and public.is_teacher());
+
+-- Live updates
+do $$
+declare t text;
+begin
+  foreach t in array array['lessons', 'recs', 'students', 'msgs'] loop
+    begin
+      execute format('alter publication supabase_realtime add table public.%I', t);
+    exception when duplicate_object or undefined_object then null;
+    end;
+  end loop;
+end
+$$;
+
+-- The 15 Stage 1 lessons
+insert into public.lessons (id, stage, ord, title, board, note) values
+  ('s1-01', 1, 1, $q$The alphabet$q$, $q$Aa Bb Cc Dd Ee Ff Gg
+Hh Ii Jj Kk Ll Mm Nn
+Oo Pp Qq Rr Ss Tt Uu
+Vv Ww Xx Yy Zz$q$, $q$A quick check on the order and the letter NAMES. He says he knows these, so keep it short. Record each tile with the letter's name. Point out that big and small letters are the same letter, and that books mostly use the small ones.$q$),
+  ('s1-02', 1, 2, $q$Letters have sounds$q$, $q$a b c d e f g
+h i j k l m n
+o p q r s t u
+v w x y z$q$, $q$The big idea of the whole course: every letter has a name and a sound, and reading uses the sound. Record each tile with its SOUND, not its name. Keep c and g hard, as in cup and go. q almost always travels with u and says 'kw'. x at the end of a word says 'ks', as in box.$q$),
+  ('s1-03', 1, 3, $q$The five vowels$q$, $q$a e i o u
+bag bed sit hot cup$q$, $q$Vowels are the letters that sing, and every English word has at least one. Tell him plainly that English vowels don't always sound like the vowels in our language: the u in cup is not the u in our words. This is the lesson that stops 'kut' for cut. The top row reuses the sounds from lesson 2, so only the five words need recording.$q$),
+  ('s1-04', 1, 4, $q$Consonants$q$, $q$b c d f g h j
+k l m n p q r
+s t v w x y z$q$, $q$The other 21 letters. They can't make a word on their own; they need a vowel beside them. These tiles reuse the sounds you recorded in lesson 2, so there's nothing new to record. Mention y: at the start of a word it's a consonant, as in yes.$q$),
+  ('s1-05', 1, 5, $q$Joining sounds, part 1$q$, $q$ba be bi bo bu
+da de di do du
+fa fe fi fo fu
+ha he hi ho hu
+ja je ji jo ju
+ka ke ki ko ku
+la le li lo lu
+ma me mi mo mu
+na ne ni no nu$q$, $q$Consonant plus vowel, joined, exactly the way we learned. Use the English vowel sounds from lesson 3. These are pieces of words, not words. A few look like real words (he, me, no, do); real words follow other rules we'll meet later, so treat these as pieces for now. Good homework: copy the chart into his book.$q$),
+  ('s1-06', 1, 6, $q$Joining sounds, part 2$q$, $q$pa pe pi po pu
+ra re ri ro ru
+sa se si so su
+ta te ti to tu
+va ve vi vo vu
+wa we wi wo wu
+ya ye yi yo yu
+za ze zi zo zu
+ca co cu
+ga go gu$q$, $q$Same chart, the rest of the consonants. c and g only join with a, o and u here on purpose: before e and i they usually change their sound, and that's a rule for later. Same warning as part 1: so, to, we and go are pieces here, not the real words.$q$),
+  ('s1-07', 1, 7, $q$Words with a$q$, $q$bag cab dad fan
+gas ham jam lab
+man map tax van$q$, $q$Three sounds joined into a word: b-a-g, bag. Have him say each sound, then say them faster until it becomes the word. Every word here follows rules he already has, so there's nothing to memorise.$q$),
+  ('s1-08', 1, 8, $q$Words with e$q$, $q$bed beg jet leg
+men net pen red
+set ten wet yes$q$, $q$Same method with e. Watch that he keeps e different from i: bed, not bid.$q$),
+  ('s1-09', 1, 9, $q$Words with i$q$, $q$big bin dig fix
+hit kid lip mix
+pin six tin win$q$, $q$Same method with i. x at the end says 'ks' (fix, mix, six).$q$),
+  ('s1-10', 1, 10, $q$Words with o$q$, $q$box cot dog hot
+job jog lot mop
+not pot rod top$q$, $q$Same method with o.$q$),
+  ('s1-11', 1, 11, $q$Words with u$q$, $q$bus bug cup cut
+fun gum hut jug
+mud nut run sun$q$, $q$Same method with u, the vowel behind the 'kut' problem, so go slowly. Worth warning him that a small group of words breaks this (put, push, pull, full, bush). Don't teach them yet; just tell him they exist, so a surprise later doesn't make him doubt the rule.$q$),
+  ('s1-12', 1, 12, $q$Change the vowel$q$, $q$bat bet bit but
+hat hit hot hut
+bag beg big bug
+pan pen pin
+sat set sit
+cat cot cut
+tap tip top
+fan fin fun
+ham him hum$q$, $q$Only the vowel changes in each row. Read across slowly and make every vowel sound clearly different. This is the drill that stops him reading every u like the u in our language. Most of these words already have recordings from lessons 7 to 11.$q$),
+  ('s1-13', 1, 13, $q$Change one letter$q$, $q$cat hat mat rat sat
+can pan man fan van
+pet net jet wet set
+pig big dig wig fig
+hot pot not lot dot
+sun run fun bun
+cat cap cup pup pop top tip tin$q$, $q$Playing with letters, like we did in class: change the first letter, then the last, then the middle. The last row is a chain; each word changes one letter from the word before it. Good homework: build his own chain in his book and read it to you.$q$),
+  ('s1-14', 1, 14, $q$Two consonants together$q$, $q$stop step spin swim
+flag frog drum trip
+plan glad club slip
+hand lamp milk jump
+best desk list tent$q$, $q$Two consonants side by side: each keeps its own sound, just said quickly together, s-t-o-p. The first three rows have them at the start, the last two at the end. (Pairs that make a brand-new sound, like sh, ch and th, are a rule for later.)$q$),
+  ('s1-15', 1, 15, $q$First sentences$q$, $q$the a I is to
+I can fix the van.
+Sam got a job.
+The bus is red.
+I got ten cups.
+Tom and Pat run to the bus.$q$, $q$Five small words to know by sight for now: the, a, I, is, to. Tell him they don't follow the rules yet and we'll explain them later. Re-record 'a' and 'to' in this lesson: the ones reused from earlier are the letter sound and the sound piece, not the words. Then real sentences using only what he's learned. Record each sentence at a natural speed and have him read them to you.$q$)
+on conflict (id) do nothing;
+</script>
+<script>
+(function () {
+  "use strict";
+  var root = document.getElementById("app");
+  if (!window.preact || !window.preactHooks || !window.htm) {
+    root.innerHTML = '<div class="center"><p class="help c">This page needs an internet connection to load. Check your data, then open it again.</p></div>';
+    return;
+  }
+  const { h, render, Fragment } = window.preact;
+  const { useState, useEffect, useRef, useMemo } = window.preactHooks;
+  const html = window.htm.bind(h);
+
+  /* ================= utilities ================= */
+  const STAGES = { 1: "Foundation", 2: "English rules", 3: "Reading", 4: "More practice" };
+  const COLORS = ["#2E7D5B", "#1F4FA3", "#B5572E", "#7A4FB0", "#B23A5B", "#2B7A8C"];
+  const sleep = ms => new Promise(r => setTimeout(r, ms));
+  const uid = () => Date.now().toString(36) + Math.random().toString(36).slice(2, 9);
+  const round1 = n => Math.round((n || 0) * 10) / 10;
+  const initial = name => ((String(name || "").trim()[0]) || "?").toUpperCase();
+  function cyrb53(str) {
+    let h1 = 0xdeadbeef, h2 = 0x41c6ce57;
+    for (let i = 0; i < str.length; i++) {
+      const ch = str.charCodeAt(i);
+      h1 = Math.imul(h1 ^ ch, 2654435761);
+      h2 = Math.imul(h2 ^ ch, 1597334677);
+    }
+    h1 = Math.imul(h1 ^ (h1 >>> 16), 2246822507) ^ Math.imul(h2 ^ (h2 >>> 13), 3266489909);
+    h2 = Math.imul(h2 ^ (h2 >>> 16), 2246822507) ^ Math.imul(h1 ^ (h1 >>> 13), 3266489909);
+    return (4294967296 * (2097151 & h2) + (h1 >>> 0)).toString(36);
+  }
+  const recKey = (lessonId, text) => lessonId + "~" + cyrb53(text);
+  function parseBoard(text) {
+    return String(text || "").split(/\r?\n/).map(l => l.trim()).filter(Boolean).map(line => {
+      if (/[.?!]["')\]]?$/.test(line)) return [{ t: line, s: true }];
+      return line.split(/\s+/).filter(Boolean).map(t => ({ t, s: false }));
+    });
+  }
+  function uniqueTiles(rows) {
+    const seen = new Set(), out = [];
+    for (const r of rows) for (const t of r) if (!seen.has(t.t)) { seen.add(t.t); out.push(t); }
+    return out;
+  }
+  function lessonSort(a, b) {
+    return (a.stage || 1) - (b.stage || 1) || (a.order || 0) - (b.order || 0) || String(a.id).localeCompare(String(b.id));
+  }
+  function fmtDur(s) { s = Math.max(0, Math.round(s || 0)); return Math.floor(s / 60) + ":" + String(s % 60).padStart(2, "0"); }
+  function fmtClock(ms) { const d = new Date(ms); return String(d.getHours()).padStart(2, "0") + ":" + String(d.getMinutes()).padStart(2, "0"); }
+  function fmtDay(ms) { const d = new Date(ms); return String(d.getDate()).padStart(2, "0") + "/" + String(d.getMonth() + 1).padStart(2, "0"); }
+  function dayKey(ms) { const d = new Date(ms); return d.getFullYear() + "-" + d.getMonth() + "-" + d.getDate(); }
+  function fmtWhen(ms) { return new Date(ms).toDateString() === new Date().toDateString() ? fmtClock(ms) : fmtDay(ms); }
+  function waveBars(seed, n) {
+    let x = parseInt(cyrb53(String(seed)).slice(0, 7), 36) || 7;
+    const out = [];
+    for (let i = 0; i < n; i++) {
+      x = (x * 1103515245 + 12345) % 2147483648;
+      const v = 26 + (x % 74);
+      out.push(i < 2 || i > n - 3 ? Math.min(v, 42) : v);
+    }
+    return out;
+  }
+  function autosize(el) { el.style.height = "auto"; el.style.height = Math.min(Math.max(el.scrollHeight + 3, 48), 132) + "px"; }
+
+  // Which recording plays for a tile: this lesson's own, else the nearest earlier lesson's, else any.
+  function buildSound(recs, lessons) {
+    const pos = new Map(lessons.map((l, i) => [l.id, i]));
+    const own = new Map(), byText = new Map();
+    for (const r of recs) {
+      if (!r.audio || !pos.has(r.lesson)) continue;
+      let m = own.get(r.lesson); if (!m) own.set(r.lesson, (m = new Map()));
+      m.set(r.text, r);
+      let arr = byText.get(r.text); if (!arr) byText.set(r.text, (arr = []));
+      arr.push({ r, p: pos.get(r.lesson) });
+    }
+    for (const arr of byText.values()) arr.sort((a, b) => a.p - b.p);
+    return { pos, own, byText };
+  }
+  function soundFor(ix, lessonId, text) {
+    const o = ix.own.get(lessonId); const mine = o && o.get(text);
+    if (mine) return { rec: mine, own: true, from: ix.pos.get(lessonId) };
+    const arr = ix.byText.get(text); if (!arr || !arr.length) return null;
+    const p = ix.pos.has(lessonId) ? ix.pos.get(lessonId) : 1e9;
+    let best = null;
+    for (const e of arr) { if (e.p < p) best = e; else break; }
+    if (!best) best = arr[0];
+    return { rec: best.r, own: false, from: best.p };
+  }
+
+  /* ================= store ================= */
+  const store = {
+    s: { phase: "loading", isOwner: false, canSend: false, lessons: [], recs: [], students: [], msgs: [], sid: null, toast: null, email: "", hint: "", err: "", wantTeacher: false, fresh: false },
+    subs: new Set(),
+    set(patch) { this.s = Object.assign({}, this.s, patch); this.subs.forEach(f => f(this.s)); },
+  };
+  function useStore() {
+    const [s, set] = useState(store.s);
+    useEffect(() => { store.subs.add(set); set(store.s); return () => { store.subs.delete(set); }; }, []);
+    return s;
+  }
+  let toastTimer = null;
+  function toast(text) {
+    clearTimeout(toastTimer);
+    store.set({ toast: { text, id: uid() } });
+    toastTimer = setTimeout(() => store.set({ toast: null }), 3800);
+  }
+  function errText(e, fallback) {
+    const c = e && e.code;
+    if (c === "quota_exceeded" || c === "quota_or_state") return "Storage is full. Delete some old recordings or photos, then try again.";
+    if (c === "too_large") return "That file is too big to send.";
+    if (c === "unsupported_type") return "That kind of file can't be used here.";
+    if (c === "not_granted" || c === "invalid_argument" || c === "capability_disabled") return "Not allowed. If you're the student, ask your teacher for a new link.";
+    if (c === "rate_limited" || c === "resource_exhausted") return "Too many things at once. Wait a moment and try again.";
+    if (c === "upstream_auth") return "Your sign-in ran out. Close the page and open it again.";
+    return fallback || "That didn't save. Check the connection and try again.";
+  }
+
+  /* ================= Supabase runtime ================= */
+  const CFG_KEY = "rc.cfg", INVITE_KEY = "rc.invite";
+  let sb = null, cfg = null;
+  function readCfg() {
+    try { const c = JSON.parse(localStorage.getItem(CFG_KEY) || "null"); return c && c.url && c.key ? c : null; } catch (e) { return null; }
+  }
+  function b64url(s) { return btoa(unescape(encodeURIComponent(s))).replace(/\+/g, "-").replace(/\//g, "_").replace(/=+$/, ""); }
+  function unb64url(s) { s = s.replace(/-/g, "+").replace(/_/g, "/"); while (s.length % 4) s += "="; return decodeURIComponent(escape(atob(s))); }
+  function joinLink(invite) { return location.origin + location.pathname + "#j=" + b64url(JSON.stringify({ u: cfg.url, k: cfg.key, c: invite })); }
+  function consumeJoinLink() {
+    const m = /[#&]j=([A-Za-z0-9_-]+)/.exec(location.hash || "");
+    if (!m) return;
+    try {
+      const j = JSON.parse(unb64url(m[1]));
+      if (j && j.u && j.k && j.c) {
+        localStorage.setItem(CFG_KEY, JSON.stringify({ url: j.u, key: j.k }));
+        localStorage.setItem(INVITE_KEY, j.c);
+      }
+    } catch (e) {}
+    try { history.replaceState(null, "", location.pathname + location.search); } catch (e) {}
+  }
+  function newId() { return window.crypto && crypto.randomUUID ? crypto.randomUUID() : uid() + uid(); }
+  const publicUrl = path => cfg.url.replace(/\/+$/, "") + "/storage/v1/object/public/class/" + String(path).split("/").map(encodeURIComponent).join("/");
+
+  // App field names <-> database columns
+  const FIELDS = {
+    lessons: { stage: "stage", order: "ord", title: "title", note: "note", board: "board", explain: "explain", explainSecs: "explain_secs", updatedAt: "updated_at" },
+    recs: { lesson: "lesson", text: "tile", audio: "audio", secs: "secs" },
+    students: { name: "name", color: "color", unlocked: "unlocked", invite: "invite" },
+    msgs: { student: "student", lesson: "lesson", from: "sender", kind: "kind", asset: "media", secs: "secs", text: "body", hw: "hw", point: "point", next: "next", seen: "seen", cid: "cid" },
+  };
+  function toRow(table, data, id) {
+    const map = FIELDS[table], row = {};
+    if (id) row.id = id;
+    for (const k in data) {
+      const col = map[k];
+      if (!col || data[k] === undefined) continue;
+      row[col] = col === "updated_at" ? new Date(data[k] || Date.now()).toISOString() : data[k];
+    }
+    return row;
+  }
+  const ms = t => (t ? Date.parse(t) || 0 : 0);
+  const FROM = {
+    lessons: r => ({ id: r.id, stage: r.stage, order: r.ord, title: r.title, note: r.note, board: r.board, explain: r.explain, explainSecs: r.explain_secs, updatedAt: ms(r.updated_at) }),
+    recs: r => ({ id: r.id, lesson: r.lesson, text: r.tile, audio: r.audio, secs: r.secs }),
+    students: r => ({ id: r.id, name: r.name, color: r.color, unlocked: r.unlocked, invite: r.invite, createdAt: ms(r.created_at) }),
+    msgs: r => ({ id: r.id, student: r.student, lesson: r.lesson, from: r.sender, kind: r.kind, asset: r.media, secs: r.secs, text: r.body, hw: r.hw, point: r.point || [], next: r.next, seen: r.seen, cid: r.cid, at: ms(r.created_at) }),
+  };
+  const SORTS = {
+    lessons: list => list.sort(lessonSort),
+    recs: list => list,
+    students: list => list.sort((a, b) => (a.createdAt || 0) - (b.createdAt || 0)),
+    msgs: list => list.sort((a, b) => (a.at || 0) - (b.at || 0)),
+  };
+  function putLocal(table, rowsIn) {
+    if (!rowsIn || !rowsIn.length) return;
+    const byId = new Map(store.s[table].map(x => [x.id, x]));
+    for (const r of rowsIn) byId.set(r.id, FROM[table](r));
+    store.set({ [table]: SORTS[table](Array.from(byId.values())) });
+  }
+  function dropLocal(table, id) { store.set({ [table]: store.s[table].filter(x => x.id !== id) }); }
+  function sbErr(error) {
+    const msg = String((error && (error.message || error.error_description || error.error)) || error || "");
+    const sc = String((error && (error.statusCode || error.status)) || "");
+    let code = "unknown";
+    if (/Failed to fetch|NetworkError|Load failed|network/i.test(msg)) code = "unavailable";
+    else if ((error && error.code === "42501") || /row-level security|permission denied/i.test(msg) || sc === "403") code = "not_granted";
+    else if ((error && error.code === "PGRST301") || /jwt|token/i.test(msg) || sc === "401") code = "upstream_auth";
+    else if (sc === "413" || /too large|maximum allowed size/i.test(msg)) code = "too_large";
+    else if (sc === "415" || /mime type/i.test(msg)) code = "unsupported_type";
+    else if (sc === "429") code = "rate_limited";
+    const e = new Error(msg);
+    e.code = code;
+    return e;
+  }
+  async function q(promise) {
+    let res;
+    try { res = await promise; } catch (e) { throw sbErr(e); }
+    if (res && res.error) throw sbErr(res.error);
+    return res ? res.data : null;
+  }
+  function docShim(table, id) {
+    return {
+      id,
+      async set(data) {
+        const row = toRow(table, data, id), b = sb.from(table);
+        putLocal(table, await q(table === "msgs" ? b.insert(row).select() : b.upsert(row).select()));
+      },
+      async update(patch) { putLocal(table, await q(sb.from(table).update(toRow(table, patch)).eq("id", id).select())); },
+      async delete() { await q(sb.from(table).delete().eq("id", id)); dropLocal(table, id); },
+    };
+  }
+  const rt = {
+    db: {
+      doc: path => { const i = path.indexOf("/"); return docShim(path.slice(0, i), path.slice(i + 1)); },
+      collection: table => ({ doc: id => docShim(table, id || newId()) }),
+    },
+    assets: {
+      async upload(blob, opts) {
+        const type = (opts && opts.type) || blob.type;
+        const ext = type.indexOf("webm") >= 0 ? "webm" : type.indexOf("mp4") >= 0 ? "m4a" : type === "image/png" ? "png" : type === "image/webp" ? "webp" : type === "image/gif" ? "gif" : "jpg";
+        const path = new Date().toISOString().slice(0, 7) + "/" + newId() + "." + ext;
+        await q(sb.storage.from("class").upload(path, blob, { contentType: type, cacheControl: "31536000", upsert: false }));
+        return { id: path };
+      },
+      async delete(path) { await q(sb.storage.from("class").remove([path])); return { deleted: true }; },
+    },
+  };
+
+  const chains = new Map();
+  function serial(key, fn) {
+    const prev = chains.get(key) || Promise.resolve();
+    const next = prev.catch(() => {}).then(fn);
+    chains.set(key, next);
+    const clean = () => { if (chains.get(key) === next) chains.delete(key); };
+    next.then(clean, clean);
+    return next;
+  }
+  async function retry(fn) {
+    try { return await fn(); }
+    catch (e) {
+      if (e && e.code === "unavailable") { await sleep(700 + Math.random() * 900); return fn(); }
+      throw e;
+    }
+  }
+  const docRef = path => rt.db.doc(path);
+  const update = (path, data) => serial(path, () => retry(() => docRef(path).update(data)));
+  const remove = path => serial(path, () => retry(() => docRef(path).delete()));
+
+  async function fetchAll(table, build) {
+    const out = [], size = 1000;
+    for (let from = 0; ; from += size) {
+      const page = await q(build(sb.from(table).select("*")).range(from, from + size - 1));
+      out.push(...(page || []));
+      if (!page || page.length < size || out.length >= 20000) break;
+    }
+    return out;
+  }
+  async function loadAll() {
+    const [L, R, S, M] = await Promise.all([
+      fetchAll("lessons", b => b.order("id")),
+      fetchAll("recs", b => b.order("id")),
+      fetchAll("students", b => b.order("created_at")),
+      q(sb.from("msgs").select("*").order("created_at", { ascending: false }).limit(1000)),
+    ]);
+    store.set({
+      lessons: L.map(FROM.lessons).sort(lessonSort),
+      recs: R.map(FROM.recs),
+      students: SORTS.students(S.map(FROM.students)),
+      msgs: (M || []).map(FROM.msgs).reverse(),
+    });
+  }
+  let channel = null, subscribedOnce = false, reloadTimer = null, visHooked = false;
+  function scheduleReload(delay) {
+    clearTimeout(reloadTimer);
+    reloadTimer = setTimeout(() => { if (store.s.phase === "ready") loadAll().catch(() => {}); }, delay || 600);
+  }
+  function subscribe() {
+    if (channel) { try { sb.removeChannel(channel); } catch (e) {} }
+    subscribedOnce = false;
+    channel = sb.channel("class-room");
+    for (const t of ["lessons", "recs", "students", "msgs"]) {
+      channel.on("postgres_changes", { event: "*", schema: "public", table: t }, p => {
+        if (p.eventType === "DELETE") { if (p.old && p.old.id) dropLocal(t, p.old.id); return; }
+        if (!p.new || !p.new.id) return;
+        if (t === "msgs" && !store.s.isOwner && p.new.student !== store.s.sid) return;
+        putLocal(t, [p.new]);
+      });
+    }
+    channel.subscribe(status => {
+      if (status === "SUBSCRIBED") { if (subscribedOnce) scheduleReload(300); subscribedOnce = true; }
+      else if (status === "CHANNEL_ERROR" || status === "TIMED_OUT") scheduleReload(5000);
+    });
+    if (!visHooked) {
+      visHooked = true;
+      document.addEventListener("visibilitychange", () => { if (document.visibilityState === "visible") scheduleReload(400); });
+    }
+  }
+
+  async function boot() {
+    consumeJoinLink();
+    cfg = readCfg();
+    if (!cfg) { store.set({ phase: "setup" }); return; }
+    if (!window.supabase || !window.supabase.createClient) { store.set({ phase: "offline" }); return; }
+    try {
+      sb = window.supabase.createClient(cfg.url, cfg.key, { auth: { persistSession: true, autoRefreshToken: true, detectSessionInUrl: true, storageKey: "rc.auth" } });
+    } catch (e) { localStorage.removeItem(CFG_KEY); store.set({ phase: "setup" }); return; }
+    try {
+      let session = (await sb.auth.getSession()).data.session;
+      const invite = localStorage.getItem(INVITE_KEY);
+      if (invite) {
+        if (!session) {
+          const r = await sb.auth.signInAnonymously();
+          if (r.error) {
+            if (sbErr(r.error).code === "unavailable") throw sbErr(r.error);
+            localStorage.removeItem(INVITE_KEY);
+            store.set({ phase: "nolink", hint: /anonymous/i.test(r.error.message || "") ? "For the teacher: anonymous sign-ins are switched off in Supabase (Authentication, Sign In / Providers)." : "" });
+            return;
+          }
+          session = r.data.session;
+        }
+        const r2 = await sb.rpc("claim_invite", { code: invite });
+        if (r2.error) {
+          if (sbErr(r2.error).code === "unavailable") throw sbErr(r2.error);
+          localStorage.removeItem(INVITE_KEY);
+          store.set({ phase: "nolink" });
+          return;
+        }
+        localStorage.removeItem(INVITE_KEY);
+      }
+      if (!session) { store.set({ phase: "signin" }); return; }
+      await enter();
+    } catch (e) {
+      store.set({ phase: e && e.code === "unavailable" ? "offline" : "error", err: errText(e, "Couldn't open the class. Try again in a moment.") });
+    }
+  }
+  async function enter() {
+    store.set({ phase: "loading" });
+    const session = (await sb.auth.getSession()).data.session;
+    if (!session) { store.set({ phase: "signin" }); return; }
+    const anonUser = !!(session.user && session.user.is_anonymous);
+    let who = (await q(sb.rpc("whoami"))) || {};
+    if (!who.teacher && !who.student && !anonUser) {
+      if (await q(sb.rpc("claim_teacher"))) who = { teacher: true, student: null };
+    }
+    if (!who.teacher && !who.student) {
+      store.set({ phase: anonUser ? "nolink" : "notteacher", email: session.user.email || "" });
+      return;
+    }
+    store.set({ isOwner: !!who.teacher, sid: who.teacher ? null : who.student, canSend: true, email: session.user.email || "" });
+    await loadAll();
+    subscribe();
+    store.set({ phase: "ready" });
+  }
+  async function teacherAuth(email, password, create) {
+    const r = create
+      ? await sb.auth.signUp({ email, password, options: { emailRedirectTo: location.origin + location.pathname } })
+      : await sb.auth.signInWithPassword({ email, password });
+    if (r.error) throw r.error;
+    if (!r.data || !r.data.session) return "confirm";
+    await enter();
+    return "ok";
+  }
+  async function signOut() {
+    try { if (channel) await sb.removeChannel(channel); } catch (e) {}
+    channel = null;
+    try { await sb.auth.signOut(); } catch (e) {}
+    store.set({ phase: "signin", isOwner: false, sid: null, lessons: [], recs: [], students: [], msgs: [], email: "" });
+  }
+  function forgetProject() { localStorage.removeItem(CFG_KEY); location.reload(); }
+  async function connectProject(url, key) {
+    let u = String(url || "").trim().replace(/\/+$/, "");
+    if (u && !/^https?:\/\//i.test(u)) u = "https://" + u;
+    const k = String(key || "").trim();
+    if (!/^https:\/\/[^\s\/]+$/i.test(u)) throw new Error("url");
+    if (k.length < 20) throw new Error("key");
+    if (!window.supabase || !window.supabase.createClient) throw new Error("net");
+    const test = window.supabase.createClient(u, k, { auth: { persistSession: false, autoRefreshToken: false, detectSessionInUrl: false } });
+    let r;
+    try { r = await test.rpc("whoami"); } catch (e) { throw new Error("net"); }
+    if (r.error) {
+      const t = (r.error.message || "") + " " + (r.error.code || "") + " " + (r.error.hint || "");
+      if (/PGRST202|Could not find the function|does not exist|schema cache/i.test(t)) throw new Error("sql");
+      if (/api ?key|JWT|Unauthorized|401/i.test(t)) throw new Error("key");
+      throw new Error("net");
+    }
+    localStorage.setItem(CFG_KEY, JSON.stringify({ url: u, key: k }));
+  }
+
+  /* ================= media ================= */
+  const blobUrls = new Map();
+  const srcFor = id => blobUrls.get(id) || publicUrl(id);
+  const inflight = new Set();
+  let prefQ = [], prefActive = 0;
+  function prefetch(ids) {
+    for (const id of ids) if (id && !blobUrls.has(id) && !inflight.has(id) && prefQ.indexOf(id) < 0) prefQ.push(id);
+    pump();
+  }
+  function pump() {
+    while (prefActive < 3 && prefQ.length) {
+      const id = prefQ.shift();
+      inflight.add(id); prefActive++;
+      fetch(publicUrl(id)).then(r => (r.ok ? r.blob() : null)).then(b => { if (b && b.size) blobUrls.set(id, URL.createObjectURL(b)); })
+        .catch(() => {}).then(() => { inflight.delete(id); prefActive--; pump(); });
+    }
+  }
+
+  const player = {
+    a: null, key: null, st: { key: null, playing: false, cur: 0, dur: 0 }, subs: new Set(),
+    emit() {
+      const a = this.a;
+      this.st = { key: this.key, playing: !!a && !a.paused && !a.ended, cur: a ? a.currentTime || 0 : 0, dur: a && isFinite(a.duration) ? a.duration : 0 };
+      this.subs.forEach(f => f(this.st));
+    },
+    el() {
+      if (this.a) return this.a;
+      const a = new Audio();
+      a.preload = "auto";
+      this.a = a;
+      const e = () => this.emit();
+      ["play", "pause", "timeupdate", "durationchange", "loadedmetadata"].forEach(n => a.addEventListener(n, e));
+      a.addEventListener("ended", () => { this.key = null; this.emit(); });
+      a.addEventListener("error", () => { if (this.key) { this.key = null; this.emit(); toast("That recording couldn't play. Try again in a moment."); } });
+      return a;
+    },
+    play(key, src, restart) {
+      const a = this.el();
+      if (this.key === key && !restart) { if (a.paused) a.play().catch(() => {}); else a.pause(); return; }
+      if (this.key === key && restart) { a.currentTime = 0; a.play().catch(() => {}); return; }
+      this.key = key;
+      a.src = src;
+      const p = a.play();
+      if (p && p.catch) p.catch(() => {});
+      this.emit();
+    },
+    stop() { if (this.a) this.a.pause(); if (this.key) { this.key = null; this.emit(); } },
+    seek(d) { const a = this.a; if (a && this.key) a.currentTime = Math.max(0, (a.currentTime || 0) + d); },
+  };
+  function usePlayer() {
+    const [st, set] = useState(player.st);
+    useEffect(() => { player.subs.add(set); return () => { player.subs.delete(set); }; }, []);
+    return st;
+  }
+
+  const recorder = {
+    blocked: false,
+    mime() {
+      if (!window.MediaRecorder || !MediaRecorder.isTypeSupported) return "";
+      for (const t of ["audio/webm;codecs=opus", "audio/webm", "audio/mp4;codecs=mp4a.40.2", "audio/mp4"]) {
+        try { if (MediaRecorder.isTypeSupported(t)) return t; } catch (e) {}
+      }
+      return "";
+    },
+    async open() {
+      if (this.blocked || !navigator.mediaDevices || !navigator.mediaDevices.getUserMedia || !window.MediaRecorder) throw new Error("nomic");
+      try {
+        return await navigator.mediaDevices.getUserMedia({ audio: { echoCancellation: true, noiseSuppression: true, autoGainControl: true } });
+      } catch (e) {
+        if (e && (e.name === "NotAllowedError" || e.name === "SecurityError" || e.name === "NotFoundError")) this.blocked = true;
+        throw e;
+      }
+    },
+    start(stream) {
+      const mime = this.mime();
+      const opts = { audioBitsPerSecond: 32000 };
+      if (mime) opts.mimeType = mime;
+      let mr;
+      try { mr = new MediaRecorder(stream, opts); } catch (e) { mr = new MediaRecorder(stream); }
+      const chunks = [], t0 = Date.now();
+      mr.ondataavailable = e => { if (e.data && e.data.size) chunks.push(e.data); };
+      mr.start(250);
+      const type = () => ((mr.mimeType || mime || "audio/webm").split(";")[0]);
+      return {
+        t0,
+        stop: () => new Promise(resolve => {
+          const finish = () => resolve({ blob: new Blob(chunks, { type: type() }), secs: (Date.now() - t0) / 1000 });
+          if (mr.state === "inactive") return finish();
+          mr.onstop = finish;
+          try { mr.stop(); } catch (e) { finish(); }
+        }),
+        cancel: () => { mr.onstop = null; try { if (mr.state !== "inactive") mr.stop(); } catch (e) {} },
+      };
+    },
+    close(stream) { try { if (stream) stream.getTracks().forEach(t => t.stop()); } catch (e) {} },
+  };
+  function assetTypeFor(blob) {
+    const t = String(blob.type || "").toLowerCase();
+    if (t.indexOf("webm") >= 0) return "audio/webm";
+    if (t.indexOf("mp4") >= 0 || t.indexOf("m4a") >= 0) return "audio/mp4";
+    if (t === "image/jpeg" || t === "image/png" || t === "image/webp" || t === "image/gif") return t;
+    return null;
+  }
+  async function uploadBlob(blob) {
+    if (!rt.assets) throw { code: "not_granted" };
+    const type = assetTypeFor(blob);
+    if (!type) throw { code: "unsupported_type" };
+    const res = await retry(() => rt.assets.upload(blob, { type }));
+    try { blobUrls.set(res.id, URL.createObjectURL(blob)); } catch (e) {}
+    return res.id;
+  }
+  function probeDuration(blob) {
+    return new Promise(res => {
+      let done = false;
+      const a = new Audio(), u = URL.createObjectURL(blob);
+      const fin = v => { if (done) return; done = true; URL.revokeObjectURL(u); res(v); };
+      a.preload = "metadata";
+      a.onloadedmetadata = () => fin(isFinite(a.duration) ? a.duration : 0);
+      a.onerror = () => fin(0);
+      setTimeout(() => fin(0), 4000);
+      a.src = u;
+    });
+  }
+  async function transcode(file) {
+    const AC = window.AudioContext || window.webkitAudioContext;
+    if (!AC || !window.MediaRecorder) throw { code: "unsupported_type" };
+    const ctx = new AC();
+    try {
+      if (ctx.state === "suspended") { try { await ctx.resume(); } catch (e) {} }
+      if (ctx.state !== "running") throw { code: "unsupported_type" };
+      const ab = await file.arrayBuffer();
+      const buf = await new Promise((res, rej) => { const r = ctx.decodeAudioData(ab, res, rej); if (r && r.then) r.then(res, rej); });
+      if (buf.duration > 20 * 60) throw { code: "too_large" };
+      const dest = ctx.createMediaStreamDestination();
+      const src = ctx.createBufferSource();
+      src.buffer = buf;
+      src.connect(dest);
+      const r = recorder.start(dest.stream);
+      await new Promise(res => { src.onended = res; src.start(); setTimeout(res, buf.duration * 1000 + 3000); });
+      await sleep(200);
+      const out = await r.stop();
+      return { blob: out.blob, secs: buf.duration };
+    } catch (e) {
+      throw e && e.code ? e : { code: "unsupported_type" };
+    } finally { try { ctx.close(); } catch (e) {} }
+  }
+  async function audioFromFile(file) {
+    const t = String(file.type || "").toLowerCase(), name = String(file.name || "").toLowerCase();
+    const isWebm = t.indexOf("webm") >= 0 || /\.webm$/.test(name);
+    const isMp4 = t.indexOf("mp4") >= 0 || t.indexOf("m4a") >= 0 || /\.(m4a|mp4)$/.test(name);
+    if (isWebm || isMp4) {
+      const blob = new Blob([file], { type: isWebm ? "audio/webm" : "audio/mp4" });
+      return { blob, secs: await probeDuration(blob) };
+    }
+    return transcode(file);
+  }
+  async function compressImage(file) {
+    const url = URL.createObjectURL(file);
+    try {
+      const img = await new Promise((res, rej) => { const i = new Image(); i.onload = () => res(i); i.onerror = rej; i.src = url; });
+      const max = 1400;
+      const scale = Math.min(1, max / Math.max(img.naturalWidth, img.naturalHeight));
+      const w = Math.max(1, Math.round(img.naturalWidth * scale)), hh = Math.max(1, Math.round(img.naturalHeight * scale));
+      const c = document.createElement("canvas");
+      c.width = w; c.height = hh;
+      c.getContext("2d").drawImage(img, 0, 0, w, hh);
+      const blob = await new Promise(res => c.toBlob(res, "image/jpeg", 0.74));
+      if (blob) return blob;
+      if (/^image\/(jpeg|png|webp)$/.test(file.type)) return file;
+      throw new Error("encode");
+    } finally { URL.revokeObjectURL(url); }
+  }
+  async function saveTileRec(lessonId, text, out) {
+    const asset = await uploadBlob(out.blob);
+    const id = recKey(lessonId, text);
+    const prev = store.s.recs.find(r => r.id === id);
+    await serial("recs/" + id, () => retry(() => docRef("recs/" + id).set({ lesson: lessonId, text, audio: asset, secs: round1(out.secs), at: Date.now() })));
+    if (prev && prev.audio && prev.audio !== asset && rt.assets) { try { await rt.assets.delete(prev.audio); } catch (e) {} }
+  }
+  async function removeTileRec(lessonId, text) {
+    const id = recKey(lessonId, text);
+    const prev = store.s.recs.find(r => r.id === id);
+    await remove("recs/" + id);
+    if (prev && prev.audio && rt.assets) { try { await rt.assets.delete(prev.audio); } catch (e) {} }
+  }
+
+  /* ================= icons ================= */
+  function Svg(p) {
+    const size = p.size || 26, sw = p.sw || 2;
+    return html`<svg width=${size} height=${size} viewBox="0 0 24 24" fill=${p.fill ? "currentColor" : "none"} stroke=${p.fill ? "none" : "currentColor"} stroke-width=${sw} stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">${p.children}</svg>`;
+  }
+  const Ic = {
+    play: p => html`<${Svg} ...${p} fill=${true}><path d="M8 5.2v13.6a1 1 0 0 0 1.53.85l10.6-6.8a1 1 0 0 0 0-1.7L9.53 4.35A1 1 0 0 0 8 5.2z"/></${Svg}>`,
+    pause: p => html`<${Svg} ...${p} fill=${true}><rect x="6" y="5" width="4.2" height="14" rx="1.3"/><rect x="13.8" y="5" width="4.2" height="14" rx="1.3"/></${Svg}>`,
+    mic: p => html`<${Svg} ...${p}><rect x="9" y="2.8" width="6" height="11.4" rx="3"/><path d="M5.5 11a6.5 6.5 0 0 0 13 0M12 17.5V21"/></${Svg}>`,
+    cam: p => html`<${Svg} ...${p}><path d="M3.5 8.6A2.6 2.6 0 0 1 6.1 6h1.7l1.5-2.2h5.4L16.2 6h1.7a2.6 2.6 0 0 1 2.6 2.6v7.8A2.6 2.6 0 0 1 17.9 19H6.1a2.6 2.6 0 0 1-2.6-2.6z"/><circle cx="12" cy="12.3" r="3.6"/></${Svg}>`,
+    send: p => html`<${Svg} ...${p} fill=${true}><path d="M3.6 20.3 21 12 3.6 3.7a.7.7 0 0 0-.97.83L4.8 11 13 12l-8.2 1-2.17 6.47a.7.7 0 0 0 .97.83z"/></${Svg}>`,
+    trash: p => html`<${Svg} ...${p}><path d="M4 7h16M9.5 7V4.5h5V7M6.5 7l1 13h9l1-13M10 11v6M14 11v6"/></${Svg}>`,
+    x: p => html`<${Svg} ...${p}><path d="M6 6l12 12M18 6 6 18"/></${Svg}>`,
+    stop: p => html`<${Svg} ...${p} fill=${true}><rect x="6" y="6" width="12" height="12" rx="2.6"/></${Svg}>`,
+    back: p => html`<${Svg} ...${p}><path d="M15 5l-7 7 7 7"/></${Svg}>`,
+    tick: p => html`<${Svg} ...${p}><path d="M4.5 12.8l4.6 4.4L19.5 6.5"/></${Svg}>`,
+    book: p => html`<${Svg} ...${p}><path d="M5 4.5h10.5A2.5 2.5 0 0 1 18 7v13H7.5A2.5 2.5 0 0 1 5 17.5z"/><path d="M5 17.5A2.5 2.5 0 0 1 7.5 15H18M9 8.5h5"/></${Svg}>`,
+    replay: p => html`<${Svg} ...${p}><path d="M4.6 12a7.4 7.4 0 1 0 2.3-5.4"/><path d="M4.4 3.8V8h4.2"/></${Svg}>`,
+    plus: p => html`<${Svg} ...${p}><path d="M12 5v14M5 12h14"/></${Svg}>`,
+    up: p => html`<${Svg} ...${p}><path d="M6 14l6-6 6 6"/></${Svg}>`,
+    down: p => html`<${Svg} ...${p}><path d="M6 10l6 6 6-6"/></${Svg}>`,
+    upload: p => html`<${Svg} ...${p}><path d="M12 15V4M7.5 8.5 12 4l4.5 4.5M5 15v3.5A1.5 1.5 0 0 0 6.5 20h11a1.5 1.5 0 0 0 1.5-1.5V15"/></${Svg}>`,
+    lock: p => html`<${Svg} ...${p}><rect x="5" y="10.5" width="14" height="10" rx="2.2"/><path d="M8.5 10.5V7.8a3.5 3.5 0 0 1 7 0v2.7"/></${Svg}>`,
+    wait: p => html`<${Svg} ...${p}><path d="M7 3.5h10M7 20.5h10M8 3.5c0 4.5 8 4.5 8 8.5s-8 4-8 8.5M16 3.5c0 4.5-8 4.5-8 8.5s8 4 8 8.5"/></${Svg}>`,
+    edit: p => html`<${Svg} ...${p}><path d="M4 20h4L19 9l-4-4L4 16z"/><path d="M13.5 6.5l4 4"/></${Svg}>`,
+    speaker: p => html`<${Svg} ...${p}><path d="M4 9.5h3.5L12 5.5v13l-4.5-4H4z"/><path d="M15.5 9a4 4 0 0 1 0 6M18 6.5a7.5 7.5 0 0 1 0 11"/></${Svg}>`,
+    chat: p => html`<${Svg} ...${p}><path d="M4.5 18.5V7a2.5 2.5 0 0 1 2.5-2.5h10A2.5 2.5 0 0 1 19.5 7v6.5A2.5 2.5 0 0 1 17 16H8z"/></${Svg}>`,
+    arrow: p => html`<${Svg} ...${p}><path d="M5 12h13M13 6.5l5.5 5.5-5.5 5.5"/></${Svg}>`,
+    link: p => html`<${Svg} ...${p}><path d="M10 14a4.5 4.5 0 0 0 6.36 0l3-3a4.5 4.5 0 0 0-6.36-6.36l-1.2 1.2"/><path d="M14 10a4.5 4.5 0 0 0-6.36 0l-3 3a4.5 4.5 0 0 0 6.36 6.36l1.2-1.2"/></${Svg}>`,
+    wifi: p => html`<${Svg} ...${p}><path d="M2.5 8.5a14.5 14.5 0 0 1 19 0M6 12.2a9.5 9.5 0 0 1 12 0M9.5 15.8a4.5 4.5 0 0 1 5 0M12 19.5h.01M3.5 3.5l17 17"/></${Svg}>`,
+  };
+
+  /* ================= shared pieces ================= */
+  const Loading = () => html`<div class="center"><div class="loader" aria-label="Loading"><i></i><i></i><i></i></div></div>`;
+  const Center = p => html`<div class="center"><div class=${"msgbox" + (p.wide ? " wide" : "")}>${p.children}</div></div>`;
+  const Offline = () => html`<${Center}>
+    <div class="bigicon"><${Ic.wifi} size=${54} sw=${1.8}/></div>
+    <p><b>No connection.</b></p>
+    <p class="help">Check your data, then try again.</p>
+    <button class="btn" onClick=${() => location.reload()}><${Ic.replay} size=${20}/>Try again</button>
+  </${Center}>`;
+  const ErrorScreen = ({ err }) => html`<${Center}>
+    <div class="bigicon"><${Ic.wifi} size=${54} sw=${1.8}/></div>
+    <p class="help">${err || "Something went wrong."}</p>
+    <button class="btn" onClick=${() => location.reload()}><${Ic.replay} size=${20}/>Try again</button>
+  </${Center}>`;
+  const NoLink = ({ hint }) => html`<${Center}>
+    <div class="bigicon"><${Ic.link} size=${54} sw=${1.8}/></div>
+    <p><b>This link doesn't work anymore.</b></p>
+    <p class="help">Ask your teacher to send you a new one.</p>
+    ${hint ? html`<p class="help">${hint}</p>` : null}
+    <button class="linkbtn" onClick=${() => store.set({ phase: "signin", wantTeacher: true })}>Teacher sign in</button>
+  </${Center}>`;
+  const NotTeacher = ({ email }) => html`<${Center} wide=${true}>
+    <div class="bigicon"><${Ic.lock} size=${54} sw=${1.8}/></div>
+    <p><b>${email || "This account"} isn't the teacher of this class.</b></p>
+    <p class="help">The first account that signed in became the teacher. Sign in with that one.</p>
+    <button class="btn quiet" onClick=${signOut}>Sign out</button>
+  </${Center}>`;
+
+  function SignIn({ s }) {
+    const [open, setOpen] = useState(!!s.wantTeacher);
+    const [create, setCreate] = useState(!!s.wantTeacher && !!s.fresh);
+    const [email, setEmail] = useState(""), [pw, setPw] = useState("");
+    const [busy, setBusy] = useState(false), [err, setErr] = useState(""), [note, setNote] = useState("");
+    async function go() {
+      setErr(""); setNote("");
+      if (!/.+@.+\..+/.test(email.trim())) { setErr("Enter your email address."); return; }
+      if (pw.length < 6) { setErr("The password needs at least 6 characters."); return; }
+      setBusy(true);
+      try {
+        const r = await teacherAuth(email.trim(), pw, create);
+        if (r === "confirm") { setNote("Account made. Supabase sent you a confirmation email: tap its link, then sign in here. (Or turn off Confirm email in Supabase and sign in straight away.)"); setCreate(false); }
+      } catch (e) {
+        const m = String((e && e.message) || "");
+        setErr(/Invalid login/i.test(m) ? "Wrong email or password."
+          : /already registered|already exists/i.test(m) ? "That email already has an account. Sign in instead."
+          : /not confirmed/i.test(m) ? "Confirm your email first (check your inbox), or turn off Confirm email in Supabase."
+          : /fetch|network|load failed/i.test(m) ? "No connection. Try again."
+          : m || "That didn't work. Try again.");
+      }
+      setBusy(false);
+    }
+    if (!open) return html`<${Center}>
+      <div class="bigicon"><${Ic.link} size=${54} sw=${1.8}/></div>
+      <p class="help">Open the link your teacher sent you.</p>
+      <button class="linkbtn" onClick=${() => setOpen(true)}>Teacher sign in</button>
+    </${Center}>`;
+    return html`<div class="setup">
+      <h1>${create ? "Create your teacher account" : "Teacher sign in"}</h1>
+      ${create ? html`<p class="help">The first account made here becomes the teacher of this class.</p>` : null}
+      <div class="card">
+        <div class="field"><label for="em">Email</label>
+          <input id="em" type="email" autocomplete="email" inputmode="email" autocapitalize="off" value=${email} onInput=${e => setEmail(e.target.value)}/></div>
+        <div class="field"><label for="pw">Password</label>
+          <input id="pw" type="password" autocomplete=${create ? "new-password" : "current-password"} value=${pw} onInput=${e => setPw(e.target.value)} onKeyDown=${e => { if (e.key === "Enter") go(); }}/></div>
+        ${err ? html`<p class="err" role="alert">${err}</p>` : null}
+        ${note ? html`<p class="help">${note}</p>` : null}
+        <button class="btn" disabled=${busy} onClick=${go}>${busy ? "One moment…" : create ? "Create account" : "Sign in"}</button>
+        <button class="linkbtn" onClick=${() => { setCreate(!create); setErr(""); setNote(""); }}>${create ? "I already have an account" : "Create the teacher account"}</button>
+      </div>
+      <button class="linkbtn" onClick=${forgetProject}>Connect a different Supabase project</button>
+    </div>`;
+  }
+
+  function Setup() {
+    const [url, setUrl] = useState(""), [key, setKey] = useState("");
+    const [busy, setBusy] = useState(false), [err, setErr] = useState(""), [copied, setCopied] = useState(false);
+    const sql = useMemo(() => ((document.getElementById("setup-sql") || {}).textContent || "").trim() + "\n", []);
+    async function copySql() {
+      let ok = false;
+      try { await navigator.clipboard.writeText(sql); ok = true; } catch (e) {}
+      if (!ok) {
+        try {
+          const ta = document.createElement("textarea");
+          ta.value = sql; ta.setAttribute("readonly", ""); ta.style.position = "fixed"; ta.style.opacity = "0";
+          document.body.appendChild(ta); ta.select(); ok = document.execCommand("copy"); ta.remove();
+        } catch (e) {}
+      }
+      setCopied(ok);
+      if (!ok) toast("Couldn't copy. Open “Show the code” below, select all of it and copy.");
+    }
+    async function connect() {
+      setErr(""); setBusy(true);
+      try {
+        await connectProject(url, key);
+        store.set({ phase: "loading", wantTeacher: true, fresh: true });
+        await boot();
+      } catch (e) {
+        setErr({
+          url: "That doesn't look like a Supabase project URL. It starts with https:// and ends in .supabase.co",
+          key: "The key was refused. Copy the publishable (or anon) key again, all of it.",
+          sql: "Connected, but the setup code hasn't run yet. Do step 1, then tap Connect again.",
+          net: "Couldn't reach that project. Check the URL and your connection.",
+        }[e && e.message] || "Couldn't connect. Check both values.");
+      }
+      setBusy(false);
+    }
+    return html`<div class="setup">
+      <h1>Reading class</h1>
+      <p class="help">Setting up takes about five minutes, all from your phone. You only do it once.</p>
+      <div class="step"><span class="stepn">1</span><div class="stepb">
+        <p>Copy the setup code. In Supabase, open <b>SQL Editor</b>, start a new query, paste it and tap <b>Run</b>.</p>
+        <button class=${"btn" + (copied ? " sec" : "")} onClick=${copySql}>${copied ? html`<${Ic.tick} size=${18}/>Copied` : "Copy setup code"}</button>
+        <details><summary>Show the code</summary><textarea class="sqlbox" readonly value=${sql}></textarea></details>
+      </div></div>
+      <div class="step"><span class="stepn">2</span><div class="stepb">
+        <p>In Supabase, open <b>Authentication</b>, then <b>Sign In / Providers</b>. Turn on <b>Allow anonymous sign-ins</b>: that's how your student gets in with just a link. On the same page open <b>Email</b>, turn off <b>Confirm email</b> and save.</p>
+      </div></div>
+      <div class="step"><span class="stepn">3</span><div class="stepb">
+        <p>In Supabase, tap <b>Connect</b> at the top of your project (or open Project Settings, then API Keys). Copy the project URL and the publishable key (the older anon key works too) and paste them here.</p>
+        <div class="field"><label for="su">Project URL</label>
+          <input id="su" inputmode="url" autocomplete="off" autocapitalize="off" spellcheck=${false} placeholder="https://xxxx.supabase.co" value=${url} onInput=${e => setUrl(e.target.value)}/></div>
+        <div class="field"><label for="sk">Publishable or anon key</label>
+          <input id="sk" autocomplete="off" autocapitalize="off" spellcheck=${false} placeholder="sb_publishable_…" value=${key} onInput=${e => setKey(e.target.value)}/></div>
+        ${err ? html`<p class="err" role="alert">${err}</p>` : null}
+        <button class="btn" disabled=${busy || !url.trim() || !key.trim()} onClick=${connect}>${busy ? "Checking…" : "Connect"}</button>
+      </div></div>
+    </div>`;
+  }
+  const Waiting = ({ onBack }) => html`<div class="center"><div class="msgbox">
+    <div class="bigicon"><${Ic.wait} size=${54} sw=${1.8}/></div>
+    <p class="help">The first lesson isn't ready yet.</p>
+    ${onBack ? html`<button class="btn quiet" onClick=${onBack}>Back</button>` : null}
+  </div></div>`;
+  function Board({ lesson, number, ix, pst, onTile, points, edit }) {
+    const rowsOf = useMemo(() => parseBoard(lesson.board), [lesson.board]);
+    const cols = useMemo(() => {
+      let maxLen = 0, maxCount = 1;
+      for (const r of rowsOf) {
+        if (r[0] && r[0].s) continue;
+        maxCount = Math.max(maxCount, r.length);
+        for (const t of r) maxLen = Math.max(maxLen, Array.from(t.t).length);
+      }
+      const limit = maxLen <= 2 ? 7 : maxLen <= 4 ? 5 : maxLen <= 6 ? 4 : 3;
+      return Math.max(1, Math.min(maxCount, limit));
+    }, [rowsOf]);
+    return html`<div class=${"boardwrap" + (edit ? " edit" : "")}>
+      <div class=${"board" + (cols >= 6 ? " dense" : "")} style=${"--cols:" + cols}>
+        <div class="bnum" aria-label=${"Lesson " + number}>${number}</div>
+        ${rowsOf.length ? rowsOf.map((row, ri) => html`<div class="brow" key=${ri}>${row.map((t, ti) => {
+          const snd = soundFor(ix, lesson.id, t.t);
+          const on = pst.key === "tile:" + lesson.id + ":" + t.t;
+          const cls = "tile" + (t.s ? " sent" : "") + (on ? " on" : "") + (!snd ? " mute" : "") +
+            (edit ? (snd ? (snd.own ? " own" : " borrow") : " miss") : "") + (points && points.indexOf(t.t) >= 0 ? " pt" : "");
+          return html`<button key=${ti} class=${cls} onClick=${() => onTile(t, snd)}>${t.t}</button>`;
+        })}</div>`) : html`<div class="bempty">${edit ? "The board is empty. Write its rows below." : html`<${Ic.wait} size=${40} sw=${1.6}/>`}</div>`}
+      </div>
+      <div class="ledge"><i></i></div>
+    </div>`;
+  }
+
+  function Rail({ lessons, uIdx, vIdx, unreadBy, teacher, onPick }) {
+    const ref = useRef(null);
+    useEffect(() => {
+      const rail = ref.current; if (!rail) return;
+      const el = rail.children[vIdx]; if (!el) return;
+      const left = el.offsetLeft - rail.clientWidth / 2 + el.clientWidth / 2;
+      try { rail.scrollTo({ left, behavior: "smooth" }); } catch (e) { rail.scrollLeft = left; }
+    }, [vIdx, lessons.length]);
+    return html`<nav class="rail" ref=${ref} aria-label="Lessons">${lessons.map((l, i) => {
+      const state = i < uIdx ? "done" : i === uIdx ? "cur" : "locked";
+      const can = teacher || i <= uIdx;
+      return html`<button key=${l.id} class=${"dot " + state + (i === vIdx ? " view" : "") + (teacher && i === vIdx ? " tview" : "")} disabled=${!can} onClick=${() => onPick(l.id)} aria-label=${"Lesson " + (i + 1)} aria-current=${i === vIdx ? "true" : null}>
+        ${i + 1}
+        ${state === "done" ? html`<span class="tk"><${Ic.tick} size=${13} sw=${3.2}/></span>` : null}
+        ${unreadBy[l.id] ? html`<span class="bd"></span>` : null}
+      </button>`;
+    })}</nav>`;
+  }
+
+  function Voice({ m, pst }) {
+    const key = "msg:" + (m.cid || m.id);
+    const on = pst.key === key;
+    const dur = m.secs || (on ? pst.dur : 0);
+    const frac = on && dur ? Math.min(1, pst.cur / dur) : 0;
+    const bars = useMemo(() => waveBars(m.cid || m.id, 26), [m.cid || m.id]);
+    const src = m.localUrl || (m.asset ? srcFor(m.asset) : null);
+    return html`<div class="voice">
+      <button class="vplay" disabled=${!src} onClick=${() => src && player.play(key, src)} aria-label=${on && pst.playing ? "Pause" : "Play"}>
+        ${on && pst.playing ? html`<${Ic.pause} size=${20}/>` : html`<${Ic.play} size=${20}/>`}
+      </button>
+      <div class="wave">${bars.map((b, i) => html`<i key=${i} class=${(i + 0.5) / bars.length <= frac ? "f" : ""} style=${"height:" + b + "%"}></i>`)}</div>
+      <span class="vdur">${fmtDur(on && pst.cur > 0 ? pst.cur : dur)}</span>
+    </div>`;
+  }
+
+  function Meta({ m, me, teacher, onDel, onRetry }) {
+    const [arm, setArm] = useState(false);
+    useEffect(() => { if (!arm) return; const t = setTimeout(() => setArm(false), 3500); return () => clearTimeout(t); }, [arm]);
+    return html`<div class="meta">
+      ${m.pending ? (m.state === "fail"
+        ? html`<button class="failbtn" onClick=${onRetry} aria-label="Not sent. Try again">!</button>`
+        : html`<span class="spin" aria-label="Sending"></span>`) : null}
+      <span>${fmtClock(m.at)}</span>
+      ${me && !m.pending ? html`<span class=${"ticks" + (m.seen ? " seen" : "")} aria-label=${m.seen ? "Seen" : "Sent"}>${m.seen ? "✓✓" : "✓"}</span>` : null}
+      ${teacher && !m.pending ? html`<button class=${"delbtn" + (arm ? " arm" : "")} onClick=${() => (arm ? onDel() : setArm(true))} aria-label="Delete message">${arm ? "Delete?" : html`<${Ic.trash} size=${15}/>`}</button>` : null}
+    </div>`;
+  }
+
+  function Msg({ m, role, teacher, pst, lessons, onGoto, onRetry, onDel, onPhoto }) {
+    const me = m.from === role;
+    if (m.kind === "pass") {
+      const ni = m.next ? lessons.findIndex(l => l.id === m.next) : -1;
+      return html`<div class="stamp">
+        <div class="stamp-ring" aria-label="Lesson passed"><${Ic.tick} size=${54} sw=${3}/></div>
+        ${ni >= 0 ? html`<button class="nextbtn" onClick=${() => onGoto(m.next)} aria-label=${"Go to lesson " + (ni + 1)}><span>${ni + 1}</span><${Ic.arrow} size=${26} sw=${2.6}/></button>` : null}
+        ${teacher ? html`<${Meta} m=${m} me=${true} teacher=${true} onDel=${onDel}/>` : null}
+      </div>`;
+    }
+    const photoSrc = m.localUrl || (m.asset ? srcFor(m.asset) : null);
+    return html`<div class=${"msg " + (me ? "me" : "them")}>
+      <div class=${"bub" + (m.hw ? " hw" : "")}>
+        ${m.hw ? html`<span class="hwtag"><${Ic.book} size=${18}/>Homework</span>` : null}
+        ${m.point && m.point.length ? html`<div class="pts" aria-label="Pointing at">${m.point.map(p => html`<span key=${p}>👉 ${p}</span>`)}</div>` : null}
+        ${m.kind === "voice" ? html`<${Voice} m=${m} pst=${pst}/>` : null}
+        ${m.kind === "photo" && photoSrc ? html`<img class="ph" src=${photoSrc} alt="Photo" loading="lazy" onClick=${() => onPhoto(photoSrc)}/>` : null}
+        ${m.kind === "text" ? html`<div class="txt">${m.text}</div>` : null}
+      </div>
+      <${Meta} m=${m} me=${me} teacher=${teacher} onDel=${onDel} onRetry=${onRetry}/>
+    </div>`;
+  }
+
+  function Listen({ lesson, pst }) {
+    const key = "explain:" + lesson.id;
+    const on = pst.key === key;
+    const dur = lesson.explainSecs || (on ? pst.dur : 0);
+    const frac = on && dur ? Math.min(1, pst.cur / dur) : 0;
+    const C = 2 * Math.PI * 35;
+    return html`<div class="listen">
+      <button class="big" disabled=${!lesson.explain} onClick=${() => lesson.explain && player.play(key, srcFor(lesson.explain))} aria-label=${on && pst.playing ? "Pause the teacher" : "Play the teacher"}>
+        <svg class="ring" viewBox="0 0 78 78" aria-hidden="true"><circle class="rbg" cx="39" cy="39" r="35"/><circle class="rfg" cx="39" cy="39" r="35" style=${"stroke-dasharray:" + C + ";stroke-dashoffset:" + C * (1 - frac)}/></svg>
+        ${on && pst.playing ? html`<${Ic.pause} size=${30}/>` : html`<${Ic.play} size=${30}/>`}
+      </button>
+      ${on ? html`<button class="mid" onClick=${() => player.seek(-10)} aria-label="Back 10 seconds"><${Ic.replay} size=${24}/></button>` : null}
+    </div>`;
+  }
+
+  /* ================= composer (bottom bar) ================= */
+  function Composer({ teacher, lesson, pst, canSend, onSend, points, setPoints, hw, setHw }) {
+    const [mode, setMode] = useState("idle");
+    const [t0, setT0] = useState(0);
+    const [now, setNow] = useState(0);
+    const [take, setTake] = useState(null);
+    const [photo, setPhoto] = useState(null);
+    const [text, setText] = useState("");
+    const recRef = useRef(null), streamRef = useRef(null), camRef = useRef(null), audRef = useRef(null), taRef = useRef(null);
+
+    useEffect(() => { if (mode !== "rec") return; const i = setInterval(() => setNow(Date.now()), 250); return () => clearInterval(i); }, [mode]);
+    useEffect(() => () => { if (recRef.current) recRef.current.cancel(); recorder.close(streamRef.current); }, []);
+    useEffect(() => { reset(); }, [lesson.id]);
+
+    function reset() {
+      if (recRef.current) { recRef.current.cancel(); recRef.current = null; }
+      recorder.close(streamRef.current); streamRef.current = null;
+      if (player.key === "take") player.stop();
+      setTake(null); setMode("idle"); setPoints(null);
+    }
+    function micTap() {
+      if (recorder.blocked) { audRef.current && audRef.current.click(); return; }
+      startRec();
+    }
+    async function startRec() {
+      player.stop();
+      try {
+        const st = await recorder.open();
+        streamRef.current = st;
+        recRef.current = recorder.start(st);
+        setT0(Date.now()); setNow(Date.now()); setMode("rec");
+        if (!teacher) setPoints([]);
+      } catch (e) {
+        toast("The microphone isn't available here. Tap the mic again to use your phone's recorder.");
+        recorder.blocked = true;
+      }
+    }
+    async function stopRec() {
+      const r = recRef.current; recRef.current = null;
+      if (!r) return;
+      const out = await r.stop();
+      recorder.close(streamRef.current); streamRef.current = null;
+      if (out.secs < 0.8 || !out.blob.size) { setMode("idle"); setPoints(null); toast("That was too short. Tap the mic, talk, then tap stop."); return; }
+      setTake({ blob: out.blob, secs: out.secs, url: URL.createObjectURL(out.blob) });
+      setMode("review");
+    }
+    function sendTake() {
+      const tk = take;
+      if (player.key === "take") player.stop();
+      setTake(null); setMode("idle");
+      onSend({ kind: "voice", blob: tk.blob, secs: tk.secs, point: points || [] });
+      setPoints(null);
+    }
+    async function onPhotoFile(e) {
+      const f = e.target.files && e.target.files[0];
+      e.target.value = "";
+      if (!f) return;
+      try { const blob = await compressImage(f); setPhoto({ blob, url: URL.createObjectURL(blob) }); }
+      catch (err) { toast("That photo couldn't be opened. Try taking it again."); }
+    }
+    async function onAudioFile(e) {
+      const f = e.target.files && e.target.files[0];
+      e.target.value = "";
+      if (!f) return;
+      try {
+        toast("Getting the recording ready…");
+        const out = await audioFromFile(f);
+        setTake({ blob: out.blob, secs: out.secs, url: URL.createObjectURL(out.blob) });
+        setMode("review");
+      } catch (err) { toast(errText(err, "That recording couldn't be used. Try again.")); }
+    }
+    function sendText() {
+      const tx = text.trim(); if (!tx) return;
+      setText("");
+      if (taRef.current) { taRef.current.style.height = ""; }
+      onSend({ kind: "text", text: tx });
+    }
+
+    const inputs = html`
+      <input ref=${camRef} type="file" accept="image/*" capture=${teacher ? null : "environment"} style="display:none" onChange=${onPhotoFile}/>
+      <input ref=${audRef} type="file" accept="audio/*" capture="" style="display:none" onChange=${onAudioFile}/>`;
+
+    let bar;
+    if (mode === "rec") {
+      bar = html`<div class="bar"><div class="bar-in">
+        <button class="big grey" onClick=${reset} aria-label="Cancel recording"><${Ic.x} size=${28}/></button>
+        <div class="recind" role="timer"><span class="recdot"></span>${fmtDur((now - t0) / 1000)}</div>
+        <button class="big red" onClick=${stopRec} aria-label="Stop recording"><${Ic.stop} size=${28}/></button>
+      </div></div>`;
+    } else if (mode === "review" && take) {
+      const on = pst.key === "take";
+      bar = html`<div class="bar"><div class="bar-in">
+        <button class="big grey" onClick=${reset} aria-label="Delete this recording"><${Ic.trash} size=${28}/></button>
+        <div class="take">
+          <button class="vplay" onClick=${() => player.play("take", take.url)} aria-label="Listen before sending">${on && pst.playing ? html`<${Ic.pause} size=${20}/>` : html`<${Ic.play} size=${20}/>`}</button>
+          <span class="vdur">${fmtDur(on && pst.cur > 0 ? pst.cur : take.secs)}</span>
+        </div>
+        <button class="big" onClick=${sendTake} aria-label="Send"><${Ic.send} size=${28}/></button>
+      </div></div>`;
+    } else if (teacher) {
+      bar = html`<div class="bar t"><div class="bar-in">
+        <button class=${"hwbtn" + (hw ? " on" : "")} onClick=${() => setHw(!hw)} aria-pressed=${hw ? "true" : "false"} aria-label="Mark as homework"><${Ic.book} size=${22}/></button>
+        <textarea ref=${taRef} class="tin" rows="1" placeholder=${hw ? "Homework for this lesson" : "Message"} value=${text} onInput=${e => { setText(e.target.value); autosize(e.target); }}></textarea>
+        <button class="big alt" onClick=${() => camRef.current && camRef.current.click()} aria-label="Send a photo"><${Ic.cam} size=${24}/></button>
+        ${text.trim()
+          ? html`<button class="big" onClick=${sendText} aria-label="Send message"><${Ic.send} size=${24}/></button>`
+          : html`<button class="big" onClick=${micTap} aria-label="Record a voice note"><${Ic.mic} size=${24}/></button>`}
+      </div></div>`;
+    } else {
+      bar = html`<div class="bar"><div class="bar-in">
+        <${Listen} lesson=${lesson} pst=${pst}/>
+        <div class="grow"></div>
+        ${canSend ? html`
+          <button class="big alt" onClick=${() => camRef.current && camRef.current.click()} aria-label="Send a photo"><${Ic.cam} size=${30}/></button>
+          <button class="big" onClick=${micTap} aria-label="Record a voice note"><${Ic.mic} size=${30}/></button>`
+          : html`<span class="nosend"><${Ic.lock} size=${18}/>Can listen, can't send yet</span>`}
+      </div></div>`;
+    }
+    return html`${inputs}${bar}
+      ${points && points.length && (mode === "rec" || mode === "review") ? html`<div class="pointbar">${points.map(p => html`<span key=${p}>👉 ${p}</span>`)}</div>` : null}
+      ${photo ? html`<div class="lb" role="dialog" aria-label="Photo to send">
+        <div class="imgwrap"><img src=${photo.url} alt="Photo to send"/></div>
+        <div class="bar"><div class="bar-in">
+          <button class="big grey" onClick=${() => { URL.revokeObjectURL(photo.url); setPhoto(null); }} aria-label="Delete this photo"><${Ic.trash} size=${28}/></button>
+          <div class="grow"></div>
+          <button class="big" onClick=${() => { const p = photo; setPhoto(null); onSend({ kind: "photo", blob: p.blob, localUrl: p.url }); }} aria-label="Send photo"><${Ic.send} size=${28}/></button>
+        </div></div>
+      </div>` : null}`;
+  }
+
+  /* ================= the classroom ================= */
+  const markedSeen = new Set();
+  function Room({ s, ix, student, mode, onBack, startEditing }) {
+    const teacher = mode === "teacher";
+    const role = teacher ? "teacher" : "student";
+    const lessons = s.lessons;
+    const pst = usePlayer();
+    const uFound = lessons.findIndex(l => l.id === student.unlocked);
+    const uIdx = uFound >= 0 ? uFound : 0;
+    const [viewId, setViewId] = useState(() => (lessons[uIdx] ? lessons[uIdx].id : null));
+    let vIdx = lessons.findIndex(l => l.id === viewId);
+    if (vIdx < 0 || (!teacher && vIdx > uIdx)) vIdx = uIdx;
+    const lesson = lessons[vIdx];
+    const [pending, setPending] = useState([]);
+    const [points, setPoints] = useState(null);
+    const [hw, setHw] = useState(false);
+    const [lightbox, setLightbox] = useState(null);
+    const [editing, setEditing] = useState(!!startEditing);
+    const [endVis, setEndVis] = useState(false);
+    const [vis, setVis] = useState(document.visibilityState !== "hidden");
+    const endRef = useRef(null);
+    const uploaded = useRef(new Map());
+    const lid = lesson ? lesson.id : null;
+
+    const mine = s.msgs.filter(m => m.student === student.id);
+    const cids = new Set(mine.map(m => m.cid).filter(Boolean));
+    const live = pending.filter(p => !cids.has(p.cid));
+    const thread = mine.filter(m => m.lesson === lid).concat(live.filter(p => p.lesson === lid)).sort((a, b) => a.at - b.at);
+    const unreadBy = {};
+    for (const m of mine) if (m.from !== role && !m.seen) unreadBy[m.lesson] = (unreadBy[m.lesson] || 0) + 1;
+    const unreadHere = lid ? unreadBy[lid] || 0 : 0;
+    const unseenIds = thread.filter(m => !m.pending && m.from !== role && !m.seen).map(m => m.id);
+
+    useEffect(() => { if (pending.some(p => cids.has(p.cid))) setPending(ps => ps.filter(p => !cids.has(p.cid))); }, [s.msgs]);
+    useEffect(() => { player.stop(); window.scrollTo(0, 0); }, [lid]);
+    useEffect(() => {
+      if (!lesson) return;
+      const ids = [];
+      for (const t of uniqueTiles(parseBoard(lesson.board))) { const x = soundFor(ix, lesson.id, t.t); if (x) ids.push(x.rec.audio); }
+      prefetch(ids.slice(0, 160));
+    }, [lid, lesson && lesson.board, s.recs]);
+    useEffect(() => {
+      const f = () => setVis(document.visibilityState !== "hidden");
+      document.addEventListener("visibilitychange", f);
+      return () => document.removeEventListener("visibilitychange", f);
+    }, []);
+    useEffect(() => {
+      const el = endRef.current;
+      if (!el || !("IntersectionObserver" in window)) { setEndVis(true); return; }
+      const io = new IntersectionObserver(es => setEndVis(es[0].isIntersecting), { rootMargin: "0px 0px -96px 0px" });
+      io.observe(el);
+      return () => io.disconnect();
+    }, [lid]);
+    useEffect(() => {
+      if (!vis || !endVis || !unseenIds.length) return;
+      const todo = unseenIds.filter(id => !markedSeen.has(id));
+      if (!todo.length) return;
+      todo.forEach(id => markedSeen.add(id));
+      (async () => {
+        for (const id of todo) {
+          try { await update("msgs/" + id, { seen: true }); } catch (e) { /* read-only viewer: leave it */ }
+        }
+      })();
+    }, [vis, endVis, unseenIds.join(",")]);
+
+    if (!lesson) return html`<${Waiting} onBack=${onBack}/>`;
+
+    const scrollEnd = () => requestAnimationFrame(() => { if (endRef.current) endRef.current.scrollIntoView({ behavior: "smooth", block: "end" }); });
+
+    async function deliver(p) {
+      setPending(ps => ps.map(x => (x.cid === p.cid ? Object.assign({}, x, { state: "up" }) : x)));
+      try {
+        let asset = uploaded.current.get(p.cid) || null;
+        if (p.blob && !asset) { asset = await uploadBlob(p.blob); uploaded.current.set(p.cid, asset); }
+        await retry(() => rt.db.collection("msgs").doc().set({
+          student: p.student, lesson: p.lesson, from: p.from, kind: p.kind, asset: asset || null,
+          secs: round1(p.secs), text: p.text || "", hw: !!p.hw, point: p.point || [], seen: false, at: p.at, cid: p.cid,
+        }));
+      } catch (e) {
+        setPending(ps => ps.map(x => (x.cid === p.cid ? Object.assign({}, x, { state: "fail" }) : x)));
+        toast(errText(e, "Not sent. Tap the red mark to try again."));
+      }
+    }
+    function send(item) {
+      const cid = uid();
+      const p = {
+        id: "p_" + cid, cid, pending: true, state: "up", student: student.id, lesson: lesson.id, from: role,
+        kind: item.kind, secs: item.secs || 0, text: item.text || "", hw: teacher && hw, point: item.point || [],
+        at: Date.now(), blob: item.blob || null, localUrl: item.localUrl || (item.blob ? URL.createObjectURL(item.blob) : null),
+      };
+      setPending(ps => ps.concat(p));
+      scrollEnd();
+      deliver(p);
+    }
+    async function delMsg(m) {
+      try {
+        await remove("msgs/" + m.id);
+        if (m.asset && rt.assets) { try { await rt.assets.delete(m.asset); } catch (e) {} }
+      } catch (e) { toast(errText(e)); }
+    }
+    function onTile(t) {
+      if (points) { setPoints(ps => (ps.indexOf(t.t) >= 0 ? ps.filter(x => x !== t.t) : ps.concat(t.t).slice(-6))); return; }
+      const snd = soundFor(ix, lesson.id, t.t);
+      if (snd) player.play("tile:" + lesson.id + ":" + t.t, srcFor(snd.rec.audio), true);
+    }
+    async function pass() {
+      const next = lessons[uIdx + 1];
+      try {
+        if (next) await update("students/" + student.id, { unlocked: next.id });
+        await retry(() => rt.db.collection("msgs").doc().set({
+          student: student.id, lesson: lesson.id, from: "teacher", kind: "pass", asset: null, secs: 0, text: "",
+          hw: false, point: [], seen: false, at: Date.now(), cid: uid(), next: next ? next.id : null,
+        }));
+        toast(next ? "Passed. Lesson " + (uIdx + 2) + " is now open." : "Passed. That was the last lesson.");
+        scrollEnd();
+      } catch (e) { toast(errText(e)); }
+    }
+    async function makeCurrent() {
+      try { await update("students/" + student.id, { unlocked: lesson.id }); toast("Lesson " + (vIdx + 1) + " is now the current lesson."); }
+      catch (e) { toast(errText(e)); }
+    }
+
+    let lastDay = null;
+    const nodes = [];
+    for (const m of thread) {
+      const dk = dayKey(m.at);
+      if (dk !== lastDay) { nodes.push(html`<div class="day" key=${"d" + dk}>${fmtDay(m.at)}</div>`); lastDay = dk; }
+      nodes.push(html`<${Msg} key=${m.cid || m.id} m=${m} role=${role} teacher=${teacher} pst=${pst} lessons=${lessons}
+        onGoto=${id => setViewId(id)} onRetry=${() => deliver(m)} onDel=${() => delMsg(m)} onPhoto=${setLightbox}/>`);
+    }
+
+    return html`<div class="room">
+      ${teacher ? html`<header class="rhead">
+        <button class="iconbtn" onClick=${onBack} aria-label="Back to students"><${Ic.back}/></button>
+        <span class="av" style=${"background:" + (student.color || COLORS[0])}>${initial(student.name)}</span>
+        <div class="rtitle"><b>${student.name || "Student"}</b><small>On lesson ${uIdx + 1} of ${lessons.length}</small></div>
+        <button class="iconbtn" onClick=${() => setEditing(true)} aria-label="Student settings and join link"><${Ic.edit} size=${22}/></button>
+      </header>` : null}
+      <${Rail} lessons=${lessons} uIdx=${uIdx} vIdx=${vIdx} unreadBy=${unreadBy} teacher=${teacher} onPick=${setViewId}/>
+      ${teacher ? html`<div class="tact">
+        ${vIdx === uIdx
+          ? html`<button class="btn pass" onClick=${pass}><${Ic.tick} size=${20} sw=${2.8}/>Pass lesson ${vIdx + 1}</button>`
+          : html`<button class="btn sec" onClick=${makeCurrent}>Make lesson ${vIdx + 1} the current one</button>`}
+        <span class="tl">${lesson.title}</span>
+      </div>` : null}
+      <${Board} lesson=${lesson} number=${vIdx + 1} ix=${ix} pst=${pst} onTile=${onTile} points=${points}/>
+      <section class="book" aria-label="Messages">
+        <div class="thread">${nodes}</div>
+        <div class="end" ref=${endRef}></div>
+      </section>
+      <div class="spacer"></div>
+      ${!endVis && unreadHere ? html`<button class="newpill" onClick=${scrollEnd} aria-label="New messages"><${Ic.chat} size=${20}/><${Ic.down} size=${18}/></button>` : null}
+      <${Composer} teacher=${teacher} lesson=${lesson} pst=${pst} canSend=${teacher || s.canSend} onSend=${send}
+        points=${points} setPoints=${setPoints} hw=${hw} setHw=${setHw}/>
+      ${lightbox ? html`<div class="lb" role="dialog" aria-label="Photo" onClick=${() => setLightbox(null)}><div class="imgwrap"><img src=${lightbox} alt="Photo"/></div></div>` : null}
+      ${editing ? html`<${StudentSheet} student=${student} onClose=${() => setEditing(false)} onDeleted=${() => { setEditing(false); onBack && onBack(); }}/>` : null}
+    </div>`;
+  }
+
+  /* ================= teacher screens ================= */
+  function StudentSheet({ student, onClose, onDeleted }) {
+    const [name, setName] = useState(student.name || "");
+    const [arm, setArm] = useState(false), [armReset, setArmReset] = useState(false), [copied, setCopied] = useState(false);
+    useEffect(() => { if (!armReset) return; const t = setTimeout(() => setArmReset(false), 3500); return () => clearTimeout(t); }, [armReset]);
+    useEffect(() => { if (!arm) return; const t = setTimeout(() => setArm(false), 3500); return () => clearTimeout(t); }, [arm]);
+    const save = patch => update("students/" + student.id, patch).catch(e => toast(errText(e)));
+    const saveName = () => { const n = name.trim() || "Student"; if (n !== (student.name || "")) return save({ name: n }); return Promise.resolve(); };
+    const link = student.invite ? joinLink(student.invite) : "";
+    async function copy() {
+      try { await navigator.clipboard.writeText(link); setCopied(true); }
+      catch (e) { toast("Couldn't copy. Use Send on WhatsApp instead."); }
+    }
+    async function resetLink() {
+      if (!armReset) { setArmReset(true); return; }
+      try {
+        const code = await q(sb.rpc("reset_invite", { sid: student.id }));
+        store.set({ students: store.s.students.map(x => (x.id === student.id ? Object.assign({}, x, { invite: code }) : x)) });
+        setArmReset(false); setCopied(false);
+        toast("New link made. The old one no longer works.");
+      } catch (e) { toast(errText(e)); }
+    }
+    async function del() {
+      if (!arm) { setArm(true); return; }
+      try { await remove("students/" + student.id); onDeleted(); } catch (e) { toast(errText(e)); }
+    }
+    return html`<div class="scrim" onClick=${e => { if (e.target === e.currentTarget) { saveName(); onClose(); } }}>
+      <div class="sheet" role="dialog" aria-label="Student settings">
+        <div class="field"><span class="lbl">Join link</span>
+          <p class="help">Send this to ${name.trim() || "your student"} only. Opening it on their phone puts them straight into the class, with no account or password.</p>
+          <div class="row2">
+            <a class="btn" href=${"https://wa.me/?text=" + encodeURIComponent("Reading class: " + link)} target="_blank" rel="noopener"><${Ic.send} size=${18}/>Send on WhatsApp</a>
+            <button class="btn sec" onClick=${copy}>${copied ? html`<${Ic.tick} size=${18}/>Copied` : "Copy link"}</button>
+          </div>
+          <button class=${"btn danger" + (armReset ? " arm" : "")} onClick=${resetLink}>${armReset ? "Tap again: the old link stops working" : "Make a new link"}</button>
+        </div>
+        <div class="field"><label for="sname">Name</label>
+          <input id="sname" value=${name} onInput=${e => setName(e.target.value)} onBlur=${saveName} autocomplete="off"/></div>
+        <div class="field"><span class="lbl">Colour</span>
+          <div class="swatches">${COLORS.map(c => html`<button key=${c} class=${"sw" + (student.color === c ? " on" : "")} style=${"background:" + c} onClick=${() => save({ color: c })} aria-label="Pick this colour"></button>`)}</div></div>
+        <div class="row2">
+          <button class="btn quiet" onClick=${async () => { await saveName(); onClose(); }}>Done</button>
+          <button class=${"btn danger" + (arm ? " arm" : "")} onClick=${del}>${arm ? "Tap again to remove" : "Remove student"}</button>
+        </div>
+      </div>
+    </div>`;
+  }
+
+  function StudentsList({ s, onOpen }) {
+    const unread = {}, last = {};
+    for (const m of s.msgs) {
+      if (m.from === "student" && !m.seen) unread[m.student] = (unread[m.student] || 0) + 1;
+      if (!last[m.student] || m.at > last[m.student]) last[m.student] = m.at;
+    }
+    async function add() {
+      const ref = rt.db.collection("students").doc();
+      try {
+        await ref.set({ name: "New student", color: COLORS[s.students.length % COLORS.length], unlocked: s.lessons[0] ? s.lessons[0].id : null, createdAt: Date.now() });
+        onOpen(ref.id, true);
+      } catch (e) { toast(errText(e)); }
+    }
+    return html`<section class="list">
+      ${s.students.length ? s.students.map(st => {
+        const f = s.lessons.findIndex(l => l.id === st.unlocked), i = f >= 0 ? f : 0, l = s.lessons[i];
+        return html`<button class="row" key=${st.id} onClick=${() => onOpen(st.id)}>
+          <span class="av" style=${"background:" + (st.color || COLORS[0])}>${initial(st.name)}</span>
+          <span class="rowmain"><b>${st.name || "Student"}</b><small>${l ? "Lesson " + (i + 1) + ": " + (l.title || "Untitled") : "No lessons yet"}</small></span>
+          ${unread[st.id] ? html`<span class="count" aria-label=${unread[st.id] + " new"}>${unread[st.id]}</span>` : last[st.id] ? html`<span class="when">${fmtWhen(last[st.id])}</span>` : null}
+        </button>`;
+      }) : html`<div class="empty"><p>No students yet. Add one, then send them their join link.</p></div>`}
+      <button class="btn sec" onClick=${add}><${Ic.plus} size=${20}/>Add a student</button>
+      <div class="note">
+        <b>Letting your student in</b>
+        <p>Tap your student, then the pencil, then Send on WhatsApp. They don't need an account or a password.</p>
+        <p>On a call, have them open the link in Chrome, allow the microphone the first time they record, then add the page to their home screen (Chrome menu, then Add to Home screen). After that they just tap the icon.</p>
+      </div>
+      <div class="acct"><span>${s.email ? "Signed in as " + s.email : ""}</span><button class="linkbtn" onClick=${signOut}>Sign out</button></div>
+    </section>`;
+  }
+
+  function LessonsList({ s, ix, onOpen }) {
+    async function add() {
+      const stage = s.lessons.length ? s.lessons[s.lessons.length - 1].stage || 1 : 1;
+      const order = s.lessons.filter(l => (l.stage || 1) === stage).reduce((m, l) => Math.max(m, l.order || 0), 0) + 1;
+      const ref = rt.db.collection("lessons").doc();
+      try {
+        await ref.set({ stage, order, title: "New lesson", note: "", board: "", explain: null, explainSecs: 0, updatedAt: Date.now() });
+        onOpen(ref.id);
+      } catch (e) { toast(errText(e)); }
+    }
+    let lastStage = null;
+    return html`<section class="list">
+      ${s.lessons.length ? s.lessons.map((l, i) => {
+        const stg = l.stage || 1, head = stg !== lastStage;
+        lastStage = stg;
+        const tiles = uniqueTiles(parseBoard(l.board));
+        let ok = 0;
+        for (const t of tiles) if (soundFor(ix, l.id, t.t)) ok++;
+        return html`<${Fragment} key=${l.id}>
+          ${head ? html`<h2 class="stagehead">Stage ${stg}${STAGES[stg] ? ": " + STAGES[stg] : ""}</h2>` : null}
+          <button class="row" onClick=${() => onOpen(l.id)}>
+            <span class="num">${i + 1}</span>
+            <span class="rowmain"><b>${l.title || "Untitled lesson"}</b>
+              <span class="pills">
+                <span class=${"pill" + (l.explain ? " ok" : "")}><${Ic.mic} size=${14}/>${l.explain ? "Explained, " + fmtDur(l.explainSecs) : "No explanation yet"}</span>
+                <span class=${"pill" + (tiles.length && ok === tiles.length ? " ok" : "")}><${Ic.speaker} size=${14}/>${ok} of ${tiles.length} tiles</span>
+              </span></span>
+          </button>
+        </${Fragment}>`;
+      }) : html`<div class="empty"><p>No lessons yet. Add the first one.</p></div>`}
+      <button class="btn sec" onClick=${add}><${Ic.plus} size=${20}/>Add a lesson</button>
+    </section>`;
+  }
+
+  function ExplainRecorder({ lesson, pst }) {
+    const [mode, setMode] = useState("idle");
+    const [t0, setT0] = useState(0), [now, setNow] = useState(0);
+    const [take, setTake] = useState(null);
+    const [arm, setArm] = useState(false);
+    const r = useRef(null), st = useRef(null), fileRef = useRef(null);
+    useEffect(() => { if (mode !== "rec") return; const i = setInterval(() => setNow(Date.now()), 250); return () => clearInterval(i); }, [mode]);
+    useEffect(() => () => { if (r.current) r.current.cancel(); recorder.close(st.current); }, []);
+    useEffect(() => { if (!arm) return; const t = setTimeout(() => setArm(false), 3500); return () => clearTimeout(t); }, [arm]);
+    async function start() {
+      if (recorder.blocked) { fileRef.current && fileRef.current.click(); return; }
+      player.stop();
+      try { st.current = await recorder.open(); r.current = recorder.start(st.current); setT0(Date.now()); setNow(Date.now()); setMode("rec"); }
+      catch (e) { toast("The microphone isn't available here. Tap again to choose a recording file."); }
+    }
+    async function stop() {
+      const c = r.current; r.current = null; if (!c) return;
+      const out = await c.stop();
+      recorder.close(st.current); st.current = null;
+      if (out.secs < 1) { setMode("idle"); toast("That was too short."); return; }
+      setTake({ blob: out.blob, secs: out.secs, url: URL.createObjectURL(out.blob) });
+      setMode("review");
+    }
+    function cancel() { if (r.current) { r.current.cancel(); r.current = null; } recorder.close(st.current); st.current = null; if (player.key === "etake") player.stop(); setTake(null); setMode("idle"); }
+    async function save() {
+      const tk = take;
+      if (player.key === "etake") player.stop();
+      setMode("saving");
+      try {
+        const id = await uploadBlob(tk.blob);
+        const old = lesson.explain;
+        await update("lessons/" + lesson.id, { explain: id, explainSecs: round1(tk.secs), updatedAt: Date.now() });
+        if (old && old !== id && rt.assets) { try { await rt.assets.delete(old); } catch (e) {} }
+        toast("Explanation saved.");
+        setTake(null); setMode("idle");
+      } catch (e) { toast(errText(e)); setMode("review"); }
+    }
+    async function del() {
+      if (!arm) { setArm(true); return; }
+      const old = lesson.explain;
+      try {
+        await update("lessons/" + lesson.id, { explain: null, explainSecs: 0, updatedAt: Date.now() });
+        if (old && rt.assets) { try { await rt.assets.delete(old); } catch (e) {} }
+        setArm(false);
+      } catch (e) { toast(errText(e)); }
+    }
+    async function onFile(e) {
+      const f = e.target.files && e.target.files[0]; e.target.value = ""; if (!f) return;
+      try { toast("Getting the recording ready…"); const out = await audioFromFile(f); setTake({ blob: out.blob, secs: out.secs, url: URL.createObjectURL(out.blob) }); setMode("review"); }
+      catch (err) { toast(errText(err, "That file couldn't be used.")); }
+    }
+    const fileInput = html`<input ref=${fileRef} type="file" accept="audio/*" style="display:none" onChange=${onFile}/>`;
+    if (mode === "rec") return html`<div class="exrow">
+      <button class="btn rec" onClick=${stop}><${Ic.stop} size=${18}/>Stop, ${fmtDur((now - t0) / 1000)}</button>
+      <button class="btn quiet" onClick=${cancel}>Cancel</button></div>`;
+    if (mode === "review" || mode === "saving") {
+      const on = pst.key === "etake";
+      return html`<div class="exrow">
+        <button class="btn quiet" onClick=${() => player.play("etake", take.url)}>${on && pst.playing ? html`<${Ic.pause} size=${18}/>` : html`<${Ic.play} size=${18}/>`}Listen, ${fmtDur(take.secs)}</button>
+        <button class="btn" disabled=${mode === "saving"} onClick=${save}>${mode === "saving" ? "Saving…" : "Save it"}</button>
+        <button class="btn quiet" disabled=${mode === "saving"} onClick=${cancel}>Discard</button></div>`;
+    }
+    const key = "explain:" + lesson.id, on = pst.key === key;
+    return html`<div class="exrow">
+      ${lesson.explain ? html`<button class="btn quiet" onClick=${() => player.play(key, srcFor(lesson.explain))}>${on && pst.playing ? html`<${Ic.pause} size=${18}/>` : html`<${Ic.play} size=${18}/>`}Play, ${fmtDur(on && pst.cur > 0 ? pst.cur : lesson.explainSecs)}</button>` : null}
+      <button class="btn" onClick=${start}><${Ic.mic} size=${18}/>${lesson.explain ? "Record again" : "Record explanation"}</button>
+      <button class="btn quiet" onClick=${() => fileRef.current && fileRef.current.click()}><${Ic.upload} size=${18}/>Use a file</button>
+      ${lesson.explain ? html`<button class=${"btn danger" + (arm ? " arm" : "")} onClick=${del}>${arm ? "Tap again to remove" : "Remove"}</button>` : null}
+      ${fileInput}
+    </div>`;
+  }
+
+  function StepRecorder({ ix, lesson, onClose }) {
+    const [list] = useState(() => {
+      const tiles = uniqueTiles(parseBoard(lesson.board));
+      const missing = tiles.filter(t => !soundFor(ix, lesson.id, t.t));
+      return missing.length ? missing : tiles;
+    });
+    const [i, setI] = useState(0);
+    const [recOn, setRecOn] = useState(false);
+    const [t0, setT0] = useState(0), [now, setNow] = useState(0);
+    const [micErr, setMicErr] = useState(recorder.blocked);
+    const [busy, setBusy] = useState(0);
+    const [last, setLast] = useState(null);
+    const streamRef = useRef(null), recRef = useRef(null), chain = useRef(Promise.resolve()), fileRef = useRef(null);
+    useEffect(() => { if (!recOn) return; const t = setInterval(() => setNow(Date.now()), 200); return () => clearInterval(t); }, [recOn]);
+    useEffect(() => () => { if (recRef.current) recRef.current.cancel(); recorder.close(streamRef.current); player.stop(); }, []);
+    const cur = list[i];
+    const done = i >= list.length;
+    function queueSave(t, idx, out) {
+      setLast({ t: t.t, idx, url: URL.createObjectURL(out.blob) });
+      setI(idx + 1);
+      setBusy(b => b + 1);
+      chain.current = chain.current.then(() => saveTileRec(lesson.id, t.t, out)).then(
+        () => setBusy(b => b - 1),
+        e => { setBusy(b => b - 1); toast(errText(e, "Couldn't save “" + t.t + "”. Tap it on the board to record it again.")); });
+    }
+    async function toggle() {
+      if (recRef.current) {
+        const r = recRef.current; recRef.current = null; setRecOn(false);
+        const out = await r.stop();
+        if (out.secs < 0.3 || !out.blob.size) { toast("That was too short. Try again."); return; }
+        queueSave(cur, i, out);
+        return;
+      }
+      player.stop();
+      try {
+        if (!streamRef.current) streamRef.current = await recorder.open();
+        recRef.current = recorder.start(streamRef.current);
+        setT0(Date.now()); setNow(Date.now()); setRecOn(true);
+      } catch (e) { setMicErr(true); }
+    }
+    async function onFile(e) {
+      const f = e.target.files && e.target.files[0]; e.target.value = "";
+      if (!f || !cur) return;
+      try { const out = await audioFromFile(f); queueSave(cur, i, out); }
+      catch (err) { toast(errText(err, "That file couldn't be used.")); }
+    }
+    return html`<div class="full" role="dialog" aria-label="Record the board">
+      <div class="fhead">
+        <span>${done ? "All done" : (i + 1) + " of " + list.length}</span>
+        ${busy ? html`<span class="saving"><span class="spin"></span>Saving</span>` : null}
+        <button class="iconbtn" onClick=${onClose} aria-label="Close"><${Ic.x}/></button>
+      </div>
+      <div class="fbody">${done
+        ? html`<div class="fdone"><${Ic.tick} size=${64} sw=${2.4}/><p>${busy ? "Finishing the last saves…" : "Every tile in this round is recorded."}</p></div>`
+        : html`<div class=${"ftile" + (cur.s ? " sent" : "")}>${cur.t}</div>`}</div>
+      <div class="ffoot">
+        ${last ? html`<div class="lastrow"><span>Last: <b>${last.t}</b></span>
+          <button class="chip" disabled=${recOn} onClick=${() => player.play("steplast", last.url, true)}><${Ic.play} size=${16}/>Hear it</button>
+          <button class="chip" disabled=${recOn} onClick=${() => { setI(last.idx); setLast(null); }}><${Ic.replay} size=${16}/>Redo</button></div>` : null}
+        ${done ? html`<button class="btn light" onClick=${onClose}>Close</button>`
+          : micErr ? html`<p class="fhelp">The microphone isn't available here. Record the tile with your phone's recorder, then pick the file.</p>
+              <button class="btn light" onClick=${() => fileRef.current && fileRef.current.click()}><${Ic.upload} size=${20}/>Choose recording for “${cur.t}”</button>
+              <button class="chip" onClick=${() => setI(x => x + 1)}>Skip</button>`
+          : html`<div class="frow">
+              <button class="chip" disabled=${recOn} onClick=${() => setI(x => x + 1)}>Skip</button>
+              <button class=${"big " + (recOn ? "red" : "chalk")} onClick=${toggle} aria-label=${recOn ? "Stop and save" : "Record this tile"}>${recOn ? html`<${Ic.stop} size=${30}/>` : html`<${Ic.mic} size=${30}/>`}</button>
+              <span class="ftime">${recOn ? fmtDur((now - t0) / 1000) : ""}</span>
+            </div>
+            <p class="fhelp">${recOn ? "Tap again when you've said it. It saves and moves on." : "Tap, say the tile, tap again."}</p>`}
+      </div>
+      <input ref=${fileRef} type="file" accept="audio/*" capture="" style="display:none" onChange=${onFile}/>
+    </div>`;
+  }
+
+  function TileSheet({ ix, lesson, lessons, text, onClose }) {
+    const pst = usePlayer();
+    const snd = soundFor(ix, lesson.id, text);
+    const [recOn, setRecOn] = useState(false), [saving, setSaving] = useState(false), [arm, setArm] = useState(false);
+    const [t0, setT0] = useState(0), [now, setNow] = useState(0);
+    const r = useRef(null), st = useRef(null), fileRef = useRef(null);
+    useEffect(() => { if (!recOn) return; const t = setInterval(() => setNow(Date.now()), 200); return () => clearInterval(t); }, [recOn]);
+    useEffect(() => () => { if (r.current) r.current.cancel(); recorder.close(st.current); }, []);
+    useEffect(() => { if (!arm) return; const t = setTimeout(() => setArm(false), 3500); return () => clearTimeout(t); }, [arm]);
+    async function saveOut(out) {
+      setSaving(true);
+      try { await saveTileRec(lesson.id, text, out); toast("Saved “" + text + "”."); } catch (e) { toast(errText(e)); }
+      setSaving(false);
+    }
+    async function toggle() {
+      if (r.current) {
+        const c = r.current; r.current = null; setRecOn(false);
+        const out = await c.stop(); recorder.close(st.current); st.current = null;
+        if (out.secs < 0.3 || !out.blob.size) { toast("That was too short. Try again."); return; }
+        return saveOut(out);
+      }
+      if (recorder.blocked) { fileRef.current && fileRef.current.click(); return; }
+      player.stop();
+      try { st.current = await recorder.open(); r.current = recorder.start(st.current); setT0(Date.now()); setNow(Date.now()); setRecOn(true); }
+      catch (e) { toast("The microphone isn't available here. Tap again to choose a recording file."); }
+    }
+    async function onFile(e) {
+      const f = e.target.files && e.target.files[0]; e.target.value = ""; if (!f) return;
+      try { saveOut(await audioFromFile(f)); } catch (err) { toast(errText(err, "That file couldn't be used.")); }
+    }
+    async function del() {
+      if (!arm) { setArm(true); return; }
+      try { await removeTileRec(lesson.id, text); toast("Recording removed."); } catch (e) { toast(errText(e)); }
+      setArm(false);
+    }
+    const fromLesson = snd && !snd.own ? lessons[snd.from] : null;
+    const status = !snd ? "No recording yet." : snd.own ? "Recorded for this lesson."
+      : "Reusing the recording from lesson " + (snd.from + 1) + (fromLesson ? " (" + fromLesson.title + ")" : "") + ". Record it here if it should sound different in this lesson.";
+    const key = "sheet:" + text, on = pst.key === key;
+    return html`<div class="scrim" onClick=${e => { if (e.target === e.currentTarget) onClose(); }}>
+      <div class="sheet" role="dialog" aria-label=${"Recording for " + text}>
+        <div class="sheettile">${text}</div>
+        <p class="help c">${status}</p>
+        <div class="row2">
+          ${snd ? html`<button class="btn quiet" disabled=${recOn} onClick=${() => player.play(key, srcFor(snd.rec.audio), !on)}>${on && pst.playing ? html`<${Ic.pause} size=${18}/>` : html`<${Ic.play} size=${18}/>`}Play</button>` : null}
+          <button class=${"btn" + (recOn ? " rec" : "")} disabled=${saving} onClick=${toggle}>
+            ${recOn ? html`<${Ic.stop} size=${18}/>Stop, ${fmtDur((now - t0) / 1000)}` : saving ? "Saving…" : html`<${Ic.mic} size=${18}/>${snd && snd.own ? "Record again" : "Record"}`}
+          </button>
+        </div>
+        <button class="btn quiet" disabled=${recOn || saving} onClick=${() => fileRef.current && fileRef.current.click()}><${Ic.upload} size=${18}/>Use a recording file</button>
+        ${snd && snd.own ? html`<button class=${"btn danger" + (arm ? " arm" : "")} onClick=${del}>${arm ? "Tap again to remove" : "Remove this lesson's recording"}</button>` : null}
+        <button class="btn quiet" onClick=${onClose}>Close</button>
+        <input ref=${fileRef} type="file" accept="audio/*" style="display:none" onChange=${onFile}/>
+      </div>
+    </div>`;
+  }
+
+  function LessonEditor({ s, ix, lesson, onBack }) {
+    const pst = usePlayer();
+    const idx = s.lessons.findIndex(l => l.id === lesson.id);
+    const [title, setTitle] = useState(lesson.title || "");
+    const [note, setNote] = useState(lesson.note || "");
+    const [board, setBoard] = useState(lesson.board || "");
+    const [dirty, setDirty] = useState(false);
+    const [stepOpen, setStepOpen] = useState(false);
+    const [tile, setTile] = useState(null);
+    const [armDel, setArmDel] = useState(false);
+    useEffect(() => { if (!dirty) setBoard(lesson.board || ""); }, [lesson.board]);
+    useEffect(() => { if (!armDel) return; const t = setTimeout(() => setArmDel(false), 3500); return () => clearTimeout(t); }, [armDel]);
+    useEffect(() => () => player.stop(), []);
+    const rowsOf = useMemo(() => parseBoard(lesson.board), [lesson.board]);
+    const tiles = useMemo(() => uniqueTiles(rowsOf), [rowsOf]);
+    let own = 0, bor = 0, miss = 0;
+    for (const t of tiles) { const x = soundFor(ix, lesson.id, t.t); if (!x) miss++; else if (x.own) own++; else bor++; }
+    const save = patch => update("lessons/" + lesson.id, Object.assign({ updatedAt: Date.now() }, patch)).catch(e => toast(errText(e)));
+
+    async function saveBoard() {
+      const clean = board.split(/\r?\n/).map(l => l.replace(/\s+/g, " ").trim()).filter(Boolean).join("\n");
+      await save({ board: clean });
+      setBoard(clean); setDirty(false);
+      toast("Board saved.");
+    }
+    async function changeStage(n) {
+      const order = s.lessons.filter(l => (l.stage || 1) === n && l.id !== lesson.id).reduce((m, l) => Math.max(m, l.order || 0), 0) + 1;
+      await save({ stage: n, order });
+    }
+    async function move(dir) {
+      const same = s.lessons.filter(l => (l.stage || 1) === (lesson.stage || 1));
+      const i = same.findIndex(l => l.id === lesson.id), j = i + dir;
+      if (j < 0 || j >= same.length) { toast(dir < 0 ? "Already first in this stage." : "Already last in this stage."); return; }
+      const arr = same.slice();
+      const tmp = arr[i]; arr[i] = arr[j]; arr[j] = tmp;
+      try { for (let k = 0; k < arr.length; k++) if ((arr[k].order || 0) !== k + 1) await update("lessons/" + arr[k].id, { order: k + 1 }); }
+      catch (e) { toast(errText(e)); }
+    }
+    async function delLesson() {
+      if (!armDel) { setArmDel(true); return; }
+      const all = s.lessons, i = all.findIndex(l => l.id === lesson.id);
+      const fallback = all[i + 1] || all[i - 1] || null;
+      try {
+        for (const st of s.students) if (st.unlocked === lesson.id) await update("students/" + st.id, { unlocked: fallback ? fallback.id : null });
+        await remove("lessons/" + lesson.id);
+        if (lesson.explain && rt.assets) { try { await rt.assets.delete(lesson.explain); } catch (e) {} }
+        onBack();
+      } catch (e) { toast(errText(e)); }
+    }
+    const stg = lesson.stage || 1;
+    return html`<div class="page">
+      <header class="rhead">
+        <button class="iconbtn" onClick=${onBack} aria-label="Back to lessons"><${Ic.back}/></button>
+        <div class="rtitle"><b>Lesson ${idx + 1}</b><small>Stage ${stg}${STAGES[stg] ? ": " + STAGES[stg] : ""}</small></div>
+      </header>
+      <div class="ed">
+        <div class="field"><label for="lt">Title</label>
+          <input id="lt" value=${title} onInput=${e => setTitle(e.target.value)} onBlur=${() => { const t = title.trim() || "Untitled lesson"; if (t !== (lesson.title || "")) save({ title: t }); }} autocomplete="off"/></div>
+        <div class="field"><label for="ls">Stage</label>
+          <select id="ls" value=${String(stg)} onChange=${e => changeStage(Number(e.target.value))}>
+            ${[1, 2, 3, 4].map(n => html`<option key=${n} value=${String(n)}>Stage ${n}: ${STAGES[n]}</option>`)}
+          </select></div>
+        <div class="field"><label for="ln">What to explain</label>
+          <textarea id="ln" rows="5" value=${note} onInput=${e => setNote(e.target.value)} onBlur=${() => { if (note !== (lesson.note || "")) save({ note }); }}></textarea>
+          <p class="help">Only you see this.</p></div>
+        <div class="card">
+          <div class="lbl">Your explanation</div>
+          <p class="help">They play this while looking at the board. Speak in the language they're most comfortable with, and tell them when to write in their book.</p>
+          <${ExplainRecorder} lesson=${lesson} pst=${pst}/>
+        </div>
+        <div class="card">
+          <div class="lbl">The board</div>
+          <p class="help">Tap a tile to hear it or record it. A tile recorded in one lesson is reused wherever the same letters appear, so you only record what's new.</p>
+          <${Board} lesson=${lesson} number=${idx + 1} ix=${ix} pst=${pst} onTile=${t => setTile(t.t)} edit=${true}/>
+          <div class="legend">
+            <span><i class="lg"></i>${own} recorded here</span>
+            <span><i class="lg bor"></i>${bor} reused</span>
+            <span><i class="lg miss"></i>${miss} not recorded</span>
+          </div>
+          <button class="btn" disabled=${!tiles.length} onClick=${() => { player.stop(); setStepOpen(true); }}><${Ic.mic} size=${20}/>${miss ? "Record the " + miss + " missing, one by one" : "Re-record every tile, one by one"}</button>
+        </div>
+        <div class="card">
+          <label class="lbl" for="bt">Edit the board</label>
+          <textarea id="bt" class="boardtxt" rows=${Math.min(14, Math.max(4, board.split("\n").length + 1))} value=${board}
+            onInput=${e => { setBoard(e.target.value); setDirty(true); }} spellcheck=${false} autocapitalize="off" autocomplete="off"></textarea>
+          <p class="help">One row per line. Tiles are split by spaces. A line ending in . ? or ! stays whole as one sentence.</p>
+          <button class="btn sec" disabled=${!dirty} onClick=${saveBoard}>Save board</button>
+        </div>
+        <div class="row2">
+          <button class="btn quiet" onClick=${() => move(-1)}><${Ic.up} size=${20}/>Move earlier</button>
+          <button class="btn quiet" onClick=${() => move(1)}><${Ic.down} size=${20}/>Move later</button>
+        </div>
+        <button class=${"btn danger" + (armDel ? " arm" : "")} onClick=${delLesson}>${armDel ? "Tap again to delete this lesson" : "Delete lesson"}</button>
+      </div>
+      ${stepOpen ? html`<${StepRecorder} ix=${ix} lesson=${lesson} onClose=${() => setStepOpen(false)}/>` : null}
+      ${tile ? html`<${TileSheet} ix=${ix} lesson=${lesson} lessons=${s.lessons} text=${tile} onClose=${() => setTile(null)}/>` : null}
+    </div>`;
+  }
+
+  function Teacher({ s, ix }) {
+    const [tab, setTab] = useState("students");
+    const [openStudent, setOpenStudent] = useState(null);
+    const [openLesson, setOpenLesson] = useState(null);
+    const [fresh, setFresh] = useState(false);
+    useEffect(() => { window.scrollTo(0, 0); }, [tab, openStudent, openLesson]);
+    if (openStudent) {
+      const st = s.students.find(x => x.id === openStudent);
+      if (st) return html`<${Room} key=${st.id} s=${s} ix=${ix} student=${st} mode="teacher" startEditing=${fresh} onBack=${() => { setOpenStudent(null); setFresh(false); }}/>`;
+    }
+    if (openLesson) {
+      const l = s.lessons.find(x => x.id === openLesson);
+      if (l) return html`<${LessonEditor} key=${l.id} s=${s} ix=${ix} lesson=${l} onBack=${() => setOpenLesson(null)}/>`;
+    }
+    const unreadTotal = s.msgs.filter(m => m.from === "student" && !m.seen).length;
+    return html`<div class="page">
+      <header class="top">
+        <h1>Reading class</h1>
+        <div class="seg" role="tablist">
+          <button role="tab" aria-selected=${tab === "students" ? "true" : "false"} class=${tab === "students" ? "on" : ""} onClick=${() => setTab("students")}>Students${unreadTotal ? html`<span class="segdot" aria-label="New messages"></span>` : null}</button>
+          <button role="tab" aria-selected=${tab === "lessons" ? "true" : "false"} class=${tab === "lessons" ? "on" : ""} onClick=${() => setTab("lessons")}>Lessons</button>
+        </div>
+      </header>
+      ${tab === "students" ? html`<${StudentsList} s=${s} onOpen=${(id, isNew) => { setFresh(!!isNew); setOpenStudent(id); }}/>` : html`<${LessonsList} s=${s} ix=${ix} onOpen=${setOpenLesson}/>`}
+    </div>`;
+  }
+
+  function StudentHome({ s, ix }) {
+    const st = s.students.find(x => x.id === s.sid);
+    if (!st) return html`<${NoLink}/>`;
+    if (!s.lessons.length) return html`<${Waiting}/>`;
+    return html`<${Room} key=${st.id} s=${s} ix=${ix} student=${st} mode="student"/>`;
+  }
+
+  function App() {
+    const s = useStore();
+    const ix = useMemo(() => buildSound(s.recs, s.lessons), [s.recs, s.lessons]);
+    let body;
+    if (s.phase === "loading") body = html`<${Loading}/>`;
+    else if (s.phase === "setup") body = html`<${Setup}/>`;
+    else if (s.phase === "signin") body = html`<${SignIn} s=${s}/>`;
+    else if (s.phase === "nolink") body = html`<${NoLink} hint=${s.hint}/>`;
+    else if (s.phase === "notteacher") body = html`<${NotTeacher} email=${s.email}/>`;
+    else if (s.phase === "offline") body = html`<${Offline}/>`;
+    else if (s.phase === "error") body = html`<${ErrorScreen} err=${s.err}/>`;
+    else if (s.isOwner) body = html`<${Teacher} s=${s} ix=${ix}/>`;
+    else body = html`<${StudentHome} s=${s} ix=${ix}/>`;
+    return html`${body}${s.toast ? html`<div class="toast" role="status" key=${s.toast.id}>${s.toast.text}</div>` : null}`;
+  }
+
+  root.innerHTML = "";
+  render(html`<${App}/>`, root);
+  boot();
+})();
+</script>
+</body>
+</html>
