@@ -541,6 +541,74 @@ img{max-width:100%}
 .kfrecap .ok{background:rgba(46,158,107,.85);color:#fff}
 .kfrecap .no{background:rgba(232,103,95,.9);color:#fff}
 .kfb.kfpow.fin{background:#E8462E;font-size:36px;animation:kfpulse .6s infinite}
+/* ---------- games: story mode ---------- */
+.qhub,.qscene{position:fixed;inset:0;z-index:96;background-color:#1E3328;background-image:var(--noise);color:var(--chalk);display:flex;flex-direction:column;padding:calc(6px + env(safe-area-inset-top,0px)) 10px calc(10px + env(safe-area-inset-bottom,0px));touch-action:none;-webkit-user-select:none;user-select:none}
+.qbar{display:grid;grid-template-columns:48px 1fr auto;align-items:center;gap:8px;min-height:56px}
+.qcoins{font-weight:700;font-size:18px;white-space:nowrap}
+.qcoins.big{font-size:30px}
+.qclue{display:flex;align-items:center;justify-content:center;gap:10px}
+.qfind{font-size:28px}
+.qword{font-size:40px;line-height:1;background:#F4F0E2;color:#1B2B22;padding:4px 16px 8px;border-radius:10px;font-weight:700}
+.qsign{font-size:46px;background:#F4F0E2;border-radius:12px;padding:0 10px;line-height:1.2}
+.qgo{font-size:30px}
+.big.qhear{width:56px;height:56px}
+.qdots{display:flex;gap:6px;justify-content:center;padding:4px 0}
+.qdots i{width:12px;height:12px;border-radius:50%;background:rgba(241,236,220,.25)}
+.qdots i.on{background:#7BE0A0}
+.qarena{flex:1;min-height:0;position:relative;display:grid;place-items:center}
+.qarena canvas{display:block;touch-action:none}
+.qpad{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:12px;padding-top:8px;justify-items:center}
+.big.qsearch{width:84px;height:84px;font-size:40px;background:#2E9E6B}
+.big.qsearch.off{opacity:.35}
+.big.qright svg{transform:scaleX(-1)}
+.qlockhead{text-align:center;font-size:30px}
+.qpanel{margin:auto;display:flex;flex-direction:column;align-items:center;gap:14px;text-align:center;max-width:420px;padding:20px}
+.qpanel p{margin:0;font-size:17px;color:var(--chalk-2)}
+.qch{width:46px;height:46px;border-radius:50%;background:#FFE27A;color:#1B2B22;font-weight:700;font-size:24px;display:grid;place-items:center}
+.qbigemo{font-size:84px;line-height:1.1}
+.qstory{font-size:40px}
+.big.qplay{width:84px;height:84px;background:#2E9E6B}
+.qtitle{font-size:32px;color:#FFE27A}
+.qstars{display:flex;gap:6px;font-size:54px;color:rgba(241,236,220,.25)}
+.qstars .on{color:#FFE27A;text-shadow:0 0 12px rgba(255,226,122,.6)}
+.qhome{flex:1;display:flex;flex-direction:column;gap:14px;justify-content:center;padding:10px}
+.qtile{display:flex;align-items:center;gap:16px;border:0;border-radius:20px;padding:18px 20px;background:rgba(241,236,220,.12);color:var(--chalk);font-size:22px;text-align:left}
+.qtile.story{background:linear-gradient(135deg,#8E3B2E,#4A2A5E);padding:26px 20px}
+.qtile .qemo{font-size:48px}
+.qtile small{margin-left:auto;font-size:26px}
+.qmap{flex:1;overflow:auto;display:flex;flex-direction:column-reverse;gap:14px;padding:16px 6px 30px;align-items:center}
+.qnode{display:flex;align-items:center;gap:14px;width:min(100%,320px);border:0;border-radius:18px;padding:12px 16px;background:rgba(241,236,220,.14);color:var(--chalk)}
+.qnode:nth-child(even){transform:translateX(26px)}
+.qnode:nth-child(odd){transform:translateX(-26px)}
+.qnode.shut{opacity:.5}
+.qn{width:40px;height:40px;border-radius:50%;background:#FFE27A;color:#1B2B22;font-weight:700;font-size:20px;display:grid;place-items:center;flex:0 0 auto}
+.qnode.shut .qn{background:rgba(241,236,220,.3)}
+.qnemo{font-size:40px}
+.qnst{margin-left:auto;font-size:22px;color:rgba(241,236,220,.25)}
+.qnst .on{color:#FFE27A}
+.qnst small{font-size:16px;color:var(--chalk)}
+.qshop{flex:1;overflow:auto;padding:8px}
+.qshop h3{margin:10px 4px;font-size:30px}
+.qgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:10px}
+.qitem{display:flex;flex-direction:column;align-items:center;gap:6px;border:0;border-radius:16px;padding:12px;background:rgba(241,236,220,.12);color:var(--chalk);font-size:16px}
+.qitem.on{box-shadow:inset 0 0 0 3px #FFE27A}
+.qsw{display:flex;gap:4px}
+.qsw i{display:inline-block;width:22px;height:22px;border-radius:50%;box-shadow:0 0 0 2px rgba(255,255,255,.3)}
+.qprice{font-weight:700;color:#FFE27A;min-height:20px}
+.wc{position:relative;display:flex;flex-direction:column;gap:10px;padding-top:8px}
+.wcrow{display:flex;align-items:center;gap:14px;justify-content:center}
+.wcopts{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;padding:4px 8px}
+.wcopt{border:0;border-radius:16px;background:#F4F0E2;color:#1B2B22;font-family:var(--font);font-size:34px;font-weight:700;padding:12px 8px;min-height:70px}
+.wcopt.pic{font-size:52px;background:rgba(241,236,220,.14)}
+.wcopts:has(.pic){grid-template-columns:repeat(3,1fr)}
+.wcopt.good{background:#2E9E6B;color:#fff}
+.wcopt.bad{background:#E8675F;color:#fff;animation:shake .4s}
+.kftyped.good{color:#7BE0A0}
+.kftyped.bad{color:#E8675F}
+.recbtn{display:inline-flex;align-items:center;gap:6px;margin-left:8px;border:0;border-radius:99px;padding:5px 10px;background:rgba(241,236,220,.14);color:var(--chalk);font-size:13px;font-weight:700;letter-spacing:.04em;vertical-align:middle}
+.recbtn .recdot2{width:10px;height:10px;border-radius:50%;background:#E8675F}
+.recbtn.on{background:#E8675F;color:#fff}
+.recbtn.on .recdot2{background:#fff;animation:blink 1s infinite}
 /* ---------- setup and sign in ---------- */
 .setup{max-width:560px;margin:0 auto;padding:24px 16px 56px;display:flex;flex-direction:column;gap:16px}
 .setup h1{margin:0;font-size:28px;line-height:1.15}
@@ -1061,8 +1129,9 @@ notify pgrst, 'reload schema';
   function b64url(s) { return btoa(unescape(encodeURIComponent(s))).replace(/\+/g, "-").replace(/\//g, "_").replace(/=+$/, ""); }
   function unb64url(s) { s = s.replace(/-/g, "+").replace(/_/g, "/"); while (s.length % 4) s += "="; return decodeURIComponent(escape(atob(s))); }
   function joinLink(invite) { return location.origin + location.pathname + "#j=" + b64url(JSON.stringify({ u: cfg.url, k: cfg.key, c: invite })); }
+  const IS_IOS = /iPhone|iPad|iPod/.test(navigator.userAgent) || (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1);
   function consumeJoinLink() {
-    const m = /[#&]j=([A-Za-z0-9_-]+)/.exec(location.hash || "");
+    const m = /[#&?]j=([A-Za-z0-9_-]+)/.exec((location.hash || "") + "&" + (location.search || ""));
     if (!m) return;
     try {
       const j = JSON.parse(unb64url(m[1]));
@@ -1071,7 +1140,15 @@ notify pgrst, 'reload schema';
         localStorage.setItem(INVITE_KEY, j.c);
       }
     } catch (e) {}
-    try { history.replaceState(null, "", location.pathname + location.search); } catch (e) {}
+    try {
+      if (IS_IOS) {
+        // On iPhone, an app added to the home screen gets its own storage. So the join code stays in the
+        // address, and the home-screen icon opens this exact address: it signs him straight back in.
+        history.replaceState(null, "", location.pathname + "?j=" + m[1]);
+        const man = document.querySelector('link[rel="manifest"]');
+        if (man) man.remove();
+      } else history.replaceState(null, "", location.pathname + location.search.replace(/[?&]j=[A-Za-z0-9_-]+/, ""));
+    } catch (e) {}
   }
   function newId() { return window.crypto && crypto.randomUUID ? crypto.randomUUID() : uid() + uid(); }
   const publicUrl = path => cfg.url.replace(/\/+$/, "") + "/storage/v1/object/public/class/" + String(path).split("/").map(encodeURIComponent).join("/");
@@ -2651,7 +2728,7 @@ notify pgrst, 'reload schema';
     if (g.over) { for (const f of g.f) if (f.act === "ko") f.t += dt; g.wt = (g.wt || 0) + dt; return; }
     if (!g.finish) g.time = Math.max(0, g.time - dt);
     const L = g.cpu ? KF_LEVELS[Math.max(0, (g.level || 1) - 1)] : null;
-    g.S = Math.max(0, g.S - (L ? L.drain : 2.2) * dt * (g.reading ? 0.3 : 1));   // strength drains unless he keeps reading
+    g.S = Math.max(0, g.S - (L ? L.drain : 2.2) * 0.55 * dt * (g.reading ? 0 : 1));   // strength drains unless he keeps reading
     if (g.S >= 99.5) g.sup = true;
     g.cd[1] = Math.max(0, g.cd[1] - dt);
     if (g.finish) {
@@ -2785,7 +2862,7 @@ notify pgrst, 'reload schema';
       gn.gain.setValueAtTime(0.0001, t);
       gn.gain.exponentialRampToValueAtTime(kind === "whiff" ? 0.04 : 0.2, t + 0.012);
       gn.gain.exponentialRampToValueAtTime(0.0001, t + set[2]);
-      o.connect(gn); gn.connect(kfA.destination);
+      o.connect(gn); gn.connect(kfOut());
       o.start(t); o.stop(t + set[2] + 0.05);
     } catch (e) {}
   }
@@ -3082,6 +3159,8 @@ notify pgrst, 'reload schema';
     if (P.mouth) { c.fillStyle = "#2A1410"; c.beginPath(); c.ellipse(hx + 15.4, hy + 12.4, 2.4, 3, 0, 0, 7); c.fill(); }
     else { c.strokeStyle = kfShade(skin, -0.5); c.lineWidth = 1.3; c.beginPath(); c.moveTo(hx + 12.5, hy + 12.3); c.lineTo(hx + 17.8, hy + 12.5); c.stroke(); }
     c.fillStyle = "rgba(255,255,255,.12)"; c.beginPath(); c.ellipse(hx + 10, hy + 4, 4, 2.4, -0.3, 0, 7); c.fill();   // cheekbone light
+    if (ch.mask) { c.fillStyle = "#1A1A1A"; c.beginPath(); c.moveTo(hx - 7, hy + 1); c.lineTo(hx + 23, hy + 2); c.lineTo(hx + 19, hy + 22); c.lineTo(hx + 2, hy + 24); c.lineTo(hx - 6, hy + 16); c.closePath(); c.fill(); c.strokeStyle = "#B8322A"; c.lineWidth = 1.5; c.beginPath(); c.moveTo(hx - 6, hy + 5); c.lineTo(hx + 21, hy + 6); c.stroke(); }
+    if (ch.shades) { c.fillStyle = "#0E0E0E"; kfRR(c, hx + 3, hy - 6.5, 15, 7, 2.5); c.fill(); c.fillStyle = "rgba(255,255,255,.35)"; c.fillRect(hx + 6, hy - 5, 4, 1.4); }
   }
   function kfBody(c, f, ch, o) {
     const P = kfPose(f, o.T || 0, o.i || 0, Object.assign({ emote: ch.emote }, o));
@@ -3198,8 +3277,8 @@ notify pgrst, 'reload schema';
     if (lastFx && fxSeen.has(lastFx.id) && (lastFx.big || lastFx.sup)) { const age = (performance.now() - fxSeen.get(lastFx.id)) / 1000; if (age < 0.18) shk = (lastFx.sup ? 10 : 6) * k; }
     c.save();
     if (shk) c.translate((Math.random() - 0.5) * shk * 2, (Math.random() - 0.5) * shk * 2);
-    kfFigure(c, g.f[1], KF_CHARS[(lk[1] | 0) % nC], k, { T, i: 1, win: g.over && g.win === 1, wt: g.wt });
-    kfFigure(c, me, KF_CHARS[(lk[0] | 0) % nC], k, { T, i: 0, strong, weak, win: g.over && g.win === 0, wt: g.wt });
+    kfFigure(c, g.f[1], kfChar(lk[1]), k, { T, i: 1, win: g.over && g.win === 1, wt: g.wt });
+    kfFigure(c, me, g.myCh || kfChar(lk[0]), k, { T, i: 0, strong, weak, win: g.over && g.win === 0, wt: g.wt });
     // fireballs and ice blasts
     for (const p of g.pj || []) {
       const X = p.x * k, Y = (KF.GROUND - 170) * k, sg = Math.sign(p.v) || 1;
@@ -3268,7 +3347,7 @@ notify pgrst, 'reload schema';
     if (g.pw && now - g.pw < 900) { c.save(); c.globalAlpha = 1 - (now - g.pw) / 900; c.font = "700 " + 40 * k + "px Andika, sans-serif"; c.fillStyle = "#7BE0A0"; c.fillText("POWER UP", me.x * k, (KF.GROUND - 260) * k - (now - g.pw) / 20 * k); c.restore(); }
   }
 
-  function Fight({ mode, student, lessons, ix, uIdx, onClose }) {
+  function Fight({ mode, student, lessons, ix, uIdx, onClose, story }) {
     const host = mode === "host", solo = mode === "solo", client = mode === "live";
     const wrapRef = useRef(null), cvRef = useRef(null), gRef = useRef(null), prevRef = useRef(null);
     const keysRef = useRef({ l: 0, r: 0, b: 0 });
@@ -3288,15 +3367,16 @@ notify pgrst, 'reload schema';
     const chRef = useRef(null); chRef.current = ch;
     const sentRef = useRef(null);   // on your phone: the word you sent him
     const name = (student && student.name) || "Student";
-    const names = [name, solo ? "Chalk bot" : "Teacher"];
+    const names = [name, story ? story.name : solo ? "Chalk bot" : "Teacher"];
 
     const say = m => live.send(m);
-    const levelRef = useRef((() => { try { return Math.max(1, Math.min(5, parseInt(localStorage.getItem("rc.kf.lvl") || "1", 10) || 1)); } catch (e) { return 1; } })());
+    const levelRef = useRef(story ? story.level : (() => { try { return Math.max(1, Math.min(5, parseInt(localStorage.getItem("rc.kf.lvl") || "1", 10) || 1)); } catch (e) { return 1; } })());
     const [help, setHelp] = useState(false);
     function newGame() {
       const g = kfNew(solo ? levelRef.current : 0);
       g.cpu = solo;
-      g.look = solo ? [lookRef.current, (lookRef.current + levelRef.current) % KF_CHARS.length] : [theirLookRef.current, lookRef.current];
+      g.look = story ? [lookRef.current, 100 + story.foe] : solo ? [lookRef.current, (lookRef.current + levelRef.current) % KF_CHARS.length] : [theirLookRef.current, lookRef.current];
+      g.myCh = solo ? kfMyChar(lookRef.current) : null;
       gRef.current = g;
       setCh(null); setJudge(null); setResult(null); setTyped("");
       setUi({ over: false, win: -1, sup: false, reading: false });
@@ -3317,25 +3397,15 @@ notify pgrst, 'reload schema';
       }
       if (kind === "super") g.sup = false;
       if (ok && kind === "super") { g.S = 40; const f = g.f[0]; f.act = "super"; f.t = 0; f.hit = false; }
-      else if (ok) { g.S = Math.min(100, g.S + (kind === "spell" ? 32 : 26)); g.pw = performance.now(); kfSnd("power"); }
+      else if (ok) { g.S = Math.min(100, g.S + 30); g.pw = performance.now(); kfSnd("power"); }
       else { g.S = Math.max(0, g.S - 15); kfSnd("bad"); }
     }
     function makeChallenge(sup, fin) {
-      const pool = poolRef.current, g0 = gRef.current, lv = solo ? (g0 && g0.level) || 1 : 3;
+      const kind = fin ? "finish" : sup ? "super" : "power";
       const force = window.__kfForce;
-      let kind = fin ? "finish" : sup ? "super" : force || (Math.random() < 0.5 ? "spell" : "read");
-      if (solo) kind = fin ? "finish" : sup ? "super" : "spell";
-      const big = kind === "super" || kind === "finish";
-      let text = null, audio = null, how = "read";
-      if (big && !solo && pool.sentences.length && force !== "spell") { text = pool.sentences[Math.floor(Math.random() * pool.sentences.length)]; how = "read"; }
-      else {
-        let w = null;
-        if (kind === "spell" || (big && solo)) { w = kfPick(pool, "spell", recentRef.current, lv); how = "spell"; }
-        if (!w) { w = kfPick(pool, "read", recentRef.current, lv); how = "read"; }
-        if (!w) return null;
-        text = w.text; audio = how === "spell" ? w.audio : null;
-      }
-      return { id: uid(), kind, how, text, audio };
+      const allow = force ? [force] : kind === "power" ? ["see", "hear", "spell"] : ["spell", "hear", "see"];
+      const c = qMake(poolRef.current, recentRef.current, allow) || qMake(poolRef.current, recentRef.current, ["see", "hear", "spell"]);
+      return c ? Object.assign(c, { kind }) : null;
     }
     function askPower(sup) {
       const g = gRef.current;
@@ -3366,7 +3436,7 @@ notify pgrst, 'reload schema';
       try { localStorage.setItem("rc.kf.me", String(myLook)); } catch (e) {}
       const g = gRef.current;
       if (client) say({ type: "kf-look", c: myLook });
-      else if (g && g.look) g.look = solo ? [myLook, (myLook + 2) % KF_CHARS.length] : [g.look[0], myLook];
+      else if (g && g.look) { g.look = story ? [myLook, g.look[1]] : solo ? [myLook, (myLook + 2) % KF_CHARS.length] : [g.look[0], myLook]; if (solo) g.myCh = kfMyChar(myLook); }
     }, [myLook]);
     // play the word he has to spell
     useEffect(() => { if (ch && ch.how === "spell" && ch.audio) tilePlayer.play("kf:" + ch.id, srcFor(ch.audio)); }, [ch && ch.id]);
@@ -3388,7 +3458,7 @@ notify pgrst, 'reload schema';
             if (!c) return;
             g.reading = true;
             sentRef.current = c;
-            say({ type: "kf-ch", ch: { id: c.id, kind: c.kind, how: c.how, text: c.text, audio: c.audio } });
+            say({ type: "kf-ch", ch: c });
             if (c.how === "read") setJudge(c);
           }
           else if (m.type === "kf-ans") {
@@ -3401,6 +3471,7 @@ notify pgrst, 'reload schema';
         } else if (client) {
           if (m.type === "kf-st") {
             const old = gRef.current, ng = Object.assign(kfUnpack(m.g), { at: performance.now() });
+            ng.myCh = old && old.myCh ? old.myCh : kfMyChar(lookRef.current);
             ng.pw = old && ng.S - old.S > 15 ? performance.now() : old ? old.pw : 0;
             ng.need = old && ng.nRaw && ng.nRaw !== old.nRaw ? performance.now() : old ? old.need : 0;
             if (old && ng.S - old.S > 15) kfSnd("power");
@@ -3428,7 +3499,7 @@ notify pgrst, 'reload schema';
 
     // the game loop: simulate (your phone or practice), draw everything
     useEffect(() => {
-      poolRef.current = kfWords(lessons, uIdx, ix);
+      poolRef.current = qPool(lessons, uIdx, ix);
       window.__kf = gRef;
       if (host || solo) newGame();
       if (host) say({ type: "kf-start" });
@@ -3457,7 +3528,7 @@ notify pgrst, 'reload schema';
           if (g) {
             if (solo) { g.f[0].keys = keysRef.current; kfCpu(g, dt, ai, kfSnd); }
             else g.f[1].keys = keysRef.current;
-            const sl = (g.slowT > 0 ? 0.35 : 1) * (solo && pickRef.current ? 0 : 1);   // practice waits while he picks a fighter
+            const sl = (g.slowT > 0 ? 0.35 : 1) * (solo && pickRef.current ? 0 : 1) * (g.reading ? 0.25 : 1);   // practice waits while he picks a fighter
             g.slowT = Math.max(0, (g.slowT || 0) - dt);
             kfStep(g, dt * sl, kfSnd);
             if (host) { sendAcc += dt; if (sendAcc > 0.08) { sendAcc = 0; say({ type: "kf-st", g: kfPack(g) }); } }
@@ -3519,7 +3590,7 @@ notify pgrst, 'reload schema';
     return html`<div class="kf" role="dialog" aria-label="Chalk Kombat">
       <div class="kfhead">
         ${host || solo ? html`<button class="iconbtn light" onClick=${onClose} aria-label=${host ? "End the fight" : "Leave"}><${Ic.x} size=${26}/></button>` : html`<span></span>`}
-        <b class="kftitle">Chalk Kombat <button class="kfhelpbtn" onClick=${() => setHelp(true)} aria-label="Special moves">?</button></b>
+        <b class="kftitle">Chalk Kombat <button class="kfhelpbtn" onClick=${() => setHelp(true)} aria-label="Special moves">?</button>${host ? html`<${GameRecBtn} cvRef=${cvRef} title=${"Chalk Kombat with " + name} student=${student}/>` : null}</b>
         <button class="iconbtn light kfwho" onClick=${() => setPick(true)} aria-label="Choose your fighter"><${KfPortraitMini} i=${myLook}/></button>
       </div>
       <div class="kfarena" ref=${wrapRef}><canvas ref=${cvRef} aria-label="The fight"></canvas>
@@ -3537,7 +3608,8 @@ notify pgrst, 'reload schema';
         ${ui.over ? html`<div class="kfover">
           <div class="kfwin">${ui.win === (host ? 1 : 0) ? (solo && levelRef.current === 5 ? "CHAMPION!" : "YOU WIN") : ui.win === -1 ? "DRAW" : host ? name + " WINS" : "TRY AGAIN"}</div>
           ${gRef.current && gRef.current.log && gRef.current.log.length ? html`<div class="kfrecap" aria-label="Words in this fight">${gRef.current.log.slice(-8).map((w, i) => html`<span key=${i} class=${w.ok ? "ok" : "no"}>${w.text}</span>`)}</div>` : null}
-          ${solo ? html`<div class="kfagain">
+          ${story ? html`<div class="kfagain">${ui.win === 0 ? html`<button class="btn light" onClick=${() => story.onWin()}>Continue ▶</button>` : html`<button class="btn light" onClick=${again}>Try again</button>`}<button class="btn quiet" onClick=${onClose}>Leave</button></div>`
+          : solo ? html`<div class="kfagain">
             ${ui.win === 0 && levelRef.current < 5 ? html`<button class="btn light" onClick=${nextLevel}>Next fighter ▶</button>` : null}
             ${ui.win === 0 && levelRef.current === 5 ? html`<button class="btn light" onClick=${restartLadder}>Start the ladder again</button>` : null}
             ${ui.win !== 0 ? html`<button class="btn light" onClick=${again}>Try again</button>` : null}
@@ -3550,14 +3622,7 @@ notify pgrst, 'reload schema';
         <div class="kfjrow"><button class="big kfok" onClick=${() => judgeIt(true)} aria-label="Read it right"><${Ic.tick} size=${30} sw=${3}/></button>
         <button class="big kfno" onClick=${() => judgeIt(false)} aria-label="Not right"><${Ic.x} size=${30} sw=${3}/></button></div>
       </div>` : null}
-      ${reading ? html`<div class="kfread">
-        <button class="kfcancel" onClick=${cancelReading} aria-label="Back to fighting"><${Ic.x} size=${22}/></button>
-        ${ch.how === "read"
-          ? html`<div class="kfbig">${ch.text}</div>`
-          : html`<div class="kfspell"><button class="big light" onClick=${() => ch.audio && tilePlayer.play("kf:" + ch.id + ":" + Date.now(), srcFor(ch.audio))} aria-label="Hear the word again"><${Ic.speaker} size=${28}/></button><div class="kftyped">${typed}<span class="caret"></span></div></div>
-            <${LetterKeys} ix=${ix} lessons=${lessons} compact=${true} onKey=${ch2 => setTyped(t => (t + ch2).slice(0, 12))} onBack=${() => setTyped(t => t.slice(0, -1))}
-              onDone=${() => answer(typed.trim().toLowerCase() === String(ch.text).toLowerCase())}/>`}
-      </div>` : html`<div class="kfpad">
+      ${reading ? html`<${WordChallenge} c=${ch} ix=${ix} lessons=${lessons} onDone=${ok => answer(ok)} onCancel=${cancelReading}/>` : html`<div class="kfpad">
         <div class="kfdir">
           <button class="kfb" ...${hold("l")} aria-label="Move left"><${Ic.back} size=${30} sw=${3}/></button>
           <button class="kfb" ...${hold("r")} aria-label="Move right"><${Ic.back} size=${30} sw=${3}/></button>
@@ -3780,6 +3845,567 @@ notify pgrst, 'reload schema';
     }
     return path;
   }
+  /* ================= Rescue Nala: story mode, rewards, self-checking challenges ================= */
+  // Pictures for words he can read. Only common emoji, so they show on older phones too.
+  const QPICS = { bag: "👜", hat: "🎩", cat: "🐱", dog: "🐶", pig: "🐷", bus: "🚌", sun: "☀️", cup: "☕", box: "📦", pen: "🖊️", bed: "🛏️", van: "🚐", map: "🗺️", jam: "🍯", pot: "🍲", net: "🥅", pin: "📌", rat: "🐀", bat: "🦇", fox: "🦊", hen: "🐔", egg: "🥚", ant: "🐜", bug: "🐛", web: "🕸️", tin: "🥫", cap: "🧢", cab: "🚕", car: "🚗", kid: "🧒", man: "👨", mop: "🧹", nut: "🥜", ten: "🔟", milk: "🥛", frog: "🐸", drum: "🥁", flag: "🚩", hand: "✋", tent: "⛺", lamp: "💡", ship: "🚢", fish: "🐟", shop: "🏪", moon: "🌙", tree: "🌳", bee: "🐝", rain: "🌧️", boat: "⛵", star: "⭐", cake: "🎂", bike: "🚲", kite: "🪁", rose: "🌹", king: "👑", ring: "💍", bell: "🔔", duck: "🦆", sock: "🧦", gift: "🎁", leg: "🦵", lip: "👄", jet: "✈️", ham: "🍖", rod: "🎣", chip: "🍟", shell: "🐚", sheep: "🐑", feet: "🦶", tea: "🍵", dad: "👨", sit: "🪑", hot: "🔥", wet: "💧", run: "🏃", swim: "🏊", mud: "🟤", lid: "🫙", pan: "🍳", fan: "🌀", gas: "⛽", hut: "🏠", sun2: "☀️" };
+  const qShuffle = a => { a = a.slice(); for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); const t = a[i]; a[i] = a[j]; a[j] = t; } return a; };
+  // Hearing a word: your recording if you made one, otherwise the phone's own voice (real words only:
+  // the phone would say a letter's name, not its sound).
+  function qCanHear(w) { return !!(w && (w.audio || (w.text.length >= 3 && "speechSynthesis" in window))); }
+  function qSay(text) {
+    try {
+      const u = new SpeechSynthesisUtterance(text);
+      u.lang = "en-GB"; u.rate = 0.8;
+      const v = (speechSynthesis.getVoices() || []).find(x => /^en/i.test(x.lang));
+      if (v) u.voice = v;
+      speechSynthesis.cancel(); speechSynthesis.speak(u);
+    } catch (e) {}
+  }
+  function qPlay(w) {
+    if (!w) return;
+    if (w.audio) tilePlayer.play("q:" + w.text + ":" + Date.now(), srcFor(w.audio));
+    else if (w.text.length >= 3) qSay(w.text);
+  }
+  function qPool(lessons, uIdx, ix) {
+    const p = kfWords(lessons, uIdx, ix);
+    p.words.forEach(w => { w.emoji = QPICS[w.text.toLowerCase()] || null; });
+    return p;
+  }
+  // Pick a target, favouring words he got wrong before (the same memory the fight uses).
+  function qTarget(list, recent) {
+    const miss = kfMissed(), bag = [];
+    for (const w of list) if (recent.indexOf(w.text) < 0) for (let n = 0; n < 1 + (miss[w.text] || 0); n++) bag.push(w);
+    const src = bag.length ? bag : list, w = src[Math.floor(Math.random() * src.length)];
+    recent.push(w.text); if (recent.length > 6) recent.shift();
+    return w;
+  }
+  // Lookalikes: words that differ by one letter first (cat, cut, cot), so he has to really read.
+  function qOptions(pool, target, n, needPic) {
+    const T = target.text.toLowerCase();
+    const others = pool.words.filter(w => w.text.toLowerCase() !== T && (!needPic || w.emoji) && !(needPic && w.emoji === target.emoji));
+    const same = others.filter(w => w.text.length === T.length);
+    const near = same.filter(w => { let d = 0; for (let i = 0; i < T.length; i++) if (w.text[i].toLowerCase() !== T[i]) d++; return d === 1; });
+    const out = [];
+    for (const list of [near, same, others]) for (const w of qShuffle(list)) {
+      if (out.length >= n - 1) break;
+      if (!out.some(o => o.text.toLowerCase() === w.text.toLowerCase())) out.push(w);
+    }
+    return qShuffle(out.concat([target])).map(o => ({ text: o.text, emoji: o.emoji || null }));
+  }
+  // A challenge that checks itself: no one has to mark it.
+  //   see:   read the word, tap its picture
+  //   hear:  hear the word, tap it among lookalikes
+  //   spell: hear the word, spell it with the letter keys
+  function qMake(pool, recent, allow) {
+    const pics = pool.words.filter(w => w.emoji), hears = pool.words.filter(qCanHear), ways = [];
+    if (allow.indexOf("see") >= 0 && pics.length >= 3) ways.push("see");
+    if (allow.indexOf("hear") >= 0 && hears.length && pool.words.length >= 3) ways.push("hear");
+    if (allow.indexOf("spell") >= 0 && hears.length) ways.push("spell");
+    if (!ways.length) return null;
+    const how = ways[Math.floor(Math.random() * ways.length)];
+    const t = qTarget(how === "see" ? pics : hears, recent);
+    return { id: uid(), how, text: t.text, audio: t.audio || null, emoji: t.emoji || null,
+      options: how === "spell" ? [] : qOptions(pool, t, how === "see" ? 3 : 4, how === "see") };
+  }
+  function WordChallenge({ c, ix, lessons, onDone, onCancel }) {
+    const [typed, setTyped] = useState("");
+    const [res, setRes] = useState(null);
+    useEffect(() => { setTyped(""); setRes(null); if (c.how !== "see") setTimeout(() => qPlay(c), 150); }, [c.id]);
+    const finish = (ok, pick) => {
+      if (res) return;
+      setRes({ ok, pick });
+      chime(ok);
+      kfNoteWord(c.text, ok);
+      setTimeout(() => onDone(ok), ok ? 500 : 1300);
+    };
+    const mark = o => (res && o.text === c.text ? " good" : res && o.text === res.pick ? " bad" : "");
+    const say = html`<button class="big light wcsay" onClick=${() => qPlay(c)} aria-label="Hear it again"><${Ic.speaker} size=${28}/></button>`;
+    const x = onCancel ? html`<button class="kfcancel" onClick=${onCancel} aria-label="Back"><${Ic.x} size=${22}/></button>` : null;
+    if (c.how === "spell") return html`<div class="wc">${x}
+      <div class="wcrow">${say}<div class=${"kftyped" + (res ? (res.ok ? " good" : " bad") : "")}>${res && !res.ok ? c.text : typed}<span class="caret"></span></div></div>
+      <${LetterKeys} ix=${ix} lessons=${lessons} compact=${true} onKey=${k => { if (!res) setTyped(t => (t + k).slice(0, 12)); }}
+        onBack=${() => setTyped(t => t.slice(0, -1))} onDone=${() => finish(typed.trim().toLowerCase() === String(c.text).toLowerCase(), typed)}/>
+    </div>`;
+    if (c.how === "hear") return html`<div class="wc">${x}
+      <div class="wcrow">${say}</div>
+      <div class="wcopts">${c.options.map(o => html`<button key=${o.text} class=${"wcopt" + mark(o)} onClick=${() => finish(o.text === c.text, o.text)}>${o.text}</button>`)}</div>
+    </div>`;
+    return html`<div class="wc">${x}
+      <div class="kfbig">${c.text}</div>
+      <div class="wcopts">${c.options.map(o => html`<button key=${o.text} class=${"wcopt pic" + mark(o)} onClick=${() => finish(o.text === c.text, o.text)} aria-label="Picture">${o.emoji}</button>`)}</div>
+    </div>`;
+  }
+
+  // ---- coins, stars and things to buy: kept on his phone ----
+  const GKEY = "rc.game";
+  function gLoad() {
+    const d = { coins: 0, stars: {}, owned: ["car-red"], kit: null, car: "car-red" };
+    try { return Object.assign(d, JSON.parse(localStorage.getItem(GKEY) || "{}")); } catch (e) { return d; }
+  }
+  function gSave(st) { try { localStorage.setItem(GKEY, JSON.stringify(st)); } catch (e) {} }
+  function gCoins(n) { const st = gLoad(); st.coins = Math.max(0, (st.coins || 0) + n); gSave(st); return st.coins; }
+  const KITS = [
+    { id: "kit-gold", name: "Gold", price: 40, top: "#E8B923", shorts: "#1C1C1C", trim: "#E8B923", gloves: "#E8B923" },
+    { id: "kit-fire", name: "Fire", price: 70, top: "#E2572B", shorts: "#8E1C14", trim: "#FFB23F", gloves: "#E2572B" },
+    { id: "kit-ice", name: "Ice", price: 100, top: "#BFE6FF", shorts: "#2D6FA8", trim: "#FFFFFF", gloves: "#8FD3FF" },
+    { id: "kit-night", name: "Night", price: 140, top: "#2B1E3D", shorts: "#151018", trim: "#9C72D0", gloves: "#9C72D0" },
+    { id: "kit-champ", name: "Champion", price: 220, top: "#FFFFFF", shorts: "#B8322A", trim: "#E8B923", gloves: "#E8B923" },
+  ];
+  const CARS = [
+    { id: "car-red", name: "Red", price: 0, col: "#C8322B" }, { id: "car-blue", name: "Blue", price: 30, col: "#2F5DA8" },
+    { id: "car-yellow", name: "Yellow", price: 60, col: "#E8B923" }, { id: "car-black", name: "Black", price: 90, col: "#222222" },
+    { id: "car-green", name: "Green", price: 130, col: "#2E9E6B" },
+  ];
+  function kfMyChar(i) {
+    const base = KF_CHARS[(i | 0) % KF_CHARS.length], kit = KITS.find(k => k.id === gLoad().kit);
+    if (!kit) return base;
+    const o = Object.assign({}, base, { trim: kit.trim, gloves: kit.gloves });
+    if (base.gi) o.gi = kit.shorts === "#1C1C1C" ? kit.top : kit.shorts; else { o.shorts = kit.shorts; o.top = kit.top; }
+    return o;
+  }
+  function kfChar(i) { i = i | 0; return i >= 100 ? KF_FOES[(i - 100) % KF_FOES.length] : KF_CHARS[i % KF_CHARS.length]; }
+  const KF_FOES = [
+    { name: "Shadow", skin: "#5C3A29", hair: "fade", mask: 1, top: "#202020", shorts: "#151515", trim: "#B8322A", gloves: "#151515", shoes: "#151515", build: 1 },
+    { name: "Scar", skin: "#4E3022", hair: "bald", beard: 1, shorts: "#3A3A3A", trim: "#9AA0A6", gloves: "#3A3A3A", shoes: "#222222", build: 1.08 },
+    { name: "Viper", skin: "#6C442B", hair: "braids", mask: 1, top: "#1F5E3A", shorts: "#111111", trim: "#7BE0A0", gloves: "#1F5E3A", shoes: "#111111", build: 0.95 },
+    { name: "Big Boss", skin: "#4A2F20", hair: "bald", beard: 1, shades: 1, top: "#5A1A1A", shorts: "#1A1A1A", trim: "#E8B923", gloves: "#1A1A1A", shoes: "#111111", build: 1.2 },
+  ];
+  // The story, chapter by chapter. A chapter opens when the last one is done and he has reached its lesson.
+  const QCH = [
+    { id: "c1", place: "The market", emo: "🏪", floor: ["#8A6A48", "#7E6040"], foe: 0, level: 1, need: 0, guard: false, gates: 6,
+      intro: "They took Nala at the market! Find the clues and follow their van." },
+    { id: "c2", place: "The warehouse", emo: "🏭", floor: ["#64666E", "#5A5C64"], foe: 1, level: 2, need: 4, guard: false, gates: 7,
+      intro: "The van stopped at an old warehouse. Search it." },
+    { id: "c3", place: "The bus station", emo: "🚏", floor: ["#73705E", "#696654"], foe: 2, level: 3, need: 7, guard: true, gates: 8,
+      intro: "A guard is watching the station. Don't let him catch you!" },
+    { id: "c4", place: "The rooftops", emo: "🏙️", floor: ["#4D525E", "#454A55"], foe: 0, level: 4, need: 9, guard: true, gates: 8,
+      intro: "Nala dropped her phone on a roof. Find it." },
+    { id: "c5", place: "The bridge", emo: "🌉", floor: ["#566476", "#4D5A6B"], foe: 1, level: 4, need: 11, guard: true, gates: 9,
+      intro: "They are crossing the bridge. Stop them!" },
+    { id: "c6", place: "The Big Boss's house", emo: "🏰", floor: ["#6A4040", "#5E3838"], foe: 3, level: 5, need: 13, guard: true, gates: 10,
+      intro: "Nala is locked in the Big Boss's house. Beat him and set her free!" },
+  ];
+  function qOpen(n, gs, uIdx) { return (n === 0 || (gs.stars[QCH[n - 1].id] || 0) > 0) && uIdx >= QCH[n].need; }
+
+  // ---- recording a game: the screen, both voices, and the game sounds ----
+  let kfMaster = null;
+  function kfOut() { if (!kfMaster) { kfMaster = kfA.createGain(); kfMaster.connect(kfA.destination); } return kfMaster; }
+  const gameRec = {
+    active: false, mr: null, id: null, seq: 0, bytes: 0, t0: 0, dest: null, srcs: [], saving: Promise.resolve(), subs: new Set(),
+    emit() { this.subs.forEach(f => f(this.active)); },
+    async start(cv, meta) {
+      if (this.active) return true;
+      if (!cv || !window.MediaRecorder || !cv.captureStream) { toast("This phone's browser can't record the game."); return false; }
+      try { kfA = kfA || new (window.AudioContext || window.webkitAudioContext)(); await kfA.resume(); } catch (e) {}
+      const dest = kfA.createMediaStreamDestination();
+      kfOut().connect(dest);
+      this.dest = dest; this.srcs = [];
+      for (const s of [call.mic, call.remoteStream]) {
+        if (s && s.getAudioTracks && s.getAudioTracks().length) { try { const n = kfA.createMediaStreamSource(s); n.connect(dest); this.srcs.push(n); } catch (e) {} }
+      }
+      const stream = new MediaStream([].concat(cv.captureStream(24).getVideoTracks(), dest.stream.getAudioTracks()));
+      const want = classRec.pickMime(), opts = { videoBitsPerSecond: 900000, audioBitsPerSecond: 48000 };
+      if (want) opts.mimeType = want;
+      let mr;
+      try { mr = new MediaRecorder(stream, opts); } catch (e) { mr = new MediaRecorder(stream); }
+      this.mime = (mr.mimeType || want || "video/webm").split(";")[0];
+      this.id = "g" + Date.now().toString(36); this.seq = 0; this.bytes = 0; this.t0 = Date.now();
+      await classRec.put("recs", { id: this.id, startedAt: this.t0, title: meta.title || "Chalk Kombat", lessonNo: "", student: meta.student || null, part: 1, mime: this.mime, status: "recording", size: 0, secs: 0 });
+      const id = this.id;
+      mr.ondataavailable = e => {
+        if (!e.data || !e.data.size) return;
+        const seq = this.seq++;
+        this.bytes += e.data.size;
+        const bytes = this.bytes, secs = (Date.now() - this.t0) / 1000;
+        this.saving = this.saving.then(() => classRec.put("chunks", { rec: id, seq, blob: e.data })).then(() => classRec.patchRec(id, { size: bytes, secs }))
+          .catch(() => toast("This phone is out of space for the recording."));
+      };
+      mr.start(3000);
+      this.mr = mr; this.active = true; this.emit();
+      toast("Recording the game.");
+      return true;
+    },
+    async stop() {
+      if (!this.active) return;
+      this.active = false; this.emit();
+      const mr = this.mr, id = this.id;
+      await new Promise(res => { mr.onstop = res; try { mr.stop(); } catch (e) { res(); } setTimeout(res, 5000); });
+      await this.saving;
+      await classRec.patchRec(id, { status: "done", secs: (Date.now() - this.t0) / 1000, size: this.bytes });
+      for (const n of this.srcs) { try { n.disconnect(); } catch (e) {} }
+      try { kfOut().disconnect(this.dest); } catch (e) {}
+      toast("Game recording saved under Recordings.");
+    },
+  };
+  function GameRecBtn({ cvRef, title, student }) {
+    const [on, setOn] = useState(gameRec.active);
+    useEffect(() => { gameRec.subs.add(setOn); return () => { gameRec.subs.delete(setOn); if (gameRec.active) gameRec.stop(); }; }, []);
+    return html`<button class=${"recbtn" + (on ? " on" : "")} onClick=${() => (gameRec.active ? gameRec.stop() : gameRec.start(cvRef.current, { title, student: student && student.id }))} aria-label=${on ? "Stop recording" : "Record the game"}>
+      <span class="recdot2"></span>${on ? "REC" : "Record"}</button>`;
+  }
+
+  // A canvas that fills the space it's given, keeping the scene's shape.
+  function qFit(cv, wrap, W, H, last) {
+    const ww = wrap.clientWidth, wh = wrap.clientHeight;
+    if (ww === last.w && wh === last.h) return last.k;
+    last.w = ww; last.h = wh;
+    const w = Math.max(200, Math.floor(Math.min(ww, wh * W / H))), dpr = Math.min(window.devicePixelRatio || 1, 2);
+    cv.width = Math.round(w * dpr); cv.height = Math.round(w * H / W * dpr);
+    cv.style.width = w + "px"; cv.style.height = w * H / W + "px";
+    last.k = cv.width / W;
+    return last.k;
+  }
+  function qEmoji(c, e, x, y, size, k, alpha) {
+    c.save(); c.globalAlpha = alpha == null ? 1 : alpha;
+    c.font = Math.round(size * k) + "px serif"; c.textAlign = "center"; c.textBaseline = "middle";
+    c.fillText(e, x * k, y * k); c.restore();
+  }
+  function qWho(c, x, y, k, kit, skin, face) {   // him from above: shoulders, arms, head
+    c.save(); c.translate(x * k, y * k);
+    c.fillStyle = "rgba(0,0,0,.25)"; c.beginPath(); c.ellipse(4 * k, 6 * k, 26 * k, 18 * k, 0, 0, 7); c.fill();
+    c.fillStyle = kit; c.beginPath(); c.ellipse(0, 0, 25 * k, 16 * k, 0, 0, 7); c.fill();
+    c.fillStyle = skin; c.beginPath(); c.arc(-24 * k, 2 * k, 7 * k, 0, 7); c.arc(24 * k, 2 * k, 7 * k, 0, 7); c.fill();
+    c.fillStyle = skin; c.beginPath(); c.arc(0, -2 * k, 12 * k, 0, 7); c.fill();
+    c.fillStyle = "#17100C"; c.beginPath(); c.arc(0, -5 * k, 11 * k, Math.PI * 1.05, Math.PI * 1.95); c.fill();
+    c.fillStyle = "#F4EEE6"; c.beginPath(); c.arc(-4 * k, (face ? 3 : -2) * k, 2 * k, 0, 7); c.arc(4 * k, (face ? 3 : -2) * k, 2 * k, 0, 7); c.fill();
+    c.restore();
+  }
+
+  // ---- 1. Explore: walk the room, read the clue, find the thing, open the door ----
+  function ExploreScene({ C, pool, ix, lessons, kit, onDone, onExit }) {
+    const wrapRef = useRef(null), cvRef = useRef(null), S = useRef(null);
+    const [clue, setClue] = useState(0), [near, setNear] = useState(-1), [lock, setLock] = useState(null);
+    const [flash, setFlash] = useState(null), [coins, setCoins] = useState(gLoad().coins);
+    const W = 600, H = 820;
+    function build() {
+      const pics = qShuffle(pool.words.filter(w => w.emoji));
+      const picMode = pics.length >= 4;
+      const src = picMode ? pics : qShuffle(pool.words.filter(qCanHear));
+      const items = src.slice(0, Math.min(7, src.length));
+      const spots = qShuffle([[110, 210], [300, 190], [490, 210], [100, 400], [500, 400], [130, 580], [470, 580], [300, 470]]);
+      items.forEach((w, i) => { w.x = spots[i][0] + (Math.random() - 0.5) * 30; w.y = spots[i][1] + (Math.random() - 0.5) * 30; w.found = false; });
+      const targets = qShuffle(items).slice(0, Math.min(3, items.length));
+      const coinsAt = qShuffle([[200, 300], [400, 300], [300, 640], [200, 720], [420, 700], [300, 330]]).slice(0, 4).map(p => ({ x: p[0], y: p[1], got: false }));
+      return { picMode, items, targets, coinsAt, p: { x: 300, y: 760 }, to: null, guard: C.guard ? { x: 70, y: 420, d: 1 } : null,
+        mistakes: 0, hints: 0, open: false, caught: 0, T: 0 };
+    }
+    if (!S.current) S.current = build();
+    const st = S.current;
+    const target = st.targets[clue];
+    useEffect(() => { if (target && !st.picMode) setTimeout(() => qPlay(target), 300); }, [clue]);
+    useEffect(() => {
+      const cv = cvRef.current, wrap = wrapRef.current, c = cv.getContext("2d"), last = {};
+      let raf = 0, prev = performance.now();
+      window.__qs = st;
+      const loop = now => {
+        raf = requestAnimationFrame(loop);
+        const k = qFit(cv, wrap, W, H, last), dt = Math.min(0.05, (now - prev) / 1000);
+        prev = now; st.T += dt;
+        if (st.to && !lock) {
+          const dx = st.to.x - st.p.x, dy = st.to.y - st.p.y, d = Math.hypot(dx, dy), step = 280 * dt;
+          if (d <= step) { st.p.x = st.to.x; st.p.y = st.to.y; st.to = null; } else { st.p.x += dx / d * step; st.p.y += dy / d * step; }
+        }
+        for (const cn of st.coinsAt) if (!cn.got && Math.hypot(cn.x - st.p.x, cn.y - st.p.y) < 34) { cn.got = true; setCoins(gCoins(2)); kfSnd("power"); }
+        if (st.guard && !lock) {
+          const g = st.guard; g.x += g.d * (95 + C.level * 15) * dt;
+          if (g.x > 530) g.d = -1; if (g.x < 70) g.d = 1;
+          if (Math.hypot(g.x - st.p.x, g.y - st.p.y) < 46) {
+            st.p.x = 300; st.p.y = 760; st.to = null; st.caught++; st.mistakes++;
+            kfSnd("bad"); setFlash({ ok: false, text: "🕵️ Caught!" }); setTimeout(() => setFlash(null), 1200);
+          }
+        }
+        let n = -1, best = 70;
+        st.items.forEach((w, i) => { const d = Math.hypot(w.x - st.p.x, w.y - st.p.y); if (d < best) { best = d; n = i; } });
+        st.near = n;
+        setNear(o => (o === n ? o : n));
+        if (st.targets.length && st.targets.every(t => t.found) && !st.open && !lock && Math.hypot(300 - st.p.x, 95 - st.p.y) < 70) {
+          const last = st.targets[st.targets.length - 1];
+          const ch = qCanHear(last) ? { id: uid(), how: "spell", text: last.text, audio: last.audio || null, options: [] }
+            : qMake(pool, [], ["see", "hear"]) || { id: uid(), how: "see", text: last.text, emoji: last.emoji, options: qOptions(pool, last, 3, true) };
+          setLock(ch);
+        }
+        // draw: tiles, walls, the door, the things, coins, the guard, him
+        c.clearRect(0, 0, cv.width, cv.height);
+        for (let y = 0; y < H; y += 60) for (let x = 0; x < W; x += 60) { c.fillStyle = ((x + y) / 60) % 2 ? C.floor[0] : C.floor[1]; c.fillRect(x * k, y * k, 60 * k + 1, 60 * k + 1); }
+        c.fillStyle = "#2B2620"; c.fillRect(0, 0, W * k, 40 * k); c.fillRect(0, 0, 18 * k, H * k); c.fillRect((W - 18) * k, 0, 18 * k, H * k); c.fillRect(0, (H - 18) * k, W * k, 18 * k);
+        c.fillStyle = st.open ? "#3B7A4F" : "#6B4A2E"; c.fillRect(250 * k, 20 * k, 100 * k, 50 * k);
+        qEmoji(c, st.open ? "🚪" : "🔒", 300, 46, 34, k);
+        st.items.forEach((w, i) => {
+          if (i === st.near && !lock) { c.strokeStyle = "rgba(255,226,122,.9)"; c.lineWidth = 4 * k; c.beginPath(); c.arc(w.x * k, w.y * k, 40 * k, 0, 7); c.stroke(); }
+          if (st.picMode) qEmoji(c, w.emoji, w.x, w.y, 50, k, w.found ? 0.35 : 1);
+          else {
+            qEmoji(c, "📦", w.x, w.y, 54, k, w.found ? 0.35 : 1);
+            c.fillStyle = "#FFF7E0"; c.font = "700 " + 22 * k + "px Andika, sans-serif"; c.textAlign = "center"; c.textBaseline = "middle";
+            c.fillText(w.text, w.x * k, (w.y + 34) * k);
+          }
+        });
+        for (const cn of st.coinsAt) if (!cn.got) qEmoji(c, "🪙", cn.x, cn.y + Math.sin(st.T * 4 + cn.x) * 3, 28, k);
+        if (st.guard) qEmoji(c, "🕵️", st.guard.x, st.guard.y, 50, k);
+        if (st.to) { c.strokeStyle = "rgba(255,255,255,.35)"; c.lineWidth = 3 * k; c.beginPath(); c.arc(st.to.x * k, st.to.y * k, 14 * k, 0, 7); c.stroke(); }
+        qWho(c, st.p.x, st.p.y, k, kit.top || kit.gi || "#F2C230", kit.skin, false);
+      };
+      raf = requestAnimationFrame(loop);
+      const tap = e => {
+        if (lock) return;
+        const r = cv.getBoundingClientRect(), u = W / r.width;
+        st.to = { x: Math.max(40, Math.min(W - 40, (e.clientX - r.left) * u)), y: Math.max(80, Math.min(H - 40, (e.clientY - r.top) * u)) };
+      };
+      cv.addEventListener("pointerdown", tap);
+      return () => { cancelAnimationFrame(raf); cv.removeEventListener("pointerdown", tap); };
+    }, [lock]);
+    function search() {
+      const w = st.items[near];
+      if (!w || w.found || !target) return;
+      if (w === target) {
+        w.found = true; chime(true); setCoins(gCoins(5)); kfNoteWord(w.text, true);
+        setFlash({ ok: true, text: "✓" }); setTimeout(() => setFlash(null), 900);
+        setClue(clue + 1);
+      } else {
+        st.mistakes++; chime(false); kfNoteWord(target.text, false);
+        setFlash({ ok: false, text: "✗" }); setTimeout(() => setFlash(null), 900);
+      }
+    }
+    function hint() {
+      if (!target) return;
+      if (gLoad().coins < 2) { toast("You need 2 coins for a hint."); return; }
+      setCoins(gCoins(-2)); st.hints++; qPlay(target);
+    }
+    const doneAll = st.targets.length && clue >= st.targets.length;
+    return html`<div class="qscene">
+      <div class="qbar">
+        <button class="iconbtn light" onClick=${onExit} aria-label="Leave"><${Ic.x} size=${24}/></button>
+        <div class="qclue">${doneAll ? html`<span class="qgo">🚪 ⬆</span>`
+          : st.picMode ? html`<span class="qfind">🔍</span><b class="qword">${target ? target.text : ""}</b>`
+          : html`<button class="big light qhear" onClick=${() => qPlay(target)} aria-label="Hear the clue"><${Ic.speaker} size=${26}/></button>`}</div>
+        <span class="qcoins">🪙 ${coins}</span>
+      </div>
+      <div class="qdots">${st.targets.map((t, i) => html`<i key=${i} class=${t.found ? "on" : ""}></i>`)}</div>
+      <div class="qarena" ref=${wrapRef}><canvas ref=${cvRef} aria-label="The room"></canvas>
+        ${flash ? html`<div class=${"kfres " + (flash.ok ? "ok" : "no")}>${flash.text}</div>` : null}
+      </div>
+      ${lock ? html`<div class="qlock"><div class="qlockhead">🔒</div><${WordChallenge} c=${lock} ix=${ix} lessons=${lessons}
+          onDone=${ok => { if (ok) { st.open = true; setLock(null); setCoins(gCoins(5)); setTimeout(() => onDone(st.mistakes + st.hints === 0 ? 3 : st.mistakes + st.hints <= 2 ? 2 : 1), 900); } else { st.mistakes++; setLock(null); st.p.y += 60; } }}/></div>`
+        : html`<div class="qpad">
+          ${st.picMode && !doneAll ? html`<button class="big alt" onClick=${hint} aria-label="Hear the clue, 2 coins"><${Ic.speaker} size=${26}/></button>` : html`<span></span>`}
+          <button class=${"big qsearch" + (near >= 0 && !doneAll ? "" : " off")} disabled=${near < 0 || doneAll} onClick=${search} aria-label="Search here">🖐️</button>
+          <span></span>
+        </div>`}
+    </div>`;
+  }
+
+  // ---- 2. The chase: read the sign in time and steer into the right lane ----
+  function DriveScene({ C, pool, ix, carCol, onDone, onExit }) {
+    const wrapRef = useRef(null), cvRef = useRef(null), S = useRef(null);
+    const [prompt, setPrompt] = useState(null), [hearts, setHearts] = useState(3), [coins, setCoins] = useState(gLoad().coins);
+    const [over, setOver] = useState(null), [flash, setFlash] = useState(null), [round, setRound] = useState(0);
+    const W = 600, H = 820, LX = [150, 300, 450], CARY = 690;
+    useEffect(() => {
+      const pics = pool.words.filter(w => w.emoji), hears = pool.words.filter(qCanHear), recent = [];
+      const gates = [];
+      for (let i = 0; i < C.gates; i++) {
+        const usePic = pics.length >= 3 && (!hears.length || Math.random() < 0.55);
+        const list = usePic ? pics : hears;
+        if (!list.length || pool.words.length < 3) break;
+        const t = qTarget(list, recent);
+        const opts = qOptions(pool, t, 3, false).slice(0, 3);
+        gates.push({ t, how: usePic ? "see" : "hear", words: opts.map(o => o.text), y: -80 - i * 640, done: false, shown: false });
+      }
+      if (!gates.length) { onDone(3); return; }
+      S.current = { gates, lane: 1, x: LX[1], speed: 230, crashes: 0, roadT: 0, coinsOn: [], shake: 0, hearts: 3 };
+      setHearts(3); setOver(null);
+      const st = S.current;
+      window.__qd = st;
+      const cv = cvRef.current, wrap = wrapRef.current, c = cv.getContext("2d"), last = {};
+      let raf = 0, prev = performance.now(), ended = false;
+      for (let i = 0; i < gates.length; i++) st.coinsOn.push({ lane: Math.floor(Math.random() * 3), y: gates[i].y + 320, got: false });
+      const loop = now => {
+        raf = requestAnimationFrame(loop);
+        const k = qFit(cv, wrap, W, H, last), dt = Math.min(0.05, (now - prev) / 1000);
+        prev = now;
+        if (ended) return;
+        const v = st.speed;
+        st.roadT += v * dt;
+        st.x += (LX[st.lane] - st.x) * Math.min(1, dt * 12);
+        st.shake = Math.max(0, st.shake - dt);
+        for (const g of st.gates) {
+          g.y += v * dt;
+          if (!g.shown && g.y > -60) { g.shown = true; setPrompt(g); if (g.how === "hear") qPlay(g.t); }
+          if (!g.done && g.y >= CARY - 40) {
+            g.done = true;
+            const picked = g.words[st.lane];
+            if (picked === g.t.text) { st.speed += 14; setCoins(gCoins(3)); chime(true); kfNoteWord(g.t.text, true); setFlash({ ok: true, text: "✓" }); }
+            else {
+              st.crashes++; st.hearts--; setHearts(st.hearts); st.shake = 0.5; kfSnd("big"); kfNoteWord(g.t.text, false);
+              setFlash({ ok: false, text: g.t.emoji ? g.t.emoji + " " + g.t.text : g.t.text });
+              if (st.hearts <= 0) { ended = true; setOver("crash"); }
+            }
+            setTimeout(() => setFlash(null), 900);
+            const nx = st.gates.find(x => !x.done);
+            if (!nx && !ended) { ended = true; setTimeout(() => onDone(st.crashes === 0 ? 3 : st.crashes === 1 ? 2 : 1), 900); }
+          }
+        }
+        for (const cn of st.coinsOn) { cn.y += v * dt; if (!cn.got && Math.abs(cn.y - CARY) < 30 && cn.lane === st.lane) { cn.got = true; setCoins(gCoins(1)); } }
+        // draw the road
+        const sx = st.shake ? (Math.random() - 0.5) * 16 * k : 0;
+        c.save(); c.translate(sx, 0);
+        c.fillStyle = "#3E6B3A"; c.fillRect(0, 0, W * k, H * k);
+        c.fillStyle = "#3A3A3E"; c.fillRect(70 * k, 0, 460 * k, H * k);
+        c.fillStyle = "#E8E2D0"; c.fillRect(70 * k, 0, 6 * k, H * k); c.fillRect(524 * k, 0, 6 * k, H * k);
+        c.fillStyle = "rgba(240,236,220,.7)";
+        for (const lx of [225, 375]) for (let y = -80 + (st.roadT % 80); y < H; y += 80) c.fillRect((lx - 3) * k, y * k, 6 * k, 40 * k);
+        for (let y = -100 + (st.roadT * 0.9 % 200); y < H; y += 200) { qEmoji(c, "🌳", 34, y, 40, k); qEmoji(c, "🌴", 566, y + 100, 40, k); }
+        const nextG = st.gates.find(g => !g.done);
+        qEmoji(c, "🚐", 300, nextG ? Math.max(60, Math.min(160, nextG.y - 260)) : 80, 54, k, 0.9);
+        for (const cn of st.coinsOn) if (!cn.got && cn.y > -40 && cn.y < H) qEmoji(c, "🪙", LX[cn.lane], cn.y, 30, k);
+        for (const g of st.gates) {
+          if (g.y < -70 || g.y > H + 40 || g.done) continue;
+          g.words.forEach((w, i) => {
+            c.fillStyle = "#F4F0E2"; c.fillRect((LX[i] - 66) * k, (g.y - 30) * k, 132 * k, 60 * k);
+            c.strokeStyle = "#2E7D5B"; c.lineWidth = 4 * k; c.strokeRect((LX[i] - 66) * k, (g.y - 30) * k, 132 * k, 60 * k);
+            c.fillStyle = "#1B2B22"; c.font = "700 " + 34 * k + "px Andika, sans-serif"; c.textAlign = "center"; c.textBaseline = "middle";
+            c.fillText(w, LX[i] * k, g.y * k + 2 * k);
+          });
+        }
+        // the car
+        c.save(); c.translate(st.x * k, CARY * k);
+        c.fillStyle = "rgba(0,0,0,.3)"; c.fillRect(-34 * k, -54 * k, 72 * k, 116 * k);
+        c.fillStyle = carCol; kfRR(c, -36 * k, -58 * k, 72 * k, 116 * k, 16 * k); c.fill();
+        c.fillStyle = "#1E2A33"; kfRR(c, -26 * k, -34 * k, 52 * k, 26 * k, 6 * k); c.fill(); kfRR(c, -26 * k, 18 * k, 52 * k, 20 * k, 6 * k); c.fill();
+        c.fillStyle = "#FFF3B0"; c.fillRect(-28 * k, -60 * k, 14 * k, 6 * k); c.fillRect(14 * k, -60 * k, 14 * k, 6 * k);
+        c.restore();
+        c.restore();
+      };
+      raf = requestAnimationFrame(loop);
+      let sx0 = null;
+      const down = e => { sx0 = e.clientX; };
+      const up = e => { if (sx0 == null) return; const dx = e.clientX - sx0; sx0 = null; if (Math.abs(dx) > 30) steer(dx > 0 ? 1 : -1); };
+      cv.addEventListener("pointerdown", down); cv.addEventListener("pointerup", up);
+      return () => { cancelAnimationFrame(raf); cv.removeEventListener("pointerdown", down); cv.removeEventListener("pointerup", up); };
+    }, [round]);
+    function steer(d) { const st = S.current; if (!st) return; st.lane = Math.max(0, Math.min(2, st.lane + d)); }
+    return html`<div class="qscene drive">
+      <div class="qbar">
+        <button class="iconbtn light" onClick=${onExit} aria-label="Leave"><${Ic.x} size=${24}/></button>
+        <div class="qclue">${prompt ? (prompt.how === "see"
+          ? html`<span class="qsign">${prompt.t.emoji}</span>`
+          : html`<button class="big light qhear" onClick=${() => qPlay(prompt.t)} aria-label="Hear it again"><${Ic.speaker} size=${26}/></button>`) : null}</div>
+        <span class="qcoins">${"❤".repeat(Math.max(0, hearts))} 🪙 ${coins}</span>
+      </div>
+      <div class="qarena" ref=${wrapRef}><canvas ref=${cvRef} aria-label="The road"></canvas>
+        ${flash ? html`<div class=${"kfres " + (flash.ok ? "ok" : "no")}>${flash.text}</div>` : null}
+        ${over ? html`<div class="kfover"><div class="kfwin">💥</div><div class="kfagain"><button class="btn light" onClick=${() => setRound(r => r + 1)}>Try again</button></div></div>` : null}
+      </div>
+      <div class="qpad">
+        <button class="big alt" onPointerDown=${e => { e.preventDefault(); steer(-1); }} aria-label="Left"><${Ic.back} size=${34} sw=${3}/></button>
+        <span></span>
+        <button class="big alt qright" onPointerDown=${e => { e.preventDefault(); steer(1); }} aria-label="Right"><${Ic.back} size=${34} sw=${3}/></button>
+      </div>
+    </div>`;
+  }
+
+  // ---- the chapter, start to finish: story, room, chase, boss ----
+  function ChapterPlay({ n, student, lessons, ix, uIdx, onExit, onNext }) {
+    const C = QCH[n];
+    const [step, setStep] = useState("intro");
+    const score = useRef({ explore: 0, drive: 0 });
+    const pool = useMemo(() => qPool(lessons, uIdx, ix), []);
+    const gs = gLoad();
+    const look = (() => { try { const v = parseInt(localStorage.getItem("rc.kf.me") || "1", 10); return isNaN(v) ? 1 : v; } catch (e) { return 1; } })();
+    const kit = kfMyChar(look), car = (CARS.find(x => x.id === gs.car) || CARS[0]).col;
+    const [earned, setEarned] = useState(0);
+    useEffect(() => { if (step === "intro") setTimeout(() => qSay(C.intro), 400); }, [step]);
+    if (!pool.words.length || (!pool.words.some(w => w.emoji) && !pool.words.some(qCanHear))) {
+      return html`<div class="qscene"><div class="qpanel"><div class="qbigemo">🎙️</div><p>Ask your teacher to record the sounds in your lessons first.</p>
+        <button class="btn light" onClick=${onExit}>OK</button></div></div>`;
+    }
+    if (step === "intro") return html`<div class="qscene"><div class="qpanel">
+      <div class="qch">${n + 1}</div>
+      <div class="qbigemo">${C.emo}</div>
+      <div class="qstory">${n === 0 ? "👩🏾 🚐💨" : n === QCH.length - 1 ? "🔒👩🏾" : "🔍 👣"}</div>
+      <p class="qcap">${C.intro}</p>
+      <div class="kfagain"><button class="big light" onClick=${() => qSay(C.intro)} aria-label="Hear the story"><${Ic.speaker} size=${26}/></button>
+        <button class="big qplay" onClick=${() => setStep("explore")} aria-label="Start"><${Ic.play} size=${32}/></button></div>
+    </div></div>`;
+    if (step === "explore") return html`<${ExploreScene} C=${C} pool=${pool} ix=${ix} lessons=${lessons} kit=${kit}
+      onDone=${s => { score.current.explore = s; setStep("drive"); }} onExit=${onExit}/>`;
+    if (step === "drive") return html`<${DriveScene} C=${C} pool=${pool} ix=${ix} carCol=${car}
+      onDone=${s => { score.current.drive = s; setStep("boss"); }} onExit=${onExit}/>`;
+    if (step === "boss") return html`<${Fight} mode="solo" student=${student} lessons=${lessons} ix=${ix} uIdx=${uIdx} onClose=${onExit}
+      story=${{ level: C.level, foe: C.foe, name: KF_FOES[C.foe].name, onWin: () => {
+        const stars = Math.max(1, Math.round((score.current.explore + score.current.drive + 3) / 3));
+        const st = gLoad(); st.stars[C.id] = Math.max(st.stars[C.id] || 0, stars); gSave(st);
+        const bonus = 20 + stars * 10; gCoins(bonus); setEarned(bonus); score.current.stars = stars; setStep("done");
+      } }}/>`;
+    const stars = score.current.stars || 1, last = n === QCH.length - 1;
+    return html`<div class="qscene"><div class="qpanel won">
+      ${last ? html`<div class="qbigemo">🎉👩🏾🎉</div><b class="qtitle">Nala is free!</b>` : html`<div class="qbigemo">🏆</div>`}
+      <div class="qstars">${[1, 2, 3].map(i => html`<span key=${i} class=${i <= stars ? "on" : ""}>★</span>`)}</div>
+      <div class="qcoins big">🪙 +${earned}</div>
+      <div class="kfagain">
+        ${!last ? html`<button class="big qplay" onClick=${onNext} aria-label="Next chapter"><${Ic.play} size=${32}/></button>` : null}
+        <button class="big light" onClick=${onExit} aria-label="Back to the map">🗺️</button>
+      </div>
+    </div></div>`;
+  }
+
+  function StoryMap({ gs, uIdx, lessons, onPlay }) {
+    return html`<div class="qmap">${QCH.map((C, n) => {
+      const open = qOpen(n, gs, uIdx), stars = gs.stars[C.id] || 0, byLesson = uIdx < C.need;
+      return html`<button key=${C.id} class=${"qnode" + (open ? "" : " shut")} disabled=${!open} onClick=${() => onPlay(n)} aria-label=${"Chapter " + (n + 1)}>
+        <span class="qn">${n + 1}</span><span class="qnemo">${open ? C.emo : "🔒"}</span>
+        <span class="qnst">${open || stars ? [1, 2, 3].map(i => html`<i key=${i} class=${i <= stars ? "on" : ""}>★</i>`) : byLesson ? html`<small>📖 ${C.need + 1}</small>` : null}</span>
+      </button>`;
+    })}</div>`;
+  }
+
+  function Shop({ gs, onChange }) {
+    const buy = (item, kind) => {
+      const st = gLoad();
+      if (st.owned.indexOf(item.id) < 0) {
+        if (st.coins < item.price) { toast("You need " + item.price + " coins."); return; }
+        st.coins -= item.price; st.owned.push(item.id); chime(true);
+      }
+      if (kind === "kit") st.kit = st.kit === item.id ? null : item.id; else st.car = item.id;
+      gSave(st); onChange();
+    };
+    const row = (item, kind, sw) => {
+      const owned = gs.owned.indexOf(item.id) >= 0, on = kind === "kit" ? gs.kit === item.id : gs.car === item.id;
+      return html`<button key=${item.id} class=${"qitem" + (on ? " on" : "")} onClick=${() => buy(item, kind)} aria-label=${item.name}>
+        <span class="qsw">${sw}</span><b>${item.name}</b><span class="qprice">${on ? "✓" : owned ? "" : "🪙 " + item.price}</span></button>`;
+    };
+    return html`<div class="qshop">
+      <h3>🥊</h3>
+      <div class="qgrid">${KITS.map(kt => row(kt, "kit", html`<i style=${"background:" + kt.top}></i><i style=${"background:" + kt.shorts}></i><i style=${"background:" + kt.gloves}></i>`))}</div>
+      <h3>🚗</h3>
+      <div class="qgrid">${CARS.map(cr => row(cr, "car", html`<i style=${"background:" + cr.col + ";width:34px;border-radius:8px"}></i>`))}</div>
+    </div>`;
+  }
+
+  function GameHub({ student, lessons, ix, uIdx, onClose }) {
+    const [view, setView] = useState("home");
+    const [chap, setChap] = useState(0);
+    const [gs, setGs] = useState(gLoad);
+    const [key, setKey] = useState(0);
+    const refresh = () => setGs(gLoad());
+    if (view === "fight") return html`<${Fight} mode="solo" student=${student} lessons=${lessons} ix=${ix} uIdx=${uIdx} onClose=${() => { refresh(); setView("home"); }}/>`;
+    if (view === "play") return html`<${ChapterPlay} key=${key} n=${chap} student=${student} lessons=${lessons} ix=${ix} uIdx=${uIdx}
+      onExit=${() => { refresh(); setView("map"); }}
+      onNext=${() => { const g = gLoad(); refresh(); if (chap + 1 < QCH.length && qOpen(chap + 1, g, uIdx)) { setChap(chap + 1); setKey(x => x + 1); } else setView("map"); }}/>`;
+    return html`<div class="qhub">
+      <div class="qbar">
+        <button class="iconbtn light" onClick=${view === "home" ? onClose : () => setView("home")} aria-label="Back"><${Ic.back} size=${24}/></button>
+        <span></span><span class="qcoins">🪙 ${gs.coins}</span>
+      </div>
+      ${view === "home" ? html`<div class="qhome">
+          <button class="qtile story" onClick=${() => setView("map")} aria-label="Rescue Nala"><span class="qemo">🗺️</span><b>Rescue Nala</b><small>👩🏾 🔒</small></button>
+          <button class="qtile" onClick=${() => setView("fight")} aria-label="Fight"><span class="qemo">🥊</span><b>Fight</b></button>
+          <button class="qtile" onClick=${() => setView("shop")} aria-label="Shop"><span class="qemo">🛍️</span><b>Shop</b></button>
+        </div>`
+        : view === "map" ? html`<${StoryMap} gs=${gs} uIdx=${uIdx} lessons=${lessons} onPlay=${n => { setChap(n); setKey(x => x + 1); setView("play"); }}/>`
+        : html`<${Shop} gs=${gs} onChange=${refresh}/>`}
+    </div>`;
+  }
+
   const classRec = {
     active: false, mr: null, id: null, seq: 0, t0: 0, bytes: 0, mime: "", saving: Promise.resolve(),
     cv: null, cx: null, drawT: null, actx: null, dest: null, srcs: new Map(),
@@ -4026,7 +4652,7 @@ notify pgrst, 'reload schema';
     blocked: false,
     mime() {
       if (!window.MediaRecorder || !MediaRecorder.isTypeSupported) return "";
-      for (const t of ["audio/webm;codecs=opus", "audio/webm", "audio/mp4;codecs=mp4a.40.2", "audio/mp4"]) {
+      for (const t of ["audio/mp4;codecs=mp4a.40.2", "audio/mp4", "audio/webm;codecs=opus", "audio/webm"]) {   // MP4/AAC first: iPhones play it
         try { if (MediaRecorder.isTypeSupported(t)) return t; } catch (e) {}
       }
       return "";
@@ -4385,7 +5011,7 @@ notify pgrst, 'reload schema';
       const left = el.offsetLeft - rail.clientWidth / 2 + el.clientWidth / 2;
       try { rail.scrollTo({ left, behavior: "smooth" }); } catch (e) { rail.scrollLeft = left; }
     }, [vIdx, lessons.length]);
-    return html`<nav class="rail" ref=${ref} aria-label="Lessons">${onBook ? html`<button class="railbook" onClick=${onBook} aria-label="My exercise book"><${Ic.book} size=${22}/></button>` : null}${onFight ? html`<button class="railbook railfight" onClick=${onFight} aria-label="Chalk Kombat">🥊</button>` : null}${lessons.map((l, i) => {
+    return html`<nav class="rail" ref=${ref} aria-label="Lessons">${onBook ? html`<button class="railbook" onClick=${onBook} aria-label="My exercise book"><${Ic.book} size=${22}/></button>` : null}${onFight ? html`<button class="railbook railfight" onClick=${onFight} aria-label="Games">🎮</button>` : null}${lessons.map((l, i) => {
       const state = i < uIdx ? "done" : i === uIdx ? "cur" : "locked";
       const can = teacher || i <= uIdx;
       return html`<button key=${l.id} class=${"dot " + state + (i === vIdx ? " view" : "") + (teacher && i === vIdx ? " tview" : "")} disabled=${!can} onClick=${() => onPick(l.id)} aria-label=${"Lesson " + (i + 1)} aria-current=${i === vIdx ? "true" : null}>
@@ -4790,7 +5416,7 @@ notify pgrst, 'reload schema';
       if (live.st.on && live.st.sid !== student.id) { toast("You're already in a class. End it first."); return; }
       try { await live.startClass(student.id, lid); }
       catch (e) {
-        if (e && /NotAllowed|NotFound|Security|NotReadable/.test(e.name || "")) call.set({ phase: "idle", error: "Your microphone is blocked. Allow it for this site in Chrome settings, then tap Rejoin voice." });
+        if (e && /NotAllowed|NotFound|Security|NotReadable/.test(e.name || "")) call.set({ phase: "idle", error: "Your microphone is blocked. Allow it for this site in your browser's settings, then tap Rejoin voice." });
         else toast(errText(e));
       }
     }
@@ -4824,7 +5450,7 @@ notify pgrst, 'reload schema';
         <button class="iconbtn" onClick=${() => setBookOpen(true)} aria-label="Their exercise book"><${Ic.book} size=${22}/></button>
         <button class="iconbtn" onClick=${() => setEditing(true)} aria-label="Student settings and join link"><${Ic.edit} size=${22}/></button>
       </header>` : null}
-      <${Rail} lessons=${lessons} uIdx=${uIdx} vIdx=${vIdx} unreadBy=${unreadBy} teacher=${teacher} onPick=${setViewId} onBook=${teacher ? null : () => setBookOpen(true)} onFight=${teacher ? null : () => setFight("solo")}/>
+      <${Rail} lessons=${lessons} uIdx=${uIdx} vIdx=${vIdx} unreadBy=${unreadBy} teacher=${teacher} onPick=${setViewId} onBook=${teacher ? null : () => setBookOpen(true)} onFight=${teacher ? null : () => setFight("hub")}/>
       ${teacher ? html`<div class="tact">
         ${vIdx === uIdx
           ? html`<button class="btn pass" onClick=${pass}><${Ic.tick} size=${20} sw=${2.8}/>Pass lesson ${vIdx + 1}</button>`
@@ -4850,7 +5476,7 @@ notify pgrst, 'reload schema';
       ${lightbox ? html`<div class="lb" role="dialog" aria-label="Photo" onClick=${() => setLightbox(null)}><div class="imgwrap"><img src=${lightbox} alt="Photo"/></div></div>` : null}
       ${editing ? html`<${StudentSheet} student=${student} onClose=${() => setEditing(false)} onDeleted=${() => { setEditing(false); onBack && onBack(); }}/>` : null}
       ${hwEdit ? html`<${HwEditor} lesson=${lesson} number=${vIdx + 1} student=${student} onClose=${() => setHwEdit(false)}/>` : null}
-      ${fight ? html`<${Fight} key=${fight} mode=${fight} student=${student} lessons=${lessons} ix=${ix} uIdx=${uIdx} onClose=${() => setFight(null)}/>` : null}
+      ${fight === "hub" ? html`<${GameHub} student=${student} lessons=${lessons} ix=${ix} uIdx=${uIdx} onClose=${() => setFight(null)}/>` : fight ? html`<${Fight} key=${fight} mode=${fight} student=${student} lessons=${lessons} ix=${ix} uIdx=${uIdx} onClose=${() => setFight(null)}/>` : null}
       ${hwRun ? html`<${HwRunner} key=${hwRun.hw.id} hw=${hwRun.hw} msgs=${mine} student=${student} ix=${ix} lessons=${lessons} preview=${!!hwRun.preview} onClose=${() => setHwRun(null)}/>` : null}
       ${hwRev ? html`<${HwReview} ans=${hwRev} msgs=${mine} onClose=${() => setHwRev(null)}/>` : null}
       ${bookOpen ? html`<${ExBook} student=${student} msgs=${mine} lessons=${lessons} teacher=${teacher} onOpen=${hw => { setBookOpen(false); openHw(hw); }} onClose=${() => setBookOpen(false)}/>` : null}
@@ -4937,7 +5563,7 @@ notify pgrst, 'reload schema';
       <div class="note">
         <b>Letting your student in</b>
         <p>Tap your student, then the pencil, then Send on WhatsApp. They don't need an account or a password.</p>
-        <p>On a call, have them open the link in Chrome, allow the microphone the first time they record, then add the page to their home screen (Chrome menu, then Add to Home screen). After that they just tap the icon.</p>
+        <p>On a call, have them open the link (Safari on iPhone, Chrome on Android), allow the microphone the first time they record, then add the page to their home screen (iPhone: Share button, then Add to Home Screen; Android: Chrome menu, then Add to Home screen). After that they just tap the icon.</p>
       </div>
       <div class="acct"><span>${s.email ? "Signed in as " + s.email : ""}</span><${SignOutBtn}/></div>
     </section>`;
@@ -5546,7 +6172,7 @@ notify pgrst, 'reload schema';
     }, [joined, L.away, L.on]);
     async function join() {
       try { await call.studentJoin(); }
-      catch (e) { call.set({ error: "The microphone is blocked. Allow it for this site in Chrome settings, then tap the green phone again." }); }
+      catch (e) { call.set({ error: "The microphone is blocked. Allow it for this site in your browser's settings (iPhone: Settings, Safari, Microphone), then tap the green phone again." }); }
     }
     return html`<div class="callcard">
       ${L.away ? html`<div class="away" role="status"><${Ic.wait} size=${22}/><span>Waiting for your teacher</span></div>` : null}
@@ -5571,7 +6197,7 @@ notify pgrst, 'reload schema';
   }
   async function rejoinVoice() {
     try { await call.teacherStart(); await resumeRecording(); }
-    catch (e) { call.set({ phase: "paused", error: "Your microphone is blocked. Allow it for this site in Chrome settings, then tap Rejoin voice." }); }
+    catch (e) { call.set({ phase: "paused", error: "Your microphone is blocked. Allow it for this site in your browser's settings, then tap Rejoin voice." }); }
   }
 
   function ClassPanel({ who, lessonTitle, lessonNo, studentId }) {
