@@ -482,6 +482,65 @@ img{max-width:100%}
 .wb.moving canvas{cursor:grab}
 .stools{flex-wrap:wrap}
 .linkbtn.danger{color:var(--red)}
+/* ---------- Chalk Kombat ---------- */
+.railfight{font-size:22px;background:#3A2A1E}
+.kf{position:fixed;inset:0;z-index:95;background-color:#1E3328;background-image:var(--noise);color:var(--chalk);display:flex;flex-direction:column;padding:calc(6px + env(safe-area-inset-top,0px)) 10px calc(10px + env(safe-area-inset-bottom,0px));touch-action:none;-webkit-user-select:none;user-select:none}
+.kfhead{display:grid;grid-template-columns:48px 1fr 48px;align-items:center;min-height:44px}
+.kftitle{text-align:center;letter-spacing:.16em;font-size:15px;color:var(--chalk-2)}
+.iconbtn.light{color:var(--chalk)}
+.kfarena{flex:1;min-height:0;position:relative;display:grid;place-items:center}
+.kfarena canvas{display:block}
+.kfres{position:absolute;left:50%;top:16%;transform:translateX(-50%);padding:8px 18px;border-radius:16px;font-size:34px;font-weight:700;display:flex;align-items:center;gap:8px;pointer-events:none}
+.kfres.ok{background:rgba(46,158,107,.9);color:#fff}
+.kfres.no{background:rgba(232,103,95,.92);color:#fff}
+.kfover{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;gap:14px;padding-bottom:4%}
+.kfwin{font-size:30px;font-weight:700;color:#FFE27A;text-shadow:0 2px 8px rgba(0,0,0,.5)}
+.kfagain{display:flex;gap:10px}
+.kfpad{display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:8px;padding-top:8px}
+.kfdir,.kfmid{display:flex;gap:8px;align-items:center}
+.kfmid{justify-content:center}
+.kfact{display:grid;grid-template-columns:58px 58px;gap:8px}
+.kfact .kfb:last-child{grid-column:1 / span 2;width:100%;border-radius:29px;height:50px}
+.kfb{width:58px;height:58px;border-radius:50%;border:0;background:rgba(241,236,220,.14);color:var(--chalk);display:grid;place-items:center;font-size:28px;padding:0;touch-action:none;box-shadow:inset 0 0 0 2px rgba(241,236,220,.25)}
+.kfb:active{background:rgba(241,236,220,.32)}
+.kfdir .kfb:last-child svg{transform:scaleX(-1)}
+.kfhit{background:rgba(244,211,107,.22)}
+.kfb.kfpow{width:72px;height:72px;background:#2E9E6B;color:#fff;animation:kfpulse 1.4s infinite}
+.kfb.kfpow.sup{background:#FF9F43;font-size:36px}
+@keyframes kfpulse{50%{box-shadow:0 0 0 10px rgba(46,158,107,.25)}}
+.kfread{position:relative;display:flex;flex-direction:column;gap:10px;padding-top:8px}
+.kfcancel{position:absolute;top:4px;right:0;width:40px;height:40px;border-radius:50%;border:0;background:rgba(241,236,220,.14);color:var(--chalk);display:grid;place-items:center;z-index:2}
+.kfbig{font-size:clamp(42px,12vw,76px);text-align:center;padding:14px 44px 18px;line-height:1.15}
+.kfspell{display:flex;align-items:center;gap:14px;justify-content:center}
+.kftyped{min-width:150px;font-size:40px;border-bottom:3px solid rgba(241,236,220,.5);padding:0 8px;min-height:54px}
+.kfjudge{display:flex;flex-direction:column;align-items:center;gap:6px;padding:8px;background:rgba(0,0,0,.28);border-radius:16px;margin-top:8px}
+.kfjudge .kfword{font-size:34px}
+.kfjrow{display:flex;gap:18px}
+.big.kfok{background:#2E9E6B;color:#fff}
+.big.kfno{background:#E8675F;color:#fff}
+.big.light{background:var(--chalk);color:var(--board)}
+@media (prefers-reduced-motion: reduce){.kfb.kfpow{animation:none}}
+.kfpick{position:absolute;inset:0;z-index:5;background:rgba(10,20,15,.86);display:flex;align-items:center;justify-content:center;padding:12px}
+.kfgrid{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;max-width:470px}
+.kfch{display:flex;flex-direction:column;align-items:center;gap:4px;border:0;border-radius:14px;padding:8px 6px 10px;background:rgba(241,236,220,.1);color:var(--chalk);font-weight:700;font-size:14px;min-width:96px}
+.kfch.on{box-shadow:inset 0 0 0 3px #FFE27A;background:rgba(255,226,122,.16)}
+.kfwho{padding:0;width:44px;height:44px}
+.board.passage .brow{display:flex;flex-wrap:wrap;justify-content:flex-start;gap:0 2px;margin-bottom:14px}
+.board.passage .brow .tile{flex:0 0 auto;width:auto;text-align:left}
+.board.passage .tile{font-size:clamp(21px,5.8vw,27px);min-width:0;min-height:42px;padding:4px 4px 6px}
+.board.passage .tile.mute{color:var(--chalk)}
+.splitask{box-shadow:inset 0 0 0 2px var(--blue),var(--lift)}
+.kfhelpbtn{margin-left:6px;width:24px;height:24px;border-radius:50%;border:0;background:rgba(241,236,220,.18);color:var(--chalk);font-weight:700;font-size:14px;padding:0;vertical-align:middle}
+.kfhelp{position:absolute;inset:0;z-index:6;background:rgba(10,20,15,.9);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;padding:16px;color:var(--chalk)}
+.kfhelp p{margin:0;font-size:14px;color:var(--chalk-2);text-align:center;max-width:30ch}
+.kfcombo{display:flex;align-items:center;gap:8px;font-size:22px}
+.kfk{width:46px;height:46px;border-radius:50%;display:grid;place-items:center;background:rgba(241,236,220,.16);font-size:22px}
+.kfbig2{font-size:38px}
+.kfrecap{display:flex;flex-wrap:wrap;gap:6px;justify-content:center;max-width:90%}
+.kfrecap span{padding:3px 10px;border-radius:10px;font-size:18px;font-weight:700}
+.kfrecap .ok{background:rgba(46,158,107,.85);color:#fff}
+.kfrecap .no{background:rgba(232,103,95,.9);color:#fff}
+.kfb.kfpow.fin{background:#E8462E;font-size:36px;animation:kfpulse .6s infinite}
 /* ---------- setup and sign in ---------- */
 .setup{max-width:560px;margin:0 auto;padding:24px 16px 56px;display:flex;flex-direction:column;gap:16px}
 .setup h1{margin:0;font-size:28px;line-height:1.15}
@@ -903,8 +962,14 @@ notify pgrst, 'reload schema';
     return (4294967296 * (2097151 & h2) + (h1 >>> 0)).toString(36);
   }
   const recKey = (lessonId, text) => lessonId + "~" + cyrb53(text);
-  function parseBoard(text) {
-    return String(text || "").split(/\r?\n/).map(l => l.trim()).filter(Boolean).map(line => {
+  function parseBoard(text, passage) {
+    const lines = String(text || "").split(/\r?\n/).map(l => l.trim()).filter(Boolean);
+    if (passage) return lines.map(line => line.split(/\s+/).filter(Boolean).map(w => {
+      const core = w.replace(/^[^A-Za-z0-9']+|[^A-Za-z0-9']+$/g, "");
+      const k = !core ? w : /^I('|$)/.test(core) ? core : core.toLowerCase();
+      return { t: k, d: w, s: false };
+    }));
+    return lines.map(line => {
       if (/[.?!]["')\]]?$/.test(line)) return [{ t: line, s: true }];
       return line.split(/\s+/).filter(Boolean).map(t => ({ t, s: false }));
     });
@@ -1587,6 +1652,7 @@ notify pgrst, 'reload schema';
     spoint(tile, r, c, lesson) { this.send({ type: "spoint", tile, r, c, lesson }); },
     recv(m) {
       const now = Date.now();
+      if (typeof m.type === "string" && m.type.indexOf("kf-") === 0) { if (this.role === "teacher") this.lastHere = now; kfBus.emit(m); return; }
       if (m.type === "rtc") { if (this.role === "teacher") this.lastHere = now; call.onRtc(m); return; }
       if (m.type === "wb-seg") { wb.remoteSeg(m); if (this.role === "teacher") this.lastHere = now; return; }
       if (m.type === "wb-end") { wb.remoteEnd(m); return; }
@@ -2460,6 +2526,1054 @@ notify pgrst, 'reload schema';
     </div>`;
   }
 
+  /* ================= Chalk Kombat: a real fight where reading is his strength ================= */
+  const kfBus = { subs: new Set(), emit(m) { this.subs.forEach(f => { try { f(m); } catch (e) {} }); } };
+  const KF = { W: 600, H: 560, GROUND: 486 };
+  const KF_MOVES = { p: { wind: 0.12, act: 0.1, total: 0.42, reach: 145, dmg: 7 }, k: { wind: 0.22, act: 0.12, total: 0.66, reach: 182, dmg: 11 } };
+  // Specials: a button combo, paid for with reading strength. f = toward the opponent, b = away.
+  const KF_SPECIALS = { fire: { combo: ["f", "f", "p"], cost: 25, dmg: 12, icon: "🔥" }, ice: { combo: ["b", "f", "k"], cost: 30, dmg: 6, icon: "❄️" } };
+  // The practice ladder: each opponent fights smarter and hits harder.
+  const KF_LEVELS = [
+    { dmg: 0.45, spd: 0.75, aggr: 1.6, block: 0.02, specials: [], cd: 99, drain: 1.8 },
+    { dmg: 0.55, spd: 0.82, aggr: 2.0, block: 0.035, specials: [], cd: 99, drain: 2.0 },
+    { dmg: 0.65, spd: 0.88, aggr: 2.4, block: 0.05, specials: ["fire"], cd: 9, drain: 2.2 },
+    { dmg: 0.75, spd: 0.94, aggr: 2.8, block: 0.065, specials: ["fire", "ice"], cd: 8, drain: 2.4 },
+    { dmg: 0.86, spd: 1.0, aggr: 3.2, block: 0.08, specials: ["fire", "ice"], cd: 6, drain: 2.6 },
+  ];
+  // Words come from his own lessons, up to the one he's on: nothing is made up.
+  function kfWords(lessons, uIdx, ix) {
+    const seen = new Set(), words = [], sentences = [];
+    for (let i = 0; i <= Math.min(uIdx, lessons.length - 1); i++) {
+      const L = lessons[i];
+      for (const row of parseBoard(L.board, L.stage === 3)) for (const t of row) {
+        const w = t.t;
+        if (seen.has(w)) continue;
+        seen.add(w);
+        if (t.s) { sentences.push(w); continue; }
+        if (!/^[A-Za-z]{1,8}$/.test(w)) continue;
+        const snd = soundFor(ix, L.id, w);
+        const pair = w.length === 2 && w[0] !== w[1] && w[0].toLowerCase() === w[1];   // "Aa" on the alphabet board is the letter a
+        const text = pair ? w[1] : w;
+        if (pair && seen.has("#" + text)) continue;
+        seen.add("#" + text);
+        words.push({ text, audio: snd ? snd.rec.audio : null });
+      }
+    }
+    return { words, sentences };
+  }
+  // Words he got wrong come back more often until he gets them right.
+  function kfMissed() { try { return JSON.parse(localStorage.getItem("rc.kf.miss") || "{}"); } catch (e) { return {}; } }
+  function kfNoteWord(text, ok) {
+    try {
+      const m = kfMissed();
+      if (ok) { if (m[text]) { m[text] -= 1; if (m[text] <= 0) delete m[text]; } } else m[text] = Math.min(5, (m[text] || 0) + 2);
+      localStorage.setItem("rc.kf.miss", JSON.stringify(m));
+    } catch (e) {}
+  }
+  function kfPick(pool, kind, recent, level) {
+    let list = kind === "spell" ? pool.words.filter(w => w.audio) : pool.words.slice();
+    if (!list.length) return null;
+    const lv = level || 1;
+    const fit = w => (lv <= 2 ? w.text.length <= 3 : lv === 3 ? w.text.length >= 3 && w.text.length <= 4 : w.text.length >= 4);
+    const fitting = list.filter(fit);
+    if (fitting.length >= 3) list = fitting;
+    const miss = kfMissed(), bag = [];
+    for (const w of list) if (recent.indexOf(w.text) < 0) for (let n = 0; n < 1 + (miss[w.text] || 0); n++) bag.push(w);
+    const src = bag.length ? bag : list;
+    const w = src[Math.floor(Math.random() * src.length)];
+    recent.push(w.text); if (recent.length > 6) recent.shift();
+    return w;
+  }
+  function kfFighter(x) { return { x, dir: 1, hp: 100, act: "idle", t: 0, hit: false, keys: { l: 0, r: 0, b: 0 } }; }
+  function kfNew(level) {
+    return { f: [kfFighter(170), kfFighter(430)], S: 50, sup: false, time: 99, over: false, win: -1, fx: [], fxId: 0, reading: false, go: false, pw: 0,
+      look: [1, 0], slowT: 0, level: level || 0, pj: [], pjId: 0, cb: [[], []], cd: [0, 0], need: 0, finish: null, fatal: false, log: [] };
+  }
+  function kfMult(g, i) {
+    if (i === 0) { const s = g.S / 100; return { dmg: 0.25 + 1.25 * s, spd: 0.6 + 0.4 * s }; }
+    if (g.cpu) { const L = KF_LEVELS[Math.max(0, (g.level || 1) - 1)]; return { dmg: L.dmg, spd: L.spd }; }
+    return { dmg: 0.75, spd: 0.95 };
+  }
+  function kfBusy(f) { return ["ko", "hit", "p", "k", "super", "cast", "frozen", "dazed"].indexOf(f.act) >= 0; }
+  // Remember the direction taps, to spot combos.
+  function kfTap(g, i, key) {
+    const f = g.f[i];
+    const rel = key === "r" ? (f.dir > 0 ? "f" : "b") : key === "l" ? (f.dir > 0 ? "b" : "f") : key;
+    const now = performance.now();
+    g.cb[i] = g.cb[i].filter(e => now - e.t < 900).concat({ k: rel, t: now }).slice(-4);
+  }
+  function kfCast(g, i, kind, snd) {
+    const f = g.f[i];
+    f.act = "cast"; f.t = 0; f.hit = false; f.spell = kind;
+    if (snd) snd(kind);
+  }
+  function kfPress(g, i, move, snd) {
+    const f = g.f[i];
+    if (!g.go || g.over || kfBusy(f) || (i === 0 && g.reading)) return;
+    kfTap(g, i, move);
+    const seq = g.cb[i].map(e => e.k).slice(-3).join("");
+    for (const name in KF_SPECIALS) {
+      const sp = KF_SPECIALS[name];
+      if (seq !== sp.combo.join("")) continue;
+      g.cb[i] = [];
+      if (i === 0) {
+        if (g.S < sp.cost) { g.need = performance.now(); if (snd) snd("bad"); break; }   // not strong enough: read first
+        g.S -= sp.cost;
+      } else {
+        if (g.cd[1] > 0) break;
+        g.cd[1] = 6;
+      }
+      kfCast(g, i, name, snd);
+      return;
+    }
+    f.act = move; f.t = 0; f.hit = false;
+  }
+  // When he drops the opponent, they stagger: one more word finishes the fight in style.
+  function kfDown(g, i, snd) {
+    const b = g.f[1 - i];
+    if (i === 0 && !g.finish) { b.act = "dazed"; b.t = 0; b.hp = 0; g.finish = { t: 0 }; if (snd) snd("go"); return; }
+    if (g.finish && i === 0) return;
+    b.act = "ko"; b.t = 0; g.slowT = 0.9;
+  }
+  function kfHit(g, i, dmg, reach, kind, snd) {
+    const a = g.f[i], b = g.f[1 - i];
+    if (Math.abs(a.x - b.x) > reach || b.act === "ko" || b.act === "dazed") { if (snd) snd("whiff"); return; }
+    const blocked = b.act === "block" && b.dir === -a.dir;
+    const d = dmg * (blocked ? 0.15 : 1);
+    b.hp = Math.max(0, b.hp - d);
+    if (!blocked && b.act !== "frozen") { b.act = "hit"; b.t = 0; b.x += a.dir * 38; }
+    g.fx.push({ id: ++g.fxId, x: b.x - a.dir * 30, y: KF.GROUND - (kind === "k" ? 115 : 160), big: d >= 12, blocked });
+    if (g.fx.length > 6) g.fx.shift();
+    if (snd) snd(blocked ? "block" : d >= 12 ? "big" : "hit");
+    if (b.hp <= 0) kfDown(g, i, snd);
+  }
+  function kfStep(g, dt, snd) {
+    if (g.over) { for (const f of g.f) if (f.act === "ko") f.t += dt; g.wt = (g.wt || 0) + dt; return; }
+    if (!g.finish) g.time = Math.max(0, g.time - dt);
+    const L = g.cpu ? KF_LEVELS[Math.max(0, (g.level || 1) - 1)] : null;
+    g.S = Math.max(0, g.S - (L ? L.drain : 2.2) * dt * (g.reading ? 0.3 : 1));   // strength drains unless he keeps reading
+    if (g.S >= 99.5) g.sup = true;
+    g.cd[1] = Math.max(0, g.cd[1] - dt);
+    if (g.finish) {
+      g.finish.t += dt;
+      if (g.finish.t > 7 && !g.reading) { const b = g.f[1]; b.act = "ko"; b.t = 0; g.finish = null; g.slowT = 0.9; }
+    }
+    for (let i = 0; i < 2; i++) {
+      const f = g.f[i], o = g.f[1 - i], m = kfMult(g, i);
+      if (f.act !== "super") f.dir = o.x >= f.x ? 1 : -1;
+      if (f.act === "ko" || f.act === "dazed") { f.t += dt; continue; }
+      if (f.act === "hit") { f.t += dt; if (f.t > 0.3) { f.act = "idle"; f.t = 0; } continue; }
+      if (f.act === "frozen") { f.t += dt; if (f.t > 1.3) { f.act = "idle"; f.t = 0; } continue; }
+      if (f.act === "cast") {
+        f.t += dt;
+        if (!f.hit && f.t >= 0.16) {
+          f.hit = true;
+          g.pj.push({ id: ++g.pjId, owner: i, kind: f.spell, x: f.x + f.dir * 60, y: KF.GROUND - 170, v: f.dir * 520, mult: m.dmg });
+        }
+        if (f.t > 0.42) { f.act = "idle"; f.t = 0; }
+        continue;
+      }
+      if (f.act === "super") {
+        f.t += dt;
+        if (!f.hit) {
+          const gap = Math.abs(o.x - f.x);
+          if (gap > 110) f.x += f.dir * Math.min(gap - 110, 1500 * dt);
+          else {
+            f.hit = true;
+            o.hp = Math.max(0, o.hp - 28);
+            if (o.act !== "dazed") { o.act = "hit"; o.t = 0; }
+            o.x += f.dir * 90;
+            g.fx.push({ id: ++g.fxId, x: o.x - f.dir * 40, y: KF.GROUND - 160, big: true, sup: true });
+            if (snd) snd("super");
+            if (o.hp <= 0) kfDown(g, i, snd);
+          }
+        }
+        if (f.t > 0.8) { f.act = "idle"; f.t = 0; }
+        continue;
+      }
+      if (f.act === "p" || f.act === "k") {
+        const mv = KF_MOVES[f.act];
+        f.t += dt * m.spd;
+        if (!f.hit && f.t >= mv.wind) { f.hit = true; kfHit(g, i, mv.dmg * m.dmg, mv.reach, f.act, snd); }
+        if (f.t >= mv.total) { f.act = "idle"; f.t = 0; }
+        continue;
+      }
+      const reading = i === 0 && g.reading;
+      const blocking = !!f.keys.b && !reading;
+      const dx = reading ? 0 : ((f.keys.r ? 1 : 0) - (f.keys.l ? 1 : 0)) * 210 * m.spd * dt * (blocking ? 0.35 : 1);
+      f.x += dx;
+      const act = reading ? "read" : blocking ? "block" : dx ? "walk" : "idle";
+      if (act !== f.act) { f.act = act; f.t = 0; } else f.t += dt;
+    }
+    // fireballs and ice blasts fly until they hit someone or leave the board
+    for (const p of g.pj) {
+      p.x += p.v * dt;
+      const o = g.f[1 - p.owner];
+      if (!p.done && Math.abs(p.x - o.x) < 42 && o.act !== "ko" && o.act !== "dazed") {
+        p.done = true;
+        const sp = KF_SPECIALS[p.kind];
+        const blocked = o.act === "block" && o.dir === -Math.sign(p.v);
+        const d = sp.dmg * p.mult * (blocked ? 0.25 : 1);
+        o.hp = Math.max(0, o.hp - d);
+        if (p.kind === "ice" && !blocked) { o.act = "frozen"; o.t = 0; if (snd) snd("freeze"); }
+        else if (!blocked) { o.act = "hit"; o.t = 0; o.x += Math.sign(p.v) * 50; if (snd) snd("big"); }
+        else if (snd) snd("block");
+        g.fx.push({ id: ++g.fxId, x: o.x - Math.sign(p.v) * 25, y: KF.GROUND - 160, big: true, kind: p.kind, blocked });
+        if (o.hp <= 0) kfDown(g, p.owner, snd);
+      }
+    }
+    g.pj = g.pj.filter(p => !p.done && p.x > -40 && p.x < KF.W + 40);
+    const [a, b] = g.f;
+    if (Math.abs(a.x - b.x) < 88) { const mid = (a.x + b.x) / 2, s = a.x <= b.x ? -1 : 1; a.x = mid + s * 44; b.x = mid - s * 44; }
+    for (const f of g.f) f.x = Math.max(60, Math.min(KF.W - 60, f.x));
+    const aDown = a.act === "ko" || a.hp <= 0, bDown = b.act === "ko";
+    if (aDown || bDown || (g.time <= 0 && !g.finish)) {
+      if (aDown && a.act !== "ko") { a.act = "ko"; a.t = 0; }
+      g.over = true; g.wt = 0;
+      g.win = bDown && !aDown ? 0 : aDown && !bDown ? 1 : a.hp === b.hp ? -1 : a.hp > b.hp ? 0 : 1;
+      g.reading = false;
+      if (snd) snd("ko");
+    }
+  }
+  // The computer opponent for practice: smarter and harder each level, and it eases off while he's reading.
+  function kfCpu(g, dt, ai, snd) {
+    const me = g.f[1], you = g.f[0], L = KF_LEVELS[Math.max(0, (g.level || 1) - 1)];
+    me.keys = { l: 0, r: 0, b: 0 };
+    if (!g.go || g.over || kfBusy(me)) return;
+    ai.t -= dt;
+    const d = Math.abs(me.x - you.x), toward = you.x > me.x ? "r" : "l", away = toward === "r" ? "l" : "r";
+    const calm = g.reading ? 0.4 : 1;
+    if (ai.mode === "block" && ai.t > 0) { me.keys.b = 1; return; }
+    if (((you.act === "p" || you.act === "k") && d < 200 || you.act === "cast") && Math.random() < L.block * 40 * dt) { ai.mode = "block"; ai.t = 0.45; return; }
+    if (L.specials.length && g.cd[1] <= 0 && d > 230 && Math.random() < 0.8 * dt) {
+      const kind = L.specials[Math.floor(Math.random() * L.specials.length)];
+      g.cd[1] = L.cd; kfCast(g, 1, kind, snd); return;
+    }
+    if (ai.t <= 0) { ai.mode = Math.random() < 0.18 ? "back" : "go"; ai.t = 0.4 + Math.random() * 0.9; }
+    if (ai.mode === "back") me.keys[away] = 1;
+    else if (d > 140) me.keys[toward] = 1;
+    else if (Math.random() < L.aggr * dt * calm) kfPress(g, 1, d > 150 || Math.random() < 0.38 ? "k" : "p", snd);
+  }
+  const kfPack = g => ({
+    f: g.f.map(f => [Math.round(f.x), f.dir, Math.round(f.hp * 10) / 10, f.act, Math.round(f.t * 100) / 100, f.spell || ""]),
+    S: Math.round(g.S), sup: g.sup, time: Math.ceil(g.time), over: g.over, win: g.win, rd: g.reading, go: g.go, pw: g.pw, lk: g.look,
+    fx: g.fx.map(x => [x.id, Math.round(x.x), Math.round(x.y), x.big ? 1 : 0, x.blocked ? 1 : 0, x.sup ? 1 : 0, x.kind || ""]),
+    pj: g.pj.map(p => [p.id, Math.round(p.x), p.kind, Math.sign(p.v)]),
+    fin: g.finish ? Math.round(g.finish.t * 10) / 10 : -1, fat: g.fatal ? 1 : 0, wt: Math.round((g.wt || 0) * 10) / 10, nd: g.need,
+    lg: g.log.slice(-8).map(x => [x.text, x.ok ? 1 : 0]),
+  });
+  const kfUnpack = p => ({
+    f: p.f.map(a => ({ x: a[0], dir: a[1], hp: a[2], act: a[3], t: a[4], spell: a[5] })),
+    S: p.S, sup: p.sup, time: p.time, over: p.over, win: p.win, reading: p.rd, go: p.go, pw: p.pw, look: p.lk || [1, 0],
+    fx: p.fx.map(a => ({ id: a[0], x: a[1], y: a[2], big: !!a[3], blocked: !!a[4], sup: !!a[5], kind: a[6] })),
+    pj: (p.pj || []).map(a => ({ id: a[0], x: a[1], kind: a[2], v: a[3] })),
+    finish: p.fin >= 0 ? { t: p.fin } : null, fatal: !!p.fat, wt: p.wt || 0, need: 0, nRaw: p.nd || 0,
+    log: (p.lg || []).map(a => ({ text: a[0], ok: !!a[1] })),
+  });
+  let kfA = null;
+  function kfSnd(kind) {
+    try {
+      kfA = kfA || new (window.AudioContext || window.webkitAudioContext)();
+      if (kfA.state === "suspended") kfA.resume();
+      const t = kfA.currentTime;
+      const set = { hit: [150, 55, 0.16, "square"], big: [120, 38, 0.28, "sawtooth"], block: [460, 400, 0.08, "triangle"], whiff: [650, 320, 0.07, "sine"],
+        ko: [320, 50, 1.0, "sawtooth"], super: [220, 35, 0.55, "sawtooth"], power: [440, 1100, 0.35, "sine"], bad: [210, 110, 0.35, "triangle"], go: [330, 660, 0.25, "square"], fire: [170, 640, 0.38, "sawtooth"], ice: [1300, 480, 0.32, "triangle"], freeze: [700, 1500, 0.45, "sine"] }[kind] || [300, 100, 0.1, "sine"];
+      const o = kfA.createOscillator(), gn = kfA.createGain();
+      o.type = set[3];
+      o.frequency.setValueAtTime(set[0], t);
+      o.frequency.exponentialRampToValueAtTime(set[1], t + set[2]);
+      gn.gain.setValueAtTime(0.0001, t);
+      gn.gain.exponentialRampToValueAtTime(kind === "whiff" ? 0.04 : 0.2, t + 0.012);
+      gn.gain.exponentialRampToValueAtTime(0.0001, t + set[2]);
+      o.connect(gn); gn.connect(kfA.destination);
+      o.start(t); o.stop(t + set[2] + 0.05);
+    } catch (e) {}
+  }
+  // How far a punch or kick is extended: pulls back, snaps out, comes home.
+  function kfExt(f, mv) {
+    const m = KF_MOVES[mv];
+    if (f.t < m.wind) return -0.25 * (f.t / m.wind);
+    if (f.t < m.wind + m.act) return 1;
+    return Math.max(0, 1 - (f.t - m.wind - m.act) / (m.total - m.wind - m.act));
+  }
+  // Five fighters with real proportions, skin tones, faces, hair and kit. All drawn here: nothing to download.
+  const KF_CHARS = [
+    { name: "Tembo", stripe: "#F2C230", emote: "flex", skin: "#5C3A29", hair: "bald", beard: 1, shorts: "#B8322A", gloves: "#262626", shoes: "#333333", build: 1.1 },
+    { name: "Kasonde", stripe: "#F4F4F4", emote: "pump", skin: "#7C4B2E", hair: "fade", top: "#F2C230", shorts: "#2F5DA8", gloves: "#C8322B", shoes: "#F2F2F2", build: 1 },
+    { name: "Mwila", emote: "bow", skin: "#68412A", hair: "locs", gi: "#2E7D4F", belt: "#151515", gloves: "#F2F2F2", build: 1 },
+    { name: "Jabu", stripe: "#D93A2E", emote: "dance", skin: "#8E5B3F", hair: "afro", top: "#F4F4F4", shorts: "#262626", gloves: "#D93A2E", shoes: "#D93A2E", build: 0.97 },
+    { name: "Nala", stripe: "#B794E6", emote: "pump", skin: "#6C442B", hair: "braids", top: "#7B4FB0", shorts: "#2A2A2A", gloves: "#7B4FB0", shoes: "#EEEEEE", build: 0.93 },
+  ];
+  function kfShade(col, a) {
+    let r, g, b;
+    if (col[0] === "#") { const n = parseInt(col.slice(1), 16); r = n >> 16; g = (n >> 8) & 255; b = n & 255; }
+    else { const m = col.match(/[\d.]+/g) || [0, 0, 0]; r = +m[0]; g = +m[1]; b = +m[2]; }   // also takes rgb(...) colours
+    if (a < 0) { r *= 1 + a; g *= 1 + a; b *= 1 + a; } else { r += (255 - r) * a; g += (255 - g) * a; b += (255 - b) * a; }
+    return "rgb(" + (r | 0) + "," + (g | 0) + "," + (b | 0) + ")";
+  }
+  function kfRR(c, x, y, w, h, r) { c.beginPath(); c.moveTo(x + r, y); c.arcTo(x + w, y, x + w, y + h, r); c.arcTo(x + w, y + h, x, y + h, r); c.arcTo(x, y + h, x, y, r); c.arcTo(x, y, x + w, y, r); c.closePath(); }
+  // Two-bone reach: where the elbow or knee goes so the hand or foot lands on target.
+  function kfIK(a, b, l1, l2, pref) {
+    let dx = b[0] - a[0], dy = b[1] - a[1], d = Math.hypot(dx, dy) || 0.001;
+    const mx = l1 + l2 - 0.5;
+    if (d > mx) { b = [a[0] + dx / d * mx, a[1] + dy / d * mx]; dx = b[0] - a[0]; dy = b[1] - a[1]; d = mx; }
+    const base = Math.atan2(dy, dx), t = Math.acos(Math.max(-1, Math.min(1, (l1 * l1 + d * d - l2 * l2) / (2 * l1 * d))));
+    const j1 = [a[0] + Math.cos(base + t) * l1, a[1] + Math.sin(base + t) * l1], j2 = [a[0] + Math.cos(base - t) * l1, a[1] + Math.sin(base - t) * l1];
+    return [pref(j1, j2) ? j1 : j2, b];
+  }
+  function kfLimb(c, a, b, r1, r2, col) {
+    const dx = b[0] - a[0], dy = b[1] - a[1], d = Math.hypot(dx, dy) || 0.001, nx = -dy / d, ny = dx / d;
+    c.fillStyle = col;
+    c.beginPath(); c.moveTo(a[0] + nx * r1, a[1] + ny * r1); c.lineTo(b[0] + nx * r2, b[1] + ny * r2); c.lineTo(b[0] - nx * r2, b[1] - ny * r2); c.lineTo(a[0] - nx * r1, a[1] - ny * r1); c.closePath(); c.fill();
+    c.beginPath(); c.arc(a[0], a[1], r1, 0, 7); c.fill();
+    c.beginPath(); c.arc(b[0], b[1], r2, 0, 7); c.fill();
+  }
+  // a limb with a dark edge and a soft highlight, so it reads as a real arm or leg
+  function kfLimb3(c, a, b, r1, r2, col) {
+    kfLimb(c, a, b, r1 + 1.8, r2 + 1.8, kfShade(col, -0.5));
+    kfLimb(c, a, b, r1, r2, col);
+    const ga = c.globalAlpha;
+    c.globalAlpha = ga * 0.32;
+    kfLimb(c, [a[0] - r1 * 0.25, a[1] - r1 * 0.35], [b[0] - r2 * 0.25, b[1] - r2 * 0.35], r1 * 0.38, r2 * 0.3, kfShade(col, 0.4));
+    c.globalAlpha = ga;
+  }
+  function kfPose(f, T, i, o) {
+    const weak = o.weak, still = f.act === "idle" || f.act === "block";
+    const b = still ? Math.sin(T * (weak ? 2.4 : 5.5) + i * 1.7) * 3 : 0;
+    const w = f.act === "walk" ? Math.sin(T * 10 + i) : 0;
+    const P = { hip: [0, -126 + b], neck: [8, -214 + b], fH: [56, -204 + b], bH: [32, -196 + b], fF: [34 + w * 18, -Math.max(0, w) * 10], bF: [-30 - w * 18, -Math.max(0, -w) * 10], look: 0, mouth: 0 };
+    if (weak) { P.neck = [18, -198 + b]; P.fH = [44, -150]; P.bH = [28, -146]; P.hip[1] += 6; P.look = 0.35; }
+    if (f.act === "p") { const e = kfExt(f, "p"); P.fH = [56 + 112 * e, -206]; P.neck[0] += 10 * Math.max(0, e); P.hip[0] += 6 * Math.max(0, e); }
+    if (f.act === "k") { const e = Math.max(0, kfExt(f, "k")); P.fF = [40 + 128 * e, -36 - 112 * e]; P.hip[0] -= 10 * e; P.neck[0] -= 14 * e; P.neck[1] += 6 * e; }
+    if (f.act === "block") { P.fH = [46, -240]; P.bH = [36, -226]; P.hip[1] += 6; P.neck[1] += 4; }
+    if (f.act === "hit") { P.neck = [-16, -206]; P.fH = [14, -178]; P.bH = [-8, -172]; P.mouth = 1; P.look = -0.3; }
+    if (f.act === "read") { P.fH = [50, -176]; P.bH = [36, -172]; P.look = 0.45; }
+    if (f.act === "super") { P.hip = [12, -116]; P.neck = [40, -200]; P.fH = [172, -206]; P.fF = [70, 0]; P.bF = [-70, 0]; P.mouth = 1; }
+    if (f.act === "ko") { P.neck = [-6, -212]; P.fH = [30, -120]; P.bH = [-30, -120]; P.mouth = 1; }
+    if (f.act === "cast") { P.fH = [124, -200]; P.bH = [106, -192]; P.neck[0] += 10; P.mouth = 1; }
+    if (f.act === "frozen") { P.mouth = 1; }
+    if (f.act === "dazed") { const sw = Math.sin(T * 5) * 10; P.neck = [sw * 0.8, -206]; P.hip = [sw * 0.3, -122]; P.fH = [26, -140]; P.bH = [6, -136]; P.mouth = 1; P.look = 0.3; }
+    if (o.win) {   // each fighter celebrates their own way
+      const e = o.emote || "pump", w2 = o.wt || 0, s2 = Math.sin(w2 * 7);
+      if (e === "pump") { P.fH = [24, -300 - 18 * Math.max(0, s2)]; P.bH = [-6, -150]; P.neck = [4, -216]; P.look = -0.15; }
+      else if (e === "flex") { P.fH = [66, -246]; P.bH = [-42, -246]; P.neck = [4, -216]; P.look = -0.1; P.mouth = s2 > 0 ? 1 : 0; }
+      else if (e === "bow") { const d2 = Math.min(1, w2 * 1.5); P.neck = [8 + 40 * d2, -214 + 36 * d2]; P.fH = [40 + 20 * d2, -170 + 20 * d2]; P.bH = [30 + 20 * d2, -166 + 20 * d2]; }
+      else { P.hip = [s2 * 10, -126 + Math.abs(s2) * 6]; P.neck = [s2 * 16, -214]; P.fH = [50 + s2 * 20, -250]; P.bH = [-10 - s2 * 20, -240]; P.fF = [40, -Math.max(0, s2) * 16]; P.bF = [-30, -Math.max(0, -s2) * 16]; }
+    }
+    return P;
+  }
+  // ---- Bodies drawn as one smooth outline with muscle shapes, not parts stuck together ----
+  // A smooth line through the joints (elbow or knee rounded off).
+  function kfCurve(pts) {
+    let p = [];
+    for (let s = 0; s < pts.length - 1; s++) for (let i = 0; i < 6; i++) { const t = i / 6; p.push([pts[s][0] + (pts[s + 1][0] - pts[s][0]) * t, pts[s][1] + (pts[s + 1][1] - pts[s][1]) * t]); }
+    p.push(pts[pts.length - 1].slice());
+    for (let k = 0; k < 2; k++) {
+      const q = [p[0]];
+      for (let i = 0; i < p.length - 1; i++) { const a = p[i], b = p[i + 1]; q.push([a[0] * 0.75 + b[0] * 0.25, a[1] * 0.75 + b[1] * 0.25], [a[0] * 0.25 + b[0] * 0.75, a[1] * 0.25 + b[1] * 0.75]); }
+      q.push(p[p.length - 1]);
+      p = q;
+    }
+    return p;
+  }
+  // How thick the limb is along its length: muscles swell, joints narrow.
+  function kfProf(prof, t) {
+    for (let i = 1; i < prof.length; i++) if (t <= prof[i][0]) {
+      const a = prof[i - 1], b = prof[i], u = (t - a[0]) / ((b[0] - a[0]) || 1), s = u * u * (3 - 2 * u);
+      return a[1] + (b[1] - a[1]) * s;
+    }
+    return prof[prof.length - 1][1];
+  }
+  const KF_ARM = [[0, 13.5], [0.18, 12.5], [0.32, 11.5], [0.47, 8.6], [0.6, 10], [0.78, 8.4], [1, 6.6]];
+  const KF_LEG = [[0, 17.5], [0.2, 16.5], [0.38, 13.5], [0.49, 10.2], [0.62, 11.8], [0.8, 8.6], [1, 6.4]];
+  const KF_SLEEVE = [[0, 16], [0.4, 15], [1, 14]];
+  const KF_PANT = [[0, 20], [0.45, 17], [0.55, 15], [1, 13]];
+  const KF_TRUNK = [[0, 19.5], [0.7, 17.5], [1, 17]];
+  // Draws one limb as a single rounded shape with soft cylinder shading.
+  function kfSkin(c, joints, prof, col) {
+    const p = kfCurve(joints), n = p.length, L = [0];
+    for (let i = 1; i < n; i++) L.push(L[i - 1] + Math.hypot(p[i][0] - p[i - 1][0], p[i][1] - p[i - 1][1]));
+    const tot = L[n - 1] || 1, lf = [], rt = [];
+    let maxW = 0;
+    for (let i = 0; i < n; i++) {
+      const a = p[Math.max(0, i - 1)], b = p[Math.min(n - 1, i + 1)];
+      let dx = b[0] - a[0], dy = b[1] - a[1];
+      const d = Math.hypot(dx, dy) || 1; dx /= d; dy /= d;
+      const w = kfProf(prof, L[i] / tot);
+      maxW = Math.max(maxW, w);
+      lf.push([p[i][0] - dy * w, p[i][1] + dx * w]); rt.push([p[i][0] + dy * w, p[i][1] - dx * w]);
+    }
+    const s0 = p[0], e0 = p[n - 1];
+    let nx = -(e0[1] - s0[1]), ny = e0[0] - s0[0];
+    const nd = Math.hypot(nx, ny) || 1; nx /= nd; ny /= nd;
+    if (ny > 0 || (ny === 0 && nx > 0)) { nx = -nx; ny = -ny; }       // light comes from above
+    const mx = (s0[0] + e0[0]) / 2, my = (s0[1] + e0[1]) / 2;
+    const g = c.createLinearGradient(mx + nx * maxW * 1.25, my + ny * maxW * 1.25, mx - nx * maxW * 1.25, my - ny * maxW * 1.25);
+    g.addColorStop(0, kfShade(col, 0.34)); g.addColorStop(0.4, kfShade(col, 0.06)); g.addColorStop(0.85, kfShade(col, -0.08)); g.addColorStop(1, kfShade(col, -0.16));
+    c.fillStyle = g;
+    c.beginPath();
+    c.moveTo(lf[0][0], lf[0][1]);
+    for (const q of lf) c.lineTo(q[0], q[1]);
+    for (let i = n - 1; i >= 0; i--) c.lineTo(rt[i][0], rt[i][1]);
+    c.closePath(); c.fill();
+    c.strokeStyle = "rgba(20,10,5,.28)"; c.lineWidth = 1.2; c.stroke();
+    c.beginPath(); c.arc(s0[0], s0[1], kfProf(prof, 0), 0, 7); c.fill();
+    c.beginPath(); c.arc(e0[0], e0[1], kfProf(prof, 1), 0, 7); c.fill();
+    let ly = 0, ry = 0;
+    for (let i = 0; i < n; i++) { ly += lf[i][1]; ry += rt[i][1]; }
+    const lit = ly < ry ? lf : rt;
+    if (Math.hypot(e0[0] - s0[0], e0[1] - s0[1]) < tot * 0.72) return;   // folded arm: no edge light across it
+    c.strokeStyle = kfShade(col, 0.55); c.lineWidth = 2.2; const ga = c.globalAlpha; c.globalAlpha = ga * 0.45;
+    c.beginPath(); c.moveTo(lit[1][0], lit[1][1]); for (let i = 2; i < n - 1; i++) c.lineTo(lit[i][0], lit[i][1]); c.stroke();
+    c.globalAlpha = ga;
+  }
+  function kfGlove(c, p, dir, ch, sh) {
+    const col = kfShade(ch.gloves, sh);
+    const g = c.createRadialGradient(p[0] + 4, p[1] - 5, 2, p[0], p[1], 15);
+    g.addColorStop(0, kfShade(ch.gloves, sh + 0.28)); g.addColorStop(1, kfShade(ch.gloves, sh - 0.3));
+    c.fillStyle = g;
+    c.beginPath(); c.ellipse(p[0] + 2, p[1], 14, 12.5, 0, 0, 7); c.fill();
+    c.strokeStyle = "rgba(0,0,0,.3)"; c.lineWidth = 1.2; c.stroke();
+    c.fillStyle = kfShade(ch.gloves, sh - 0.12); c.beginPath(); c.ellipse(p[0] + 6, p[1] + 7, 6, 4.5, 0.4, 0, 7); c.fill();   // thumb
+    c.fillStyle = "#F2F2F2"; c.globalAlpha *= 0.85; kfRR(c, p[0] - 13, p[1] - 6, 6, 13, 2.5); c.fill(); c.globalAlpha /= 0.85;  // cuff
+  }
+  // Shorts: a hem at the bottom, a stripe down the side, a soft crease.
+  function kfTrim(c, a, e, ch, sh) {
+    const dx = e[0] - a[0], dy = e[1] - a[1], d = Math.hypot(dx, dy) || 1, ux = dx / d, uy = dy / d, nx = -uy, ny = ux, w = 17.5;
+    c.fillStyle = kfShade(ch.shorts, sh - 0.3);
+    c.beginPath();
+    c.moveTo(e[0] + nx * (w + 1), e[1] + ny * (w + 1)); c.lineTo(e[0] - nx * (w + 1), e[1] - ny * (w + 1));
+    c.lineTo(e[0] - nx * w - ux * 6, e[1] - ny * w - uy * 6); c.lineTo(e[0] + nx * w - ux * 6, e[1] + ny * w - uy * 6);
+    c.closePath(); c.fill();
+    if (ch.stripe) { c.strokeStyle = kfShade(ch.stripe, sh); c.lineWidth = 3.6; c.beginPath(); c.moveTo(a[0] + ux * 10, a[1] + uy * 10); c.lineTo(e[0] - ux * 7, e[1] - uy * 7); c.stroke(); }
+    const ga = c.globalAlpha;
+    c.strokeStyle = kfShade(ch.shorts, sh - 0.25); c.lineWidth = 1.4; c.globalAlpha = ga * 0.55;
+    c.beginPath(); c.moveTo(a[0] + nx * 7 + ux * 14, a[1] + ny * 7 + uy * 14); c.quadraticCurveTo(a[0] + ux * 24, a[1] + uy * 24, a[0] - nx * 9 + ux * 18, a[1] - ny * 9 + uy * 18); c.stroke();
+    c.globalAlpha = ga;
+  }
+  // Trousers: creases at the knee and a cuff at the ankle.
+  function kfFolds(c, kn, ft, col, sh) {
+    const ga = c.globalAlpha;
+    c.strokeStyle = kfShade(col, sh - 0.3); c.lineWidth = 1.6; c.globalAlpha = ga * 0.6;
+    for (let q = 0; q < 2; q++) { c.beginPath(); c.moveTo(kn[0] - 10, kn[1] - 6 + q * 9); c.quadraticCurveTo(kn[0], kn[1] - 2 + q * 9, kn[0] + 11, kn[1] - 8 + q * 9); c.stroke(); }
+    c.globalAlpha = ga;
+    c.fillStyle = kfShade(col, sh - 0.14); kfRR(c, ft[0] - 15, ft[1] - 19, 30, 7, 3); c.fill();
+  }
+  function kfShoe(c, p, ch, sh) {
+    const col = ch.shoes ? kfShade(ch.shoes, sh) : kfShade(ch.skin, sh - 0.08);
+    c.fillStyle = col;
+    c.beginPath();
+    c.moveTo(p[0] - 10, p[1] + 1);
+    c.lineTo(p[0] - 11, p[1] - 9);
+    c.quadraticCurveTo(p[0] - 6, p[1] - 15, p[0] + 1, p[1] - 12);
+    c.quadraticCurveTo(p[0] + 12, p[1] - 9, p[0] + 21, p[1] - 4);
+    c.quadraticCurveTo(p[0] + 26, p[1] - 1, p[0] + 23, p[1] + 2);
+    c.closePath(); c.fill();
+    c.strokeStyle = "rgba(0,0,0,.3)"; c.lineWidth = 1.2; c.stroke();
+    if (ch.shoes) { c.fillStyle = kfShade(ch.shoes, sh - 0.35); c.fillRect(p[0] - 10, p[1] - 1, 33, 3); }
+  }
+  // Torso: neck slope, round shoulders, chest, a waist that narrows, hips.
+  function kfTorsoPath(c, N, H, sF, sB) {
+    c.beginPath();
+    c.moveTo(N[0] - 9, N[1] - 4);
+    c.quadraticCurveTo(sB[0] + 2, sB[1] - 12, sB[0] - 6, sB[1] - 6);
+    c.quadraticCurveTo(sB[0] - 17, sB[1] + 2, sB[0] - 15, sB[1] + 18);
+    c.quadraticCurveTo(sB[0] - 15, (sB[1] + H[1]) / 2 + 6, H[0] - 18, H[1] - 14);
+    c.lineTo(H[0] - 20, H[1] + 2);
+    c.lineTo(H[0] + 20, H[1] + 2);
+    c.lineTo(H[0] + 19, H[1] - 14);
+    c.quadraticCurveTo(H[0] + 25, (N[1] + H[1]) / 2 + 14, sF[0] + 10, N[1] + 54);
+    c.quadraticCurveTo(sF[0] + 20, N[1] + 42, sF[0] + 13, sF[1] + 6);
+    c.quadraticCurveTo(sF[0] + 10, sF[1] - 10, sF[0] - 3, sF[1] - 10);
+    c.quadraticCurveTo(N[0] + 9, N[1] - 2, N[0] + 7, N[1] - 5);
+    c.closePath();
+  }
+  function kfTorso(c, N, H, sF, sB, ch) {
+    const top = ch.gi || ch.top || null;
+    const g = c.createLinearGradient(sB[0] - 16, N[1], sF[0] + 22, H[1]);
+    g.addColorStop(0, kfShade(ch.skin, -0.16)); g.addColorStop(0.55, ch.skin); g.addColorStop(1, kfShade(ch.skin, 0.16));
+    c.fillStyle = g; kfTorsoPath(c, N, H, sF, sB); c.fill();
+    c.strokeStyle = "rgba(20,10,5,.28)"; c.lineWidth = 1.2; c.stroke();
+    if (!top) {
+      // chest and stomach muscles, drawn softly
+      c.strokeStyle = kfShade(ch.skin, -0.32); c.lineWidth = 1.8; c.globalAlpha *= 0.7;
+      c.beginPath(); c.moveTo(N[0] - 4, N[1] + 32); c.quadraticCurveTo(N[0] + 12, N[1] + 48, sF[0] + 15, N[1] + 40); c.stroke();
+      const mx = (N[0] + H[0]) / 2 + 9;
+      c.beginPath(); c.moveTo(mx, N[1] + 54); c.quadraticCurveTo(mx - 2, (N[1] + H[1]) / 2 + 20, mx - 1, H[1] - 20); c.stroke();
+      for (let r = 0; r < 3; r++) { const y = N[1] + 62 + r * 13; c.beginPath(); c.moveTo(mx - 9, y); c.quadraticCurveTo(mx, y + 3, mx + 9, y - 1); c.stroke(); }
+      c.globalAlpha /= 0.7;
+    } else {
+      c.save(); kfTorsoPath(c, N, H, sF, sB); c.clip();
+      const tg = c.createLinearGradient(sB[0] - 16, N[1], sF[0] + 22, H[1]);
+      tg.addColorStop(0, kfShade(top, -0.18)); tg.addColorStop(0.55, top); tg.addColorStop(1, kfShade(top, 0.12));
+      c.fillStyle = tg;
+      if (ch.gi) c.fillRect(-240, N[1] - 20, 480, 400);
+      else {   // a vest: scooped neck, bare shoulders
+        c.beginPath();
+        c.moveTo(sB[0] - 4, sB[1] + 8); c.quadraticCurveTo(N[0] - 2, N[1] + 24, sF[0] + 4, sF[1] + 8);
+        c.lineTo(sF[0] + 40, H[1] - 14); c.lineTo(sB[0] - 40, H[1] - 14); c.closePath(); c.fill();
+        c.strokeStyle = kfShade(top, -0.38); c.lineWidth = 2.6;
+        c.beginPath(); c.moveTo(sB[0] - 4, sB[1] + 8); c.quadraticCurveTo(N[0] - 2, N[1] + 24, sF[0] + 4, sF[1] + 8); c.stroke();
+      }
+      c.strokeStyle = kfShade(top, -0.3); c.lineWidth = 1.6;
+      for (let r = 0; r < 3; r++) { c.beginPath(); c.moveTo(N[0] - 6 + r * 9, H[1] - 30 - r * 14); c.quadraticCurveTo(N[0] + 4 + r * 9, H[1] - 24 - r * 14, N[0] + 12 + r * 9, H[1] - 32 - r * 14); c.globalAlpha *= 0.5; c.stroke(); c.globalAlpha /= 0.5; }
+      if (ch.gi) { c.strokeStyle = kfShade(top, -0.4); c.lineWidth = 3; c.beginPath(); c.moveTo(N[0] - 6, N[1] + 2); c.lineTo(H[0] + 14, H[1] - 30); c.stroke(); }
+      c.restore();
+    }
+  }
+  function kfWaist(c, H, ch) {
+    if (ch.gi) {
+      c.fillStyle = ch.belt; kfRR(c, H[0] - 22, H[1] - 18, 44, 10, 3); c.fill();
+      c.fillStyle = kfShade(ch.belt, 0.15); c.beginPath(); c.moveTo(H[0] + 12, H[1] - 10); c.lineTo(H[0] + 20, H[1] + 14); c.lineTo(H[0] + 13, H[1] + 15); c.lineTo(H[0] + 8, H[1] - 9); c.fill();
+      return;
+    }
+    if (!ch.shorts) return;
+    c.strokeStyle = "#EDE7DA"; c.lineWidth = 1.4;
+    c.beginPath(); c.moveTo(H[0] + 6, H[1] - 16); c.lineTo(H[0] + 4, H[1] - 6); c.moveTo(H[0] + 11, H[1] - 16); c.lineTo(H[0] + 12, H[1] - 6); c.stroke();
+    c.fillStyle = kfShade(ch.shorts, -0.28);
+    c.beginPath(); c.moveTo(H[0] - 21, H[1] - 22); c.quadraticCurveTo(H[0], H[1] - 25, H[0] + 21, H[1] - 21); c.lineTo(H[0] + 21, H[1] - 14); c.quadraticCurveTo(H[0], H[1] - 17, H[0] - 21, H[1] - 15); c.closePath(); c.fill();
+  }
+  // A face in profile: forehead, brow, nose, lips, chin, jaw, ear, eye with a lid.
+  function kfHead(c, N, P, ch) {
+    const hx = N[0] + 7 + P.look * 5, hy = N[1] - 31 + Math.abs(P.look) * 4;
+    const dark = "#16100C", skin = ch.skin;
+    kfSkin(c, [[N[0] + 1, N[1] + 6], [hx - 3, hy + 14]], [[0, 11.5], [1, 9.5]], kfShade(skin, -0.12));
+    if (ch.hair === "afro") { c.fillStyle = dark; c.beginPath(); c.ellipse(hx - 5, hy - 9, 30, 28, 0, 0, 7); c.fill(); }
+    if (ch.hair === "locs") for (let q = 0; q < 6; q++) kfSkin(c, [[hx - 6 - q * 2.5, hy - 16 + q * 3], [hx - 18 - q * 3, hy + 10 + q * 4], [hx - 22 - q * 3, hy + 34 + q * 5]], [[0, 4.4], [1, 3.4]], "#1C130E");
+    if (ch.hair === "braids") kfSkin(c, [[hx - 14, hy - 10], [hx - 26, hy + 8], [hx - 30, hy + 34]], [[0, 6], [1, 3.6]], "#1C130E");
+    const head = () => {
+      c.beginPath();
+      c.moveTo(hx - 11, hy + 19);
+      c.quadraticCurveTo(hx - 21, hy + 10, hx - 19, hy - 3);
+      c.bezierCurveTo(hx - 20, hy - 22, hx + 0, hy - 31, hx + 12, hy - 18);
+      c.quadraticCurveTo(hx + 16, hy - 13, hx + 16, hy - 7);
+      c.quadraticCurveTo(hx + 17, hy - 3, hx + 16.5, hy - 1);
+      c.lineTo(hx + 22, hy + 6);
+      c.quadraticCurveTo(hx + 21, hy + 8.5, hx + 17, hy + 8);
+      c.quadraticCurveTo(hx + 19.5, hy + 10.5, hx + 17.5, hy + 12.5);
+      c.quadraticCurveTo(hx + 18.5, hy + 14.5, hx + 16.5, hy + 16);
+      c.quadraticCurveTo(hx + 18.5, hy + 20, hx + 14, hy + 23);
+      c.quadraticCurveTo(hx + 4, hy + 25, hx - 3, hy + 18);
+      c.quadraticCurveTo(hx - 7, hy + 18, hx - 11, hy + 19);
+      c.closePath();
+    };
+    const g = c.createRadialGradient(hx + 7, hy - 7, 2, hx, hy, 26);
+    g.addColorStop(0, kfShade(skin, 0.24)); g.addColorStop(0.6, skin); g.addColorStop(1, kfShade(skin, -0.14));
+    c.fillStyle = g; head(); c.fill();
+    c.strokeStyle = "rgba(20,10,5,.3)"; c.lineWidth = 1.1; c.stroke();
+    // ear
+    c.fillStyle = kfShade(skin, -0.1); c.beginPath(); c.ellipse(hx - 4, hy + 3, 4.2, 6.2, 0.15, 0, 7); c.fill();
+    c.strokeStyle = kfShade(skin, -0.35); c.lineWidth = 1.2; c.beginPath(); c.arc(hx - 4, hy + 3, 2.6, -1.6, 1.6); c.stroke();
+    // hair on the head
+    c.save(); head(); c.clip();
+    c.fillStyle = dark;
+    if (ch.hair === "fade") { c.beginPath(); c.ellipse(hx - 3, hy - 13, 20, 13, -0.15, Math.PI * 0.95, Math.PI * 2.1); c.fill(); c.globalAlpha *= 0.35; c.fillRect(hx - 22, hy - 10, 12, 18); c.globalAlpha /= 0.35; }
+    if (ch.hair === "afro" || ch.hair === "locs") { c.beginPath(); c.ellipse(hx - 3, hy - 12, 22, 15, -0.1, Math.PI * 0.9, Math.PI * 2.12); c.fill(); }
+    if (ch.hair === "braids") { c.beginPath(); c.ellipse(hx - 3, hy - 12, 21, 14, -0.1, Math.PI * 0.9, Math.PI * 2.1); c.fill(); c.strokeStyle = "#4A3528"; c.lineWidth = 1.4; for (let q = -2; q <= 2; q++) { c.beginPath(); c.moveTo(hx + 8 + q * 5, hy - 22); c.quadraticCurveTo(hx - 2 + q * 5, hy - 16, hx - 14 + q * 3, hy - 6); c.stroke(); } }
+    if (ch.beard) { c.globalAlpha *= 0.92; c.beginPath(); c.moveTo(hx - 4, hy + 6); c.quadraticCurveTo(hx + 2, hy + 26, hx + 15, hy + 23); c.quadraticCurveTo(hx + 19, hy + 18, hx + 16.5, hy + 15); c.quadraticCurveTo(hx + 10, hy + 15, hx + 8, hy + 12); c.quadraticCurveTo(hx + 2, hy + 12, hx - 4, hy + 6); c.fill(); c.globalAlpha /= 0.92; }
+    c.restore();
+    if (ch.hair === "bald") { c.fillStyle = "rgba(255,255,255,.22)"; c.beginPath(); c.ellipse(hx + 3, hy - 17, 7, 3, -0.3, 0, 7); c.fill(); }
+    // eye with an upper lid, brow, nostril, lips
+    c.fillStyle = "#EFE7DD"; c.beginPath(); c.moveTo(hx + 7, hy - 2); c.quadraticCurveTo(hx + 10.5, hy - 5, hx + 14, hy - 2); c.quadraticCurveTo(hx + 10.5, hy + 0.5, hx + 7, hy - 2); c.fill();
+    c.fillStyle = "#24170F"; c.beginPath(); c.arc(hx + 11.6, hy - 2.1, 1.7, 0, 7); c.fill();
+    c.strokeStyle = "#1A100B"; c.lineWidth = 1.4; c.beginPath(); c.moveTo(hx + 6.5, hy - 2.3); c.quadraticCurveTo(hx + 10.5, hy - 5.6, hx + 14.5, hy - 2.4); c.stroke();
+    c.strokeStyle = dark; c.lineWidth = 2.4; c.lineCap = "round"; c.beginPath(); c.moveTo(hx + 5, hy - 8.5); c.quadraticCurveTo(hx + 10, hy - 9.5, hx + 15.5, hy - 6.5); c.stroke();
+    c.fillStyle = kfShade(skin, -0.45); c.beginPath(); c.ellipse(hx + 18.6, hy + 6.3, 1.4, 0.9, 0.3, 0, 7); c.fill();
+    if (P.mouth) { c.fillStyle = "#2A1410"; c.beginPath(); c.ellipse(hx + 15.4, hy + 12.4, 2.4, 3, 0, 0, 7); c.fill(); }
+    else { c.strokeStyle = kfShade(skin, -0.5); c.lineWidth = 1.3; c.beginPath(); c.moveTo(hx + 12.5, hy + 12.3); c.lineTo(hx + 17.8, hy + 12.5); c.stroke(); }
+    c.fillStyle = "rgba(255,255,255,.12)"; c.beginPath(); c.ellipse(hx + 10, hy + 4, 4, 2.4, -0.3, 0, 7); c.fill();   // cheekbone light
+  }
+  function kfBody(c, f, ch, o) {
+    const P = kfPose(f, o.T || 0, o.i || 0, Object.assign({ emote: ch.emote }, o));
+    const skin = ch.skin, skinB = kfShade(skin, -0.2), N = P.neck, H = P.hip;
+    const sF = [N[0] + 14, N[1] + 11], sB = [N[0] - 20, N[1] + 13], hF = [H[0] + 9, H[1]], hB = [H[0] - 9, H[1]];
+    const knee = (j1, j2) => j1[0] > j2[0], elbow = (j1, j2) => j1[1] > j2[1];
+    const [bKnee, bFoot] = kfIK(hB, P.bF, 66, 64, knee), [fKnee, fFoot] = kfIK(hF, P.fF, 66, 64, knee);
+    const [bElb, bHand] = kfIK(sB, P.bH, 50, 48, elbow), [fElb, fHand] = kfIK(sF, P.fH, 50, 48, elbow);
+    const mid = (a, b, t) => [a[0] + (b[0] - a[0]) * t, a[1] + (b[1] - a[1]) * t];
+    const gi = ch.gi;
+    const leg = (hip, kn, ft, sh) => {
+      if (gi) { kfSkin(c, [hip, kn, [ft[0], ft[1] - 4]], KF_PANT, kfShade(gi, sh)); kfFolds(c, kn, ft, gi, sh); }
+      else {
+        kfSkin(c, [hip, kn, [ft[0], ft[1] - 5]], KF_LEG, kfShade(skin, sh));
+        if (ch.shorts) { const a0 = [hip[0], hip[1] - 14], e = mid(hip, kn, 0.5); kfSkin(c, [a0, e], KF_TRUNK, kfShade(ch.shorts, sh)); kfTrim(c, a0, e, ch, sh); }
+      }
+      kfShoe(c, ft, ch, sh);
+    };
+    const arm = (sh0, el, hand, sh) => {
+      kfSkin(c, [sh0, el, hand], KF_ARM, kfShade(skin, sh));
+      if (gi) {
+        const cuff = mid(el, hand, 0.35);
+        kfSkin(c, [sh0, el, cuff], KF_SLEEVE, kfShade(gi, sh));
+        c.fillStyle = kfShade(gi, sh - 0.2); c.beginPath(); c.arc(cuff[0], cuff[1], 13.5, 0, 7); c.fill();
+      }
+    };
+    leg(hB, bKnee, bFoot, -0.12);
+    arm(sB, bElb, bHand, -0.12);
+    kfGlove(c, bHand, 1, ch, -0.12);
+    kfTorso(c, N, H, sF, sB, ch);
+    leg(hF, fKnee, fFoot, 0);
+    kfWaist(c, H, ch);
+    kfHead(c, N, P, ch);
+    arm(sF, fElb, fHand, 0);
+    kfGlove(c, fHand, 1, ch, 0);
+    if (f.act === "read") {
+      c.fillStyle = "#F1ECDC"; kfRR(c, fHand[0] - 8, fHand[1] - 28, 38, 26, 3); c.fill();
+      c.strokeStyle = "#2B4A3A"; c.lineWidth = 1.6; c.beginPath(); c.moveTo(fHand[0] + 11, fHand[1] - 28); c.lineTo(fHand[0] + 11, fHand[1] - 2); c.stroke();
+    }
+  }
+  const kfOff = [null, null];
+  function kfFigure(c, f, ch, k, o) {
+    const i = o.i || 0, sc = ch.build || 1, U = 660, V = 450, oy = V - 30;
+    const w = Math.ceil(U * k), h = Math.ceil(V * k);
+    let off = kfOff[i];
+    if (!off || off.width !== w || off.height !== h) { off = document.createElement("canvas"); off.width = w; off.height = h; kfOff[i] = off; }
+    const x = off.getContext("2d");
+    x.setTransform(1, 0, 0, 1, 0, 0); x.clearRect(0, 0, w, h);
+    x.globalCompositeOperation = "source-over"; x.globalAlpha = 1;
+    x.setTransform(k * sc * f.dir, 0, 0, k * sc, (U / 2) * k, oy * k);
+    if (f.act === "ko") x.rotate(Math.PI / 2 * Math.min(1, f.t * 3));
+    x.lineCap = "round"; x.lineJoin = "round";
+    kfBody(x, f, ch, o);
+    x.setTransform(1, 0, 0, 1, 0, 0);
+    const flash = f.act === "hit" && f.t < 0.09;
+    if (flash || o.weak) {
+      x.globalCompositeOperation = "source-atop";
+      x.fillStyle = flash ? "rgba(255,255,255,.78)" : "rgba(105,112,122,.45)";
+      x.fillRect(0, 0, w, h);
+      x.globalCompositeOperation = "source-over";
+    }
+    c.fillStyle = "rgba(0,0,0,.3)";
+    c.beginPath(); c.ellipse(f.x * k + (f.act === "ko" ? f.dir * 110 * k : 0), (KF.GROUND + 4) * k, (f.act === "ko" ? 140 : 58) * k, 9 * k, 0, 0, 7); c.fill();
+    c.save();
+    if (o.strong) { c.shadowColor = "#FFE27A"; c.shadowBlur = 28 * k; }
+    c.drawImage(off, f.x * k - (U / 2) * k, (KF.GROUND - oy) * k);
+    c.restore();
+  }
+  function KfPortraitMini({ i }) {
+    const ref = useRef(null);
+    useEffect(() => {
+      const cv = ref.current, dpr = Math.min(window.devicePixelRatio || 1, 2);
+      cv.width = Math.round(40 * dpr); cv.height = Math.round(40 * dpr);
+      const x = cv.getContext("2d");
+      const s = 0.6 * dpr;
+      x.setTransform(s, 0, 0, s, 20 * dpr - 16 * s, 24 * dpr + 236 * s);
+      x.lineCap = "round"; x.lineJoin = "round";
+      kfBody(x, { act: "idle", t: 0, dir: 1, x: 0 }, KF_CHARS[i], { T: 0, i });
+    }, [i]);
+    return html`<canvas ref=${ref} style="width:40px;height:40px;border-radius:50%;background:rgba(241,236,220,.12)" aria-hidden="true"></canvas>`;
+  }
+  function KfPortrait({ i }) {
+    const ref = useRef(null);
+    useEffect(() => {
+      const cv = ref.current, dpr = Math.min(window.devicePixelRatio || 1, 2);
+      cv.width = Math.round(84 * dpr); cv.height = Math.round(104 * dpr);
+      const x = cv.getContext("2d");
+      const s = 0.31 * dpr * (KF_CHARS[i].build || 1) / 1.05;
+      x.setTransform(s, 0, 0, s, 40 * dpr, 100 * dpr);
+      x.lineCap = "round"; x.lineJoin = "round";
+      kfBody(x, { act: "idle", t: 0, dir: 1, x: 0 }, KF_CHARS[i], { T: 0, i });
+    }, [i]);
+    return html`<canvas ref=${ref} style="width:84px;height:104px" aria-hidden="true"></canvas>`;
+  }
+
+  function kfBar(c, x, y, w, h, frac, col, back, right) {
+    c.fillStyle = back; c.fillRect(x, y, w, h);
+    c.fillStyle = col;
+    const fw = Math.max(0, Math.min(1, frac)) * w;
+    c.fillRect(right ? x + w - fw : x, y, fw, h);
+    c.strokeStyle = "rgba(241,236,220,.7)"; c.lineWidth = 2; c.strokeRect(x, y, w, h);
+  }
+  function kfDraw(c, g, k, names, T, fxSeen) {
+    const W = KF.W * k, H = KF.H * k;
+    c.clearRect(0, 0, W, H);
+    // floor
+    c.strokeStyle = "rgba(241,236,220,.35)"; c.lineWidth = 3 * k;
+    c.beginPath(); c.moveTo(20 * k, (KF.GROUND + 8) * k); c.lineTo(W - 20 * k, (KF.GROUND + 8) * k); c.stroke();
+    const me = g.f[0], strong = g.S >= 75, weak = g.S < 25;
+    const lk = g.look || [1, 0], nC = KF_CHARS.length;
+    // the camera shakes on big hits
+    const lastFx = g.fx.length ? g.fx[g.fx.length - 1] : null;
+    let shk = 0;
+    if (lastFx && fxSeen.has(lastFx.id) && (lastFx.big || lastFx.sup)) { const age = (performance.now() - fxSeen.get(lastFx.id)) / 1000; if (age < 0.18) shk = (lastFx.sup ? 10 : 6) * k; }
+    c.save();
+    if (shk) c.translate((Math.random() - 0.5) * shk * 2, (Math.random() - 0.5) * shk * 2);
+    kfFigure(c, g.f[1], KF_CHARS[(lk[1] | 0) % nC], k, { T, i: 1, win: g.over && g.win === 1, wt: g.wt });
+    kfFigure(c, me, KF_CHARS[(lk[0] | 0) % nC], k, { T, i: 0, strong, weak, win: g.over && g.win === 0, wt: g.wt });
+    // fireballs and ice blasts
+    for (const p of g.pj || []) {
+      const X = p.x * k, Y = (KF.GROUND - 170) * k, sg = Math.sign(p.v) || 1;
+      c.save();
+      if (p.kind === "fire") {
+        for (let q = 0; q < 6; q++) { c.globalAlpha = 0.55 - q * 0.08; c.fillStyle = q % 2 ? "#FFB347" : "#FF5E3A"; c.beginPath(); c.arc(X - sg * q * 14 * k, Y + Math.sin(T * 30 + q) * 4 * k, (22 - q * 2.5) * k, 0, 7); c.fill(); }
+        c.globalAlpha = 1; c.fillStyle = "#FFF1A8"; c.beginPath(); c.arc(X, Y, 11 * k, 0, 7); c.fill();
+      } else {
+        c.strokeStyle = "#BDEBFF"; c.lineWidth = 4 * k; c.shadowColor = "#7FD3FF"; c.shadowBlur = 14 * k;
+        for (let q = 0; q < 6; q++) { const an = q * Math.PI / 3 + T * 6; c.beginPath(); c.moveTo(X, Y); c.lineTo(X + Math.cos(an) * 20 * k, Y + Math.sin(an) * 20 * k); c.stroke(); }
+        c.shadowBlur = 0; c.globalAlpha = 0.4; c.fillStyle = "#BDEBFF";
+        for (let q = 1; q < 4; q++) { c.beginPath(); c.arc(X - sg * q * 16 * k, Y, (9 - q * 2) * k, 0, 7); c.fill(); }
+      }
+      c.restore();
+    }
+    // frozen in ice; seeing stars
+    g.f.forEach(f => {
+      if (f.act === "frozen") { c.save(); c.globalAlpha = 0.42; c.fillStyle = "#9EDCFF"; kfRR(c, (f.x - 54) * k, (KF.GROUND - 300) * k, 108 * k, 302 * k, 14 * k); c.fill(); c.globalAlpha = 0.85; c.strokeStyle = "#E6F7FF"; c.lineWidth = 3 * k; c.stroke(); c.restore(); }
+      if (f.act === "dazed") { c.save(); c.fillStyle = "#FFE27A"; c.font = 24 * k + "px sans-serif"; c.textAlign = "center"; for (let q = 0; q < 3; q++) { const an = T * 4 + q * 2.1; c.fillText("★", (f.x + Math.cos(an) * 30) * k, (KF.GROUND - 298 + Math.sin(an) * 8) * k); } c.restore(); }
+    });
+    // the reading finisher: a column of fire around the beaten fighter
+    if (g.fatal && g.over) {
+      const f = g.f[1], age = g.wt || 0;
+      c.save();
+      for (let q = 0; q < 14; q++) { const h2 = (120 + 170 * Math.min(1, age)) * k; c.globalAlpha = 0.26; c.fillStyle = q % 2 ? "#FFB347" : "#FF5E3A"; c.beginPath(); c.ellipse((f.x + Math.sin(T * 9 + q) * 20) * k, (KF.GROUND - 30) * k - (q / 14) * h2, (42 - q * 2) * k, 30 * k, 0, 0, 7); c.fill(); }
+      c.restore();
+    }
+    // confetti when he wins
+    if (g.over && g.win === 0 && (g.wt || 0) < 4.5) {
+      c.save();
+      for (let q = 0; q < 42; q++) { c.fillStyle = ["#FFE27A", "#7BE0A0", "#9CC3F5", "#E8675F"][q % 4]; c.fillRect(((q * 97) % 600) * k, (((g.wt || 0) * 170 + q * 53) % 560) * k, 6 * k, 10 * k); }
+      c.restore();
+    }
+    c.restore();
+    // hits
+    const now = performance.now();
+    for (const x of g.fx) {
+      if (!fxSeen.has(x.id)) fxSeen.set(x.id, now);
+      const age = (now - fxSeen.get(x.id)) / 1000;
+      if (age > 0.35) continue;
+      const r = (x.sup ? 70 : x.big ? 46 : 30) * (0.6 + age * 2) * k;
+      c.save(); c.globalAlpha = 1 - age / 0.35;
+      c.strokeStyle = x.blocked ? "#9CC3F5" : x.sup ? "#FFE27A" : "#F1ECDC"; c.lineWidth = 5 * k;
+      c.beginPath();
+      for (let a = 0; a < 10; a++) { const ang = a * Math.PI / 5; c.moveTo(x.x * k + Math.cos(ang) * r * 0.45, x.y * k + Math.sin(ang) * r * 0.45); c.lineTo(x.x * k + Math.cos(ang) * r, x.y * k + Math.sin(ang) * r); }
+      c.stroke(); c.restore();
+    }
+    // bars: his life and strength on the left, the opponent's life on the right
+    const bw = 250 * k, bh = 20 * k;
+    kfBar(c, 24 * k, 20 * k, bw, bh, me.hp / 100, "#F4D36B", "rgba(0,0,0,.35)", false);
+    kfBar(c, W - 24 * k - bw, 20 * k, bw, bh, g.f[1].hp / 100, "#9CC3F5", "rgba(0,0,0,.35)", true);
+    kfBar(c, 24 * k, 50 * k, bw * 0.8, 14 * k, g.S / 100, g.S >= 99.5 ? "#FF9F43" : g.S < 25 ? "#E8675F" : "#7BE0A0", "rgba(0,0,0,.35)", false);
+    c.fillStyle = "#F1ECDC"; c.font = "700 " + 20 * k + "px Andika, sans-serif"; c.textBaseline = "top";
+    c.textAlign = "left"; c.fillText(names[0], 24 * k, 70 * k);
+    c.textAlign = "right"; c.fillText(names[1], W - 24 * k, 50 * k);
+    c.textAlign = "center"; c.font = "700 " + 30 * k + "px Andika, sans-serif"; c.fillText(String(Math.ceil(g.time)), W / 2, 14 * k);
+    if (g.level) { c.font = "700 " + 13 * k + "px Andika, sans-serif"; c.fillStyle = "#FFE27A"; c.fillText("LEVEL " + g.level, W / 2, 48 * k); c.fillStyle = "#F1ECDC"; }
+    if (g.S >= 99.5) { c.font = "700 " + 16 * k + "px Andika, sans-serif"; c.fillStyle = "#FF9F43"; c.textAlign = "left"; c.fillText("SUPER", 24 * k + bw * 0.8 + 8 * k, 48 * k); }
+    // banners
+    c.textAlign = "center"; c.textBaseline = "middle";
+    const banner = (txt, col) => { c.save(); c.font = "700 " + 74 * k + "px Andika, sans-serif"; { const tw = c.measureText(txt).width; if (tw > W * 0.92) c.font = "700 " + Math.floor(74 * k * W * 0.92 / tw) + "px Andika, sans-serif"; } c.fillStyle = col; c.shadowColor = "rgba(0,0,0,.5)"; c.shadowBlur = 12 * k; c.fillText(txt, W / 2, H * 0.42); c.restore(); };
+    if (!g.go) banner("FIGHT!", "#FFE27A");
+    else if (g.over) banner(g.fatal ? "WORD POWER!" : g.time <= 0 && g.f[0].hp > 0 && g.f[1].hp > 0 ? "TIME" : "K.O.", g.fatal ? "#FFB347" : "#E8675F");
+    else if (g.finish) { c.save(); c.globalAlpha = 0.65 + 0.35 * Math.sin(T * 8); banner("READ TO FINISH!", "#FFB347"); c.restore(); }
+    if (g.need && now - g.need < 1200) { c.save(); c.globalAlpha = 1 - (now - g.need) / 1200; c.font = "700 " + 28 * k + "px Andika, sans-serif"; c.fillStyle = "#E8675F"; c.fillText("READ FOR POWER!", me.x * k, (KF.GROUND - 275) * k); c.restore(); }
+    if (g.pw && now - g.pw < 900) { c.save(); c.globalAlpha = 1 - (now - g.pw) / 900; c.font = "700 " + 40 * k + "px Andika, sans-serif"; c.fillStyle = "#7BE0A0"; c.fillText("POWER UP", me.x * k, (KF.GROUND - 260) * k - (now - g.pw) / 20 * k); c.restore(); }
+  }
+
+  function Fight({ mode, student, lessons, ix, uIdx, onClose }) {
+    const host = mode === "host", solo = mode === "solo", client = mode === "live";
+    const wrapRef = useRef(null), cvRef = useRef(null), gRef = useRef(null), prevRef = useRef(null);
+    const keysRef = useRef({ l: 0, r: 0, b: 0 });
+    const poolRef = useRef(null), recentRef = useRef([]);
+    const [ch, setCh] = useState(null);          // his reading or spelling challenge
+    const [typed, setTyped] = useState("");
+    const [judge, setJudge] = useState(null);    // the teacher's ✓ / ✗ for reading aloud
+    const [result, setResult] = useState(null);  // right or wrong, shown for a moment
+    const [ui, setUi] = useState({ over: false, win: -1, sup: false, reading: false });
+    const [round, setRound] = useState(0);
+    const savedLook = (() => { try { const v = parseInt(localStorage.getItem("rc.kf.me") || "", 10); return isNaN(v) ? null : v % KF_CHARS.length; } catch (e) { return null; } })();
+    const [myLook, setMyLook] = useState(savedLook == null ? (host ? 0 : 1) : savedLook);
+    const [pick, setPick] = useState(!host && savedLook == null);   // first fight: he picks his fighter
+    const lookRef = useRef(myLook); lookRef.current = myLook;
+    const pickRef = useRef(pick); pickRef.current = pick;
+    const theirLookRef = useRef(1);   // on your phone: the fighter he picked
+    const chRef = useRef(null); chRef.current = ch;
+    const sentRef = useRef(null);   // on your phone: the word you sent him
+    const name = (student && student.name) || "Student";
+    const names = [name, solo ? "Chalk bot" : "Teacher"];
+
+    const say = m => live.send(m);
+    const levelRef = useRef((() => { try { return Math.max(1, Math.min(5, parseInt(localStorage.getItem("rc.kf.lvl") || "1", 10) || 1)); } catch (e) { return 1; } })());
+    const [help, setHelp] = useState(false);
+    function newGame() {
+      const g = kfNew(solo ? levelRef.current : 0);
+      g.cpu = solo;
+      g.look = solo ? [lookRef.current, (lookRef.current + levelRef.current) % KF_CHARS.length] : [theirLookRef.current, lookRef.current];
+      gRef.current = g;
+      setCh(null); setJudge(null); setResult(null); setTyped("");
+      setUi({ over: false, win: -1, sup: false, reading: false });
+      setTimeout(() => { if (gRef.current === g) { g.go = true; kfSnd("go"); } }, 1100);
+      return g;
+    }
+    // A right answer powers him up; a wrong one drains him.
+    function applyResult(ok, kind, text) {
+      const g = gRef.current;
+      if (!g) return;
+      g.reading = false;
+      if (text) { g.log.push({ text, ok }); kfNoteWord(text, ok); }
+      if (kind === "finish") {   // the reading finisher
+        const b = g.f[1];
+        if (ok) { g.fatal = true; kfSnd("super"); }
+        b.act = "ko"; b.t = 0; g.finish = null; g.slowT = 0.9;
+        return;
+      }
+      if (kind === "super") g.sup = false;
+      if (ok && kind === "super") { g.S = 40; const f = g.f[0]; f.act = "super"; f.t = 0; f.hit = false; }
+      else if (ok) { g.S = Math.min(100, g.S + (kind === "spell" ? 32 : 26)); g.pw = performance.now(); kfSnd("power"); }
+      else { g.S = Math.max(0, g.S - 15); kfSnd("bad"); }
+    }
+    function makeChallenge(sup, fin) {
+      const pool = poolRef.current, g0 = gRef.current, lv = solo ? (g0 && g0.level) || 1 : 3;
+      const force = window.__kfForce;
+      let kind = fin ? "finish" : sup ? "super" : force || (Math.random() < 0.5 ? "spell" : "read");
+      if (solo) kind = fin ? "finish" : sup ? "super" : "spell";
+      const big = kind === "super" || kind === "finish";
+      let text = null, audio = null, how = "read";
+      if (big && !solo && pool.sentences.length && force !== "spell") { text = pool.sentences[Math.floor(Math.random() * pool.sentences.length)]; how = "read"; }
+      else {
+        let w = null;
+        if (kind === "spell" || (big && solo)) { w = kfPick(pool, "spell", recentRef.current, lv); how = "spell"; }
+        if (!w) { w = kfPick(pool, "read", recentRef.current, lv); how = "read"; }
+        if (!w) return null;
+        text = w.text; audio = how === "spell" ? w.audio : null;
+      }
+      return { id: uid(), kind, how, text, audio };
+    }
+    function askPower(sup) {
+      const g = gRef.current;
+      if (!g || !g.go || g.over || chRef.current) return;
+      if (client) { say({ type: "kf-power", sup: !!sup }); return; }
+      const c = makeChallenge(!g.finish && sup, !!g.finish);
+      if (!c) { toast(solo ? "Your teacher hasn't recorded words for you yet." : "No words in the lessons yet."); return; }
+      g.reading = true;
+      setCh(c); setTyped("");
+    }
+    function answer(ok) {
+      const c = chRef.current;
+      if (!c) return;
+      setCh(null); setTyped("");
+      setResult({ ok, text: c.text }); setTimeout(() => setResult(null), 1300);
+      if (client) { say({ type: "kf-ans", id: c.id, ok }); kfNoteWord(c.text, ok); }
+      else applyResult(ok, c.kind, c.text);
+    }
+    function cancelReading() {
+      if (!chRef.current) return;
+      setCh(null); setTyped("");
+      if (client) say({ type: "kf-cancel" });
+      else if (gRef.current) gRef.current.reading = false;
+    }
+    useEffect(() => { window.__kfCh = ch; }, [ch]);
+    // a new fighter picked: tell the game (and your phone, in class)
+    useEffect(() => {
+      try { localStorage.setItem("rc.kf.me", String(myLook)); } catch (e) {}
+      const g = gRef.current;
+      if (client) say({ type: "kf-look", c: myLook });
+      else if (g && g.look) g.look = solo ? [myLook, (myLook + 2) % KF_CHARS.length] : [g.look[0], myLook];
+    }, [myLook]);
+    // play the word he has to spell
+    useEffect(() => { if (ch && ch.how === "spell" && ch.audio) tilePlayer.play("kf:" + ch.id, srcFor(ch.audio)); }, [ch && ch.id]);
+    // challenges time out, so he can't hide in the book forever
+    useEffect(() => { if (!ch) return; const t = setTimeout(() => answer(false), ch.how === "spell" ? 25000 : 20000); return () => clearTimeout(t); }, [ch && ch.id]);
+
+    // messages between the two phones
+    useEffect(() => {
+      const f = m => {
+        if (host) {
+          const g = gRef.current;
+          if (!g) return;
+          if (m.type === "kf-in") { g.f[0].keys = m.keys || { l: 0, r: 0, b: 0 }; if (m.tap) kfTap(g, 0, m.tap); if (m.press) kfPress(g, 0, m.press, kfSnd); }
+          else if (m.type === "kf-look") { theirLookRef.current = (m.c | 0) % KF_CHARS.length; g.look = [theirLookRef.current, g.look[1]]; }
+          else if (m.type === "kf-power") {
+            if (g.reading || g.over || !g.go) return;
+            if (m.sup && !g.sup && !g.finish) return;
+            const c = makeChallenge(!g.finish && !!m.sup, !!g.finish);
+            if (!c) return;
+            g.reading = true;
+            sentRef.current = c;
+            say({ type: "kf-ch", ch: { id: c.id, kind: c.kind, how: c.how, text: c.text, audio: c.audio } });
+            if (c.how === "read") setJudge(c);
+          }
+          else if (m.type === "kf-ans") {
+            const c = sentRef.current;
+            if (!c || c.id !== m.id) return;
+            sentRef.current = null; setJudge(null);
+            applyResult(!!m.ok, c.kind, c.text);
+          }
+          else if (m.type === "kf-cancel") { g.reading = false; sentRef.current = null; setJudge(null); }
+        } else if (client) {
+          if (m.type === "kf-st") {
+            const old = gRef.current, ng = Object.assign(kfUnpack(m.g), { at: performance.now() });
+            ng.pw = old && ng.S - old.S > 15 ? performance.now() : old ? old.pw : 0;
+            ng.need = old && ng.nRaw && ng.nRaw !== old.nRaw ? performance.now() : old ? old.need : 0;
+            if (old && ng.S - old.S > 15) kfSnd("power");
+            if (old && ng.over && !old.over) kfSnd("ko");
+            if (old && !old.go && ng.go) kfSnd("go");
+            prevRef.current = old; gRef.current = ng;
+          }
+          else if (m.type === "kf-ch") { setCh(m.ch); setTyped(""); }
+          else if (m.type === "kf-res") { if (m.text) kfNoteWord(m.text, !!m.ok); if (chRef.current && chRef.current.id === m.id) { setCh(null); setTyped(""); } setResult({ ok: !!m.ok, text: m.text }); setTimeout(() => setResult(null), 1300); }
+          else if (m.type === "kf-start") { gRef.current = null; setCh(null); setResult(null); setRound(r => r + 1); say({ type: "kf-look", c: lookRef.current }); }
+          else if (m.type === "kf-end") onClose();
+        }
+      };
+      kfBus.subs.add(f);
+      return () => kfBus.subs.delete(f);
+    }, []);
+    const judgeRef = useRef(null); judgeRef.current = judge;
+    function judgeIt(ok) {
+      const c = judgeRef.current;
+      if (!c) return;
+      setJudge(null); sentRef.current = null;
+      applyResult(ok, c.kind, c.text);
+      say({ type: "kf-res", id: c.id, ok, text: c.text });
+    }
+
+    // the game loop: simulate (your phone or practice), draw everything
+    useEffect(() => {
+      poolRef.current = kfWords(lessons, uIdx, ix);
+      window.__kf = gRef;
+      if (host || solo) newGame();
+      if (host) say({ type: "kf-start" });
+      if (client) say({ type: "kf-look", c: lookRef.current });
+      const cv = cvRef.current, wrap = wrapRef.current, c = cv.getContext("2d");
+      const fxSeen = new Map();
+      let raf = 0, last = performance.now(), sendAcc = 0, k = 1, lastW = 0, lastH = 0, seenFx = 0;
+      const ai = { t: 0, mode: "go" };
+      const fit = () => {
+        const W = wrap.clientWidth, H = wrap.clientHeight;
+        if (W === lastW && H === lastH) return;
+        lastW = W; lastH = H;
+        const w = Math.max(200, Math.floor(Math.min(W, H * KF.W / KF.H)));
+        const dpr = Math.min(window.devicePixelRatio || 1, 2);
+        cv.width = Math.round(w * dpr); cv.height = Math.round(w * KF.H / KF.W * dpr);
+        cv.style.width = w + "px"; cv.style.height = w * KF.H / KF.W + "px";
+        k = cv.width / KF.W;
+      };
+      const loop = now => {
+        raf = requestAnimationFrame(loop);
+        fit();
+        const dt = Math.min(0.05, (now - last) / 1000);
+        last = now;
+        let g = gRef.current;
+        if (host || solo) {
+          if (g) {
+            if (solo) { g.f[0].keys = keysRef.current; kfCpu(g, dt, ai, kfSnd); }
+            else g.f[1].keys = keysRef.current;
+            const sl = (g.slowT > 0 ? 0.35 : 1) * (solo && pickRef.current ? 0 : 1);   // practice waits while he picks a fighter
+            g.slowT = Math.max(0, (g.slowT || 0) - dt);
+            kfStep(g, dt * sl, kfSnd);
+            if (host) { sendAcc += dt; if (sendAcc > 0.08) { sendAcc = 0; say({ type: "kf-st", g: kfPack(g) }); } }
+          }
+        } else if (g) {
+          // show his phone the fight smoothly between updates
+          const p = prevRef.current;
+          if (p && p.f && g.f) {
+            const a = Math.min(1, (now - g.at) / 90);
+            g = Object.assign({}, g, { f: g.f.map((f, i) => Object.assign({}, f, { x: p.f[i].x + (f.x - p.f[i].x) * a })) });
+          }
+          const top = g.fx.length ? g.fx[g.fx.length - 1].id : 0;
+          if (top > seenFx) { const x = g.fx[g.fx.length - 1]; if (seenFx) kfSnd(x.sup ? "super" : x.blocked ? "block" : x.big ? "big" : "hit"); seenFx = top; }
+        }
+        if (g) {
+          kfDraw(c, g, k, names, now / 1000, fxSeen);
+          const u = { over: !!g.over, win: g.win, sup: !!g.sup, reading: !!g.reading, fin: !!g.finish, dir: g.f[0].dir };
+          setUi(o => (o.over === u.over && o.win === u.win && o.sup === u.sup && o.reading === u.reading && o.fin === u.fin && o.dir === u.dir ? o : u));
+        } else { c.clearRect(0, 0, cv.width, cv.height); }
+      };
+      raf = requestAnimationFrame(loop);
+      // his controls reach your phone even if a message gets lost
+      const resend = client ? setInterval(() => say({ type: "kf-in", keys: keysRef.current }), 250) : 0;
+      return () => { cancelAnimationFrame(raf); clearInterval(resend); if (host) say({ type: "kf-end" }); };
+    }, [round]);
+
+    // buttons: hold to move or block, tap to punch or kick
+    const setKey = (key, v) => {
+      if (keysRef.current[key] === v) return;
+      keysRef.current = Object.assign({}, keysRef.current, { [key]: v });
+      if (client) say({ type: "kf-in", keys: keysRef.current });
+    };
+    const hit = move => {
+      if (client) say({ type: "kf-in", keys: keysRef.current, press: move });
+      else if (gRef.current) kfPress(gRef.current, host ? 1 : 0, move, kfSnd);
+    };
+    const pressDir = key => {
+      keysRef.current = Object.assign({}, keysRef.current, { [key]: 1 });
+      if (client) say({ type: "kf-in", keys: keysRef.current, tap: key === "b" ? null : key });
+      else if (gRef.current && key !== "b") kfTap(gRef.current, host ? 1 : 0, key);
+    };
+    const hold = key => ({
+      onPointerDown: e => { e.preventDefault(); try { e.currentTarget.setPointerCapture(e.pointerId); } catch (x) {} pressDir(key); },
+      onPointerUp: () => setKey(key, 0), onPointerCancel: () => setKey(key, 0), onLostPointerCapture: () => setKey(key, 0),
+    });
+    const tapBtn = fn => ({ onPointerDown: e => { e.preventDefault(); fn(); } });
+    function again() {
+      if (host) { newGame(); say({ type: "kf-start" }); }
+      else if (solo) newGame();
+    }
+    function nextLevel() {
+      levelRef.current = Math.min(5, levelRef.current + 1);
+      try { localStorage.setItem("rc.kf.lvl", String(levelRef.current)); } catch (e) {}
+      newGame();
+    }
+    function restartLadder() { levelRef.current = 1; try { localStorage.setItem("rc.kf.lvl", "1"); } catch (e) {} newGame(); }
+    const me = !host;   // the student's own screen (live or practice)
+    const reading = ch && me;
+    return html`<div class="kf" role="dialog" aria-label="Chalk Kombat">
+      <div class="kfhead">
+        ${host || solo ? html`<button class="iconbtn light" onClick=${onClose} aria-label=${host ? "End the fight" : "Leave"}><${Ic.x} size=${26}/></button>` : html`<span></span>`}
+        <b class="kftitle">Chalk Kombat <button class="kfhelpbtn" onClick=${() => setHelp(true)} aria-label="Special moves">?</button></b>
+        <button class="iconbtn light kfwho" onClick=${() => setPick(true)} aria-label="Choose your fighter"><${KfPortraitMini} i=${myLook}/></button>
+      </div>
+      <div class="kfarena" ref=${wrapRef}><canvas ref=${cvRef} aria-label="The fight"></canvas>
+        ${help ? html`<div class="kfhelp" role="dialog" aria-label="Special moves" onClick=${() => setHelp(false)}>
+          ${(() => { const to = (ui.dir || 1) > 0 ? "▶" : "◀", away = (ui.dir || 1) > 0 ? "◀" : "▶"; return html`
+            <div class="kfcombo"><span class="kfk">${to}</span><span class="kfk">${to}</span><span class="kfk">👊</span><b>=</b><span class="kfbig2">🔥</span></div>
+            <div class="kfcombo"><span class="kfk">${away}</span><span class="kfk">${to}</span><span class="kfk">🦵</span><b>=</b><span class="kfbig2">❄️</span></div>
+            <div class="kfcombo"><span class="kfk kfbook"><${Ic.book} size=${22}/></span><b>=</b><span class="kfbig2">💪</span></div>
+            <p>Fire and ice use up strength. Read to get it back.</p>`; })()}
+        </div>` : null}
+        ${pick ? html`<div class="kfpick" role="dialog" aria-label="Choose your fighter">
+          <div class="kfgrid">${KF_CHARS.map((c2, i) => html`<button key=${i} class=${"kfch" + (i === myLook ? " on" : "")} onClick=${() => { setMyLook(i); setPick(false); }} aria-label=${c2.name}><${KfPortrait} i=${i}/><span>${c2.name}</span></button>`)}</div>
+        </div>` : null}
+        ${result && me ? html`<div class=${"kfres " + (result.ok ? "ok" : "no")}>${result.ok ? html`<${Ic.tick} size=${40} sw=${3}/>` : html`<span class="kfword">${result.text}</span>`}</div>` : null}
+        ${ui.over ? html`<div class="kfover">
+          <div class="kfwin">${ui.win === (host ? 1 : 0) ? (solo && levelRef.current === 5 ? "CHAMPION!" : "YOU WIN") : ui.win === -1 ? "DRAW" : host ? name + " WINS" : "TRY AGAIN"}</div>
+          ${gRef.current && gRef.current.log && gRef.current.log.length ? html`<div class="kfrecap" aria-label="Words in this fight">${gRef.current.log.slice(-8).map((w, i) => html`<span key=${i} class=${w.ok ? "ok" : "no"}>${w.text}</span>`)}</div>` : null}
+          ${solo ? html`<div class="kfagain">
+            ${ui.win === 0 && levelRef.current < 5 ? html`<button class="btn light" onClick=${nextLevel}>Next fighter ▶</button>` : null}
+            ${ui.win === 0 && levelRef.current === 5 ? html`<button class="btn light" onClick=${restartLadder}>Start the ladder again</button>` : null}
+            ${ui.win !== 0 ? html`<button class="btn light" onClick=${again}>Try again</button>` : null}
+            <button class="btn quiet" onClick=${onClose}>Leave</button></div>`
+          : host ? html`<div class="kfagain"><button class="btn light" onClick=${again}>Fight again</button><button class="btn quiet" onClick=${onClose}>End</button></div>` : null}
+        </div>` : null}
+      </div>
+      ${host && judge ? html`<div class="kfjudge">
+        <span>${name} is reading:</span><b class="kfword">${judge.text}</b>
+        <div class="kfjrow"><button class="big kfok" onClick=${() => judgeIt(true)} aria-label="Read it right"><${Ic.tick} size=${30} sw=${3}/></button>
+        <button class="big kfno" onClick=${() => judgeIt(false)} aria-label="Not right"><${Ic.x} size=${30} sw=${3}/></button></div>
+      </div>` : null}
+      ${reading ? html`<div class="kfread">
+        <button class="kfcancel" onClick=${cancelReading} aria-label="Back to fighting"><${Ic.x} size=${22}/></button>
+        ${ch.how === "read"
+          ? html`<div class="kfbig">${ch.text}</div>`
+          : html`<div class="kfspell"><button class="big light" onClick=${() => ch.audio && tilePlayer.play("kf:" + ch.id + ":" + Date.now(), srcFor(ch.audio))} aria-label="Hear the word again"><${Ic.speaker} size=${28}/></button><div class="kftyped">${typed}<span class="caret"></span></div></div>
+            <${LetterKeys} ix=${ix} lessons=${lessons} compact=${true} onKey=${ch2 => setTyped(t => (t + ch2).slice(0, 12))} onBack=${() => setTyped(t => t.slice(0, -1))}
+              onDone=${() => answer(typed.trim().toLowerCase() === String(ch.text).toLowerCase())}/>`}
+      </div>` : html`<div class="kfpad">
+        <div class="kfdir">
+          <button class="kfb" ...${hold("l")} aria-label="Move left"><${Ic.back} size=${30} sw=${3}/></button>
+          <button class="kfb" ...${hold("r")} aria-label="Move right"><${Ic.back} size=${30} sw=${3}/></button>
+        </div>
+        ${me ? html`<div class="kfmid">
+          <button class=${"kfb kfpow" + (ui.fin ? " fin" : ui.sup ? " sup" : "")} ...${tapBtn(() => askPower(ui.sup))} aria-label=${ui.fin ? "Read to finish" : ui.sup ? "Super move" : "Read for strength"}>${ui.fin ? "🔥" : ui.sup ? "⚡" : html`<${Ic.book} size=${30}/>`}</button>
+        </div>` : null}
+        <div class="kfact">
+          <button class="kfb kfhit" ...${tapBtn(() => hit("p"))} aria-label="Punch">👊</button>
+          <button class="kfb kfhit" ...${tapBtn(() => hit("k"))} aria-label="Kick">🦵</button>
+          <button class="kfb" ...${hold("b")} aria-label="Block">🛡️</button>
+        </div>
+      </div>`}
+    </div>`;
+  }
+
   // In-app voice: a direct phone-to-phone audio call (WebRTC). Signals travel over the live channel;
   // a relay (TURN) from the Netlify function keeps it working on mobile data.
   const call = {
@@ -2851,7 +3965,7 @@ notify pgrst, 'reload schema';
       c.restore();
     },
     makeLayout(c, lesson, w, h) {
-      const rowsOf = parseBoard(lesson.board);
+      const rowsOf = parseBoard(lesson.board, lesson.stage === 3);
       let last = null;
       for (let size = 76; size >= 18; size -= 4) {
         c.font = "400 " + size + "px Andika, sans-serif";
@@ -2876,7 +3990,7 @@ notify pgrst, 'reload schema';
       const key = lesson.id + "|" + lesson.board;
       if (this.layoutKey !== key) { this.layout = this.makeLayout(c, lesson, w, h); this.layoutKey = key; }
       const lay = this.layout; if (!lay) return;
-      const rowsOf = parseBoard(lesson.board);
+      const rowsOf = parseBoard(lesson.board, lesson.stage === 3);
       const cp = posOf(rowsOf, L.point && L.point.lesson === lesson.id ? L.point : null);
       const mp = posOf(rowsOf, L.mark && L.mark.lesson === lesson.id ? L.mark : null);
       c.font = "400 " + lay.size + "px Andika, sans-serif"; c.textAlign = "center"; c.textBaseline = "middle";
@@ -3227,7 +4341,7 @@ notify pgrst, 'reload schema';
     return null;
   }
   function Board({ lesson, number, ix, tkey, onTile, points, edit, cue, mark, turn, flash, hint, follow }) {
-    const rowsOf = useMemo(() => parseBoard(lesson.board), [lesson.board]);
+    const rowsOf = useMemo(() => parseBoard(lesson.board, lesson.stage === 3), [lesson.board]);
     const boardRef = useRef(null), stickRef = useRef(null);
     const cp = posOf(rowsOf, cue), mp = posOf(rowsOf, mark), hp = posOf(rowsOf, hint);
     const cpKey = cp ? cp.r + "-" + cp.c : "";
@@ -3246,7 +4360,7 @@ notify pgrst, 'reload schema';
     }, [cpKey, lesson.board, follow]);
     const at = (p, ri, ti) => p && p.r === ri && p.c === ti;
     return html`<div class=${"boardwrap" + (edit ? " edit" : "")}>
-      <div class=${"board" + (cp ? " cueing" : "") + (turn ? " turn" : "")} ref=${boardRef}>
+      <div class=${"board" + (cp ? " cueing" : "") + (turn ? " turn" : "") + (lesson.stage === 3 ? " passage" : "")} ref=${boardRef}>
         <div class="bnum" aria-label=${"Lesson " + number}>${number}</div>
         ${turn ? html`<div class="turnhint" aria-label="Your turn"><${Ic.hand} size=${32}/></div>` : null}
         ${rowsOf.length ? rowsOf.map((row, ri) => html`<div class="brow" key=${ri}>${row.map((t, ti) => {
@@ -3255,7 +4369,7 @@ notify pgrst, 'reload schema';
             (edit ? (snd ? (snd.own ? " own" : " borrow") : " miss") : "") + (points && points.indexOf(t.t) >= 0 ? " pt" : "") +
             (at(cp, ri, ti) ? " cue" : "") + (at(mp, ri, ti) ? " mark" : "") + (at(hp, ri, ti) ? " hint" : "") +
             (flash && flash.r === ri && flash.c === ti ? (flash.ok ? " good" : " bad") : "");
-          return html`<button key=${ti} class=${cls} data-rc=${ri + "-" + ti} onClick=${() => onTile(t, snd, ri, ti)}>${t.t}</button>`;
+          return html`<button key=${ti} class=${cls} data-rc=${ri + "-" + ti} onClick=${() => onTile(t, snd, ri, ti)}>${t.d || t.t}</button>`;
         })}</div>`) : html`<div class="bempty">${edit ? "The board is empty. Write its rows below." : html`<${Ic.wait} size=${40} sw=${1.6}/>`}</div>`}
         <div class="stick" ref=${stickRef} aria-hidden="true"><i></i></div>
       </div>
@@ -3263,7 +4377,7 @@ notify pgrst, 'reload schema';
     </div>`;
   }
 
-  function Rail({ lessons, uIdx, vIdx, unreadBy, teacher, onPick, onBook }) {
+  function Rail({ lessons, uIdx, vIdx, unreadBy, teacher, onPick, onBook, onFight }) {
     const ref = useRef(null);
     useEffect(() => {
       const rail = ref.current; if (!rail) return;
@@ -3271,7 +4385,7 @@ notify pgrst, 'reload schema';
       const left = el.offsetLeft - rail.clientWidth / 2 + el.clientWidth / 2;
       try { rail.scrollTo({ left, behavior: "smooth" }); } catch (e) { rail.scrollLeft = left; }
     }, [vIdx, lessons.length]);
-    return html`<nav class="rail" ref=${ref} aria-label="Lessons">${onBook ? html`<button class="railbook" onClick=${onBook} aria-label="My exercise book"><${Ic.book} size=${22}/></button>` : null}${lessons.map((l, i) => {
+    return html`<nav class="rail" ref=${ref} aria-label="Lessons">${onBook ? html`<button class="railbook" onClick=${onBook} aria-label="My exercise book"><${Ic.book} size=${22}/></button>` : null}${onFight ? html`<button class="railbook railfight" onClick=${onFight} aria-label="Chalk Kombat">🥊</button>` : null}${lessons.map((l, i) => {
       const state = i < uIdx ? "done" : i === uIdx ? "cur" : "locked";
       const can = teacher || i <= uIdx;
       return html`<button key=${l.id} class=${"dot " + state + (i === vIdx ? " view" : "") + (teacher && i === vIdx ? " tview" : "")} disabled=${!can} onClick=${() => onPick(l.id)} aria-label=${"Lesson " + (i + 1)} aria-current=${i === vIdx ? "true" : null}>
@@ -3519,6 +4633,13 @@ notify pgrst, 'reload schema';
     const [lightbox, setLightbox] = useState(null);
     const [editing, setEditing] = useState(!!startEditing);
     const [hwEdit, setHwEdit] = useState(false);
+    const [fight, setFight] = useState(null);
+    useEffect(() => {
+      if (teacher) return;
+      const f = m => { if (m.type === "kf-start") setFight("live"); };
+      kfBus.subs.add(f);
+      return () => kfBus.subs.delete(f);
+    }, [teacher]);
     const [hwRun, setHwRun] = useState(null);
     const [hwRev, setHwRev] = useState(null);
     const [bookOpen, setBookOpen] = useState(false);
@@ -3572,7 +4693,7 @@ notify pgrst, 'reload schema';
     useEffect(() => {
       if (!lesson) return;
       const ids = [];
-      for (const t of uniqueTiles(parseBoard(lesson.board))) { const x = soundFor(ix, lesson.id, t.t); if (x) ids.push(x.rec.audio); }
+      for (const t of uniqueTiles(parseBoard(lesson.board, lesson.stage === 3))) { const x = soundFor(ix, lesson.id, t.t); if (x) ids.push(x.rec.audio); }
       prefetch(ids.slice(0, 160));
     }, [lid, lesson && lesson.board, s.recs]);
     useEffect(() => {
@@ -3703,13 +4824,14 @@ notify pgrst, 'reload schema';
         <button class="iconbtn" onClick=${() => setBookOpen(true)} aria-label="Their exercise book"><${Ic.book} size=${22}/></button>
         <button class="iconbtn" onClick=${() => setEditing(true)} aria-label="Student settings and join link"><${Ic.edit} size=${22}/></button>
       </header>` : null}
-      <${Rail} lessons=${lessons} uIdx=${uIdx} vIdx=${vIdx} unreadBy=${unreadBy} teacher=${teacher} onPick=${setViewId} onBook=${teacher ? null : () => setBookOpen(true)}/>
+      <${Rail} lessons=${lessons} uIdx=${uIdx} vIdx=${vIdx} unreadBy=${unreadBy} teacher=${teacher} onPick=${setViewId} onBook=${teacher ? null : () => setBookOpen(true)} onFight=${teacher ? null : () => setFight("solo")}/>
       ${teacher ? html`<div class="tact">
         ${vIdx === uIdx
           ? html`<button class="btn pass" onClick=${pass}><${Ic.tick} size=${20} sw=${2.8}/>Pass lesson ${vIdx + 1}</button>`
           : html`<button class="btn sec" onClick=${makeCurrent}>Make lesson ${vIdx + 1} the current one</button>`}
         <button class="btn quiet" onClick=${() => setHwEdit(true)}><${Ic.book} size=${18}/>Exercise</button>
         ${!L.on ? html`<button class="btn golive" onClick=${startClass}><${Ic.phone} size=${18}/>Start class</button>` : null}
+        ${L.on && live.sid === student.id ? html`<button class="btn quiet" onClick=${() => setFight("host")}>🥊 Fight</button>` : null}
         <span class="tl">${lesson.title}</span>
       </div>` : null}
       ${teacher && L.on ? html`<${ClassPanel} who=${who} lessonTitle=${lesson.title} lessonNo=${vIdx + 1} studentId=${student.id}/>` : null}
@@ -3728,6 +4850,7 @@ notify pgrst, 'reload schema';
       ${lightbox ? html`<div class="lb" role="dialog" aria-label="Photo" onClick=${() => setLightbox(null)}><div class="imgwrap"><img src=${lightbox} alt="Photo"/></div></div>` : null}
       ${editing ? html`<${StudentSheet} student=${student} onClose=${() => setEditing(false)} onDeleted=${() => { setEditing(false); onBack && onBack(); }}/>` : null}
       ${hwEdit ? html`<${HwEditor} lesson=${lesson} number=${vIdx + 1} student=${student} onClose=${() => setHwEdit(false)}/>` : null}
+      ${fight ? html`<${Fight} key=${fight} mode=${fight} student=${student} lessons=${lessons} ix=${ix} uIdx=${uIdx} onClose=${() => setFight(null)}/>` : null}
       ${hwRun ? html`<${HwRunner} key=${hwRun.hw.id} hw=${hwRun.hw} msgs=${mine} student=${student} ix=${ix} lessons=${lessons} preview=${!!hwRun.preview} onClose=${() => setHwRun(null)}/>` : null}
       ${hwRev ? html`<${HwReview} ans=${hwRev} msgs=${mine} onClose=${() => setHwRev(null)}/>` : null}
       ${bookOpen ? html`<${ExBook} student=${student} msgs=${mine} lessons=${lessons} teacher=${teacher} onOpen=${hw => { setBookOpen(false); openHw(hw); }} onClose=${() => setBookOpen(false)}/>` : null}
@@ -3820,13 +4943,125 @@ notify pgrst, 'reload schema';
     </section>`;
   }
 
+  /* ================= reading passages and ready-made lessons ================= */
+  // Bring in a text or PDF file as a reading passage. No AI: the PDF's own text is read out of it.
+  let pdfjsP = null;
+  function loadPdfJs() {
+    if (pdfjsP) return pdfjsP;
+    pdfjsP = new Promise((res, rej) => {
+      const sc = document.createElement("script");
+      sc.src = "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js";
+      sc.onload = () => { try { window.pdfjsLib.GlobalWorkerOptions.workerSrc = "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js"; res(window.pdfjsLib); } catch (e) { rej(e); } };
+      sc.onerror = () => { pdfjsP = null; rej(new Error("pdf")); };
+      document.head.appendChild(sc);
+    });
+    return pdfjsP;
+  }
+  async function fileToText(file) {
+    const name = String(file.name || "").toLowerCase();
+    if (file.type === "application/pdf" || name.endsWith(".pdf")) {
+      const lib = await loadPdfJs();
+      const pdf = await lib.getDocument({ data: await file.arrayBuffer() }).promise;
+      const out = [];
+      for (let p = 1; p <= Math.min(pdf.numPages, 60); p++) {
+        const tc = await (await pdf.getPage(p)).getTextContent();
+        let line = "";
+        for (const it of tc.items) {
+          line += it.str;
+          if (it.hasEOL) { out.push(line); line = ""; } else if (it.str && !/\s$/.test(it.str)) line += " ";
+        }
+        if (line.trim()) out.push(line);
+        out.push("");
+      }
+      return out.join("\n");
+    }
+    return await file.text();
+  }
+  // Wrapped lines join into paragraphs; a blank line starts a new paragraph.
+  function tidyPassage(text) {
+    return String(text || "").replace(/\r/g, "").replace(/-\n(?=[a-z])/g, "").split(/\n\s*\n/)
+      .map(p => p.replace(/\s*\n\s*/g, " ").replace(/\s+/g, " ").trim()).filter(Boolean).join("\n");
+  }
+  // A long book becomes several lessons of about 150 words, split at paragraph ends.
+  function splitPassage(text, size) {
+    const parts = [];
+    let cur = [], n = 0;
+    for (const para of tidyPassage(text).split("\n")) {
+      const w = para.split(/\s+/).length;
+      if (n && n + w > size * 1.3) { parts.push(cur.join("\n")); cur = []; n = 0; }
+      if (w > size * 1.6) {           // one huge paragraph: cut it at sentence ends
+        let chunk = "";
+        for (const sen of para.match(/[^.!?]+[.!?]*["')\]]*\s*/g) || [para]) {
+          if (chunk && (chunk + sen).split(/\s+/).length > size) { cur.push(chunk.trim()); parts.push(cur.join("\n")); cur = []; n = 0; chunk = ""; }
+          chunk += sen;
+        }
+        if (chunk.trim()) { cur.push(chunk.trim()); n += chunk.split(/\s+/).length; }
+      } else { cur.push(para); n += w; }
+    }
+    if (cur.length) parts.push(cur.join("\n"));
+    return parts.filter(Boolean);
+  }
+  const LESSON_PACKS = [
+    { key: "s2", title: "Stage 2: English rules", about: "12 lessons: sh, ch, th, magic e, ee, ai, oo, ar, soft c and g, endings and tricky words.", lessons: [
+      ["s2-01", 2, 1, "sh, ch, th", "sh ch th\nship shop fish dish\nchip chat much rich\nthin this that bath", "Two letters, one new sound. sh as in ship, ch as in chip, th as in thin. Tell him to look for the pair before he sounds the word out: s-h is not s then h."],
+      ["s2-02", 2, 2, "ck, ng, wh, ph", "ck ng wh ph\nback duck neck sick\nring song long king\nwhen whip what\nphone graph", "More pairs that make one sound. ck says k, ng is the sound at the end of song, wh says w, ph says f."],
+      ["s2-03", 2, 3, "Magic e with a", "cap cape\ntap tape\nmad made\ncan cane\nmake bake take lake game name", "The e at the end is silent, but it makes the a say its name. Read each pair across: cap, cape. This is the rule that fixes most long-vowel mistakes."],
+      ["s2-04", 2, 4, "Magic e with i, o, u", "pin pine\nkit kite\nhop hope\nnot note\ncub cube\ntub tube\nbike ride home bone cute", "Same rule for i, o and u: the silent e makes the vowel say its name."],
+      ["s2-05", 2, 5, "ee and ea", "ee ea\nsee tree feet week\nsea eat read meat\nbee bean seed leaf", "Two vowels together: the first one says its name, the second is quiet. ee and ea both say the long e."],
+      ["s2-06", 2, 6, "ai and ay", "ai ay\nrain wait mail tail\nday play say way\npaint stay train", "ai and ay both say the long a. ay usually comes at the end of a word."],
+      ["s2-07", 2, 7, "oa, ow, oo", "oa ow oo\nboat coat road\nslow snow grow\nfood moon room\nbook look good", "oa and ow (in snow) say the long o. oo has two sounds: long in moon, short in book."],
+      ["s2-08", 2, 8, "ar, or, er, ir, ur", "ar or er ir ur\ncar park farm\nfor fork corn\nher bird turn\nshirt nurse first", "An r after a vowel changes it. ar as in car, or as in for, and er, ir, ur all make the same sound as in her."],
+      ["s2-09", 2, 9, "Soft c and soft g", "ce ci cy\nface ice city cent\nge gi gy\npage age gym giant", "Before e, i or y, c usually says s and g usually says j. This is the rule we kept away from in Stage 1."],
+      ["s2-10", 2, 10, "Endings: -s, -ed, -ing", "cats dogs bags\njumped played wanted\njumping playing reading", "Find the word you know, then add the ending. -ed can sound like t, d or id."],
+      ["s2-11", 2, 11, "Tricky words", "the said was you they\nwhat where who come some\none two are were your", "Common words that don't follow the rules. Learn them by sight, a few at a time, and keep coming back to them."],
+      ["s2-12", 2, 12, "Sentences with the new rules", "The ship is in the sea.\nI see a cat on the boat.\nShe made a cake for me.\nWe play in the park.", "Real sentences using Stage 2 rules. Have him read each one to you, then read it back to him smoothly."],
+    ] },
+    { key: "s3", title: "Stage 3: First reading passages", about: "2 short passages he can read with you. Add your own by pasting text or a PDF.", lessons: [
+      ["s3-01", 3, 1, "The red bus", "Sam got on the bus. The bus was red.\nSam sat at the back. He had a bag and a hat.\nThe bus went up the hill and down the hill. It was fun!", "A short story using only Stage 1 skills and a few sight words. Read it to him first with the stick, then let him read it back while pointing at each word."],
+      ["s3-02", 3, 2, "At the shop", "Tembo went to the shop to get milk and bread.\nThe shop was big. It had lots of things to eat.\nHe paid the man, put the milk in his bag and went home.", "Uses sh, th, ee and a few tricky words from Stage 2. Ask him a question after each line: who, where, what."],
+    ] },
+  ];
+  async function addPack(pack, s) {
+    const have = new Set(s.lessons.map(l => l.id));
+    let added = 0;
+    for (const [id, stage, order, title, board, note] of pack.lessons) {
+      if (have.has(id)) continue;
+      await rt.db.collection("lessons").doc(id).set({ stage, order, title, board, note, explain: null, explainSecs: 0, updatedAt: Date.now() });
+      added++;
+    }
+    return added;
+  }
+  function PacksSheet({ s, onClose }) {
+    const [busy, setBusy] = useState(null);
+    const have = new Set(s.lessons.map(l => l.id));
+    return html`<div class="scrim" onClick=${e => { if (e.target === e.currentTarget) onClose(); }}>
+      <div class="sheet" role="dialog" aria-label="Ready-made lessons">
+        <b>Ready-made lessons</b>
+        <p class="help">These are added after your own lessons, with notes on what to explain. You still record your voice and the tiles.</p>
+        ${LESSON_PACKS.map(p => {
+          const left = p.lessons.filter(l => !have.has(l[0])).length;
+          return html`<div class="card" key=${p.key}>
+            <b>${p.title}</b><p class="help">${p.about}</p>
+            <button class="btn" disabled=${!left || busy} onClick=${async () => {
+              setBusy(p.key);
+              try { const n = await addPack(p, s); toast(n ? "Added " + n + " lessons." : "Already added."); } catch (e) { toast(errText(e)); }
+              setBusy(null);
+            }}>${busy === p.key ? "Adding…" : left ? "Add " + left + " lessons" : "Added"}</button>
+          </div>`;
+        })}
+        <button class="btn quiet" onClick=${onClose}>Close</button>
+      </div>
+    </div>`;
+  }
+
   function LessonsList({ s, ix, onOpen }) {
-    async function add() {
-      const stage = s.lessons.length ? s.lessons[s.lessons.length - 1].stage || 1 : 1;
+    const [packs, setPacks] = useState(false);
+    async function add(reading) {
+      const stage = reading ? 3 : s.lessons.length ? s.lessons[s.lessons.length - 1].stage || 1 : 1;
       const order = s.lessons.filter(l => (l.stage || 1) === stage).reduce((m, l) => Math.max(m, l.order || 0), 0) + 1;
       const ref = rt.db.collection("lessons").doc();
       try {
-        await ref.set({ stage, order, title: "New lesson", note: "", board: "", explain: null, explainSecs: 0, updatedAt: Date.now() });
+        await ref.set({ stage, order, title: reading ? "New reading passage" : "New lesson", note: "", board: "", explain: null, explainSecs: 0, updatedAt: Date.now() });
         onOpen(ref.id);
       } catch (e) { toast(errText(e)); }
     }
@@ -3835,7 +5070,7 @@ notify pgrst, 'reload schema';
       ${s.lessons.length ? s.lessons.map((l, i) => {
         const stg = l.stage || 1, head = stg !== lastStage;
         lastStage = stg;
-        const tiles = uniqueTiles(parseBoard(l.board));
+        const tiles = uniqueTiles(parseBoard(l.board, l.stage === 3));
         let ok = 0;
         for (const t of tiles) if (soundFor(ix, l.id, t.t)) ok++;
         return html`<${Fragment} key=${l.id}>
@@ -3850,7 +5085,10 @@ notify pgrst, 'reload schema';
           </button>
         </${Fragment}>`;
       }) : html`<div class="empty"><p>No lessons yet. Add the first one.</p></div>`}
-      <button class="btn sec" onClick=${add}><${Ic.plus} size=${20}/>Add a lesson</button>
+      <button class="btn sec" onClick=${() => add(false)}><${Ic.plus} size=${20}/>Add a lesson</button>
+      <button class="btn sec" onClick=${() => add(true)}><${Ic.book} size=${20}/>Add a reading passage</button>
+      <button class="btn quiet" onClick=${() => setPacks(true)}><${Ic.plus} size=${20}/>Ready-made lessons</button>
+      ${packs ? html`<${PacksSheet} s=${s} onClose=${() => setPacks(false)}/>` : null}
     </section>`;
   }
 
@@ -4017,7 +5255,7 @@ notify pgrst, 'reload schema';
 
   function StepRecorder({ ix, lesson, onClose }) {
     const [list] = useState(() => {
-      const tiles = uniqueTiles(parseBoard(lesson.board));
+      const tiles = uniqueTiles(parseBoard(lesson.board, lesson.stage === 3));
       const missing = tiles.filter(t => !soundFor(ix, lesson.id, t.t));
       return missing.length ? missing : tiles;
     });
@@ -4153,6 +5391,37 @@ notify pgrst, 'reload schema';
     const [note, setNote] = useState(lesson.note || "");
     const [board, setBoard] = useState(lesson.board || "");
     const [dirty, setDirty] = useState(false);
+    const [importing, setImporting] = useState(false);
+    const [split, setSplit] = useState(null);
+    const importRef = useRef(null);
+    async function importFile(e) {
+      const f = e.target.files && e.target.files[0]; e.target.value = "";
+      if (!f) return;
+      setImporting(true);
+      try {
+        const all = tidyPassage(await fileToText(f));
+        const words = all ? all.split(/\s+/).length : 0;
+        if (!words) toast("No text found in that file. If it's a scanned book, type the page in instead.");
+        else if (words > 220) setSplit({ all, words, parts: splitPassage(all, 150), name: String(f.name || "Book").replace(/\.[^.]+$/, "") });
+        else { setBoard(all); setDirty(true); toast("Imported. Check it, then tap Save passage."); }
+      } catch (err) { toast("Couldn't read that file. Try a .txt or a PDF that has real text in it."); }
+      setImporting(false);
+    }
+    async function splitIntoLessons() {
+      const sp = split;
+      setSplit(null);
+      try {
+        const title = (lesson.title && lesson.title !== "New reading passage") ? lesson.title : sp.name;
+        await update("lessons/" + lesson.id, { board: sp.parts[0], title: title + ", part 1", updatedAt: Date.now() });
+        setBoard(sp.parts[0]); setDirty(false);
+        const later = s.lessons.filter(l => (l.stage || 1) === 3 && (l.order || 0) > (lesson.order || 0));
+        for (const l of later) await update("lessons/" + l.id, { order: (l.order || 0) + sp.parts.length - 1 });
+        for (let i = 1; i < sp.parts.length; i++) {
+          await rt.db.collection("lessons").doc().set({ stage: 3, order: (lesson.order || 0) + i, title: title + ", part " + (i + 1), note: "", board: sp.parts[i], explain: null, explainSecs: 0, updatedAt: Date.now() });
+        }
+        toast("Made " + sp.parts.length + " reading lessons.");
+      } catch (err) { toast(errText(err)); }
+    }
     const [stepOpen, setStepOpen] = useState(false);
     const [studio, setStudio] = useState(false);
     const [tile, setTile] = useState(null);
@@ -4160,7 +5429,7 @@ notify pgrst, 'reload schema';
     useEffect(() => { if (!dirty) setBoard(lesson.board || ""); }, [lesson.board]);
     useEffect(() => { if (!armDel) return; const t = setTimeout(() => setArmDel(false), 3500); return () => clearTimeout(t); }, [armDel]);
     useEffect(() => () => player.stop(), []);
-    const rowsOf = useMemo(() => parseBoard(lesson.board), [lesson.board]);
+    const rowsOf = useMemo(() => parseBoard(lesson.board, lesson.stage === 3), [lesson.board]);
     const tiles = useMemo(() => uniqueTiles(rowsOf), [rowsOf]);
     let own = 0, bor = 0, miss = 0;
     for (const t of tiles) { const x = soundFor(ix, lesson.id, t.t); if (!x) miss++; else if (x.own) own++; else bor++; }
@@ -4229,11 +5498,25 @@ notify pgrst, 'reload schema';
           <button class="btn" disabled=${!tiles.length} onClick=${() => { player.stop(); setStepOpen(true); }}><${Ic.mic} size=${20}/>${miss ? "Record the " + miss + " missing, one by one" : "Re-record every tile, one by one"}</button>
         </div>
         <div class="card">
-          <label class="lbl" for="bt">Edit the board</label>
+          <label class="lbl" for="bt">${lesson.stage === 3 ? "The passage" : "Edit the board"}</label>
           <textarea id="bt" class="boardtxt" rows=${Math.min(14, Math.max(4, board.split("\n").length + 1))} value=${board}
             onInput=${e => { setBoard(e.target.value); setDirty(true); }} spellcheck=${false} autocapitalize="off" autocomplete="off"></textarea>
-          <p class="help">One row per line. Tiles are split by spaces. A line ending in . ? or ! stays whole as one sentence.</p>
-          <button class="btn sec" disabled=${!dirty} onClick=${saveBoard}>Save board</button>
+          <p class="help">${lesson.stage === 3
+            ? "Type or paste the text. Each new line starts a new paragraph. Every word becomes something he can tap to hear, using any recording of that word from earlier lessons."
+            : "One row per line. Tiles are split by spaces. A line ending in . ? or ! stays whole as one sentence."}</p>
+          ${lesson.stage === 3 ? html`<div class="row2">
+            <button class="btn quiet" disabled=${importing} onClick=${() => importRef.current && importRef.current.click()}><${Ic.upload} size=${18}/>${importing ? "Reading the file…" : "Import a text or PDF file"}</button>
+            <input ref=${importRef} type="file" accept=".txt,.pdf,text/plain,application/pdf" style="display:none" onChange=${importFile}/>
+          </div>` : null}
+          ${split ? html`<div class="card splitask">
+            <b>That's ${split.words} words.</b>
+            <p class="help">Long texts are easier in short sittings. Split it into ${split.parts.length} lessons of about 150 words, one after another?</p>
+            <div class="row2">
+              <button class="btn" onClick=${splitIntoLessons}>Split into ${split.parts.length} lessons</button>
+              <button class="btn quiet" onClick=${() => { setBoard(split.all); setDirty(true); setSplit(null); }}>Keep it all here</button>
+            </div>
+          </div>` : null}
+          <button class="btn sec" disabled=${!dirty} onClick=${saveBoard}>Save ${lesson.stage === 3 ? "passage" : "board"}</button>
         </div>
         <div class="row2">
           <button class="btn quiet" onClick=${() => move(-1)}><${Ic.up} size=${20}/>Move earlier</button>
@@ -4502,7 +5785,8 @@ notify pgrst, 'reload schema';
     return html`${body}${s.toast ? html`<div class="toast" role="status" key=${s.toast.id}>${s.toast.text}</div>` : null}`;
   }
 
-  window.__rc = { call, live, classRec, wb };
+  window.__rc = { call, live, classRec, wb, tilePlayer };
+  window.__kfArt = { kfBody, KF_CHARS };
   root.innerHTML = "";
   render(html`<${App}/>`, root);
   boot();
