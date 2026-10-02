@@ -659,7 +659,7 @@ img{max-width:100%}
 .frbtns{display:grid;grid-template-columns:repeat(2,64px);gap:8px}
 .frbtn{width:64px;height:64px;border-radius:50%;border:0;background:rgba(16,28,22,.55);box-shadow:inset 0 0 0 2px rgba(241,236,220,.3);font-size:28px;touch-action:none}
 .frbtn.wide{grid-column:span 2;width:auto;border-radius:32px}
-.frbtn.frbook{background:#1F7A4D;box-shadow:0 0 0 4px rgba(31,122,77,.35);align-self:center;margin-bottom:30px}
+.frbtn.frbook{background:#1F7A4D;box-shadow:0 0 0 4px rgba(31,122,77,.35);align-self:center;margin-bottom:30px;width:64px;height:64px;flex:0 0 64px}
 .frread .kfbig,.frread .kftyped{color:#F1ECDC}
 .frread{position:absolute;left:50%;bottom:8px;transform:translateX(-50%);width:min(94%,560px);z-index:4;background:rgba(14,26,20,.93);border-radius:16px;padding:8px}
 .msg.flash{animation:msgflash 2.4s ease}
@@ -691,6 +691,11 @@ img{max-width:100%}
 .frrow span{flex:0 0 74px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .frrow .frbar{height:11px}
 .frrow.mine .frbar i{background:#F4D36B}.frrow.mate .frbar i{background:#7BE0A0}.frrow:not(.mine):not(.mate) .frbar i{background:#9CC3F5}
+.wbsize{position:absolute;right:10px;bottom:10px;display:flex;gap:8px;z-index:3}
+.wbsize button{width:54px;height:54px;border-radius:14px;border:0;background:rgba(241,236,220,.94);color:#1B2B22;font:700 21px var(--font);box-shadow:0 2px 8px rgba(0,0,0,.3)}
+.pushcard{display:flex;align-items:center;gap:12px;width:calc(100% - 4px);margin:4px 2px 12px;border:1px solid #CFE3F7;background:#EEF6FE;border-radius:14px;padding:12px 14px;text-align:left;font:inherit;color:inherit}
+.pushcard > span:first-child{font-size:24px}
+.pushcard small{display:block;color:#5B6B7B;margin-top:2px;line-height:1.35}
 /* ---------- setup and sign in ---------- */
 .setup{max-width:560px;margin:0 auto;padding:24px 16px 56px;display:flex;flex-direction:column;gap:16px}
 .setup h1{margin:0;font-size:28px;line-height:1.15}
@@ -775,7 +780,35 @@ exception when duplicate_object or undefined_object then null;
 end
 $$;
 
-create or replace function public.schema_version() returns int language sql immutable as $$ select 4 $$;
+-- phone notifications: each phone's push address; who may notify whom is decided here
+create table if not exists public.push_subs (
+  endpoint text primary key,
+  user_id uuid not null default auth.uid(),
+  student text,
+  p256dh text not null,
+  auth text not null,
+  created_at timestamptz not null default now()
+);
+alter table public.push_subs enable row level security;
+drop policy if exists "own push subs" on public.push_subs;
+create policy "own push subs" on public.push_subs for all to authenticated
+  using (user_id = auth.uid())
+  with check (user_id = auth.uid() and ((student is null and public.is_teacher()) or student = public.my_student()));
+create or replace function public.push_targets(p_to text, p_student text)
+returns table (endpoint text, p256dh text, auth text) language sql stable security definer set search_path = public as $$
+  select s.endpoint, s.p256dh, s.auth from public.push_subs s
+  where (p_to = 'teacher' and public.my_student() is not null and s.student is null)
+     or (p_to = 'student' and public.is_teacher() and s.student = p_student);
+$$;
+revoke all on function public.push_targets(text, text) from public;
+grant execute on function public.push_targets(text, text) to authenticated;
+create or replace function public.push_gone(p_endpoint text) returns void language sql security definer set search_path = public as $$
+  delete from public.push_subs where endpoint = p_endpoint;
+$$;
+revoke all on function public.push_gone(text) from public;
+grant execute on function public.push_gone(text) to authenticated;
+
+create or replace function public.schema_version() returns int language sql immutable as $$ select 5 $$;
 grant execute on function public.schema_version() to anon, authenticated;
 notify pgrst, 'reload schema';
 </script>
@@ -1125,7 +1158,35 @@ exception when duplicate_object or undefined_object then null;
 end
 $$;
 
-create or replace function public.schema_version() returns int language sql immutable as $$ select 4 $$;
+-- phone notifications: each phone's push address; who may notify whom is decided here
+create table if not exists public.push_subs (
+  endpoint text primary key,
+  user_id uuid not null default auth.uid(),
+  student text,
+  p256dh text not null,
+  auth text not null,
+  created_at timestamptz not null default now()
+);
+alter table public.push_subs enable row level security;
+drop policy if exists "own push subs" on public.push_subs;
+create policy "own push subs" on public.push_subs for all to authenticated
+  using (user_id = auth.uid())
+  with check (user_id = auth.uid() and ((student is null and public.is_teacher()) or student = public.my_student()));
+create or replace function public.push_targets(p_to text, p_student text)
+returns table (endpoint text, p256dh text, auth text) language sql stable security definer set search_path = public as $$
+  select s.endpoint, s.p256dh, s.auth from public.push_subs s
+  where (p_to = 'teacher' and public.my_student() is not null and s.student is null)
+     or (p_to = 'student' and public.is_teacher() and s.student = p_student);
+$$;
+revoke all on function public.push_targets(text, text) from public;
+grant execute on function public.push_targets(text, text) to authenticated;
+create or replace function public.push_gone(p_endpoint text) returns void language sql security definer set search_path = public as $$
+  delete from public.push_subs where endpoint = p_endpoint;
+$$;
+revoke all on function public.push_gone(text) from public;
+grant execute on function public.push_gone(text) to authenticated;
+
+create or replace function public.schema_version() returns int language sql immutable as $$ select 5 $$;
 grant execute on function public.schema_version() to anon, authenticated;
 notify pgrst, 'reload schema';
 </script>
@@ -1544,10 +1605,10 @@ notify pgrst, 'reload schema';
     try { const a = await sb.from("live").select("id").limit(1); hasLive = !a.error; } catch (e) {}
     if (who.teacher) { try { const pr = await sb.from("lessons").select("cues").limit(1); hasCues = !pr.error; } catch (e) {} }
     let ver = 0;
-    if (who.teacher) { try { const v = await sb.rpc("schema_version"); ver = v.error ? 0 : Number(v.data) || 0; } catch (e) {} }
+    try { const v = await sb.rpc("schema_version"); ver = v.error ? 0 : Number(v.data) || 0; } catch (e) {}   // every phone: students need it for notifications
     let hasExpl = false;
     try { const x = await sb.from("explains").select("id").limit(1); hasExpl = !x.error; } catch (e) {}
-    store.set({ hasLive, hasExpl, needsUpdate: !!who.teacher && (!hasLive || !hasCues || ver < 4) });
+    store.set({ hasLive, hasExpl, schemaVer: ver, needsUpdate: !!who.teacher && (!hasLive || !hasCues || ver < 5) });
     await loadAll();
     subscribe();
     store.set({ phase: "ready" });
@@ -2049,6 +2110,47 @@ notify pgrst, 'reload schema';
     if (w > maxW) { size = size * maxW / w; w = maxW; }
     return { x0: s.x - w / 2 - 18, x1: s.x + w / 2 + 18, y0: s.y - size * 0.62 - 12, y1: s.y + size * 0.62 + 12 };
   }
+  // Handwriting: chalk strokes close together make one word, so a thumb can pick the whole word up.
+  const isInk = s => s.tool === "chalk" || s.tool === "pen";
+  function strokeBox(s) {
+    const p = s.pts || [], r = (s.w || 13) / 2;
+    let x0 = 1e9, y0 = 1e9, x1 = -1e9, y1 = -1e9;
+    for (let i = 0; i < p.length; i += 2) { const x = p[i], y = p[i + 1]; if (x < x0) x0 = x; if (x > x1) x1 = x; if (y < y0) y0 = y; if (y > y1) y1 = y; }
+    return { x0: x0 - r, y0: y0 - r, x1: x1 + r, y1: y1 + r };
+  }
+  function hitInk(x, y) {
+    let best = null, bd = 45 * 45;
+    for (const s of wb.strokes) {
+      if (!isInk(s)) continue;
+      const p = s.pts || [];
+      for (let i = 0; i < p.length; i += 2) { const dx = p[i] - x, dy = p[i + 1] - y, d = dx * dx + dy * dy; if (d < bd) { bd = d; best = s; } }
+    }
+    if (best) return best;
+    // a thumb inside a letter (the middle of an "a" or "o") picks it up too
+    let area = 1e12;
+    for (const s of wb.strokes) {
+      if (!isInk(s)) continue;
+      const b = strokeBox(s), a = (b.x1 - b.x0) * (b.y1 - b.y0);
+      if (x >= b.x0 - 20 && x <= b.x1 + 20 && y >= b.y0 - 20 && y <= b.y1 + 20 && a < area) { area = a; best = s; }
+    }
+    return best;
+  }
+  function inkGroup(seed) {
+    const ink = wb.strokes.filter(isInk), box = new Map(ink.map(s => [s, strokeBox(s)]));
+    // letters of one word sit closer than about half a letter's height; bigger handwriting, bigger gaps
+    const hs = ink.map(s => box.get(s).y1 - box.get(s).y0).filter(h => h > 40).sort((a, b) => a - b);
+    const G = Math.max(30, Math.min(140, (hs.length ? hs[hs.length >> 1] : 90) * 0.55));
+    const out = new Set([seed]), q = [seed];
+    while (q.length) {
+      const a = box.get(q.pop());
+      for (const s of ink) {
+        if (out.has(s)) continue;
+        const b = box.get(s);
+        if (b.x0 - G <= a.x1 && a.x0 - G <= b.x1 && b.y0 - G * 0.6 <= a.y1 && a.y0 - G * 0.6 <= b.y1) { out.add(s); q.push(s); }
+      }
+    }
+    return [...out];
+  }
   function hitText(x, y) {
     for (let i = wb.strokes.length - 1; i >= 0; i--) {
       const s = wb.strokes[i];
@@ -2122,6 +2224,57 @@ notify pgrst, 'reload schema';
   function hasAnswer(a) { return !!(a && ((a.text && a.text.trim()) || (a.strokes && a.strokes.length) || a.blob || a.audio)); }
   async function sendRow(data) {
     await retry(() => rt.db.collection("msgs").doc().set(Object.assign({ hw: false, point: [], seen: false, secs: 0, asset: null, cid: uid() }, data)));
+    pushAbout(data);
+  }
+  /* ================= phone notifications ================= */
+  const b64uBytes = s => { const b = atob(String(s).replace(/-/g, "+").replace(/_/g, "/") + "===".slice((String(s).length + 3) % 4)); return Uint8Array.from(b, c => c.charCodeAt(0)); };
+  const push = {
+    ok() { return "serviceWorker" in navigator && "PushManager" in window && "Notification" in window; },
+    needsHome() { return IS_IOS && !(navigator.standalone || (window.matchMedia && matchMedia("(display-mode: standalone)").matches)); },
+    isOn() { try { return localStorage.getItem("rc.push") === "on" && Notification.permission === "granted"; } catch (e) { return false; } },
+    async on(studentId) {
+      const c = await fetch("/.netlify/functions/config", { cache: "no-store" }).then(r => r.json()).catch(() => ({}));
+      if (!c.vapid) throw new Error("novapid");
+      const reg = await navigator.serviceWorker.register("sw.js");
+      if ((await Notification.requestPermission()) !== "granted") throw new Error("denied");
+      let sub = await reg.pushManager.getSubscription();
+      if (!sub) sub = await reg.pushManager.subscribe({ userVisibleOnly: true, applicationServerKey: b64uBytes(c.vapid) });
+      const j = sub.toJSON();
+      const r = await sb.from("push_subs").upsert({ endpoint: j.endpoint, p256dh: j.keys.p256dh, auth: j.keys.auth, student: studentId || null });
+      if (r.error) throw r.error;
+      try { localStorage.setItem("rc.push", "on"); } catch (e) {}
+    },
+  };
+  async function pushSend(b) {
+    try {
+      const { data } = await sb.auth.getSession(), tok = data && data.session && data.session.access_token;
+      if (!tok) return;
+      await fetch("/.netlify/functions/push", { method: "POST", headers: { "content-type": "application/json", authorization: "Bearer " + tok }, body: JSON.stringify(b) });
+    } catch (e) {}
+  }
+  // A question (or homework) from a student buzzes the teacher; the teacher's answer buzzes that student.
+  function pushAbout(m) {
+    try {
+      if (!m || (store.s.schemaVer || 0) < 5) return;
+      const li = store.s.lessons.findIndex(l => l.id === m.lesson), ln = li >= 0 ? "Lesson " + (li + 1) : "";
+      if (m.from === "student" && ["voice", "photo", "text", "hwans"].includes(m.kind)) {
+        const st = store.s.students.find(x => x.id === m.student);
+        pushSend({ to: "teacher", title: (st ? st.name : "Your student") + (m.kind === "hwans" ? " sent homework" : " asked a question"), body: ln, tag: "q-" + m.student });
+      } else if (m.from === "teacher" && ["voice", "photo", "text", "hw"].includes(m.kind)) {
+        pushSend({ to: "student", student: m.student, title: m.kind === "hw" ? "New homework" : "Your teacher answered", body: ln, tag: "a-" + m.student });
+      }
+    } catch (e) {}
+  }
+  function PushCard({ studentId }) {
+    const [st, setSt] = useState(() => (push.isOn() ? "on" : "off"));
+    if (st === "on" || (store.s.schemaVer || 0) < 5) return null;
+    if (push.needsHome()) return html`<div class="pushcard"><span>🔔</span><span><b>Notifications</b><small>Add this app to your Home Screen first (Share, then Add to Home Screen), then open it from there.</small></span></div>`;
+    if (!push.ok()) return null;
+    return html`<button class="pushcard" onClick=${async () => {
+      setSt("busy");
+      try { await push.on(studentId); setSt("on"); toast("Notifications are on."); }
+      catch (e) { setSt("off"); toast(e && e.message === "denied" ? "Notifications are blocked. Allow them in your phone's settings." : e && e.message === "novapid" ? "Notifications aren't set up on the website yet." : "Couldn't turn on notifications."); }
+    }}><span>🔔</span><span><b>${st === "busy" ? "Turning on…" : "Turn on notifications"}</b><small>${studentId ? "Know when your teacher answers." : "Know when a student asks something, even with the app closed."}</small></span></button>`;
   }
 
   // A short recording made by the teacher (a spelling word, a question, instructions).
@@ -2518,6 +2671,8 @@ notify pgrst, 'reload schema';
   function WriteBoard({ canWrite, teacher, holder, name, ix, lessons }) {
     const wrapRef = useRef(null), cvRef = useRef(null), dusterRef = useRef(null), headRef = useRef(null);
     const [tool, setToolState] = useState("chalk");
+    const [sel, setSel] = useState(null);   // a handwritten word picked up with Move
+    useEffect(() => { if (tool !== "move") setSel(null); }, [tool]);
     const toolRef = useRef(tool);
     toolRef.current = tool;
     const canRef = useRef(canWrite);
@@ -2676,6 +2831,14 @@ notify pgrst, 'reload schema';
     useEffect(() => {
       const cv = cvRef.current, ctx = cv.getContext("2d");
       let cur = null, queue = [], timer = null, drag = null, dragSent = 0;
+      // move a whole handwritten word; the other phone sees it slide
+      const inkShift = (d, dx, dy, final) => {
+        d.lx = dx; d.ly = dy;
+        const moved = d.orig.map(z => Object.assign({}, z, { pts: z.pts.map((v, i) => Math.round(i % 2 ? v + dy : v + dx)) }));
+        wb.edit({ remove: d.ids, add: moved });
+        const now = Date.now();
+        if (final || now - d.sent > 90) { d.sent = now; live.send({ type: "wb-edit", remove: d.ids, add: moved }); }
+      };
       const dragTo = (x, y, final) => {
         x = Math.round(Math.max(40, Math.min(WB_W - 40, x))); y = Math.round(Math.max(30, Math.min(WB_H - 30, y)));
         drag.lx = x; drag.ly = y;
@@ -2713,7 +2876,16 @@ notify pgrst, 'reload schema';
         if (t === "move") {
           const [x, y] = units(e);
           const hit = hitText(x, y);
-          if (hit) { drag = { id: hit.id, dx: x - hit.x, dy: y - hit.y, lx: hit.x, ly: hit.y }; try { cv.setPointerCapture(e.pointerId); } catch (x2) {} }
+          if (hit) { drag = { id: hit.id, dx: x - hit.x, dy: y - hit.y, lx: hit.x, ly: hit.y }; setSel(null); try { cv.setPointerCapture(e.pointerId); } catch (x2) {} }
+          else {
+            const ink = hitInk(x, y);
+            if (ink) {
+              const grp = inkGroup(ink);
+              drag = { ink: true, ids: grp.map(z => z.id), orig: grp.map(z => Object.assign({}, z, { pts: z.pts.slice() })), sx: x, sy: y, lx: 0, ly: 0, sent: 0 };
+              setSel(drag.ids);
+              try { cv.setPointerCapture(e.pointerId); } catch (x2) {}
+            } else setSel(null);
+          }
           return;
         }
         if (t === "type") {
@@ -2740,6 +2912,7 @@ notify pgrst, 'reload schema';
         add(x, y);
       };
       const move = e => {
+        if (drag && drag.ink) { e.preventDefault(); const [x, y] = units(e); inkShift(drag, x - drag.sx, y - drag.sy, false); return; }
         if (drag) {
           e.preventDefault();
           const [x, y] = units(e);
@@ -2752,6 +2925,7 @@ notify pgrst, 'reload schema';
         for (const ev of list && list.length ? list : [e]) { const [x, y] = units(ev); add(x, y); }
       };
       const up = () => {
+        if (drag && drag.ink) { inkShift(drag, drag.lx, drag.ly, true); drag = null; return; }
         if (drag) { dragTo(drag.lx, drag.ly, true); drag = null; return; }
         if (!cur) return;
         clearTimeout(timer);
@@ -2801,6 +2975,18 @@ notify pgrst, 'reload schema';
           ${mine && !full ? html`<div class="wbhint" aria-hidden="true"><${Ic.chalk} size=${30}/></div>` : null}
           ${stamp ? html`<div class="wbstamp" key=${stamp} aria-label="Good"><${Ic.tick} size=${72} sw=${3}/></div>` : null}
           ${!full && !teacher ? html`<button class="wbexpand" onClick=${goFull} aria-label="Make the board bigger"><${Ic.expand} size=${22}/></button>` : null}
+          ${canWrite && tool === "move" && sel && sel.length ? html`<div class="wbsize">
+            <button onClick=${() => {
+              const ss = wb.strokes.filter(z => sel.includes(z.id)); if (!ss.length) { setSel(null); return; }
+              const b = ss.map(strokeBox).reduce((a, c) => ({ x0: Math.min(a.x0, c.x0), y0: Math.min(a.y0, c.y0), x1: Math.max(a.x1, c.x1), y1: Math.max(a.y1, c.y1) })), cx = (b.x0 + b.x1) / 2, cy = (b.y0 + b.y1) / 2;
+              live.edit(sel, ss.map(z => Object.assign({}, z, { w: Math.max(5, Math.round(z.w * 0.9)), pts: z.pts.map((v, i) => Math.round(i % 2 ? cy + (v - cy) * 0.8 : cx + (v - cx) * 0.8)) })));
+            }} aria-label="Make it smaller">A−</button>
+            <button onClick=${() => {
+              const ss = wb.strokes.filter(z => sel.includes(z.id)); if (!ss.length) { setSel(null); return; }
+              const b = ss.map(strokeBox).reduce((a, c) => ({ x0: Math.min(a.x0, c.x0), y0: Math.min(a.y0, c.y0), x1: Math.max(a.x1, c.x1), y1: Math.max(a.y1, c.y1) })), cx = (b.x0 + b.x1) / 2, cy = (b.y0 + b.y1) / 2;
+              live.edit(sel, ss.map(z => Object.assign({}, z, { w: Math.min(26, Math.round(z.w * 1.1)), pts: z.pts.map((v, i) => Math.round(i % 2 ? cy + (v - cy) * 1.25 : cx + (v - cx) * 1.25)) })));
+            }} aria-label="Make it bigger">A+</button>
+          </div>` : null}
         </div>
         ${!full ? html`<div class="ledge"><i></i></div>` : null}
         ${canWrite && tool === "type" ? html`<${LetterKeys} ix=${ix} lessons=${lessons} compact=${full}
@@ -5087,7 +5273,7 @@ notify pgrst, 'reload schema';
       </div>` : null}
       ${ch ? html`<div class="frread"><${WordChallenge} c=${ch} ix=${ix} lessons=${lessons} onDone=${ok => answer(ok)} onCancel=${() => { setCh(null); readMsg({ type: "fr-read", on: false }); }}/></div>` : html`<div class="frpad">
         <${FrStick} keys=${keysRef}/>
-        <button class="frbtn book" onPointerDown=${e => { e.preventDefault(); openBook(); }} aria-label="Read for strength">📖</button>
+        <button class="frbtn frbook" onPointerDown=${e => { e.preventDefault(); openBook(); }} aria-label="Read for strength">📖</button>
         <div class="frbtns">
           <button class="frbtn" onPointerDown=${press("p")} aria-label="Punch">👊</button>
           <button class="frbtn" onPointerDown=${press("k")} aria-label="Kick">🦵</button>
@@ -6130,6 +6316,7 @@ notify pgrst, 'reload schema';
           student: p.student, lesson: p.lesson, from: p.from, kind: p.kind, asset: asset || null,
           secs: round1(p.secs), text: p.text || "", hw: !!p.hw, point: p.point || [], seen: false, at: p.at, cid: p.cid,
         }));
+        pushAbout(p);
       } catch (e) {
         setPending(ps => ps.map(x => (x.cid === p.cid ? Object.assign({}, x, { state: "fail" }) : x)));
         toast(errText(e, "Not sent. Tap the red mark to try again."));
@@ -6221,6 +6408,7 @@ notify pgrst, 'reload schema';
         <button class="iconbtn" onClick=${() => setBookOpen(true)} aria-label="Their exercise book"><${Ic.book} size=${22}/></button>
         <button class="iconbtn" onClick=${() => setEditing(true)} aria-label="Student settings and join link"><${Ic.edit} size=${22}/></button>
       </header>` : null}
+      ${!teacher ? html`<${PushCard} studentId=${student.id}/>` : null}
       ${!teacher ? (() => {
         const news = mine.filter(m => m.from === "teacher" && !m.seen && m.lesson !== (lesson && lesson.id)).sort((a, b) => b.at - a.at);
         if (!news.length) return null;
@@ -7254,7 +7442,7 @@ notify pgrst, 'reload schema';
           <div class="seg" role="tablist">${tabBtn("students", "Students", unreadTotal)}${tabBtn("lessons", "Lessons")}${tabBtn("recordings", "Recordings")}</div>
         </header>
         ${s.needsUpdate ? html`<${UpdateBanner}/>` : null}
-        ${tab === "students" ? html`<${Questions} s=${s} onOpen=${(id, f) => { setFresh(false); setFocus(f); setOpenStudent(id); }}/><${StudentsList} s=${s} onOpen=${(id, isNew) => { setFresh(!!isNew); setFocus(null); setOpenStudent(id); }}/>`
+        ${tab === "students" ? html`<${PushCard}/><${Questions} s=${s} onOpen=${(id, f) => { setFresh(false); setFocus(f); setOpenStudent(id); }}/><${StudentsList} s=${s} onOpen=${(id, isNew) => { setFresh(!!isNew); setFocus(null); setOpenStudent(id); }}/>`
           : tab === "lessons" ? (() => { const v = viewOf(s, tLang); return html`<${LessonsList} s=${v.s} ix=${v.ix} onOpen=${setOpenLesson} lang=${tLang} onLang=${l => { setTLang(l); try { localStorage.setItem("rc.tlang", l); } catch (e) {} }}/>`; })()
           : html`<${Recordings}/>`}
         ${float ? html`<div class="floatspace"></div>` : null}
@@ -7289,6 +7477,7 @@ notify pgrst, 'reload schema';
 
   window.__rc = { call, live, classRec, wb, tilePlayer };
   window.__kfArt = { kfBody, KF_CHARS, kfHit };
+  window.__ink = { hitInk, inkGroup };
   window.__lang = { viewOf, saveExpl, saveTileRec, set: l => { REC_LANG = l; }, get: () => REC_LANG, store };
   root.innerHTML = "";
   render(html`<${App}/>`, root);

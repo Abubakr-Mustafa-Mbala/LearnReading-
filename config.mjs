@@ -4,7 +4,8 @@
 export default async () => {
   const url = (process.env.SUPABASE_URL || "").trim().replace(/\/+$/, "");
   const key = (process.env.SUPABASE_KEY || "").trim();
-  return new Response(JSON.stringify(url && key ? { url, key } : {}), {
+  const vapid = (process.env.VAPID_PUBLIC_KEY || "").trim();   // for phone notifications (optional)
+  return new Response(JSON.stringify(url && key ? Object.assign({ url, key }, vapid ? { vapid } : {}) : {}), {
     headers: { "content-type": "application/json", "cache-control": "no-store" },
   });
 };
