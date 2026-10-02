@@ -2,6 +2,6 @@
 [build]
   publish = "."
 
-# The voice relay (turn.mjs) sits next to index.html.
+# The small helpers sit next to index.html: turn.mjs (voice relay) and config.mjs (which Supabase project).
 [functions]
   directory = "."
