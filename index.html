@@ -710,7 +710,7 @@ img{max-width:100%}
 .citycar small{font:700 13px var(--font)}
 .citycoins{margin-left:auto;align-self:center;background:rgba(0,0,0,.45);color:#FFE27A;font:700 18px var(--font);padding:6px 12px;border-radius:14px}
 .cityclue{position:absolute;left:50%;top:calc(62px + env(safe-area-inset-top,0px));transform:translateX(-50%);z-index:3;display:flex;align-items:center;gap:10px;background:rgba(255,248,232,.97);border-radius:18px;padding:8px 10px 8px 14px;box-shadow:0 6px 18px rgba(0,0,0,.3);color:#1b2b22}
-.cityclue .cl1{font:700 15px var(--font);color:#8A4B12}
+.cityclue .cl1{font:700 15px var(--font);color:#8A4B12;white-space:nowrap}
 .cityclue .clw{font:700 36px Andika,sans-serif;line-height:1}
 .cityclue .clh{border:0;background:#F1E3C4;border-radius:12px;width:44px;height:44px;font-size:22px}
 .cityclue .cld{display:flex;gap:4px}.cityclue .cld i{width:9px;height:9px;border-radius:50%;background:#d8cdb6}.cityclue .cld i.now{background:#FFB020}.cityclue .cld i.on{background:#2E9E5B}
@@ -723,6 +723,9 @@ img{max-width:100%}
 .diffrow{display:flex;gap:8px;justify-content:center;margin:0 0 6px}
 .diffb{flex:1;border:0;border-radius:12px;padding:10px 0;background:rgba(241,236,220,.12);color:var(--chalk);font:700 16px var(--font)}
 .diffb.on{background:#FFB020;color:#3A2400}
+.langpick.inline{margin:6px 0 10px}
+.help.langoff{background:#FFF7E6;border-radius:10px;padding:8px 10px;color:#8A4B12}
+.vidbtn{margin-top:10px;width:100%}
 /* ---------- setup and sign in ---------- */
 .setup{max-width:560px;margin:0 auto;padding:24px 16px 56px;display:flex;flex-direction:column;gap:16px}
 .setup h1{margin:0;font-size:28px;line-height:1.15}
@@ -5647,10 +5650,8 @@ notify pgrst, 'reload schema';
       </div>
       ${view === "home" ? html`<div class="qhome">
           <div class="diffrow" role="group" aria-label="Difficulty">${[[1, "Normal"], [2, "Hard"], [3, "Brutal"]].map(([v, nm]) => html`<button class=${"diffb" + (gDiff() === v ? " on" : "")} onClick=${() => { setDiff(v); setDiffTick(t => t + 1); }}>${nm}</button>`)}</div>
-          <button class="qtile story" onClick=${() => setView("city")} aria-label="City"><span class="qemo">🏙️</span><b>City</b><small>Walk, drive, read</small></button>
           <button class="qtile" onClick=${() => setView("arena")} aria-label="Arena"><span class="qemo">🏟️</span><b>Arena</b><small>3D</small></button>
           <button class="qtile" onClick=${() => setView("fight")} aria-label="Fight"><span class="qemo">🥊</span><b>Fight</b></button>
-          <button class="qtile" onClick=${() => setView("shop")} aria-label="Shop"><span class="qemo">🛍️</span><b>Shop</b></button>
         </div>`
         : view === "map" ? html`<${StoryMap} gs=${gs} uIdx=${uIdx} lessons=${lessons} onPlay=${n => { setChap(n); setKey(x => x + 1); setView("play"); }}/>`
         : html`<${Shop} gs=${gs} onChange=${refresh}/>`}
@@ -7442,7 +7443,96 @@ notify pgrst, 'reload schema';
     </div>`;
   }
 
-  function LessonEditor({ s, ix, lesson, onBack }) {
+  /* ================= a recorded lesson as a video: the board, the stick, the voice ================= */
+  async function lessonVideo(lesson, number, onProgress) {
+    const W = 1280, H = 720, cv = document.createElement("canvas"); cv.width = W; cv.height = H;
+    const c = cv.getContext("2d");
+    const rows = parseBoard(lesson.board, lesson.stage === 3), cues = (lesson.cues || []).slice().sort((a, b) => a.t - b.t);
+    // lay the tiles out like the board
+    const top = 150, bottom = H - 70, rowH = Math.min(140, (bottom - top) / Math.max(1, rows.length));
+    const size = Math.max(28, Math.min(84, rowH * 0.62));
+    c.font = "400 " + size + "px Andika, sans-serif";
+    const boxes = rows.map((r, ri) => {
+      const gap = size * 0.7, ws = r.map(t => c.measureText(t.d || t.t).width + size * 0.5);
+      let total = ws.reduce((a, b) => a + b, 0) + gap * (r.length - 1), scale = Math.min(1, (W - 140) / total);
+      let x = (W - total * scale) / 2;
+      return r.map((t, ti) => { const w = ws[ti] * scale, b = { x, y: top + ri * rowH, w, h: rowH * 0.86, t, scale }; x += w + gap * scale; return b; });
+    });
+    const draw = now => {
+      const g = c.createLinearGradient(0, 0, 0, H); g.addColorStop(0, "#2B4A3A"); g.addColorStop(1, "#1E3328");
+      c.fillStyle = "#6b4a2e"; c.fillRect(0, 0, W, H); c.fillStyle = g; c.fillRect(18, 18, W - 36, H - 36);
+      c.fillStyle = "rgba(241,236,220,.85)"; c.font = "700 40px Andika, sans-serif"; c.textAlign = "left"; c.textBaseline = "middle";
+      c.fillText("Lesson " + number + (lesson.title ? "  ·  " + lesson.title : ""), 60, 78);
+      let p = null, w = null;
+      for (const q of cues) { if (q.t > now) break; if (q.k === "p") p = q; if (q.k === "w") w = q; }
+      if (p && now - p.t > 8) p = null;
+      for (const r of boxes) for (const b of r) {
+        const on = p && boxes[p.r] && boxes[p.r][p.c] === b;
+        if (on) { c.fillStyle = "rgba(255,226,122,.22)"; c.strokeStyle = "#FFE27A"; c.lineWidth = 5; c.beginPath(); c.roundRect ? c.roundRect(b.x, b.y, b.w, b.h, 16) : c.rect(b.x, b.y, b.w, b.h); c.fill(); c.stroke(); }
+        c.fillStyle = on ? "#FFF6D0" : "rgba(241,236,220,.92)"; c.font = "400 " + size * b.scale + "px Andika, sans-serif"; c.textAlign = "center";
+        c.fillText(b.t.d || b.t.t, b.x + b.w / 2, b.y + b.h / 2);
+      }
+      if (p && boxes[p.r] && boxes[p.r][p.c]) {   // the stick
+        const b = boxes[p.r][p.c], tx = b.x + b.w / 2 + 10, ty = b.y + b.h * 0.85;
+        c.strokeStyle = "#B07A3E"; c.lineWidth = 12; c.lineCap = "round"; c.beginPath(); c.moveTo(W - 120, H - 40); c.lineTo(tx, ty); c.stroke();
+        c.strokeStyle = "#F1ECDC"; c.lineWidth = 12; c.beginPath(); c.moveTo(tx + (W - 120 - tx) * 0.04, ty + (H - 40 - ty) * 0.04); c.lineTo(tx, ty); c.stroke();
+      }
+      if (w && now - w.t < 2) { c.fillStyle = "#FFB020"; c.font = "700 44px Andika, sans-serif"; c.textAlign = "right"; c.fillText("Your turn!", W - 60, 78); }
+    };
+    const ac = new (window.AudioContext || window.webkitAudioContext)();
+    const buf = await fetch(publicUrl(lesson.explain)).then(r => { if (!r.ok) throw new Error("audio"); return r.arrayBuffer(); }).then(b => new Promise((res, rej) => ac.decodeAudioData(b, res, rej)));
+    const src = ac.createBufferSource(); src.buffer = buf;
+    const dest = ac.createMediaStreamDestination(); src.connect(dest);
+    const stream = new MediaStream([...cv.captureStream(24).getVideoTracks(), ...dest.stream.getAudioTracks()]);
+    const mime = ["video/mp4", "video/webm;codecs=vp8,opus", "video/webm"].find(m => window.MediaRecorder && MediaRecorder.isTypeSupported && MediaRecorder.isTypeSupported(m)) || "";
+    const rec = new MediaRecorder(stream, mime ? { mimeType: mime, videoBitsPerSecond: 1200000 } : undefined), parts = [];
+    rec.ondataavailable = e => { if (e.data && e.data.size) parts.push(e.data); };
+    const done = new Promise(res => { rec.onstop = res; });
+    draw(0); rec.start(500); await ac.resume(); src.start();
+    const t0 = ac.currentTime, total = buf.duration;
+    await new Promise(res => {
+      const iv = setInterval(() => {
+        const now = ac.currentTime - t0; draw(now); if (onProgress) onProgress(Math.min(1, now / total));
+        if (window.__vidShot === null && now > 1.5) window.__vidShot = cv.toDataURL('image/jpeg', 0.8);
+        if (now >= total + 0.4) { clearInterval(iv); res(); }
+      }, 40);
+    });
+    rec.stop(); await done; ac.close();
+    const type = (rec.mimeType || mime || "video/webm").split(";")[0];
+    return new Blob(parts, { type });
+  }
+  function LessonVideoBtn({ lesson, number }) {
+    const [p, setP] = useState(null);
+    async function make() {
+      if (p != null) return;
+      setP(0);
+      try {
+        const blob = await lessonVideo(lesson, number, v => setP(v));
+        const name = "lesson-" + number + (blob.type.includes("mp4") ? ".mp4" : ".webm"), file = new File([blob], name, { type: blob.type });
+        if (navigator.canShare && navigator.canShare({ files: [file] })) { try { await navigator.share({ files: [file], title: "Lesson " + number }); setP(null); return; } catch (e) {} }
+        const a = document.createElement("a"); a.href = URL.createObjectURL(blob); a.download = name; document.body.appendChild(a); a.click(); a.remove();
+        window.__lastVideo = { size: blob.size, type: blob.type };
+      } catch (e) { toast("Couldn't make the video. Check the connection and try again."); }
+      setP(null);
+    }
+    return html`<button class="btn quiet vidbtn" onClick=${make} disabled=${p != null}>${p == null ? "⬇ Save as video" : "Making the video… " + Math.round(p * 100) + "%"}</button>`;
+  }
+  // Which language you're recording in, right where you record.
+  function LangPick({ lang, onLang }) {
+    if (!store.s.hasExpl) return html`<p class="help langoff">Recording in English. To record in other languages, run the one-time database update (the blue box on your home screen).</p>`;
+    return html`<div class="field langpick inline"><label for="elang">Recording in</label>
+      <select id="elang" value=${lang || "en"} onChange=${e => {
+        let v = e.target.value;
+        if (v === "__add") {
+          const name = (window.prompt("Which language? Type its name, for example Dutch.") || "").trim().replace(/\s+/g, " ").slice(0, 30);
+          if (!name || /^english$/i.test(name)) { e.target.value = lang || "en"; return; }
+          try { const L = JSON.parse(localStorage.getItem("rc.langs") || "[]"); if (!L.includes(name)) localStorage.setItem("rc.langs", JSON.stringify(L.concat(name))); } catch (x) {}
+          v = name;
+        }
+        onLang(v);
+      }}>${[...new Set(myLangs().concat(lang || "en"))].map(c => html`<option value=${c}>${langName(c)}${langCount(c) ? " · " + langCount(c) + " recorded" : ""}</option>`)}<option value="__add">+ Add a language…</option></select></div>`;
+  }
+  function LessonEditor({ s, ix, lesson, onBack, lang, onLang }) {
     const pst = usePlayer();
     const idx = s.lessons.findIndex(l => l.id === lesson.id);
     const [title, setTitle] = useState(lesson.title || "");
@@ -7541,8 +7631,10 @@ notify pgrst, 'reload schema';
           <p class="help">Only you see this.</p></div>
         <div class="card">
           <div class="lbl">Your explanation</div>
+          ${onLang ? html`<${LangPick} lang=${lang} onLang=${onLang}/>` : null}
           <p class="help">They play this while looking at the board. Record with the board so your stick points at each tile as you talk, and add Your turn moments so they have to answer. Speak in the language they're most comfortable with.</p>
           <${ExplainRecorder} lesson=${lesson} pst=${pst} onStudio=${() => { player.stop(); setStudio(true); }}/>
+          ${lesson.explain ? html`<${LessonVideoBtn} lesson=${lesson} number=${idx + 1}/>` : null}
         </div>
         <div class="card">
           <div class="lbl">The board</div>
@@ -7828,7 +7920,7 @@ notify pgrst, 'reload schema';
     if (!body && openLesson) {
       const v = viewOf(s, tLang), l = v.s.lessons.find(x => x.id === openLesson);
       REC_LANG = tLang;
-      if (l) body = html`<${LessonEditor} key=${l.id + tLang} s=${v.s} ix=${v.ix} lesson=${l} onBack=${() => setOpenLesson(null)}/>`;
+      if (l) body = html`<${LessonEditor} key=${l.id + tLang} s=${v.s} ix=${v.ix} lesson=${l} lang=${tLang} onLang=${x => { setTLang(x); try { localStorage.setItem("rc.tlang", x); } catch (e) {} }} onBack=${() => setOpenLesson(null)}/>`;
     }
     if (!body) {
       const unreadTotal = s.msgs.filter(m => m.from === "student" && !m.seen).length;
@@ -7876,7 +7968,7 @@ notify pgrst, 'reload schema';
   window.__kfArt = { kfBody, KF_CHARS, kfHit };
   window.__kfApi = { kfPress, kfStep, kfNew, kfSnd, kfAnn, annRec };
   window.__ink = { hitInk, inkGroup };
-  window.__lang = { viewOf, saveExpl, saveTileRec, set: l => { REC_LANG = l; }, get: () => REC_LANG, store };
+  window.__lang = { viewOf, saveExpl, saveTileRec, uploadBlob, set: l => { REC_LANG = l; }, get: () => REC_LANG, store };
   root.innerHTML = "";
   render(html`<${App}/>`, root);
   boot();
