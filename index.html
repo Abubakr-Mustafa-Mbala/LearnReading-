@@ -696,6 +696,33 @@ img{max-width:100%}
 .pushcard{display:flex;align-items:center;gap:12px;width:calc(100% - 4px);margin:4px 2px 12px;border:1px solid #CFE3F7;background:#EEF6FE;border-radius:14px;padding:12px 14px;text-align:left;font:inherit;color:inherit}
 .pushcard > span:first-child{font-size:24px}
 .pushcard small{display:block;color:#5B6B7B;margin-top:2px;line-height:1.35}
+.wbsize button.tidy{width:auto;padding:0 14px;font-size:17px}
+.anncard{margin:14px 0 4px;background:#fff;border:1px solid var(--line);border-radius:16px;padding:6px 14px 10px}
+.annhead{padding:8px 0 6px}.annhead small{display:block;color:#5B6B7B;margin-top:2px}
+.annrow{display:flex;align-items:center;gap:8px;padding:8px 0;border-top:1px solid var(--line)}
+.annno{color:#8A96A3}
+.annrec{width:44px;height:44px;border-radius:50%;border:0;background:#FDECEA;color:#C8322B;font-size:20px}
+.annrec.on{background:#C8322B;color:#fff}
+.citytitle{color:#fff;font-size:20px;letter-spacing:.05em;text-shadow:0 2px 6px rgba(0,0,0,.5);align-self:center}
+.cityword{position:absolute;left:50%;bottom:calc(170px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);z-index:3;display:flex;align-items:center;gap:12px;border:0;border-radius:18px;padding:10px 18px;background:rgba(255,248,232,.96);color:#1b2b22;font:700 40px Andika,sans-serif;box-shadow:0 6px 18px rgba(0,0,0,.3)}
+.cityword .ce{font-size:36px}.cityword .cs{font-size:26px}
+.citycar{width:84px;height:84px;border-radius:50%;border:0;background:rgba(16,28,22,.6);box-shadow:inset 0 0 0 2px rgba(241,236,220,.35);font-size:34px;color:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px}
+.citycar small{font:700 13px var(--font)}
+.citycoins{margin-left:auto;align-self:center;background:rgba(0,0,0,.45);color:#FFE27A;font:700 18px var(--font);padding:6px 12px;border-radius:14px}
+.cityclue{position:absolute;left:50%;top:calc(62px + env(safe-area-inset-top,0px));transform:translateX(-50%);z-index:3;display:flex;align-items:center;gap:10px;background:rgba(255,248,232,.97);border-radius:18px;padding:8px 10px 8px 14px;box-shadow:0 6px 18px rgba(0,0,0,.3);color:#1b2b22}
+.cityclue .cl1{font:700 15px var(--font);color:#8A4B12}
+.cityclue .clw{font:700 36px Andika,sans-serif;line-height:1}
+.cityclue .clh{border:0;background:#F1E3C4;border-radius:12px;width:44px;height:44px;font-size:22px}
+.cityclue .cld{display:flex;gap:4px}.cityclue .cld i{width:9px;height:9px;border-radius:50%;background:#d8cdb6}.cityclue .cld i.now{background:#FFB020}.cityclue .cld i.on{background:#2E9E5B}
+.cityflash{position:absolute;left:0;right:0;top:40%;text-align:center;z-index:4;color:#FFE27A;font:700 34px var(--font);text-shadow:0 3px 10px rgba(0,0,0,.6);animation:cflash 1.8s ease forwards;pointer-events:none}
+.cityflash.bad{color:#FF8A80}
+@keyframes cflash{0%{transform:scale(.6);opacity:0}15%{transform:scale(1.1);opacity:1}70%{opacity:1}100%{opacity:0;transform:translateY(-30px)}}
+.wctime{height:6px;border-radius:3px;background:rgba(255,255,255,.18);overflow:hidden;margin:0 6px 8px}
+.wctime i{display:block;height:100%;width:100%;background:linear-gradient(90deg,#E8675F,#FFB020);transform-origin:left;animation:wct linear forwards}
+@keyframes wct{from{transform:scaleX(1)}to{transform:scaleX(0)}}
+.diffrow{display:flex;gap:8px;justify-content:center;margin:0 0 6px}
+.diffb{flex:1;border:0;border-radius:12px;padding:10px 0;background:rgba(241,236,220,.12);color:var(--chalk);font:700 16px var(--font)}
+.diffb.on{background:#FFB020;color:#3A2400}
 /* ---------- setup and sign in ---------- */
 .setup{max-width:560px;margin:0 auto;padding:24px 16px 56px;display:flex;flex-direction:column;gap:16px}
 .setup h1{margin:0;font-size:28px;line-height:1.15}
@@ -1224,7 +1251,22 @@ notify pgrst, 'reload schema';
   let REC_LANG = "en";
   const recKey = (lessonId, text, lang) => (lang && lang !== "en" ? lessonId + "~" + lang + "~" : lessonId + "~") + cyrb53(text);
   const LANGS = [["en", "English"], ["ny", "Nyanja"], ["bem", "Bemba"], ["toi", "Tonga"], ["loz", "Lozi"], ["sw", "Swahili"], ["fr", "French"], ["ar", "Arabic"]];
-  const langName = c => (LANGS.find(x => x[0] === c) || [c, c || "English"])[1];
+  const langName = c => (!c || c === "en" ? "English" : (LANGS.find(x => x[0] === c) || [c, c])[1]);
+  // Your languages: English, every language you've recorded in, and any you've added yourself.
+  function myLangs() {
+    const set = new Set(), s = store.s;
+    for (const r of s.recs || []) if (r.lang && r.lang !== "en") set.add(r.lang);
+    for (const e of s.explains || []) if (e.lang && e.lang !== "en") set.add(e.lang);
+    try { for (const l of JSON.parse(localStorage.getItem("rc.langs") || "[]")) set.add(l); } catch (e) {}
+    return ["en"].concat([...set].sort((a, b) => langName(a).localeCompare(langName(b))));
+  }
+  function recordedLangs() {
+    const set = new Set(["en"]), s = store.s;
+    for (const r of s.recs || []) if (r.lang) set.add(r.lang);
+    for (const e of s.explains || []) if (e.lang) set.add(e.lang);
+    return [...set];
+  }
+  function langCount(l) { return l === "en" ? store.s.lessons.filter(x => x.explain).length : (store.s.explains || []).filter(e => e.lang === l && e.explain).length; }
   // The lessons as they look in one language: that language's recordings and explanations.
   let LANG_CACHE = { r: null, l: null, e: null, map: new Map() };
   function viewOf(s, lang) {
@@ -2151,6 +2193,21 @@ notify pgrst, 'reload schema';
     }
     return [...out];
   }
+  // Tidy: a clean black-on-white picture of just the chosen handwriting, for reading.
+  function inkPng(ss) {
+    const b = ss.map(strokeBox).reduce((a, c) => ({ x0: Math.min(a.x0, c.x0), y0: Math.min(a.y0, c.y0), x1: Math.max(a.x1, c.x1), y1: Math.max(a.y1, c.y1) }));
+    const pad = 24, W = b.x1 - b.x0 + pad * 2, H = b.y1 - b.y0 + pad * 2, sc = Math.min(1.5, 640 / Math.max(W, H));
+    const c = document.createElement("canvas"); c.width = Math.max(32, Math.round(W * sc)); c.height = Math.max(32, Math.round(H * sc));
+    const x = c.getContext("2d");
+    x.fillStyle = "#fff"; x.fillRect(0, 0, c.width, c.height); x.strokeStyle = "#111"; x.lineCap = "round"; x.lineJoin = "round";
+    for (const s of ss) {
+      x.lineWidth = Math.max(3, (s.w || 13) * sc); x.beginPath();
+      for (let i = 0; i < s.pts.length; i += 2) { const px = (s.pts[i] - b.x0 + pad) * sc, py = (s.pts[i + 1] - b.y0 + pad) * sc; if (i) x.lineTo(px, py); else x.moveTo(px, py); }
+      if (s.pts.length === 2) x.lineTo((s.pts[0] - b.x0 + pad) * sc + 0.1, (s.pts[1] - b.y0 + pad) * sc);
+      x.stroke();
+    }
+    return { image: c.toDataURL("image/png").split(",")[1], box: b };
+  }
   function hitText(x, y) {
     for (let i = wb.strokes.length - 1; i >= 0; i--) {
       const s = wb.strokes[i];
@@ -2672,6 +2729,25 @@ notify pgrst, 'reload schema';
     const wrapRef = useRef(null), cvRef = useRef(null), dusterRef = useRef(null), headRef = useRef(null);
     const [tool, setToolState] = useState("chalk");
     const [sel, setSel] = useState(null);   // a handwritten word picked up with Move
+    const [tidying, setTidying] = useState(false);
+    async function tidySel() {
+      const ss = wb.strokes.filter(z => sel && sel.includes(z.id) && z.pts && z.pts.length);
+      if (!ss.length || tidying) return;
+      setTidying(true);
+      try {
+        const { image, box: b } = inkPng(ss);
+        const { data } = await sb.auth.getSession(), tok = data && data.session && data.session.access_token;
+        const r = await fetch("/.netlify/functions/tidy", { method: "POST", headers: { "content-type": "application/json", authorization: "Bearer " + (tok || "") }, body: JSON.stringify({ image }) });
+        const j = await r.json().catch(() => ({}));
+        if (j.off) { toast("Tidy isn't switched on yet: add ANTHROPIC_API_KEY in Netlify."); return; }
+        const text = String(j.text || "").trim();
+        if (!r.ok || !text || text === "?") { toast("Couldn't read that one. Try writing it a little bigger."); return; }
+        const t = { id: uid(), tool: "text", text: text.slice(0, 30), x: Math.round((b.x0 + b.x1) / 2), y: Math.round((b.y0 + b.y1) / 2), h: Math.round(Math.max(60, Math.min(220, (b.y1 - b.y0) * 1.2))) };
+        live.edit(ss.map(z => z.id), [t]);
+        setSel(null);
+      } catch (e) { toast("Couldn't reach Tidy. Check the connection."); }
+      finally { setTidying(false); }
+    }
     useEffect(() => { if (tool !== "move") setSel(null); }, [tool]);
     const toolRef = useRef(tool);
     toolRef.current = tool;
@@ -2986,6 +3062,7 @@ notify pgrst, 'reload schema';
               const b = ss.map(strokeBox).reduce((a, c) => ({ x0: Math.min(a.x0, c.x0), y0: Math.min(a.y0, c.y0), x1: Math.max(a.x1, c.x1), y1: Math.max(a.y1, c.y1) })), cx = (b.x0 + b.x1) / 2, cy = (b.y0 + b.y1) / 2;
               live.edit(sel, ss.map(z => Object.assign({}, z, { w: Math.min(26, Math.round(z.w * 1.1)), pts: z.pts.map((v, i) => Math.round(i % 2 ? cy + (v - cy) * 1.25 : cx + (v - cx) * 1.25)) })));
             }} aria-label="Make it bigger">A+</button>
+            <button class="tidy" onClick=${tidySel} disabled=${tidying} aria-label="Tidy: make it clean letters">✨ ${tidying ? "…" : "Tidy"}</button>
           </div>` : null}
         </div>
         ${!full ? html`<div class="ledge"><i></i></div>` : null}
@@ -3005,6 +3082,12 @@ notify pgrst, 'reload schema';
   // Specials: a button combo, paid for with reading strength. f = toward the opponent, b = away.
   const KF_SPECIALS = { fire: { combo: ["f", "f", "p"], cost: 25, dmg: 12, icon: "🔥" }, ice: { combo: ["b", "f", "k"], cost: 30, dmg: 6, icon: "❄️" } };
   // The practice ladder: each opponent fights smarter and hits harder.
+  // Difficulty for every game: 1 Normal, 2 Hard (default), 3 Brutal.
+  let CUR_DIFF = (() => { try { const v = parseInt(localStorage.getItem("rc.diff") || "2", 10); return [1, 2, 3].includes(v) ? v : 2; } catch (e) { return 2; } })();
+  const gDiff = () => CUR_DIFF;
+  const setDiff = v => { CUR_DIFF = v; try { localStorage.setItem("rc.diff", String(v)); } catch (e) {} };
+  const KD = () => ({ 1: { dmg: 0.85, spd: 0.92, aggr: 0.9, block: 0.8 }, 2: { dmg: 1.15, spd: 1.05, aggr: 1.3, block: 1.6 }, 3: { dmg: 1.35, spd: 1.15, aggr: 1.7, block: 2.4 } })[CUR_DIFF];
+  const READ_LIMIT = c => (c && c.how === "spell" ? [25, 16, 11] : [12, 8, 5])[CUR_DIFF - 1];
   const KF_LEVELS = [
     { dmg: 0.45, spd: 0.75, aggr: 1.6, block: 0.02, specials: [], cd: 99, drain: 1.8 },
     { dmg: 0.55, spd: 0.82, aggr: 2.0, block: 0.035, specials: [], cd: 99, drain: 2.0 },
@@ -3063,7 +3146,7 @@ notify pgrst, 'reload schema';
   }
   function kfMult(g, i) {
     if (i === 0) { const s = g.S / 100; return { dmg: 0.55 + 0.95 * s, spd: 0.65 + 0.35 * s }; }
-    if (g.cpu) { const L = KF_LEVELS[Math.max(0, (g.level || 1) - 1)]; return { dmg: L.dmg, spd: L.spd }; }
+    if (g.cpu) { const L = KF_LEVELS[Math.max(0, (g.level || 1) - 1)], D = KD(); return { dmg: L.dmg * D.dmg, spd: L.spd * D.spd }; }
     return { dmg: 0.75, spd: 0.95 };
   }
   function kfBusy(f) { return ["ko", "hit", "p", "k", "super", "cast", "frozen", "dazed"].indexOf(f.act) >= 0; }
@@ -3079,8 +3162,16 @@ notify pgrst, 'reload schema';
     f.act = "cast"; f.t = 0; f.hit = false; f.spell = kind;
     if (snd) snd(kind);
   }
+  function kfStartMove(g, f, move) {
+    f.combo = (f.idleT != null ? f.idleT : 9) < 0.45 ? Math.min((f.combo || 1) + 1, 6) : 1;
+    f.cs = Math.max(0.6, 1 - 0.1 * (f.combo - 1));
+    const o = g.f[g.f.indexOf(f) === 0 ? 1 : 0], gap = Math.abs(o.x - f.x), want = (KF_MOVES[move] || KF_MOVES.p).reach * 0.85;
+    if (gap > want) f.x += f.dir * Math.min(14, gap - want);   // step in to stay in reach
+    f.act = move; f.t = 0; f.hit = false; f.mv = (f.mv || 0) + 1; f.bufAge = 0;
+  }
   function kfPress(g, i, move, snd) {
     const f = g.f[i];
+    if (g.go && !g.over && (f.act === "p" || f.act === "k") && (move === "p" || move === "k") && !(i === 0 && g.reading)) { f.buf = move; f.bufAge = 0; kfTap(g, i, move); return; }
     if (!g.go || g.over || kfBusy(f) || (i === 0 && g.reading)) return;
     kfTap(g, i, move);
     const seq = g.cb[i].map(e => e.k).slice(-3).join("");
@@ -3098,7 +3189,7 @@ notify pgrst, 'reload schema';
       kfCast(g, i, name, snd);
       return;
     }
-    f.act = move; f.t = 0; f.hit = false;
+    kfStartMove(g, f, move);
   }
   // When he drops the opponent, they stagger: one more word finishes the fight in style.
   function kfDown(g, i, snd) {
@@ -3119,19 +3210,35 @@ notify pgrst, 'reload schema';
       b.guard = (b.guard || 0) + (kind === "k" ? 1.5 : 1);
       if (b.guard >= 3) { blocked = false; gbreak = true; b.guard = 0; }
     }
-    const d = dmg * (blocked ? 0.25 : gbreak ? 1.3 : 1);
+    const d = dmg * 0.6 * (blocked ? 0.25 : gbreak ? 1.3 : 1);   // fights last longer
     b.hp = Math.max(0, b.hp - d);
-    if (!blocked && b.act !== "frozen") { b.act = "hit"; b.t = 0; b.x += a.dir * 38; }
+    if (!blocked && b.act !== "frozen") { b.act = "hit"; b.t = 0; b.x += a.dir * (kind === "k" ? 38 : 16); }
     g.fx.push({ id: ++g.fxId, x: b.x - a.dir * 30, y: KF.GROUND - (kind === "k" ? 115 : 160), big: d >= 12 || gbreak, blocked, gb: gbreak });
     if (g.fx.length > 6) g.fx.shift();
     if (snd) snd(blocked ? "block" : d >= 12 ? "big" : "hit");
     if (b.hp <= 0) kfDown(g, i, snd);
   }
   function kfStep(g, dt, snd) {
+    // word orbs: whoever reaches one first gets it; for him it's a quick word for power
+    if (g.go && !g.over) {
+      g.orbs = g.orbs || []; g.orbT = (g.orbT == null ? 4 : g.orbT) - dt;
+      if (g.orbT <= 0) {
+        g.orbT = 6 + Math.random() * 4;
+        if (g.orbs.length < 2) for (let k = 0; k < 8; k++) { const x = 80 + Math.random() * 440; if (g.f.every(f => Math.abs(f.x - x) > 90)) { g.orbs.push({ id: (g.orbId = (g.orbId || 0) + 1), x }); break; } }
+      }
+      for (const o of g.orbs.slice()) for (let i = 0; i < 2; i++) {
+        const f = g.f[i];
+        if (["ko", "dazed", "frozen"].includes(f.act) || Math.abs(f.x - o.x) > 34 || (i === 0 && g.reading)) continue;
+        g.orbs = g.orbs.filter(x => x !== o);
+        if (i === 0) g.orbWant = true; else f.hp = Math.min(100, f.hp + 4);
+        if (snd) snd("power");
+        break;
+      }
+    }
     if (g.over) { for (const f of g.f) if (f.act === "ko") f.t += dt; g.wt = (g.wt || 0) + dt; return; }
     if (!g.finish) g.time = Math.max(0, g.time - dt);
     const L = g.cpu ? KF_LEVELS[Math.max(0, (g.level || 1) - 1)] : null;
-    g.S = Math.max(0, g.S - (L ? L.drain : 2.2) * 0.55 * dt * (g.reading ? 0 : 1));   // strength drains unless he keeps reading
+    g.S = Math.max(0, g.S - (L ? L.drain : 2.2) * 0.22 * dt * (g.reading ? 0 : 1));   // strength drains unless he keeps reading
     if (g.S >= 99.5) g.sup = true;
     g.cd[1] = Math.max(0, g.cd[1] - dt);
     if (g.finish) {
@@ -3172,12 +3279,17 @@ notify pgrst, 'reload schema';
         continue;
       }
       if (f.act === "p" || f.act === "k") {
-        const mv = KF_MOVES[f.act];
-        f.t += dt * m.spd;
-        if (!f.hit && f.t >= mv.wind) { f.hit = true; kfHit(g, i, mv.dmg * m.dmg, mv.reach, f.act, snd); }
-        if (f.t >= mv.total) { f.act = "idle"; f.t = 0; }
+        const mv = KF_MOVES[f.act], cs = f.cs || 1;
+        f.t += dt * m.spd; f.bufAge = (f.bufAge || 0) + dt;
+        if (!f.hit && f.t >= mv.wind * cs) { f.hit = true; kfHit(g, i, mv.dmg * m.dmg * ((f.combo || 1) >= 3 ? 1.25 : 1), mv.reach, f.act, snd); }
+        if (f.t >= mv.total * cs) {
+          f.act = "idle"; f.t = 0; f.idleT = 0;
+          const b = f.buf; f.buf = null;
+          if (b && f.bufAge < 0.45) kfStartMove(g, f, b);
+        }
         continue;
       }
+      f.idleT = (f.idleT || 0) + dt;
       const reading = i === 0 && g.reading;
       const blocking = !!f.keys.b && !reading;
       const dx = reading ? 0 : ((f.keys.r ? 1 : 0) - (f.keys.l ? 1 : 0)) * 210 * m.spd * dt * (blocking ? 0.35 : 1);
@@ -3224,7 +3336,7 @@ notify pgrst, 'reload schema';
     const d = Math.abs(me.x - you.x), toward = you.x > me.x ? "r" : "l", away = toward === "r" ? "l" : "r";
     const calm = g.reading ? 0.4 : 1;
     if (ai.mode === "block" && ai.t > 0) { me.keys.b = 1; return; }
-    if (((you.act === "p" || you.act === "k") && d < 200 || you.act === "cast") && Math.random() < L.block * 40 * dt) { ai.mode = "block"; ai.t = 0.45; return; }
+    if (((you.act === "p" || you.act === "k") && d < 200 || you.act === "cast") && Math.random() < L.block * 40 * KD().block * dt) { ai.mode = "block"; ai.t = 0.45; return; }
     if (L.specials.length && g.cd[1] <= 0 && d > 230 && Math.random() < 0.8 * dt) {
       const kind = L.specials[Math.floor(Math.random() * L.specials.length)];
       g.cd[1] = L.cd; kfCast(g, 1, kind, snd); return;
@@ -3232,10 +3344,11 @@ notify pgrst, 'reload schema';
     if (ai.t <= 0) { ai.mode = Math.random() < 0.18 ? "back" : "go"; ai.t = 0.4 + Math.random() * 0.9; }
     if (ai.mode === "back") me.keys[away] = 1;
     else if (d > 140) me.keys[toward] = 1;
-    else if (Math.random() < L.aggr * dt * calm) kfPress(g, 1, d > 150 || Math.random() < 0.38 ? "k" : "p", snd);
+    else if (Math.random() < L.aggr * KD().aggr * dt * calm) kfPress(g, 1, d > 150 || Math.random() < 0.38 ? "k" : "p", snd);
   }
   const kfPack = g => ({
-    f: g.f.map(f => [Math.round(f.x), f.dir, Math.round(f.hp * 10) / 10, f.act, Math.round(f.t * 100) / 100, f.spell || ""]),
+    f: g.f.map(f => [Math.round(f.x), f.dir, Math.round(f.hp * 10) / 10, f.act, Math.round(f.t * 100) / 100, f.spell || "", f.mv || 0, Math.round((f.cs || 1) * 100) / 100]),
+    ob: (g.orbs || []).map(o => [o.id, Math.round(o.x)]),
     S: Math.round(g.S), sup: g.sup, time: Math.ceil(g.time), over: g.over, win: g.win, rd: g.reading, go: g.go, pw: g.pw, lk: g.look,
     fx: g.fx.map(x => [x.id, Math.round(x.x), Math.round(x.y), x.big ? 1 : 0, x.blocked ? 1 : 0, x.sup ? 1 : 0, x.kind || ""]),
     pj: g.pj.map(p => [p.id, Math.round(p.x), p.kind, Math.sign(p.v)]),
@@ -3243,7 +3356,8 @@ notify pgrst, 'reload schema';
     lg: g.log.slice(-8).map(x => [x.text, x.ok ? 1 : 0]),
   });
   const kfUnpack = p => ({
-    f: p.f.map(a => ({ x: a[0], dir: a[1], hp: a[2], act: a[3], t: a[4], spell: a[5] })),
+    f: p.f.map(a => ({ x: a[0], dir: a[1], hp: a[2], act: a[3], t: a[4], spell: a[5], mv: a[6] || 0, cs: a[7] || 1 })),
+    orbs: (p.ob || []).map(a => ({ id: a[0], x: a[1] })),
     S: p.S, sup: p.sup, time: p.time, over: p.over, win: p.win, reading: p.rd, go: p.go, pw: p.pw, look: p.lk || [1, 0],
     fx: p.fx.map(a => ({ id: a[0], x: a[1], y: a[2], big: !!a[3], blocked: !!a[4], sup: !!a[5], kind: a[6] })),
     pj: (p.pj || []).map(a => ({ id: a[0], x: a[1], kind: a[2], v: a[3] })),
@@ -3251,11 +3365,56 @@ notify pgrst, 'reload schema';
     log: (p.lg || []).map(a => ({ text: a[0], ok: !!a[1] })),
   });
   let kfA = null;
+  // The teacher's own voice as the announcer, recorded on the Lessons tab; built-in sounds when there's none.
+  const ANN_KEYS = [["fight", "FIGHT!"], ["read", "READ!"], ["finish", "READ TO FINISH!"], ["win", "YOU WIN!"], ["ko", "K.O.!"]];
+  let annIx = null, annLesson = null, annEl = null;
+  function annSet(ix, lessons) { annIx = ix || null; annLesson = lessons && lessons[0] ? lessons[0].id : null; }
+  function annRec(key) { if (!annIx || !annLesson) return null; const o = annIx.own.get(annLesson); return (o && o.get("__ann:" + key)) || null; }
+  function kfAnn(key) {
+    const r = annRec(key);
+    if (!r || !r.audio) return false;
+    try {
+      kfA = kfA || new (window.AudioContext || window.webkitAudioContext)();
+      if (!annEl) { annEl = new Audio(); annEl.crossOrigin = "anonymous"; try { kfA.createMediaElementSource(annEl).connect(kfOut()); } catch (e) {} }
+      annEl.src = publicUrl(r.audio); annEl.currentTime = 0; annEl.play().catch(() => {});
+      return true;
+    } catch (e) { return false; }
+  }
+  // Game sounds, layered like real game audio: a noise burst for the impact, a low thump for the body.
+  let kfNoise = null;
+  function kfNoiseBuf() {
+    if (kfNoise) return kfNoise;
+    const n = kfA.sampleRate, b = kfA.createBuffer(1, n, n), d = b.getChannelData(0);
+    for (let i = 0; i < n; i++) d[i] = Math.random() * 2 - 1;
+    return (kfNoise = b);
+  }
+  function kfBurst(t, dur, vol, type, f0, f1, q) {
+    const src = kfA.createBufferSource(), fl = kfA.createBiquadFilter(), g = kfA.createGain();
+    src.buffer = kfNoiseBuf(); fl.type = type; fl.Q.value = q || 0.8;
+    fl.frequency.setValueAtTime(f0, t); if (f1) fl.frequency.exponentialRampToValueAtTime(f1, t + dur);
+    g.gain.setValueAtTime(0.0001, t); g.gain.exponentialRampToValueAtTime(vol, t + 0.008); g.gain.exponentialRampToValueAtTime(0.0001, t + dur);
+    src.connect(fl); fl.connect(g); g.connect(kfOut()); src.start(t, Math.random() * 0.5); src.stop(t + dur + 0.05);
+  }
+  function kfTone(t, type, f0, f1, dur, vol, attack) {
+    const o = kfA.createOscillator(), g = kfA.createGain();
+    o.type = type; o.frequency.setValueAtTime(f0, t); if (f1 && f1 !== f0) o.frequency.exponentialRampToValueAtTime(f1, t + dur);
+    g.gain.setValueAtTime(0.0001, t); g.gain.exponentialRampToValueAtTime(vol, t + (attack || 0.01)); g.gain.exponentialRampToValueAtTime(0.0001, t + dur);
+    o.connect(g); g.connect(kfOut()); o.start(t); o.stop(t + dur + 0.05);
+  }
   function kfSnd(kind) {
     try {
       kfA = kfA || new (window.AudioContext || window.webkitAudioContext)();
       if (kfA.state === "suspended") kfA.resume();
       const t = kfA.currentTime;
+      if (kind === "hit") { kfBurst(t, 0.07, 0.35, "bandpass", 1800, 900, 1.2); kfTone(t, "sine", 140, 48, 0.14, 0.45); return; }
+      if (kind === "big") { kfBurst(t, 0.14, 0.5, "lowpass", 2200, 500); kfTone(t, "sine", 110, 34, 0.26, 0.6); kfBurst(t + 0.02, 0.5, 0.06, "bandpass", 900, 1300, 0.6); return; }
+      if (kind === "block") { kfTone(t, "square", 1250, 900, 0.05, 0.12); kfBurst(t, 0.05, 0.18, "highpass", 2500); kfTone(t + 0.02, "triangle", 620, 520, 0.08, 0.1); return; }
+      if (kind === "whiff") { kfBurst(t, 0.16, 0.08, "bandpass", 700, 2600, 2); return; }
+      if (kind === "ko") { kfAnn("ko"); kfTone(t, "sine", 72, 26, 1.1, 0.75); kfBurst(t, 0.7, 0.35, "lowpass", 600, 120); kfBurst(t + 0.05, 1.8, 0.12, "bandpass", 700, 1400, 0.5); return; }
+      if (kind === "power") { [880, 1320, 1760].forEach((f, i) => kfTone(t + i * 0.07, "sine", f, f, 0.22, 0.16)); kfTone(t, "triangle", 440, 880, 0.3, 0.06); return; }
+      if (kind === "bad") { kfTone(t, "triangle", 330, 300, 0.16, 0.18); kfTone(t + 0.16, "triangle", 220, 190, 0.26, 0.18); return; }
+      if (kind === "go") { if (annRec("fight") && kfAnn("fight")) return; kfTone(t, "sine", 196, 190, 1.4, 0.4, 0.005); kfTone(t, "sine", 392, 385, 1.0, 0.18, 0.005); kfTone(t, "sine", 587, 580, 0.7, 0.08, 0.005); return; }
+      if (kind === "super") { kfBurst(t, 0.35, 0.25, "bandpass", 400, 3000, 1.5); kfTone(t + 0.3, "sine", 120, 30, 0.6, 0.7); kfBurst(t + 0.3, 0.4, 0.4, "lowpass", 1500, 200); return; }
       const set = { hit: [150, 55, 0.16, "square"], big: [120, 38, 0.28, "sawtooth"], block: [460, 400, 0.08, "triangle"], whiff: [650, 320, 0.07, "sine"],
         ko: [320, 50, 1.0, "sawtooth"], super: [220, 35, 0.55, "sawtooth"], power: [440, 1100, 0.35, "sine"], bad: [210, 110, 0.35, "triangle"], go: [330, 660, 0.25, "square"], fire: [170, 640, 0.38, "sawtooth"], ice: [1300, 480, 0.32, "triangle"], freeze: [700, 1500, 0.45, "sine"] }[kind] || [300, 100, 0.1, "sine"];
       const o = kfA.createOscillator(), gn = kfA.createGain();
@@ -3690,6 +3849,11 @@ notify pgrst, 'reload schema';
   function kfDraw(c, g, k, names, T, fxSeen, o3d) {
     const W = KF.W * k, H = KF.H * k;
     c.clearRect(0, 0, W, H);
+    if (!o3d) for (const o of g.orbs || []) {
+      const y = (KF.GROUND - 34 + Math.sin(T * 3 + o.id) * 5) * k, gr = c.createRadialGradient(o.x * k, y, 2, o.x * k, y, 26 * k);
+      gr.addColorStop(0, "rgba(255,240,170,1)"); gr.addColorStop(0.4, "rgba(255,210,74,.8)"); gr.addColorStop(1, "rgba(255,210,74,0)");
+      c.fillStyle = gr; c.beginPath(); c.arc(o.x * k, y, 26 * k, 0, 7); c.fill();
+    }
     if (!o3d) {
     // floor
     c.strokeStyle = "rgba(241,236,220,.35)"; c.lineWidth = 3 * k;
@@ -3778,6 +3942,7 @@ notify pgrst, 'reload schema';
   }
 
   function Fight({ mode, student, lessons, ix, uIdx, onClose, story }) {
+    annSet(ix, lessons);
     const host = mode === "host", solo = mode === "solo", client = mode === "live";
     const wrapRef = useRef(null), cvRef = useRef(null), gRef = useRef(null), prevRef = useRef(null), gl3Ref = useRef(null);
     const keysRef = useRef({ l: 0, r: 0, b: 0 });
@@ -3855,6 +4020,7 @@ notify pgrst, 'reload schema';
       if (!c) { toast(solo ? "Your teacher hasn't recorded words for you yet." : "No words in the lessons yet."); return; }
       g.reading = true;
       setCh(c); setTyped("");
+      kfAnn(g.finish ? "finish" : "read");
     }
     function answer(ok) {
       const c = chRef.current;
@@ -3921,6 +4087,7 @@ notify pgrst, 'reload schema';
           }
           else if (m.type === "kf-ch") { setCh(m.ch); setTyped(""); }
           else if (m.type === "kf-res") { if (m.text) kfNoteWord(m.text, !!m.ok); if (chRef.current && chRef.current.id === m.id) { setCh(null); setTyped(""); } setResult({ ok: !!m.ok, text: m.text }); setTimeout(() => setResult(null), 1300); }
+          else if (m.type === "kf-orb") askPower(!!(gRef.current && gRef.current.sup));
           else if (m.type === "kf-start") { gRef.current = null; setCh(null); setResult(null); setRound(r => r + 1); say({ type: "kf-look", c: lookRef.current }); }
           else if (m.type === "kf-end") onClose();
         }
@@ -3946,7 +4113,7 @@ notify pgrst, 'reload schema';
       if (client) say({ type: "kf-look", c: lookRef.current });
       const cv = cvRef.current, wrap = wrapRef.current, c = cv.getContext("2d");
       const fxSeen = new Map();
-      let raf = 0, last = performance.now(), sendAcc = 0, k = 1, lastW = 0, lastH = 0, seenFx = 0, offX = 0, lastF = false;
+      let raf = 0, last = performance.now(), sendAcc = 0, k = 1, lastW = 0, lastH = 0, seenFx = 0, offX = 0, lastF = false, annOver = false;
       // the 3D fight: loads in the background; until it's ready (or if a phone can't do 3D) the drawn fight shows
       const gl = gl3Ref.current, v3 = { view: null };
       let dead = false;
@@ -3991,6 +4158,12 @@ notify pgrst, 'reload schema';
             const sl = (g.slowT > 0 ? 0.35 : 1) * (solo && pickRef.current ? 0 : 1) * (g.reading ? 0.25 : 1);   // practice waits while he picks a fighter
             g.slowT = Math.max(0, (g.slowT || 0) - dt);
             kfStep(g, dt * sl, kfSnd);
+            // an orb he grabbed, or the opponent dazed: the reading challenge opens by itself
+            if (g.orbWant || (g.finish && !g.finAsk && !g.reading)) {
+              if (g.finish) g.finAsk = true;
+              g.orbWant = false;
+              if (solo) askPower(g.sup); else say({ type: "kf-orb" });
+            }
             if (host) { sendAcc += dt; if (sendAcc > 0.08) { sendAcc = 0; say({ type: "kf-st", g: kfPack(g) }); } }
           }
         } else if (g) {
@@ -4014,6 +4187,7 @@ notify pgrst, 'reload schema';
             gl.style.visibility = on3 ? "visible" : "hidden";
           }
           if (offX) { c.setTransform(1, 0, 0, 1, 0, 0); c.clearRect(0, 0, cv.width, cv.height); c.translate(offX, 0); }
+          if (g.over && !annOver) { annOver = true; const w = g.win; setTimeout(() => kfAnn(w === 0 ? "win" : "ko"), 900); }
           kfDraw(c, g, k, names, now / 1000, fxSeen, on3);
           if (offX) c.setTransform(1, 0, 0, 1, 0, 0);
           const u = { over: !!g.over, win: g.win, sup: !!g.sup, reading: !!g.reading, fin: !!g.finish, dir: g.f[0].dir };
@@ -4093,13 +4267,12 @@ notify pgrst, 'reload schema';
         <div class="kfjrow"><button class="big kfok" onClick=${() => judgeIt(true)} aria-label="Read it right"><${Ic.tick} size=${30} sw=${3}/></button>
         <button class="big kfno" onClick=${() => judgeIt(false)} aria-label="Not right"><${Ic.x} size=${30} sw=${3}/></button></div>
       </div>` : null}
-      ${reading ? html`<${WordChallenge} c=${ch} ix=${ix} lessons=${lessons} onDone=${ok => answer(ok)} onCancel=${cancelReading}/>` : html`<div class="kfpad">
+      ${reading ? html`<${WordChallenge} timed=${true} c=${ch} ix=${ix} lessons=${lessons} onDone=${ok => answer(ok)} onCancel=${cancelReading}/>` : html`<div class="kfpad">
         <div class="kfdir">
           <button class="kfb" ...${hold("l")} aria-label="Move left"><${Ic.back} size=${30} sw=${3}/></button>
           <button class="kfb" ...${hold("r")} aria-label="Move right"><${Ic.back} size=${30} sw=${3}/></button>
         </div>
         ${me ? html`<div class="kfmid">
-          <button class=${"kfb kfpow" + (ui.fin ? " fin" : ui.sup ? " sup" : "")} ...${tapBtn(() => askPower(ui.sup))} aria-label=${ui.fin ? "Read to finish" : ui.sup ? "Super move" : "Read for strength"}>${ui.fin ? "🔥" : ui.sup ? "⚡" : html`<${Ic.book} size=${30}/>`}</button>
         </div>` : null}
         <div class="kfact">
           <button class="kfb kfhit" ...${tapBtn(() => hit("p"))} aria-label="Punch">👊</button>
@@ -4435,12 +4608,20 @@ notify pgrst, 'reload schema';
     return { id: uid(), how, text: t.text, audio: t.audio || null, emoji: t.emoji || null,
       options: how === "spell" ? [] : qOptions(pool, t, how === "see" ? 3 : 4, how === "see") };
   }
-  function WordChallenge({ c, ix, lessons, onDone, onCancel }) {
+  function WordChallenge({ c, ix, lessons, onDone, onCancel, timed }) {
     const [typed, setTyped] = useState("");
     const [res, setRes] = useState(null);
-    useEffect(() => { setTyped(""); setRes(null); if (c.how !== "see") setTimeout(() => qPlay(c), 150); }, [c.id]);
+    const resRef = useRef(null), limit = timed ? READ_LIMIT(c) : 0;
+    useEffect(() => {
+      setTyped(""); setRes(null); resRef.current = null;
+      if (c.how !== "see") setTimeout(() => qPlay(c), 150);
+      // too slow counts as wrong
+      const t = limit ? setTimeout(() => finish(false, null), limit * 1000) : 0;
+      return () => clearTimeout(t);
+    }, [c.id]);
     const finish = (ok, pick) => {
-      if (res) return;
+      if (res || resRef.current) return;
+      resRef.current = { ok, pick };
       setRes({ ok, pick });
       chime(ok);
       kfNoteWord(c.text, ok);
@@ -4448,7 +4629,7 @@ notify pgrst, 'reload schema';
     };
     const mark = o => (res && o.text === c.text ? " good" : res && o.text === res.pick ? " bad" : "");
     const say = html`<button class="big light wcsay" onClick=${() => qPlay(c)} aria-label="Hear it again"><${Ic.speaker} size=${28}/></button>`;
-    const x = onCancel ? html`<button class="kfcancel" onClick=${onCancel} aria-label="Back"><${Ic.x} size=${22}/></button>` : null;
+    const x = html`${limit && !res ? html`<div class="wctime" key=${"t" + c.id}><i style=${"animation-duration:" + limit + "s"}></i></div>` : null}${onCancel ? html`<button class="kfcancel" onClick=${onCancel} aria-label="Back"><${Ic.x} size=${22}/></button>` : null}`;
     if (c.how === "case") return html`<div class="wc">${x}
       <div class="wccap" aria-label=${"Find the small letter for " + c.text.toUpperCase()}>${c.text.toUpperCase()}</div>
       <div class="wcopts">${c.options.map(o => html`<button class=${"wcopt" + mark(o)} onClick=${() => finish(o.text === c.text, o.text)}>${o.text}</button>`)}</div>
@@ -4925,10 +5106,10 @@ notify pgrst, 'reload schema';
   const frAngTo = (a, b) => Math.atan2(b.x - a.x, b.z - a.z);
   const frDiff = (a, b) => Math.atan2(Math.sin(a - b), Math.cos(a - b));
   function frFighter(team, x, z, ang, cpu) { return { team, x, z, y: 0, ang, hp: 100, act: "idle", t: 0, hit: false, keys: { mx: 0, mz: 0, b: 0 }, guard: 0, gt: -9, cd: 0.8 + Math.random(), cpu, spd: 0, side: Math.random() < 0.5 ? -1 : 1, blockT: 0 }; }
-  function frNew(nOpp, lv) {
+  function frNew(nOpp, lv, diff) {
     const f = [Object.assign(frFighter(0, 0, 3, Math.PI, false), { human: true, S: 50 })];
     for (let i = 0; i < nOpp; i++) f.push(frFighter(1, nOpp === 1 ? 0 : (i ? 1.6 : -1.6), -3, 0, true));
-    return { f, S: 50, over: false, winTeam: -1, fx: [], fxId: 0, reading: false, slowT: 0, wt: 0, T: 0, go: 1.4, lv: lv || 1, cpuDmg: nOpp > 1 ? 0.6 : 0.75 };
+    return { f, S: 50, over: false, winTeam: -1, fx: [], fxId: 0, reading: false, slowT: 0, wt: 0, T: 0, go: 1.4, lv: lv || 1, diff: diff || 2, cpuDmg: FR_DIFF[diff || 2].dmg * (nOpp > 1 ? 0.8 : 1) };
   }
   function frClamp(f) { const d = Math.hypot(f.x, f.z); if (d > FR_R) { f.x *= FR_R / d; f.z *= FR_R / d; } }
   function frNearest(g, f, maxD, cone) {
@@ -4940,10 +5121,24 @@ notify pgrst, 'reload schema';
     }
     return best;
   }
+  // Speed is skill: a tap during a strike is kept and fires the moment it ends, and quick follow-ups get faster.
+  function frStart(g, f, k) {
+    const chain = f.lastEnd != null && g.T - f.lastEnd < 0.45;
+    f.combo = chain ? Math.min((f.combo || 1) + 1, 6) : 1;
+    f.cs = Math.max(0.6, 1 - 0.1 * (f.combo - 1));
+    const t = frNearest(g, f, 2.4, 1.9);
+    if (t) {
+      f.ang = frAngTo(f, t);
+      const d = Math.hypot(t.x - f.x, t.z - f.z), step = Math.max(0, Math.min(0.18, d - 0.85));   // step in to stay in reach
+      f.x += Math.sin(f.ang) * step; f.z += Math.cos(f.ang) * step;
+    }
+    f.act = k; f.t = 0; f.hit = false; f.mv = (f.mv || 0) + 1;
+  }
   function frPress(g, i, k) {
     const f = g.f[i];
+    if (f && !g.over && (f.act === "p" || f.act === "k") && (k === "p" || k === "k")) { f.buf = k; f.bufT = g.T; return; }
     if (!f || g.over || g.go > 0 || f.act === "ko" || !["idle", "walk", "run", "block"].includes(f.act)) return;
-    if (k === "p" || k === "k") { const t = frNearest(g, f, 2.4, 1.9); if (t) f.ang = frAngTo(f, t); f.act = k; f.t = 0; f.hit = false; }
+    if (k === "p" || k === "k") frStart(g, f, k);
     else if (k === "jump") { f.act = "jump"; f.t = 0; }
     else if (k === "roll") {
       const m = Math.hypot(f.keys.mx || 0, f.keys.mz || 0);
@@ -4964,9 +5159,19 @@ notify pgrst, 'reload schema';
       const back = Math.abs(frDiff(frAngTo(b, a), b.ang)) > 2.0;
       let blocked = b.act === "block" && !back, gb = false;
       if (blocked) { if (g.T - b.gt > 1.6) b.guard = 0; b.gt = g.T; b.guard += mv === FRM.k ? 1.5 : 1; if (b.guard >= 3) { blocked = false; gb = true; b.guard = 0; } }
-      const d = mv.dmg * mul * (back ? 1.5 : 1) * (blocked ? 0.25 : gb ? 1.3 : 1);
+      const combo = (a.combo || 1) >= 3 ? 1.25 : 1;   // the third quick hit lands harder
+      const d = mv.dmg * 0.6 * mul * combo * (back ? 1.5 : 1) * (blocked ? 0.25 : gb ? 1.3 : 1);
       b.hp = Math.max(0, b.hp - d);
-      if (!blocked) { const an = frAngTo(a, b); b.x += Math.sin(an) * 0.35; b.z += Math.cos(an) * 0.35; frClamp(b); b.act = gb ? "dazed" : "hit"; b.t = 0; b.keys.b = 0; }
+      if (!blocked) {
+        const an = frAngTo(a, b);
+        // combo breaker: after 3 quick hits the defender is knocked clear and can't be stunned for a moment
+        b.chainN = g.T - (b.chainT || -9) < 1.0 ? (b.chainN || 0) + 1 : 1; b.chainT = g.T;
+        const breakFree = b.chainN >= 3, armored = (b.armor || 0) > g.T;
+        const kb = breakFree ? 0.9 : mv === FRM.k ? 0.4 : 0.14;
+        b.x += Math.sin(an) * kb; b.z += Math.cos(an) * kb; frClamp(b);
+        if (breakFree) { b.chainN = 0; b.armor = g.T + 0.7; b.act = "idle"; b.t = 0; }
+        else if (!armored) { b.act = gb ? "dazed" : "hit"; b.t = 0; b.keys.b = 0; }
+      }
       if (b.hp <= 0) { b.act = "ko"; b.t = 0; g.slowT = 0.9; }
       g.fx.push({ id: ++g.fxId, x: b.x, z: b.z, y: mv === FRM.k ? 1.0 : 1.45, big: d >= 10 || back || gb, back, blocked, gb });
       if (g.fx.length > 30) g.fx.splice(0, g.fx.length - 30);
@@ -4977,14 +5182,39 @@ notify pgrst, 'reload schema';
     g.T += dt;
     if (g.go > 0) { g.go -= dt; if (g.go <= 0 && snd) snd("go"); }
     if (g.over) { g.wt += dt; for (const f of g.f) f.t += dt; return; }
-    for (const f of g.f) if (f.human && f.act !== "ko" && f.act !== "read" && !(g.reading && f === g.f[0])) f.S = Math.max(0, (f.S || 0) - dt);
+    for (const f of g.f) if (f.human && f.act !== "ko" && f.act !== "read" && !(g.reading && f === g.f[0])) f.S = Math.max(0, (f.S || 0) - dt * 0.4);
+    if (g.go <= 0) {
+      g.orbs = g.orbs || []; g.orbT = (g.orbT == null ? 3.5 : g.orbT) - dt;
+      if (g.orbT <= 0) {
+        g.orbT = 6 + Math.random() * 4;
+        if (g.orbs.length < 2) for (let k = 0; k < 8; k++) { const a = Math.random() * 6.283, r = 1 + Math.random() * (FR_R - 1.8), x = Math.sin(a) * r, z = Math.cos(a) * r; if (g.f.every(f => Math.hypot(f.x - x, f.z - z) > 1.4)) { g.orbs.push({ id: (g.orbId = (g.orbId || 0) + 1), x, z }); break; } }
+      }
+      for (const o of g.orbs.slice()) for (const f of g.f) {
+        if (["ko", "read", "dazed"].includes(f.act) || Math.hypot(f.x - o.x, f.z - o.z) > 0.6) continue;
+        const reader = f.cpu ? false : f.owner ? f.owner !== "teacher" : f === g.f[0];
+        if (reader && f === g.f[0] && g.reading) continue;
+        g.orbs = g.orbs.filter(x => x !== o);
+        if (reader) f.orbWant = true; else f.hp = Math.min(100, f.hp + 4);
+        if (snd) snd("power");
+        break;
+      }
+    }
     for (const f of g.f) {
       f.t += dt; f.spd = 0;
       if (f.act === "ko") continue;
       if (f.act === "read") { if (f.t >= 12) f.act = "idle"; continue; }
       const mv = FRM[f.act];
-      if (mv) { if (!f.hit && f.t >= mv.wind) { f.hit = true; frHit(g, f, mv, snd); } if (f.t >= mv.total) f.act = "idle"; continue; }
-      if (f.act === "hit") { if (f.t >= 0.38) f.act = "idle"; continue; }
+      if (mv) {
+        const cs = f.cs || 1;
+        if (!f.hit && f.t >= mv.wind * cs) { f.hit = true; frHit(g, f, mv, snd); }
+        if (f.t >= mv.total * cs) {
+          f.lastEnd = g.T;
+          const b = f.buf; f.buf = null; f.act = "idle";
+          if (b && g.T - f.bufT < 0.45) frStart(g, f, b);
+        }
+        continue;
+      }
+      if (f.act === "hit") { if (f.t >= 0.3) f.act = "idle"; continue; }
       if (f.act === "dazed") { if (f.t >= 0.9) f.act = "idle"; continue; }
       if (f.act === "roll") { const s = 5.2 * Math.max(0, 1 - f.t / 0.42); f.x += Math.sin(f.ang) * s * dt; f.z += Math.cos(f.ang) * s * dt; if (f.t >= 0.42) f.act = "idle"; frClamp(f); continue; }
       let mx = f.keys.mx || 0, mz = f.keys.mz || 0;
@@ -5012,30 +5242,70 @@ notify pgrst, 'reload schema';
     if (!alive(0) || !alive(1)) { g.over = true; g.winTeam = alive(0) ? 0 : 1; g.wt = 0; }
   }
   // The computer: chases, circles, strikes, blocks; a second opponent tries to get behind him.
+  // How tough the computer is: Normal, Hard (the default) or Brutal.
+  const FR_DIFF = {
+    1: { react: 0.35, block: 0.35, dodge: 0.1, burst: 1, cd: 1.0, flank: 0.15, punish: 0.3, orbs: 0, dmg: 0.6 },
+    2: { react: 0.15, block: 0.65, dodge: 0.3, burst: 3, cd: 0.42, flank: 0.55, punish: 0.85, orbs: 0.5, dmg: 1.55 },
+    3: { react: 0.09, block: 0.85, dodge: 0.45, burst: 4, cd: 0.28, flank: 0.85, punish: 1, orbs: 0.9, dmg: 1.9 },
+  };
   function frCpu(g, dt) {
     if (g.over || g.go > 0) return;
+    const P = FR_DIFF[g.diff || 2];
     g.f.forEach((f, i) => {
       if (!f.cpu || f.act === "ko") return;
       f.cd -= dt;
       const tgt = frNearest(g, f, 99);
       if (!tgt) { f.keys = { mx: 0, mz: 0, b: 0 }; return; }
-      const d = Math.hypot(tgt.x - f.x, tgt.z - f.z);
+      const d = Math.hypot(tgt.x - f.x, tgt.z - f.z), toMe = frDiff(frAngTo(tgt, f), tgt.ang);
+      // keep a combo going: queue the next strike while this one lands
+      if ((f.act === "p" || f.act === "k") && (f.burst || 0) > 1 && !f.buf && f.t > 0.05) { f.burst--; frPress(g, i, f.burst === 1 && Math.random() < 0.4 ? "k" : "p"); }
+      if (["p", "k", "hit", "dazed", "roll", "jump"].includes(f.act)) return;
+      // a block that's being hammered: drop it and roll away before the guard breaks
+      if (f.blockT > 0 && (f.guard || 0) >= 2) { f.blockT = 0; const a = frAngTo(tgt, f) + (Math.random() < 0.5 ? 1.4 : -1.4); f.keys = { mx: Math.sin(a), mz: Math.cos(a), b: 0 }; frPress(g, i, "roll"); f.cd = 0; return; }
       if (f.blockT > 0) { f.blockT -= dt; if (f.blockT <= 0) f.keys = { mx: 0, mz: 0, b: 0 }; return; }
-      const threat = (tgt.act === "p" || tgt.act === "k") && d < 1.6 && Math.abs(frDiff(frAngTo(tgt, f), tgt.ang)) < 0.9;
-      if (threat && Math.random() < dt * (1.5 + g.lv)) { f.keys = { mx: 0, mz: 0, b: 1 }; f.blockT = 0.5; return; }
-      if (d < 1.25) {
+      if (f.act === "idle" && f.wasRoll) { f.wasRoll = false; f.cd = 0; }   // straight out of a roll: counter
+      // he swings at me: react after a human-like delay, then block, roll aside or back off
+      const swinging = (tgt.act === "p" || tgt.act === "k") && d < 1.9 && Math.abs(toMe) < 1.0;
+      if (swinging && f.seen !== tgt.mv) {
+        f.seen = tgt.mv; f.reactAt = g.T + P.react * (0.7 + Math.random() * 0.6); f.reactTo = tgt.mv;
+        f.swings = (f.swings || []).filter(t => g.T - t < 1.5).concat(g.T);   // is he just mashing?
+      }
+      if (swinging && f.reactTo === tgt.mv && f.reactAt && g.T >= f.reactAt) {
+        f.reactAt = 0;
+        const r = Math.random(), hurt = f.hp < 35 ? 0.15 : 0, spam = (f.swings || []).length >= 3 && P.burst > 1;
+        if (spam && r < 0.75) { const side = Math.random() < 0.5 ? 1 : -1, a = frAngTo(tgt, f) + side * 1.5; f.keys = { mx: Math.sin(a), mz: Math.cos(a), b: 0 }; frPress(g, i, "roll"); f.wasRoll = true; f.swings = []; return; }
+        if (r < P.block + hurt) { f.keys = { mx: 0, mz: 0, b: 1 }; f.blockT = 0.35 + Math.random() * 0.25; return; }
+        if (r < P.block + hurt + P.dodge) { const side = Math.random() < 0.5 ? 1 : -1, a = frAngTo(tgt, f) + side * 1.3; f.keys = { mx: Math.sin(a), mz: Math.cos(a), b: 0 }; frPress(g, i, "roll"); return; }
+      }
+      // he missed and is still recovering: punish with a combo
+      const whiffed = (tgt.act === "p" || tgt.act === "k") && tgt.hit && tgt.t > 0.22;
+      if (d < 1.35) {
         f.ang = frAngTo(f, tgt);
-        if (f.cd <= 0) { f.keys = { mx: 0, mz: 0, b: 0 }; frPress(g, i, Math.random() < 0.35 ? "k" : "p"); f.cd = Math.max(0.5, 1.3 - g.lv * 0.15) + Math.random() * 0.6; }
-        else { if (Math.random() < dt * 0.8) f.side = -f.side; f.keys = { mx: Math.cos(f.ang) * f.side * 0.45, mz: -Math.sin(f.ang) * f.side * 0.45, b: 0 }; }
+        const go = f.cd <= 0 || (whiffed && Math.random() < P.punish) || (tgt.act === "read") || (tgt.hp < 25 && Math.random() < 0.6);
+        if (go) { f.keys = { mx: 0, mz: 0, b: 0 }; f.burst = P.burst > 1 ? 2 + Math.floor(Math.random() * (P.burst - 1)) : 1; frPress(g, i, d > 1.1 && Math.random() < 0.5 ? "k" : "p"); f.cd = P.cd * (0.7 + Math.random() * 0.7) * (f.hp < 30 ? 1.4 : 1); return; }
+        // circle him, and get round the back while he blocks
+        if (Math.random() < dt * 1.2) f.side = -f.side;
+        const behind = tgt.act === "block" ? 0.9 : 0.45;
+        f.keys = { mx: Math.cos(f.ang) * f.side * behind, mz: -Math.sin(f.ang) * f.side * behind, b: 0 };
         return;
       }
-      if (f.hp < 30 && Math.random() < dt * 0.3) { frPress(g, i, "roll"); return; }
+      // a word orb close by: race him for it
+      if (P.orbs && g.orbs && g.orbs.length) {
+        const o = g.orbs.reduce((a, b) => (Math.hypot(b.x - f.x, b.z - f.z) < Math.hypot(a.x - f.x, a.z - f.z) ? b : a));
+        if (Math.hypot(o.x - f.x, o.z - f.z) < 3.5 && Math.random() < P.orbs) { const dx = o.x - f.x, dz = o.z - f.z, dd = Math.hypot(dx, dz) || 1; f.keys = { mx: dx / dd, mz: dz / dd, b: 0 }; return; }
+      }
+      if (f.hp < 25 && Math.random() < dt * 0.4) { frPress(g, i, "roll"); return; }
+      // close in; harder opponents come at him from the side or behind
       let gx = tgt.x, gz = tgt.z;
-      if (i === 2) { gx = tgt.x - Math.sin(tgt.ang) * 1.1; gz = tgt.z - Math.cos(tgt.ang) * 1.1; }   // the second one goes round the back
-      const dx = gx - f.x, dz = gz - f.z, dd = Math.hypot(dx, dz) || 1, sp = dd > 3.5 ? 1 : 0.7;
+      if (i === 2 || Math.random() < P.flank * dt * 3 || f.flankT > g.T) {
+        if (!(f.flankT > g.T)) f.flankT = g.T + 1.2;
+        gx = tgt.x - Math.sin(tgt.ang) * 1.1; gz = tgt.z - Math.cos(tgt.ang) * 1.1;
+      }
+      const dx = gx - f.x, dz = gz - f.z, dd = Math.hypot(dx, dz) || 1, sp = dd > 2.5 ? 1 : 0.8;
       f.keys = { mx: dx / dd * sp, mz: dz / dd * sp, b: 0 };
     });
   }
+
   // the joystick: push a little to walk, all the way to run
   function FrStick({ keys }) {
     const knob = useRef(null), st = useRef({ id: null, cx: 0, cy: 0 });
@@ -5051,6 +5321,7 @@ notify pgrst, 'reload schema';
     return html`<div class="frstick" onPointerDown=${down} onPointerMove=${move} onPointerUp=${up} onPointerCancel=${up} aria-label="Move"><div class="frknob" ref=${knob}></div></div>`;
   }
   function Arena({ student, lessons, ix, uIdx, onClose }) {
+    annSet(ix, lessons);
     const glRef = useRef(null), gRef = useRef(null), keysRef = useRef({ mx: 0, mz: 0, b: 0 }), poolRef = useRef(null), recentRef = useRef([]), chRef = useRef(null);
     const [n, setN] = useState(null);
     const [round, setRound] = useState(0);
@@ -5061,7 +5332,7 @@ notify pgrst, 'reload schema';
     useEffect(() => {
       if (!n) return;
       poolRef.current = qPool(lessons, uIdx, ix);
-      const g = frNew(n, 1); gRef.current = g; window.__fr = gRef; window.__frApi = { frPress, frHit, FRM };
+      const g = frNew(n, 1, gDiff()); gRef.current = g; window.__fr = gRef; window.__frApi = { frPress, frHit, FRM, frStep, frNew, frCpu };
       const gl = glRef.current, chars = [KF_CHARS[me], KF_CHARS[(me + 2) % KF_CHARS.length], KF_CHARS[(me + 3) % KF_CHARS.length]].slice(0, n + 1);
       let view = null, dead = false, raf = 0, last = performance.now(), uiT = 0, lw = 0, lh = 0;
       setLoad(v => (v === "ready" ? v : "loading"));
@@ -5078,6 +5349,7 @@ notify pgrst, 'reload schema';
           const sl = (g.slowT > 0 ? 0.35 : 1) * (g.reading ? 0.25 : 1);
           g.slowT = Math.max(0, g.slowT - dt);
           frStep(g, dt * sl, kfSnd);
+          if (g.f[0].orbWant) { g.f[0].orbWant = false; openBook(); }
           view.render(g, dt, now / 1000);
         }
         uiT += dt;
@@ -5093,7 +5365,7 @@ notify pgrst, 'reload schema';
       const g = gRef.current; if (!g || g.over || chRef.current) return;
       const c = qMake(poolRef.current, recentRef.current, ["see", "hear", "spell"]) || qCase(recentRef.current);
       recentRef.current = recentRef.current.concat(c.text).slice(-6);
-      g.reading = true; setCh(c);
+      g.reading = true; setCh(c); kfAnn("read");
     }
     function answer(ok) {
       const g = gRef.current, c = chRef.current; setCh(null);
@@ -5126,9 +5398,8 @@ notify pgrst, 'reload schema';
         <div class="frmsg frbig">${u.win ? "YOU WIN" : "K.O."}</div>
         <div class="frendb"><button class="btn" onClick=${() => { setUi(null); setRound(r => r + 1); }}>Again</button><button class="btn quiet" onClick=${() => setN(null)}>Change</button></div>
       </div>` : null}
-      ${ch ? html`<div class="frread"><${WordChallenge} c=${ch} ix=${ix} lessons=${lessons} onDone=${ok => answer(ok)} onCancel=${() => { setCh(null); if (gRef.current) gRef.current.reading = false; }}/></div>` : html`<div class="frpad">
+      ${ch ? html`<div class="frread"><${WordChallenge} timed=${true} c=${ch} ix=${ix} lessons=${lessons} onDone=${ok => answer(ok)} onCancel=${() => { setCh(null); if (gRef.current) gRef.current.reading = false; }}/></div>` : html`<div class="frpad">
         <${FrStick} keys=${keysRef}/>
-        <button class="frbtn frbook" onPointerDown=${e => { e.preventDefault(); openBook(); }} aria-label="Read for strength">📖</button>
         <div class="frbtns">
           <button class="frbtn" onPointerDown=${press("p")} aria-label="Punch">👊</button>
           <button class="frbtn" onPointerDown=${press("k")} aria-label="Kick">🦵</button>
@@ -5154,12 +5425,13 @@ notify pgrst, 'reload schema';
     });
     return { f, S: 50, over: false, winTeam: -1, fx: [], fxId: 0, reading: false, slowT: 0, wt: 0, T: 0, go: 2, lv: 1, cpuDmg: 0.75, mode };
   }
-  const frPack = g => ({ f: g.f.map(f => [Math.round(f.x * 100) / 100, Math.round(f.z * 100) / 100, Math.round(f.ang * 100) / 100, f.act, Math.round(f.t * 100) / 100, Math.round(f.hp), Math.round(f.S || 0), Math.round((f.y || 0) * 100) / 100, f.team, Math.round((f.spd || 0) * 10) / 10]), fx: g.fx.slice(-8), over: g.over, wt: g.winTeam, go: g.go });
+  const frPack = g => ({ f: g.f.map(f => [Math.round(f.x * 100) / 100, Math.round(f.z * 100) / 100, Math.round(f.ang * 100) / 100, f.act, Math.round(f.t * 100) / 100, Math.round(f.hp), Math.round(f.S || 0), Math.round((f.y || 0) * 100) / 100, f.team, Math.round((f.spd || 0) * 10) / 10, f.mv || 0, Math.round((f.cs || 1) * 100) / 100]), fx: g.fx.slice(-8), ob: (g.orbs || []).map(o => [o.id, Math.round(o.x * 100) / 100, Math.round(o.z * 100) / 100]), over: g.over, wt: g.winTeam, go: g.go });
   function frApply(g, p) {
-    p.f.forEach((a, i) => { const f = g.f[i]; if (!f) return; f.tx = a[0]; f.tz = a[1]; f.ang = a[2]; f.act = a[3]; f.t = a[4]; f.hp = a[5]; f.S = a[6]; f.y = a[7]; f.team = a[8]; f.spd = a[9]; });
-    g.fx = p.fx || []; g.over = p.over; g.winTeam = p.wt; g.go = p.go;
+    p.f.forEach((a, i) => { const f = g.f[i]; if (!f) return; f.tx = a[0]; f.tz = a[1]; f.ang = a[2]; f.act = a[3]; f.t = a[4]; f.hp = a[5]; f.S = a[6]; f.y = a[7]; f.team = a[8]; f.spd = a[9]; f.mv = a[10] || 0; f.cs = a[11] || 1; });
+    g.fx = p.fx || []; g.over = p.over; g.winTeam = p.wt; g.go = p.go; g.orbs = (p.ob || []).map(a => ({ id: a[0], x: a[1], z: a[2] }));
   }
   function ArenaLive({ role, s, student, lessons, ix, uIdx, onClose }) {
+    annSet(ix, lessons);
     const host = role === "host", me = host ? "teacher" : student.id;
     const glRef = useRef(null), gRef = useRef(null), keysRef = useRef({ mx: 0, mz: 0, b: 0 }), chRef = useRef(null), poolRef = useRef(null), recentRef = useRef([]), startRef = useRef(null);
     const [setup, setSetup] = useState(null);   // { mode, roster }
@@ -5173,6 +5445,7 @@ notify pgrst, 'reload schema';
           if (m.type === "fr-start") { startRef.current = m; setSetup({ mode: m.mode, roster: m.roster, n: m.n }); }
           else if (m.type === "fr-end") onClose();
           else if (m.type === "fr-st" && gRef.current) frApply(gRef.current, m.g);
+          else if (m.type === "fr-orb" && m.to === me) openBook();
           return;
         }
         const g = gRef.current;
@@ -5198,7 +5471,7 @@ notify pgrst, 'reload schema';
     }
     useEffect(() => {
       if (!setup) return;
-      const g = frLive(setup.mode, setup.roster); gRef.current = g; window.__frl = gRef; window.__frApi = { frPress, frHit, FRM };
+      const g = frLive(setup.mode, setup.roster); gRef.current = g; window.__frl = gRef; window.__frApi = { frPress, frHit, FRM, frStep, frNew, frCpu };
       g.f.forEach(f => { f.tx = f.x; f.tz = f.z; });
       if (host) { startRef.current = { type: "fr-start", mode: setup.mode, roster: setup.roster, n: round }; live.send(startRef.current); }
       poolRef.current = qPool(lessons, uIdx, ix);
@@ -5218,6 +5491,7 @@ notify pgrst, 'reload schema';
           // the match keeps pace with real time even if this phone draws few frames
           let left = real;
           while (left > 1e-4) { const st = Math.min(0.05, left); left -= st; const sl = g.slowT > 0 ? 0.35 : 1; g.slowT = Math.max(0, g.slowT - st); frStep(g, st * sl, kfSnd); }
+          for (const f of g.f) if (f.orbWant) { f.orbWant = false; if (f.owner && f.owner !== me) live.send({ type: "fr-orb", to: f.owner }); }
           if (sendT > 0.066) { sendT = 0; live.send({ type: "fr-st", g: frPack(g) }); }
         } else {
           for (const f of g.f) { const k = Math.min(1, dt * 12); f.x += ((f.tx != null ? f.tx : f.x) - f.x) * k; f.z += ((f.tz != null ? f.tz : f.z) - f.z) * k; }
@@ -5245,7 +5519,7 @@ notify pgrst, 'reload schema';
       const g = gRef.current; if (!g || g.over || chRef.current) return;
       const c = qMake(poolRef.current, recentRef.current, ["see", "hear", "spell"]) || qCase(recentRef.current);
       recentRef.current = recentRef.current.concat(c.text).slice(-6);
-      setCh(c); readMsg({ type: "fr-read", on: true });
+      setCh(c); readMsg({ type: "fr-read", on: true }); kfAnn("read");
     }
     function answer(ok) { const c = chRef.current; setCh(null); if (c) kfNoteWord(c.text, ok); readMsg({ type: "fr-read", on: false, ok }); kfSnd(ok ? "power" : "bad"); }
     if (!setup) return html`<div class="frpick">
@@ -5271,9 +5545,8 @@ notify pgrst, 'reload schema';
         <div class="frmsg big">${u.win ? "YOU WIN" : "K.O."}</div>
         ${host ? html`<div class="frendb"><button class="btn" onClick=${() => { setUi(null); setRound(r => r + 1); }}>Again</button><button class="btn quiet" onClick=${onClose}>End</button></div>` : null}
       </div>` : null}
-      ${ch ? html`<div class="frread"><${WordChallenge} c=${ch} ix=${ix} lessons=${lessons} onDone=${ok => answer(ok)} onCancel=${() => { setCh(null); readMsg({ type: "fr-read", on: false }); }}/></div>` : html`<div class="frpad">
+      ${ch ? html`<div class="frread"><${WordChallenge} timed=${true} c=${ch} ix=${ix} lessons=${lessons} onDone=${ok => answer(ok)} onCancel=${() => { setCh(null); readMsg({ type: "fr-read", on: false }); }}/></div>` : html`<div class="frpad">
         <${FrStick} keys=${keysRef}/>
-        <button class="frbtn frbook" onPointerDown=${e => { e.preventDefault(); openBook(); }} aria-label="Read for strength">📖</button>
         <div class="frbtns">
           <button class="frbtn" onPointerDown=${press("p")} aria-label="Punch">👊</button>
           <button class="frbtn" onPointerDown=${press("k")} aria-label="Kick">🦵</button>
@@ -5284,13 +5557,85 @@ notify pgrst, 'reload schema';
       </div>`}
     </div>`;
   }
+  /* ================= the reading city: walk and drive around a town full of words ================= */
+  function City({ student, lessons, ix, uIdx, onClose }) {
+    const glRef = useRef(null), keysRef = useRef({ mx: 0, mz: 0 }), viewRef = useRef(null);
+    const [load, setLoad] = useState("loading");
+    const [near, setNear] = useState(null);
+    const [carNear, setCarNear] = useState(false);
+    const [inCar, setInCar] = useState(false);
+    const [coins, setCoins] = useState(() => gLoad().coins || 0);
+    const [clue, setClue] = useState(null);           // { word, step, hint }
+    const [flash, setFlash] = useState(null);
+    const clueRef = useRef(null); clueRef.current = clue;
+    const flashT = useRef(0);
+    const pay = (n, text) => { setCoins(gCoins(n)); setFlash({ text, good: n >= 0, id: Date.now() }); clearTimeout(flashT.current); flashT.current = setTimeout(() => setFlash(null), 1800); };
+    // a new clue: the name of a shop he has to read and find
+    const nextClue = (step, prev) => {
+      const v = viewRef.current; if (!v) return;
+      const opts = v.shopWords().filter(w => !prev || w.text !== prev.text);
+      const w = opts[Math.floor(Math.random() * opts.length)];
+      if (w) setClue({ word: w, step, hint: false });
+    };
+    const me = (() => { try { const v = parseInt(localStorage.getItem("rc.kf.me") || "", 10); return isNaN(v) ? 1 : v % KF_CHARS.length; } catch (e) { return 1; } })();
+    const say = w => { if (w) qPlay({ text: w.text, audio: w.audio || null }); };
+    useEffect(() => {
+      const pool = qPool(lessons, uIdx, ix), seen = new Set(), words = [];
+      for (const w of (pool && pool.words) || []) { const t = String(w.text || "").trim(); if (t && t.length <= 8 && !seen.has(t.toLowerCase())) { seen.add(t.toLowerCase()); words.push({ text: t, audio: w.audio || null, emoji: w.emoji || "" }); } }
+      const real = words.filter(w => w.emoji || w.text.length >= 3);   // real words (a picture, or 3+ letters), not practice sounds like 'bu'
+      if (real.length >= 8) words.splice(0, words.length, ...real);
+      const gl = glRef.current;
+      let view = null, dead = false, raf = 0, last = performance.now(), lw = 0, lh = 0;
+      const carColor = (CARS.find(c => c.id === gLoad().car) || CARS[0]).col;
+      const onEvent = e => { if (e === "stopped") { kfSnd("power"); pay(1, "Good STOP! +1"); } else if (e === "ran") { kfSnd("bad"); pay(-1, "You didn't STOP! −1"); } };
+      load3D().then(G => G.createCity(gl, { words, char: KF_CHARS[me], carColor, onNear: w => setNear(w), onCar: setCarNear, onSign: say, onEvent }))
+        .then(v => { if (dead) { v.dispose(); return; } view = v; viewRef.current = v; window.__city = v; setLoad("ready"); nextClue(1); })
+        .catch(() => { if (!dead) setLoad("failed"); });
+      const loop = now => {
+        raf = requestAnimationFrame(loop);
+        const dt = Math.min(0.1, (now - last) / 1000); last = now;   // real time, even on a slow phone
+        if (!view) return;
+        const w = gl.clientWidth, h = gl.clientHeight;
+        if (w !== lw || h !== lh) { lw = w; lh = h; view.resize(w, h); }
+        view.step(keysRef.current, dt, now / 1000);
+        // did he find the shop on his clue?
+        const c = clueRef.current;
+        if (c && !c.done && view.distTo(c.word.text) < 4.5) {
+          c.done = true; kfSnd("power");
+          if (c.step >= 3) { pay((c.hint ? 2 : 5) + 10, "Mission done! +" + ((c.hint ? 2 : 5) + 10)); setTimeout(() => nextClue(1, c.word), 1200); }
+          else { pay(c.hint ? 2 : 5, "Found it! +" + (c.hint ? 2 : 5)); setTimeout(() => nextClue(c.step + 1, c.word), 1200); }
+        }
+      };
+      raf = requestAnimationFrame(loop);
+      return () => { dead = true; cancelAnimationFrame(raf); if (view) view.dispose(); };
+    }, []);
+    return html`<div class="frwrap city">
+      <canvas ref=${glRef} class="frcv" aria-label="The city"></canvas>
+      <div class="frhud"><button class="iconbtn light" onClick=${onClose} aria-label="Leave the city"><${Ic.x} size=${24}/></button><b class="citytitle">City</b><span class="citycoins" aria-label=${coins + " coins"}>🪙 ${coins}</span></div>
+      ${clue && load === "ready" ? html`<div class="cityclue">
+        <span class="cl1">📜 Go to</span>
+        <b class="clw">${clue.word.text}</b>
+        <button class="clh" onClick=${() => { setClue(Object.assign({}, clue, { hint: true })); say(clue.word); }} aria-label="Hear the clue">🔊</button>
+        <span class="cld">${[1, 2, 3].map(k => html`<i class=${k < clue.step || (k === clue.step && clue.done) ? "on" : k === clue.step ? "now" : ""}></i>`)}</span>
+      </div>` : null}
+      ${flash ? html`<div class=${"cityflash" + (flash.good ? "" : " bad")} key=${flash.id}>${flash.text}</div>` : null}
+      ${load !== "ready" ? html`<div class="frmsg">${load === "failed" ? "This phone can't show the city." : "Building the city…"}</div>` : null}
+      ${near ? html`<button class="cityword" onClick=${() => say(near)} aria-label=${"Hear " + near.text}>${near.emoji ? html`<span class="ce">${near.emoji}</span>` : null}<b>${near.text}</b><span class="cs">🔊</span></button>` : null}
+      <div class="frpad">
+        <${FrStick} keys=${keysRef}/>
+        ${carNear || inCar ? html`<button class="citycar" onClick=${() => { const v = viewRef.current; if (v) setInCar(v.toggleCar()); }} aria-label=${inCar ? "Get out of the car" : "Get in the car"}>${inCar ? "🚶" : "🚗"}<small>${inCar ? "Get out" : "Drive"}</small></button>` : null}
+      </div>
+    </div>`;
+  }
   function GameHub({ student, lessons, ix, uIdx, onClose }) {
+    const [, setDiffTick] = useState(0);
     const [view, setView] = useState("home");
     const [chap, setChap] = useState(0);
     const [gs, setGs] = useState(gLoad);
     const [key, setKey] = useState(0);
     const refresh = () => setGs(gLoad());
     if (view === "fight") return html`<${Fight} mode="solo" student=${student} lessons=${lessons} ix=${ix} uIdx=${uIdx} onClose=${() => { refresh(); setView("home"); }}/>`;
+    if (view === "city") return html`<${City} student=${student} lessons=${lessons} ix=${ix} uIdx=${uIdx} onClose=${() => { refresh(); setView("home"); }}/>`;
     if (view === "arena") return html`<${Arena} student=${student} lessons=${lessons} ix=${ix} uIdx=${uIdx} onClose=${() => { refresh(); setView("home"); }}/>`;
     if (view === "play") return html`<${ChapterPlay} key=${key} n=${chap} student=${student} lessons=${lessons} ix=${ix} uIdx=${uIdx}
       onExit=${() => { refresh(); setView("map"); }}
@@ -5301,7 +5646,8 @@ notify pgrst, 'reload schema';
         <span></span><span class="qcoins">🪙 ${gs.coins}</span>
       </div>
       ${view === "home" ? html`<div class="qhome">
-          <button class="qtile story" onClick=${() => setView("map")} aria-label="Rescue Nala"><span class="qemo">🗺️</span><b>Rescue Nala</b><small>👩🏾 🔒</small></button>
+          <div class="diffrow" role="group" aria-label="Difficulty">${[[1, "Normal"], [2, "Hard"], [3, "Brutal"]].map(([v, nm]) => html`<button class=${"diffb" + (gDiff() === v ? " on" : "")} onClick=${() => { setDiff(v); setDiffTick(t => t + 1); }}>${nm}</button>`)}</div>
+          <button class="qtile story" onClick=${() => setView("city")} aria-label="City"><span class="qemo">🏙️</span><b>City</b><small>Walk, drive, read</small></button>
           <button class="qtile" onClick=${() => setView("arena")} aria-label="Arena"><span class="qemo">🏟️</span><b>Arena</b><small>3D</small></button>
           <button class="qtile" onClick=${() => setView("fight")} aria-label="Fight"><span class="qemo">🥊</span><b>Fight</b></button>
           <button class="qtile" onClick=${() => setView("shop")} aria-label="Shop"><span class="qemo">🛍️</span><b>Shop</b></button>
@@ -5365,7 +5711,7 @@ notify pgrst, 'reload schema';
       this.listen();
       this.t0 = Date.now();
       this.draw();
-      const vs = this.cv.captureStream(24);
+      const vs = this.cv.captureStream(15);
       const AC = window.AudioContext || window.webkitAudioContext;
       this.actx = new AC();
       try { await this.actx.resume(); } catch (e) {}
@@ -5397,7 +5743,7 @@ notify pgrst, 'reload schema';
       };
       this.mr = mr;
       mr.start(4000);
-      this.drawT = setInterval(() => this.draw(), 42);
+      this.drawT = setInterval(() => this.draw(), 33);
       this.active = true;
       this.set({ on: true, since: this.t0 });
       live.setRec(true);
@@ -5484,7 +5830,11 @@ notify pgrst, 'reload schema';
       c.fillText(fmtDur((Date.now() - this.t0) / 1000), W - 30, 34);
     },
     draw() {
-      if (this.game && this.game.isConnected) { this.drawGame(); return; }
+      // light on the phone: lessons at 10 frames a second, games at 15
+      const tNow = performance.now(), game = this.game && this.game.isConnected;
+      if (tNow - (this.lastDraw || 0) < (game ? 64 : 98)) return;
+      this.lastDraw = tNow;
+      if (game) { this.drawGame(); return; }
       if (!this.shouldDraw()) return;
       this.cx.setTransform(this.cv.width / 1280, 0, 0, this.cv.height / 720, 0, 0);
       const c = this.cx; if (!c) return;
@@ -6490,8 +6840,8 @@ notify pgrst, 'reload schema';
         <div class="field"><label for="sname">Name</label>
           <input id="sname" value=${name} onInput=${e => setName(e.target.value)} onBlur=${saveName} autocomplete="off"/></div>
         <div class="field"><label for="slang">Language</label>
-          <select id="slang" value=${student.lang || "en"} disabled=${!store.s.hasExpl} onChange=${e => save({ lang: e.target.value })}>${LANGS.map(([c, n]) => html`<option value=${c}>${n}</option>`)}</select>
-          <small class="hint">${store.s.hasExpl ? "He hears the lessons you recorded in this language." : "Do the one-time database update to use other languages."}</small></div>
+          <select id="slang" value=${student.lang || "en"} disabled=${!store.s.hasExpl} onChange=${e => save({ lang: e.target.value })}>${[...new Set(recordedLangs().concat(student.lang || "en"))].map(c => html`<option value=${c}>${langName(c)}</option>`)}</select>
+          <small class="hint">${store.s.hasExpl ? "Only languages you've recorded lessons in. Add a new one on the Lessons tab." : "Do the one-time database update to use other languages."}</small></div>
         <div class="field"><span class="lbl">Colour</span>
           <div class="swatches">${COLORS.map(c => html`<button key=${c} class=${"sw" + (student.color === c ? " on" : "")} style=${"background:" + c} onClick=${() => save({ color: c })} aria-label="Pick this colour"></button>`)}</div></div>
         <div class="row2">
@@ -6709,6 +7059,43 @@ notify pgrst, 'reload schema';
     </div>`;
   }
 
+  function AnnouncerCard({ s, ix }) {
+    const [busy, setBusy] = useState(null);
+    const recRef = useRef(null);
+    const l0 = s.lessons[0];
+    if (!l0) return null;
+    const have = k => { const o = ix.own.get(l0.id); return o && o.get("__ann:" + k); };
+    async function start(k) {
+      try {
+        const st = await navigator.mediaDevices.getUserMedia({ audio: true });
+        const types = ["audio/webm;codecs=opus", "audio/webm", "audio/mp4", "audio/aac"];
+        const type = types.find(t => { try { return MediaRecorder.isTypeSupported(t); } catch (e) { return false; } }) || "";
+        const mr = new MediaRecorder(st, type ? { mimeType: type } : undefined), parts = [], t0 = Date.now();
+        mr.ondataavailable = e => { if (e.data && e.data.size) parts.push(e.data); };
+        mr.onstop = async () => {
+          st.getTracks().forEach(x => x.stop());
+          const blob = new Blob(parts, { type: mr.mimeType || type || "audio/webm" });
+          setBusy("saving:" + k);
+          try { await saveTileRec(l0.id, "__ann:" + k, { blob, secs: (Date.now() - t0) / 1000 }); toast("Saved."); } catch (e) { toast(errText(e)); }
+          setBusy(null);
+        };
+        recRef.current = mr; mr.start(); setBusy("rec:" + k);
+      } catch (e) { toast("The microphone isn't available."); }
+    }
+    function stop() { if (recRef.current && recRef.current.state !== "inactive") recRef.current.stop(); }
+    return html`<section class="anncard">
+      <div class="annhead">🎙 <b>Game announcer</b><small>Your voice in the games. Say each line loudly, like a fight announcer.</small></div>
+      ${ANN_KEYS.map(([k, label]) => {
+        const r = have(k), rec = busy === "rec:" + k, saving = busy === "saving:" + k;
+        return html`<div class="annrow" key=${k}>
+          <b>${label}</b>
+          <span class="grow"></span>
+          ${r ? html`<button class="iconbtn" onClick=${() => player.play("ann:" + k, publicUrl(r.audio), true)} aria-label=${"Play " + label}><${Ic.play} size=${20}/></button>` : html`<small class="annno">not yet</small>`}
+          <button class=${"annrec" + (rec ? " on" : "")} disabled=${(busy && !rec) || saving} onClick=${() => (rec ? stop() : start(k))} aria-label=${rec ? "Stop" : "Record " + label}>${rec ? "■" : saving ? "…" : "●"}</button>
+        </div>`;
+      })}
+    </section>`;
+  }
   function LessonsList({ s, ix, onOpen, lang, onLang }) {
     const [packs, setPacks] = useState(false);
     const [rules, setRules] = useState(false);
@@ -6745,9 +7132,19 @@ notify pgrst, 'reload schema';
       <button class="btn sec" onClick=${() => add(true)}><${Ic.book} size=${20}/>Add a reading passage</button>
       <button class="btn quiet" onClick=${() => setPacks(true)}><${Ic.plus} size=${20}/>Ready-made lessons</button>
       <button class="btn quiet" onClick=${() => setRules(true)}><${Ic.book} size=${20}/>Spelling rules</button>
+      <${AnnouncerCard} s=${s} ix=${ix}/>
       ${onLang ? html`<div class="field langpick"><label for="tlang">Recording in</label>
-        <select id="tlang" value=${lang || "en"} disabled=${!store.s.hasExpl && (lang || "en") === "en"} onChange=${e => onLang(e.target.value)}>${LANGS.map(([c, n]) => html`<option value=${c}>${n}</option>`)}</select>
-        <small>${(lang || "en") === "en" ? "English recordings go to students set to English." : "These recordings go to students set to " + langName(lang) + ". English ones stay as they are."}</small></div>` : null}
+        <select id="tlang" value=${lang || "en"} disabled=${!store.s.hasExpl && (lang || "en") === "en"} onChange=${e => {
+          let v = e.target.value;
+          if (v === "__add") {
+            const name = (window.prompt("Which language? Type its name, for example Dutch.") || "").trim().replace(/\s+/g, " ").slice(0, 30);
+            if (!name || /^english$/i.test(name)) { e.target.value = lang || "en"; return; }
+            try { const L = JSON.parse(localStorage.getItem("rc.langs") || "[]"); if (!L.includes(name)) localStorage.setItem("rc.langs", JSON.stringify(L.concat(name))); } catch (x) {}
+            v = name;
+          }
+          onLang(v);
+        }}>${[...new Set(myLangs().concat(lang || "en"))].map(c => html`<option value=${c}>${langName(c)}${langCount(c) ? " · " + langCount(c) + " recorded" : ""}</option>`)}<option value="__add">+ Add a language…</option></select>
+        <small>${(lang || "en") === "en" ? "Record your lessons in any language first. Then pick one of them for each student." : "You're recording in " + langName(lang) + ". Students you set to " + langName(lang) + " hear these. English stays as it is."}</small></div>` : null}
       ${packs ? html`<${PacksSheet} s=${s} onClose=${() => setPacks(false)}/>` : null}
       ${rules ? html`<${RulesGuide} onClose=${() => setRules(false)}/>` : null}
     </section>`;
@@ -7443,7 +7840,7 @@ notify pgrst, 'reload schema';
         </header>
         ${s.needsUpdate ? html`<${UpdateBanner}/>` : null}
         ${tab === "students" ? html`<${PushCard}/><${Questions} s=${s} onOpen=${(id, f) => { setFresh(false); setFocus(f); setOpenStudent(id); }}/><${StudentsList} s=${s} onOpen=${(id, isNew) => { setFresh(!!isNew); setFocus(null); setOpenStudent(id); }}/>`
-          : tab === "lessons" ? (() => { const v = viewOf(s, tLang); return html`<${LessonsList} s=${v.s} ix=${v.ix} onOpen=${setOpenLesson} lang=${tLang} onLang=${l => { setTLang(l); try { localStorage.setItem("rc.tlang", l); } catch (e) {} }}/>`; })()
+          : tab === "lessons" ? (() => { const v = viewOf(s, tLang); REC_LANG = tLang; return html`<${LessonsList} s=${v.s} ix=${v.ix} onOpen=${setOpenLesson} lang=${tLang} onLang=${l => { setTLang(l); try { localStorage.setItem("rc.tlang", l); } catch (e) {} }}/>`; })()
           : html`<${Recordings}/>`}
         ${float ? html`<div class="floatspace"></div>` : null}
       </div>`;
@@ -7477,6 +7874,7 @@ notify pgrst, 'reload schema';
 
   window.__rc = { call, live, classRec, wb, tilePlayer };
   window.__kfArt = { kfBody, KF_CHARS, kfHit };
+  window.__kfApi = { kfPress, kfStep, kfNew, kfSnd, kfAnn, annRec };
   window.__ink = { hitInk, inkGroup };
   window.__lang = { viewOf, saveExpl, saveTileRec, set: l => { REC_LANG = l; }, get: () => REC_LANG, store };
   root.innerHTML = "";
