@@ -693,6 +693,16 @@ img{max-width:100%}
 .frrow.mine .frbar i{background:#F4D36B}.frrow.mate .frbar i{background:#7BE0A0}.frrow:not(.mine):not(.mate) .frbar i{background:#9CC3F5}
 .wbsize{position:absolute;right:10px;bottom:10px;display:flex;gap:8px;z-index:3}
 .wbsize button{width:54px;height:54px;border-radius:14px;border:0;background:rgba(241,236,220,.94);color:#1B2B22;font:700 21px var(--font);box-shadow:0 2px 8px rgba(0,0,0,.3)}
+.toprow{display:flex;align-items:center;gap:8px;margin:0 0 10px}.toprow h1{margin:0;flex:1}
+.bellbtn{position:relative;border:0;cursor:pointer}
+.bellbtn.top{width:40px;height:40px;border-radius:50%;background:var(--paper-2);color:var(--ink);display:grid;place-items:center;padding:0}
+.bellbtn .belldot{position:absolute;top:7px;right:8px;width:8px;height:8px;border-radius:50%;background:var(--red);box-shadow:0 0 0 2px var(--paper)}
+.railbook.bellbtn .belldot{top:6px;right:6px;box-shadow:none}
+.setupbtn{width:40px;height:40px;font-size:18px;opacity:.7}
+.setupcheck h3{margin:0 0 8px}
+.setuplist{list-style:none;margin:0 0 6px;padding:0;display:flex;flex-direction:column;gap:6px}
+.setuplist li{display:flex;gap:10px;align-items:flex-start;padding:8px 10px;border-radius:10px;background:var(--paper-2)}
+.setuplist li small{display:block;color:var(--ink-3);font:12px ui-monospace,monospace}
 .pushcard{display:flex;align-items:center;gap:12px;width:calc(100% - 4px);margin:4px 2px 12px;border:1px solid #CFE3F7;background:#EEF6FE;border-radius:14px;padding:12px 14px;text-align:left;font:inherit;color:inherit}
 .pushcard > span:first-child{font-size:24px}
 .pushcard small{display:block;color:#5B6B7B;margin-top:2px;line-height:1.35}
@@ -733,6 +743,11 @@ img{max-width:100%}
 .vidready{margin-top:10px;background:#EEF8F1;border:1px solid #BFE3CC;border-radius:14px;padding:10px 12px;display:flex;flex-direction:column;gap:4px}
 .vidready small{color:#5B6B7B}
 .vidrow{display:flex;gap:8px;align-items:center;margin-top:6px}.vidrow .btn{flex:1}
+.vidpill{position:fixed;left:50%;transform:translateX(-50%);top:calc(env(safe-area-inset-top,0px) + 8px);z-index:60;background:#1E3328;color:#F1ECDC;border-radius:999px;padding:7px 14px;font:600 13px var(--font);box-shadow:0 4px 14px rgba(0,0,0,.25);white-space:nowrap;max-width:94vw;overflow:hidden;text-overflow:ellipsis}
+.help.vidhelp{margin:6px 0 0;font-size:13px}
+.mmute{border:0;background:none;font-size:15px;padding:0 2px;margin-left:2px}
+.mmute.on{filter:none;background:#FFE3E0;border-radius:8px}
+.hushed{font:700 14px var(--font);color:#B3261E;background:#FDECEA;border-radius:10px;padding:6px 10px}
 /* ---------- setup and sign in ---------- */
 .setup{max-width:560px;margin:0 auto;padding:24px 16px 56px;display:flex;flex-direction:column;gap:16px}
 .setup h1{margin:0;font-size:28px;line-height:1.15}
@@ -1727,11 +1742,31 @@ notify pgrst, 'reload schema';
     }
   }
 
+  // Keeps the screen on while something needs it (a lesson voice playing, a video being made).
+  const awake = {
+    why: new Set(), lock: null, busy: false,
+    on(k) { this.why.add(k); this.sync(); },
+    off(k) { if (this.why.delete(k)) this.sync(); },
+    async sync() {
+      if (this.busy) return;
+      this.busy = true;
+      try {
+        if (this.why.size && !this.lock && document.visibilityState === "visible" && "wakeLock" in navigator) {
+          const l = await navigator.wakeLock.request("screen");
+          this.lock = l; l.addEventListener("release", () => { if (this.lock === l) this.lock = null; });
+        } else if (!this.why.size && this.lock) { const l = this.lock; this.lock = null; await l.release(); }
+      } catch (e) {}
+      this.busy = false;
+      if (!!this.why.size !== !!this.lock && document.visibilityState === "visible" && "wakeLock" in navigator && !this.again) { this.again = true; setTimeout(() => { this.again = false; this.sync(); }, 400); }
+    },
+  };
+  document.addEventListener("visibilitychange", () => { if (document.visibilityState === "visible") awake.sync(); });
   const player = {
     a: null, key: null, pos: {}, st: { key: null, playing: false, cur: 0, dur: 0 }, subs: new Set(),
     emit() {
       const a = this.a;
       this.st = { key: this.key, playing: !!a && !a.paused && !a.ended, cur: a ? a.currentTime || 0 : 0, dur: a && isFinite(a.duration) ? a.duration : 0 };
+      if (this.st.playing) awake.on("voice"); else awake.off("voice");
       this.subs.forEach(f => f(this.st));
     },
     el() {
@@ -2224,6 +2259,73 @@ notify pgrst, 'reload schema';
     }
     return { image: c.toDataURL("image/png").split(",")[1], box: b };
   }
+  // Straighten a hand-drawn stroke: a wobbly line becomes straight, a rough ring a clean circle,
+  // a rough box or triangle clean straight sides. Anything else is just smoothed.
+  function straighten(z) {
+    const P = []; for (let i = 0; i + 1 < (z.pts || []).length; i += 2) P.push([z.pts[i], z.pts[i + 1]]);
+    if (P.length < 3) return { pts: z.pts, shape: false };
+    const d = (a, b) => Math.hypot(a[0] - b[0], a[1] - b[1]);
+    let x0 = 1e9, y0 = 1e9, x1 = -1e9, y1 = -1e9, len = 0;
+    P.forEach((q, i) => { x0 = Math.min(x0, q[0]); x1 = Math.max(x1, q[0]); y0 = Math.min(y0, q[1]); y1 = Math.max(y1, q[1]); if (i) len += d(P[i - 1], q); });
+    const diag = Math.hypot(x1 - x0, y1 - y0);
+    if (diag < 20) return { pts: z.pts, shape: false };
+    const segDist = (q, a, b) => { const vx = b[0] - a[0], vy = b[1] - a[1], L = vx * vx + vy * vy || 1, t = Math.max(0, Math.min(1, ((q[0] - a[0]) * vx + (q[1] - a[1]) * vy) / L)); return Math.hypot(q[0] - a[0] - t * vx, q[1] - a[1] - t * vy); };
+    const dense = V => { const out = []; for (let i = 0; i + 1 < V.length; i++) { const n = Math.max(1, Math.round(d(V[i], V[i + 1]) / 8)); for (let k = 0; k < n; k++) out.push([V[i][0] + (V[i + 1][0] - V[i][0]) * k / n, V[i][1] + (V[i + 1][1] - V[i][1]) * k / n]); } out.push(V[V.length - 1]); return out; };
+    const flat = V => { const o = []; V.forEach(q => o.push(Math.round(q[0]), Math.round(q[1]))); return o; };
+    const A = P[0], B = P[P.length - 1], closed = d(A, B) < Math.max(28, 0.2 * diag) && len > 1.8 * diag;
+    // 1) a line
+    if (!closed) {
+      let dev = 0; for (const q of P) dev = Math.max(dev, segDist(q, A, B));
+      if (dev < Math.max(10, 0.1 * d(A, B))) {
+        let b = B.slice(); const ang = Math.atan2(B[1] - A[1], B[0] - A[0]), L = d(A, B), snap = Math.round(ang / (Math.PI / 4)) * (Math.PI / 4);
+        if (Math.abs(ang - snap) < 0.12) b = [A[0] + Math.cos(snap) * L, A[1] + Math.sin(snap) * L];
+        return { pts: flat(dense([A, b])), shape: "line" };
+      }
+    }
+    // 2) a ring
+    if (closed) {
+      const cx = (x0 + x1) / 2, cy = (y0 + y1) / 2; let rx = (x1 - x0) / 2, ry = (y1 - y0) / 2;
+      let err = 0, out = 0; for (const q of P) { const e = Math.hypot((q[0] - cx) / (rx || 1), (q[1] - cy) / (ry || 1)) - 1; err += Math.abs(e); if (e > 0.16) out++; } err /= P.length;
+      if (err < 0.13 && out < P.length * 0.06 && rx > 8 && ry > 8) {   // (a box has corners poking out; a ring doesn't)
+        if (rx / ry > 0.82 && rx / ry < 1.22) rx = ry = (rx + ry) / 2;
+        const V = [], n = Math.max(24, Math.round(Math.PI * (rx + ry) / 8)), a0 = Math.atan2(A[1] - cy, A[0] - cx);
+        for (let k = 0; k <= n; k++) { const a = a0 + 2 * Math.PI * k / n; V.push([cx + rx * Math.cos(a), cy + ry * Math.sin(a)]); }
+        return { pts: flat(V), shape: "ring" };
+      }
+    }
+    // 3) straight sides (a box, a triangle, an arrow head, a zigzag)
+    // find the corners: walk the path in even steps and look for sharp turns
+    const N = 64, Q = [], cum = [0];
+    for (let i = 1; i < P.length; i++) cum.push(cum[i - 1] + d(P[i - 1], P[i]));
+    for (let k = 0, j = 0; k < N; k++) { const t = len * k / (N - 1); while (j < P.length - 2 && cum[j + 1] < t) j++; const f = (t - cum[j]) / ((cum[j + 1] - cum[j]) || 1); Q.push([P[j][0] + (P[j + 1][0] - P[j][0]) * f, P[j][1] + (P[j + 1][1] - P[j][1]) * f]); }
+    const w = 4, turn = Q.map((q, i) => { if (i < w || i >= N - w) return 0; const a1 = Math.atan2(q[1] - Q[i - w][1], q[0] - Q[i - w][0]), a2 = Math.atan2(Q[i + w][1] - q[1], Q[i + w][0] - q[0]); let t = Math.abs(a2 - a1); if (t > Math.PI) t = 2 * Math.PI - t; return t; });
+    const I = [0];
+    for (let i = w; i < N - w; i++) if (turn[i] > 0.7 && turn.slice(Math.max(0, i - w), i + w + 1).every((t, k, arr) => t <= turn[i] && !(t === turn[i] && k < i - Math.max(0, i - w)))) I.push(i);
+    I.push(N - 1);
+    if (I.length <= 6) {
+      // each side must really be straight: a curve cut into a few bits bends away from its chord
+      let ok = true;
+      for (let k = 0; k + 1 < I.length && ok; k++) {
+        const a = Q[I[k]], b = Q[I[k + 1]], L = d(a, b);
+        let dev = 0; for (let i = I[k] + 1; i < I[k + 1]; i++) dev = Math.max(dev, segDist(Q[i], a, b));
+        if (dev > Math.max(7, 0.09 * L)) ok = false;
+      }
+      if (ok) {
+        let V = I.map(i => Q[i].slice());
+        if (closed) V[V.length - 1] = V[0];
+        for (let i = 0; i + 1 < V.length; i++) {   // nearly flat or upright sides become exactly so
+          const dx = V[i + 1][0] - V[i][0], dy = V[i + 1][1] - V[i][1];
+          if (Math.abs(dy) < Math.abs(dx) * 0.14) V[i + 1][1] = V[i][1]; else if (Math.abs(dx) < Math.abs(dy) * 0.14) V[i + 1][0] = V[i][0];
+        }
+        if (closed) { V[V.length - 1] = V[0].slice(); }
+        return { pts: flat(dense(V)), shape: "sides" };
+      }
+    }
+    // 4) anything else: just smooth the wobble
+    const S = P.map((q, i) => { let sx = 0, sy = 0, n = 0; for (let k = Math.max(0, i - 3); k <= Math.min(P.length - 1, i + 3); k++) { sx += P[k][0]; sy += P[k][1]; n++; } return [sx / n, sy / n]; });
+    S[0] = P[0]; S[S.length - 1] = P[P.length - 1];
+    return { pts: flat(S), shape: false };
+  }
   function hitText(x, y) {
     for (let i = wb.strokes.length - 1; i >= 0; i--) {
       const s = wb.strokes[i];
@@ -2307,6 +2409,7 @@ notify pgrst, 'reload schema';
     isOn() { try { return localStorage.getItem("rc.push") === "on" && Notification.permission === "granted"; } catch (e) { return false; } },
     async on(studentId) {
       const c = await fetch("/.netlify/functions/config", { cache: "no-store" }).then(r => r.json()).catch(() => ({}));
+      push.setup = c.setup || null;
       if (!c.vapid) throw new Error("novapid");
       const reg = await navigator.serviceWorker.register("sw.js");
       if ((await Notification.requestPermission()) !== "granted") throw new Error("denied");
@@ -2338,16 +2441,45 @@ notify pgrst, 'reload schema';
       }
     } catch (e) {}
   }
-  function PushCard({ studentId }) {
+  // What the website can see in Netlify (yes/no only). Shown when something isn't working.
+  const SETUP_ROWS = [
+    ["SUPABASE_URL", "Class database address", "needed"], ["SUPABASE_KEY", "Class database key", "needed"],
+    ["VAPID_PUBLIC_KEY", "Notifications: public key", "notifications"], ["VAPID_PRIVATE_KEY", "Notifications: private key", "notifications"], ["VAPID_SUBJECT", "Notifications: your email (mailto:…)", "notifications"],
+    ["OPENAI_API_KEY", "Tidy with ChatGPT", "tidy"], ["CF_TURN_KEY_ID", "Voice relay: Turn Token ID", "voice"], ["CF_TURN_API_TOKEN", "Voice relay: API Token", "voice"],
+  ];
+  function SetupCheck({ onClose }) {
+    const [st, setSt] = useState(null);
+    useEffect(() => { fetch("/.netlify/functions/config", { cache: "no-store" }).then(r => r.json()).then(j => setSt(j.setup || "old")).catch(() => setSt("none")); }, []);
+    return html`<div class="scrim" onClick=${e => { if (e.target === e.currentTarget) onClose(); }}>
+      <div class="sheet setupcheck" role="dialog" aria-label="Website setup">
+        <h3>Website setup</h3>
+        ${st == null ? html`<p class="help c">Checking…</p>`
+          : st === "none" ? html`<p class="help">The website's helper isn't answering. Make sure <b>config.mjs</b> is uploaded next to index.html, then redeploy.</p>`
+          : st === "old" ? html`<p class="help">The website is still running the <b>old config.mjs</b>. Upload the new one, then in Netlify: <b>Deploys → Trigger deploy → Deploy site</b>.</p>`
+          : html`<ul class="setuplist">${SETUP_ROWS.map(([k, label]) => html`<li key=${k} class=${st[k] ? "ok" : "no"}><span>${st[k] ? "✅" : "❌"}</span><span>${label}<small>${k}</small></span></li>`)}</ul>
+            <p class="help">❌ means the website can't see that setting. In Netlify: <b>Site configuration → Environment variables</b>. Check the name is spelled exactly as shown, and that <b>Functions</b> is ticked under "Scopes". Then <b>Deploys → Trigger deploy → Deploy site</b>: new settings only reach the website after a new deploy.</p>`}
+        <button class="btn quiet" onClick=${onClose}>Close</button>
+      </div>
+    </div>`;
+  }
+  // A small bell: tap it once to get notifications on this phone. It goes away once they're on.
+  function PushBell({ studentId, rail }) {
     const [st, setSt] = useState(() => (push.isOn() ? "on" : "off"));
-    if (st === "on" || (store.s.schemaVer || 0) < 5) return null;
-    if (push.needsHome()) return html`<div class="pushcard"><span>🔔</span><span><b>Notifications</b><small>Add this app to your Home Screen first (Share, then Add to Home Screen), then open it from there.</small></span></div>`;
-    if (!push.ok()) return null;
-    return html`<button class="pushcard" onClick=${async () => {
+    const [check, setCheck] = useState(false);
+    if (st === "on" || (store.s.schemaVer || 0) < 5 || !(push.ok() || push.needsHome())) return null;
+    async function tap() {
+      if (push.needsHome()) { toast("For notifications: tap Share, then Add to Home Screen, and open the app from there."); return; }
       setSt("busy");
       try { await push.on(studentId); setSt("on"); toast("Notifications are on."); }
-      catch (e) { setSt("off"); toast(e && e.message === "denied" ? "Notifications are blocked. Allow them in your phone's settings." : e && e.message === "novapid" ? "Notifications aren't set up on the website yet." : "Couldn't turn on notifications."); }
-    }}><span>🔔</span><span><b>${st === "busy" ? "Turning on…" : "Turn on notifications"}</b><small>${studentId ? "Know when your teacher answers." : "Know when a student asks something, even with the app closed."}</small></span></button>`;
+      catch (e) {
+        setSt("off");
+        if (e && e.message === "novapid") { if (studentId) toast("Notifications aren't ready yet. Your teacher needs to finish setting them up."); else setCheck(true); }
+        else toast(e && e.message === "denied" ? "Notifications are blocked. Allow them for this app in your phone's settings." : "Couldn't turn on notifications.");
+      }
+    }
+    return html`<button class=${rail ? "railbook railw bellbtn" : "bellbtn top"} onClick=${tap} disabled=${st === "busy"} aria-label="Turn on notifications" title="Turn on notifications">
+      <${Ic.bell} size=${20}/>${rail ? html`<span>${st === "busy" ? "…" : "Alerts"}</span>` : null}${st !== "busy" ? html`<i class="belldot"></i>` : null}
+    </button>${check ? html`<${SetupCheck} onClose=${() => setCheck(false)}/>` : null}`;
   }
 
   // A short recording made by the teacher (a spelling word, a question, instructions).
@@ -2750,18 +2882,36 @@ notify pgrst, 'reload schema';
       const ss = wb.strokes.filter(z => sel && sel.includes(z.id) && z.pts && z.pts.length);
       if (!ss.length || tidying) return;
       setTidying(true);
+      // straighten the drawing; onlyShapes: only if every stroke is a clean line, ring or straight-sided shape
+      const straightenAll = onlyShapes => {
+        const out = ss.map(z => Object.assign({ z }, straighten(z)));
+        if (onlyShapes && out.some(o => !o.shape)) return false;
+        live.edit(ss.map(z => z.id), out.map(o => Object.assign({}, o.z, { id: uid(), pts: o.pts })));
+        setSel(null); toast("Straightened.");
+        return true;
+      };
       try {
         const { image, box: b } = inkPng(ss);
         const { data } = await sb.auth.getSession(), tok = data && data.session && data.session.access_token;
         const r = await fetch("/.netlify/functions/tidy", { method: "POST", headers: { "content-type": "application/json", authorization: "Bearer " + (tok || "") }, body: JSON.stringify({ image }) });
         const j = await r.json().catch(() => ({}));
-        if (j.off) { toast("Tidy isn't switched on yet: add ANTHROPIC_API_KEY in Netlify."); return; }
+        if (j.off) { if (!straightenAll(true)) toast("To turn writing into clean letters, add OPENAI_API_KEY in Netlify, then redeploy (⚙️ on your home screen checks it)."); return; }
+        if (j.error === "ai") {
+          if (straightenAll(true)) return;
+          const m = String(j.msg || "");
+          toast(j.status === 401 ? j.who + " says the key isn't right. Copy OPENAI_API_KEY again into Netlify, then redeploy."
+            : j.code === "insufficient_quota" || /quota|billing|credit/i.test(m) ? "Your OpenAI account has no credit. Add some at platform.openai.com → Billing (ChatGPT Plus doesn't include it)."
+            : j.status === 404 || /model/i.test(m) ? j.who + " can't use that model. Remove TIDY_MODEL in Netlify, then redeploy."
+            : j.status === 429 ? j.who + " is busy. Try again in a minute." : "Tidy didn't work: " + (m || "try again."));
+          return;
+        }
+        if (j.type === "drawing") { straightenAll(false); return; }
         const text = String(j.text || "").trim();
-        if (!r.ok || !text || text === "?") { toast("Couldn't read that one. Try writing it a little bigger."); return; }
+        if (!r.ok || j.type !== "text" || !text) { if (!straightenAll(true)) toast("Couldn't read that one. Try writing it a little bigger."); return; }
         const t = { id: uid(), tool: "text", text: text.slice(0, 30), x: Math.round((b.x0 + b.x1) / 2), y: Math.round((b.y0 + b.y1) / 2), h: Math.round(Math.max(60, Math.min(220, (b.y1 - b.y0) * 1.2))) };
         live.edit(ss.map(z => z.id), [t]);
         setSel(null);
-      } catch (e) { toast("Couldn't reach Tidy. Check the connection."); }
+      } catch (e) { if (!straightenAll(true)) toast("Couldn't reach Tidy. Check the connection."); }
       finally { setTidying(false); }
     }
     useEffect(() => { if (tool !== "move") setSel(null); }, [tool]);
@@ -3078,7 +3228,7 @@ notify pgrst, 'reload schema';
               const b = ss.map(strokeBox).reduce((a, c) => ({ x0: Math.min(a.x0, c.x0), y0: Math.min(a.y0, c.y0), x1: Math.max(a.x1, c.x1), y1: Math.max(a.y1, c.y1) })), cx = (b.x0 + b.x1) / 2, cy = (b.y0 + b.y1) / 2;
               live.edit(sel, ss.map(z => Object.assign({}, z, { w: Math.min(26, Math.round(z.w * 1.1)), pts: z.pts.map((v, i) => Math.round(i % 2 ? cy + (v - cy) * 1.25 : cx + (v - cx) * 1.25)) })));
             }} aria-label="Make it bigger">A+</button>
-            <button class="tidy" onClick=${tidySel} disabled=${tidying} aria-label="Tidy: make it clean letters">✨ ${tidying ? "…" : "Tidy"}</button>
+            <button class="tidy" onClick=${tidySel} disabled=${tidying} aria-label="Tidy: clean letters, or straighten a drawing">✨ ${tidying ? "…" : "Tidy"}</button>
           </div>` : null}
         </div>
         ${!full ? html`<div class="ledge"><i></i></div>` : null}
@@ -3094,7 +3244,7 @@ notify pgrst, 'reload schema';
   /* ================= Chalk Kombat: a real fight where reading is his strength ================= */
   const kfBus = { subs: new Set(), emit(m) { this.subs.forEach(f => { try { f(m); } catch (e) {} }); } };
   const KF = { W: 600, H: 560, GROUND: 486 };
-  const KF_MOVES = { p: { wind: 0.12, act: 0.1, total: 0.42, reach: 145, dmg: 7 }, k: { wind: 0.22, act: 0.12, total: 0.66, reach: 182, dmg: 11 } };
+  const KF_MOVES = { p: { wind: 0.09, act: 0.09, total: 0.33, reach: 145, dmg: 7 }, k: { wind: 0.17, act: 0.11, total: 0.52, reach: 182, dmg: 11 } };
   // Specials: a button combo, paid for with reading strength. f = toward the opponent, b = away.
   const KF_SPECIALS = { fire: { combo: ["f", "f", "p"], cost: 25, dmg: 12, icon: "🔥" }, ice: { combo: ["b", "f", "k"], cost: 30, dmg: 6, icon: "❄️" } };
   // The practice ladder: each opponent fights smarter and hits harder.
@@ -3104,7 +3254,7 @@ notify pgrst, 'reload schema';
   let CUR_DIFF = (() => { try { const v = parseInt(localStorage.getItem("rc.diff") || "2", 10); return [1, 2, 3].includes(v) ? v : 2; } catch (e) { return 2; } })();
   const gDiff = () => CUR_DIFF;
   const setDiff = v => { CUR_DIFF = v; try { localStorage.setItem("rc.diff", String(v)); } catch (e) {} };
-  const KD = () => ({ 1: { dmg: 0.85, spd: 0.92, aggr: 0.9, block: 0.8 }, 2: { dmg: 1.15, spd: 1.05, aggr: 1.3, block: 1.6 }, 3: { dmg: 1.35, spd: 1.15, aggr: 1.7, block: 2.4 } })[CUR_DIFF];
+  const KD = () => ({ 1: { dmg: 0.65, spd: 0.92, aggr: 0.9, block: 0.8 }, 2: { dmg: 0.9, spd: 1.05, aggr: 1.3, block: 1.4 }, 3: { dmg: 1.15, spd: 1.15, aggr: 1.7, block: 2.2 } })[CUR_DIFF];
   const READ_LIMIT = c => (c && c.how === "spell" ? [25, 16, 11] : [12, 8, 5])[CUR_DIFF - 1];
   const KF_LEVELS = [
     { dmg: 0.45, spd: 0.75, aggr: 1.6, block: 0.02, specials: [], cd: 99, drain: 1.8 },
@@ -3157,13 +3307,13 @@ notify pgrst, 'reload schema';
     recent.push(w.text); if (recent.length > 6) recent.shift();
     return w;
   }
-  function kfFighter(x) { return { x, dir: 1, hp: 100, act: "idle", t: 0, hit: false, keys: { l: 0, r: 0, b: 0 } }; }
+  function kfFighter(x) { return { pT: KF_MOVES.p.total, kT: KF_MOVES.k.total, x, dir: 1, hp: 100, act: "idle", t: 0, hit: false, keys: { l: 0, r: 0, b: 0 } }; }
   function kfNew(level) {
     return { f: [kfFighter(170), kfFighter(430)], S: 50, sup: false, time: 99, over: false, win: -1, fx: [], fxId: 0, reading: false, go: false, pw: 0,
       look: [1, 0], slowT: 0, level: level || 0, pj: [], pjId: 0, cb: [[], []], cd: [0, 0], need: 0, finish: null, fatal: false, log: [] };
   }
   function kfMult(g, i) {
-    if (i === 0) { const s = g.S / 100; return { dmg: 0.55 + 0.95 * s, spd: 0.65 + 0.35 * s }; }
+    if (i === 0) { const s = g.S / 100; return { dmg: 0.7 + 0.95 * s, spd: 0.75 + 0.35 * s }; }
     if (g.cpu) { const L = KF_LEVELS[Math.max(0, (g.level || 1) - 1)], D = KD(); return { dmg: L.dmg * D.dmg, spd: L.spd * D.spd }; }
     return { dmg: 0.75, spd: 0.95 };
   }
@@ -4306,7 +4456,7 @@ notify pgrst, 'reload schema';
   const call = {
     pc: null, mic: null, remoteStream: null, audioEl: null, gen: 0, pending: [], role: null, joined: false,
     ice: null, iceAt: 0, relay: null, lastOffer: 0, restartT: null, loopT: null, answerT: null, wake: null,
-    st: { phase: "idle", muted: false, since: 0, peerMuted: false, error: "" },
+    st: { phase: "idle", muted: false, hushed: false, since: 0, peerMuted: false, error: "" },
     subs: new Set(),
     set(p) { this.st = Object.assign({}, this.st, p); this.subs.forEach(f => f(this.st)); },
     async iceServers() {
@@ -4358,6 +4508,7 @@ notify pgrst, 'reload schema';
         const stream = (e.streams && e.streams[0]) || new MediaStream([e.track]);
         this.remoteStream = stream;
         const a = this.ensureAudio();
+        a.muted = !!this.hushed;   // a student you've muted stays muted, even if he reconnects
         a.srcObject = stream;
         const p = a.play();
         if (p && p.catch) p.catch(() => {});
@@ -4462,6 +4613,10 @@ notify pgrst, 'reload schema';
           this.closePc();
           if (this.joined) this.set({ phase: this.role === "teacher" ? "waiting" : "connecting", since: 0, peerMuted: false });
         } else if (m.kind === "mute") this.set({ peerMuted: !!m.on });
+        else if (m.kind === "hush" && this.role !== "teacher") {   // the teacher muted this student
+          this.set({ hushed: !!m.on }); this.applyMute();
+          if (m.on) toast("Your teacher muted your microphone.");
+        }
       } catch (e) { /* the invite/ready loop retries */ }
     },
     leave(sendBye) {
@@ -4473,10 +4628,19 @@ notify pgrst, 'reload schema';
       if (this.audioEl) this.audioEl.srcObject = null;
       this.remoteStream = null;
       this.releaseAwake();
-      this.set({ phase: "idle", since: 0, peerMuted: false, muted: false });
+      this.set({ phase: "idle", since: 0, peerMuted: false, muted: false, hushed: false });
     },
-    toggleMute() { this.set({ muted: !this.st.muted }); this.applyMute(); this.sendRtc({ kind: "mute", on: this.st.muted }); if (this.role === "teacher") for (const x of live.extra.values()) if (x.peer) x.peer.sendRtc({ kind: "mute", on: this.st.muted }); },
-    applyMute() { if (this.mic) this.mic.getAudioTracks().forEach(t => { t.enabled = !this.st.muted; }); },
+    // the teacher mutes or unmutes one student
+    hush(on) {
+      this.hushed = !!on; this.set({ hushed: !!on });
+      if (this.audioEl) this.audioEl.muted = !!on;
+      this.sendRtc({ kind: "hush", on: !!on });
+      mixer.rebuild();
+    },
+    toggleMute() {
+      if (this.st.hushed) { toast("Your teacher muted your microphone."); return; }
+      this.set({ muted: !this.st.muted }); this.applyMute(); this.sendRtc({ kind: "mute", on: this.st.muted }); if (this.role === "teacher") for (const x of live.extra.values()) if (x.peer) x.peer.sendRtc({ kind: "mute", on: this.st.muted }); },
+    applyMute() { if (this.mic) this.mic.getAudioTracks().forEach(t => { t.enabled = !(this.st.muted || this.st.hushed); }); },
     async keepAwake() {
       try { if ("wakeLock" in navigator && !this.wake) { this.wake = await navigator.wakeLock.request("screen"); this.wake.addEventListener("release", () => { this.wake = null; }); } } catch (e) {}
     },
@@ -4488,7 +4652,7 @@ notify pgrst, 'reload schema';
     const p = Object.create(call);
     Object.assign(p, {
       sid, pc: null, remoteStream: null, audioEl: null, gen: 0, pending: [], role: "teacher", joined: true, lastOffer: 0, restartT: null, loopT: null, answerT: null, ice: null,
-      st: { phase: "waiting", muted: false, since: 0, peerMuted: false, error: "" }, subs: new Set(),
+      st: { phase: "waiting", muted: false, hushed: false, since: 0, peerMuted: false, error: "" }, subs: new Set(),
       getMic() { return call.getMic(); },
       sendRtc(m) { live.sendTo(sid, Object.assign({ type: "rtc", gen: this.gen }, m)); },
       leave(bye) {
@@ -4514,6 +4678,7 @@ notify pgrst, 'reload schema';
     },
     rebuild() {
       const ps = this.peers(), micTrack = call.mic && call.mic.getAudioTracks()[0];
+      for (const q of ps) if (q.hushed && q.pc) q.sendRtc({ kind: "hush", on: true });
       for (const n of this.srcs) { try { n.disconnect(); } catch (e) {} }
       this.srcs = [];
       if (ps.length < 2 || !micTrack) { for (const p of ps) this.useTrack(p, micTrack); return; }
@@ -4521,7 +4686,7 @@ notify pgrst, 'reload schema';
         this.ctx = this.ctx || new (window.AudioContext || window.webkitAudioContext)();
         if (this.ctx.state === "suspended") this.ctx.resume().catch(() => {});
         const mic = this.ctx.createMediaStreamSource(call.mic); this.srcs.push(mic);
-        const rs = ps.filter(p => p.remoteStream).map(p => { const n = this.ctx.createMediaStreamSource(p.remoteStream); this.srcs.push(n); return [p, n]; });
+        const rs = ps.filter(p => p.remoteStream && !p.hushed).map(p => { const n = this.ctx.createMediaStreamSource(p.remoteStream); this.srcs.push(n); return [p, n]; });
         for (const p of ps) {
           let d = this.dests.get(p); if (!d) { d = this.ctx.createMediaStreamDestination(); this.dests.set(p, d); }
           mic.connect(d);
@@ -5119,15 +5284,15 @@ notify pgrst, 'reload schema';
   }
 
   /* ================= the free-roam arena: move anywhere, get behind people ================= */
-  const FRM = { p: { wind: 0.12, act: 0.1, total: 0.42, reach: 1.0, dmg: 7, cone: 0.85 }, k: { wind: 0.2, act: 0.12, total: 0.62, reach: 1.35, dmg: 11, cone: 0.7 } };
+  const FRM = { p: { wind: 0.09, act: 0.09, total: 0.32, reach: 1.0, dmg: 7, cone: 0.85 }, k: { wind: 0.15, act: 0.11, total: 0.48, reach: 1.35, dmg: 11, cone: 0.7 } };
   const FR_R = 6;
   const frAngTo = (a, b) => Math.atan2(b.x - a.x, b.z - a.z);
   const frDiff = (a, b) => Math.atan2(Math.sin(a - b), Math.cos(a - b));
-  function frFighter(team, x, z, ang, cpu) { return { team, x, z, y: 0, ang, hp: 100, act: "idle", t: 0, hit: false, keys: { mx: 0, mz: 0, b: 0 }, guard: 0, gt: -9, cd: 0.8 + Math.random(), cpu, spd: 0, side: Math.random() < 0.5 ? -1 : 1, blockT: 0 }; }
+  function frFighter(team, x, z, ang, cpu) { return { pT: FRM.p.total, kT: FRM.k.total, team, x, z, y: 0, ang, hp: 100, act: "idle", t: 0, hit: false, keys: { mx: 0, mz: 0, b: 0 }, guard: 0, gt: -9, cd: 0.8 + Math.random(), cpu, spd: 0, side: Math.random() < 0.5 ? -1 : 1, blockT: 0 }; }
   function frNew(nOpp, lv, diff) {
     const f = [Object.assign(frFighter(0, 0, 3, Math.PI, false), { human: true, S: 50 })];
     for (let i = 0; i < nOpp; i++) f.push(frFighter(1, nOpp === 1 ? 0 : (i ? 1.6 : -1.6), -3, 0, true));
-    return { f, S: 50, over: false, winTeam: -1, fx: [], fxId: 0, reading: false, slowT: 0, wt: 0, T: 0, go: 1.4, lv: lv || 1, diff: diff || 2, cpuDmg: FR_DIFF[diff || 2].dmg * (nOpp > 1 ? 0.8 : 1) };
+    return { f, S: 50, over: false, winTeam: -1, fx: [], fxId: 0, reading: false, slowT: 0, wt: 0, T: 0, go: 1.4, lv: lv || 1, diff: diff || 2, cpuDmg: FR_DIFF[diff || 2].dmg * (nOpp > 1 ? 0.6 : 1), tok: 1, tokT: 0 };
   }
   function frClamp(f) { const d = Math.hypot(f.x, f.z); if (d > FR_R) { f.x *= FR_R / d; f.z *= FR_R / d; } }
   function frNearest(g, f, maxD, cone) {
@@ -5167,7 +5332,7 @@ notify pgrst, 'reload schema';
   }
   // A strike lands only if someone is really in reach and in front; from behind it hurts more and can't be blocked.
   function frHit(g, a, mv, snd) {
-    const mul = a.human ? 0.55 + 0.95 * (a.S || 0) / 100 : g.cpuDmg;
+    const mul = a.human ? 0.7 + 0.95 * (a.S || 0) / 100 : g.cpuDmg;
     const ts = g.f.filter(b => b !== a && b.team !== a.team && b.act !== "ko" && b.act !== "roll" && b.act !== "read")
       .map(b => [b, Math.hypot(b.x - a.x, b.z - a.z)])
       .filter(([b, d]) => d < mv.reach + 0.35 && Math.abs(frDiff(frAngTo(a, b), a.ang)) < mv.cone)
@@ -5178,7 +5343,7 @@ notify pgrst, 'reload schema';
       let blocked = b.act === "block" && !back, gb = false;
       if (blocked) { if (g.T - b.gt > 1.6) b.guard = 0; b.gt = g.T; b.guard += mv === FRM.k ? 1.5 : 1; if (b.guard >= 3) { blocked = false; gb = true; b.guard = 0; } }
       const combo = (a.combo || 1) >= 3 ? 1.25 : 1;   // the third quick hit lands harder
-      const d = mv.dmg * 0.6 * mul * combo * (back ? 1.5 : 1) * (blocked ? 0.25 : gb ? 1.3 : 1);
+      const d = mv.dmg * 0.6 * mul * combo * (back ? (a.cpu ? 1.2 : 1.5) : 1) * (blocked ? 0.25 : gb ? 1.3 : 1);
       b.hp = Math.max(0, b.hp - d);
       if (!blocked) {
         const an = frAngTo(a, b);
@@ -5246,7 +5411,7 @@ notify pgrst, 'reload schema';
       }
       if (f.keys.b && g.go <= 0) { f.act = "block"; const t = frNearest(g, f, 4); if (t) f.ang = frAngTo(f, t); if (m > 0.1) { f.x += mx * dt; f.z += mz * dt; } frClamp(f); continue; }
       if (m > 0.12) {
-        const run = m > 0.85, sp = run ? 4.4 : 2.3 * Math.max(0.5, m / 0.85);
+        const run = m > 0.85, sp = run ? 5.0 : 2.6 * Math.max(0.5, m / 0.85);
         f.x += mx / m * sp * dt; f.z += mz / m * sp * dt; f.ang = Math.atan2(mx, mz); f.spd = sp; f.act = run ? "run" : "walk";
       } else f.act = "idle";
       frClamp(f);
@@ -5262,13 +5427,17 @@ notify pgrst, 'reload schema';
   // The computer: chases, circles, strikes, blocks; a second opponent tries to get behind him.
   // How tough the computer is: Normal, Hard (the default) or Brutal.
   const FR_DIFF = {
-    1: { react: 0.35, block: 0.35, dodge: 0.1, burst: 1, cd: 1.0, flank: 0.15, punish: 0.3, orbs: 0, dmg: 0.6 },
-    2: { react: 0.15, block: 0.65, dodge: 0.3, burst: 3, cd: 0.42, flank: 0.55, punish: 0.85, orbs: 0.5, dmg: 1.55 },
-    3: { react: 0.09, block: 0.85, dodge: 0.45, burst: 4, cd: 0.28, flank: 0.85, punish: 1, orbs: 0.9, dmg: 1.9 },
+    1: { react: 0.35, block: 0.35, dodge: 0.1, burst: 1, cd: 1.0, flank: 0.15, punish: 0.3, orbs: 0, dmg: 0.5, turn: 3.6 },
+    2: { react: 0.16, block: 0.6, dodge: 0.3, burst: 3, cd: 0.5, flank: 0.45, punish: 0.8, orbs: 0.5, dmg: 1.1, turn: 3.0 },
+    3: { react: 0.1, block: 0.8, dodge: 0.42, burst: 4, cd: 0.34, flank: 0.75, punish: 1, orbs: 0.9, dmg: 1.4, turn: 2.4 },
   };
   function frCpu(g, dt) {
     if (g.over || g.go > 0) return;
     const P = FR_DIFF[g.diff || 2];
+    // more than one opponent: only one comes in at a time; the turn passes every few seconds
+    const cpus = g.f.map((f, i) => i).filter(i => g.f[i].cpu && g.f[i].team === 1 && g.f[i].act !== "ko");
+    g.tokT = (g.tokT || 0) - dt;
+    if (cpus.length > 1 && (!cpus.includes(g.tok) || g.tokT <= 0)) { const k = cpus.indexOf(g.tok); g.tok = cpus[(k + 1) % cpus.length]; g.tokT = P.turn * (0.8 + Math.random() * 0.4); }
     g.f.forEach((f, i) => {
       if (!f.cpu || f.act === "ko") return;
       f.cd -= dt;
@@ -5296,7 +5465,17 @@ notify pgrst, 'reload schema';
         if (r < P.block + hurt + P.dodge) { const side = Math.random() < 0.5 ? 1 : -1, a = frAngTo(tgt, f) + side * 1.3; f.keys = { mx: Math.sin(a), mz: Math.cos(a), b: 0 }; frPress(g, i, "roll"); return; }
       }
       // he missed and is still recovering: punish with a combo
-      const whiffed = (tgt.act === "p" || tgt.act === "k") && tgt.hit && tgt.t > 0.22;
+      const whiffed = (tgt.act === "p" || tgt.act === "k") && tgt.hit && tgt.t > 0.18;
+      // not my turn: hang back at the edge of reach, step around him, wait
+      if (cpus.length > 1 && f.team === 1 && g.tok !== i && tgt.human) {
+        f.ang = frAngTo(f, tgt);
+        if (d < 1.3 && whiffed && Math.random() < dt * 2) { frPress(g, i, "p"); f.cd = P.cd; return; }   // a cheap shot, now and then
+        const want = 2.4, r = (d - want) / Math.max(d, 0.01), dx = tgt.x - f.x, dz = tgt.z - f.z;
+        if (Math.random() < dt * 0.6) f.side = -f.side;
+        f.keys = { mx: dx * r * 1.2 + Math.cos(f.ang) * f.side * 0.35, mz: dz * r * 1.2 - Math.sin(f.ang) * f.side * 0.35, b: 0 };
+        const m = Math.hypot(f.keys.mx, f.keys.mz); if (m > 0.8) { f.keys.mx *= 0.8 / m; f.keys.mz *= 0.8 / m; }
+        return;
+      }
       if (d < 1.35) {
         f.ang = frAngTo(f, tgt);
         const go = f.cd <= 0 || (whiffed && Math.random() < P.punish) || (tgt.act === "read") || (tgt.hp < 25 && Math.random() < 0.6);
@@ -6090,6 +6269,7 @@ notify pgrst, 'reload schema';
     return html`<svg width=${size} height=${size} viewBox="0 0 24 24" fill=${p.fill ? "currentColor" : "none"} stroke=${p.fill ? "none" : "currentColor"} stroke-width=${sw} stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">${p.children}</svg>`;
   }
   const Ic = {
+    bell: ({ size = 22, sw = 2 }) => html`<svg width=${size} height=${size} viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width=${sw} stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/></svg>`,
     expand: p => html`<${Svg} ...${p}><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></${Svg}>`,
     shrink: p => html`<${Svg} ...${p}><path d="M9 4v5H4M15 4v5h5M9 20v-5H4M15 20v-5h5"/></${Svg}>`,
     keys: p => html`<${Svg} ...${p}><rect x="2.5" y="6" width="19" height="12" rx="2"/><path d="M6.5 10h.01M9.5 10h.01M12.5 10h.01M15.5 10h.01M18 10h.01M7.5 14h9"/></${Svg}>`,
@@ -6308,7 +6488,7 @@ notify pgrst, 'reload schema';
     </div>`;
   }
 
-  function Rail({ lessons, uIdx, vIdx, unreadBy, teacher, onPick, onBook, onFight }) {
+  function Rail({ lessons, uIdx, vIdx, unreadBy, teacher, onPick, onBook, onFight, bell }) {
     const ref = useRef(null);
     useEffect(() => {
       const rail = ref.current; if (!rail) return;
@@ -6316,7 +6496,7 @@ notify pgrst, 'reload schema';
       const left = el.offsetLeft - rail.clientWidth / 2 + el.clientWidth / 2;
       try { rail.scrollTo({ left, behavior: "smooth" }); } catch (e) { rail.scrollLeft = left; }
     }, [vIdx, lessons.length]);
-    return html`<nav class="rail" ref=${ref} aria-label="Lessons">${onBook ? html`<button class="railbook railw" onClick=${onBook} aria-label="My exercise book"><${Ic.book} size=${20}/><span>Book</span></button>` : null}${onFight ? html`<button class="railbook railfight railw" onClick=${onFight} aria-label="Games">🎮<span>Game</span></button>` : null}${onBook || onFight ? html`<span class="raillbl">Lessons</span>` : null}${lessons.map((l, i) => {
+    return html`<nav class="rail" ref=${ref} aria-label="Lessons">${bell ? html`<${PushBell} studentId=${bell} rail=${true}/>` : null}${onBook ? html`<button class="railbook railw" onClick=${onBook} aria-label="My exercise book"><${Ic.book} size=${20}/><span>Book</span></button>` : null}${onFight ? html`<button class="railbook railfight railw" onClick=${onFight} aria-label="Games">🎮<span>Game</span></button>` : null}${onBook || onFight ? html`<span class="raillbl">Lessons</span>` : null}${lessons.map((l, i) => {
       const state = i < uIdx ? "done" : i === uIdx ? "cur" : "locked";
       const can = teacher || i <= uIdx;
       return html`<button key=${l.id} class=${"dot " + state + (i === vIdx ? " view" : "") + (teacher && i === vIdx ? " tview" : "")} disabled=${!can} onClick=${() => onPick(l.id)} aria-label=${"Lesson " + (i + 1)} aria-current=${i === vIdx ? "true" : null}>
@@ -6774,7 +6954,6 @@ notify pgrst, 'reload schema';
         <button class="iconbtn" onClick=${() => setBookOpen(true)} aria-label="Their exercise book"><${Ic.book} size=${22}/></button>
         <button class="iconbtn" onClick=${() => setEditing(true)} aria-label="Student settings and join link"><${Ic.edit} size=${22}/></button>
       </header>` : null}
-      ${!teacher ? html`<${PushCard} studentId=${student.id}/>` : null}
       ${!teacher ? (() => {
         const news = mine.filter(m => m.from === "teacher" && !m.seen && m.lesson !== (lesson && lesson.id)).sort((a, b) => b.at - a.at);
         if (!news.length) return null;
@@ -6783,7 +6962,7 @@ notify pgrst, 'reload schema';
         const asked = mine.some(m => m.from === "student" && m.lesson === m0.lesson && m.at < m0.at);
         return html`<button class="answerbar" onClick=${() => { setViewId(m0.lesson); flashMsg(m0.id); }}>🔔 <b>${asked ? "Teacher answered" : "New from teacher"}</b><span>Lesson ${li + 1}</span><${Ic.down} size=${18}/></button>`;
       })() : null}
-      <${Rail} lessons=${lessons} uIdx=${uIdx} vIdx=${vIdx} unreadBy=${unreadBy} teacher=${teacher} onPick=${setViewId} onBook=${teacher ? null : () => setBookOpen(true)} onFight=${teacher || !student.games ? null : () => setFight("hub")}/>
+      <${Rail} lessons=${lessons} uIdx=${uIdx} vIdx=${vIdx} unreadBy=${unreadBy} teacher=${teacher} onPick=${setViewId} onBook=${teacher ? null : () => setBookOpen(true)} onFight=${teacher || !student.games ? null : () => setFight("hub")} bell=${teacher ? null : student.id}/>
       ${teacher ? html`<div class="tact">
         ${vIdx === uIdx
           ? html`<button class="btn pass" onClick=${pass}><${Ic.tick} size=${20} sw=${2.8}/>Pass lesson ${vIdx + 1}</button>`
@@ -6885,7 +7064,8 @@ notify pgrst, 'reload schema';
     for (const m of s.msgs) { const k = m.student + "|" + m.lesson; (byThread[k] = byThread[k] || []).push(m); }
     for (const list of Object.values(byThread)) {
       const lastTeacher = Math.max(0, ...list.filter(m => m.from === "teacher").map(m => m.at || 0));
-      for (const m of list) if (m.from === "student" && (m.at || 0) > lastTeacher && ["voice", "photo", "text", "hwans"].includes(m.kind)) waiting.push(m);
+      // a question stays here until you've opened it (two blue ticks); homework stays until it's marked
+      for (const m of list) if (m.from === "student" && (m.at || 0) > lastTeacher && (m.kind === "hwans" ? !marksFor(m.id, s.msgs) : ["voice", "photo", "text"].includes(m.kind) && !m.seen)) waiting.push(m);
     }
     waiting.sort((a, b) => (b.at || 0) - (a.at || 0));
     if (!waiting.length) return null;
@@ -7462,10 +7642,36 @@ notify pgrst, 'reload schema';
     </div>`;
   }
 
+  /* ================= finished video files (proper length, seekable) ================= */
+  let muxP = null;
+  function loadMux() {
+    if (!muxP) muxP = new Promise((res, rej) => {
+      if (window.MB) return res(window.MB);
+      const sc = document.createElement("script"); sc.src = "videomux.js";
+      sc.onload = () => (window.MB ? res(window.MB) : rej(new Error("mux")));
+      sc.onerror = () => { muxP = null; rej(new Error("mux")); };
+      document.head.appendChild(sc);
+    });
+    return muxP;
+  }
+  // A live recording has no length written in, so players can't skip around and some refuse it.
+  // This copies it into a finished file, without re-encoding.
+  async function fixVideo(file, onProgress) {
+    const MB = await loadMux();
+    const mp4 = /mp4/i.test(file.type);
+    const input = new MB.Input({ source: new MB.BlobSource(file), formats: MB.ALL_FORMATS });
+    const output = new MB.Output({ format: mp4 ? new MB.Mp4OutputFormat({ fastStart: "in-memory" }) : new MB.WebMOutputFormat(), target: new MB.BufferTarget() });
+    const conv = await MB.Conversion.init({ input, output });
+    if (!conv.isValid) throw new Error("invalid");
+    conv.onProgress = pr => { if (onProgress) onProgress(pr); };
+    await conv.execute();
+    return new Blob([output.target.buffer], { type: mp4 ? "video/mp4" : "video/webm" });
+  }
   /* ================= a recorded lesson as a video: the board, the stick, the voice ================= */
   async function lessonVideo(lesson, number, onProgress) {
-    const W = 1280, H = 720, cv = document.createElement("canvas"); cv.width = W; cv.height = H;
-    const c = cv.getContext("2d");
+    // drawn in 1280×720 steps, written out at full HD (1920×1080) so it fills a TV
+    const W = 1280, H = 720, OUT_W = 1920, OUT_H = 1080, cv = document.createElement("canvas"); cv.width = OUT_W; cv.height = OUT_H;
+    const c = cv.getContext("2d"); c.setTransform(OUT_W / W, 0, 0, OUT_H / H, 0, 0);
     const rows = parseBoard(lesson.board, lesson.stage === 3), cues = (lesson.cues || []).slice().sort((a, b) => a.t - b.t);
     // lay the tiles out like the board
     const top = 150, bottom = H - 70, rowH = Math.min(140, (bottom - top) / Math.max(1, rows.length));
@@ -7498,61 +7704,122 @@ notify pgrst, 'reload schema';
       }
       if (w && now - w.t < 2) { c.fillStyle = "#FFB020"; c.font = "700 44px Andika, sans-serif"; c.textAlign = "right"; c.fillText("Your turn!", W - 60, 78); }
     };
-    const ac = new (window.AudioContext || window.webkitAudioContext)();
-    const buf = await fetch(publicUrl(lesson.explain)).then(r => { if (!r.ok) throw new Error("audio"); return r.arrayBuffer(); }).then(b => new Promise((res, rej) => ac.decodeAudioData(b, res, rej)));
-    const src = ac.createBufferSource(); src.buffer = buf;
-    const dest = ac.createMediaStreamDestination(); src.connect(dest);
-    const stream = new MediaStream([...cv.captureStream(24).getVideoTracks(), ...dest.stream.getAudioTracks()]);
-    const mime = ["video/mp4", "video/webm;codecs=vp8,opus", "video/webm"].find(m => window.MediaRecorder && MediaRecorder.isTypeSupported && MediaRecorder.isTypeSupported(m)) || "";
-    const rec = new MediaRecorder(stream, mime ? { mimeType: mime, videoBitsPerSecond: 1200000 } : undefined), parts = [];
-    rec.ondataavailable = e => { if (e.data && e.data.size) parts.push(e.data); };
-    const done = new Promise(res => { rec.onstop = res; });
-    draw(0); rec.start(500); await ac.resume(); src.start();
-    const t0 = ac.currentTime, total = buf.duration;
-    await new Promise(res => {
-      const iv = setInterval(() => {
-        const now = ac.currentTime - t0; draw(now); if (onProgress) onProgress(Math.min(1, now / total));
-        if (window.__vidShot === null && now > 1.5) window.__vidShot = cv.toDataURL('image/jpeg', 0.8);
-        if (now >= total + 0.4) { clearInterval(iv); res(); }
-      }, 40);
-    });
-    rec.stop(); await done; ac.close();
-    const type = (rec.mimeType || mime || "video/webm").split(";")[0];
-    const out = new Blob(parts, { type }); out.secs = total;
+    // ---- build the file frame by frame, faster than real time, and finish it properly ----
+    const MB = await loadMux();
+    const FPS = 15;
+    // the voice, decoded once at a low sample rate so it stays small in memory
+    const output = new MB.Output({ format: new MB.Mp4OutputFormat({ fastStart: "in-memory" }), target: new MB.BufferTarget() });
+    const order = (have, want) => want.filter(x => have.includes(x)).concat(have.filter(x => !want.includes(x)));
+    const vcodec = await MB.getFirstEncodableVideoCodec(order(output.format.getSupportedVideoCodecs(), ["avc", "hevc", "vp9", "av1"]), { width: OUT_W, height: OUT_H });
+    // AAC wants a normal sample rate; find the smallest one this phone can write, so the voice stays light in memory
+    const aorder = order(output.format.getSupportedAudioCodecs(), ["aac", "opus"]);
+    let acodec = null, rate = 24000;
+    for (const sr of [24000, 44100, 48000]) { const k = await MB.getFirstEncodableAudioCodec(["aac"].filter(x => aorder.includes(x)), { numberOfChannels: 1, sampleRate: sr }); if (k) { acodec = k; rate = sr; break; } }
+    if (!acodec) { rate = 48000; acodec = await MB.getFirstEncodableAudioCodec(aorder, { numberOfChannels: 1, sampleRate: rate }); }
+    if (!vcodec || !acodec) throw new Error("nocodec");
+    let ac;
+    try { ac = new (window.AudioContext || window.webkitAudioContext)({ sampleRate: rate }); } catch (e) { ac = new (window.AudioContext || window.webkitAudioContext)(); }
+    const raw = await fetch(publicUrl(lesson.explain)).then(r => { if (!r.ok) throw new Error("audio"); return r.arrayBuffer(); });
+    let buf = await new Promise((res, rej) => ac.decodeAudioData(raw, res, rej));
+    if (buf.numberOfChannels > 1) {   // one voice: one channel, half the memory
+      const m = ac.createBuffer(1, buf.length, buf.sampleRate), d = m.getChannelData(0), n = buf.numberOfChannels;
+      for (let ch = 0; ch < n; ch++) { const x = buf.getChannelData(ch); for (let k = 0; k < x.length; k++) d[k] += x[k] / n; }
+      buf = m;
+    }
+    try { ac.close(); } catch (e) {}
+    if (buf.sampleRate !== rate) {   // this phone ignored the rate we asked for: make it match what the encoder accepts
+      const k = await MB.getFirstEncodableAudioCodec(aorder, { numberOfChannels: 1, sampleRate: buf.sampleRate });
+      if (!k) throw new Error("nocodec");
+      acodec = k;
+    }
+    window.__lastCodecs = { vcodec, acodec, rate: buf.sampleRate };
+    const total = buf.duration;
+    const vsrc = new MB.CanvasSource(cv, { codec: vcodec, bitrate: 1500000, bitrateMode: "variable", latencyMode: "quality", contentHint: "text" });
+    const asrc = new MB.AudioBufferSource({ codec: acodec, bitrate: 128000 });
+    output.addVideoTrack(vsrc, { frameRate: FPS });
+    output.addAudioTrack(asrc);
+    await output.start();
+    const audioDone = asrc.add(buf);   // not awaited here: the two tracks are written side by side
+    const n = Math.ceil(total * FPS);
+    const yieldUi = () => new Promise(r => { const c = new MessageChannel(); c.port1.onmessage = () => r(); c.port2.postMessage(0); });
+    // The board only changes when the stick moves: write a new picture then, and one a second otherwise.
+    // Far smaller files, and much less work for the phone.
+    const sig = now => { let p = -1, w = null; cues.forEach((q, k) => { if (q.t <= now) { if (q.k === "p") p = k; if (q.k === "w") w = q; } }); if (p >= 0 && now - cues[p].t > 8) p = -1; return p + "|" + (w && now - w.t < 2 ? 1 : 0); };
+    const times = [];
+    let lastSig = null, lastT = -9;
+    for (let f = 0; f < n; f++) { const t = f / FPS, g = sig(t); if (g !== lastSig || t - lastT >= 1 - 1e-6) { times.push(t); lastSig = g; lastT = t; } }
+    let lastKey = -99;
+    for (let k = 0; k < times.length; k++) {
+      const t = times[k], next = k + 1 < times.length ? times[k + 1] : n / FPS;
+      draw(t);
+      const key = t - lastKey >= 4 - 1e-6; if (key) lastKey = t;
+      await vsrc.add(t, next - t, { keyFrame: key });
+      if (k % 3 === 0) { if (onProgress) onProgress(t / total); await yieldUi(); }
+    }
+    await audioDone;
+    if (onProgress) onProgress(1);
+    await output.finalize();
+    const out = new Blob([output.target.buffer], { type: "video/mp4" });
+    out.secs = total;
     return out;
   }
-  function LessonVideoBtn({ lesson, number }) {
-    const [p, setP] = useState(null);
-    const [ready, setReady] = useState(null);
-    async function make() {
-      if (p != null) return;
-      setP(0); setReady(null);
+  // One video at a time, kept outside the screen that started it: you can move around the app while it's made.
+  const vidJob = {
+    st: null, subs: new Set(),
+    set(v) { this.st = v; this.subs.forEach(f => f(v)); },
+    async start(lesson, number) {
+      if (this.st && this.st.p != null) return;
+      this.set({ lid: lesson.id, number, p: 0 });
+      awake.on("video");
       try {
-        const blob = await lessonVideo(lesson, number, v => setP(v));
+        const blob = await lessonVideo(lesson, number, v => { if (this.st && this.st.p != null && (v === 1 || v - this.st.p >= 0.01)) this.set(Object.assign({}, this.st, { p: v })); });
         const name = "lesson-" + number + (blob.type.includes("mp4") ? ".mp4" : ".webm");
         // keep it in the Recordings tab too, so it's never lost
         try {
           const id = uid();
-          await classRec.put("recs", { id, startedAt: Date.now(), title: "Lesson " + number + " video" + (lesson.title ? ": " + lesson.title : ""), lessonNo: number, student: null, part: 1, mime: blob.type, status: "done", size: blob.size, secs: Math.round(blob.secs || 0) });
+          await classRec.put("recs", { id, startedAt: Date.now(), title: "Lesson " + number + " video" + (lesson.title ? ": " + lesson.title : ""), lessonNo: number, student: null, part: 1, mime: blob.type, status: "done", fixed: true, size: blob.size, secs: Math.round(blob.secs || 0) });
           await classRec.put("chunks", { rec: id, seq: 0, blob });
         } catch (e) {}
-        window.__lastVideo = { size: blob.size, type: blob.type };
-        setReady({ blob, name });
-      } catch (e) { toast("Couldn't make the video. Check the connection and try again."); }
-      setP(null);
-    }
+        window.__lastVideo = { size: blob.size, type: blob.type }; window.__lastVideoBlob = blob;
+        this.set({ lid: lesson.id, number, p: null, ready: { blob, name } });
+        if (document.visibilityState === "visible") toast("Lesson " + number + " video is ready.");
+      } catch (e) {
+        this.set({ lid: lesson.id, number, p: null, err: true });
+        toast(e && e.message === "nocodec" ? "This phone can't make videos. Try Chrome on Android or a newer iPhone." : "Couldn't make the video. Check the connection and try again.");
+      }
+      awake.off("video");
+    },
+  };
+  window.addEventListener("beforeunload", e => { if (vidJob.st && vidJob.st.p != null) { e.preventDefault(); e.returnValue = ""; } });
+  function useVidJob() {
+    const [st, set] = useState(vidJob.st);
+    useEffect(() => { vidJob.subs.add(set); return () => { vidJob.subs.delete(set); }; }, []);
+    return st;
+  }
+  // a small strip on every screen while a video is being made
+  function VidJobPill() {
+    const j = useVidJob();
+    if (!j || j.p == null) return null;
+    return html`<div class="vidpill" role="status">🎬 Making lesson ${j.number} video… ${Math.round(j.p * 100)}% · keep the app open</div>`;
+  }
+  function LessonVideoBtn({ lesson, number }) {
+    const j = useVidJob();
+    const mine = j && j.lid === lesson.id;
+    const busy = j && j.p != null;
+    const ready = mine && j.ready;
     // phones only open Share or Save straight after a tap, so these are buttons
     const file = ready ? new File([ready.blob], ready.name, { type: ready.blob.type }) : null;
     const canShare = !!(file && navigator.canShare && navigator.canShare({ files: [file] }));
     return html`<div>
-      <button class="btn quiet vidbtn" onClick=${make} disabled=${p != null}>${p == null ? "⬇ Save as video" : "Making the video… " + Math.round(p * 100) + "%"}</button>
+      <button class="btn quiet vidbtn" onClick=${() => vidJob.start(lesson, number)} disabled=${busy}>${!busy ? "⬇ Save as video" : mine ? "Making the video… " + Math.round(j.p * 100) + "%" : "Another video is being made…"}</button>
+      ${mine && busy ? html`<p class="help vidhelp">Keep the app open until it's done. You can look at other lessons meanwhile.</p>` : null}
       ${ready ? html`<div class="vidready">
         <b>✅ Video ready (${fmtDur(ready.blob.secs || 0)})</b>
-        <small>It's also in your Recordings tab.</small>
+        <small>Full HD, ready for YouTube. It's also in your Recordings tab.</small>
         <div class="vidrow">
           ${canShare ? html`<button class="btn" onClick=${async () => { try { await navigator.share({ files: [file], title: "Lesson " + number }); } catch (e) {} }}>Share</button>` : null}
           <button class="btn quiet" onClick=${() => { const a = document.createElement("a"); a.href = URL.createObjectURL(ready.blob); a.download = ready.name; document.body.appendChild(a); a.click(); a.remove(); }}>Save</button>
-          <button class="iconbtn" onClick=${() => setReady(null)} aria-label="Close"><${Ic.x} size=${20}/></button>
+          <button class="iconbtn" onClick=${() => vidJob.set(null)} aria-label="Close"><${Ic.x} size=${20}/></button>
         </div>
       </div>` : null}
     </div>`;
@@ -7745,7 +8012,8 @@ notify pgrst, 'reload schema';
         ? html`<button class="joinbtn" onClick=${join} aria-label="Join the class"><${Ic.phone} size=${34}/></button>`
         : html`<div class="incall">
             <span class="cstate">${C.phase === "connected" ? html`<${Ic.speaker} size=${22}/>` : html`<span class="spin"></span>`}<span>${C.since ? fmtDur((now - C.since) / 1000) : ""}</span></span>
-            <button class=${"cbtn" + (C.muted ? " off" : "")} onClick=${() => call.toggleMute()} aria-label=${C.muted ? "Unmute" : "Mute"}>${C.muted ? html`<${Ic.micOff} size=${24}/>` : html`<${Ic.mic} size=${24}/>`}</button>
+            <button class=${"cbtn" + (C.muted || C.hushed ? " off" : "")} onClick=${() => call.toggleMute()} aria-label=${C.hushed ? "Muted by your teacher" : C.muted ? "Unmute" : "Mute"}>${C.muted || C.hushed ? html`<${Ic.micOff} size=${24}/>` : html`<${Ic.mic} size=${24}/>`}</button>
+            ${C.hushed ? html`<span class="hushed" role="status">Muted by your teacher</span>` : null}
             <button class="cbtn hang" onClick=${() => call.leave(true)} aria-label="Leave the call"><${Ic.hangup} size=${26}/></button>
           </div>`}
       ${L.rec ? html`<span class="recbadge" aria-label="This class is being recorded"><span class="recdot"></span>REC</span>` : null}
@@ -7767,7 +8035,10 @@ notify pgrst, 'reload schema';
 
   function ClassMembers({ s, studentId }) {
     const L = useLive();
+    useCall();
     useTick(1000);
+    const peerOf = id => (id === studentId ? call : (live.extra.get(id) || {}).peer);
+    const hushedOf = id => { const q = peerOf(id); return !!(q && q.st && q.st.hushed); };
     const [adding, setAdding] = useState(false);
     const group = L.group || [], holder = L.holderSid || studentId;
     const inClass = [studentId].concat(group);
@@ -7779,6 +8050,7 @@ notify pgrst, 'reload schema';
         ${inClass.map(id => html`<span class=${"mchip" + (voiceOf(id) === "connected" ? " on" : "")} key=${id}>
           <span class="pres small"></span>${nameOf(id)}
           ${L.mode === "write" ? html`<button class=${"mchalk" + (holder === id ? " on" : "")} onClick=${() => live.giveChalkTo(id)} aria-label=${"Chalk goes to " + nameOf(id)}>✏️</button>` : null}
+          <button class=${"mmute" + (hushedOf(id) ? " on" : "")} onClick=${() => { const q = peerOf(id); if (q) q.hush(!hushedOf(id)); }} aria-label=${(hushedOf(id) ? "Let " : "Mute ") + nameOf(id) + (hushedOf(id) ? " talk again" : "")} aria-pressed=${hushedOf(id) ? "true" : "false"}>${hushedOf(id) ? "🔇" : "🎤"}</button>
           ${id !== studentId ? html`<button class="mx" onClick=${() => live.removeStudent(id)} aria-label=${"Take " + nameOf(id) + " out of the class"}>×</button>` : null}
         </span>`)}
         ${others.length ? html`<button class="tool" onClick=${() => setAdding(!adding)}><${Ic.plus} size=${16}/>Add a student</button>` : null}
@@ -7824,7 +8096,7 @@ notify pgrst, 'reload schema';
       <div class="lprow">
         ${C.phase === "paused" || C.phase === "idle"
           ? html`<button class="btn slim" onClick=${rejoinVoice}><${Ic.phone} size=${18}/>Rejoin voice</button>`
-          : html`<button class=${"tool" + (C.muted ? " on" : "")} onClick=${() => call.toggleMute()}>${C.muted ? html`<${Ic.micOff} size=${16}/>Unmute` : html`<${Ic.mic} size=${16}/>Mute`}</button>`}
+          : html`<button class=${"tool" + (C.muted ? " on" : "")} onClick=${() => call.toggleMute()}>${C.muted ? html`<${Ic.micOff} size=${16}/>Unmute me` : html`<${Ic.mic} size=${16}/>Mute me`}</button>`}
         <button class=${"tool" + (R.on ? " recon" : "")} onClick=${toggleRec} aria-pressed=${R.on ? "true" : "false"}><span class=${"recdot small" + (R.on ? "" : " idle")}></span>${R.on ? "Recording " + fmtDur((now - R.since) / 1000) : "Record"}</button>
         <button class=${"chip2" + (L.sound ? " on" : "")} onClick=${() => live.setSound(!L.sound)} aria-pressed=${L.sound ? "true" : "false"}><${Ic.speaker} size=${16}/>Sounds on their phone</button>
         <button class=${"btn danger slim" + (armEnd ? " arm" : "")} onClick=${() => (armEnd ? live.endClass() : setArmEnd(true))}>${armEnd ? "Tap again to end" : "End class"}</button>
@@ -7861,10 +8133,23 @@ notify pgrst, 'reload schema';
     const load = () => classRec.all("recs").then(l => setList(l.sort((a, b) => b.startedAt - a.startedAt))).catch(() => setList([]));
     useEffect(() => { load(); const t = setInterval(load, 3000); return () => clearInterval(t); }, []);
     useEffect(() => { if (!arm) return; const t = setTimeout(() => setArm(null), 3500); return () => clearTimeout(t); }, [arm]);
+    const cache = useRef(new Map());
+    const [prog, setProg] = useState(null);
     async function fileOf(r) {
+      if (cache.current.has(r.id)) return cache.current.get(r.id);
       const parts = await classRec.chunks(r.id);
       if (!parts.length) throw new Error("empty");
-      return new File(parts, recFileName(r), { type: r.mime || "video/webm" });
+      let f = new File(parts, recFileName(r), { type: r.mime || "video/webm" });
+      if (!r.fixed) {
+        try {
+          setProg(0);
+          const blob = await fixVideo(f, v => setProg(Math.round(v * 100)));
+          f = new File([blob], recFileName(r).replace(/\.\w+$/, blob.type.includes("mp4") ? ".mp4" : ".webm"), { type: blob.type });
+        } catch (e) { /* if it can't be finished, the original still saves */ }
+        setProg(null);
+      }
+      cache.current.set(r.id, f);
+      return f;
     }
     async function download(r) {
       setBusy(r.id);
@@ -7881,7 +8166,10 @@ notify pgrst, 'reload schema';
         const f = await fileOf(r);
         if (navigator.canShare && navigator.canShare({ files: [f] })) await navigator.share({ files: [f], title: r.title });
         else { toast("Sharing isn't available here, so it's downloading instead."); await download(r); }
-      } catch (e) { if (!e || e.name !== "AbortError") toast("Couldn't share. Try Download."); }
+      } catch (e) {
+        if (e && e.name === "NotAllowedError") toast("The video is ready. Tap Share again.");   // the phone wants a fresh tap
+        else if (!e || e.name !== "AbortError") toast("Couldn't share. Try Download.");
+      }
       setBusy(null);
     }
     async function del(r) {
@@ -7900,7 +8188,7 @@ notify pgrst, 'reload schema';
               <span class="rowmain"><b>${(r.lessonNo ? "Lesson " + r.lessonNo + ": " : "") + (r.title || "Class")}${r.part > 1 ? ", part " + r.part : ""}</b>
               <small>${new Date(r.startedAt).toLocaleString([], { dateStyle: "medium", timeStyle: "short" })}, ${fmtDur(r.secs)}, ${mb(r.size || 0)}${note ? ", " + note.toLowerCase() : ""}</small></span></div>
             ${now ? null : html`<div class="row2">
-              <button class="btn" disabled=${busy === r.id} onClick=${() => download(r)}><${Ic.download} size=${18}/>Download</button>
+              <button class="btn" disabled=${busy === r.id} onClick=${() => download(r)}><${Ic.download} size=${18}/>${busy === r.id && prog != null ? "Getting it ready… " + prog + "%" : "Download"}</button>
               <button class="btn sec" disabled=${busy === r.id} onClick=${() => share(r)}><${Ic.send} size=${16}/>Share</button>
               <button class=${"btn danger" + (arm === r.id ? " arm" : "")} onClick=${() => del(r)}>${arm === r.id ? "Tap again to delete" : "Delete"}</button>
             </div>`}
@@ -7931,6 +8219,7 @@ notify pgrst, 'reload schema';
 
   function Teacher({ s, ix }) {
     const [tab, setTab] = useState("students");
+    const [setupOpen, setSetupOpen] = useState(false);
     const [openStudent, setOpenStudent] = useState(null);
     const [focus, setFocus] = useState(null);
     const [tLang, setTLang] = useState(() => { try { return localStorage.getItem("rc.tlang") || "en"; } catch (e) { return "en"; } });
@@ -7968,11 +8257,12 @@ notify pgrst, 'reload schema';
       const tabBtn = (id, label, dot) => html`<button role="tab" aria-selected=${tab === id ? "true" : "false"} class=${tab === id ? "on" : ""} onClick=${() => setTab(id)}>${label}${dot ? html`<span class="segdot" aria-label="New messages"></span>` : null}</button>`;
       body = html`<div class="page">
         <header class="top">
-          <h1>Reading class</h1>
+          <div class="toprow"><h1>Reading class</h1><${PushBell}/><button class="iconbtn setupbtn" onClick=${() => setSetupOpen(true)} aria-label="Website setup check" title="Website setup check">⚙️</button></div>
           <div class="seg" role="tablist">${tabBtn("students", "Students", unreadTotal)}${tabBtn("lessons", "Lessons")}${tabBtn("recordings", "Recordings")}</div>
         </header>
         ${s.needsUpdate ? html`<${UpdateBanner}/>` : null}
-        ${tab === "students" ? html`<${PushCard}/><${Questions} s=${s} onOpen=${(id, f) => { setFresh(false); setFocus(f); setOpenStudent(id); }}/><${StudentsList} s=${s} onOpen=${(id, isNew) => { setFresh(!!isNew); setFocus(null); setOpenStudent(id); }}/>`
+        ${setupOpen ? html`<${SetupCheck} onClose=${() => setSetupOpen(false)}/>` : null}
+        ${tab === "students" ? html`<${Questions} s=${s} onOpen=${(id, f) => { setFresh(false); setFocus(f); setOpenStudent(id); }}/><${StudentsList} s=${s} onOpen=${(id, isNew) => { setFresh(!!isNew); setFocus(null); setOpenStudent(id); }}/>`
           : tab === "lessons" ? (() => { const v = viewOf(s, tLang); REC_LANG = tLang; return html`<${LessonsList} s=${v.s} ix=${v.ix} onOpen=${setOpenLesson} lang=${tLang} onLang=${l => { setTLang(l); try { localStorage.setItem("rc.tlang", l); } catch (e) {} }}/>`; })()
           : html`<${Recordings}/>`}
         ${float ? html`<div class="floatspace"></div>` : null}
@@ -8002,13 +8292,15 @@ notify pgrst, 'reload schema';
     else if (s.phase === "error") body = html`<${ErrorScreen} err=${s.err}/>`;
     else if (s.isOwner) body = html`<${Teacher} s=${s} ix=${ix}/>`;
     else body = html`<${StudentHome} s=${s} ix=${ix}/>`;
-    return html`${body}${s.toast ? html`<div class="toast" role="status" key=${s.toast.id}>${s.toast.text}</div>` : null}`;
+    return html`${body}<${VidJobPill}/>${s.toast ? html`<div class="toast" role="status" key=${s.toast.id}>${s.toast.text}</div>` : null}`;
   }
 
-  window.__rc = { call, live, classRec, wb, tilePlayer };
+  window.__rc = { call, live, classRec, wb, tilePlayer, mixer };
   window.__kfArt = { kfBody, KF_CHARS, kfHit };
   window.__kfApi = { kfPress, kfStep, kfNew, kfSnd, kfAnn, annRec };
-  window.__ink = { hitInk, inkGroup };
+  window.__ink = { hitInk, inkGroup, straighten };
+  window.__mux = { lessonVideo, fixVideo, loadMux, vidJob, awake, player };
+  window.__ui = { PushBell, SetupCheck, VidJobPill, html, render, store };
   window.__lang = { viewOf, saveExpl, saveTileRec, uploadBlob, set: l => { REC_LANG = l; }, get: () => REC_LANG, store };
   root.innerHTML = "";
   render(html`<${App}/>`, root);
