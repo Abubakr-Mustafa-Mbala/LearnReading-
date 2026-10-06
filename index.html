@@ -280,6 +280,38 @@ img{max-width:100%}
 .stick{position:absolute;left:0;top:0;width:8px;height:190px;margin-left:-4px;transform-origin:50% 0;border-radius:4px;background:linear-gradient(90deg,#6E4526,#B8834F 45%,#7C5535);box-shadow:3px 4px 8px rgba(0,0,0,.35);opacity:0;transition:transform .4s cubic-bezier(.3,.7,.3,1),opacity .25s;pointer-events:none;z-index:3}
 .stick i{position:absolute;left:0;top:0;width:8px;height:13px;border-radius:4px 4px 2px 2px;background:var(--chalk)}
 .board.turn{box-shadow:inset 0 0 0 3px var(--chalk-hi),inset 0 18px 44px rgba(0,0,0,.28)}
+.bfx{position:absolute;left:0;top:0;pointer-events:none;z-index:3;overflow:visible}
+.bfx path{fill:none;stroke-linecap:round;stroke-linejoin:round;filter:drop-shadow(0 0 2px rgba(0,0,0,.35))}
+.bfx path.fxd{stroke-dasharray:1;stroke-dashoffset:1;animation:fxdraw .6s linear forwards}
+@keyframes fxdraw{to{stroke-dashoffset:0}}
+.board.hasstrip{padding-bottom:96px}
+.bstrip{position:absolute;left:8px;right:8px;bottom:10px;min-height:72px;display:flex;justify-content:center;align-items:center;gap:6px;flex-wrap:wrap;z-index:4;border-top:2px dashed var(--chalk-2);padding-top:8px}
+.bstrip .sl{font:400 clamp(34px,10vw,52px)/1 var(--font);color:#FFF6D0;background:rgba(244,211,107,.16);border-radius:10px;padding:4px 10px 8px;box-shadow:0 0 0 2px rgba(244,211,107,.6)}
+.bstrip .sl.pop{animation:slpop .45s cubic-bezier(.3,1.4,.5,1)}
+@keyframes slpop{from{transform:scale(.2) translateY(-30px);opacity:0}}
+.bpic{position:absolute;inset:44px 10px 10px;z-index:5;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;background:rgba(20,32,26,.72);border-radius:10px;animation:picin .35s cubic-bezier(.3,1.3,.5,1)}
+.bpic img,.bpic video{max-width:94%;max-height:calc(100% - 8px);border-radius:8px;border:4px solid #F1ECDC;box-shadow:0 10px 30px rgba(0,0,0,.5);background:#000;object-fit:contain}
+.bpic.clip video{max-height:calc(100% - 56px)}
+.bpic .clipplay{position:absolute;top:40%;left:50%;transform:translate(-50%,-50%);font:700 20px var(--font);border:0;border-radius:999px;padding:14px 22px;background:var(--chalk-hi);color:#3A2400}
+.bpic .clipdone{background:rgba(255,255,255,.9)}
+@keyframes picin{from{transform:scale(.6);opacity:0}}
+.penpad{position:absolute;inset:0;z-index:6;touch-action:none;cursor:crosshair}
+.board.pening{outline:3px dashed var(--chalk-hi);outline-offset:-3px}
+.vbars{position:absolute;top:14px;right:14px;display:flex;gap:3px;align-items:center;height:22px;z-index:2}
+.vbars i{width:4px;height:22px;border-radius:2px;background:var(--chalk-hi);transform:scaleY(.12);transform-origin:50% 50%;opacity:.85}
+.board.turn .vbars{display:none}
+.crwrap{margin:12px 12px 4px}
+.crstage{position:relative;width:100%;border-radius:12px;overflow:hidden;background:#000;box-shadow:0 6px 20px rgba(0,0,0,.18)}
+.crcv{display:block;width:100%;aspect-ratio:16/9;touch-action:manipulation}
+.crplay{position:absolute;left:50%;top:44%;transform:translate(-50%,-50%);width:76px;height:76px;border-radius:50%;border:0;background:rgba(232,89,12,.92);color:#fff;display:grid;place-items:center;box-shadow:0 6px 20px rgba(0,0,0,.35)}
+.crbar{position:absolute;left:0;right:0;bottom:0;display:flex;align-items:center;gap:8px;padding:6px 8px;background:linear-gradient(transparent,rgba(0,0,0,.6));color:#fff}
+.crbtn{border:0;background:rgba(255,255,255,.18);color:#fff;width:34px;height:34px;border-radius:50%;display:grid;place-items:center;font-size:16px;flex:0 0 auto}
+.crtime{font:600 12px var(--font);font-variant-numeric:tabular-nums;white-space:nowrap}
+.crseek{flex:1;min-width:0;accent-color:#E8590C}
+.crclip{position:absolute;inset:0;z-index:3}
+.crclip .bpic{inset:0;border-radius:0}
+.crwrap.full{position:fixed;inset:0;z-index:90;background:#000;margin:0}
+.crwrap.full .crstage{position:absolute;left:50%;top:50%;border-radius:0;transform-origin:50% 50%}
 .turnhint{position:absolute;top:10px;right:14px;color:var(--chalk-hi);animation:bob .8s infinite alternate;z-index:2}
 @keyframes bob{to{transform:translateY(-6px)}}
 .big.turnbtn{animation:pulsebtn 1.1s infinite}
@@ -306,6 +338,37 @@ img{max-width:100%}
 .sfoot .help{text-align:center;max-width:46ch;margin:0}
 .srow{display:flex;align-items:center;justify-content:center;gap:14px;flex-wrap:wrap;width:100%}
 .srow .recind{flex:0 0 auto}
+.full.studio .chip,.livetools .chip{background:var(--paper-2);color:var(--ink);border:1px solid var(--line)}
+.tpick{display:flex;flex-direction:column;gap:8px;width:100%}
+.tmoods{display:flex;gap:8px;justify-content:center;align-items:center}
+.tmoods .help{margin:0 4px 0 0;font-size:13px}
+.swatch.big{width:34px;height:34px;border-width:4px}
+.chip.on,.full.studio .chip.on{background:var(--blue);color:#fff;border-color:var(--blue)}
+.emotes{display:flex;gap:4px;overflow-x:auto;width:100%;scrollbar-width:none}
+.emote{flex:1 0 44px;display:flex;flex-direction:column;align-items:center;border:0;background:var(--paper-2);border-radius:10px;padding:4px 2px;font-size:20px;line-height:1.1;color:var(--ink)}
+.emote small{font:600 10px var(--font)}
+.emote:active{transform:scale(.92)}
+.livetools{margin:10px 12px 0;display:flex;flex-direction:column;gap:8px}
+.tools{display:flex;gap:6px;overflow-x:auto;width:100%;padding:2px 0;scrollbar-width:none;justify-content:flex-start}
+.tools::-webkit-scrollbar{display:none}
+.tool{flex:1 0 54px;display:flex;flex-direction:column;align-items:center;gap:2px;min-width:54px;padding:6px 3px;border-radius:12px;border:1.5px solid var(--line);background:var(--paper);color:var(--ink);font:700 11px var(--font);white-space:nowrap}
+.tool span{font-size:20px;line-height:1}
+.tool.on{border-color:var(--blue);background:var(--blue-soft);color:var(--blue)}
+.subbar{display:flex;align-items:center;gap:8px;flex-wrap:wrap;justify-content:center;width:100%}
+.subbar .help{margin:0;font-size:13px}
+.subbar .btn small{font-weight:400;margin-left:6px;opacity:.8}
+.swatch{width:30px;height:30px;border-radius:50%;border:2px solid var(--line)}
+.swatch.on{box-shadow:0 0 0 3px var(--blue)}
+.mtray{display:flex;gap:8px;overflow-x:auto;width:100%;padding:2px 0;scrollbar-width:none}
+.mthumb{flex:0 0 auto;position:relative;width:74px;height:56px;border-radius:10px;border:1.5px solid var(--line);background:var(--paper-2);padding:0;overflow:hidden;display:grid;place-items:center;color:var(--ink-2)}
+.mthumb img,.mthumb video{width:100%;height:100%;object-fit:cover;pointer-events:none}
+.mthumb.on{box-shadow:0 0 0 3px var(--chalk-hi)}
+.mthumb .mbadge{position:absolute;left:4px;bottom:3px;background:rgba(0,0,0,.6);color:#fff;font:700 11px var(--font);border-radius:6px;padding:1px 5px}
+.mthumb.madd{border-style:dashed;display:flex;flex-direction:column;gap:0;width:92px}
+.mthumb.madd span{font-size:22px;line-height:1}.mthumb.madd small{font:600 11px var(--font)}
+.mbusy{font:700 13px var(--font)}
+.peek{position:fixed;inset:0;z-index:80;background:rgba(0,0,0,.85);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;color:#fff}
+.peek img{max-width:94%;max-height:80%;border-radius:8px}
 .armnote{margin:0;color:var(--blue);font-weight:700;text-align:center}
 .update{margin:12px 12px 0;padding:14px;border-radius:14px;background:var(--card);box-shadow:inset 0 0 0 2px var(--blue),var(--lift);display:flex;flex-direction:column;gap:10px}
 .update p{margin:0}
@@ -863,7 +926,12 @@ grant execute on function public.push_gone(text) to authenticated;
 -- games only when the teacher allows them
 alter table public.students add column if not exists games boolean not null default false;
 
-create or replace function public.schema_version() returns int language sql immutable as $$ select 6 $$;
+-- Videos on the board (version 7): the class's file store accepts short video clips too.
+update storage.buckets set file_size_limit = 52428800,
+  allowed_mime_types = array['audio/webm', 'audio/mp4', 'audio/mpeg', 'audio/ogg', 'audio/wav', 'audio/aac', 'image/jpeg', 'image/png', 'image/webp', 'image/gif', 'video/mp4', 'video/webm', 'video/quicktime']
+  where id = 'class';
+
+create or replace function public.schema_version() returns int language sql immutable as $$ select 7 $$;
 grant execute on function public.schema_version() to anon, authenticated;
 notify pgrst, 'reload schema';
 </script>
@@ -1076,8 +1144,8 @@ grant update (seen) on public.msgs to authenticated;
 
 -- Storage for voice notes, recordings and photos (file names are long random codes).
 insert into storage.buckets (id, name, public, file_size_limit, allowed_mime_types)
-values ('class', 'class', true, 26214400,
-  array['audio/webm', 'audio/mp4', 'audio/mpeg', 'audio/ogg', 'audio/wav', 'audio/aac', 'image/jpeg', 'image/png', 'image/webp', 'image/gif'])
+values ('class', 'class', true, 52428800,
+  array['audio/webm', 'audio/mp4', 'audio/mpeg', 'audio/ogg', 'audio/wav', 'audio/aac', 'image/jpeg', 'image/png', 'image/webp', 'image/gif', 'video/mp4', 'video/webm', 'video/quicktime'])
 on conflict (id) do update set public = excluded.public, file_size_limit = excluded.file_size_limit,
   allowed_mime_types = excluded.allowed_mime_types;
 
@@ -1244,7 +1312,7 @@ grant execute on function public.push_gone(text) to authenticated;
 -- games only when the teacher allows them
 alter table public.students add column if not exists games boolean not null default false;
 
-create or replace function public.schema_version() returns int language sql immutable as $$ select 6 $$;
+create or replace function public.schema_version() returns int language sql immutable as $$ select 7 $$;
 grant execute on function public.schema_version() to anon, authenticated;
 notify pgrst, 'reload schema';
 </script>
@@ -1522,7 +1590,7 @@ notify pgrst, 'reload schema';
     assets: {
       async upload(blob, opts) {
         const type = (opts && opts.type) || blob.type;
-        const ext = type.indexOf("webm") >= 0 ? "webm" : type.indexOf("mp4") >= 0 ? "m4a" : type === "image/png" ? "png" : type === "image/webp" ? "webp" : type === "image/gif" ? "gif" : "jpg";
+        const ext = type === "video/mp4" ? "mp4" : type === "video/quicktime" ? "mov" : type.indexOf("webm") >= 0 ? "webm" : type.indexOf("mp4") >= 0 ? "m4a" : type === "image/png" ? "png" : type === "image/webp" ? "webp" : type === "image/gif" ? "gif" : "jpg";
         const path = new Date().toISOString().slice(0, 7) + "/" + newId() + "." + ext;
         await q(sb.storage.from("class").upload(path, blob, { contentType: type, cacheControl: "31536000", upsert: false }));
         return { id: path };
@@ -1681,7 +1749,7 @@ notify pgrst, 'reload schema';
     try { const v = await sb.rpc("schema_version"); ver = v.error ? 0 : Number(v.data) || 0; } catch (e) {}   // every phone: students need it for notifications
     let hasExpl = false;
     try { const x = await sb.from("explains").select("id").limit(1); hasExpl = !x.error; } catch (e) {}
-    store.set({ hasLive, hasExpl, schemaVer: ver, needsUpdate: !!who.teacher && (!hasLive || !hasCues || ver < 6) });
+    store.set({ hasLive, hasExpl, schemaVer: ver, needsUpdate: !!who.teacher && (!hasLive || !hasCues || ver < 7) });
     await loadAll();
     subscribe();
     store.set({ phase: "ready" });
@@ -1868,7 +1936,7 @@ notify pgrst, 'reload schema';
         if (!a || player.key !== key) return;
         const now = a.currentTime || 0, prev = prevRef.current;
         let p = null;
-        for (const c of cues) { if (c.t > now) break; p = c.k === "p" ? c : null; }
+        for (const c of cues) { if (c.t > now) break; if (c.k === "p") p = c; else if (c.k === "w") p = null; }
         const show = p && now - p.t < 8 ? p : null;
         if (show !== cur) { cur = show; setActive(show); }
         prevRef.current = now;
@@ -1886,6 +1954,790 @@ notify pgrst, 'reload schema';
       return () => cancelAnimationFrame(raf);
     }, [running, key, cues]);
     return active;
+  }
+
+  /* ================= a livelier board: circles, underlines, chalk drawing, a word built from the board, pictures, clips =================
+     Everything the teacher does is a cue with a time, so it replays with the voice: on the student's phone and in the saved video. */
+  const FX_KINDS = ["o", "ox", "sa", "sx", "img", "imgx", "vid"];
+  function stageAt(cues, now) {
+    let marks = [], strip = [], img = null;
+    for (const c of cues || []) {
+      if (c.t > now) break;
+      if (c.k === "o") { marks.push(c); if (marks.length > 12) marks.shift(); }
+      else if (c.k === "ox") marks = [];
+      else if (c.k === "sa") { strip.push(c); if (strip.length > 16) strip.shift(); }
+      else if (c.k === "sx") strip = [];
+      else if (c.k === "img") img = c;
+      else if (c.k === "imgx") img = null;
+    }
+    return { marks, strip, img };
+  }
+  const stageSig = s => (s ? s.marks.map(c => c.id).join(",") + "|" + s.strip.map(c => c.id).join(",") + "|" + (s.img ? s.img.id : "") : "");
+  const hasStrip = cues => (cues || []).some(c => c.k === "sa");
+  const fxOnly = cues => (cues || []).filter(c => c.t >= 0 && FX_KINDS.includes(c.k));
+  const hashN = str => { let h = 7; for (const ch of String(str || "")) h = (h * 31 + ch.charCodeAt(0)) % 1000; return h / 1000; };
+  // A mark's shape around its tile, as points. b is the tile's box: on the phone's board or in the video.
+  function markPts(c, b) {
+    const P = [];
+    if (c.s === "circle") {
+      const cx = b.x + b.w / 2, cy = b.y + b.h / 2, rx = b.w / 2 + Math.max(10, b.h * 0.2), ry = b.h / 2 + Math.max(6, b.h * 0.12), sd = hashN(c.id) * 6;
+      for (let k = 0; k <= 44; k++) { const a = -2 + (k / 44) * (2 * Math.PI + 0.5), w = 1 + 0.04 * Math.sin(k * 0.7 + sd); P.push([cx + Math.cos(a) * rx * w, cy + Math.sin(a) * ry * w - k * b.h * 0.0025]); }
+    } else if (c.s === "under") {
+      for (let k = 0; k <= 14; k++) P.push([b.x - 4 + (b.w + 8) * k / 14, b.y + b.h + 1 + Math.sin(k / 14 * Math.PI) * 3 - k * 0.15]);
+    } else if (c.pts) {
+      for (let i = 0; i + 1 < c.pts.length; i += 2) P.push([b.x + c.pts[i] * b.w, b.y + c.pts[i + 1] * b.h]);
+    }
+    return P;
+  }
+  const markDur = c => (c.s === "pen" ? Math.max(0.25, Math.min(3, c.dur || 0.6)) : c.s === "circle" ? 0.6 : 0.35);
+  const markCol = c => c.col || (c.s === "under" ? "#8FD0FF" : c.s === "pen" ? "#F1ECDC" : "#FFE27A");
+  const ptsPath = P => P.map((q, i) => (i ? "L" : "M") + q[0].toFixed(1) + " " + q[1].toFixed(1)).join("");
+
+  // How loud the voice is, every 1/20 s: makes the little voice bars move with the real voice.
+  const lvCache = new Map();
+  function levelsOf(ab) {
+    const d = ab.getChannelData(0), step = Math.max(1, Math.round(ab.sampleRate * 0.05)), n = Math.ceil(d.length / step), out = new Float32Array(n);
+    for (let i = 0; i < n; i++) { let sum = 0, m = 0; const e = Math.min(d.length, (i + 1) * step); for (let k = i * step; k < e; k += 4) { sum += d[k] * d[k]; m++; } out[i] = Math.sqrt(sum / (m || 1)); }
+    const srt = Array.from(out).sort((a, b) => a - b), ref = srt[Math.floor(n * 0.95)] || 1e-4;
+    for (let i = 0; i < n; i++) out[i] = Math.min(1, out[i] / (ref || 1e-4));
+    return out;
+  }
+  function voiceLevels(src, secs) {
+    if (!src || (secs && secs > 1800)) return Promise.resolve(null);
+    if (!lvCache.has(src)) lvCache.set(src, (async () => {
+      const raw = await fetch(src).then(r => r.arrayBuffer());
+      let ac; try { ac = new (window.AudioContext || window.webkitAudioContext)({ sampleRate: 16000 }); } catch (e) { ac = new (window.AudioContext || window.webkitAudioContext)(); }
+      const ab = await new Promise((res, rej) => ac.decodeAudioData(raw, res, rej));
+      try { ac.close(); } catch (e) {}
+      return levelsOf(ab);
+    })().catch(() => null));
+    return lvCache.get(src);
+  }
+  function VoiceBars({ src, secs, k }) {
+    const ref = useRef(null);
+    useEffect(() => {
+      let raf = 0, lv = null, dead = false;
+      voiceLevels(src, secs).then(v => { lv = v; });
+      const tick = () => {
+        raf = requestAnimationFrame(tick);
+        const el = ref.current, a = player.a; if (!el || dead) return;
+        const on = a && player.key === k && !a.paused, t = on ? a.currentTime : 0;
+        Array.from(el.children).forEach((b, i) => {
+          let v = 0.12;
+          if (on) v = lv ? 0.15 + 0.85 * (lv[Math.max(0, Math.floor(t * 20) - 2 + i)] || 0) : 0.3 + 0.5 * Math.abs(Math.sin(t * 9 + i * 1.7));
+          b.style.transform = "scaleY(" + v.toFixed(2) + ")";
+        });
+      };
+      raf = requestAnimationFrame(tick);
+      return () => { dead = true; cancelAnimationFrame(raf); };
+    }, [src, k]);
+    return html`<div class="vbars" ref=${ref} aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>`;
+  }
+
+  // Follows an explanation as it plays: what's drawn on the board now, and the clips (the voice waits while one plays).
+  function useStageSync(key, cues, pst) {
+    const [stage, setStage] = useState(null);
+    const [clip, setClip] = useState(null);
+    const prevRef = useRef(-1), sigRef = useRef("");
+    const fx = useMemo(() => fxOnly(cues).sort((a, b) => a.t - b.t), [cues]);
+    const running = pst.key === key && pst.playing;
+    useEffect(() => { sigRef.current = ""; prevRef.current = -1; setStage(null); setClip(null); }, [key]);
+    useEffect(() => { if (pst.key !== key && !clip) { sigRef.current = ""; prevRef.current = -1; setStage(null); } }, [pst.key]);
+    useEffect(() => {
+      if (!running || !fx.length) return;
+      let raf = 0;
+      const tick = () => {
+        raf = requestAnimationFrame(tick);
+        const a = player.a;
+        if (!a || player.key !== key) return;
+        const now = a.currentTime || 0, prev = prevRef.current;
+        prevRef.current = now;
+        const st = stageAt(fx, now), g = stageSig(st);
+        if (g !== sigRef.current) { sigRef.current = g; setStage(st); }
+        if (!a.paused && prev >= 0 && now > prev && now - prev < 1.5) {
+          for (const c of fx) if (c.k === "vid" && c.t > prev && c.t <= now) { a.pause(); setClip(c); break; }
+        }
+      };
+      raf = requestAnimationFrame(tick);
+      return () => cancelAnimationFrame(raf);
+    }, [running, key, fx]);
+    const endClip = () => { setClip(null); if (player.key === key && player.a && player.a.paused) player.a.play().catch(() => {}); };
+    return { stage, clip, endClip };
+  }
+
+  /* ================= the classroom: a chalkboard, a desk, books and plants, and the teacher =================
+     One picture, drawn the same way on the phone and in the saved video. 1280 × 720 steps. */
+  const CR_W = 1280, CR_H = 720, CR_DESK = 618;
+  const CR_BOARD = { x: 372, y: 26, w: 880, h: 548 };              // the whiteboard (outside of the frame)
+  const CR_TILES = { x: 410, y: 62, w: 560, h: 480 };              // where the lesson's letters and words go
+  const CR_PANEL = { x: 1000, y: 62, w: 226, h: 480 };             // the right-hand panel: the topic, a built word
+  const CR_HOME = 222;                                              // where the teacher usually stands
+  const CR_OUTFITS = { white: { robe: "#F3F0E8", robe2: "#D8D2C4", trim: "#1F3A68", cap: "#F6F4EE", cap2: "#1F3A68" }, grey: { robe: "#C9CCCF", robe2: "#A7ABB0", trim: "#2B2F36", cap: "#F2F2F0", cap2: "#5A6370" }, navy: { robe: "#2E4566", robe2: "#22354F", trim: "#E8E1CF", cap: "#F6F4EE", cap2: "#2E4566" } };
+  const CR_MOODS = { calm: { name: "Calm", amp: 0.5, gest: 0.4, flair: 0 }, cheerful: { name: "Cheerful", amp: 1, gest: 1, flair: 0.5 }, lively: { name: "Lively", amp: 1.45, gest: 1.4, flair: 1 } };
+  const CR_EMOTES = [["nod", "🙂", "Nod"], ["thumbs", "👍", "Great"], ["clap", "👏", "Clap"], ["wave", "👋", "Wave"], ["think", "🤔", "Think"], ["wow", "😮", "Wow"], ["laugh", "😄", "Laugh"]];
+  const crEase = x => { x = Math.max(0, Math.min(1, x)); return x < 0.5 ? 2 * x * x : 1 - Math.pow(-2 * x + 2, 2) / 2; };
+  const crLerp = (a, b, k) => a + (b - a) * k;
+  const crLerp2 = (a, b, k) => [crLerp(a[0], b[0], k), crLerp(a[1], b[1], k)];
+  const crHash = n => { const x = Math.sin(n * 127.1 + 311.7) * 43758.5453; return x - Math.floor(x); };
+  const crRR = (c, x, y, w, h, r) => { c.beginPath(); if (c.roundRect) c.roundRect(x, y, w, h, r); else c.rect(x, y, w, h); };
+  function crFit(c, text, maxW, size, weight, fam) { let s = size; for (; s > 10; s -= 1) { c.font = (weight || 400) + " " + s + "px " + (fam || "Andika, sans-serif"); if (c.measureText(text).width <= maxW) break; } return s; }
+  function crWrap(c, text, maxW) { const out = []; let line = ""; for (const w of String(text || "").split(/\s+/).filter(Boolean)) { const tr = line ? line + " " + w : w; if (c.measureText(tr).width > maxW && line) { out.push(line); line = w; } else line = tr; } if (line) out.push(line); return out; }
+
+  // ---------- the room (drawn once, kept as a picture) ----------
+  function crBook(c, x, y, w, h, col, band, label, labCol) {
+    const g = c.createLinearGradient(x, y, x, y + h); g.addColorStop(0, col); g.addColorStop(1, crShade(col, 0.78));
+    crRR(c, x, y, w, h, 4); c.fillStyle = g; c.fill();
+    c.fillStyle = "#F4EEDF"; c.fillRect(x + w - 10, y + 4, 8, h - 8);   // the pages
+    c.strokeStyle = "rgba(0,0,0,.08)"; c.lineWidth = 1; for (let i = 1; i < 4; i++) { c.beginPath(); c.moveTo(x + w - 10, y + 4 + i * (h - 8) / 4); c.lineTo(x + w - 2, y + 4 + i * (h - 8) / 4); c.stroke(); }
+    if (band) { c.fillStyle = band; c.fillRect(x + 14, y + 3, 4, h - 6); c.fillRect(x + w - 26, y + 3, 4, h - 6); }
+    if (label) { c.fillStyle = labCol || "#F4E7C8"; c.font = "600 " + Math.round(h * 0.42) + "px Andika, sans-serif"; c.textAlign = "center"; c.textBaseline = "middle"; c.fillText(label, x + w / 2 - 6, y + h / 2 + 1); }
+  }
+  function crShade(hex, k) { const n = parseInt(hex.slice(1), 16); const f = v => Math.round(Math.max(0, Math.min(255, v * k))); return "rgb(" + f(n >> 16) + "," + f((n >> 8) & 255) + "," + f(n & 255) + ")"; }
+  function crLeaf(c, x, y, len, ang, col) {
+    c.save(); c.translate(x, y); c.rotate(ang);
+    const g = c.createLinearGradient(0, 0, len, 0); g.addColorStop(0, crShade(col, 0.8)); g.addColorStop(1, col);
+    c.fillStyle = g; c.beginPath(); c.moveTo(0, 0); c.quadraticCurveTo(len * 0.5, -len * 0.32, len, 0); c.quadraticCurveTo(len * 0.5, len * 0.32, 0, 0); c.fill();
+    c.strokeStyle = "rgba(255,255,255,.25)"; c.lineWidth = 1; c.beginPath(); c.moveTo(2, 0); c.lineTo(len * 0.9, 0); c.stroke();
+    c.restore();
+  }
+  function crPlant(c, x, y, sc, sway, potCol) {
+    // pot
+    const pw = 54 * sc, ph = 46 * sc;
+    const g = c.createLinearGradient(x - pw / 2, 0, x + pw / 2, 0); g.addColorStop(0, crShade(potCol, 0.8)); g.addColorStop(0.5, potCol); g.addColorStop(1, crShade(potCol, 0.75));
+    c.fillStyle = g; c.beginPath(); c.moveTo(x - pw / 2, y - ph); c.lineTo(x + pw / 2, y - ph); c.lineTo(x + pw * 0.38, y); c.lineTo(x - pw * 0.38, y); c.closePath(); c.fill();
+    c.fillStyle = crShade(potCol, 1.08); c.fillRect(x - pw / 2 - 3, y - ph - 6 * sc, pw + 6, 9 * sc);
+    // leaves
+    const n = 9;
+    for (let i = 0; i < n; i++) {
+      const a = -Math.PI / 2 + (i - (n - 1) / 2) * 0.32 + Math.sin(sway + i) * 0.04;
+      crLeaf(c, x + (i - 4) * 2 * sc, y - ph - 2 * sc, (46 + crHash(i) * 26) * sc, a, i % 2 ? "#4E8B3A" : "#3E7A30");
+    }
+  }
+  function crGlobe(c, x, y, r) {
+    c.strokeStyle = "#8C6A2E"; c.lineWidth = 6; c.beginPath(); c.arc(x, y, r + 10, Math.PI * 0.7, Math.PI * 1.9); c.stroke();
+    c.fillStyle = "#6B4A20"; c.fillRect(x - 6, y + r + 4, 12, 26); c.beginPath(); c.ellipse(x, y + r + 34, 34, 8, 0, 0, 7); c.fill();
+    const g = c.createRadialGradient(x - r * 0.4, y - r * 0.4, r * 0.1, x, y, r); g.addColorStop(0, "#7FC3F0"); g.addColorStop(1, "#2B6EA8");
+    c.fillStyle = g; c.beginPath(); c.arc(x, y, r, 0, 7); c.fill();
+    c.save(); c.beginPath(); c.arc(x, y, r, 0, 7); c.clip();
+    c.fillStyle = "#6FA85A";
+    const blobs = [[-0.4, -0.35, 0.35, 0.22], [-0.25, 0.15, 0.22, 0.34], [0.3, -0.25, 0.3, 0.2], [0.35, 0.25, 0.18, 0.28], [0.05, -0.6, 0.25, 0.1]];
+    for (const [bx, by, rx, ry] of blobs) { c.beginPath(); c.ellipse(x + bx * r, y + by * r, rx * r, ry * r, 0.4, 0, 7); c.fill(); }
+    c.restore();
+    c.fillStyle = "rgba(255,255,255,.25)"; c.beginPath(); c.ellipse(x - r * 0.35, y - r * 0.4, r * 0.3, r * 0.15, -0.6, 0, 7); c.fill();
+  }
+  function crRoom(lesson, number) {
+    const cv = document.createElement("canvas"); cv.width = CR_W; cv.height = CR_H;
+    const c = cv.getContext("2d");
+    // wall
+    let g = c.createLinearGradient(0, 0, 0, CR_H); g.addColorStop(0, "#E9DDC8"); g.addColorStop(1, "#D3C2A4"); c.fillStyle = g; c.fillRect(0, 0, CR_W, CR_H);
+    g = c.createRadialGradient(1180, 60, 20, 1180, 60, 520); g.addColorStop(0, "rgba(255,226,160,.35)"); g.addColorStop(1, "rgba(255,226,160,0)"); c.fillStyle = g; c.fillRect(0, 0, CR_W, CR_H);
+    // bookshelf on the left
+    c.fillStyle = "#7A4E2A"; c.fillRect(0, 150, 150, 480);
+    c.fillStyle = "#5E3B1E"; c.fillRect(10, 160, 130, 470);
+    const shelfCols = ["#2F5D8C", "#8C3B33", "#3E6B45", "#C49A3A", "#4A4F7A", "#A0522D", "#2E6E6E", "#7A5C9E"];
+    for (let sh = 0; sh < 4; sh++) {
+      const y0 = 172 + sh * 112;
+      c.fillStyle = "#8A5A32"; c.fillRect(6, y0 + 96, 138, 10);
+      let x = 14;
+      for (let k = 0; x < 132; k++) {
+        const w = 13 + crHash(sh * 9 + k) * 10, h = 64 + crHash(sh * 7 + k * 3) * 28, col = shelfCols[(sh * 3 + k) % shelfCols.length];
+        if (crHash(sh * 5 + k * 11) < 0.12 && x < 110) { c.save(); c.translate(x, y0 + 96); c.rotate(-0.2); c.fillStyle = col; c.fillRect(0, -h, w, h); c.restore(); x += w + 12; continue; }
+        const gg = c.createLinearGradient(x, 0, x + w, 0); gg.addColorStop(0, crShade(col, 0.85)); gg.addColorStop(0.5, col); gg.addColorStop(1, crShade(col, 0.7));
+        c.fillStyle = gg; c.fillRect(x, y0 + 96 - h, w, h);
+        c.fillStyle = "rgba(240,210,140,.55)"; c.fillRect(x + 2, y0 + 96 - h + 8, w - 4, 3); c.fillRect(x + 2, y0 + 96 - 14, w - 4, 3);
+        x += w + 1.5;
+      }
+    }
+    // a trailing plant on top of the shelf
+    for (let i = 0; i < 5; i++) { const vx = 8 + i * 9; c.strokeStyle = "#3F7A33"; c.lineWidth = 2; c.beginPath(); c.moveTo(vx + 10, 152); c.quadraticCurveTo(vx - 6, 230 + i * 12, vx + 4, 300 + crHash(i) * 120); c.stroke(); for (let j = 0; j < 8; j++) { const ly = 162 + j * 22 + i * 4; if (ly > 300 + crHash(i) * 120) break; crLeaf(c, vx + Math.sin(j + i) * 6, ly, 13, (j % 2 ? 0.6 : 2.5), j % 2 ? "#4E8B3A" : "#5C9A44"); } }
+    // the whiteboard: frame, surface, a soft shine
+    const B = CR_BOARD;
+    c.fillStyle = "rgba(0,0,0,.18)"; crRR(c, B.x + 6, B.y + 10, B.w, B.h, 10); c.fill();
+    g = c.createLinearGradient(B.x, B.y, B.x, B.y + B.h); g.addColorStop(0, "#9A6A3B"); g.addColorStop(1, "#7A4F2A"); c.fillStyle = g; crRR(c, B.x, B.y, B.w, B.h, 10); c.fill();
+    // a green chalkboard, with the faint smudges of earlier lessons
+    g = c.createLinearGradient(B.x, B.y, B.x, B.y + B.h); g.addColorStop(0, "#2D4C3C"); g.addColorStop(1, "#22392D"); c.fillStyle = g; c.fillRect(B.x + 14, B.y + 14, B.w - 28, B.h - 28);
+    c.save(); c.beginPath(); c.rect(B.x + 14, B.y + 14, B.w - 28, B.h - 28); c.clip();
+    for (let i = 0; i < 900; i++) { const x = B.x + 14 + crHash(i * 3.1) * (B.w - 28), y = B.y + 14 + crHash(i * 7.7) * (B.h - 28); c.fillStyle = "rgba(255,255,255," + (0.012 + crHash(i) * 0.025).toFixed(3) + ")"; c.fillRect(x, y, 2 + crHash(i * 5) * 3, 1 + crHash(i * 9) * 2); }
+    for (let i = 0; i < 7; i++) { const x = B.x + 60 + crHash(i * 13) * (B.w - 200), y = B.y + 40 + crHash(i * 17) * (B.h - 140); const gg = c.createRadialGradient(x, y, 4, x, y, 90 + crHash(i) * 70); gg.addColorStop(0, "rgba(255,255,255,.045)"); gg.addColorStop(1, "rgba(255,255,255,0)"); c.fillStyle = gg; c.fillRect(x - 170, y - 170, 340, 340); }
+    g = c.createRadialGradient(B.x + B.w / 2, B.y + B.h / 2, B.h * 0.3, B.x + B.w / 2, B.y + B.h / 2, B.w * 0.62); g.addColorStop(0, "rgba(0,0,0,0)"); g.addColorStop(1, "rgba(0,0,0,.22)"); c.fillStyle = g; c.fillRect(B.x, B.y, B.w, B.h);
+    c.restore();
+    // the divider and the marker tray
+    c.strokeStyle = "rgba(241,236,220,.22)"; c.lineWidth = 2; c.beginPath(); c.moveTo(CR_PANEL.x - 14, B.y + 50); c.lineTo(CR_PANEL.x - 14, B.y + B.h - 50); c.stroke();
+    // the chalk ledge: chalk sticks and a duster
+    c.fillStyle = "#6E4526"; crRR(c, B.x + 20, B.y + B.h - 6, B.w - 40, 16, 4); c.fill(); c.fillStyle = "rgba(255,255,255,.12)"; c.fillRect(B.x + 20, B.y + B.h - 6, B.w - 40, 3);
+    [["#F4F1E8", 160], ["#FFE27A", 190], ["#9FD3FF", 216], ["#FFB3B3", 244]].forEach(([col, x]) => { c.fillStyle = col; crRR(c, B.x + x, B.y + B.h - 13, 26 - (x % 3) * 3, 8, 3); c.fill(); });
+    c.fillStyle = "#5B3A22"; crRR(c, B.x + B.w - 210, B.y + B.h - 28, 84, 20, 5); c.fill(); c.fillStyle = "#D9D3C4"; c.fillRect(B.x + B.w - 206, B.y + B.h - 12, 76, 6);
+    // the lesson sign
+    const sx = 26, sy = 26, sw = 316, shh = 104;
+    c.fillStyle = "rgba(0,0,0,.18)"; crRR(c, sx + 5, sy + 7, sw, shh, 12); c.fill();
+    g = c.createLinearGradient(0, sy, 0, sy + shh); g.addColorStop(0, "#9A6A3B"); g.addColorStop(1, "#7A4F2A"); c.fillStyle = g; crRR(c, sx, sy, sw, shh, 12); c.fill();
+    c.fillStyle = "#F3E7CF"; crRR(c, sx + 8, sy + 8, sw - 16, shh - 16, 8); c.fill();
+    // an open book on the sign
+    c.save(); c.translate(sx + 50, sy + 56);
+    c.fillStyle = "#8A5A32"; c.beginPath(); c.moveTo(-28, -16); c.quadraticCurveTo(0, -24, 0, -14); c.quadraticCurveTo(0, -24, 28, -16); c.lineTo(28, 20); c.quadraticCurveTo(0, 12, 0, 22); c.quadraticCurveTo(0, 12, -28, 20); c.closePath(); c.fill();
+    c.fillStyle = "#FBF4E4"; c.beginPath(); c.moveTo(-24, -14); c.quadraticCurveTo(-8, -19, -2, -12); c.lineTo(-2, 16); c.quadraticCurveTo(-8, 10, -24, 15); c.closePath(); c.fill(); c.beginPath(); c.moveTo(24, -14); c.quadraticCurveTo(8, -19, 2, -12); c.lineTo(2, 16); c.quadraticCurveTo(8, 10, 24, 15); c.closePath(); c.fill();
+    c.strokeStyle = "rgba(0,0,0,.18)"; c.lineWidth = 1.2; for (let i = 0; i < 4; i++) { c.beginPath(); c.moveTo(-20, -6 + i * 6); c.lineTo(-6, -7 + i * 6); c.moveTo(6, -7 + i * 6); c.lineTo(20, -6 + i * 6); c.stroke(); }
+    c.restore();
+    c.fillStyle = "#2A2118"; c.textAlign = "left"; c.textBaseline = "alphabetic";
+    c.font = "400 26px Andika, sans-serif"; c.fillText("Lesson " + number, sx + 96, sy + 44);
+    const title = lesson.title || "Reading";
+    crFit(c, title, sw - 112, 34, 700); c.fillText(title, sx + 96, sy + 82);
+    return cv;
+  }
+  // the desk and the things on it sit in FRONT of the teacher (kept as a picture too; only the plant moves)
+  function crFront() {
+    const cv = document.createElement("canvas"); cv.width = CR_W; cv.height = CR_H;
+    const c = cv.getContext("2d"), D = CR_DESK;
+    let g0 = c.createLinearGradient(0, D, 0, CR_H); g0.addColorStop(0, "#C98A4B"); g0.addColorStop(0.12, "#B27238"); g0.addColorStop(1, "#8A5226"); c.fillStyle = g0; c.fillRect(0, D, CR_W, CR_H - D);
+    c.fillStyle = "#DDA25F"; c.fillRect(0, D, CR_W, 5);
+    c.strokeStyle = "rgba(90,50,20,.18)"; c.lineWidth = 1.5; for (let i = 0; i < 9; i++) { c.beginPath(); c.moveTo(0, D + 16 + i * 12); c.bezierCurveTo(300, D + 10 + i * 12, 900, D + 22 + i * 12, CR_W, D + 14 + i * 12); c.stroke(); }
+    // a stack of books, left
+    crBook(c, 18, D - 4, 260, 40, "#7A4A2A", "#E0B062", "Vocabulary");
+    crBook(c, 30, D - 40, 240, 38, "#2F6B4A", "#E0B062", "Spelling");
+    crBook(c, 22, D - 76, 230, 38, "#2C4E7E", "#E0B062", "Reading");
+    // a pen pot
+    const px = 300, pw = 70, ph = 76;
+    for (let i = 0; i < 5; i++) { const cols = ["#C62828", "#1E4E9C", "#F2F2F2", "#2B2B2B", "#E3A21A"]; c.save(); c.translate(px + 14 + i * 11, D - ph + 6); c.rotate(-0.18 + i * 0.09); c.fillStyle = cols[i]; crRR(c, -3.5, -50, 7, 56, 3); c.fill(); c.fillStyle = "#2B2B2B"; c.fillRect(-3.5, -50, 7, 8); c.restore(); }
+    let g = c.createLinearGradient(px, 0, px + pw, 0); g.addColorStop(0, "#9A6A3B"); g.addColorStop(0.5, "#C08A52"); g.addColorStop(1, "#8A5A32"); c.fillStyle = g; crRR(c, px, D - ph + 4, pw, ph, 6); c.fill();
+    c.fillStyle = "rgba(255,255,255,.12)"; c.fillRect(px + 8, D - ph + 10, 6, ph - 16);
+    // the open book in the middle
+    c.save(); c.translate(690, D + 30);
+    c.fillStyle = "rgba(0,0,0,.18)"; c.beginPath(); c.ellipse(0, 40, 230, 22, 0, 0, 7); c.fill();
+    c.fillStyle = "#2C4E7E"; c.beginPath(); c.moveTo(-220, 30); c.lineTo(220, 30); c.lineTo(212, 44); c.lineTo(-212, 44); c.fill();
+    for (const sd of [-1, 1]) {
+      g = c.createLinearGradient(0, 0, sd * 210, 0); g.addColorStop(0, "#E6DECB"); g.addColorStop(0.15, "#FBF7EC"); g.addColorStop(1, "#F4EEDF");
+      c.fillStyle = g; c.beginPath(); c.moveTo(0, -24); c.quadraticCurveTo(sd * 100, -44, sd * 212, -30); c.lineTo(sd * 216, 32); c.quadraticCurveTo(sd * 100, 22, 0, 38); c.closePath(); c.fill();
+      c.strokeStyle = "rgba(60,80,120,.25)"; c.lineWidth = 1; for (let i = 0; i < 5; i++) { c.beginPath(); c.moveTo(sd * 24, -14 + i * 10); c.quadraticCurveTo(sd * 110, -28 + i * 11, sd * 196, -18 + i * 10); c.stroke(); }
+    }
+    c.fillStyle = "#2A3550"; c.font = "400 15px Andika, sans-serif"; c.textAlign = "center";
+    const L1 = "A B C D E F G", L2 = "H I J K L M N", L3 = "O P Q R S T U";
+    c.save(); c.rotate(-0.04); c.fillText(L1, -110, -16); c.fillText(L2, -110, -2); c.fillText(L3, -108, 12); c.restore();
+    c.restore();
+    // a blue book on the right, a plant, a globe
+    crBook(c, 960, D + 6, 220, 34, "#24447A", "#E0B062", null);
+    crGlobe(c, 1236, D - 92, 46);
+    return cv;
+  }
+
+  // ---------- the faceless teacher ----------
+  function crTeacher(c, P, outfit) {
+    const O = CR_OUTFITS[outfit] || CR_OUTFITS.white, s = P.s, skin = "#8A5A3C", skin2 = "#6E4630";
+    const W2L = (wx, wy) => [(wx - P.x) / s, (wy - P.base + P.hop - P.bob) / s];
+    c.save();
+    c.translate(P.x, P.base - P.hop + P.bob); c.scale(s, s); c.rotate(P.lean);
+    c.lineJoin = "round"; c.lineCap = "round";
+    const SH = { "-1": [-38, -120], "1": [38, -120] };
+    // the robe
+    const robe = () => { c.beginPath(); c.moveTo(-50, 40); c.bezierCurveTo(-50, -20, -50, -88, -46, -106); c.bezierCurveTo(-42, -124, -28, -130, -12, -132); c.lineTo(12, -132); c.bezierCurveTo(28, -130, 42, -124, 46, -106); c.bezierCurveTo(50, -88, 50, -20, 50, 40); c.closePath(); };
+    let g = c.createLinearGradient(-50, 0, 50, 0); g.addColorStop(0, O.robe2); g.addColorStop(0.35, O.robe); g.addColorStop(0.7, O.robe); g.addColorStop(1, O.robe2);
+    c.save(); c.shadowColor = "rgba(40,25,10,.28)"; c.shadowBlur = 18; c.shadowOffsetX = 10; robe(); c.fillStyle = g; c.fill(); c.restore();
+    c.save(); robe(); c.clip();
+    c.strokeStyle = "rgba(0,0,0,.07)"; c.lineWidth = 3; for (const fx of [-30, -14, 20, 34]) { c.beginPath(); c.moveTo(fx, -70); c.quadraticCurveTo(fx + 4, -10, fx - 2, 40); c.stroke(); }
+    c.restore();
+    // collar band and the placket
+    c.fillStyle = O.trim; c.beginPath(); c.moveTo(-14, -132); c.quadraticCurveTo(0, -122, 14, -132); c.lineTo(14, -126); c.quadraticCurveTo(0, -116, -14, -126); c.closePath(); c.fill();
+    c.fillRect(-4, -122, 8, 52);
+    c.fillStyle = "rgba(255,255,255,.35)"; for (let i = 0; i < 3; i++) { c.beginPath(); c.arc(0, -110 + i * 15, 1.6, 0, 7); c.fill(); }
+    // neck
+    c.fillStyle = skin2; c.fillRect(-9, -146, 18, 18);
+    // head: faceless, turned by where the ear, cap and beard sit
+    c.save(); c.translate(P.turn * 4, -170); c.rotate(P.tilt + P.nod * 0.12);
+    const tx = P.turn * 9;
+    g = c.createLinearGradient(-24, 0, 24, 0); g.addColorStop(0, crShade(skin, 0.86)); g.addColorStop(0.45 + P.turn * 0.15, skin); g.addColorStop(1, crShade(skin, 0.78));
+    c.fillStyle = g; c.beginPath(); c.moveTo(-22, -6); c.bezierCurveTo(-23, -30, 23, -30, 22, -6); c.bezierCurveTo(23, 14, 12, 28, 0, 29); c.bezierCurveTo(-12, 28, -23, 14, -22, -6); c.closePath(); c.fill();
+    // an ear on the side he's turned from
+    const earX = P.turn > 0.08 ? -21 : P.turn < -0.08 ? 21 : null;
+    c.fillStyle = crShade(skin, 0.9);
+    if (earX != null) { c.beginPath(); c.ellipse(earX - Math.sign(earX) * 1, 0, 4.5, 7.5, 0, 0, 7); c.fill(); }
+    else { c.beginPath(); c.ellipse(-22, 0, 4, 7, 0, 0, 7); c.ellipse(22, 0, 4, 7, 0, 0, 7); c.fill(); }
+    // the beard along the jaw
+    c.fillStyle = "#1E1712"; c.beginPath(); c.moveTo(-21, 4); c.bezierCurveTo(-20, 24, -9, 36, tx * 0.5, 38); c.bezierCurveTo(9 + tx * 0.3, 36, 20, 24, 21, 4); c.bezierCurveTo(18, 12, 14, 17, 9 + tx * 0.5, 19); c.quadraticCurveTo(tx * 0.5, 16, -9 + tx * 0.5, 19); c.bezierCurveTo(-14, 17, -18, 12, -21, 4); c.fill();
+    c.fillStyle = "rgba(255,255,255,.08)"; c.beginPath(); c.ellipse(-8 + tx, -10, 9, 6, -0.3, 0, 7); c.fill();
+    // the cap
+    g = c.createLinearGradient(0, -36, 0, -10); g.addColorStop(0, O.cap); g.addColorStop(1, crShade(O.cap, 0.88));
+    c.fillStyle = g; c.beginPath(); c.moveTo(-24, -10); c.bezierCurveTo(-26, -38, 26, -38, 24, -10); c.quadraticCurveTo(0, -15, -24, -10); c.fill();
+    c.strokeStyle = O.cap2; c.lineWidth = 2.6; c.beginPath(); c.moveTo(-24, -14); c.quadraticCurveTo(0, -19, 24, -14); c.moveTo(-23, -20); c.quadraticCurveTo(0, -25, 23, -20); c.stroke();
+    c.restore();
+    // arms
+    const arm = (sd, hand, o) => {
+      const sh = SH[sd], a = 40, b = 38, dx = hand[0] - sh[0], dy = hand[1] - sh[1], d = Math.hypot(dx, dy) || 1;
+      const dd = Math.max(6, Math.min(a + b - 0.5, d)), base = Math.atan2(dy, dx), off = Math.acos(Math.max(-1, Math.min(1, (a * a + dd * dd - b * b) / (2 * a * dd))));
+      const e1 = [sh[0] + Math.cos(base + off) * a, sh[1] + Math.sin(base + off) * a], e2 = [sh[0] + Math.cos(base - off) * a, sh[1] + Math.sin(base - off) * a];
+      const score = e => e[0] * sd + e[1] * 0.6;
+      const el = score(e1) > score(e2) ? e1 : e2;
+      const hd = d > a + b ? [sh[0] + dx / d * (a + b), sh[1] + dy / d * (a + b)] : hand;
+      const cuff = [hd[0] + (el[0] - hd[0]) * 0.22, hd[1] + (el[1] - hd[1]) * 0.22];
+      // a loose sleeve: wide at the top, a little narrower at the cuff
+      c.strokeStyle = O.robe2; c.lineWidth = 22; c.beginPath(); c.moveTo(sh[0], sh[1]); c.lineTo(el[0], el[1]); c.lineTo(cuff[0], cuff[1]); c.stroke();
+      c.strokeStyle = O.robe; c.lineWidth = 17; c.beginPath(); c.moveTo(sh[0], sh[1]); c.lineTo(el[0], el[1]); c.lineTo(cuff[0], cuff[1]); c.stroke();
+      const ux = (cuff[0] - el[0]), uy = (cuff[1] - el[1]), ul = Math.hypot(ux, uy) || 1;
+      c.strokeStyle = O.trim; c.lineWidth = 18; c.beginPath(); c.moveTo(cuff[0] - ux / ul * 5, cuff[1] - uy / ul * 5); c.lineTo(cuff[0], cuff[1]); c.stroke();
+      const ang = Math.atan2(hd[1] - el[1], hd[0] - el[0]);
+      c.save(); c.translate(hd[0], hd[1]); c.rotate(ang);
+      c.fillStyle = skin;
+      if (o.open) {
+        c.beginPath(); c.ellipse(2, 0, 8, 7.5, 0, 0, 7); c.fill();
+        for (let i = 0; i < 4; i++) { c.save(); c.rotate((i - 1.5) * 0.26); crRR(c, 6, -2.2, 11 - Math.abs(i - 1.5) * 1.6, 4.4, 2.2); c.fill(); c.restore(); }
+        c.save(); c.rotate(-1.15 * sd); crRR(c, 3, -2.2, 9, 4.4, 2.2); c.fill(); c.restore();
+      } else { c.beginPath(); c.ellipse(3, 0, 8, 7.5, 0, 0, 7); c.fill(); c.strokeStyle = skin2; c.lineWidth = 1.2; c.beginPath(); c.moveTo(6, -4); c.lineTo(6, 4); c.stroke(); }
+      c.restore();
+      if (o.thumb) { c.fillStyle = skin; crRR(c, hd[0] - 2.6, hd[1] - 18, 5.4, 13, 2.6); c.fill(); }
+      return hd;
+    };
+    let sd = P.stickSide;
+    if (!P.tip && P.free && !P.free2) sd = P.free[0] < P.x ? 1 : -1;
+    let stickHand, tipL;
+    if (P.tip) {
+      tipL = W2L(P.tip[0], P.tip[1]);
+      const sh = SH[sd], d = Math.hypot(tipL[0] - sh[0], tipL[1] - sh[1]) || 1, len = Math.max(80, Math.min(320, d - 62));
+      stickHand = [tipL[0] - (tipL[0] - sh[0]) / d * len, tipL[1] - (tipL[1] - sh[1]) / d * len];
+    } else { stickHand = [sd * 30, -40]; tipL = [sd * 70, 50]; }
+    const fs = -sd;
+    const freeHand = P.free ? W2L(P.free[0], P.free[1]) : [fs * 28, -40];
+    const free2 = P.free2 ? W2L(P.free2[0], P.free2[1]) : null;
+    if (free2) arm(String(-fs), free2, { open: P.freeOpen });
+    else {
+      const h = stickHand, dl = Math.hypot(tipL[0] - h[0], tipL[1] - h[1]) || 1;
+      const g2 = c.createLinearGradient(h[0], h[1], tipL[0], tipL[1]); g2.addColorStop(0, "#6E4526"); g2.addColorStop(1, "#C08A52");
+      c.strokeStyle = "rgba(0,0,0,.25)"; c.lineWidth = 5.5; c.beginPath(); c.moveTo(h[0] - (tipL[0] - h[0]) / dl * 10, h[1] - (tipL[1] - h[1]) / dl * 10 + 2); c.lineTo(tipL[0], tipL[1] + 2); c.stroke();
+      c.strokeStyle = g2; c.lineWidth = 4; c.beginPath(); c.moveTo(h[0] - (tipL[0] - h[0]) / dl * 10, h[1] - (tipL[1] - h[1]) / dl * 10); c.lineTo(tipL[0], tipL[1]); c.stroke();
+      c.fillStyle = "#2B2B2B"; c.beginPath(); c.arc(tipL[0], tipL[1], 2.6, 0, 7); c.fill();
+      arm(String(sd), stickHand, { open: false });
+    }
+    arm(String(fs), freeHand, { open: P.freeOpen, thumb: P.thumb });
+    c.restore();
+  }
+
+  // ---------- what the teacher does, and when ----------
+  // When we know what's coming (playback and the video) he starts moving a moment early, so the stick
+  // lands on the word exactly as you tapped it.
+  function crPlan(cues, rectOf, live, stripTarget) {
+    const A = live ? 0 : 0.35, R = live ? 0.28 : 0;
+    const list = (cues || []).filter(c => c.t >= 0).slice().sort((a, b) => a.t - b.t);
+    const ev = [];
+    for (const c of list) {
+      const b = rectOf(c);
+      if (c.k === "p" && b) ev.push({ k: "point", t0: c.t - A, t1: c.t + R, end: c.t + R + 2.2, tip: [b.x + b.w * 0.5, b.y + b.h * 0.9], c });
+      else if (c.k === "o" && b) { const P = markPts(c, b); if (P.length > 1) ev.push({ k: "mark", t0: c.t - (live ? 0 : 0.3), t1: c.t, end: c.t + markDur(c) + 0.35, path: P, dur: markDur(c), tip: P[0], c }); }
+      else if (c.k === "sa") ev.push({ k: "letter", t0: c.t - A * 0.8, t1: c.t + R, end: c.t + R + 0.5, tip: b ? [b.x + b.w / 2, b.y + b.h * 0.75] : null, to: stripTarget, c });
+      else if (c.k === "img") ev.push({ k: "present", t0: c.t, t1: c.t + 0.3, end: c.t + 2.8, c });
+      else if (c.k === "w") ev.push({ k: "turn", t0: c.t - 0.25, t1: c.t, end: c.t + 2.4, c });
+      else if (c.k === "e") ev.push({ k: "emote", e: c.e, t0: c.t, t1: c.t + 0.2, end: c.t + (c.e === "laugh" ? 2.2 : 1.8), c });
+    }
+    // where he stands: near home, stepping a little towards what he points at
+    const keys = [[-99, CR_HOME]];
+    let lastEnd = -99, lastX = CR_HOME;
+    for (const e of ev) {
+      if (!e.tip) continue;
+      const sx = Math.max(150, Math.min(330, CR_HOME + (e.tip[0] - 700) * 0.16));
+      if (e.t0 - lastEnd > 4) { keys.push([lastEnd + 1.5, lastX]); keys.push([lastEnd + 2.6, CR_HOME]); lastX = CR_HOME; }
+      keys.push([Math.max(keys[keys.length - 1][0] + 0.05, e.t0 - 0.45), lastX]);
+      keys.push([e.t0, sx]);
+      lastX = sx; lastEnd = Math.max(lastEnd, e.end);
+    }
+    keys.push([lastEnd + 1.5, lastX]); keys.push([lastEnd + 2.6, CR_HOME]);
+    return { ev, keys };
+  }
+  function crX(plan, t) {
+    const K = plan.keys;
+    for (let i = K.length - 1; i >= 0; i--) if (t >= K[i][0]) { const n = K[i + 1]; if (!n) return K[i][1]; return crLerp(K[i][1], n[1], crEase((t - K[i][0]) / Math.max(0.01, n[0] - K[i][0]))); }
+    return CR_HOME;
+  }
+  function crPose(plan, t, wall, env) {
+    const mood = CR_MOODS[env.mood] || CR_MOODS.cheerful, s = 2.55, base = CR_DESK + 30;
+    const lv = env.levels, li = Math.max(0, Math.floor(t * 20));
+    const talking = !!env.playing && !!lv;
+    const lev = k => (talking ? lv[Math.max(0, li - k)] || 0 : 0);
+    const energy = talking ? (lev(0) + lev(1) + lev(2) + lev(3) + lev(4) + lev(5)) / 6 : 0;
+    const x = crX(plan, t);
+    const P = { x, base, s, lean: 0, turn: 0.15, tilt: 0, nod: 0, bob: 0, hop: 0, tip: null, stickSide: 1, free: null, free2: null, freeOpen: false, thumb: false, dust: null };
+    // breathing, weight shifting
+    P.bob = Math.sin(wall * 1.8) * 1.4;
+    P.lean = Math.sin(wall * 0.45) * 0.012 * mood.amp;
+    P.tilt = Math.sin(wall * 0.6) * 0.03 * mood.amp;
+    if (talking) {   // he talks with his head and his body
+      P.nod = Math.max(0, lev(0) - lev(3)) * 1.6 * mood.amp;
+      P.tilt += Math.sin(t * 1.7) * 0.06 * mood.amp * (0.4 + energy);
+      P.turn = 0.15 + Math.sin(t * 0.5) * 0.25;
+      P.bob += Math.sin(t * 7) * energy * 2.4 * mood.amp;
+    }
+    const xv = crX(plan, t + 0.05) - x;
+    if (Math.abs(xv) > 0.5) { P.bob += -Math.abs(Math.sin(t * 10)) * 4; P.turn = Math.sign(xv) * 0.6; }
+    let cur = null, prev = null;
+    for (const e of plan.ev) { if (e.t0 <= t) { if (!cur || e.t0 >= cur.t0) { prev = cur; cur = e; } } else break; }
+    if (cur && t > cur.end + 0.45 && !(cur.k === "turn" && env.waiting)) { prev = cur; cur = null; }
+    const rest = [x + 70 * s / 2.55 * 2.55 / 2.55 * 1, base + 40];
+    const restTip = () => [x + 70 * s / 2.55 + 110, base + 60];
+    const tipOf = (e, tt) => {
+      if (e.k === "mark") { if (tt < e.t1) return e.path[0]; const k = Math.min(1, (tt - e.t1) / e.dur), L = e.path.length - 1, i = Math.min(L - 1, Math.floor(k * L)), f = k * L - i; return crLerp2(e.path[i], e.path[i + 1], f); }
+      if (e.k === "letter" && e.to && tt > e.t1) return crLerp2(e.tip, e.to, crEase((tt - e.t1) / 0.45));
+      return e.tip;
+    };
+    if (cur && cur.tip) {
+      const from = prev && prev.tip && cur.t0 - prev.end < 0.6 ? tipOf(prev, prev.end) : restTip();
+      let tip;
+      if (t < cur.t1) tip = crLerp2(from, cur.tip, crEase((t - cur.t0) / Math.max(0.05, cur.t1 - cur.t0)));
+      else if (t <= cur.end) tip = tipOf(cur, t);
+      else tip = crLerp2(tipOf(cur, cur.end), restTip(), crEase((t - cur.end) / 0.45));
+      P.tip = tip; P.stickSide = 1;
+      P.turn = Math.max(0.2, Math.min(0.75, (tip[0] - x) / 500));
+      P.tilt += -Math.max(-0.12, Math.min(0.12, (base - 300 - tip[1]) / 2000));
+      if (cur.k === "mark" && t >= cur.t1 && t <= cur.t1 + cur.dur) P.dust = tip;
+      if (talking && mood.gest > 0.5) { P.free = [x - 34 * s / 2.55, base - (110 + 20 * energy) ]; P.freeOpen = true; }
+    } else if (cur && cur.k === "present" && t <= cur.end + 0.3) {
+      const k = crEase((t - cur.t0) / 0.35) * (t > cur.end ? 1 - crEase((t - cur.end) / 0.3) : 1);
+      P.free = [x + crLerp(40, 230, k), base - crLerp(100, 300, k)]; P.freeOpen = true; P.turn = 0.7 * k + 0.15;
+    } else if (cur && cur.k === "turn" && (t <= cur.end || env.waiting)) {
+      const k = crEase((t - cur.t0) / 0.3);
+      P.free = [x + crLerp(40, 150, k), base - crLerp(100, 255, k)]; P.freeOpen = true; P.turn = crLerp(P.turn, -0.05, k);
+      P.tilt = 0.08 * k + Math.sin(wall * 2.5) * 0.02; P.lean = -0.03 * k;
+      if (env.waiting) P.nod = Math.max(0, Math.sin(wall * 3)) * 0.5;
+    } else if (cur && cur.k === "emote" && t <= cur.end) {
+      const k = Math.min(crEase((t - cur.t0) / 0.25), 1 - crEase((t - cur.end + 0.3) / 0.3)), e = cur.e, ph = t - cur.t0;
+      if (e === "nod") { P.nod = Math.max(0, Math.sin(ph * 9)) * 1.2 * k; P.turn = 0; }
+      if (e === "thumbs") { P.free = [x + 120, base - 250 * k - 100 * (1 - k)]; P.thumb = true; P.turn = 0; P.tilt = 0.06 * k; }
+      if (e === "clap") { const cl = Math.abs(Math.sin(ph * 9)); P.free = [x + 20 - crLerp(100, 30 + 45 * cl, k), base - crLerp(100, 250, k)]; P.free2 = [x + 20 + crLerp(100, 30 + 45 * cl, k), base - crLerp(100, 250, k)]; P.hop = Math.abs(Math.sin(ph * 4.5)) * 4 * mood.amp; P.turn = 0; }
+      if (e === "wave") { P.free = [x + 150 + Math.sin(ph * 10) * 26 * k, base - crLerp(100, 400, k)]; P.freeOpen = true; P.turn = 0; }
+      if (e === "think") { P.free = [x + 30, base - crLerp(100, 360, k)]; P.tilt = 0.14 * k; P.turn = 0.35; P.nod = -0.3 * k; }
+      if (e === "wow") { P.free = [x - 90, base - crLerp(100, 330, k)]; P.free2 = [x + 130, base - crLerp(100, 330, k)]; P.freeOpen = true; P.hop = Math.sin(Math.min(1, ph / 0.35) * Math.PI) * 10; P.lean = -0.04 * k; P.turn = 0; }
+      if (e === "laugh") { P.bob += Math.sin(ph * 22) * 2.5 * k; P.tilt = -0.12 * k; P.nod = -0.4 * k; P.free = [x + 40, base - crLerp(100, 200, k)]; P.turn = 0; }
+    }
+    // hello at the start, goodbye at the end
+    if (!cur && env.total && t >= 0 && (t < 2.2 || (t > env.total - 2.4 && t <= env.total + 0.2))) {
+      const ph = t < 2.2 ? t : t - (env.total - 2.4), k = Math.min(crEase(ph / 0.35), 1 - crEase((ph - 1.9) / 0.4));
+      if (k > 0) { P.free = [x + 150 + Math.sin(ph * 10) * 26 * k, base - crLerp(100, 400, k)]; P.freeOpen = true; P.turn = 0; }
+    }
+    // hands that move with the talking
+    if (!P.free && !P.tip && talking) {
+      const g = mood.gest * energy, slot = Math.floor(t / 2.6), style = crHash(slot), k = Math.min(1, g * 1.4);
+      if (style < 0.45) P.free = [x + 70 + 25 * Math.sin(t * 3), base - (130 + 110 * k + 20 * Math.sin(t * 6.5) * k)];
+      else if (style < 0.8) { P.free = [x + 90 + 40 * k, base - (150 + 80 * k)]; P.freeOpen = true; }
+      else P.free = [x + 60, base - (120 + 70 * k * Math.abs(Math.sin(t * 5)))];
+      if (mood.flair && crHash(slot * 7 + 3) < 0.18 * mood.flair) { const ph = (t % 2.6) / 2.6; if (ph > 0.3 && ph < 0.8) { const kk = Math.sin((ph - 0.3) / 0.5 * Math.PI); P.free = [x + 140, base - (150 + 120 * kk)]; P.free2 = [x - 60, base - (150 + 120 * kk)]; P.freeOpen = true; } }
+    }
+    if (env.cheer != null && wall - env.cheer < 1.8) {   // the student got it right
+      const ph = wall - env.cheer, k = Math.min(crEase(ph / 0.25), 1 - crEase((ph - 1.4) / 0.4));
+      P.tip = null; P.free = [x - 110, base - crLerp(100, 450, k)]; P.free2 = [x + 150, base - crLerp(100, 450, k)]; P.freeOpen = true; P.turn = 0;
+      P.hop = Math.abs(Math.sin(ph * 6)) * 12 * k;
+    }
+    return P;
+  }
+
+  // ---------- one whole picture of the classroom ----------
+  const CR_MARKER = { "#F1ECDC": "#1F2D4D", "#FFE27A": "#E07A00", "#FF9E9E": "#D32F2F", "#8FD0FF": "#1E5BB8" };
+  function crLayout(lesson) {
+    const c = document.createElement("canvas").getContext("2d");
+    const rows = parseBoard(lesson.board, lesson.stage === 3), A = CR_TILES;
+    let best = null;
+    for (let size = 84; size >= 16; size -= 4) {
+      c.font = "600 " + size + "px Andika, sans-serif";
+      const lineH = size * 1.42, gap = size * 0.26, pad = size * 0.16, items = [];
+      let y = 0;
+      for (let r = 0; r < rows.length; r++) {
+        let line = [], x = 0;
+        const flush = () => { const used = x - gap, off = Math.max(0, (A.w - used) / 2) * (lesson.stage === 3 ? 0 : 1); line.forEach(it => { it.x += A.x + off; }); line = []; };
+        for (let ci = 0; ci < rows[r].length; ci++) {
+          const t = rows[r][ci], text = t.d || t.t, tw = c.measureText(text).width + pad * 2;
+          if (x > 0 && x + tw > A.w) { flush(); x = 0; y += lineH; }
+          const it = { r, c: ci, t, text, x, y: 0, w: tw, h: lineH * 0.9, line: y };
+          items.push(it); line.push(it); x += tw + gap;
+        }
+        flush(); y += lineH + size * 0.1;
+      }
+      best = { size, lineH, items, total: y };
+      if (y <= A.h) break;
+    }
+    const off = Math.max(0, (A.h - best.total) / 2) * 0.6;
+    best.items.forEach(it => { it.y = A.y + off + it.line; });
+    best.at = {}; best.items.forEach(it => { best.at[it.r + "-" + it.c] = it; });
+    return best;
+  }
+  const crDrawPath = (c, P, pr, col, lw) => {
+    if (P.length < 2 || pr <= 0) return;
+    let L = 0; const seg = []; for (let i = 1; i < P.length; i++) { const d = Math.hypot(P[i][0] - P[i - 1][0], P[i][1] - P[i - 1][1]); seg.push(d); L += d; }
+    let left = L * Math.min(1, pr);
+    c.strokeStyle = col; c.lineWidth = lw; c.lineCap = "round"; c.lineJoin = "round";
+    c.beginPath(); c.moveTo(P[0][0], P[0][1]);
+    for (let i = 1; i < P.length && left > 0; i++) { const f = Math.min(1, left / (seg[i - 1] || 1)); c.lineTo(P[i - 1][0] + (P[i][0] - P[i - 1][0]) * f, P[i - 1][1] + (P[i][1] - P[i - 1][1]) * f); left -= seg[i - 1]; }
+    c.stroke();
+  };
+  // F: { room, front, lay, lesson, t, wall, stage, point, turnCue, pic (bitmap or null), clipFrame, plan, pose env, outfit, showTeacher }
+  function crFrame(c, F) {
+    const lay = F.lay, t = F.t;
+    c.drawImage(F.room, 0, 0);
+    // the letters and words on the whiteboard
+    const p = F.point, pb = p && lay.at[p.r + "-" + p.c];
+    if (pb) { const k = crEase((t - p.t) / 0.25); c.save(); c.shadowColor = "rgba(244,211,107," + (0.7 * k).toFixed(2) + ")"; c.shadowBlur = 22; c.fillStyle = "rgba(244,211,107," + (0.2 * k).toFixed(2) + ")"; crRR(c, pb.x - 4, pb.y - 2, pb.w + 8, pb.h + 4, 12); c.fill(); c.restore(); c.strokeStyle = "rgba(244,211,107," + (0.9 * k).toFixed(2) + ")"; c.lineWidth = 3; crRR(c, pb.x - 4, pb.y - 2, pb.w + 8, pb.h + 4, 12); c.stroke(); }
+    c.font = "600 " + lay.size + "px Andika, sans-serif"; c.textAlign = "center"; c.textBaseline = "middle";
+    c.shadowColor = "rgba(241,236,220,.35)"; c.shadowBlur = 3;
+    for (const it of lay.items) { c.fillStyle = it === pb ? "#FFFFFF" : pb ? "rgba(241,236,220,.62)" : "rgba(241,236,220,.94)"; c.fillText(it.text, it.x + it.w / 2, it.y + it.h / 2 + 2); }
+    c.shadowBlur = 0;
+    // marker marks
+    const st = F.stage;
+    for (const q of st.marks) {
+      const b = lay.at[q.r + "-" + q.c]; if (!b) continue;
+      const col = markCol(q);
+      const pr = (t - q.t) / markDur(q);
+      crDrawPath(c, markPts(q, b), pr, col, q.s === "pen" ? 5 : 5.5);
+      if (q.s === "circle" && pr > 1) {   // two little strokes of emphasis
+        const k = Math.min(1, (pr - 1) * 3), cx = b.x + b.w / 2, top = b.y - Math.max(6, b.h * 0.12);
+        crDrawPath(c, [[cx + b.w * 0.35, top - 4], [cx + b.w * 0.42, top - 22]], k, col, 4.5);
+        crDrawPath(c, [[cx + b.w * 0.5, top + 2], [cx + b.w * 0.66, top - 8]], k, col, 4.5);
+      }
+    }
+    // the right-hand panel: today's topic, or the word being built
+    const Pn = CR_PANEL;
+    if (st.strip.length) {
+      c.font = "600 30px Andika, sans-serif"; c.fillStyle = "rgba(241,236,220,.85)"; c.textAlign = "center"; c.fillText("Our word", Pn.x + Pn.w / 2, Pn.y + 92);
+      const fs = crFit(c, st.strip.map(q => q.ch).join(" "), Pn.w - 40, 64, 700);
+      c.font = "700 " + fs + "px Andika, sans-serif";
+      const ws = st.strip.map(q => c.measureText(q.ch).width), gap = fs * 0.32, tot = ws.reduce((a, b) => a + b, 0) + gap * (ws.length - 1);
+      const by = Pn.y + 190;
+      c.fillStyle = "rgba(244,211,107,.1)"; c.strokeStyle = "#FFE27A"; c.lineWidth = 3.5; crRR(c, Pn.x + 6, by - fs * 0.8, Pn.w - 12, fs * 1.6, 16); c.fill(); c.stroke();
+      let x = Pn.x + Pn.w / 2 - tot / 2;
+      st.strip.forEach((q, i) => {
+        const sx = x + ws[i] / 2; x += ws[i] + gap;
+        const k = crEase((t - q.t) / 0.55), from = lay.at[q.r + "-" + q.c];
+        const cx = from ? crLerp(from.x + from.w / 2, sx, k) : sx, cy = from ? crLerp(from.y + from.h / 2, by, k) : by, sc = from ? 0.7 + 0.3 * k : 0.2 + 0.8 * k;
+        c.save(); c.translate(cx, cy); c.scale(sc, sc); c.fillStyle = "#FFF6D0"; c.textAlign = "center"; c.textBaseline = "middle"; c.fillText(q.ch, 0, 2); c.restore();
+      });
+    } else {
+      const title = F.lesson.title || "Today";
+      c.font = "700 32px Andika, sans-serif"; const fs = crFit(c, title, Pn.w - 30, 34, 700);
+      c.fillStyle = "#FFE27A"; c.textAlign = "center"; c.textBaseline = "middle"; c.fillText(title, Pn.x + Pn.w / 2, Pn.y + 42);
+      c.strokeStyle = "rgba(255,226,122,.85)"; c.lineWidth = 3; c.beginPath(); c.moveTo(Pn.x + 14, Pn.y + 70); c.quadraticCurveTo(Pn.x + Pn.w / 2, Pn.y + 76, Pn.x + Pn.w - 14, Pn.y + 68); c.stroke();
+      c.fillStyle = "rgba(241,236,220,.9)";
+      if (F.lesson.note) {
+        c.font = "400 24px Andika, sans-serif"; c.textAlign = "left"; c.textBaseline = "alphabetic";
+        crWrap(c, F.lesson.note, Pn.w - 16).slice(0, 10).forEach((l, i) => c.fillText(l, Pn.x + 8, Pn.y + 116 + i * 34));
+      }
+    }
+    // a picture, pinned to the board
+    if (st.img && F.pic) {
+      const bm = F.pic, k = crEase((t - st.img.t) / 0.35), maxW = 620, maxH = 420, s0 = Math.min(maxW / bm.width, maxH / bm.height) * (0.7 + 0.3 * k);
+      const iw = bm.width * s0, ih = bm.height * s0, cx = 905, cy = 300;
+      c.save(); c.globalAlpha = Math.min(1, k * 1.5); c.translate(cx, cy); c.rotate(-0.02);
+      c.fillStyle = "rgba(0,0,0,.25)"; c.fillRect(-iw / 2 - 8, -ih / 2 - 4, iw + 24, ih + 24);
+      c.fillStyle = "#FFFFFF"; c.fillRect(-iw / 2 - 12, -ih / 2 - 12, iw + 24, ih + 24); c.drawImage(bm, -iw / 2, -ih / 2, iw, ih);
+      c.fillStyle = "rgba(240,220,150,.85)"; c.save(); c.rotate(-0.3); c.fillRect(-iw / 2 - 20, -ih / 2 - 10 + 60, 70, 22); c.restore(); c.save(); c.translate(iw / 2, -ih / 2); c.rotate(0.35); c.fillRect(-40, -8, 70, 22); c.restore();
+      c.restore();
+    }
+    // a clip, shown on the board like a screen
+    if (F.clip) {
+      const B = CR_BOARD; c.fillStyle = "#101418"; c.fillRect(B.x + 14, B.y + 14, B.w - 28, B.h - 28);
+      if (F.clipFrame) { const fw = F.clipFrame.width, fh = F.clipFrame.height, sc = Math.min((B.w - 60) / fw, (B.h - 60) / fh); c.drawImage(F.clipFrame, B.x + B.w / 2 - fw * sc / 2, B.y + B.h / 2 - fh * sc / 2, fw * sc, fh * sc); }
+    }
+    // "Your turn!"
+    if (F.turnCue && (t - F.turnCue.t < 2.2 || F.waiting)) {
+      const k = crEase((t - F.turnCue.t) / 0.3), w = CR_PANEL.w, x0 = CR_PANEL.x, y0 = CR_PANEL.y + 300;
+      c.save(); c.globalAlpha = k; c.fillStyle = "#E8590C"; crRR(c, x0, y0, w, 64, 32); c.fill();
+      c.fillStyle = "#fff"; c.font = "700 34px Andika, sans-serif"; c.textAlign = "center"; c.textBaseline = "middle"; c.fillText("Your turn!", x0 + w / 2, y0 + 33); c.restore();
+    }
+    // the teacher, then the desk in front of him
+    if (F.showTeacher && F.drawTeacher) { const P = crPose(F.plan, t, F.wall, F.env); P.wall = F.wall; F.drawTeacher(c, P); }
+    c.drawImage(F.front, 0, 0);
+    crPlant(c, 1096, CR_DESK - 2, 1.05, F.wall * 0.8, "#E9E2D2");
+  }
+
+  // Which classroom a recording uses (kept with the recording, so every student sees the same).
+  const CR_DEFAULT = { on: true, mood: "cheerful", outfit: "white" };
+  function classOf(cues) { const m = (cues || []).find(c => c.k === "m"); return Object.assign({}, CR_DEFAULT, m && m.teacher ? m.teacher : {}); }
+  function myClass() { try { return Object.assign({}, CR_DEFAULT, JSON.parse(localStorage.getItem("rc.class") || "{}")); } catch (e) { return Object.assign({}, CR_DEFAULT); } }
+  const crCache = new Map(); let crFrontCv = null;
+  function crAssets(lesson, number) {
+    const key = [lesson.id, lesson.board, lesson.title, lesson.stage, number].join("|");
+    if (!crCache.has(key)) { if (crCache.size > 6) crCache.clear(); crCache.set(key, { room: crRoom(lesson, number), lay: crLayout(lesson) }); }
+    if (!crFrontCv) crFrontCv = crFront();
+    return Object.assign({ front: crFrontCv }, crCache.get(key));
+  }
+  // The teacher's body is 3D: loaded only when a lesson plays (it's the size of a photo or two).
+  let t3dP = null; const t3dInst = new Map();
+  function loadT3D() {
+    if (!t3dP) t3dP = new Promise((res, rej) => {
+      if (window.T3D) return res(window.T3D);
+      const sc = document.createElement("script"); sc.src = "teacher3d.js";
+      sc.onload = () => (window.T3D ? res(window.T3D) : rej(new Error("t3d"))); sc.onerror = () => { t3dP = null; rej(new Error("t3d")); };
+      document.head.appendChild(sc);
+    });
+    return t3dP;
+  }
+  // one body per place it's drawn (the phone's player, the video maker) and per robe colour
+  function teacherBody(where, outfit) {
+    const key = where + "|" + outfit;
+    if (!t3dInst.has(key)) t3dInst.set(key, loadT3D().then(T3D => T3D.create({ url: "c_remy.glb", w: 960, h: 540, outfit })).catch(e => { t3dInst.delete(key); throw e; }));
+    return t3dInst.get(key);
+  }
+  const crPics = new Map();
+  function crPic(a) {
+    if (!crPics.has(a)) { const im = new Image(); im.crossOrigin = "anonymous"; im.src = srcFor(a); crPics.set(a, im); }
+    const im = crPics.get(a); return im.complete && im.naturalWidth ? im : null;
+  }
+  const CR_STRIP = [CR_PANEL.x + CR_PANEL.w / 2, CR_PANEL.y + 190];
+  // where the stick is at lesson time t: the last tile pointed at, for up to 8 seconds (a "your turn" clears it)
+  function crPointAt(cues, t) { let p = null; for (const q of cues) { if (q.t > t) break; if (q.k === "p") p = q; else if (q.k === "w") p = null; } return p && t - p.t <= 8 ? p : null; }
+  function crTurnAt(cues, t) { let w = null; for (const q of cues) { if (q.t > t) break; if (q.k === "w") w = q; } return w; }
+
+  // The lesson as students watch it: the classroom, playing in time with the voice. Tap a word to answer.
+  function ClassroomPlayer({ lesson, number, k, src, secs, cues, onTile, waiting, cheer, live, liveT, ix }) {
+    const pst = usePlayer();
+    const cvRef = useRef(null), stageRef = useRef(null);
+    const [full, setFull] = useState(false);
+    const [rot, setRot] = useState(false);
+    const [clip, setClip] = useState(null);
+    const cls = classOf(cues);
+    const A = useMemo(() => crAssets(lesson, number), [lesson.id, lesson.board, lesson.title, lesson.stage, number]);
+    const list = useMemo(() => (cues || []).filter(q => q.t >= 0).slice().sort((a, b) => a.t - b.t), [cues]);
+    const fx = useMemo(() => fxOnly(list), [list]);
+    const plan = useMemo(() => crPlan(list, q => A.lay.at[q.r + "-" + q.c] || null, !!live, CR_STRIP), [list, A, live]);
+    const lvRef = useRef(null), cheerRef = useRef(null), prevRef = useRef(-1), S = useRef({}), bodyRef = useRef(null);
+    S.current = { list, fx, plan, A, cls, waiting, live, liveT, clip };
+    useEffect(() => { bodyRef.current = null; if (!cls.on) return; let dead = false; teacherBody("player", cls.outfit).then(T => { if (!dead) bodyRef.current = T; }).catch(() => {}); return () => { dead = true; }; }, [cls.on, cls.outfit]);
+    useEffect(() => { lvRef.current = null; if (src) voiceLevels(src, secs).then(v => { lvRef.current = v; }); }, [src]);
+    useEffect(() => { if (cheer) cheerRef.current = performance.now() / 1000; }, [cheer]);
+    useEffect(() => {
+      const cv = cvRef.current; if (!cv) return;
+      const c = cv.getContext("2d");
+      let raf = 0, last = 0, size = 0;
+      const tick = now => {
+        raf = requestAnimationFrame(tick);
+        if (now - last < 33 || document.hidden) return; last = now;
+        const R = S.current, a = player.a, mine = a && player.key === k;
+        const w = Math.round(cv.clientWidth * Math.min(2, window.devicePixelRatio || 1));
+        if (w && w !== size) { size = w; cv.width = w; cv.height = Math.round(w * 9 / 16); }
+        if (!size) return;
+        const t = R.live ? R.liveT() : mine ? a.currentTime || 0 : -50, playing = !R.live && mine && !a.paused;
+        // a clip in the recording: the voice waits while it plays
+        const prev = prevRef.current; prevRef.current = t;
+        if (playing && prev >= 0 && t > prev && t - prev < 1.5) for (const q of R.fx) if (q.k === "vid" && q.t > prev && q.t <= t) { a.pause(); setClip(q); break; }
+        const st = stageAt(R.fx, t);
+        c.setTransform(cv.width / CR_W, 0, 0, cv.height / CR_H, 0, 0);
+        crFrame(c, { room: R.A.room, front: R.A.front, lay: R.A.lay, lesson, t, wall: now / 1000, stage: st, point: crPointAt(R.list, t), turnCue: crTurnAt(R.list, t), waiting: R.waiting,
+          pic: st.img ? crPic(st.img.a) : null, plan: R.plan, outfit: R.cls.outfit, showTeacher: R.cls.on,
+          drawTeacher: bodyRef.current ? (cc, P) => { window.T3D.resize(bodyRef.current, Math.min(1280, cv.width), Math.min(720, cv.height)); window.T3D.draw(bodyRef.current, P, cc, CR_W, CR_H); } : null,
+          env: { mood: R.cls.mood, playing, levels: lvRef.current, total: secs || 0, waiting: R.waiting, cheer: cheerRef.current } });
+      };
+      raf = requestAnimationFrame(tick);
+      return () => cancelAnimationFrame(raf);
+    }, [k, lesson.id]);
+    // full screen: sideways, filling the phone
+    useEffect(() => {
+      if (!full) { setRot(false); return; }
+      const check = () => setRot(window.innerHeight > window.innerWidth);
+      check(); window.addEventListener("resize", check);
+      return () => window.removeEventListener("resize", check);
+    }, [full]);
+    async function goFull() {
+      setFull(true);
+      try { const el = stageRef.current && stageRef.current.parentNode; if (el && el.requestFullscreen) await el.requestFullscreen(); if (screen.orientation && screen.orientation.lock) await screen.orientation.lock("landscape"); } catch (e) {}
+    }
+    function exitFull() { setFull(false); try { if (document.fullscreenElement) document.exitFullscreen(); } catch (e) {} }
+    useEffect(() => { const f = () => { if (!document.fullscreenElement) setFull(false); }; document.addEventListener("fullscreenchange", f); return () => document.removeEventListener("fullscreenchange", f); }, []);
+    function tap(e) {
+      const cv = cvRef.current; if (!cv) return;
+      const r = cv.getBoundingClientRect();
+      let x, y;
+      if (rot) { x = (e.clientY - r.top) / r.height * CR_W; y = (r.right - e.clientX) / r.width * CR_H; }
+      else { x = (e.clientX - r.left) / r.width * CR_W; y = (e.clientY - r.top) / r.height * CR_H; }
+      const it = A.lay.items.find(q => x >= q.x - 6 && x <= q.x + q.w + 6 && y >= q.y - 6 && y <= q.y + q.h + 6);
+      const mine = player.key === k && player.a;
+      if (it && onTile && (waiting || !mine || player.a.paused)) { onTile(it.t, ix ? soundFor(ix, lesson.id, it.t.t) : null, it.r, it.c); return; }
+      if (!src) return;
+      player.play(k, src);
+    }
+    const mine = pst.key === k, playing = mine && pst.playing, cur = mine ? pst.cur : 0, dur = (mine && pst.dur) || secs || 0;
+    const fullStyle = full ? (() => { const W = window.innerWidth, H = window.innerHeight, sw = rot ? H : W, sh = rot ? W : H, w = Math.min(sw, sh * 16 / 9); return "width:" + w + "px;" + (rot ? "transform:translate(-50%,-50%) rotate(90deg);" : "transform:translate(-50%,-50%);"); })() : "";
+    return html`<div class=${"crwrap" + (full ? " full" : "")}>
+      <div class="crstage" ref=${stageRef} style=${fullStyle}>
+        <canvas class="crcv" ref=${cvRef} onClick=${tap} aria-label=${"Lesson " + number + " classroom"}></canvas>
+        ${!live && !playing && !waiting && !clip ? html`<button class="crplay" onClick=${() => src && player.play(k, src)} aria-label=${mine && cur > 0 ? "Carry on" : "Play the lesson"}><${Ic.play} size=${34}/></button>` : null}
+        ${clip ? html`<div class="crclip"><${BoardClip} c=${clip} onEnd=${() => { setClip(null); if (player.key === k && player.a) player.a.play().catch(() => {}); }}/></div>` : null}
+        ${!live ? html`<div class="crbar">
+          <button class="crbtn" onClick=${() => src && player.play(k, src)} aria-label=${playing ? "Pause" : "Play"}>${playing ? html`<${Ic.pause} size=${18}/>` : html`<${Ic.play} size=${18}/>`}</button>
+          <span class="crtime">${fmtDur(cur)} / ${fmtDur(dur)}</span>
+          <input class="crseek" type="range" min="0" max=${Math.max(1, dur)} step="0.1" value=${cur} aria-label="Where in the lesson"
+            onInput=${e => { const v = +e.target.value; if (player.key !== k) { player.play(k, src); setTimeout(() => { if (player.a) player.a.currentTime = v; }, 60); } else if (player.a) player.a.currentTime = v; }}/>
+          <button class="crbtn" onClick=${full ? exitFull : goFull} aria-label=${full ? "Leave full screen" : "Full screen"}>${full ? "✕" : "⛶"}</button>
+        </div>` : null}
+      </div>
+    </div>`;
+  }
+
+  // A clip on the board: plays with its own sound. If the phone won't start it by itself, a big Play button.
+  function BoardClip({ c, onEnd, label }) {
+    const ref = useRef(null);
+    const [blocked, setBlocked] = useState(false);
+    useEffect(() => {
+      const v = ref.current; if (!v) return;
+      const p = v.play(); if (p && p.catch) p.catch(() => setBlocked(true));
+    }, [c.id]);
+    const done = () => onEnd(ref.current ? ref.current.currentTime || 0 : 0);
+    return html`<div class="bpic clip" role="dialog" aria-label="Video">
+      <video ref=${ref} src=${srcFor(c.a)} playsinline controls onEnded=${done}
+        onTimeUpdate=${e => { if (c.secs && e.currentTarget.currentTime >= c.secs) { e.currentTarget.pause(); done(); } }}></video>
+      ${blocked ? html`<button class="clipplay" onClick=${() => { const v = ref.current; if (v) v.play().then(() => setBlocked(false)).catch(() => {}); }}>▶ Play the video</button>` : null}
+      <button class="btn quiet clipdone" onClick=${done}>${label || "Carry on"}</button>
+    </div>`;
+  }
+
+  // The layer over the board that draws all of it. The tiles stay tappable underneath.
+  function BoardFx({ boardRef, rowsKey, stage, clip, onClipEnd, clipLabel, onPen, penCol }) {
+    const [box, setBox] = useState({ W: 0, H: 0, R: {} });
+    const seen = useRef(new Set()), stripRef = useRef(null);
+    const marks = stage ? stage.marks : [], strip = stage ? stage.strip : [], img = stage ? stage.img : null;
+    const measure = () => {
+      const b = boardRef.current; if (!b) return;
+      const R = {};
+      b.querySelectorAll("[data-rc]").forEach(el => { R[el.getAttribute("data-rc")] = { x: el.offsetLeft, y: el.offsetTop, w: el.offsetWidth, h: el.offsetHeight }; });
+      setBox({ W: b.clientWidth, H: b.clientHeight, R });
+    };
+    useLayoutEffect(measure, [rowsKey, strip.length > 0]);
+    useEffect(() => {
+      const b = boardRef.current; if (!b || !window.ResizeObserver) return;
+      const ro = new ResizeObserver(() => measure()); ro.observe(b); return () => ro.disconnect();
+    }, []);
+    // letters fly down from their tile into the word
+    useLayoutEffect(() => {
+      const b = boardRef.current, st = stripRef.current; if (!b || !st) return;
+      st.querySelectorAll(".sl").forEach(el => {
+        const id = el.getAttribute("data-id"); if (seen.current.has(id)) return; seen.current.add(id);
+        const from = el.getAttribute("data-from"), src = from ? b.querySelector('[data-rc="' + from + '"]') : null;
+        if (!src) { el.classList.add("pop"); return; }
+        const a = src.getBoundingClientRect(), m = el.getBoundingClientRect();
+        el.style.transition = "none";
+        el.style.transform = "translate(" + (a.left + a.width / 2 - m.left - m.width / 2) + "px," + (a.top + a.height / 2 - m.top - m.height / 2) + "px) scale(.7)";
+        el.getBoundingClientRect();
+        el.style.transition = "transform .55s cubic-bezier(.3,1.3,.5,1)"; el.style.transform = "none";
+      });
+    }, [strip.map(c => c.id).join(",")]);
+    const tileBox = c => box.R[c.r + "-" + c.c];
+    // drawing with a finger (teacher, while recording)
+    const pen = useRef(null);
+    const [live, setLive] = useState(null);
+    const pt = e => { const r = boardRef.current.getBoundingClientRect(); return [e.clientX - r.left, e.clientY - r.top]; };
+    const pdown = e => { e.preventDefault(); try { e.currentTarget.setPointerCapture(e.pointerId); } catch (x) {} pen.current = { id: e.pointerId, at: Date.now(), P: [pt(e)] }; setLive(pen.current.P.slice()); };
+    const pmove = e => { const p = pen.current; if (!p || p.id !== e.pointerId) return; const q = pt(e), l = p.P[p.P.length - 1]; if (Math.hypot(q[0] - l[0], q[1] - l[1]) < 3) return; p.P.push(q); setLive(p.P.slice()); };
+    const pup = e => {
+      const p = pen.current; if (!p || p.id !== e.pointerId) return; pen.current = null; setLive(null);
+      if (p.P.length < 2) return;
+      // tie the drawing to the nearest tile, so it lands in the same place on every phone and in the video
+      let x0 = 1e9, y0 = 1e9, x1 = -1e9, y1 = -1e9; p.P.forEach(q => { x0 = Math.min(x0, q[0]); x1 = Math.max(x1, q[0]); y0 = Math.min(y0, q[1]); y1 = Math.max(y1, q[1]); });
+      const cx = (x0 + x1) / 2, cy = (y0 + y1) / 2;
+      let best = null, bd = 1e12;
+      for (const [k, r] of Object.entries(box.R)) { const d = (r.x + r.w / 2 - cx) ** 2 + (r.y + r.h / 2 - cy) ** 2; if (d < bd) { bd = d; best = [k, r]; } }
+      if (!best) return;
+      const [k, r] = best, [ri, ti] = k.split("-").map(Number);
+      const pts = []; p.P.forEach(q => { pts.push(Math.round((q[0] - r.x) / r.w * 1000) / 1000, Math.round((q[1] - r.y) / r.h * 1000) / 1000); });
+      onPen({ at: p.at, dur: (Date.now() - p.at) / 1000, r: ri, c: ti, pts });
+    };
+    return html`
+      <svg class="bfx" width=${box.W} height=${box.H} viewBox=${"0 0 " + (box.W || 1) + " " + (box.H || 1)} aria-hidden="true">
+        ${marks.map(c => { const b = tileBox(c); if (!b) return null; return html`<path key=${c.id} class="fxd" pathLength="1" d=${ptsPath(markPts(c, b))} stroke=${markCol(c)} style=${"animation-duration:" + markDur(c) + "s"} stroke-width=${c.s === "pen" ? 5 : 4.5}/>`; })}
+        ${live ? html`<path d=${ptsPath(live)} stroke=${penCol || "#F1ECDC"} stroke-width="5"/>` : null}
+      </svg>
+      ${strip.length ? html`<div class="bstrip" ref=${stripRef} aria-label=${"Word: " + strip.map(c => c.ch).join("")}>${strip.map(c => html`<span key=${c.id} class="sl" data-id=${c.id} data-from=${c.r != null ? c.r + "-" + c.c : ""}>${c.ch}</span>`)}</div>` : null}
+      ${img ? html`<div class="bpic" key=${img.id}><img src=${srcFor(img.a)} alt="Picture"/></div>` : null}
+      ${clip ? html`<${BoardClip} key=${clip.id} c=${clip} onEnd=${onClipEnd} label=${clipLabel}/>` : null}
+      ${onPen ? html`<div class="penpad" onPointerDown=${pdown} onPointerMove=${pmove} onPointerUp=${pup} onPointerCancel=${pup} aria-label="Draw on the board"></div>` : null}`;
   }
 
   // Writing board: strokes in board units (1000 across, 560 down), shared live between both phones.
@@ -1937,7 +2789,7 @@ notify pgrst, 'reload schema';
   // Live class. The class itself is a row in the database ("live"), so it survives app switches, dropped signal
   // and reloads; only the teacher's End ends it. Board, pointers, writing and call signals use a broadcast channel.
   const LIVE_STALE = 20 * 60 * 1000;
-  const LIVE_OFF = { on: false, away: false, here: false, lesson: null, point: null, mark: null, sound: false, mode: "tiles", holder: "teacher", startedAt: 0, rec: false, sid: null };
+  const LIVE_OFF = { fx: [], on: false, away: false, here: false, lesson: null, point: null, mark: null, sound: false, mode: "tiles", holder: "teacher", startedAt: 0, rec: false, sid: null };
   const live = {
     ch: null, role: null, subs: new Set(), onSound: null, lastHb: 0, lastHere: 0, extra: new Map(),
     st: Object.assign({}, LIVE_OFF),
@@ -2024,7 +2876,7 @@ notify pgrst, 'reload schema';
       this.join(sid, "teacher");
       const now = Date.now();
       wb.reset([]);
-      this.set({ on: true, away: false, lesson, here: false, point: null, mark: null, mode: "tiles", holder: "teacher", startedAt: now, rec: false });
+      this.set({ on: true, away: false, lesson, here: false, point: null, mark: null, mode: "tiles", holder: "teacher", startedAt: now, rec: false, fx: [], clip: null });
       this.beat();
       let micErr = null;
       try { await call.teacherStart(); } catch (e) { micErr = e; }
@@ -2034,7 +2886,7 @@ notify pgrst, 'reload schema';
     resume(row) {
       this.join(row.id, "teacher");
       wb.reset([]);
-      this.set({ on: true, away: false, lesson: row.lesson, mode: row.mode === "write" ? "write" : "tiles", holder: "teacher", startedAt: row.startedAt || Date.now(), here: false, point: null, mark: null, rec: false });
+      this.set({ on: true, away: false, lesson: row.lesson, mode: row.mode === "write" ? "write" : "tiles", holder: "teacher", startedAt: row.startedAt || Date.now(), here: false, point: null, mark: null, rec: false, fx: [], clip: null });
       this.beat();
       call.set({ phase: "paused" });
     },
@@ -2048,8 +2900,8 @@ notify pgrst, 'reload schema';
       update("live/" + this.st.sid, Object.assign({ updatedAt: Date.now() }, patch)).catch(() => {});
       for (const sid of this.extra.keys()) update("live/" + sid, Object.assign({ updatedAt: Date.now() }, patch)).catch(() => {});
     },
-    hb() { this.send({ type: "hb", lesson: this.st.lesson, sound: this.st.sound, mode: this.st.mode, holder: this.st.holder, rec: this.st.rec, startedAt: this.st.startedAt }); },
-    setLesson(lesson) { if (this.st.lesson !== lesson) { this.set({ lesson, point: null, mark: null }); this.hb(); this.save({ lesson }); } },
+    hb() { const st = stageAt(this.st.fx, 1e12); this.send({ type: "hb", lesson: this.st.lesson, sound: this.st.sound, mode: this.st.mode, holder: this.st.holder, rec: this.st.rec, startedAt: this.st.startedAt, fx: st.marks.concat(st.strip, st.img ? [st.img] : []).sort((a, b) => a.t - b.t) }); },
+    setLesson(lesson) { if (this.st.lesson !== lesson) { this.set({ lesson, point: null, mark: null, fx: [] }); this.hb(); this.save({ lesson }); } },
     setSound(sound) { this.set({ sound }); this.hb(); },
     setMode(mode) { this.set({ mode, holder: mode === "write" ? this.st.holder : "teacher", point: null, mark: null }); this.hb(); this.save({ mode }); },
     setHolder(holder) { this.set({ holder }); this.hb(); },
@@ -2057,6 +2909,14 @@ notify pgrst, 'reload schema';
     wipe() { wb.wipe(); this.send({ type: "wb-wipe" }); },
     edit(remove, add) { wb.edit({ remove, add }); this.send({ type: "wb-edit", remove, add }); },
     good() { wb.emit({ kind: "good" }); chime(true); this.send({ type: "wb-good" }); },
+    // circles, underlines, drawing, a word, a picture: kept as a short list and sent to every student
+    fx(c) {
+      const cue = Object.assign({ id: uid().slice(-7), t: (Date.now() - (this.st.startedAt || 0)) / 1000 }, c);
+      if (cue.k === "vid") this.set({ clip: cue });
+      else this.set({ fx: this.st.fx.concat(cue).slice(-40) });
+      this.send({ type: "fx", cue, lesson: this.st.lesson });
+      return cue;
+    },
     point(tile, r, c, lesson) {
       this.set({ point: { tile, r, c, lesson, at: Date.now() } });
       this.send({ type: "point", tile, r, c, lesson, sound: this.st.sound });
@@ -2111,9 +2971,11 @@ notify pgrst, 'reload schema';
             patch.holder = m.holder === "student" ? "student" : "teacher";
             patch.rec = !!m.rec;
             if (m.startedAt) patch.startedAt = m.startedAt;
+            if (Array.isArray(m.fx) && stageSig(stageAt(m.fx, 1e12)) !== stageSig(stageAt(this.st.fx, 1e12))) patch.fx = m.fx;
           }
           if (m.type === "point") patch.point = { tile: m.tile, r: m.r, c: m.c, lesson: m.lesson, at: now };
           else if (m.lesson !== this.st.lesson) patch.point = null;
+          if (m.lesson && m.lesson !== this.st.lesson && !patch.fx) patch.fx = [];
           this.set(patch);
           if (back) {
             this.send({ type: "here" });
@@ -2121,7 +2983,11 @@ notify pgrst, 'reload schema';
             this.hereT = setInterval(() => { if (this.st.on) this.send({ type: "here" }); }, 4000);
           }
           if (m.type === "point" && m.sound && this.onSound) this.onSound(m.tile, m.lesson);
-        } else if (m.type === "end") this.stopStudent();
+        } else if (m.type === "fx" && m.cue) {
+          if (m.cue.k === "vid") this.set({ clip: m.cue });
+          else if (m.lesson === this.st.lesson && !this.st.fx.some(x => x.id === m.cue.id)) this.set({ fx: this.st.fx.concat(m.cue).slice(-40) });
+        }
+        else if (m.type === "end") this.stopStudent();
         else if (m.type === "wb-wipe") wb.wipe();
         else if (m.type === "wb-good") { wb.emit({ kind: "good" }); chime(true); }
         else if (m.type === "wb-state") { wb.reset(m.strokes || []); if (m.holder) this.set({ holder: m.holder === "student" ? "student" : "teacher" }); }
@@ -6114,7 +6980,32 @@ notify pgrst, 'reload schema';
         c.beginPath(); c.moveTo(sx, sy); c.lineTo(sx + Math.sin(a) * len, sy + Math.cos(a) * len); c.stroke();
         c.strokeStyle = "#F1ECDC"; c.beginPath(); c.moveTo(sx, sy); c.lineTo(sx + Math.sin(a) * 18, sy + Math.cos(a) * 18); c.stroke();
       }
+      // circles, drawing, a built word and pictures, as the students see them
+      const st = L.lesson === lesson.id ? stageAt(L.fx || [], 1e12) : null;
+      if (!st) return;
+      const bx = {}; for (const p of lay.items) bx[p.r + "-" + p.c] = { x: x0 + p.x, y: y0 + p.y + 3, w: p.w, h: lay.lineH - 6 };
+      c.lineCap = "round"; c.lineJoin = "round";
+      for (const q of st.marks) { const b = bx[q.r + "-" + q.c]; if (!b) continue; const P = markPts(q, b); c.strokeStyle = markCol(q); c.lineWidth = 5; c.beginPath(); P.forEach((pt, i) => (i ? c.lineTo(pt[0], pt[1]) : c.moveTo(pt[0], pt[1]))); c.stroke(); }
+      if (st.strip.length) {
+        const word = st.strip.map(q => q.ch).join(" "), fs = Math.min(64, lay.size * 1.3);
+        c.font = "400 " + fs + "px Andika, sans-serif"; c.textAlign = "center"; c.textBaseline = "middle";
+        const tw = c.measureText(word).width + 40, yy = y0 + h - fs * 0.7;
+        c.fillStyle = "rgba(20,32,26,.85)"; rr(c, x0 + (w - tw) / 2, yy - fs * 0.65, tw, fs * 1.3, 14); c.fill();
+        c.strokeStyle = "rgba(244,211,107,.7)"; c.lineWidth = 3; c.stroke();
+        c.fillStyle = "#FFF6D0"; c.fillText(word, x0 + w / 2, yy);
+      }
+      if (st.img) {
+        let im = this.pics.get(st.img.a);
+        if (!im) { im = new Image(); im.crossOrigin = "anonymous"; im.src = srcFor(st.img.a); this.pics.set(st.img.a, im); }
+        if (im.complete && im.naturalWidth) {
+          const sc = Math.min(w * 0.8 / im.naturalWidth, h * 0.8 / im.naturalHeight), iw = im.naturalWidth * sc, ih = im.naturalHeight * sc;
+          c.fillStyle = "rgba(20,32,26,.7)"; c.fillRect(x0, y0, w, h);
+          c.fillStyle = "#F1ECDC"; c.fillRect(x0 + (w - iw) / 2 - 6, y0 + (h - ih) / 2 - 6, iw + 12, ih + 12);
+          try { c.drawImage(im, x0 + (w - iw) / 2, y0 + (h - ih) / 2, iw, ih); } catch (e) {}
+        }
+      }
     },
+    pics: new Map(),
   };
   function useRec() {
     const [st, set] = useState(classRec.st);
@@ -6147,13 +7038,18 @@ notify pgrst, 'reload schema';
       let mr;
       try { mr = new MediaRecorder(stream, opts); } catch (e) { mr = new MediaRecorder(stream); }
       const chunks = [], t0 = Date.now();
+      let held = 0, pausedAt = 0;   // time spent paused (while a clip plays) doesn't count
       mr.ondataavailable = e => { if (e.data && e.data.size) chunks.push(e.data); };
       mr.start(250);
       const type = () => ((mr.mimeType || mime || "audio/webm").split(";")[0]);
+      const at = ms => Math.max(0, ((ms == null ? Date.now() : ms) - t0 - held - (pausedAt ? Date.now() - pausedAt : 0)) / 1000);
       return {
-        t0,
+        t0, at,
+        pause: () => { if (mr.state === "recording" && mr.pause) { try { mr.pause(); pausedAt = Date.now(); } catch (e) {} } },
+        resume: () => { if (pausedAt) { try { mr.resume(); } catch (e) {} held += Date.now() - pausedAt; pausedAt = 0; } },
         stop: () => new Promise(resolve => {
-          const finish = () => resolve({ blob: new Blob(chunks, { type: type() }), secs: (Date.now() - t0) / 1000 });
+          if (pausedAt) { held += Date.now() - pausedAt; pausedAt = 0; }
+          const finish = () => resolve({ blob: new Blob(chunks, { type: type() }), secs: (Date.now() - t0 - held) / 1000 });
           if (mr.state === "inactive") return finish();
           mr.onstop = finish;
           try { mr.stop(); } catch (e) { finish(); }
@@ -6165,10 +7061,40 @@ notify pgrst, 'reload schema';
   };
   function assetTypeFor(blob) {
     const t = String(blob.type || "").toLowerCase();
+    if (t === "video/mp4" || t === "video/webm" || t === "video/quicktime") return t;
     if (t.indexOf("webm") >= 0) return "audio/webm";
     if (t.indexOf("mp4") >= 0 || t.indexOf("m4a") >= 0) return "audio/mp4";
     if (t === "image/jpeg" || t === "image/png" || t === "image/webp" || t === "image/gif") return t;
     return null;
+  }
+  // Pictures for the board: phone photos are huge; 1600 px is plenty.
+  async function shrinkImage(file) {
+    try {
+      const bm = await createImageBitmap(file), sc = Math.min(1, 1600 / Math.max(bm.width, bm.height));
+      const c = document.createElement("canvas"); c.width = Math.round(bm.width * sc); c.height = Math.round(bm.height * sc);
+      c.getContext("2d").drawImage(bm, 0, 0, c.width, c.height);
+      const out = await new Promise(r => c.toBlob(r, "image/jpeg", 0.86));
+      return out && out.size < file.size ? out : file;
+    } catch (e) { return file; }
+  }
+  // Clips for the board: made smaller (at most 1280 px, about 1.2 Mbit/s) so they upload and play quickly.
+  async function shrinkVideo(file, onP) {
+    const MB = await loadMux();
+    const input = new MB.Input({ source: new MB.BlobSource(file), formats: MB.ALL_FORMATS });
+    const secs = await input.computeDuration();
+    if (secs > 180) throw new Error("toolong");
+    const vt = await input.getPrimaryVideoTrack();
+    if (!vt) throw new Error("novideo");
+    const big = Math.max(vt.displayWidth, vt.displayHeight), wide = vt.displayWidth >= vt.displayHeight;
+    const size = big > 1280 ? (wide ? { width: 1280 } : { height: 1280 }) : {};
+    const output = new MB.Output({ format: new MB.Mp4OutputFormat({ fastStart: "in-memory" }), target: new MB.BufferTarget() });
+    const conv = await MB.Conversion.init({ input, output, video: Object.assign({ bitrate: 1200000 }, size), audio: { bitrate: 96000 } });
+    if (!conv.isValid) throw new Error("invalid");
+    conv.onProgress = v => onP && onP(v);
+    await conv.execute();
+    const out = new Blob([output.target.buffer], { type: "video/mp4" });
+    out.secs = secs;
+    return out;
   }
   async function uploadBlob(blob) {
     if (!rt.assets) throw { code: "not_granted" };
@@ -6451,7 +7377,47 @@ notify pgrst, 'reload schema';
     for (let r = 0; r < rowsOf.length; r++) for (let c = 0; c < rowsOf[r].length; c++) if (rowsOf[r][c].t === cue.tile) return { r, c };
     return null;
   }
-  function Board({ lesson, number, ix, tkey, onTile, points, edit, cue, mark, turn, flash, hint, follow }) {
+  // The teacher's tools in a live class: the same as when recording, sent to the students as you use them.
+  function LiveTools({ lesson, tool, setTool, pen, setPen, stage }) {
+    const [media, setMedia] = useState(() => { const m = (lesson.cues || []).find(c => c.k === "m"); return m && Array.isArray(m.media) ? m.media : []; });
+    const [busy, setBusy] = useState(false);
+    const fileRef = useRef(null);
+    useEffect(() => { const m = (lesson.cues || []).find(c => c.k === "m"); setMedia(m && Array.isArray(m.media) ? m.media : []); }, [lesson.id]);
+    const wipe = () => { if (stage && stage.marks.length) live.fx({ k: "ox" }); if (stage && stage.strip.length) live.fx({ k: "sx" }); if (stage && stage.img) live.fx({ k: "imgx" }); live.set({ point: null }); };
+    async function addMedia(e) {
+      const f = e.target.files && e.target.files[0]; e.target.value = ""; if (!f) return;
+      const isVid = /^video\//.test(f.type) || /\.(mp4|mov|m4v|webm)$/i.test(f.name || "");
+      if (isVid && (store.s.schemaVer || 0) < 7) { toast("To add videos, run the database update first (the blue box on your home screen)."); return; }
+      setBusy(true);
+      try {
+        let blob = f, secs = 0;
+        if (isVid) { try { blob = await shrinkVideo(f); secs = blob.secs; } catch (err) { if (err && err.message === "toolong") throw { code: "toolong" }; blob = f; } }
+        else blob = await shrinkImage(f);
+        const a = await uploadBlob(blob);
+        setMedia(ms => ms.concat({ a, type: isVid ? "vid" : "img", secs: round1(secs || 0) }));
+      } catch (err) { toast(err && err.code === "toolong" ? "That video is longer than 3 minutes. Pick a shorter clip." : errText(err, "That file couldn't be added.")); }
+      setBusy(false);
+    }
+    const show = m => {
+      if (m.type === "vid") { live.fx({ k: "vid", a: m.a, secs: 0 }); return; }
+      live.fx(stage && stage.img && stage.img.a === m.a ? { k: "imgx" } : { k: "img", a: m.a });
+    };
+    return html`<div class="livetools">
+      <div class="tools" role="toolbar" aria-label="Board tools">
+        ${STUDIO_TOOLS.map(([k, ic, lbl]) => html`<button key=${k} class=${"tool" + (tool === k ? " on" : "")} aria-pressed=${tool === k ? "true" : "false"} onClick=${() => setTool(k)}><span>${ic}</span>${lbl}</button>`)}
+        <button class="tool" onClick=${wipe}><span>🧽</span>Wipe</button>
+      </div>
+      ${tool === "pen" ? html`<div class="subbar">${PEN_COLS.map(c => html`<button key=${c} class=${"swatch" + (pen === c ? " on" : "")} style=${"background:" + c} onClick=${() => setPen(c)} aria-label="Chalk colour"></button>`)}<span class="help">Draw on the board with your finger.</span></div>` : null}
+      ${tool === "word" ? html`<div class="subbar"><span class="help">Tap letters on the board to bring them down.</span><button class="chip" onClick=${() => live.fx({ k: "sx" })}>Clear word</button></div>` : null}
+      <div class="mtray">
+        ${media.map(m => html`<button key=${m.a} class=${"mthumb" + (m.type === "img" && stage && stage.img && stage.img.a === m.a ? " on" : "")} onClick=${() => show(m)} aria-label=${m.type === "vid" ? "Play this video for them" : "Show this picture"}>
+          ${m.type === "vid" ? html`<video src=${srcFor(m.a) + "#t=0.5"} preload="metadata" muted playsinline></video><span class="mbadge">▶</span>` : html`<img src=${srcFor(m.a)} alt=""/>`}</button>`)}
+        <button class="mthumb madd" disabled=${busy} onClick=${() => fileRef.current && fileRef.current.click()} aria-label="Add a picture or video"><span>${busy ? "…" : "＋"}</span><small>Picture / video</small></button>
+        <input ref=${fileRef} type="file" accept="image/*,video/*" style="display:none" onChange=${addMedia}/>
+      </div>
+    </div>`;
+  }
+  function Board({ lesson, number, ix, tkey, onTile, points, edit, cue, mark, turn, flash, hint, follow, stage, clip, onClipEnd, clipLabel, strip, voice, onPen, penCol }) {
     const rowsOf = useMemo(() => parseBoard(lesson.board, lesson.stage === 3), [lesson.board]);
     const boardRef = useRef(null), stickRef = useRef(null);
     const cp = posOf(rowsOf, cue), mp = posOf(rowsOf, mark), hp = posOf(rowsOf, hint);
@@ -6471,10 +7437,11 @@ notify pgrst, 'reload schema';
     }, [cpKey, lesson.board, follow]);
     const at = (p, ri, ti) => p && p.r === ri && p.c === ti;
     return html`<div class=${"boardwrap" + (edit ? " edit" : "")}>
-      <div class=${"board" + (cp ? " cueing" : "") + (turn ? " turn" : "") + (lesson.stage === 3 ? " passage" : "")} ref=${boardRef}>
+      <div class=${"board" + (cp ? " cueing" : "") + (turn ? " turn" : "") + (lesson.stage === 3 ? " passage" : "") + (strip || (stage && stage.strip.length) ? " hasstrip" : "") + (onPen ? " pening" : "")} ref=${boardRef}>
         <div class="bnum" aria-label=${"Lesson " + number}>Lesson ${number}</div>
+        ${voice ? html`<${VoiceBars} src=${voice.src} secs=${voice.secs} k=${voice.k}/>` : null}
         ${turn ? html`<div class="turnhint" aria-label="Your turn"><${Ic.hand} size=${32}/></div>` : null}
-        ${rowsOf.length ? rowsOf.map((row, ri) => html`<div class="brow" key=${ri}>${row.map((t, ti) => {
+        ${rowsOf.length ? rowsOf.map((row, ri) => html`<div class="brow" key=${ri} style=${row.some(t => (t.d || t.t).length > 2) ? "--cols:" + Math.max(1, Math.min(5, row.length)) : null}>${row.map((t, ti) => {
           const snd = soundFor(ix, lesson.id, t.t);
           const cls = "tile" + (t.s ? " sent" : "") + (tkey === "tile:" + lesson.id + ":" + t.t ? " on" : "") + (!snd ? " mute" : "") +
             (edit ? (snd ? (snd.own ? " own" : " borrow") : " miss") : "") + (points && points.indexOf(t.t) >= 0 ? " pt" : "") +
@@ -6483,6 +7450,7 @@ notify pgrst, 'reload schema';
           return html`<button key=${ti} class=${cls} data-rc=${ri + "-" + ti} onClick=${() => onTile(t, snd, ri, ti)}>${t.d || t.t}</button>`;
         })}</div>`) : html`<div class="bempty">${edit ? "The board is empty. Write its rows below." : html`<${Ic.wait} size=${40} sw=${1.6}/>`}</div>`}
         <div class="stick" ref=${stickRef} aria-hidden="true"><i></i></div>
+        ${stage || clip || onPen ? html`<${BoardFx} boardRef=${boardRef} rowsKey=${lesson.board} stage=${stage} clip=${clip} onClipEnd=${onClipEnd} clipLabel=${clipLabel} onPen=${onPen} penCol=${penCol}/>` : null}
       </div>
       <div class="ledge"><i></i></div>
     </div>`;
@@ -6801,6 +7769,9 @@ notify pgrst, 'reload schema';
 
     useEffect(() => { if (pending.some(p => cids.has(p.cid))) setPending(ps => ps.filter(p => !cids.has(p.cid))); }, [s.msgs]);
     const explCue = useCueSync("explain:" + lid, lesson ? lesson.cues : null, true, c => setTurn({ cue: c, tries: 0 }), pst);
+    const explFx = useStageSync("explain:" + lid, lesson ? lesson.cues : null, pst);
+    const [ltool, setLtool] = useState("stick");
+    const [lpen, setLpen] = useState("#F1ECDC");
     useEffect(() => { player.stop(); tilePlayer.stop(); setTurn(null); setFlash(null); window.scrollTo(0, 0); }, [lid]);
     useEffect(() => { if (!flash) return; const t = setTimeout(() => setFlash(null), 800); return () => clearTimeout(t); }, [flash]);
     // live class
@@ -6899,7 +7870,11 @@ notify pgrst, 'reload schema';
         else setTurn(x => (x ? Object.assign({}, x, { tries: x.tries + 1 }) : x));
         return;
       }
-      if (teacher && L.on) { live.point(t.t, r, c, lid); return; }
+      if (teacher && L.on) {
+        if (ltool === "circle" || ltool === "under") { live.fx({ k: "o", s: ltool, r, c }); return; }
+        if (ltool === "word") { live.fx({ k: "sa", ch: t.t, r, c }); return; }
+        live.point(t.t, r, c, lid); return;
+      }
       if (snd) tilePlayer.play("tile:" + lid + ":" + t.t, srcFor(snd.rec.audio));
       if (!teacher && L.on) live.spoint(t.t, r, c, lid);
     }
@@ -6942,6 +7917,9 @@ notify pgrst, 'reload schema';
     const hint = turn && turn.cue.tile && turn.tries >= 2 ? turn.cue : null;
     const livePoint = L.on && L.point && L.point.lesson === lid ? L.point : null;
     const liveMark = teacher && L.on && L.mark && L.mark.lesson === lid ? L.mark : null;
+    const showClass = !!(lesson.explain && !L.on);
+    const liveStage = L.on && L.lesson === lid && L.mode !== "write" ? stageAt(L.fx || [], 1e12) : null;
+
     const who = student.name || "your student";
 
     return html`<div class="room">
@@ -6973,10 +7951,16 @@ notify pgrst, 'reload schema';
         <span class="tl">${lesson.title}</span>
       </div>` : null}
       ${teacher && L.on ? html`<${ClassPanel} s=${s} who=${who} lessonTitle=${lesson.title} lessonNo=${vIdx + 1} studentId=${student.id}/>` : null}
+      ${teacher && L.on && L.mode !== "write" ? html`<${LiveTools} lesson=${lesson} tool=${ltool} setTool=${setLtool} pen=${lpen} setPen=${setLpen} stage=${liveStage}/>` : null}
+      ${showClass ? html`<${ClassroomPlayer} lesson=${lesson} number=${vIdx + 1} k=${"explain:" + lid} src=${srcFor(lesson.explain)} secs=${lesson.explainSecs} cues=${lesson.cues || []} ix=${ix}
+        onTile=${onTile} waiting=${!!turn} cheer=${flash && flash.ok ? flash : null}/>` : null}
       ${L.on && L.mode === "write"
         ? html`<${WriteBoard} canWrite=${teacher || L.holder === "student"} teacher=${teacher} holder=${L.holder} name=${who} ix=${ix} lessons=${lessons}/>`
         : html`<${Board} lesson=${lesson} number=${vIdx + 1} ix=${ix} tkey=${tkey} onTile=${onTile} points=${points}
-        cue=${explCue || livePoint} mark=${liveMark} turn=${!!turn} flash=${flash} hint=${hint} follow=${!!explCue && pst.playing}/>`}
+        cue=${(showClass ? null : explCue) || livePoint} mark=${liveMark} turn=${!!turn && !showClass} flash=${flash} hint=${hint} follow=${!showClass && !!explCue && pst.playing}
+        stage=${(showClass ? null : explFx.stage) || liveStage} clip=${(showClass ? null : explFx.clip) || (L.on && L.clip) || null} onClipEnd=${explFx.clip && !showClass ? explFx.endClip : () => live.set({ clip: null })} strip=${!showClass && hasStrip(lesson.cues)}
+        onPen=${teacher && L.on && ltool === "pen" ? d => live.fx({ k: "o", s: "pen", col: lpen, r: d.r, c: d.c, pts: d.pts, dur: round2(d.dur) }) : null} penCol=${lpen}
+        voice=${!showClass && lesson.explain && pst.key === "explain:" + lid ? { src: srcFor(lesson.explain), secs: lesson.explainSecs, k: "explain:" + lid } : null}/>`}
       <section class="book" aria-label="Messages">
         <div class="thread">${nodes}</div>
         <div class="end" ref=${endRef}></div>
@@ -7351,8 +8335,12 @@ notify pgrst, 'reload schema';
   }
 
   const cueCount = cues => {
-    const np = (cues || []).filter(c => c.k === "p").length, nw = (cues || []).filter(c => c.k === "w").length;
-    return np + " point" + (np === 1 ? "" : "s") + ", " + nw + " your-turn" + (nw === 1 ? "" : "s");
+    const n = k => (cues || []).filter(c => c.k === k).length, bits = [n("p") + " point" + (n("p") === 1 ? "" : "s")];
+    if (n("o")) bits.push(n("o") + " mark" + (n("o") === 1 ? "" : "s"));
+    if (n("sa")) bits.push(n("sa") + " letter" + (n("sa") === 1 ? "" : "s"));
+    if (n("img") + n("vid")) bits.push(n("img") + n("vid") + " picture/video");
+    bits.push(n("w") + " your-turn" + (n("w") === 1 ? "" : "s"));
+    return bits.join(", ");
   };
   function ExplainRecorder({ lesson, pst, onStudio }) {
     const [mode, setMode] = useState("idle");
@@ -7405,9 +8393,11 @@ notify pgrst, 'reload schema';
       ${lesson.explain ? html`<button class=${"btn danger" + (arm ? " arm" : "")} onClick=${del}>${arm ? "Tap again to remove" : "Remove"}</button>` : null}
       ${fileInput}
     </div>
-    ${lesson.explain ? html`<p class="help">${cues.length ? "Stick: " + cueCount(cues) + "." : "No stick pointing on this one. Record with the board to add it."}</p>` : null}`;
+    ${lesson.explain ? html`<p class="help">${cues.length ? "On the board: " + cueCount(cues) + "." : "Nothing happens on the board in this one. Record with the board to add pointing, circles, words and pictures."}</p>` : null}`;
   }
 
+  const STUDIO_TOOLS = [["stick", "👉", "Stick"], ["circle", "⭕", "Circle"], ["under", "〰️", "Underline"], ["pen", "✏️", "Draw"], ["word", "🔤", "Word"]];
+  const PEN_COLS = ["#F1ECDC", "#FFE27A", "#FF9E9E", "#8FD0FF"];
   function ExplainStudio({ ix, lesson, number, onClose }) {
     const pst = usePlayer();
     const tkey = useTileKey();
@@ -7420,19 +8410,31 @@ notify pgrst, 'reload schema';
     const [pointer, setPointer] = useState(null);
     const [take, setTake] = useState(null);
     const [turnFlash, setTurnFlash] = useState(false);
-    const r = useRef(null), st = useRef(null), t0 = useRef(0);
+    const [tool, setTool] = useState("stick");
+    const [penCol, setPenCol] = useState(PEN_COLS[0]);
+    const [spell, setSpell] = useState(null);   // a typed word, shown a letter at a time
+    const [media, setMedia] = useState(() => { const m = (lesson.cues || []).find(c => c.k === "m"); return m && Array.isArray(m.media) ? m.media : []; });
+    const [adding, setAdding] = useState(null);
+    const [recClip, setRecClip] = useState(null);   // a clip playing while recording (the recording waits)
+    const [peek, setPeek] = useState(null);         // looking at a picture or clip before recording
+    const [cls, setCls] = useState(() => (lesson.cues && lesson.cues.some(c => c.k === "m" && c.teacher) ? classOf(lesson.cues) : myClass()));
+    const setC = patch => setCls(v => { const n = Object.assign({}, v, patch); try { localStorage.setItem("rc.class", JSON.stringify(n)); } catch (e) {} return n; });
+    const r = useRef(null), st = useRef(null), fileRef = useRef(null);
     const setCues = list => { cuesRef.current = list; setCuesState(list); };
+    const add = c => { const x = Object.assign({ id: uid().slice(-7) }, c); setCues(cuesRef.current.concat(x)); return x; };
     useEffect(() => { if (mode !== "rec") return; const i = setInterval(() => setNow(Date.now()), 250); return () => clearInterval(i); }, [mode]);
     useEffect(() => () => { if (r.current) r.current.cancel(); recorder.close(st.current); if (player.key === "studio") player.stop(); }, []);
+    useEffect(() => { if (mode === "rec") awake.on("studio"); else awake.off("studio"); return () => awake.off("studio"); }, [mode]);
     const preview = useCueSync("studio", cues, false, () => { setTurnFlash(true); setTimeout(() => setTurnFlash(false), 1500); }, pst);
-    const elapsed = () => round2((Date.now() - t0.current) / 1000);
+    const previewFx = useStageSync("studio", cues, pst);
+    const liveStage = useMemo(() => (mode === "rec" ? stageAt(fxOnly(cues), 1e9) : null), [cues, mode]);
+    const elapsed = ms => round2(r.current ? r.current.at(ms) : 0);
     async function start() {
       player.stop(); tilePlayer.stop();
       try {
         st.current = await recorder.open();
         r.current = recorder.start(st.current);
-        t0.current = r.current.t0;
-        setCues([]); setPointer(null); armRef.current = null; setArming(null); setNow(Date.now()); setMode("rec");
+        setCues([]); setPointer(null); armRef.current = null; setArming(null); setSpell(null); setNow(Date.now()); setMode("rec");
       } catch (e) {
         toast("The microphone isn't available here. Use a recording file instead (it won't have the stick).");
         onClose();
@@ -7441,28 +8443,87 @@ notify pgrst, 'reload schema';
     function onTile(t, snd, ri, ti) {
       if (mode === "rec") {
         if (armRef.current != null) {
-          setCues(cuesRef.current.concat({ t: armRef.current, k: "w", tile: t.t, r: ri, c: ti }));
+          add({ t: armRef.current, k: "w", tile: t.t, r: ri, c: ti });
           armRef.current = null; setArming(null); setPointer(null);
           return;
         }
-        const c = { t: elapsed(), k: "p", tile: t.t, r: ri, c: ti };
-        setCues(cuesRef.current.concat(c)); setPointer(c);
+        if (tool === "circle" || tool === "under") { add({ t: elapsed(), k: "o", s: tool, r: ri, c: ti }); return; }
+        if (tool === "word") { add({ t: elapsed(), k: "sa", ch: t.t, r: ri, c: ti }); return; }
+        const c = add({ t: elapsed(), k: "p", tile: t.t, r: ri, c: ti }); setPointer(c);
         return;
       }
       if (snd) tilePlayer.play("tile:" + lesson.id + ":" + t.t, srcFor(snd.rec.audio));
     }
+    function onPen(d) { if (mode === "rec") add({ t: elapsed(d.at), k: "o", s: "pen", col: penCol, r: d.r, c: d.c, pts: d.pts, dur: round2(d.dur) }); }
     function yourTurn() { armRef.current = elapsed(); setArming(armRef.current); setPointer(null); }
     function noAnswer() {
       if (armRef.current == null) return;
-      setCues(cuesRef.current.concat({ t: armRef.current, k: "w", tile: null }));
+      add({ t: armRef.current, k: "w", tile: null });
       armRef.current = null; setArming(null);
     }
+    function wipe() {
+      const sNow = liveStage || { marks: [], strip: [], img: null }, t = elapsed();
+      if (sNow.marks.length) add({ t, k: "ox" });
+      if (sNow.strip.length) add({ t, k: "sx" });
+      if (sNow.img) add({ t, k: "imgx" });
+      setPointer(null); setSpell(null);
+    }
+    function typeWord() {
+      const w = (window.prompt("Which word? Its letters will appear one at a time as you spell it.") || "").trim().slice(0, 16);
+      if (!w) return;
+      if (liveStage && liveStage.strip.length) add({ t: elapsed(), k: "sx" });
+      setSpell({ w, n: 0 });
+    }
+    function nextLetter() {
+      if (!spell) return;
+      add({ t: elapsed(), k: "sa", ch: spell.w[spell.n] });
+      setSpell(spell.n + 1 >= spell.w.length ? null : { w: spell.w, n: spell.n + 1 });
+    }
+    function showMedia(m) {
+      if (!m.a) return;
+      if (mode !== "rec") { setPeek(m); return; }
+      if (m.type === "vid") { r.current.pause(); setRecClip({ m, t: elapsed() }); return; }
+      const shown = liveStage && liveStage.img && liveStage.img.a === m.a;
+      add(shown ? { t: elapsed(), k: "imgx" } : { t: elapsed(), k: "img", a: m.a });
+    }
+    function clipDone(secs) {
+      const c = recClip; setRecClip(null); if (!c) return;
+      add({ t: c.t, k: "vid", a: c.m.a, secs: round1(secs || c.m.secs || 0) });
+      if (r.current) r.current.resume();
+    }
+    async function addMedia(e) {
+      const f = e.target.files && e.target.files[0]; e.target.value = ""; if (!f) return;
+      const isVid = /^video\//.test(f.type) || /\.(mp4|mov|m4v|webm)$/i.test(f.name || "");
+      if (isVid && (store.s.schemaVer || 0) < 7) { toast("To add videos, run the database update first (the blue box on your home screen)."); return; }
+      const tmp = { k: uid(), type: isVid ? "vid" : "img", busy: 0 };
+      setMedia(ms => ms.concat(tmp)); setAdding(tmp.k);
+      const upd = patch => setMedia(ms => ms.map(x => (x.k === tmp.k ? Object.assign({}, x, patch) : x)));
+      try {
+        let blob = f, secs = 0;
+        if (isVid) {
+          try { blob = await shrinkVideo(f, v => upd({ busy: v })); secs = blob.secs; }
+          catch (err) {
+            if (err && err.message === "toolong") throw { code: "toolong" };
+            if (f.size > 45 * 1048576) throw { code: "toobig" };
+            blob = f; secs = await probeDuration(f).catch(() => 0);
+          }
+        } else blob = await shrinkImage(f);
+        const id = await uploadBlob(blob);
+        upd({ a: id, secs: round1(secs || 0), busy: null });
+      } catch (err) {
+        setMedia(ms => ms.filter(x => x.k !== tmp.k));
+        toast(err && err.code === "toolong" ? "That video is longer than 3 minutes. Pick a shorter clip." : err && err.code === "toobig" ? "That video is too big. Pick a shorter clip." : errText(err, "That file couldn't be added."));
+      }
+      setAdding(null);
+    }
     async function stop() {
-      const c = r.current; r.current = null; if (!c) return;
+      const c = r.current; if (!c) return;
+      if (recClip) clipDone(0);
+      r.current = null;
       noAnswer();
       const out = await c.stop(); recorder.close(st.current); st.current = null;
       if (out.secs < 1) { setMode("ready"); toast("That was too short."); return; }
-      setTake({ blob: out.blob, secs: out.secs, url: URL.createObjectURL(out.blob) }); setPointer(null); setMode("review");
+      setTake({ blob: out.blob, secs: out.secs, url: URL.createObjectURL(out.blob) }); setPointer(null); setSpell(null); setMode("review");
     }
     function discard() { if (player.key === "studio") player.stop(); setTake(null); setCues([]); setMode("ready"); }
     async function save() {
@@ -7472,7 +8533,9 @@ notify pgrst, 'reload schema';
       try {
         const id = await uploadBlob(take.blob);
         const old = lesson.explain;
+        const kept = media.filter(m => m.a).map(m => ({ a: m.a, type: m.type, secs: m.secs || 0 }));
         const list = cuesRef.current.slice().sort((a, b) => a.t - b.t);
+        list.unshift({ t: -1, k: "m", media: kept, teacher: cls });
         await saveExpl(lesson.id, { explain: id, explainSecs: round1(take.secs), cues: list, updatedAt: Date.now() });
         if (old && old !== id && rt.assets) { try { await rt.assets.delete(old); } catch (e) {} }
         toast("Explanation saved: " + cueCount(list) + ".");
@@ -7480,28 +8543,61 @@ notify pgrst, 'reload schema';
       } catch (e) { toast(errText(e)); setMode("review"); }
     }
     const on = pst.key === "studio";
+    const rec = mode === "rec";
+    const tray = html`<div class="mtray" aria-label="Pictures and videos">
+      ${media.map(m => html`<button key=${m.k || m.a} class=${"mthumb" + (rec && m.type === "img" && liveStage && liveStage.img && liveStage.img.a === m.a ? " on" : "")} disabled=${!m.a} onClick=${() => showMedia(m)} aria-label=${m.type === "vid" ? "Play this video" : "Show this picture"}>
+        ${!m.a ? html`<span class="mbusy">${m.busy ? Math.round(m.busy * 100) + "%" : "…"}</span>` : m.type === "vid" ? html`<video src=${srcFor(m.a) + "#t=0.5"} preload="metadata" muted playsinline></video><span class="mbadge">▶ ${fmtDur(m.secs || 0)}</span>` : html`<img src=${srcFor(m.a)} alt=""/>`}
+      </button>`)}
+      <button class="mthumb madd" disabled=${!!adding} onClick=${() => fileRef.current && fileRef.current.click()} aria-label="Add a picture or video"><span>＋</span><small>Picture / video</small></button>
+      <input ref=${fileRef} type="file" accept="image/*,video/*" style="display:none" onChange=${addMedia}/>
+    </div>`;
+    const counts = (() => { const n = k => cues.filter(c => c.k === k).length; const bits = [n("p") + " point" + (n("p") === 1 ? "" : "s")]; if (n("o")) bits.push(n("o") + " marks"); if (n("sa")) bits.push(n("sa") + " letters"); if (n("img") + n("vid")) bits.push(n("img") + n("vid") + " shown"); if (n("w")) bits.push(n("w") + " your-turn"); return bits.join(", "); })();
     return html`<div class="full studio" role="dialog" aria-label="Record the explanation">
       <div class="fhead">
         <span>Lesson ${number}: ${lesson.title}</span>
         <button class="iconbtn" onClick=${onClose} aria-label="Close"><${Ic.x}/></button>
       </div>
       <div class="sbody">
-        <${Board} lesson=${lesson} number=${number} ix=${ix} tkey=${tkey} onTile=${onTile}
-          cue=${mode === "rec" ? pointer : mode === "review" ? preview : null} turn=${arming != null || turnFlash}/>
+        ${mode === "review" || mode === "saving" ? html`<${ClassroomPlayer} lesson=${lesson} number=${number} k="studio" src=${take.url} secs=${take.secs} cues=${[{ t: -1, k: "m", teacher: cls }].concat(cues)} ix=${ix}/>` : null}
+        ${mode === "review" || mode === "saving" ? null : html`<${Board} lesson=${lesson} number=${number} ix=${ix} tkey=${tkey} onTile=${onTile}
+          cue=${rec ? pointer : mode === "review" ? preview : null} turn=${arming != null || turnFlash}
+          stage=${rec ? liveStage : mode === "review" ? previewFx.stage : null}
+          clip=${rec && recClip ? { id: "rc" + recClip.t, a: recClip.m.a } : mode === "review" ? previewFx.clip : peek && peek.type === "vid" ? { id: "pk" + peek.a, a: peek.a } : null}
+          onClipEnd=${rec ? clipDone : mode === "review" ? previewFx.endClip : () => setPeek(null)} clipLabel=${rec ? "Back to the board" : null}
+          strip=${hasStrip(cues)} onPen=${rec && tool === "pen" && !recClip ? onPen : null} penCol=${penCol}
+          voice=${null}/>`}
+        ${peek && peek.type === "img" ? html`<div class="peek" onClick=${() => setPeek(null)}><img src=${srcFor(peek.a)} alt="Picture"/><small>Tap to close</small></div>` : null}
       </div>
       <div class="sfoot">
         ${mode === "ready" ? html`
-          <p class="help">Talk them through the board. Tap each tile as you mention it: they'll see your stick point at it at that exact moment. Tap <b>Your turn</b> when they should answer, then tap the right tile, or <b>No answer</b> if they should just say it or write it. The recording stops there until they do.</p>
+          <p class="help">Talk them through the board. While you record, use the tools: <b>👉 Stick</b> points, <b>⭕ Circle</b> and <b>〰️ Underline</b> mark a tile, <b>✏️ Draw</b> lets you draw with your finger, <b>🔤 Word</b> brings letters down from the board (tap m, a, k, e) or spells a word you type. Tap a picture or video below to show it. <b>Your turn</b> stops for their answer.</p>
+          ${tray}
+          <div class="tpick">
+            <button class=${"gamesw" + (cls.on ? " on" : "")} onClick=${() => setC({ on: !cls.on })} aria-pressed=${cls.on ? "true" : "false"}><span class="knob"></span><span>Teacher in the classroom</span></button>
+            ${cls.on ? html`<div class="tmoods"><span class="help">Manner</span>${Object.entries(CR_MOODS).map(([k, M]) => html`<button key=${k} class=${"chip" + (cls.mood === k ? " on" : "")} onClick=${() => setC({ mood: k })}>${M.name}</button>`)}</div>` : null}
+          </div>
           <button class="big red" onClick=${start} aria-label="Start recording"><${Ic.mic} size=${30}/></button>` : null}
-        ${mode === "rec" ? html`
-          <div class="srow"><span class="recind"><span class="recdot"></span>${fmtDur((now - t0.current) / 1000)}</span><span class="help">${cueCount(cues)}</span></div>
+        ${rec ? html`
+          <div class="srow"><span class="recind"><span class="recdot"></span>${recClip ? "Paused for the video" : fmtDur(r.current ? r.current.at() : 0)}</span><span class="help">${counts}</span></div>
           ${arming != null ? html`<p class="armnote">Now tap the right answer on the board, or <button class="linkbtn" onClick=${noAnswer}>No answer</button></p>` : null}
+          <div class="tools" role="toolbar" aria-label="Tools">
+            ${STUDIO_TOOLS.map(([k, ic, lbl]) => html`<button key=${k} class=${"tool" + (tool === k ? " on" : "")} aria-pressed=${tool === k ? "true" : "false"} onClick=${() => { setTool(k); if (k !== "stick") setPointer(null); }}><span>${ic}</span>${lbl}</button>`)}
+            <button class="tool" onClick=${wipe}><span>🧽</span>Wipe</button>
+          </div>
+          ${cls.on ? html`<div class="emotes" aria-label="Teacher's reactions">${CR_EMOTES.map(([k, ic, lbl]) => html`<button key=${k} class="emote" onClick=${() => add({ t: elapsed(), k: "e", e: k })} aria-label=${lbl}>${ic}<small>${lbl}</small></button>`)}</div>` : null}
+          ${tool === "pen" ? html`<div class="subbar">${PEN_COLS.map(c => html`<button key=${c} class=${"swatch" + (penCol === c ? " on" : "")} style=${"background:" + c} onClick=${() => setPenCol(c)} aria-label="Chalk colour"></button>`)}<span class="help">Draw on the board with your finger.</span></div>` : null}
+          ${tool === "word" ? html`<div class="subbar">
+            ${spell ? html`<button class="btn" onClick=${nextLetter}>Show “${spell.w[spell.n]}” <small>(${spell.w.slice(0, spell.n)}<u>${spell.w[spell.n]}</u>${spell.w.slice(spell.n + 1)})</small></button>`
+              : html`<span class="help">Tap letters on the board to bring them down.</span><button class="chip" onClick=${typeWord}>⌨️ Type a word</button>`}
+            <button class="chip" onClick=${() => { add({ t: elapsed(), k: "sx" }); setSpell(null); }}>Clear word</button>
+          </div>` : null}
+          ${tray}
           <div class="srow">
             <button class="btn quiet" disabled=${arming != null} onClick=${yourTurn}><${Ic.hand} size=${20}/>Your turn</button>
             <button class="big red" onClick=${stop} aria-label="Stop recording"><${Ic.stop} size=${28}/></button>
           </div>` : null}
         ${mode === "review" || mode === "saving" ? html`
-          <p class="help">${fmtDur(take.secs)}, ${cueCount(cues)}. Listen to check the stick, then save.</p>
+          <p class="help">${fmtDur(take.secs)}: ${counts}. Listen to check it, then save.</p>
           <div class="srow">
             <button class="btn quiet" disabled=${mode === "saving"} onClick=${discard}>Discard</button>
             <button class="btn quiet" onClick=${() => player.play("studio", take.url)}>${on && pst.playing ? html`<${Ic.pause} size=${18}/>` : html`<${Ic.play} size=${18}/>`}Listen</button>
@@ -7672,9 +8768,10 @@ notify pgrst, 'reload schema';
     // drawn in 1280×720 steps, written out at full HD (1920×1080) so it fills a TV
     const W = 1280, H = 720, OUT_W = 1920, OUT_H = 1080, cv = document.createElement("canvas"); cv.width = OUT_W; cv.height = OUT_H;
     const c = cv.getContext("2d"); c.setTransform(OUT_W / W, 0, 0, OUT_H / H, 0, 0);
-    const rows = parseBoard(lesson.board, lesson.stage === 3), cues = (lesson.cues || []).slice().sort((a, b) => a.t - b.t);
-    // lay the tiles out like the board
-    const top = 150, bottom = H - 70, rowH = Math.min(140, (bottom - top) / Math.max(1, rows.length));
+    const rows = parseBoard(lesson.board, lesson.stage === 3), cues = (lesson.cues || []).filter(q => q.t >= 0).sort((a, b) => a.t - b.t);
+    const fx = fxOnly(cues), pcs = cues.filter(q => q.k === "p"), wcs = cues.filter(q => q.k === "w"), stripOn = hasStrip(cues);
+    // lay the tiles out like the board (leaving room at the bottom for a word, if one gets built)
+    const top = 150, bottom = H - 70 - (stripOn ? 120 : 0), rowH = Math.min(140, (bottom - top) / Math.max(1, rows.length));
     const size = Math.max(28, Math.min(84, rowH * 0.62));
     c.font = "400 " + size + "px Andika, sans-serif";
     const boxes = rows.map((r, ri) => {
@@ -7683,31 +8780,12 @@ notify pgrst, 'reload schema';
       let x = (W - total * scale) / 2;
       return r.map((t, ti) => { const w = ws[ti] * scale, b = { x, y: top + ri * rowH, w, h: rowH * 0.86, t, scale }; x += w + gap * scale; return b; });
     });
-    const draw = now => {
-      const g = c.createLinearGradient(0, 0, 0, H); g.addColorStop(0, "#2B4A3A"); g.addColorStop(1, "#1E3328");
-      c.fillStyle = "#6b4a2e"; c.fillRect(0, 0, W, H); c.fillStyle = g; c.fillRect(18, 18, W - 36, H - 36);
-      c.fillStyle = "rgba(241,236,220,.85)"; c.font = "700 40px Andika, sans-serif"; c.textAlign = "left"; c.textBaseline = "middle";
-      c.fillText("Lesson " + number + (lesson.title ? "  ·  " + lesson.title : ""), 60, 78);
-      let p = null, w = null;
-      for (const q of cues) { if (q.t > now) break; if (q.k === "p") p = q; if (q.k === "w") w = q; }
-      if (p && now - p.t > 8) p = null;
-      for (const r of boxes) for (const b of r) {
-        const on = p && boxes[p.r] && boxes[p.r][p.c] === b;
-        if (on) { c.fillStyle = "rgba(255,226,122,.22)"; c.strokeStyle = "#FFE27A"; c.lineWidth = 5; c.beginPath(); c.roundRect ? c.roundRect(b.x, b.y, b.w, b.h, 16) : c.rect(b.x, b.y, b.w, b.h); c.fill(); c.stroke(); }
-        c.fillStyle = on ? "#FFF6D0" : "rgba(241,236,220,.92)"; c.font = "400 " + size * b.scale + "px Andika, sans-serif"; c.textAlign = "center";
-        c.fillText(b.t.d || b.t.t, b.x + b.w / 2, b.y + b.h / 2);
-      }
-      if (p && boxes[p.r] && boxes[p.r][p.c]) {   // the stick
-        const b = boxes[p.r][p.c], tx = b.x + b.w / 2 + 10, ty = b.y + b.h * 0.85;
-        c.strokeStyle = "#B07A3E"; c.lineWidth = 12; c.lineCap = "round"; c.beginPath(); c.moveTo(W - 120, H - 40); c.lineTo(tx, ty); c.stroke();
-        c.strokeStyle = "#F1ECDC"; c.lineWidth = 12; c.beginPath(); c.moveTo(tx + (W - 120 - tx) * 0.04, ty + (H - 40 - ty) * 0.04); c.lineTo(tx, ty); c.stroke();
-      }
-      if (w && now - w.t < 2) { c.fillStyle = "#FFB020"; c.font = "700 44px Andika, sans-serif"; c.textAlign = "right"; c.fillText("Your turn!", W - 60, 78); }
-    };
-    // ---- build the file frame by frame, faster than real time, and finish it properly ----
+    const boxOf = q => q && boxes[q.r] && boxes[q.r][q.c];
+    const ease = x => 1 - Math.pow(1 - Math.max(0, Math.min(1, x)), 3);
     const MB = await loadMux();
     const FPS = 15;
-    // the voice, decoded once at a low sample rate so it stays small in memory
+
+    // ---- the voice, and everything shown: pictures and clips ----
     const output = new MB.Output({ format: new MB.Mp4OutputFormat({ fastStart: "in-memory" }), target: new MB.BufferTarget() });
     const order = (have, want) => want.filter(x => have.includes(x)).concat(have.filter(x => !want.includes(x)));
     const vcodec = await MB.getFirstEncodableVideoCodec(order(output.format.getSupportedVideoCodecs(), ["avc", "hevc", "vp9", "av1"]), { width: OUT_W, height: OUT_H });
@@ -7719,43 +8797,177 @@ notify pgrst, 'reload schema';
     if (!vcodec || !acodec) throw new Error("nocodec");
     let ac;
     try { ac = new (window.AudioContext || window.webkitAudioContext)({ sampleRate: rate }); } catch (e) { ac = new (window.AudioContext || window.webkitAudioContext)(); }
+    const decode = raw => new Promise((res, rej) => ac.decodeAudioData(raw, res, rej));
+    const mono = ab => { if (ab.numberOfChannels === 1) return ab.getChannelData(0); const d = new Float32Array(ab.length), n = ab.numberOfChannels; for (let ch = 0; ch < n; ch++) { const x = ab.getChannelData(ch); for (let k = 0; k < x.length; k++) d[k] += x[k] / n; } return d; };
     const raw = await fetch(publicUrl(lesson.explain)).then(r => { if (!r.ok) throw new Error("audio"); return r.arrayBuffer(); });
-    let buf = await new Promise((res, rej) => ac.decodeAudioData(raw, res, rej));
-    if (buf.numberOfChannels > 1) {   // one voice: one channel, half the memory
-      const m = ac.createBuffer(1, buf.length, buf.sampleRate), d = m.getChannelData(0), n = buf.numberOfChannels;
-      for (let ch = 0; ch < n; ch++) { const x = buf.getChannelData(ch); for (let k = 0; k < x.length; k++) d[k] += x[k] / n; }
-      buf = m;
+    const voiceBuf = await decode(raw);
+    const SR = voiceBuf.sampleRate, voice = mono(voiceBuf), talkSecs = voiceBuf.duration;
+    const levels = levelsOf(voiceBuf);
+    const pics = new Map();
+    for (const q of fx) if (q.k === "img" && !pics.has(q.a)) {
+      try { pics.set(q.a, await createImageBitmap(await fetch(publicUrl(q.a)).then(r => r.blob()))); } catch (e) { pics.set(q.a, null); }
+    }
+    // clips: the voice waits while each one plays, so the video gets longer by each clip
+    const clips = [];
+    for (const q of fx) if (q.k === "vid") {
+      const k = { q, at: q.t, dur: 0, sound: null, frames: null };
+      try {
+        const blob = await fetch(publicUrl(q.a)).then(r => r.blob());
+        const input = new MB.Input({ source: new MB.BlobSource(blob), formats: MB.ALL_FORMATS });
+        const full = await input.computeDuration();
+        k.dur = Math.min(full, q.secs || full) || 0;
+        const vt = await input.getPrimaryVideoTrack();
+        if (vt) k.sink = new MB.CanvasSink(vt, { width: 960, height: 540, fit: "contain" });
+        try { const ab = await decode(await blob.arrayBuffer()); k.sound = mono(ab); } catch (e) { k.sound = null; }
+      } catch (e) { k.dur = 0; }
+      if (k.dur > 0.2) clips.push(k);
     }
     try { ac.close(); } catch (e) {}
-    if (buf.sampleRate !== rate) {   // this phone ignored the rate we asked for: make it match what the encoder accepts
-      const k = await MB.getFirstEncodableAudioCodec(aorder, { numberOfChannels: 1, sampleRate: buf.sampleRate });
-      if (!k) throw new Error("nocodec");
-      acodec = k;
+    // output time -> where we are in the lesson
+    const segs = []; let outT = 0, talkT = 0;
+    for (const k of clips) { segs.push({ talk: true, o0: outT, t0: talkT, t1: k.at }); outT += k.at - talkT; talkT = k.at; segs.push({ clip: k, o0: outT, o1: outT + k.dur }); outT += k.dur; }
+    segs.push({ talk: true, o0: outT, t0: talkT, t1: talkSecs }); outT += talkSecs - talkT;
+    const total = outT;
+    const where = T => { for (const g of segs) { if (g.clip) { if (T < g.o1) return { t: g.clip.at, clip: g.clip, ct: T - g.o0 }; } else if (T < g.o0 + (g.t1 - g.t0)) return { t: g.t0 + (T - g.o0) }; } return { t: talkSecs }; };
+    // one sound track: the voice with the clips' sound put in
+    const all = new Float32Array(Math.ceil(total * SR) + 1);
+    for (const g of segs) {
+      if (g.talk) all.set(voice.subarray(Math.floor(g.t0 * SR), Math.floor(g.t1 * SR)), Math.floor(g.o0 * SR));
+      else if (g.clip.sound) all.set(g.clip.sound.subarray(0, Math.floor(g.clip.dur * SR)), Math.floor(g.o0 * SR));
     }
-    window.__lastCodecs = { vcodec, acodec, rate: buf.sampleRate };
-    const total = buf.duration;
-    const vsrc = new MB.CanvasSource(cv, { codec: vcodec, bitrate: 1500000, bitrateMode: "variable", latencyMode: "quality", contentHint: "text" });
+    const outBuf = new AudioBuffer({ length: all.length, numberOfChannels: 1, sampleRate: SR });
+    outBuf.copyToChannel(all, 0);
+
+    // ---- one picture of the board at lesson time t ----
+    const stickAt = t => { let p = null, prev = null; for (const q of pcs) { if (q.t > t) break; prev = p; p = q; } if (p) { for (const w of wcs) if (w.t > p.t && w.t <= t) { p = null; break; } } return p && t - p.t <= 8 ? { p, prev: prev && p.t - prev.t < 8 ? prev : null } : null; };
+    const drawPath = (P, pr, col, lw) => {
+      if (P.length < 2 || pr <= 0) return;
+      let L = 0; const seg = []; for (let i = 1; i < P.length; i++) { const d = Math.hypot(P[i][0] - P[i - 1][0], P[i][1] - P[i - 1][1]); seg.push(d); L += d; }
+      let left = L * Math.min(1, pr);
+      c.strokeStyle = col; c.lineWidth = lw; c.lineCap = "round"; c.lineJoin = "round"; c.shadowColor = "rgba(0,0,0,.35)"; c.shadowBlur = 4;
+      c.beginPath(); c.moveTo(P[0][0], P[0][1]);
+      for (let i = 1; i < P.length && left > 0; i++) { const f = Math.min(1, left / (seg[i - 1] || 1)); c.lineTo(P[i - 1][0] + (P[i][0] - P[i - 1][0]) * f, P[i - 1][1] + (P[i][1] - P[i - 1][1]) * f); left -= seg[i - 1]; }
+      c.stroke(); c.shadowBlur = 0;
+    };
+    const slotSize = 64;
+    // the classroom: the same picture students see on their phones
+    const cls = classOf(lesson.cues), CA = crAssets(lesson, number);
+    const body = cls.on ? await teacherBody("video", cls.outfit).catch(() => null) : null;
+    if (body) window.T3D.resize(body, 1280, 720);
+    const cplan = crPlan(cues, q => CA.lay.at[q.r + "-" + q.c] || null, false, CR_STRIP);
+    for (const q of fx) if (q.k === "img" && pics.get(q.a)) crPics.set(q.a, pics.get(q.a));
+    const drawClass = (T, w8, clipFrame) => {
+      const t = w8.t, st = stageAt(fx, t);
+      c.setTransform(OUT_W / W, 0, 0, OUT_H / H, 0, 0);
+      crFrame(c, { room: CA.room, front: CA.front, lay: CA.lay, lesson, t, wall: T, stage: st, point: crPointAt(cues, t), turnCue: crTurnAt(cues, t), waiting: false,
+        pic: st.img ? pics.get(st.img.a) || null : null, plan: cplan, outfit: cls.outfit, showTeacher: cls.on, clip: !!w8.clip, clipFrame,
+        drawTeacher: body ? (cc, P) => window.T3D.draw(body, P, cc, CR_W, CR_H) : null,
+        env: { mood: cls.mood, playing: !w8.clip, levels, total: talkSecs, waiting: false, cheer: null } });
+    };
+    const draw = (T) => {
+      const w8 = where(T), now = w8.t;
+      const g = c.createLinearGradient(0, 0, 0, H); g.addColorStop(0, "#2B4A3A"); g.addColorStop(1, "#1E3328");
+      c.fillStyle = "#6b4a2e"; c.fillRect(0, 0, W, H); c.fillStyle = g; c.fillRect(18, 18, W - 36, H - 36);
+      c.fillStyle = "rgba(241,236,220,.85)"; c.font = "700 40px Andika, sans-serif"; c.textAlign = "left"; c.textBaseline = "middle";
+      c.fillText("Lesson " + number + (lesson.title ? "  ·  " + lesson.title : ""), 60, 78);
+      const sk = stickAt(now), p = sk && sk.p;
+      let w = null; for (const q of wcs) { if (q.t > now) break; w = q; }
+      for (const r of boxes) for (const b of r) {
+        const on = p && boxOf(p) === b;
+        if (on) { c.fillStyle = "rgba(255,226,122,.22)"; c.strokeStyle = "#FFE27A"; c.lineWidth = 5; c.beginPath(); c.roundRect ? c.roundRect(b.x, b.y, b.w, b.h, 16) : c.rect(b.x, b.y, b.w, b.h); c.fill(); c.stroke(); }
+        c.fillStyle = on ? "#FFF6D0" : p ? "rgba(241,236,220,.55)" : "rgba(241,236,220,.92)"; c.font = "400 " + size * b.scale + "px Andika, sans-serif"; c.textAlign = "center";
+        c.fillText(b.t.d || b.t.t, b.x + b.w / 2, b.y + b.h / 2);
+      }
+      const st = stageAt(fx, now);
+      for (const q of st.marks) { const b = boxOf(q); if (b) drawPath(markPts(q, b), (now - q.t) / markDur(q), markCol(q), q.s === "pen" ? 6 : 5.5); }
+      if (p && boxOf(p)) {   // the stick, sliding from the last tile it pointed at
+        const b = boxOf(p), pb = sk.prev && boxOf(sk.prev), k = pb ? ease((now - p.t) / 0.3) : 1;
+        const tx0 = b.x + b.w / 2 + 10, ty0 = b.y + b.h * 0.85, tx = pb ? pb.x + pb.w / 2 + 10 + (tx0 - pb.x - pb.w / 2 - 10) * k : tx0, ty = pb ? pb.y + pb.h * 0.85 + (ty0 - pb.y - pb.h * 0.85) * k : ty0;
+        c.strokeStyle = "#B07A3E"; c.lineWidth = 12; c.lineCap = "round"; c.beginPath(); c.moveTo(W - 120, H - 40); c.lineTo(tx, ty); c.stroke();
+        c.strokeStyle = "#F1ECDC"; c.lineWidth = 12; c.beginPath(); c.moveTo(tx + (W - 120 - tx) * 0.04, ty + (H - 40 - ty) * 0.04); c.lineTo(tx, ty); c.stroke();
+      }
+      if (st.strip.length) {   // the word being built, letters flying down from their tiles
+        const y = H - 70 - 58; c.font = "400 " + slotSize + "px Andika, sans-serif";
+        const ws = st.strip.map(q => c.measureText(q.ch).width + 30), tot = ws.reduce((a, b) => a + b, 0) + 10 * (ws.length - 1);
+        c.strokeStyle = "rgba(241,236,220,.45)"; c.lineWidth = 2; c.setLineDash([8, 8]); c.beginPath(); c.moveTo(60, y - 58); c.lineTo(W - 60, y - 58); c.stroke(); c.setLineDash([]);
+        let x = (W - tot) / 2;
+        st.strip.forEach((q, i) => {
+          const sw = ws[i], sx = x + sw / 2; x += sw + 10;
+          const k = ease((now - q.t) / 0.55), from = boxOf(q);
+          const cx = from ? from.x + from.w / 2 + (sx - from.x - from.w / 2) * k : sx, cy = from ? from.y + from.h / 2 + (y - from.y - from.h / 2) * k : y;
+          const sc = from ? 0.7 + 0.3 * k : 0.2 + 0.8 * k;
+          c.save(); c.translate(cx, cy); c.scale(sc, sc);
+          c.fillStyle = "rgba(244,211,107,.18)"; c.strokeStyle = "rgba(244,211,107,.7)"; c.lineWidth = 3;
+          c.beginPath(); c.roundRect ? c.roundRect(-sw / 2, -44, sw, 88, 12) : c.rect(-sw / 2, -44, sw, 88); c.fill(); c.stroke();
+          c.fillStyle = "#FFF6D0"; c.textAlign = "center"; c.fillText(q.ch, 0, 2); c.restore();
+        });
+      }
+      if (st.img && pics.get(st.img.a)) {   // a picture
+        const bm = pics.get(st.img.a), k = ease((now - st.img.t) / 0.35), maxW = W - 220, maxH = H - 200, s0 = Math.min(maxW / bm.width, maxH / bm.height) * (0.6 + 0.4 * k);
+        c.fillStyle = "rgba(20,32,26," + (0.72 * k).toFixed(2) + ")"; c.fillRect(18, 18, W - 36, H - 36);
+        const iw = bm.width * s0, ih = bm.height * s0, ix = (W - iw) / 2, iy = (H - ih) / 2 + 30;
+        c.fillStyle = "#F1ECDC"; c.fillRect(ix - 8, iy - 8, iw + 16, ih + 16); c.drawImage(bm, ix, iy, iw, ih);
+      }
+      if (w && now - w.t < 2) { c.fillStyle = "#FFB020"; c.font = "700 44px Andika, sans-serif"; c.textAlign = "right"; c.fillText("Your turn!", W - 60, 78); }
+      else if (!w8.clip) {   // the voice bars, moving with the voice
+        const base = Math.floor(now * 20);
+        for (let i = 0; i < 5; i++) { const v = 0.15 + 0.85 * (levels[Math.max(0, base - 2 + i)] || 0), h = 30 * v; c.fillStyle = "rgba(244,211,107,.85)"; c.fillRect(W - 110 + i * 10, 78 - h / 2, 6, h); }
+      }
+      return w8;
+    };
+    const drawClip = (w8, frame) => {
+      c.fillStyle = "rgba(10,16,13,.82)"; c.fillRect(18, 18, W - 36, H - 36);
+      if (frame) { const fw = frame.canvas.width, fh = frame.canvas.height, sc = Math.min((W - 120) / fw, (H - 150) / fh), iw = fw * sc, ih = fh * sc; c.drawImage(frame.canvas, (W - iw) / 2, (H - ih) / 2 + 30, iw, ih); }
+    };
+
+    // ---- write it, frame by frame ----
+    const vsrc = new MB.CanvasSource(cv, { codec: vcodec, bitrate: 1100000, bitrateMode: "variable", latencyMode: "quality", contentHint: "text" });
     const asrc = new MB.AudioBufferSource({ codec: acodec, bitrate: 128000 });
     output.addVideoTrack(vsrc, { frameRate: FPS });
     output.addAudioTrack(asrc);
     await output.start();
-    const audioDone = asrc.add(buf);   // not awaited here: the two tracks are written side by side
+    const audioDone = asrc.add(outBuf);   // not awaited here: the two tracks are written side by side
     const n = Math.ceil(total * FPS);
-    const yieldUi = () => new Promise(r => { const c = new MessageChannel(); c.port1.onmessage = () => r(); c.port2.postMessage(0); });
-    // The board only changes when the stick moves: write a new picture then, and one a second otherwise.
-    // Far smaller files, and much less work for the phone.
-    const sig = now => { let p = -1, w = null; cues.forEach((q, k) => { if (q.t <= now) { if (q.k === "p") p = k; if (q.k === "w") w = q; } }); if (p >= 0 && now - cues[p].t > 8) p = -1; return p + "|" + (w && now - w.t < 2 ? 1 : 0); };
-    const times = [];
-    let lastSig = null, lastT = -9;
-    for (let f = 0; f < n; f++) { const t = f / FPS, g = sig(t); if (g !== lastSig || t - lastT >= 1 - 1e-6) { times.push(t); lastSig = g; lastT = t; } }
-    let lastKey = -99;
-    for (let k = 0; k < times.length; k++) {
-      const t = times[k], next = k + 1 < times.length ? times[k + 1] : n / FPS;
-      draw(t);
-      const key = t - lastKey >= 4 - 1e-6; if (key) lastKey = t;
-      await vsrc.add(t, next - t, { keyFrame: key });
-      if (k % 3 === 0) { if (onProgress) onProgress(t / total); await yieldUi(); }
+    const yieldUi = () => new Promise(r => { const ch = new MessageChannel(); ch.port1.onmessage = () => r(); ch.port2.postMessage(0); });
+    // A new picture only when something on the board changes (a mark being drawn, a letter flying, the voice bars),
+    // and at least one a second. Far smaller files, and much less work for the phone.
+    const busyAt = t => {
+      const near = q => t - q.t >= 0 && t - q.t < 0.7;
+      for (const q of fx) { if (q.t > t) break; if ((q.k === "o" && t - q.t < markDur(q) + 0.05) || near(q)) return true; }
+      for (const q of pcs) { if (q.t > t) break; if (t - q.t < 0.35) return true; }
+      return false;
+    };
+    const keyAt = (T, w8) => {
+      if (w8.clip || cls.on) return "c" + T;
+      const t = w8.t, sk = stickAt(t), st = stageAt(fx, t);
+      let w = null; for (const q of wcs) { if (q.t > t) break; w = q; }
+      const turn = w && t - w.t < 2;
+      const bars = turn ? "" : Array.from({ length: 5 }, (_, i) => Math.round((levels[Math.max(0, Math.floor(t * 7.5) * 20 / 7.5 - 2 + i | 0)] || 0) * 5)).join("");
+      return (sk ? sk.p.t : -1) + "|" + stageSig(st) + "|" + (turn ? 1 : 0) + "|" + bars + (busyAt(t) ? "|" + T : "");
+    };
+    let lastKey = null, lastT = -9, lastKeyFrame = -99, pending = null, clipIter = null, clipOf = null;
+    const flush = async next => {
+      if (!pending) return;
+      await vsrc.add(pending.T, next - pending.T, { keyFrame: pending.key });
+      pending = null;
+    };
+    for (let f = 0; f < n; f++) {
+      const T = f / FPS, w8 = where(T), k = keyAt(T, w8);
+      if (k === lastKey && T - lastT < 1 - 1e-6) continue;
+      await flush(T);
+      if (!w8.clip) drawClass(T, w8, null);
+      if (w8.clip) {
+        if (clipOf !== w8.clip) { if (clipIter && clipIter.return) clipIter.return().catch(() => {}); clipOf = w8.clip; clipIter = w8.clip.sink ? w8.clip.sink.canvasesAtTimestamps((function* (g) { for (let s = 0; s < g.dur; s += 1 / FPS) yield s; })(w8.clip))[Symbol.asyncIterator]() : null; }
+        let fr = null; if (clipIter) { const r = await clipIter.next(); fr = r.done ? null : r.value; }
+        drawClass(T, w8, fr ? fr.canvas : null);
+      }
+      const key = T - lastKeyFrame >= 4 - 1e-6; if (key) lastKeyFrame = T;
+      pending = { T, key };
+      lastKey = k; lastT = T;
+      if (f % 6 === 0) { if (onProgress) onProgress(T / total); await yieldUi(); }
     }
+    await flush(n / FPS);
+    if (clipIter && clipIter.return) { try { await clipIter.return(); } catch (e) {} }
     await audioDone;
     if (onProgress) onProgress(1);
     await output.finalize();
@@ -8300,7 +9512,7 @@ notify pgrst, 'reload schema';
   window.__kfApi = { kfPress, kfStep, kfNew, kfSnd, kfAnn, annRec };
   window.__ink = { hitInk, inkGroup, straighten };
   window.__mux = { lessonVideo, fixVideo, loadMux, vidJob, awake, player };
-  window.__ui = { PushBell, SetupCheck, VidJobPill, html, render, store };
+  window.__ui = { PushBell, SetupCheck, VidJobPill, html, render, store, Board, ExplainStudio, LiveTools, stageAt, buildSound, live, player, ClassroomPlayer };
   window.__lang = { viewOf, saveExpl, saveTileRec, uploadBlob, set: l => { REC_LANG = l; }, get: () => REC_LANG, store };
   root.innerHTML = "";
   render(html`<${App}/>`, root);
