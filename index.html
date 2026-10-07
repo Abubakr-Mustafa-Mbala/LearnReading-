@@ -442,6 +442,10 @@ img{max-width:100%}
 .vmcrow:active{background:var(--paper-2)}
 .vmcrow img{width:36px;height:27px;border-radius:3px;box-shadow:0 0 0 1px var(--line);object-fit:cover}
 .vmsel{display:flex;align-items:center;gap:14px;font-size:20px}.vmsel img{width:80px;height:60px;border-radius:6px;box-shadow:0 2px 8px rgba(0,0,0,.25)}
+.vmsubs{max-height:90vh}
+.vmsublist{display:flex;flex-direction:column;gap:8px;max-height:58vh;overflow:auto}
+.vmsubrow{display:grid;grid-template-columns:auto 1fr;gap:8px;align-items:start}
+.vmsubrow textarea{font:400 16px var(--font);padding:8px 10px;border-radius:10px;border:1px solid var(--line);background:var(--paper);color:var(--ink);resize:vertical;min-width:0}
 .vmlessons{display:flex;flex-wrap:wrap;gap:6px;max-height:50vh;overflow:auto}
 .full.studio.vm .sbody{flex:0 0 auto;overflow:visible}
 .full.studio.vm .sfoot{flex:1 1 auto;min-height:0;overflow:auto;padding-bottom:14px}
@@ -926,6 +930,30 @@ a.btn{text-decoration:none}
   .qtext{font-size:clamp(40px,3.6vw,64px)}
   .ansline{font-size:clamp(40px,3.6vw,64px)}
 }
+
+.thstudio .thbody{gap:10px}
+.thgrid{display:grid;grid-template-columns:1fr;gap:12px;width:100%;max-width:900px}
+@media (min-width:700px){.thgrid{grid-template-columns:1fr 1fr}}
+.thcell{display:flex;flex-direction:column;gap:4px}.thcell small{font:600 12px var(--font);color:var(--ink-2)}
+.thcv{width:100%;aspect-ratio:16/9;border-radius:10px;background:#111;cursor:pointer;box-shadow:0 2px 10px rgba(0,0,0,.25)}
+.thfaces{display:flex;gap:8px;overflow-x:auto;width:100%;padding:2px 0 6px}
+.thface{flex:0 0 auto;width:78px;height:96px;border-radius:12px;border:2px solid var(--line,#ddd);background:repeating-conic-gradient(#e9e9e9 0 25%,#fff 0 50%) 0 0/14px 14px;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;overflow:hidden;padding:0;position:relative;cursor:pointer}
+.thface img{position:absolute;inset:0 0 18px 0;width:100%;height:calc(100% - 18px);object-fit:cover;object-position:50% 20%}
+.thface.cut img{object-fit:contain}
+.thface small{position:relative;width:100%;background:rgba(0,0,0,.72);color:#fff;font:600 10px var(--font);padding:2px 0;text-align:center;white-space:nowrap;overflow:hidden}
+.thface.add,.thface.auto{background:var(--card,#fff);justify-content:center}.thface.add span,.thface.auto span{font-size:26px;margin-bottom:auto;margin-top:18px}
+.thface.on{border-color:var(--blue);box-shadow:0 0 0 2px var(--blue)}
+.thmanage{display:flex;flex-direction:column;gap:6px;width:100%}
+.chip.on.acc{background:#FF7A00;border-color:#FF7A00}
+.thbusy{position:fixed;left:50%;bottom:24px;transform:translateX(-50%);background:rgba(20,20,20,.92);color:#fff;padding:10px 16px;border-radius:12px;font:600 14px var(--font);z-index:90;max-width:90vw;text-align:center}
+.thbig{max-width:760px}.thcvbig{width:100%;aspect-ratio:16/9;border-radius:10px;background:#111}
+.thtall{width:150px;aspect-ratio:9/16;border-radius:10px;align-self:center;background:#111}
+.thfeed{background:#0F0F0F;border-radius:12px;padding:10px;display:flex;flex-direction:column;gap:10px}
+.thfeedlbl{color:#aaa;font:600 11px var(--font)}
+.throw{display:flex;gap:10px;align-items:flex-start;color:#f1f1f1}.throw b{font:600 14px/1.3 Roboto,Arial,sans-serif;display:block}.throw small{color:#aaa;font:12px Roboto,Arial,sans-serif}
+.thsmall{width:168px;height:94px;border-radius:8px;flex:0 0 auto}.thtiny{width:120px;height:67px;border-radius:6px;flex:0 0 auto}.throw.mini b{font-size:12px}
+.thcamv{position:relative;width:100%;border-radius:12px;overflow:hidden;background:#000}.thcamv video{width:100%;display:block;transform:scaleX(-1)}
+.thcount{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font:800 96px var(--font);color:#fff;text-shadow:0 4px 20px rgba(0,0,0,.6)}
 </style>
 </head>
 <body>
@@ -9344,7 +9372,7 @@ notify pgrst, 'reload schema';
     const og = c.createLinearGradient(0, box.y, 0, box.y + box.h); og.addColorStop(0, "#7DB4D8"); og.addColorStop(1, "#4F8FBF"); c.fillStyle = og; c.fillRect(box.x, box.y, box.w, box.h);
     if (!VMW) { vmWorld().catch(() => {}); c.restore(); return box; }
     const f = ctry ? vmFocus(ctry) : [0.45, 0.35, 0.55, 0.5], fx = (f[0] + f[2]) / 2, fy = (f[1] + f[3]) / 2;
-    const sEnd = Math.max(0.006, (f[2] - f[0]) * 2.1, (f[3] - f[1]) * 2.1 * box.w / box.h), sStart = Math.min(1.05, Math.max(sEnd * 6, 0.9));
+    const sEnd = Math.max(0.004, (f[2] - f[0]) * 1.3, (f[3] - f[1]) * 1.45 * box.w / box.h), sStart = Math.min(1.05, Math.max(sEnd * 6, 0.9));
     const kz = crEase(Math.max(0, Math.min(1, (a - 0.35) / 2.3))), kc = crEase(Math.max(0, Math.min(1, (a - 0.2) / 1.6)));
     let sc = Math.exp(Math.log(sStart) + (Math.log(sEnd) - Math.log(sStart)) * kz); sc *= 1 - 0.05 * Math.max(0, Math.min(1, (a - 2.7) / 6));
     const cx = 0.5 + (fx - 0.5) * kc, cy = 0.45 + (fy - 0.45) * kc, k = box.w / sc;
@@ -9364,6 +9392,8 @@ notify pgrst, 'reload schema';
         c.save(); c.globalAlpha = hk; vmMapPath(c, ctry, tf, 0.5); c.strokeStyle = vmInk(L.acc) === "#FFFFFF" ? "#1A1A1A" : "#FFFFFF"; c.lineWidth = 5; c.stroke(); c.strokeStyle = L.acc; c.lineWidth = 2.5; c.stroke(); c.restore();
       }
     }
+    // the flag, raised on a pole in the middle of the country
+    if (ctry && a > 2.2) { const H = box.h * (G.tall ? 0.17 : 0.27), x = tf.x(fx), y = tf.y(fy) + H * 0.35; vmPoleFlag(c, vmFlag(it.a2), x, y, H, H * 0.66, a, crEase(Math.min(1, (a - 2.2) / 0.9))); }
     // the flag and the name
     const lk = crEase((a - 1.9) / 0.5);
     if (lk > 0) {
@@ -9380,7 +9410,7 @@ notify pgrst, 'reload schema';
   }
 
   // a journey: the line travels from country to country, the map following along
-  const VM_LEG = 3.4, vmTripCache = new WeakMap();
+  const VM_LEG = 4.6, vmTripCache = new WeakMap();
   function vmTripPlan(it) {
     const st = (it.stops || []).map(x => { const ct = VMW && x.n ? VMW.by50.get(x.n) : null, f = ct ? vmFocus(ct) : null; return f ? Object.assign({ ct, f, cx: (f[0] + f[2]) / 2, cy: (f[1] + f[3]) / 2 }, x) : null; }).filter(Boolean);
     return st;
@@ -9394,12 +9424,15 @@ notify pgrst, 'reload schema';
     if (!VMW) { vmWorld().catch(() => {}); c.restore(); return box; }
     let S = vmTripCache.get(it); if (!S) { S = vmTripPlan(it); vmTripCache.set(it, S); } if (!S.length) { c.restore(); return box; }
     const n = S.length, legs = Math.max(0, n - 1), T0 = 0.9, end = T0 + legs * VM_LEG;
-    const views = [vmFitView([S[0].f], box, 2.6)]; for (let i = 0; i < legs; i++) views.push(vmFitView([S[i].f, S[i + 1].f], box, 1.7));
+    const close = S.map(x => vmFitView([x.f], box, 1.45)), both = []; for (let i = 0; i < legs; i++) both.push(vmFitView([S[i].f, S[i + 1].f], box, 1.6));
     const all = vmFitView(S.map(x => x.f), box, 1.5);
-    let view, leg = -1, p = 0;
-    if (a < T0 || !legs) view = views[0];
-    else if (a < end) { leg = Math.min(legs - 1, Math.floor((a - T0) / VM_LEG)); const u = (a - T0 - leg * VM_LEG) / VM_LEG; view = vmViewLerp(views[leg], views[leg + 1], crEase(Math.min(1, u / 0.35))); p = Math.max(0, Math.min(1, (u - 0.25) / 0.6)); }
-    else { leg = legs; view = vmViewLerp(views[legs], all, crEase(Math.min(1, (a - end) / 1.4))); }
+    let view, leg = -1, p = 0, arrivedAt = 0;
+    if (a < T0 || !legs) { view = close[0]; arrivedAt = 0; }
+    else if (a < end) {
+      leg = Math.min(legs - 1, Math.floor((a - T0) / VM_LEG)); const u = (a - T0 - leg * VM_LEG) / VM_LEG;
+      view = u < 0.22 ? vmViewLerp(close[leg], both[leg], crEase(u / 0.22)) : u < 0.7 ? both[leg] : vmViewLerp(both[leg], close[leg + 1], crEase((u - 0.7) / 0.22));
+      p = Math.max(0, Math.min(1, (u - 0.2) / 0.5)); arrivedAt = T0 + leg * VM_LEG + VM_LEG * 0.7;
+    } else { leg = legs; arrivedAt = end - VM_LEG * 0.3; view = vmViewLerp(close[legs], all, crEase(Math.min(1, (a - end - 1.2) / 1.4))); }
     const k = box.w / view.s, tf = { x: x => box.x + box.w / 2 + (x - view.cx) * k, y: y => box.y + box.h / 2 + (y - view.cy) * k };
     const vx0 = view.cx - view.s / 2, vx1 = view.cx + view.s / 2, vy0 = view.cy - view.s * box.h / box.w / 2, vy1 = view.cy + view.s * box.h / box.w / 2;
     const set = view.s > 0.18 ? VMW.c110 : VMW.c50;
@@ -9421,11 +9454,15 @@ notify pgrst, 'reload schema';
       if (i === leg && p < 1) {   // the traveller
         const q = qAt(A, C, B, p), q2 = qAt(A, C, B, Math.min(1, p + 0.02)), ang = Math.atan2(q2[1] - q[1], q2[0] - q[0]);
         c.setLineDash([]); c.save(); c.translate(q[0], q[1]); c.rotate(ang);
-        c.fillStyle = L.acc; c.strokeStyle = "#FFFFFF"; c.lineWidth = 4; c.beginPath(); c.moveTo(34, 0); c.lineTo(-20, -21); c.lineTo(-9, 0); c.lineTo(-20, 21); c.closePath(); c.fill(); c.stroke();
+        c.fillStyle = L.acc; c.strokeStyle = "#FFFFFF"; c.lineWidth = 4; const z = box.w / 720; c.scale(z, z); c.beginPath(); c.moveTo(34, 0); c.lineTo(-20, -21); c.lineTo(-9, 0); c.lineTo(-20, 21); c.closePath(); c.fill(); c.stroke();
         c.restore(); c.setLineDash([16, 12]);
       }
     }
     c.setLineDash([]);
+    // the flag raised where we've arrived
+    { const atStop = leg < 0 || leg >= legs || p >= 1 || p <= 0, ci = leg < 0 ? 0 : leg >= legs ? n - 1 : Math.min(n - 1, leg + (p >= 1 ? 1 : 0)), [px, py] = pt(ci), H = box.h * (G.tall ? 0.19 : 0.28);
+      const since = ci === 0 ? a - 0.2 : leg >= legs ? a - arrivedAt : a - (T0 + (ci - 1) * VM_LEG + VM_LEG * 0.7);
+      if (atStop && since > 0) vmPoleFlag(c, vmFlag(S[ci].a2), px, py + H * 0.3, H, H * 0.66, a, crEase(Math.min(1, since / 0.9))); }
     // a dot on every stop reached, with its name
     for (let i = 0; i < reached; i++) {
       const [x, y] = pt(i); c.fillStyle = "#FFFFFF"; c.beginPath(); c.arc(x, y, 11, 0, 7); c.fill(); c.fillStyle = L.acc; c.beginPath(); c.arc(x, y, 7, 0, 7); c.fill();
@@ -9442,20 +9479,52 @@ notify pgrst, 'reload schema';
     c.restore();
     return box;
   }
+  // a flag on a pole, blowing in the wind. (bx, by): the foot of the pole; rise 0..1: being raised
+  const vmFlagRas = new WeakMap();
+  // the flag painted once at the size it's shown, so the waving strips line up cleanly
+  function vmFlagRaster(fl, FW, FH) {
+    const w = Math.max(8, Math.round(FW)), h = Math.max(6, Math.round(FH)); let m = vmFlagRas.get(fl);
+    if (!m) { m = {}; vmFlagRas.set(fl, m); }
+    const key = w + "x" + h; if (m[key]) return m[key];
+    const cv = document.createElement("canvas"); cv.width = w; cv.height = h; const x = cv.getContext("2d"); x.imageSmoothingQuality = "high"; x.drawImage(fl, 0, 0, w, h);
+    const ks = Object.keys(m); if (ks.length > 6) delete m[ks[0]];
+    return (m[key] = cv);
+  }
+  function vmPoleFlag(c, fl, bx, by, H, FW, a, rise) {
+    if (!fl || !(fl.naturalWidth || fl.width)) return;
+    const iw = fl.naturalWidth || fl.width, ih = fl.naturalHeight || fl.height, FH = FW * ih / iw, top = by - H, pw = Math.max(4, H * 0.022);
+    c.save();
+    c.fillStyle = "rgba(0,0,0,.28)"; c.beginPath(); c.ellipse(bx, by, pw * 4, pw * 1.3, 0, 0, 7); c.fill();
+    const pg = c.createLinearGradient(bx - pw, 0, bx + pw, 0); pg.addColorStop(0, "#8D9299"); pg.addColorStop(0.45, "#F2F4F6"); pg.addColorStop(1, "#6E737A");
+    c.fillStyle = pg; c.fillRect(bx - pw / 2, top, pw, H);
+    const fg = c.createRadialGradient(bx - pw * 0.4, top - pw * 0.6, 1, bx, top - pw * 0.2, pw * 1.6); fg.addColorStop(0, "#FFF4C2"); fg.addColorStop(1, "#C08A1E");
+    c.fillStyle = fg; c.beginPath(); c.arc(bx, top - pw * 0.3, pw * 1.3, 0, 7); c.fill();
+    const ras = vmFlagRaster(fl, FW, FH), RW = ras.width, RH = ras.height;
+    const fy = top + pw * 1.2 + (1 - rise) * Math.max(0, H - FH - pw * 3), N = Math.max(24, Math.min(160, Math.round(RW / 3))), sw = RW / N;
+    const wave = u => { const ph = a * 4.2 - u * 6.5; return { dy: Math.sin(ph) * FH * 0.07 * Math.pow(u, 0.8), sh: Math.cos(ph) * Math.min(1, u * 3) }; };
+    let x = bx + pw / 2;
+    for (let i = 0; i < N; i++) {
+      const u = (i + 0.5) / N, w = wave(u), ww = sw * (0.97 + 0.03 * Math.abs(w.sh));
+      c.drawImage(ras, i * sw, 0, sw, RH, x, fy + w.dy, ww + 0.8, FH);
+      if (w.sh < 0) { c.fillStyle = "rgba(0,0,0," + (-w.sh * 0.26).toFixed(3) + ")"; c.fillRect(x, fy + w.dy, ww, FH); }
+      else if (w.sh > 0.6) { c.fillStyle = "rgba(255,255,255," + ((w.sh - 0.6) * 0.1).toFixed(3) + ")"; c.fillRect(x, fy + w.dy, ww, FH); }
+      x += ww;
+    }
+    c.restore();
+  }
   // a country's flag, big
   function vmFlagCard(c, F, it, box, a) {
     const { L, st, G } = F; c.save(); vmClip(c, box); vmBg(c, G, L, box);
     if (!VMW) { vmWorld().catch(() => {}); c.restore(); return box; }
-    const fl = vmFlag(it.a2), k = crEase(a / 0.45), fw = Math.min(box.w * 0.78, box.h * 0.55 * 4 / 3) * (0.9 + 0.1 * k), fh = fw * 3 / 4, x = box.x + box.w / 2 - fw / 2, y = box.y + box.h * 0.42 - fh / 2;
-    c.globalAlpha = Math.min(1, k * 1.4);
-    if (fl) {
-      c.save(); c.shadowColor = "rgba(0,0,0,.45)"; c.shadowBlur = 24; c.shadowOffsetY = 10; c.fillStyle = "#fff"; c.fillRect(x, y, fw, fh); c.restore();
-      // a gentle wave across the flag
-      const strips = 24, sw = fw / strips;
-      for (let i = 0; i < strips; i++) { const dy = Math.sin(a * 2.4 + i * 0.45) * fh * 0.025; c.drawImage(fl, i * fl.naturalWidth / strips, 0, fl.naturalWidth / strips + 1, fl.naturalHeight, x + i * sw, y + dy, sw + 1, fh); }
-      const sh = c.createLinearGradient(x, 0, x + fw, 0); for (let i = 0; i <= 6; i++) sh.addColorStop(i / 6, "rgba(255,255,255," + (0.12 * Math.max(0, Math.sin(a * 2.4 + i * 1.3))).toFixed(3) + ")"); c.fillStyle = sh; c.fillRect(x, y - fh * 0.03, fw, fh * 1.06);
-    }
-    vmFit(c, st, it.name || "", box.w - 80, G.tall ? 76 : 64); c.fillStyle = L.ink; c.textAlign = "center"; c.textBaseline = "middle"; c.fillText(it.name || "", box.x + box.w / 2, y + fh + (G.tall ? 90 : 60));
+    const fl = vmFlag(it.a2), k = crEase(a / 0.6);
+    const sky = c.createLinearGradient(0, box.y, 0, box.y + box.h); sky.addColorStop(0, "#0B1A2E"); sky.addColorStop(0.6, "#22364F"); sky.addColorStop(1, "#E07A2E"); c.fillStyle = sky; c.fillRect(box.x, box.y, box.w, box.h);
+    const sun = c.createRadialGradient(box.x + box.w * 0.7, box.y + box.h * 0.82, 10, box.x + box.w * 0.7, box.y + box.h * 0.82, box.h * 0.5); sun.addColorStop(0, "rgba(255,190,110,.55)"); sun.addColorStop(1, "rgba(255,190,110,0)"); c.fillStyle = sun; c.fillRect(box.x, box.y, box.w, box.h);
+    c.fillStyle = "#0A0F16"; c.beginPath(); c.moveTo(box.x, box.y + box.h); for (let i = 0; i <= 12; i++) c.lineTo(box.x + box.w * i / 12, box.y + box.h * (0.88 - 0.04 * Math.sin(i * 1.7))); c.lineTo(box.x + box.w, box.y + box.h); c.fill();
+    const H = box.h * (G.tall ? 0.62 : 0.74), FW = Math.min(box.w * (G.tall ? 0.62 : 0.42), H * 0.75), bx = box.x + box.w / 2 - FW * 0.48, by = box.y + box.h * (G.tall ? 0.8 : 0.9);
+    vmPoleFlag(c, fl, bx, by, H, FW, a, crEase(Math.min(1, a / 1.1)));
+    const vg = c.createRadialGradient(box.x + box.w / 2, box.y + box.h / 2, box.h * 0.3, box.x + box.w / 2, box.y + box.h / 2, box.h * 0.85); vg.addColorStop(0, "rgba(0,0,0,0)"); vg.addColorStop(1, "rgba(0,0,0,.45)"); c.fillStyle = vg; c.fillRect(box.x, box.y, box.w, box.h);
+    c.globalAlpha = k; vmFit(c, st, it.name || "", box.w - 80, G.tall ? 76 : 64); c.fillStyle = "#FFFFFF"; c.textAlign = "center"; c.textBaseline = "middle"; c.lineJoin = "round"; c.lineWidth = 8; c.strokeStyle = "rgba(0,0,0,.6)";
+    const ny = G.tall ? by + (box.y + box.h - by) / 2 + 10 : box.y + 60; c.strokeText(it.name || "", box.x + box.w / 2, ny); c.fillText(it.name || "", box.x + box.w / 2, ny);
     c.restore();
     return box;
   }
@@ -10213,27 +10282,568 @@ notify pgrst, 'reload schema';
   const vmShift = (words, t0, t1, lead) => (words ? words.filter(w => w[1] > t0 && w[0] < t1).map(w => [round2(Math.max(0, w[0] - t0) + (lead || 0)), round2(w[1] - t0 + (lead || 0)), w[2]]) : null);
 
   /* ---- the screens ---- */
+  /* ===================== Thumbnail studio =====================
+     Your face + one subject + 3–6 big words + your accent colour, on a dark cinematic background.
+     It makes several genuinely different layouts, with A/B/C words, for YouTube (1280×720) and Shorts (1080×1920). */
+  const TH_TYPES = ["Reaction", "News", "Review", "Education", "Business", "Personal", "Documentary", "Interview"];
+  const TH_ANGLES = ["Curiosity", "Shock", "Question", "Conflict", "Mistake", "Result", "Transformation", "Comparison", "Breaking"];
+  const TH_MOODS = ["shocked", "surprised", "confused", "skeptical", "thinking", "serious", "angry", "disappointed", "excited", "laughing", "confident", "pointing"];
+  const TH_MOOD_EMO = { shocked: "😱", surprised: "😮", confused: "😕", skeptical: "🤨", thinking: "🤔", serious: "😐", angry: "😠", disappointed: "😞", excited: "🤩", laughing: "😂", confident: "😎", pointing: "👉" };
+  const TH_WANT = {
+    Shock: ["shocked", "surprised"], Question: ["confused", "skeptical", "thinking"], Conflict: ["angry", "serious", "skeptical"], Mistake: ["disappointed", "pointing", "serious"],
+    Result: ["confident", "excited"], Transformation: ["excited", "surprised"], Comparison: ["thinking", "skeptical"], Breaking: ["serious", "shocked"], Curiosity: ["thinking", "surprised", "pointing"],
+  };
+  const TH_WORDS = {
+    Curiosity: ["NOBODY TALKS ABOUT THIS", "I DIDN'T EXPECT THIS", "WAIT... WHAT?", "HERE'S THE TRUTH"],
+    Shock: ["HE REALLY SAID THAT?!", "WAIT... WHAT?", "I CAN'T BELIEVE THIS", "THIS IS CRAZY"],
+    Question: ["WORTH IT?", "IS IT TRUE?", "WHY THOUGH?", "SHOULD YOU?"],
+    Conflict: ["THEY LIED.", "THIS IS WRONG", "WHO'S RIGHT?", "I DISAGREE"],
+    Mistake: ["STOP DOING THIS", "DON'T MAKE THIS MISTAKE", "I WAS WRONG", "AVOID THIS"],
+    Result: ["30 DAYS LATER...", "IT WORKED.", "THE RESULTS", "NOT WHAT I EXPECTED"],
+    Transformation: ["BEFORE → AFTER", "DAY 1 VS DAY 30", "EVERYTHING CHANGED", "FROM ZERO"],
+    Comparison: ["WHICH ONE?", "THIS OR THAT?", "CHEAP VS EXPENSIVE", "NOT EVEN CLOSE"],
+    Breaking: ["THEY CHANGED IT.", "IT'S OFFICIAL", "JUST IN", "THIS CHANGES EVERYTHING"],
+  };
+  const TH_POWER = /^(REALLY|LIED|LIE|CHANGED|CHANGES|STOP|EVERYTHING|WORTH|NEVER|SECRET|TRUTH|WRONG|MISTAKE|LATER|NOBODY|WHAT|WHY|CRAZY|OFFICIAL|BANNED|FREE|FAKE|REAL|ZERO|DAYS?|VS|NOT|BEFORE|AFTER|BROKE|RICH|FAILED|WORKED|EXPECT|BELIEVE|TRUE|THIS)$/;
+  const TH_LABELS = ["", "BREAKING", "NEW", "UPDATE", "WORTH IT?", "EXPOSED", "DAY 1"];
+  const thWordsOf = t => String(t || "").toUpperCase().replace(/\s+/g, " ").trim().split(" ").filter(Boolean);
+  function thAutoAcc(words) {
+    if (!words.length) return -1;
+    const bare = words.map(w => w.replace(/[^A-Z0-9→]/g, ""));
+    for (let i = 0; i < bare.length; i++) if (TH_POWER.test(bare[i]) && bare[i] !== "THIS" && bare[i] !== "NOT") return i;
+    if (/\?/.test(words[words.length - 1]) || words.length <= 2) return words.length - 1;
+    let b = 0; bare.forEach((w, i) => { if (w.length > bare[b].length) b = i; }); return b;
+  }
+  // what a picture is: a cut-out (see-through around you) or an ordinary photo, and where its solid part is
+  const thInfoC = new WeakMap();
+  function thInfo(img) {
+    if (!img) return null; let o = thInfoC.get(img); if (o) return o;
+    const iw = img.naturalWidth || img.width, ih = img.naturalHeight || img.height, k = Math.min(1, 220 / Math.max(iw, ih)), w = Math.max(2, Math.round(iw * k)), h = Math.max(2, Math.round(ih * k));
+    const cv = document.createElement("canvas"); cv.width = w; cv.height = h; const x = cv.getContext("2d", { willReadFrequently: true }); x.drawImage(img, 0, 0, w, h);
+    let d; try { d = x.getImageData(0, 0, w, h).data; } catch (e) { d = null; }
+    let clear = 0, x0 = w, y0 = h, x1 = 0, y1 = 0;
+    if (d) for (let y = 0; y < h; y++) for (let xx = 0; xx < w; xx++) { const a = d[(y * w + xx) * 4 + 3]; if (a < 200) clear++; if (a > 40) { if (xx < x0) x0 = xx; if (xx > x1) x1 = xx; if (y < y0) y0 = y; if (y > y1) y1 = y; } }
+    const cut = !!d && clear > w * h * 0.06 && x1 > x0;
+    o = { iw, ih, cut, bb: cut ? [x0 / k, y0 / k, (x1 + 1) / k, (y1 + 1) / k] : [0, 0, iw, ih] };
+    thInfoC.set(img, o); return o;
+  }
+  const thCanvas = (w, h) => { const c = document.createElement("canvas"); c.width = Math.max(1, Math.round(w)); c.height = Math.max(1, Math.round(h)); return c; };
+  // a cheap, works-everywhere blur: shrink, then stretch back
+  function thBlurInto(c, src, sx, sy, sw, sh, dx, dy, dw, dh, amt) {
+    const k = Math.max(4, amt), t = thCanvas(Math.max(2, dw / k), Math.max(2, dh / k)), x = t.getContext("2d"); x.imageSmoothingQuality = "high";
+    x.drawImage(src, sx, sy, sw, sh, 0, 0, t.width, t.height);
+    const t2 = thCanvas(t.width * 2, t.height * 2), x2 = t2.getContext("2d"); x2.imageSmoothingQuality = "high"; x2.drawImage(t, 0, 0, t2.width, t2.height);
+    c.save(); c.imageSmoothingQuality = "high"; c.drawImage(t2, dx, dy, dw, dh); c.restore();
+  }
+  function thCoverRect(iw, ih, w, h, fx, fy) { const s = Math.max(w / iw, h / ih), sw = w / s, sh = h / s; return [Math.max(0, Math.min(iw - sw, iw * fx - sw / 2)), Math.max(0, Math.min(ih - sh, ih * fy - sh / 2)), sw, sh]; }
+  let thGrainC = null;
+  function thGrain(c, W, H, a) {
+    if (!thGrainC) { thGrainC = thCanvas(256, 256); const x = thGrainC.getContext("2d"), d = x.createImageData(256, 256); for (let i = 0; i < d.data.length; i += 4) { const v = 128 + (Math.random() - 0.5) * 120; d.data[i] = d.data[i + 1] = d.data[i + 2] = v; d.data[i + 3] = 255; } x.putImageData(d, 0, 0); }
+    c.save(); c.globalAlpha = a; c.globalCompositeOperation = "overlay"; c.fillStyle = c.createPattern(thGrainC, "repeat"); c.fillRect(0, 0, W, H); c.restore();
+  }
+  const thHex = (hex, a) => { const n = parseInt(String(hex).slice(1), 16); return "rgba(" + (n >> 16) + "," + ((n >> 8) & 255) + "," + (n & 255) + "," + a + ")"; };
+  // the dark cinematic background
+  function thBackground(c, W, H, src, acc, opt) {
+    opt = opt || {};
+    const g = c.createLinearGradient(0, 0, W, H); g.addColorStop(0, "#0A0D12"); g.addColorStop(1, "#151A22"); c.fillStyle = g; c.fillRect(0, 0, W, H);
+    if (src) {
+      const iw = src.naturalWidth || src.width, ih = src.naturalHeight || src.height, r = thCoverRect(iw, ih, W, H, opt.fx == null ? 0.5 : opt.fx, 0.42);
+      if (opt.sharp) { c.save(); c.imageSmoothingQuality = "high"; c.drawImage(src, r[0], r[1], r[2], r[3], 0, 0, W, H); c.restore(); }
+      else thBlurInto(c, src, r[0], r[1], r[2], r[3], 0, 0, W, H, opt.blur || 26);
+      c.fillStyle = "rgba(4,8,14," + (opt.dark == null ? 0.5 : opt.dark) + ")"; c.fillRect(0, 0, W, H);
+      // teal shadows, warm highlights: the film look
+      c.save(); c.globalCompositeOperation = "soft-light"; const tg = c.createLinearGradient(0, H, W, 0); tg.addColorStop(0, "rgba(0,90,110,.55)"); tg.addColorStop(1, "rgba(255,140,40,.35)"); c.fillStyle = tg; c.fillRect(0, 0, W, H); c.restore();
+    }
+    // the accent light coming from one side
+    const lx = opt.light === "left" ? W * 0.05 : W * 0.95, lg = c.createRadialGradient(lx, H * 0.35, 0, lx, H * 0.35, Math.max(W, H) * 0.75);
+    lg.addColorStop(0, thHex(acc, src ? 0.32 : 0.45)); lg.addColorStop(0.5, thHex(acc, 0.08)); lg.addColorStop(1, thHex(acc, 0));
+    c.save(); c.globalCompositeOperation = "screen"; c.fillStyle = lg; c.fillRect(0, 0, W, H); c.restore();
+    const vg = c.createRadialGradient(W / 2, H / 2, Math.min(W, H) * 0.35, W / 2, H / 2, Math.hypot(W, H) * 0.62); vg.addColorStop(0, "rgba(0,0,0,0)"); vg.addColorStop(1, "rgba(0,0,0,.62)"); c.fillStyle = vg; c.fillRect(0, 0, W, H);
+  }
+  // a cut-out of you (or a thing): rim light in your colour, a crisp edge, a soft glow behind
+  function thCutout(c, img, info, cx, bottom, h, o) {
+    o = o || {};
+    let [x0, y0, x1, y1] = info.bb; const bw0 = x1 - x0;
+    if ((y1 - y0) / bw0 > 1.9) y1 = y0 + bw0 * 1.5;          // a whole body: keep the head and shoulders
+    const bw = x1 - x0, bh = y1 - y0, s = h / bh, dw = bw * s, dh = h, pad = Math.round(h * 0.06);
+    const t = thCanvas(dw + pad * 2, dh + pad * 2), x = t.getContext("2d"); x.imageSmoothingQuality = "high";
+    if (o.flip) { x.translate(t.width, 0); x.scale(-1, 1); }
+    x.drawImage(img, x0, y0, bw, bh, pad, pad, dw, dh);
+    const tint = col => { const q = thCanvas(t.width, t.height), y = q.getContext("2d"); y.drawImage(t, 0, 0); y.globalCompositeOperation = "source-in"; y.fillStyle = col; y.fillRect(0, 0, q.width, q.height); return q; };
+    const left = cx - t.width / 2, top = bottom - dh - pad;
+    // glow behind
+    if (o.glow !== false) { const gl = tint(o.acc); c.save(); c.globalAlpha = 0.85; thBlurInto(c, gl, 0, 0, gl.width, gl.height, left - h * 0.03, top - h * 0.03, gl.width + h * 0.06, gl.height + h * 0.06, h * 0.05); c.restore(); }
+    // a crisp outline
+    if (o.edge !== false) { const ed = tint(o.edgeCol || "#FFFFFF"), r = Math.max(2, h * 0.007); c.save(); for (let k = 0; k < 12; k++) { const a = k / 12 * Math.PI * 2; c.drawImage(ed, left + Math.cos(a) * r, top + Math.sin(a) * r); } c.restore(); }
+    // you, a little crisper
+    c.save(); if ("filter" in c) c.filter = "contrast(1.08) saturate(1.1)"; c.drawImage(t, left, top); c.restore();
+    // rim light on the side the light comes from
+    const rim = tint(o.acc), y2 = rim.getContext("2d"); y2.globalCompositeOperation = "destination-out"; const d = Math.max(3, h * 0.018) * (o.light === "left" ? 1 : -1); y2.drawImage(t, d, d * 0.15);
+    c.save(); c.globalCompositeOperation = "screen"; c.globalAlpha = 0.9; c.drawImage(rim, left, top); c.restore();
+    return { x: left + pad, y: top + pad, w: dw, h: dh };
+  }
+  // an ordinary photo of you: fills one side and melts into the background
+  function thPhotoSide(c, img, side, W, H, frac, flip) {
+    const iw = img.naturalWidth || img.width, ih = img.naturalHeight || img.height, w = W * frac, x = side === "right" ? W - w : 0, r = thCoverRect(iw, ih, w, H, 0.5, 0.35);
+    const t = thCanvas(w, H), y = t.getContext("2d"); y.imageSmoothingQuality = "high";
+    if (flip) { y.translate(w, 0); y.scale(-1, 1); }
+    if ("filter" in y) y.filter = "contrast(1.08) saturate(1.1)"; y.drawImage(img, r[0], r[1], r[2], r[3], 0, 0, w, H); y.setTransform(1, 0, 0, 1, 0, 0); y.filter = "none";
+    y.globalCompositeOperation = "destination-in"; const m = y.createLinearGradient(side === "right" ? 0 : w, 0, side === "right" ? w * 0.42 : w * 0.58, 0); m.addColorStop(0, "rgba(0,0,0,0)"); m.addColorStop(1, "rgba(0,0,0,1)"); y.fillStyle = m; y.fillRect(0, 0, w, H);
+    c.drawImage(t, x, 0);
+  }
+  // a photo shown as a card, a little tilted, with a white edge and a shadow
+  function thCard(c, img, bx, by, bw, bh, tilt, acc) {
+    const iw = img.naturalWidth || img.width, ih = img.naturalHeight || img.height, s = Math.min(bw / iw, bh / ih), w = iw * s, h = ih * s, b = Math.max(4, Math.min(w, h) * 0.022);
+    c.save(); c.translate(bx + bw / 2, by + bh / 2); c.rotate(tilt * Math.PI / 180);
+    c.shadowColor = "rgba(0,0,0,.6)"; c.shadowBlur = Math.min(w, h) * 0.08; c.shadowOffsetY = Math.min(w, h) * 0.03; c.fillStyle = "#FFFFFF"; c.fillRect(-w / 2 - b, -h / 2 - b, w + b * 2, h + b * 2);
+    c.shadowColor = "transparent"; c.imageSmoothingQuality = "high"; if ("filter" in c) c.filter = "contrast(1.06) saturate(1.08)"; c.drawImage(img, -w / 2, -h / 2, w, h); c.filter = "none";
+    if (acc) { c.strokeStyle = acc; c.lineWidth = b * 0.6; c.strokeRect(-w / 2 - b * 0.3, -h / 2 - b * 0.3, w + b * 0.6, h + b * 0.6); }
+    c.restore(); return { x: bx + bw / 2 - w / 2, y: by + bh / 2 - h / 2, w, h };
+  }
+  function thSubject(c, img, bx, by, bw, bh, tilt, acc, light) {
+    const inf = thInfo(img);
+    if (inf.cut) { const bb = inf.bb, s = Math.min(bw / (bb[2] - bb[0]), bh / (bb[3] - bb[1])); return thCutout(c, img, inf, bx + bw / 2, by + bh / 2 + (bb[3] - bb[1]) * s / 2, (bb[3] - bb[1]) * s, { acc, light }); }
+    return thCard(c, img, bx, by, bw, bh, tilt, null);
+  }
+  // the words: big condensed letters, each line as wide as the space allows, one word in your colour
+  const thFont = s => "400 " + Math.round(s) + "px Anton, Impact, \"Arial Narrow Bold\", sans-serif";
+  function thLayout(c, words, bw, bh, uniform) {
+    const n = words.length; let best = null;
+    const meas = t => { c.font = thFont(100); return c.measureText(t).width / 100; };
+    const splits = (k) => { const out = []; const rec = (st, left, acc) => { if (left === 1) { out.push(acc.concat([[st, n]])); return; } for (let e = st + 1; e <= n - left + 1; e++) rec(e, left - 1, acc.concat([[st, e]])); }; rec(0, k, []); return out; };
+    for (let k = 1; k <= Math.min(4, n); k++) for (const sp of splits(k)) {
+      const lines = sp.map(([a, b]) => ({ a, b, t: words.slice(a, b).join(" ") })); const ws = lines.map(l => meas(l.t));
+      let sizes = uniform ? ws.map(() => Math.min.apply(null, ws.map(w => bw / w))) : ws.map(w => bw / w);
+      { const lo = Math.min.apply(null, sizes); sizes = sizes.map(v => Math.min(v, lo * 1.45)); }   // keep the lines in proportion
+      const lh = 1.04, tot = sizes.reduce((s, v) => s + v * lh, 0), f = Math.min(1, bh / tot); sizes = sizes.map(v => v * f);
+      const mx = Math.max.apply(null, sizes), mn = Math.min.apply(null, sizes);
+      let score = sizes.reduce((s, v, i) => s + v * v * ws[i], 0);
+       if (k === 1 && n > 2) score *= 0.7; if (lines.some(l => l.b - l.a === 1 && words[l.a].length <= 2 && n > 2)) score *= 0.8;
+      if (!best || score > best.score) best = { score, lines, sizes };
+    }
+    return best;
+  }
+  function thText(c, words, accI, box, o) {
+    o = o || {}; if (!words.length) return null;
+    const L = thLayout(c, words, box.w, box.h, o.uniform); if (!L) return null;
+    const lh = 1.04, tot = L.sizes.reduce((s, v) => s + v * lh, 0); let y = box.y + (o.valign === "top" ? 0 : o.valign === "bottom" ? box.h - tot : (box.h - tot) / 2);
+    const out = { x0: 1e9, x1: -1e9, y0: y, y1: y + tot };
+    L.lines.forEach((ln, li) => {
+      const s = L.sizes[li]; c.font = thFont(s); c.textBaseline = "alphabetic"; c.lineJoin = "round";
+      const parts = []; let wsum = 0; const sp = c.measureText(" ").width;
+      for (let i = ln.a; i < ln.b; i++) { const w = c.measureText(words[i]).width; parts.push({ i, w }); wsum += w + (i < ln.b - 1 ? sp : 0); }
+      let x = o.align === "center" ? box.x + (box.w - wsum) / 2 : o.align === "right" ? box.x + box.w - wsum : box.x;
+      const base = y + s * 0.9;
+      out.x0 = Math.min(out.x0, x); out.x1 = Math.max(out.x1, x + wsum);
+      for (const p of parts) {
+        const acc = p.i === accI;
+        if (acc && o.boxAcc) {
+          c.save(); c.fillStyle = o.acc; c.shadowColor = "rgba(0,0,0,.5)"; c.shadowBlur = s * 0.12; c.shadowOffsetY = s * 0.05; const pd = s * 0.07;
+          c.beginPath(); c.roundRect ? c.roundRect(x - pd, base - s * 0.86, p.w + pd * 2, s * 0.98, s * 0.06) : c.rect(x - pd, base - s * 0.86, p.w + pd * 2, s * 0.98); c.fill(); c.restore();
+          c.fillStyle = o.accInk || "#111"; c.fillText(words[p.i], x, base);
+        } else {
+          if (o.soft) { c.save(); c.shadowColor = "rgba(0,0,0,.75)"; c.shadowBlur = s * 0.18; c.shadowOffsetY = s * 0.04; c.fillStyle = acc ? o.acc : "#FFFFFF"; c.fillText(words[p.i], x, base); c.restore(); }
+          else {
+            c.save(); c.fillStyle = "rgba(0,0,0,.55)"; c.fillText(words[p.i], x + s * 0.05, base + s * 0.06); c.restore();
+            c.strokeStyle = "#000000"; c.lineWidth = s * 0.11; c.strokeText(words[p.i], x, base);
+            c.fillStyle = acc ? o.acc : "#FFFFFF"; c.fillText(words[p.i], x, base);
+          }
+        }
+        x += p.w + sp;
+      }
+      y += s * lh;
+    });
+    return out;
+  }
+  function thLabel(c, text, x, y, size, col, ink) {
+    if (!text) return 0; c.save(); c.font = "800 " + Math.round(size) + "px Poppins, Arial, sans-serif"; const w = c.measureText(text).width, ph = size * 0.45, pv = size * 0.28;
+    c.shadowColor = "rgba(0,0,0,.45)"; c.shadowBlur = size * 0.3; c.fillStyle = col; c.beginPath(); c.roundRect ? c.roundRect(x, y, w + ph * 2, size + pv * 2, size * 0.18) : c.rect(x, y, w + ph * 2, size + pv * 2); c.fill();
+    c.shadowColor = "transparent"; c.fillStyle = ink; c.textBaseline = "middle"; c.fillText(text, x + ph, y + pv + size * 0.54); c.restore(); return size + pv * 2;
+  }
+  function thArrow(c, x0, y0, x1, y1, w, col) {
+    const mx = (x0 + x1) / 2 + (y1 - y0) * 0.25, my = (y0 + y1) / 2 - (x1 - x0) * 0.25, ang = Math.atan2(y1 - my, x1 - mx);
+    c.save(); c.lineCap = "round"; c.strokeStyle = "rgba(0,0,0,.55)"; c.lineWidth = w + 10; c.beginPath(); c.moveTo(x0, y0); c.quadraticCurveTo(mx, my, x1 - Math.cos(ang) * w, y1 - Math.sin(ang) * w); c.stroke();
+    c.strokeStyle = col; c.lineWidth = w; c.stroke();
+    c.translate(x1, y1); c.rotate(ang); c.fillStyle = col; c.strokeStyle = "rgba(0,0,0,.55)"; c.lineWidth = 5; c.beginPath(); c.moveTo(w * 0.6, 0); c.lineTo(-w * 2, -w * 1.6); c.lineTo(-w * 2, w * 1.6); c.closePath(); c.stroke(); c.fill(); c.restore();
+  }
+  function thLogo(c, logo, W, H, tall) {
+    if (!logo) return; const iw = logo.naturalWidth || logo.width, ih = logo.naturalHeight || logo.height, h = Math.min(H * (tall ? 0.035 : 0.075), (W * 0.2) * ih / iw), w = h * iw / ih;
+    c.save(); c.globalAlpha = 0.92; c.shadowColor = "rgba(0,0,0,.6)"; c.shadowBlur = 8; c.drawImage(logo, tall ? (W - w) / 2 : W * 0.025, tall ? H * 0.045 : H - h - H * 0.035, w, h); c.restore();
+  }
+  // the layouts. Each is a different picture, not the same one with a new background.
+  const TH_COMPS = {
+    classic: { name: "Face + words", need: "face" },
+    show: { name: "Show it", need: "both" },
+    hero: { name: "The thing first", need: "subject" },
+    words: { name: "Big words", need: "" },
+    versus: { name: "Side by side", need: "both" },
+    breaking: { name: "Breaking", need: "" },
+    photo: { name: "Photo", need: "any" },
+  };
+  function thPlan(type, angle, has) {
+    let order = { Reaction: ["classic", "show", "hero", "words", "photo"], News: ["breaking", "classic", "show", "hero", "photo"], Review: ["hero", "show", "classic", "words", "photo"],
+      Education: ["words", "classic", "show", "hero", "photo"], Business: ["words", "classic", "show", "hero", "photo"], Personal: ["photo", "classic", "words", "show", "hero"],
+      Documentary: ["photo", "hero", "classic", "breaking", "words"], Interview: ["show", "classic", "hero", "photo", "words"] }[type] || ["classic", "show", "hero", "words", "photo"];
+    order = order.slice();
+    if (angle === "Comparison" || angle === "Transformation") order.unshift("versus");
+    if (angle === "Breaking" && order[0] !== "breaking") { order = order.filter(k => k !== "breaking"); order.unshift("breaking"); }
+    const ok = k => { const n = TH_COMPS[k].need; return n === "face" ? has.face : n === "subject" ? has.subj : n === "both" ? has.face && has.subj : n === "any" ? has.face || has.subj || has.bg : true; };
+    const out = []; for (const k of order) if (ok(k) && out.indexOf(k) < 0) out.push(k);
+    for (const k of ["words", "breaking", "classic"]) if (out.length < 3 && out.indexOf(k) < 0 && ok(k)) out.push(k);
+    return out.slice(0, 5);
+  }
+  // draw one thumbnail. P: { comp, words, acc, label, face, faceCut, subj, bg, logo, accCol, flip, tall }
+  function thDraw(c, W, H, P) {
+    const tall = H > W, A = P.accCol || "#FF7A00", ink = vmInk(A), face = P.face, subj = P.subj, fInf = face ? thInfo(face) : null, comp = P.comp;
+    const red = "#E0242B", lab = P.label, labCol = lab === "BREAKING" || comp === "breaking" ? red : A, labInk = labCol === red ? "#FFFFFF" : ink;
+    const words = P.words, accI = P.acc;
+    const bgSrc = P.bg || subj || (face && !fInf.cut ? face : null);
+    const U = Math.min(W, H) / 720;     // 1 at 1280×720
+    c.save(); c.clearRect(0, 0, W, H);
+    const faceAt = (cx, h, light, opt) => {
+      if (!face) return null;
+      if (fInf.cut) return thCutout(c, face, fInf, cx, H + h * 0.04, h, Object.assign({ acc: A, light, flip: P.flip }, opt || {}));
+      thPhotoSide(c, face, cx > W / 2 ? "right" : "left", W, H, tall ? 1 : 0.55, P.flip); return null;
+    };
+    const labelAt = (x, y, sz) => thLabel(c, lab || (comp === "breaking" ? "BREAKING" : ""), x, y, sz, labCol, labInk);
+    if (!tall) {
+      if (comp === "classic") {
+        thBackground(c, W, H, bgSrc, A, { light: "right", dark: 0.55 });
+        faceAt(W * 0.75, H * 0.97, "right");
+        const lh = labelAt(W * 0.045, H * 0.07, 34 * U);
+        thText(c, words, accI, { x: W * 0.045, y: H * 0.08 + (lh ? lh + 14 * U : 0), w: W * 0.5, h: H * 0.76 - (lh ? lh + 14 * U : 0) }, { acc: A, accInk: ink });
+      } else if (comp === "show") {
+        thBackground(c, W, H, P.bg || subj, A, { light: "left", dark: 0.68, blur: 34 });
+        const r = thSubject(c, subj, W * 0.47, H * 0.33, W * 0.5, H * 0.6, 2.5, A, "left");
+        faceAt(W * 0.22, H * 0.98, "left");
+        const t = thText(c, words, accI, { x: W * 0.43, y: H * 0.04, w: W * 0.54, h: H * 0.27 }, { acc: A, accInk: ink, uniform: true, align: "center" });
+        if (lab) labelAt(r.x + 10 * U, r.y + 10 * U, 26 * U);
+        if (t) thArrow(c, W * 0.40, H * 0.50, r.x - 4 * U, r.y + r.h * 0.45, 13 * U, A);
+      } else if (comp === "hero") {
+        thBackground(c, W, H, P.bg || subj, A, { light: "right", dark: 0.6 });
+        thSubject(c, subj, W * 0.03, H * 0.07, W * 0.56, H * 0.86, -2, A, "right");
+        if (face) { if (fInf.cut) thCutout(c, face, fInf, W * 0.84, H * 1.03, H * 0.6, { acc: A, light: "left", flip: P.flip }); else thCard(c, face, W * 0.70, H * 0.55, W * 0.28, H * 0.42, 3, A); }
+        const lh = labelAt(W * 0.6, H * 0.06, 28 * U);
+        thText(c, words, accI, { x: W * 0.6, y: H * 0.07 + (lh ? lh + 10 * U : 0), w: W * 0.37, h: H * 0.48 - (lh ? lh : 0) }, { acc: A, accInk: ink });
+      } else if (comp === "words") {
+        thBackground(c, W, H, P.bg || subj, A, { light: "right", dark: 0.72, blur: 40 });
+        if (face) { if (fInf.cut) thCutout(c, face, fInf, W * 0.87, H * 1.03, H * 0.95, { acc: A, light: "left", flip: P.flip }); else thPhotoSide(c, face, "right", W, H, 0.42, P.flip); }
+        const lh = labelAt(W * 0.045, H * 0.06, 30 * U);
+        thText(c, words, accI, { x: W * 0.045, y: H * 0.07 + (lh ? lh + 10 * U : 0), w: face ? W * 0.66 : W * 0.91, h: H * 0.8 - (lh ? lh : 0) }, { acc: A, accInk: ink, boxAcc: true });
+      } else if (comp === "versus") {
+        thBackground(c, W, H, null, A, {});
+        c.save(); c.beginPath(); c.moveTo(0, 0); c.lineTo(W * 0.56, 0); c.lineTo(W * 0.46, H); c.lineTo(0, H); c.closePath(); c.clip();
+        const iw = subj.naturalWidth || subj.width, ih = subj.naturalHeight || subj.height; if (thInfo(subj).cut) { thBackground(c, W, H, subj, A, { light: "left" }); thSubject(c, subj, W * 0.04, H * 0.25, W * 0.44, H * 0.7, 0, A, "left"); }
+        else { const r = thCoverRect(iw, ih, W * 0.56, H, 0.5, 0.45); if ("filter" in c) c.filter = "contrast(1.08) saturate(1.05) brightness(.85)"; c.drawImage(subj, r[0], r[1], r[2], r[3], 0, 0, W * 0.56, H); c.filter = "none"; }
+        c.restore();
+        c.save(); c.beginPath(); c.moveTo(W * 0.56, 0); c.lineTo(W, 0); c.lineTo(W, H); c.lineTo(W * 0.46, H); c.closePath(); c.clip();
+        const g = c.createLinearGradient(W * 0.5, 0, W, H); g.addColorStop(0, vmDarker(vmDarker(A))); g.addColorStop(1, "#07090C"); c.fillStyle = g; c.fillRect(0, 0, W, H);
+        if (fInf.cut) thCutout(c, face, fInf, W * 0.76, H * 1.03, H * 0.8, { acc: A, light: "left", flip: P.flip }); else { const iw2 = face.naturalWidth || face.width, ih2 = face.naturalHeight || face.height, r = thCoverRect(iw2, ih2, W * 0.54, H, 0.5, 0.35); c.drawImage(face, r[0], r[1], r[2], r[3], W * 0.46, 0, W * 0.54, H); }
+        c.restore();
+        c.save(); c.strokeStyle = A; c.lineWidth = 10 * U; c.beginPath(); c.moveTo(W * 0.56, 0); c.lineTo(W * 0.46, H); c.stroke(); c.restore();
+        c.save(); c.translate(W * 0.51, H * 0.56); c.fillStyle = A; c.shadowColor = "rgba(0,0,0,.6)"; c.shadowBlur = 20 * U; c.beginPath(); c.arc(0, 0, 58 * U, 0, 7); c.fill(); c.shadowColor = "transparent";
+        c.font = thFont(58 * U); c.fillStyle = ink; c.textAlign = "center"; c.textBaseline = "middle"; c.fillText(P.angle === "Transformation" ? "→" : "VS", 0, 4 * U); c.restore();
+        const sh = c.createLinearGradient(0, 0, 0, H * 0.36); sh.addColorStop(0, "rgba(0,0,0,.65)"); sh.addColorStop(1, "rgba(0,0,0,0)"); c.fillStyle = sh; c.fillRect(0, 0, W, H * 0.36);
+        thText(c, words, accI, { x: W * 0.06, y: H * 0.03, w: W * 0.88, h: H * 0.19 }, { acc: A, accInk: ink, uniform: true, align: "center" });
+      } else if (comp === "breaking") {
+        thBackground(c, W, H, P.bg || subj || (face && !fInf.cut ? face : null), A, { light: "right", dark: 0.45, blur: 12 });
+        const lw = c.createLinearGradient(0, 0, W * 0.7, 0); lw.addColorStop(0, "rgba(0,0,0,.72)"); lw.addColorStop(1, "rgba(0,0,0,0)"); c.fillStyle = lw; c.fillRect(0, 0, W, H);
+        if (face && fInf.cut) thCutout(c, face, fInf, W * 0.8, H * 1.03, H * 0.82, { acc: red, light: "left", flip: P.flip });
+        const lh = thLabel(c, lab || "BREAKING", W * 0.045, H * 0.1, 40 * U, red, "#FFFFFF");
+        thText(c, words, accI, { x: W * 0.045, y: H * 0.13 + lh, w: W * 0.56, h: H * 0.62 - lh }, { acc: A, accInk: ink, valign: "top" });
+      } else {   // photo
+        const src = face && !fInf.cut ? face : P.bg || subj || face;
+        thBackground(c, W, H, src, A, { sharp: !thInfo(src).cut, dark: 0.12, light: "left" });
+        if (src === face && fInf.cut) thCutout(c, face, fInf, W * 0.7, H * 1.03, H * 0.95, { acc: A, light: "left", flip: P.flip, edge: false });
+        const bg = c.createLinearGradient(0, H * 0.35, 0, H); bg.addColorStop(0, "rgba(0,0,0,0)"); bg.addColorStop(1, "rgba(0,0,0,.78)"); c.fillStyle = bg; c.fillRect(0, 0, W, H);
+        thText(c, words, accI, { x: W * 0.05, y: H * 0.56, w: W * 0.6, h: H * 0.32 }, { acc: A, accInk: ink, soft: true, uniform: true, valign: "bottom" });
+      }
+      thLogo(c, P.logo, W, H, false);
+    } else {
+      // Shorts cover: keep the words above the bottom quarter, where the app's buttons sit
+      const subjBox = (x, y, w, h, t) => subj ? thSubject(c, subj, x, y, w, h, t, A, "right") : null;
+      if (comp === "photo") {
+        const src = face && !fInf.cut ? face : P.bg || subj || face;
+        thBackground(c, W, H, src, A, { sharp: !thInfo(src).cut, dark: 0.12 });
+        if (src === face && fInf.cut) thCutout(c, face, fInf, W * 0.5, H * 1.02, H * 0.62, { acc: A, flip: P.flip, edge: false });
+        const bg = c.createLinearGradient(0, H * 0.3, 0, H * 0.8); bg.addColorStop(0, "rgba(0,0,0,0)"); bg.addColorStop(1, "rgba(0,0,0,.7)"); c.fillStyle = bg; c.fillRect(0, 0, W, H);
+        thText(c, words, accI, { x: W * 0.07, y: H * 0.5, w: W * 0.86, h: H * 0.22 }, { acc: A, accInk: ink, soft: true, uniform: true, align: "center", valign: "bottom" });
+      } else {
+        thBackground(c, W, H, P.bg || subj || (face && !fInf.cut ? face : null), A, { dark: comp === "words" ? 0.72 : 0.55 });
+        if (comp === "versus" && subj && face) {
+          subjBox(W * 0.06, H * 0.08, W * 0.88, H * 0.36, -2);
+          c.save(); c.translate(W / 2, H * 0.47); c.fillStyle = A; c.beginPath(); c.arc(0, 0, 70, 0, 7); c.fill(); c.font = thFont(70); c.fillStyle = ink; c.textAlign = "center"; c.textBaseline = "middle"; c.fillText(P.angle === "Transformation" ? "↓" : "VS", 0, 5); c.restore();
+          faceAt(W * 0.5, H * 0.38, "left");
+          thText(c, words, accI, { x: W * 0.06, y: H * 0.5, w: W * 0.88, h: H * 0.12 }, { acc: A, accInk: ink, uniform: true, align: "center" });
+        } else if ((comp === "show" || comp === "hero") && subj) {
+          subjBox(W * 0.06, H * 0.07, W * 0.88, H * (comp === "hero" ? 0.46 : 0.36), comp === "hero" ? -2 : 2);
+          if (face) { if (fInf.cut) thCutout(c, face, fInf, W * 0.5, H * 1.02, H * (comp === "hero" ? 0.26 : 0.4), { acc: A, light: "right", flip: P.flip }); else thCard(c, face, W * 0.1, H * 0.72, W * 0.5, H * 0.22, -3, A); }
+          const ty = comp === "hero" ? H * 0.545 : H * 0.45;
+          const lh = labelAt(W * 0.07, ty, 44); thText(c, words, accI, { x: W * 0.07, y: ty + (lh ? lh + 12 : 0), w: W * 0.86, h: H * (comp === "hero" ? 0.17 : 0.17) - (lh ? lh : 0) }, { acc: A, accInk: ink, align: "center" });
+        } else {
+          if (comp === "breaking") { const lw = c.createLinearGradient(0, 0, 0, H * 0.6); lw.addColorStop(0, "rgba(0,0,0,.6)"); lw.addColorStop(1, "rgba(0,0,0,0)"); c.fillStyle = lw; c.fillRect(0, 0, W, H); }
+          if (face) { if (fInf.cut) thCutout(c, face, fInf, W * 0.5, H * 1.02, H * (comp === "words" ? 0.42 : 0.5), { acc: comp === "breaking" ? red : A, light: "right", flip: P.flip }); else thPhotoSide(c, face, "left", W, H, 1, P.flip); }
+          const lh = comp === "breaking" ? thLabel(c, lab || "BREAKING", W * 0.07, H * 0.12, 54, red, "#FFFFFF") : labelAt(W * 0.07, H * 0.12, 48);
+          thText(c, words, accI, { x: W * 0.07, y: H * 0.14 + (lh ? lh : 0), w: W * 0.86, h: H * (comp === "words" ? 0.36 : 0.3) - (lh ? lh : 0) }, { acc: A, accInk: ink, boxAcc: comp === "words", align: "center" });
+          if (comp === "breaking") { c.fillStyle = red; c.fillRect(0, H * 0.5, W, 10); }
+        }
+      }
+      thLogo(c, P.logo, W, H, true);
+    }
+    thGrain(c, W, H, 0.07);
+    c.restore();
+  }
+  // YouTube allows 2 MB: a JPEG that fits
+  async function thJpeg(cv) { for (const q of [0.92, 0.86, 0.8, 0.72, 0.62]) { const b = await new Promise(r => cv.toBlob(r, "image/jpeg", q)); if (b && b.size < 1.95e6) return b; } return new Promise(r => cv.toBlob(r, "image/jpeg", 0.55)); }
+  // cut a person out of a photo, right here on the phone (MediaPipe selfie segmentation, loaded the first time it's needed)
+  const TH_SEG = "https://cdn.jsdelivr.net/npm/@mediapipe/selfie_segmentation@0.1.1675465747/";
+  let thSegP = null;
+  function thSegLoad() {
+    if (!thSegP) thSegP = new Promise((res, rej) => {
+      if (window.SelfieSegmentation) return res();
+      const s = document.createElement("script"); s.src = TH_SEG + "selfie_segmentation.js"; s.crossOrigin = "anonymous"; s.onload = () => res(); s.onerror = () => { thSegP = null; rej(new Error("load")); }; document.head.appendChild(s);
+    }).then(() => { const ss = new window.SelfieSegmentation({ locateFile: f => TH_SEG + f }); ss.setOptions({ modelSelection: 0 }); return ss; });
+    return thSegP;
+  }
+  async function thCutPerson(img) {
+    const ss = await vmTimeout(thSegLoad(), 45000);
+    const iw = img.naturalWidth || img.width, ih = img.naturalHeight || img.height, k = Math.min(1, 1600 / Math.max(iw, ih)), w = Math.round(iw * k), h = Math.round(ih * k);
+    const src = thCanvas(w, h); src.getContext("2d").drawImage(img, 0, 0, w, h);
+    const mask = await vmTimeout(new Promise(res => { ss.onResults(r => res(r.segmentationMask)); ss.send({ image: src }); }), 45000);
+    // the mask is small and soft: stretch it, then firm up the edge
+    const m = thCanvas(w, h), mx = m.getContext("2d", { willReadFrequently: true }); mx.imageSmoothingQuality = "high"; mx.drawImage(mask, 0, 0, w, h);
+    const md = mx.getImageData(0, 0, w, h), out = src.getContext("2d", { willReadFrequently: true }).getImageData(0, 0, w, h);
+    let solid = 0;
+    for (let i = 0; i < md.data.length; i += 4) { const v = Math.max(md.data[i], md.data[i + 3] < 255 ? md.data[i + 3] : 0) / 255, a = Math.max(0, Math.min(1, (v - 0.3) / 0.4)), sm = a * a * (3 - 2 * a); out.data[i + 3] = Math.round(sm * 255); if (sm > 0.5) solid++; }
+    if (solid < w * h * 0.03) throw new Error("nobody");
+    src.getContext("2d").putImageData(out, 0, 0);
+    return new Promise(r => src.toBlob(r, "image/png"));
+  }
+  const thLib = {
+    async get() { const all = await vmDb.all().catch(() => []); const f = all.find(x => x.id === "__faces"), d = all.find(x => x.id === "__thumb"); return { faces: f ? f.list || [] : [], draft: d ? d.draft || null : null }; },
+    setFaces(list) { return vmDb.put({ id: "__faces", list }); },
+    setDraft(draft) { return vmDb.put({ id: "__thumb", draft }); },
+  };
+  const thImgC = new WeakMap();
+  function thImg(blob) {
+    if (!blob) return Promise.resolve(null); if (thImgC.has(blob)) return thImgC.get(blob);
+    const p = new Promise(res => { const u = URL.createObjectURL(blob), im = new Image(); im.onload = () => { res(im); }; im.onerror = () => res(null); im.src = u; }); thImgC.set(blob, p); return p;
+  }
+  async function thSuggest(o) {
+    const { data } = await sb.auth.getSession(), tok = data && data.session && data.session.access_token;
+    const r = await vmTimeout(fetch("/.netlify/functions/thumbtext", { method: "POST", headers: { "content-type": "application/json", authorization: "Bearer " + (tok || "") }, body: JSON.stringify(o) }), 30000);
+    const j = await r.json().catch(() => ({})); if (j.off) throw new Error("off"); if (!r.ok) throw new Error(j.error || "fail"); return j;
+  }
+  const TH_KEYS = ["comp", "acc", "label", "face", "subj", "bg", "logo", "accCol", "flip", "angle"];
+  function THPreview({ P, W, H, cls, onClick }) {
+    const ref = useRef(null), last = useRef(null);
+    useEffect(() => {
+      const cv = ref.current; if (!cv) return;
+      const L = last.current; if (L && L.W === W && TH_KEYS.every(k => L.P[k] === P[k]) && L.P.words.join(" ") === P.words.join(" ")) return;
+      const me = { P, W, done: false }; last.current = me; let alive = true;
+      const t = setTimeout(async () => { try { await document.fonts.load("400 60px Anton"); } catch (e) {} if (alive) { thDraw(cv.getContext("2d"), W, H, P); me.done = true; } }, L ? 160 : 0);
+      return () => { alive = false; clearTimeout(t); if (last.current === me && !me.done) last.current = null; };
+    });
+    return html`<canvas ref=${ref} width=${W} height=${H} class=${cls || ""} onClick=${onClick}></canvas>`;
+  }
+  function THFaceCam({ onClose, onSnap }) {
+    const vref = useRef(null), [mood, setMood] = useState("shocked"), [count, setCount] = useState(0), [err, setErr] = useState("");
+    useEffect(() => {
+      let st = null;
+      navigator.mediaDevices.getUserMedia({ video: { facingMode: "user", width: { ideal: 1920 }, height: { ideal: 1080 } }, audio: false })
+        .then(s => { st = s; if (vref.current) { vref.current.srcObject = s; vref.current.play().catch(() => {}); } }).catch(() => setErr("The camera didn't open. Allow the camera, or add a photo instead."));
+      return () => { if (st) st.getTracks().forEach(t => t.stop()); };
+    }, []);
+    function snap() {
+      let n = 3; setCount(n); const iv = setInterval(() => {
+        n--; setCount(n); if (n > 0) return; clearInterval(iv);
+        const v = vref.current; if (!v || !v.videoWidth) return; const cv = thCanvas(v.videoWidth, v.videoHeight), x = cv.getContext("2d"); x.translate(cv.width, 0); x.scale(-1, 1); x.drawImage(v, 0, 0);
+        cv.toBlob(b => b && onSnap(b, mood), "image/jpeg", 0.93);
+      }, 800);
+    }
+    return html`<div class="scrim" onClick=${e => { if (e.target === e.currentTarget) onClose(); }}>
+      <div class="sheet thcam" role="dialog" aria-label="Take a face photo">
+        <h3 style="margin:0">Make the face, then hold it</h3>
+        <div class="thcamv"><video ref=${vref} playsinline muted></video>${count ? html`<b class="thcount">${count}</b>` : null}</div>
+        ${err ? html`<p class="help">${err}</p>` : null}
+        <div class="vmchips">${TH_MOODS.map(m => html`<button key=${m} class=${"chip" + (mood === m ? " on" : "")} onClick=${() => setMood(m)}>${TH_MOOD_EMO[m]} ${m}</button>`)}</div>
+        <p class="help">Face a window or a lamp, so your face is bright. Big expressions read best when the picture is small.</p>
+        <button class="btn" disabled=${!!count || !!err} onClick=${snap}>📸 Take it (3 seconds)</button>
+        <button class="btn quiet" onClick=${onClose}>Close</button>
+      </div>
+    </div>`;
+  }
+  function VMThumbs({ onClose, from }) {
+    const [lib, setLib] = useState(null);
+    const [d, setD] = useState(null);          // the thumbnail being made
+    const [imgs, setImgs] = useState({});      // loaded pictures
+    const [cam, setCam] = useState(false);
+    const [busy, setBusy] = useState("");
+    const [pick, setPick] = useState(null);    // the layout opened big
+    const [sugs, setSugs] = useState(null);
+    const [manage, setManage] = useState(false);
+    const st = useMemo(() => vmStyle(), []);
+    const logoImg = useRef(null);
+    useEffect(() => {
+      thLib.get().then(l => {
+        setLib(l);
+        let dr = Object.assign({ type: "Reaction", angle: "Curiosity", topic: "", texts: ["", "", ""], accs: [-1, -1, -1], vi: 0, label: "", faceId: "auto", subj: null, bg: null, flip: false, title: "" }, l.draft || {});
+        if (from) { dr = Object.assign({}, dr, { topic: from.title || dr.topic, subj: from.subj || null, bg: null }); }
+        if (!dr.texts.some(t => t.trim())) dr.texts = TH_WORDS[dr.angle].slice(0, 3);
+        setD(dr);
+      });
+      if (st.logo) { const im = new Image(); im.onload = () => { logoImg.current = im; setImgs(o => Object.assign({}, o)); }; im.src = st.logo; }
+    }, []);
+    const save = nd => { setD(nd); thLib.setDraft(nd).catch(() => {}); };
+    const up = o => save(Object.assign({}, d, o));
+    // load the pictures we need
+    const faces = lib ? lib.faces : [];
+    useEffect(() => {
+      if (!d) return; const need = [["subj", d.subj], ["bg", d.bg]].concat(faces.map(f => ["f:" + f.id, f.blob]));
+      Promise.all(need.map(async ([k, b]) => [k, await thImg(b)])).then(r => { const o = {}; r.forEach(([k, v]) => { o[k] = v; }); setImgs(o); });
+    }, [d && d.subj, d && d.bg, faces]);
+    if (!lib || !d) return html`<div class="full studio" role="dialog" aria-label="Thumbnail studio"><div class="fhead"><span>🖼 Thumbnails</span><button class="iconbtn" onClick=${onClose} aria-label="Close"><${Ic.x}/></button></div><div class="sbody"><p class="help">Loading…</p></div></div>`;
+    // which faces suit this video: the expressions that match the angle, in turn
+    const want = TH_WANT[d.angle] || [], ready = faces.filter(f => imgs["f:" + f.id]);
+    const ranked = d.faceId !== "auto" ? ready.filter(f => f.id === d.faceId) : ready.slice().sort((a, b) => { const ia = want.indexOf(a.mood), ib = want.indexOf(b.mood); return (ia < 0 ? 99 : ia) - (ib < 0 ? 99 : ib); });
+    const matched = d.faceId === "auto" ? ranked.filter(f => want.indexOf(f.mood) >= 0) : ranked, pool = matched.length ? matched : ranked;
+    const subjImg = imgs.subj || null, bgImg = imgs.bg || null;
+    const comps = thPlan(d.type, d.angle, { face: pool.length > 0, subj: !!subjImg, bg: !!bgImg });
+    const vi = d.vi || 0, wordsOf = i => thWordsOf(d.texts[i]), accOf = i => (d.accs[i] >= 0 && d.accs[i] < wordsOf(i).length ? d.accs[i] : thAutoAcc(wordsOf(i)));
+    const specs = comps.map((comp, k) => ({ comp, words: wordsOf(vi), acc: accOf(vi), label: d.label, face: pool.length ? imgs["f:" + pool[k % pool.length].id] : null, subj: subjImg, bg: bgImg, logo: logoImg.current, accCol: st.acc || "#FF7A00", flip: !!d.flip, angle: d.angle }));
+    const wc = wordsOf(vi).length;
+    async function addFace(file, mood) {
+      setBusy("Adding your photo…");
+      try {
+        const im = await thImg(file), inf = thInfo(im); let blob = file, cut = inf && inf.cut;
+        const f = { id: uid(), blob, mood: mood || "surprised", cut };
+        const list = [f].concat(faces); await thLib.setFaces(list); setLib(Object.assign({}, lib, { faces: list }));
+        if (!cut) { setBusy(""); toast("Added. Tap ✂️ to cut yourself out of the background — it looks much better."); }
+        setManage(f.id);
+      } catch (e) { toast("Couldn't add that photo."); }
+      setBusy("");
+    }
+    async function cutFace(f) {
+      setBusy("Cutting you out of the background… (the first time takes a little while)");
+      try {
+        const im = await thImg(f.blob), blob = await thCutPerson(im), nf = Object.assign({}, f, { blob, cut: true, orig: f.blob });
+        const list = faces.map(x => (x.id === f.id ? nf : x)); await thLib.setFaces(list); setLib(Object.assign({}, lib, { faces: list })); toast("Done ✂️");
+      } catch (e) { toast(e && e.message === "nobody" ? "Couldn't find a person in that photo." : "Couldn't cut it out here. Tip: on your phone, open the photo in Gallery and use “remove background”, then add that."); }
+      setBusy("");
+    }
+    async function setFace(f, o) { const list = faces.map(x => (x.id === f.id ? Object.assign({}, x, o) : x)); await thLib.setFaces(list).catch(() => {}); setLib(Object.assign({}, lib, { faces: list })); }
+    async function delFace(f) { const list = faces.filter(x => x.id !== f.id); await thLib.setFaces(list).catch(() => {}); setLib(Object.assign({}, lib, { faces: list })); if (d.faceId === f.id) up({ faceId: "auto" }); setManage(false); }
+    async function suggest() {
+      setBusy("Thinking of words…");
+      try { const j = await thSuggest({ type: d.type, angle: d.angle, topic: d.topic, title: d.title }); setSugs(j.texts || []); if (j.title && !d.title) up({ title: j.title }); }
+      catch (e) { toast(e && e.message === "off" ? "The word helper isn't set up yet — the ideas below still work." : "Couldn't get ideas just now. Try the ones below."); }
+      setBusy("");
+    }
+    async function exportIt(spec, tall) {
+      setBusy("Making it…");
+      try {
+        await document.fonts.load("400 60px Anton").catch(() => {});
+        const W = tall ? 1080 : 1280, H = tall ? 1920 : 720, cv = thCanvas(W, H); thDraw(cv.getContext("2d"), W, H, spec);
+        const blob = await thJpeg(cv), name = (d.topic || "thumbnail").replace(/[^\w-]+/g, "-").slice(0, 40) + "-" + spec.comp + "-" + "ABC"[vi] + (tall ? "-shorts" : "") + ".jpg";
+        const file = new File([blob], name, { type: "image/jpeg" });
+        if (navigator.canShare && navigator.canShare({ files: [file] })) { try { await navigator.share({ files: [file], title: name }); setBusy(""); return; } catch (e) { if (e && e.name === "AbortError") { setBusy(""); return; } } }
+        const a = document.createElement("a"); a.href = URL.createObjectURL(blob); a.download = name; document.body.appendChild(a); a.click(); a.remove(); setTimeout(() => URL.revokeObjectURL(a.href), 4000);
+        toast("Saved " + name);
+      } catch (e) { toast("Couldn't make the picture."); }
+      setBusy("");
+    }
+    const pickFile = (cb, accept) => { const i = document.createElement("input"); i.type = "file"; i.accept = accept || "image/*"; i.onchange = () => { const f = i.files && i.files[0]; if (f) cb(f); }; i.click(); };
+    const big = pick != null && specs[pick] ? specs[pick] : null;
+    return html`<div class="full studio thstudio" role="dialog" aria-label="Thumbnail studio">
+      <div class="fhead"><span>🖼 Thumbnails</span><button class="iconbtn" onClick=${onClose} aria-label="Close"><${Ic.x}/></button></div>
+      <div class="sbody thbody">
+        <p class="help">Your face, one thing, a few big words. It makes different layouts; pick one, try the A/B/C words, and save it for YouTube or Shorts.</p>
+        <div class="vml">What kind of video?<div class="vmchips">${TH_TYPES.map(t => html`<button key=${t} class=${"chip" + (d.type === t ? " on" : "")} onClick=${() => up({ type: t })}>${t}</button>`)}</div></div>
+        <div class="vml">The angle: what makes people click<div class="vmchips">${TH_ANGLES.map(t => html`<button key=${t} class=${"chip" + (d.angle === t ? " on" : "")} onClick=${() => { const old = TH_WORDS[d.angle] || [], fresh = d.texts.every(x => !x.trim() || old.indexOf(x) >= 0); up(Object.assign({ angle: t, label: t === "Breaking" ? "BREAKING" : d.label === "BREAKING" ? "" : d.label }, fresh ? { texts: TH_WORDS[t].slice(0, 3), accs: [-1, -1, -1] } : {})); }}>${t}</button>`)}</div></div>
+        <div class="field"><label for="tht">What's the video about? (for the word ideas)</label><input id="tht" value=${d.topic} onInput=${e => up({ topic: e.target.value })} placeholder="For example: the new fuel price, and what it means"/></div>
+
+        <h4 class="vmh">The words <small>3 to 6 words. The title of the video says the rest.</small></h4>
+        <div class="vmchips thab">${[0, 1, 2].map(i => html`<button key=${i} class=${"chip" + (vi === i ? " on" : "")} onClick=${() => up({ vi: i })}>${"ABC"[i]}${d.texts[i] ? ": " + d.texts[i].slice(0, 18) : ""}</button>`)}</div>
+        <div class="field"><input id="thw" value=${d.texts[vi]} onInput=${e => { const t = d.texts.slice(); t[vi] = e.target.value.toUpperCase(); const a = d.accs.slice(); a[vi] = -1; up({ texts: t, accs: a }); }} placeholder="THEY CHANGED IT."/></div>
+        ${wc > 6 ? html`<p class="help warn">That's ${wc} words — shorter hits harder. Try 3 to 6.</p>` : null}
+        ${wc ? html`<div class="vml">Tap the word to colour<div class="vmchips">${wordsOf(vi).map((w, i) => html`<button key=${i} class=${"chip" + (accOf(vi) === i ? " on acc" : "")} onClick=${() => { const a = d.accs.slice(); a[vi] = i; up({ accs: a }); }}>${w}</button>`)}</div></div>` : null}
+        <div class="vml">Ideas (tap to use)<div class="vmchips">${(sugs || []).concat(TH_WORDS[d.angle]).filter((t, i, a) => a.indexOf(t) === i).slice(0, 9).map(t => html`<button key=${t} class="chip" onClick=${() => { const tt = d.texts.slice(); tt[vi] = t.toUpperCase(); const a = d.accs.slice(); a[vi] = -1; up({ texts: tt, accs: a }); }}>${t}</button>`)}</div></div>
+        <button class="btn quiet slim" onClick=${suggest} disabled=${!!busy}>✨ More ideas for this video</button>
+        <div class="vml">A small label<div class="vmchips">${TH_LABELS.map(t => html`<button key=${t || "none"} class=${"chip" + (d.label === t ? " on" : "")} onClick=${() => up({ label: t })}>${t || "None"}</button>`)}</div></div>
+
+        <h4 class="vmh">Your face <small>${d.faceId === "auto" ? "Auto picks the expression that fits the angle" : ""}</small></h4>
+        <div class="thfaces">
+          <button class=${"thface add"} onClick=${() => setCam(true)}><span>📸</span><small>Take one</small></button>
+          <button class=${"thface add"} onClick=${() => pickFile(f => addFace(f))}><span>＋</span><small>Add photo</small></button>
+          ${faces.length ? html`<button class=${"thface auto" + (d.faceId === "auto" ? " on" : "")} onClick=${() => up({ faceId: "auto" })}><span>✨</span><small>Auto</small></button>` : null}
+          ${faces.map(f => html`<button key=${f.id} class=${"thface" + (d.faceId === f.id ? " on" : "") + (f.cut ? " cut" : "")} onClick=${() => { up({ faceId: f.id }); setManage(f.id); }}>
+            ${imgs["f:" + f.id] ? html`<img src=${imgs["f:" + f.id].src} alt=""/>` : null}<small>${TH_MOOD_EMO[f.mood] || ""} ${f.mood}</small></button>`)}
+        </div>
+        ${!faces.length ? html`<p class="help">Build a little library of your expressions: shocked, confused, skeptical, excited… Best: a photo with the background removed (on Samsung, open it in Gallery, press and hold on yourself, then “Save as image”; on iPhone, press and hold on yourself and “Copy”/“Share”). Or take one here and tap ✂️.</p>` : null}
+        ${manage && faces.find(f => f.id === manage) ? (() => { const f = faces.find(x => x.id === manage); return html`<div class="card thmanage">
+          <div class="vmchips">${TH_MOODS.map(m => html`<button key=${m} class=${"chip" + (f.mood === m ? " on" : "")} onClick=${() => setFace(f, { mood: m })}>${TH_MOOD_EMO[m]} ${m}</button>`)}</div>
+          <div class="vmchips">${f.cut ? html`<span class="help">✅ Cut out</span>` : html`<button class="btn slim" disabled=${!!busy} onClick=${() => cutFace(f)}>✂️ Cut me out of the background</button>`}
+            ${f.orig ? html`<button class="chip" onClick=${() => setFace(f, { blob: f.orig, orig: null, cut: false })}>Undo the cut</button>` : null}
+            <button class="chip" onClick=${() => delFace(f)}>🗑 Remove</button><button class="chip" onClick=${() => setManage(false)}>Done</button></div>
+        </div>`; })() : null}
+        ${faces.length ? html`<label class="vmchk"><input type="checkbox" checked=${!!d.flip} onChange=${e => up({ flip: e.target.checked })}/> ↔ Flip me (so I look towards the words)</label>` : null}
+
+        <h4 class="vmh">The one thing it's about <small>a person, a product, a screenshot, a document</small></h4>
+        <div class="vmchips">
+          <button class="btn slim quiet" onClick=${() => pickFile(f => up({ subj: f }))}>${d.subj ? "🔁 Change the picture" : "＋ Add a picture"}</button>
+          ${d.subj ? html`<button class="chip" onClick=${() => up({ subj: null })}>Remove</button>` : null}
+          <button class="btn slim quiet" onClick=${() => pickFile(f => up({ bg: f }))}>${d.bg ? "🔁 Background" : "＋ Own background (optional)"}</button>
+          ${d.bg ? html`<button class="chip" onClick=${() => up({ bg: null })}>No background</button>` : null}
+        </div>
+
+        <h4 class="vmh">Your thumbnails <small>${comps.length} layouts · words ${"ABC"[vi]}</small></h4>
+        <div class="thgrid">${specs.map((P, k) => html`<div key=${P.comp + k} class="thcell"><${THPreview} P=${P} W=${640} H=${360} cls="thcv" onClick=${() => setPick(k)}/><small>${TH_COMPS[P.comp].name}</small></div>`)}</div>
+        ${!pool.length && !subjImg ? html`<p class="help">Add your face and a picture for the real thing — these are just the words for now.</p>` : null}
+      </div>
+      ${busy ? html`<div class="thbusy">${busy}</div>` : null}
+      ${cam ? html`<${THFaceCam} onClose=${() => setCam(false)} onSnap=${(b, m) => { setCam(false); addFace(b, m); }}/>` : null}
+      ${big ? html`<div class="scrim" onClick=${e => { if (e.target === e.currentTarget) setPick(null); }}>
+        <div class="sheet thbig" role="dialog" aria-label="Thumbnail">
+          <${THPreview} P=${big} W=${1280} H=${720} cls="thcvbig"/>
+          <div class="vmchips c">${[0, 1, 2].map(i => html`<button key=${i} class=${"chip" + (vi === i ? " on" : "")} disabled=${!d.texts[i]} onClick=${() => up({ vi: i })}>${"ABC"[i]}</button>`)}</div>
+          <div class="thfeed"><span class="thfeedlbl">How it looks in the feed</span>
+            <div class="throw"><${THPreview} P=${big} W=${336} H=${189} cls="thsmall"/><div><b>${d.title || d.topic || "Your video title"}</b><small>${st.name || "Your channel"} · 1.2K views</small></div></div>
+            <div class="throw mini"><${THPreview} P=${big} W=${168} H=${94} cls="thtiny"/><div><b>${d.title || d.topic || "Your video title"}</b></div></div>
+          </div>
+          <div class="field"><label for="thti">The video's title (it gives the context the picture doesn't)</label><input id="thti" value=${d.title} onInput=${e => up({ title: e.target.value })} placeholder="The New Policy Just Changed Everything — Here's What It Means"/></div>
+          <button class="btn" disabled=${!!busy} onClick=${() => exportIt(big, false)}>⬇️ Save for YouTube (1280×720)</button>
+          <button class="btn quiet" disabled=${!!busy} onClick=${() => exportIt(big, true)}>⬇️ Save as a Shorts / Reels cover (1080×1920)</button>
+          <${THPreview} P=${big} W=${270} H=${480} cls="thtall"/>
+          <button class="btn quiet" onClick=${() => setPick(null)}>Close</button>
+        </div>
+      </div>` : null}
+    </div>`;
+  }
   function VideoMaker({ onClose }) {
     const [list, setList] = useState(null);
     const [open, setOpen] = useState(null);
     const [fresh, setFresh] = useState(false);
     const [style, setStyle] = useState(false);
     const [arm, setArm] = useState(null);
+    const [thumbs, setThumbs] = useState(null);
     const load = () => vmDb.all().then(l => setList(l.sort((a, b) => b.updatedAt - a.updatedAt))).catch(() => setList([]));
     useEffect(() => { load(); }, []);
     if (open) return html`<${VMEdit} key=${open.id} start=${open} onClose=${() => { setOpen(null); load(); }}/>`;
     if (style) return html`<${VMStyle} onClose=${() => setStyle(false)}/>`;
+    if (thumbs) return html`<${VMThumbs} from=${thumbs.from} onClose=${() => setThumbs(null)}/>`;
     return html`<div class="full studio vmhome" role="dialog" aria-label="Video maker">
       <div class="fhead"><span>🎬 Video maker</span><button class="iconbtn" onClick=${onClose} aria-label="Close"><${Ic.x}/></button></div>
       <div class="sbody vmlist">
         <p class="help">Videos for YouTube, TikTok, Reels and Shorts. Talk to your camera, or keep it faceless. While you talk, show pictures, clips and headlines, switch between you, split screen and the clip, and react to videos.</p>
         <button class="btn" onClick=${() => setFresh(true)}>＋ New video</button>
         <button class="btn quiet" onClick=${() => setStyle(true)}>🎨 My style: how all my videos look</button>
+        <button class="btn quiet" onClick=${() => setThumbs({ from: null })}>🖼 Thumbnails: make the picture people click</button>
         ${list === null ? html`<p class="help">Loading…</p>` : !list.filter(p => String(p.id).indexOf("__") !== 0).length ? null : html`<h4 class="vmh">Your videos</h4>`}
         ${(list || []).filter(p => String(p.id).indexOf("__") !== 0).map(p => html`<div class="card vmcard" key=${p.id}>
           <span class=${"vmshape " + p.fmt}></span>
           <span class="rowmain"><b>${p.title || "Untitled"}</b><small>${(VM_FMT[p.fmt] || VM_FMT.tall).name}${p.cam ? " · camera" : " · faceless"} · ${p.take ? "recorded, " + fmtDur(p.take.secs) : "not recorded yet"} · ${new Date(p.updatedAt).toLocaleDateString()}</small></span>
           <button class="btn slim" onClick=${async () => { try { setOpen(await vmDb.load(p)); } catch (e) { toast("Couldn't open that video."); } }}>Open</button>
+          <button class="btn slim quiet" title="Make its thumbnail" aria-label="Make its thumbnail" onClick=${async () => { let sub = null; try { const q = await vmDb.load(p); const im = (q.items || []).find(it => it.kind === "img" && it.blob); sub = im ? im.blob : null; } catch (e) {} setThumbs({ from: { title: p.title || "", subj: sub } }); }}>🖼</button>
           ${p.series ? html`<button class="btn slim quiet" title="Start the next day of this series" onClick=${() => { const q = vmNew(p.fmt, "", p.cam); q.series = Object.assign({}, p.series, { day: p.series.day + 1 }); q.topTitle = vmDayTitle(q.series); q.mirror = p.mirror; q.camFit = p.camFit; q.fit = p.fit; vmDb.put(q).catch(() => {}); setOpen(q); }}>Day ${p.series.day + 1} ➜</button>` : null}
           <button class=${"btn slim quiet" + (arm === p.id ? " danger" : "")} onClick=${async () => { if (arm !== p.id) { setArm(p.id); setTimeout(() => setArm(a => (a === p.id ? null : a)), 3500); return; } await vmDb.del(p.id).catch(() => {}); setArm(null); load(); }}>${arm === p.id ? "Delete?" : "🗑"}</button>
         </div>`)}
@@ -10371,6 +10981,34 @@ notify pgrst, 'reload schema';
     </div>`;
   }
 
+  // correct the subtitles, a line at a time (the timing stays with your voice)
+  function VMSubsEdit({ words, onSave, onClose, onSeek }) {
+    const lines = useMemo(() => vmCapLines(words, "box", false), [words]);
+    const [txt, setTxt] = useState(() => lines.map(l => l.map(w => w[2]).join(" ")));
+    function save() {
+      const out = [];
+      lines.forEach((l, i) => {
+        const toks = String(txt[i] || "").split(/\s+/).filter(Boolean); if (!toks.length) return;
+        if (toks.length === l.length) { toks.forEach((w, j) => out.push([l[j][0], l[j][1], w])); return; }
+        const t0 = l[0][0], t1 = l[l.length - 1][1], tot = toks.reduce((a, w) => a + w.length + 1, 0); let acc = 0;
+        toks.forEach(w => { const a0 = t0 + (t1 - t0) * acc / tot; acc += w.length + 1; out.push([round2(a0), round2(t0 + (t1 - t0) * acc / tot), w]); });
+      });
+      onSave(out);
+    }
+    const fmt = t => Math.floor(t / 60) + ":" + String(Math.floor(t % 60)).padStart(2, "0");
+    return html`<div class="scrim" onClick=${e => { if (e.target === e.currentTarget) onClose(); }}>
+      <div class="sheet vmsubs" role="dialog" aria-label="Correct the subtitles">
+        <h3 style="margin:0">✏️ Correct the subtitles</h3>
+        <p class="help">Fix any word that came out wrong. Tap ▶ to hear that part. Clear a line to remove it.</p>
+        <div class="vmsublist">${lines.map((l, i) => html`<div class="vmsubrow" key=${i}>
+          <button class="chip" onClick=${() => onSeek(l[0][0])} aria-label="Hear this part">▶ ${fmt(l[0][0])}</button>
+          <textarea rows="2" value=${txt[i]} onInput=${e => { const v = e.target.value; setTxt(t => t.map((x, j) => (j === i ? v : x))); }}></textarea>
+        </div>`)}</div>
+        <button class="btn" onClick=${save}>Save the subtitles</button>
+        <button class="btn quiet" onClick=${onClose}>Close</button>
+      </div>
+    </div>`;
+  }
   // pick a country: a map that zooms into it, or its flag
   function VMPlaces({ onClose, onAdd }) {
     const [w, setW] = useState(VMW), [err, setErr] = useState(false), [q, setQ] = useState(""), [sel, setSel] = useState(null), [trip, setTrip] = useState(null);
@@ -10885,7 +11523,7 @@ notify pgrst, 'reload schema';
       const needRead = (tk.cues || []).some(q => q.k === "show" && items[q.ref] && items[q.ref].kind === "read");
       if ((projRef.current.subs && style.caps !== "off") || needRead) {
         const want = projRef.current.clean && tk.cleanBlob ? "clean" : "raw";
-        if (tk.words && tk.wordsFor === want) words = tk.words;
+        if (tk.words && (tk.wordsFor === want || tk.wordsFor === "edited")) words = tk.words;
         else { setBusy(true); try { words = await vmTranscribe(voice()); setProj(p => ({ take: Object.assign({}, p.take, { words, wordsFor: want }) })); } catch (e) { toast(e && e.code === "nokey" ? "Subtitles need OPENAI_API_KEY in Netlify. Making it without them." : "Couldn't make subtitles. Making the video without them."); } setBusy(false); }
       }
       const P = projRef.current, tr = P.take.trim || [0, P.take.secs];
@@ -11014,7 +11652,7 @@ notify pgrst, 'reload schema';
           </div>
           <div class="revopts">
             <button class=${"gamesw" + (proj.clean ? " on" : "")} onClick=${() => { if (a) a.pause(); setProj({ clean: !proj.clean }); }} aria-pressed=${proj.clean ? "true" : "false"}><span class="knob"></span><span>Remove background noise<small>${clean && clean.p != null ? "Cleaning… " + Math.round(clean.p * 100) + "%" : tk.cleanFailed === "voice" ? "Cleaning would have taken your voice away on this one, so your original recording is used." : tk.cleanFailed ? "Couldn't clean this one; the original is used." : proj.clean ? "Play it to hear the difference." : "Off: your recording as it is. Turn on if there's a lot of noise (fans, traffic)."}</small></span></button>
-            ${st.caps === "off" ? html`<p class="help">Subtitles are off in My style.</p>` : html`<button class=${"gamesw" + (proj.subs ? " on" : "")} onClick=${() => setProj({ subs: !proj.subs })} aria-pressed=${proj.subs ? "true" : "false"}><span class="knob"></span><span>Subtitles<small>${tk.words ? "Ready. They show as you play it." : html`Your words as you say them. <button class="linkbtn" disabled=${busy} onClick=${e => { e.stopPropagation(); getSubs(); }}>${busy ? "Writing them…" : "See them now"}</button>`}</small></span></button>`}
+            ${st.caps === "off" ? html`<p class="help">Subtitles are off in My style.</p>` : html`<button class=${"gamesw" + (proj.subs ? " on" : "")} onClick=${() => setProj({ subs: !proj.subs })} aria-pressed=${proj.subs ? "true" : "false"}><span class="knob"></span><span>Subtitles<small>${tk.words ? html`Ready. They show as you play it. <button class="linkbtn" onClick=${e => { e.stopPropagation(); setSheet("subs"); }}>✏️ Correct them</button>` : html`Your words as you say them. <button class="linkbtn" disabled=${busy} onClick=${e => { e.stopPropagation(); getSubs(); }}>${busy ? "Writing them…" : "See them now"}</button>`}</small></span></button>`}
             <div class="vml">Video quality ${html`<div class="vmchips">${[["1080", "HD 1080p (sharpest)"], ["720", "720p (faster on slow phones)"]].map(([v, l]) => html`<button key=${v} class=${"chip" + ((proj.quality || "1080") === v ? " on" : "")} onClick=${() => setProj({ quality: v })}>${l}</button>`)}</div>`}</div>
             ${tk.cues.some(q => q.k === "play") ? html`<label class="vmvol">Clip sound <input type="range" min="0" max="1" step="0.05" value=${proj.clipVol} onInput=${e => setProj({ clipVol: +e.target.value })}/><small>${Math.round(proj.clipVol * 100)}%. It goes quieter by itself while you talk.</small></label>` : null}
             <div class="vmclipbar"><button class="chip" onClick=${() => setStyling(true)}>🎨 My style</button><button class="chip" onClick=${previewOpening}>▶ Try the opening</button><button class="chip" onClick=${() => setSheet("hl")}>📰 Headlines</button><button class="chip" onClick=${() => setSheet("snd")}>🔊 Sounds</button></div>
@@ -11034,6 +11672,7 @@ notify pgrst, 'reload schema';
             <button class="btn" disabled=${busy || (jobMine && jobBusy) || (proj.clean && clean && clean.p != null)} onClick=${make}>${jobMine && jobBusy ? "Making it… " + Math.round(j.p * 100) + "%" : busy ? "Writing subtitles…" : proj.clean && clean && clean.p != null ? "Cleaning…" : ready ? "Make it again" : "Make the video"}</button>
           </div>` : null}
       </div>
+      ${sheet === "subs" && proj.take && proj.take.words ? html`<${VMSubsEdit} words=${proj.take.words} onSeek=${t2 => { const a2 = aref.current; if (a2) { a2.currentTime = t2; a2.play().catch(() => {}); } }} onClose=${() => setSheet(null)} onSave=${w => { setProj(p => ({ take: Object.assign({}, p.take, { words: w, wordsFor: "edited" }) })); setSheet(null); toast("Subtitles corrected."); }}/>` : null}
       ${sheet === "place" ? html`<${VMPlaces} onClose=${() => setSheet(null)} onAdd=${it => { setSheet(null); setProj(p => ({ items: p.items.concat(Object.assign({ id: uid() }, it)) })); }}/>` : null}
       ${sheet === "hl" ? html`<${VMHeadlines} proj=${proj} onClose=${() => setSheet(null)} onSave=${p => { setProj(p); setSheet(null); }} onTry=${() => { setSheet(null); setTimeout(previewOpening, 50); }}/>` : null}
       ${sheet === "snd" ? html`<${VMSounds} proj=${proj} setProj=${setProj} lib=${lib} setLib=${setLib} st=${st} onClose=${() => setSheet(null)}/>` : null}
@@ -11550,7 +12189,7 @@ notify pgrst, 'reload schema';
   window.__kfApi = { kfPress, kfStep, kfNew, kfSnd, kfAnn, annRec };
   window.__ink = { hitInk, inkGroup, straighten };
   window.__mux = { lessonVideo, fixVideo, loadMux, vidJob, awake, player, cleanVoice };
-  window.__ui = { PushBell, SetupCheck, VidJobPill, html, render, store, Board, ExplainStudio, LiveTools, stageAt, buildSound, live, player, ClassroomPlayer, crAssets, CR_W, CR_H, TalkBoard, vidJob, VideoMaker, vmExport, vmDb, vmNew, vmAt, vmFrame, vmGeo, VM_LOOKS, vmStyle, vmSaveStyle, VMStyle, vmIntro, vmOutro, vmLook, vmElemSrc, vmPrepClip, vmWorld };
+  window.__ui = { PushBell, SetupCheck, VidJobPill, html, render, store, Board, ExplainStudio, LiveTools, stageAt, buildSound, live, player, ClassroomPlayer, crAssets, CR_W, CR_H, TalkBoard, vidJob, VideoMaker, vmExport, vmDb, vmNew, vmAt, vmFrame, vmGeo, VM_LOOKS, vmStyle, vmSaveStyle, VMStyle, vmIntro, vmOutro, vmLook, vmElemSrc, vmPrepClip, vmWorld, thDraw, thPlan, thCutPerson, thLib, VMThumbs, thInfo };
   window.__lang = { viewOf, saveExpl, saveTileRec, uploadBlob, set: l => { REC_LANG = l; }, get: () => REC_LANG, store };
   root.innerHTML = "";
   render(html`<${App}/>`, root);
