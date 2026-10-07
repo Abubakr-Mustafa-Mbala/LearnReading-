@@ -2397,7 +2397,7 @@ notify pgrst, 'reload schema';
   // which tile (or which spot on the board) is under a point of the picture
   function crHit(lay, x, y) { return lay.items.find(q => x >= q.x - 6 && x <= q.x + q.w + 6 && y >= q.y - 4 && y <= q.y + q.h + 4) || null; }
 
-  // ---- background noise out of a recording (runs on the phone) ----
+  // ---- background noise out of a recording (runs on the phone, in the background so nothing freezes) ----
   let cleanP = null;
   function loadClean() {
     if (!cleanP) cleanP = new Promise((res, rej) => {
@@ -2408,21 +2408,40 @@ notify pgrst, 'reload schema';
     });
     return cleanP;
   }
+  // in a Worker when the phone allows it; on the page otherwise
+  function cleanRun(pcm, onP) {
+    return new Promise((resolve, reject) => {
+      let w = null;
+      try {
+        const src = 'self.window=self;importScripts(' + JSON.stringify(new URL("cleanvoice.js", location.href).href) + ');onmessage=async e=>{try{const r=await self.CleanVoice(e.data,p=>postMessage({p}));postMessage({out:r.out,kept:r.kept},[r.out.buffer]);}catch(x){postMessage({err:String(x)});}};';
+        w = new Worker(URL.createObjectURL(new Blob([src], { type: "text/javascript" })));
+      } catch (e) { w = null; }
+      const onPage = () => loadClean().then(C => C(pcm, onP)).then(resolve, reject);
+      if (!w) return onPage();
+      let done = false;
+      w.onmessage = e => { const d = e.data || {}; if (d.p != null) { if (onP) onP(d.p); return; } done = true; w.terminate(); if (d.err) onPage(); else resolve({ out: d.out, kept: d.kept }); };
+      w.onerror = () => { if (done) return; done = true; try { w.terminate(); } catch (x) {} onPage(); };
+      w.postMessage(pcm, [pcm.buffer]);
+    });
+  }
   async function cleanVoice(blob, onP) {
-    const [Clean, MB] = await Promise.all([loadClean(), loadMux()]);
+    const MB = await loadMux();
     let ac; try { ac = new (window.AudioContext || window.webkitAudioContext)({ sampleRate: 48000 }); } catch (e) { ac = new (window.AudioContext || window.webkitAudioContext)(); }
     const raw = await blob.arrayBuffer();
     const ab = await new Promise((res, rej) => ac.decodeAudioData(raw, res, rej));
     try { ac.close(); } catch (e) {}
     const off = new OfflineAudioContext(1, Math.ceil(ab.duration * 48000), 48000), src = off.createBufferSource(); src.buffer = ab; src.connect(off.destination); src.start();
-    const pcm = (await off.startRendering()).getChannelData(0);
-    const out = await Clean(pcm, v => onP && onP(v * 0.85));
+    const pcm = new Float32Array((await off.startRendering()).getChannelData(0));
+    const r = await cleanRun(pcm, v => onP && onP(v * 0.85));
+    // if the cleaning took away your voice (it can happen with some phones and rooms), don't use it
+    if (!(r.kept > 0.3)) throw { code: "voicelost" };
+    const out = r.out;
     let peak = 0; for (let i = 0; i < out.length; i++) peak = Math.max(peak, Math.abs(out[i]));
-    if (peak > 0.05) { const g = Math.min(3, 0.9 / peak); for (let i = 0; i < out.length; i++) out[i] *= g; }   // an even, clear level
+    if (peak > 0.05) { const g = Math.min(2, 0.9 / peak); for (let i = 0; i < out.length; i++) out[i] *= g; }
     const output = new MB.Output({ format: new MB.Mp4OutputFormat({ fastStart: "in-memory" }), target: new MB.BufferTarget() });
     const codec = await MB.getFirstEncodableAudioCodec(["aac", "opus"].filter(c => output.format.getSupportedAudioCodecs().includes(c)), { numberOfChannels: 1, sampleRate: 48000 });
     if (!codec) throw new Error("nocodec");
-    const asrc = new MB.AudioBufferSource({ codec, bitrate: 64000 }); output.addAudioTrack(asrc); await output.start();
+    const asrc = new MB.AudioBufferSource({ codec, bitrate: 96000 }); output.addAudioTrack(asrc); await output.start();
     const buf = new AudioBuffer({ length: out.length, numberOfChannels: 1, sampleRate: 48000 }); buf.copyToChannel(out, 0);
     await asrc.add(buf); await output.finalize();
     if (onP) onP(1);
@@ -9088,7 +9107,8 @@ notify pgrst, 'reload schema';
   /* ---- black and white, and the effects (sounds made right here, nothing borrowed) ---- */
   const VM_FILTER = (() => { try { const x = document.createElement("canvas").getContext("2d"); x.filter = "grayscale(1)"; return x.filter === "grayscale(1)"; } catch (e) { return false; } })();
   const vmGrayCv = document.createElement("canvas");
-  function vmDraw(c, src, x, y, w, h, gray) {
+  function vmDraw(c, src, x, y, w, h, gray, mirror) {
+    if (mirror) { c.save(); c.translate(x + w, y); c.scale(-1, 1); vmDraw(c, src, 0, 0, w, h, gray, false); c.restore(); return; }
     if (!gray) return c.drawImage(src, x, y, w, h);
     if (VM_FILTER) { c.filter = "grayscale(1)"; c.drawImage(src, x, y, w, h); c.filter = "none"; return; }
     const [sw, sh] = vmSize(src), k = Math.min(1, 540 / Math.max(1, sw)), cv = vmGrayCv;
@@ -9102,23 +9122,67 @@ notify pgrst, 'reload schema';
   const VM_FX_LEN = { boom: 0.5, shock: 1.55, freeze: 1.6, zoom: 3.05, whoosh: 0, ding: 0, pop: 0 };
   // a sound effect, made from scratch as numbers (so it's ours to use, on any video)
   function vmSynth(kind, sr) {
-    const len = { boom: 1.6, zing: 1.0, stop: 1.0, whoosh: 0.9, ding: 1.3, pop: 0.3 }[kind] || 0.5, n = Math.ceil(len * sr), out = new Float32Array(n);
-    let seed = 7; const rnd = () => { seed = (seed * 16807) % 2147483647; return seed / 1073741823.5 - 1; };
-    let ph = 0, ph2 = 0, lo = 0, bp = 0, lp = 0;
-    const svf = (x, fc, q) => { const f = 2 * Math.sin(Math.PI * Math.min(fc, sr / 6) / sr), hi = x - lo - q * bp; bp += f * hi; lo += f * bp; return bp; };
+    const len = { boom: 2.4, zing: 2.0, stop: 1.6, whoosh: 1.2, ding: 2.2, pop: 0.4 }[kind] || 0.6, n = Math.ceil(len * sr), out = new Float32Array(n);
+    let seed = 12345; const rnd = () => { seed = (seed * 16807) % 2147483647; return seed / 1073741823.5 - 1; };
+    const env = (t, a, d) => (t < a ? t / a : Math.exp(-(t - a) * d));
+    // little building blocks
+    const mkSvf = () => { let lo = 0, bp = 0; return (x, fc, q) => { const f = 2 * Math.sin(Math.PI * Math.min(fc, sr / 6) / sr), hi = x - lo - q * bp; bp += f * hi; lo += f * bp; return { lo, bp, hi }; }; };
+    const sv1 = mkSvf(), sv2 = mkSvf(), sv3 = mkSvf();
+    let ph = 0, ph2 = 0, lp1 = 0, lp2 = 0;
     for (let i = 0; i < n; i++) {
       const t = i / sr; let v = 0;
-      if (kind === "boom") { const f = 32 + 95 * Math.exp(-t * 7); ph += 2 * Math.PI * f / sr; const r = rnd(); lp += (r - lp) * 0.06; v = (Math.sin(ph) + lp * 0.9 * Math.exp(-t * 14)) * Math.exp(-t * 2.4) * Math.min(1, t / 0.004); v = Math.tanh(v * 1.8); }
-      else if (kind === "zing") { const f = 260 + 1500 * crEase(t / 0.55) + 18 * Math.sin(t * 40); ph += 2 * Math.PI * f / sr; ph2 += 2 * Math.PI * f * 1.5 / sr; v = (Math.sin(ph) * 0.7 + Math.sin(ph2) * 0.25 + svf(rnd(), 4000 + 3000 * t, 0.4) * 0.25) * Math.min(1, t / 0.03) * (t < 0.6 ? 1 : Math.exp(-(t - 0.6) * 8)); }
-      else if (kind === "stop") { const f = Math.max(30, 520 * Math.pow(1 - Math.min(1, t / 0.75), 1.6)); ph += 2 * Math.PI * f / sr; v = Math.tanh(Math.sin(ph) * 3) * 0.6 * Math.min(1, t / 0.01) * (t < 0.75 ? 1 : Math.exp(-(t - 0.75) * 20)); }
-      else if (kind === "whoosh") { const k = t / len, fc = 300 + 3200 * Math.sin(Math.PI * Math.min(1, k * 1.1)); v = svf(rnd(), fc, 0.35) * Math.sin(Math.PI * Math.min(1, k)) ** 1.5 * 1.4; }
-      else if (kind === "ding") { v = (Math.sin(2 * Math.PI * 1320 * t) * Math.exp(-t * 3) + Math.sin(2 * Math.PI * 2640 * t) * 0.45 * Math.exp(-t * 5) + Math.sin(2 * Math.PI * 3960 * t) * 0.2 * Math.exp(-t * 8)) * Math.min(1, t / 0.002); }
-      else if (kind === "pop") { const f = 520 * Math.exp(-t * 26) + 140; ph += 2 * Math.PI * f / sr; v = Math.sin(ph) * Math.exp(-t * 22) * Math.min(1, t / 0.001); }
+      if (kind === "boom") {   // a deep cinematic hit: a punchy click, a falling sub, a short rumble
+        const f = 42 + 120 * Math.exp(-t * 16); ph += 2 * Math.PI * f / sr;
+        const sub = Math.sin(ph) * env(t, 0.003, 2.1);
+        const nz = rnd(); lp1 += (nz - lp1) * (0.02 + 0.25 * Math.exp(-t * 30)); lp2 += (lp1 - lp2) * 0.08;
+        const body = lp1 * 1.6 * env(t, 0.002, 10), rumble = lp2 * 2.2 * env(t, 0.01, 1.6);
+        const click = t < 0.012 ? sv1(rnd(), 3500, 0.7).hi * (1 - t / 0.012) * 0.9 : 0;
+        v = Math.tanh((sub * 1.1 + body + rumble + click) * 1.4);
+      } else if (kind === "zing") {   // "shock": a quick rise, then a hit with a metallic ring
+        const rise = Math.min(1, t / 0.32);
+        if (t < 0.34) { const fc = 300 + 5000 * rise * rise; v = sv1(rnd(), fc, 0.25).bp * rise * rise * 0.9; ph += 2 * Math.PI * (200 + 900 * rise) / sr; v += Math.sin(ph) * 0.15 * rise; }
+        const th = t - 0.34;
+        if (th >= 0) {
+          const f = 48 + 90 * Math.exp(-th * 18); ph2 += 2 * Math.PI * f / sr;
+          let ring = 0; for (const [fr, a, d] of [[523, 0.5, 3], [1243, 0.3, 4.5], [1871, 0.22, 6], [2953, 0.12, 9]]) ring += Math.sin(2 * Math.PI * fr * th) * a * Math.exp(-th * d);
+          const nz = rnd(); lp1 += (nz - lp1) * 0.15;
+          v += Math.tanh(Math.sin(ph2) * env(th, 0.002, 3) * 1.2 + lp1 * env(th, 0.001, 14) * 1.2) + ring * 0.55 * env(th, 0.002, 1);
+        }
+      } else if (kind === "stop") {   // "freeze": a camera shutter, then an icy shimmer
+        const c1 = t < 0.01 ? 1 - t / 0.01 : 0, c2 = t > 0.07 && t < 0.085 ? 1 - (t - 0.07) / 0.015 : 0;
+        v = sv1(rnd(), 2600, 0.6).bp * (c1 + c2) * 2.2;
+        let sh = 0; for (const [fr, p0] of [[2637, 0.1], [3136, 1.3], [3951, 2.2], [4699, 3.1], [5274, 0.7], [6272, 2.6]]) sh += Math.sin(2 * Math.PI * fr * t + p0);
+        v += sh / 6 * 0.5 * env(Math.max(0, t - 0.06), 0.03, 2.6) * (t > 0.06 ? 1 : 0) * (0.75 + 0.25 * Math.sin(2 * Math.PI * 14 * t));
+        ph += 2 * Math.PI * 70 / sr; v += Math.sin(ph) * 0.5 * env(t, 0.004, 9);
+      } else if (kind === "whoosh") {   // air rushing past: two layers of filtered noise sweeping up and down
+        const k = t / len, shape = Math.pow(Math.sin(Math.PI * Math.min(1, k < 0.55 ? k / 0.55 * 0.5 : 0.5 + (k - 0.55) / 0.45 * 0.5)), 2);
+        const fc = 250 + 2600 * Math.sin(Math.PI * Math.min(1, k * 1.05));
+        v = (sv1(rnd(), fc, 0.5).bp * 0.9 + sv2(rnd(), fc * 2.2, 0.8).bp * 0.4 + sv3(rnd(), 180 + fc * 0.3, 1.2).lo * 0.25) * shape * 1.6;
+      } else if (kind === "ding") {   // a bright little bell
+        for (const [r, a, d] of [[1, 1, 2.2], [2.01, 0.5, 3.2], [2.76, 0.35, 4.5], [5.4, 0.18, 7], [8.93, 0.08, 10]]) v += Math.sin(2 * Math.PI * 1318.5 * r * t) * a * Math.exp(-t * d);
+        v *= t < 0.002 ? t / 0.002 : 1; v *= 0.5;
+      } else if (kind === "pop") {   // a round mouth pop
+        const f = t < 0.03 ? 260 + 700 * (t / 0.03) : 960 * Math.exp(-(t - 0.03) * 6); ph += 2 * Math.PI * f / sr;
+        v = Math.sin(ph) * env(t, 0.002, 28) + sv1(rnd(), 1800, 0.8).bp * (t < 0.006 ? 1 - t / 0.006 : 0) * 0.5;
+      }
       out[i] = v;
     }
+    // a touch of room (a small reverb), so it doesn't sound flat
+    const wet = { boom: 0.1, zing: 0.28, stop: 0.3, whoosh: 0.1, ding: 0.32, pop: 0.04 }[kind] || 0.2;
+    if (wet > 0) {
+      const combs = [1557, 1617, 1491, 1422].map(d => ({ d: Math.round(d * sr / 44100), b: null, i: 0, lp: 0 })), aps = [225, 556].map(d => ({ d: Math.round(d * sr / 44100), b: null, i: 0 }));
+      combs.forEach(cm => { cm.b = new Float32Array(cm.d); }); aps.forEach(ap => { ap.b = new Float32Array(ap.d); });
+      for (let i = 0; i < n; i++) {
+        const x = out[i] * 0.25; let y = 0;
+        for (const cm of combs) { const o = cm.b[cm.i]; cm.lp = o * 0.7 + cm.lp * 0.3; cm.b[cm.i] = x + cm.lp * 0.8; cm.i = (cm.i + 1) % cm.d; y += o; }
+        for (const ap of aps) { const o = ap.b[ap.i], z = y + o * 0.5; ap.b[ap.i] = z; ap.i = (ap.i + 1) % ap.d; y = o - z * 0.5; }
+        out[i] = out[i] * (1 - wet * 0.5) + y * wet;
+      }
+    }
+    if (kind === "boom" || kind === "pop") { const a = 1 - Math.exp(-2 * Math.PI * (kind === "boom" ? 1400 : 4000) / sr); for (let pass = 0; pass < 2; pass++) { let y = 0; for (let i = 0; i < n; i++) { y += (out[i] - y) * a; out[i] = y; } } }   // keep the boom deep, not hissy
     let pk = 0; for (let i = 0; i < n; i++) pk = Math.max(pk, Math.abs(out[i]));
-    if (pk > 0) for (let i = 0; i < n; i++) out[i] *= 0.85 / pk;
-    const fo = Math.min(n, Math.floor(sr * 0.02)); for (let i = 0; i < fo; i++) out[n - 1 - i] *= i / fo;
+    if (pk > 0) for (let i = 0; i < n; i++) out[i] *= 0.9 / pk;
+    const fo = Math.min(n, Math.floor(sr * 0.08)); for (let i = 0; i < fo; i++) out[n - 1 - i] *= i / fo;
     return out;
   }
   // what the effects do to the picture at time t: a shake, a zoom, a freeze, a flash
@@ -9210,8 +9274,14 @@ notify pgrst, 'reload schema';
   }
 
   /* ---- drawing ---- */
+  const vmBgCache = new Map();
   function vmBg(c, G, L, box) {
-    const B = box || { x: 0, y: 0, w: G.W, h: G.H };
+    const B = box || { x: 0, y: 0, w: G.W, h: G.H }, key = L.bg.join() + (L.chalk ? "c" : "") + "|" + Math.round(B.w) + "x" + Math.round(B.h);
+    let cv = vmBgCache.get(key);
+    if (!cv) { if (vmBgCache.size > 24) vmBgCache.clear(); cv = document.createElement("canvas"); cv.width = Math.max(1, Math.round(B.w)); cv.height = Math.max(1, Math.round(B.h)); vmBgPaint(cv.getContext("2d"), L, { x: 0, y: 0, w: cv.width, h: cv.height }); vmBgCache.set(key, cv); }
+    c.drawImage(cv, B.x, B.y, B.w, B.h);
+  }
+  function vmBgPaint(c, L, B) {
     const g = c.createLinearGradient(B.x, B.y, B.x + B.w * 0.3, B.y + B.h); g.addColorStop(0, L.bg[0]); g.addColorStop(1, L.bg[1]);
     c.fillStyle = g; c.fillRect(B.x, B.y, B.w, B.h);
     if (L.chalk) { for (let i = 0; i < 300; i++) { c.fillStyle = "rgba(255,255,255," + (0.012 + crHash(i) * 0.022).toFixed(3) + ")"; c.fillRect(B.x + crHash(i * 3.1) * B.w, B.y + crHash(i * 7.7) * B.h, 2 + crHash(i * 5) * 3, 1 + crHash(i * 9) * 2); } }
@@ -9291,7 +9361,12 @@ notify pgrst, 'reload schema';
     if (b.pip) { c.save(); c.shadowColor = "rgba(0,0,0,.45)"; c.shadowBlur = 18; c.shadowOffsetY = 6; c.fillStyle = "#000"; vmShape(c, b, shape); c.fill(); c.restore(); }
     c.save(); vmShape(c, b, shape); c.clip();
     const [sw, sh] = vmSize(src);
-    if (sw) { const R = vmMediaRect(shape === "circle" ? { x: b.x + b.w / 2 - Math.min(b.w, b.h) / 2, y: b.y + b.h / 2 - Math.min(b.w, b.h) / 2, w: Math.min(b.w, b.h), h: Math.min(b.w, b.h) } : b, sw, sh, "fill"); vmDraw(c, src, R.x, R.y, R.w, R.h, F.gray); }
+    if (sw) {
+      const whole = F.camFit !== "fill" && !b.pip && Math.abs(sw / sh - b.w / b.h) > 0.08;
+      if (whole) { const bl = vmBlurOf(src, null); if (bl) { const bs = Math.max(b.w / bl.width, b.h / bl.height) * 1.1; c.drawImage(bl, b.x + b.w / 2 - bl.width * bs / 2, b.y + b.h / 2 - bl.height * bs / 2, bl.width * bs, bl.height * bs); c.fillStyle = "rgba(0,0,0,.35)"; c.fillRect(b.x, b.y, b.w, b.h); } }
+      const R = vmMediaRect(shape === "circle" ? { x: b.x + b.w / 2 - Math.min(b.w, b.h) / 2, y: b.y + b.h / 2 - Math.min(b.w, b.h) / 2, w: Math.min(b.w, b.h), h: Math.min(b.w, b.h) } : b, sw, sh, whole ? "fit" : "fill");
+      vmDraw(c, src, R.x, R.y, R.w, R.h, F.gray, F.camMirror);
+    }
     else { const g = c.createLinearGradient(b.x, b.y, b.x, b.y + b.h); g.addColorStop(0, "#3B4654"); g.addColorStop(1, "#1C232C"); c.fillStyle = g; c.fillRect(b.x, b.y, b.w, b.h);
       c.fillStyle = "rgba(255,255,255,.75)"; c.textAlign = "center"; c.textBaseline = "middle"; c.font = vmFont(st, Math.min(b.w, b.h) * 0.12); c.fillText("📷 You", b.x + b.w / 2, b.y + b.h / 2); }
     c.restore();
@@ -9510,7 +9585,7 @@ notify pgrst, 'reload schema';
     if (!vmPics.has(it.id)) { const im = new Image(); im.src = vmUrl(it); vmPics.set(it.id, im); }
     const im = vmPics.get(it.id); return im.complete && im.naturalWidth ? im : null;
   }
-  const vmNew = (fmt, title, cam) => ({ id: uid(), title: title || "", fmt: fmt || "tall", cam: !!cam, facing: "user", fit: "fit", notes: "", clipVol: 0.7, subs: true, clean: true, items: [], take: null, createdAt: Date.now(), updatedAt: Date.now() });
+  const vmNew = (fmt, title, cam) => ({ id: uid(), title: title || "", fmt: fmt || "tall", cam: !!cam, facing: "user", fit: "fit", notes: "", clipVol: 0.7, subs: true, clean: false, mirror: false, camFit: "whole", items: [], take: null, createdAt: Date.now(), updatedAt: Date.now() });
   // a lesson's board as a picture, to show in a promo
   async function vmLessonPic(lesson, number) {
     const cv = document.createElement("canvas"); cv.width = CR_W; cv.height = CR_H;
@@ -9528,7 +9603,12 @@ notify pgrst, 'reload schema';
       // record the camera in a kind of file this phone can read back when the video is made
       if (this.avc == null) { try { this.avc = !!(window.VideoDecoder && (await VideoDecoder.isConfigSupported({ codec: "avc1.42E01E", codedWidth: 1280, codedHeight: 720 })).supported); } catch (e) { this.avc = false; } }
       const tall = fmt !== "wide";
-      return navigator.mediaDevices.getUserMedia({ video: { facingMode: facing || "user", width: { ideal: tall ? 720 : 1280 }, height: { ideal: tall ? 1280 : 720 }, frameRate: { ideal: 30 } } });
+      // resizeMode "none": the camera's own full picture (asking for a tall shape makes phones cut it down, which looks zoomed in)
+      let s0;
+      try { s0 = await navigator.mediaDevices.getUserMedia({ video: { facingMode: facing || "user", width: { ideal: 1920 }, height: { ideal: 1440 }, frameRate: { ideal: 30 }, resizeMode: "none" } }); }
+      catch (e) { s0 = await navigator.mediaDevices.getUserMedia({ video: { facingMode: facing || "user" } }); }
+      try { const tr = s0.getVideoTracks()[0], cap = tr.getCapabilities ? tr.getCapabilities() : {}; if (cap.zoom && cap.zoom.min != null) await tr.applyConstraints({ advanced: [{ zoom: cap.zoom.min }] }); } catch (e) {}
+      return s0;
     },
     canScreen: () => !!(navigator.mediaDevices && navigator.mediaDevices.getDisplayMedia),
     // what's on your computer screen (a tab, a window or the whole screen), with its sound if you tick "share audio"
@@ -9628,7 +9708,7 @@ notify pgrst, 'reload schema';
     // you, from the camera recording
     // the camera can come in parts (each time you flipped it); older recordings had it all in one file with the voice
     const camSegs = [];
-    for (const g of camOn ? (take.camSegs && take.camSegs.length ? take.camSegs : [{ t: 0, blob: take.voice }]) : []) { let S0 = null; try { S0 = g.blob ? await sinkOf(g.blob, 1080) : null; } catch (e) {} camSegs.push({ t: g.t, S: S0 }); }
+    for (const g of camOn ? (take.camSegs && take.camSegs.length ? take.camSegs : [{ t: 0, blob: take.voice }]) : []) { let S0 = null; try { S0 = g.blob ? await sinkOf(g.blob, 1080) : null; } catch (e) {} camSegs.push({ t: g.t, S: S0, facing: g.facing || "user" }); }
     const segAt = t => { let k = -1; for (let i = 0; i < camSegs.length; i++) if (camSegs[i].t <= t + 0.01) k = i; return k; };
     const volCues = cues.filter(q => q.k === "vol"), volAt = t => { let v = 1; for (const q of volCues) { if (q.t > t) break; v = q.v; } return v; };
     // the pictures and clips that get shown
@@ -9765,7 +9845,8 @@ notify pgrst, 'reload schema';
             if (!camIt || camItSeg !== si) { await closeIt(camIt); camItSeg = si; camIt = run(sg.S.sink, Math.max(0, t - sg.t) + sg.S.first, take.secs - sg.t + sg.S.first + 1); }
             const r = await camIt.next(); camF = r.done || !r.value ? camLast : r.value.canvas; if (camF) camLast = camF;
           } else if (camIt && !fz) { await closeIt(camIt); camIt = null; camItSeg = -1; }
-          vmFrame(c, { G, L, st, proj, items, s, t, tb, cam: camF || camLast, camFreeze: frozen, camOn, pic: id => pics[id] || null, clip: frame, words, cache, prog: (T - IN) / body });
+          const segNow = camSegs[segAt(t)] || camSegs[0];
+          vmFrame(c, { G, L, st, proj, items, s, t, tb, cam: camF || camLast, camFreeze: frozen, camOn, camFit: proj.camFit || "whole", camMirror: !!proj.mirror && (!segNow || segNow.facing !== "environment"), pic: id => pics[id] || null, clip: frame, words, cache, prog: (T - IN) / body });
         };
       }
       if (key === lastKey && T - lastT < 1 - 1e-6) continue;
@@ -10045,7 +10126,7 @@ notify pgrst, 'reload schema';
     const voice = () => voiceOf(projRef.current);
     const voiceUrl = useMemo(() => { const b = voice(); return b ? URL.createObjectURL(b) : null; }, [proj.take, proj.clean]);
     // your camera, in parts (a new part each time you flipped it)
-    const camParts = useMemo(() => { const tk = proj.take; if (!tk || !tk.cam) return []; return (tk.camSegs && tk.camSegs.length ? tk.camSegs : [{ t: 0, blob: tk.voice }]).map(g => ({ t: g.t, url: URL.createObjectURL(g.blob) })); }, [proj.take && proj.take.voice]);
+    const camParts = useMemo(() => { const tk = proj.take; if (!tk || !tk.cam) return []; return (tk.camSegs && tk.camSegs.length ? tk.camSegs : [{ t: 0, blob: tk.voice }]).map(g => ({ t: g.t, url: URL.createObjectURL(g.blob), facing: g.facing || "user" })); }, [proj.take && proj.take.voice]);
     S.current.camParts = camParts;
     const clipItem = () => { const s = rec ? cur() : mode === "review" ? S.current.rs : null; const id = rec || mode === "review" ? s && s.show : peek; const it = id ? items[id] : null; return it && it.kind === "vid" ? it : null; };
     function loadClip(it, at) { const v = vref.current; if (!v) return; const u = vmUrl(it); if (v.dataset.id !== it.id) { v.dataset.id = it.id; v.src = u; } try { v.currentTime = at || 0; } catch (e) {} }
@@ -10057,8 +10138,10 @@ notify pgrst, 'reload schema';
       const sync = (v, want, run, vol) => { if (!v) return; if (vol != null) v.volume = vol; if (run) { if (v.paused) v.play().catch(() => {}); if (Math.abs(v.currentTime - want) > 0.3) v.currentTime = want; } else { if (!v.paused) v.pause(); if (Math.abs(v.currentTime - want) > 0.08) try { v.currentTime = want; } catch (e) {} } };
       const tick = now => {
         raf = requestAnimationFrame(tick);
-        if (now - last < 30 || document.hidden) return; last = now;
-        const R = S.current, G2 = R.G, w = Math.round(cv.clientWidth * Math.min(2, window.devicePixelRatio || 1));
+        if (now - last < 33 || document.hidden) return;
+        const R0 = S.current; if (R0.mode === "review" && !R0.op && aref.current && aref.current.paused && now - last < 250 && !R0.dirty) return;
+        last = now; R0.dirty = false;
+        const R = S.current, G2 = R.G, w = Math.round(cv.clientWidth * Math.min(1.5, window.devicePixelRatio || 1));
         if (!w) return;
         const h = Math.round(w * G2.H / G2.W); if (cv.width !== w || cv.height !== h) { cv.width = w; cv.height = h; }
         let s, t, words = null, prog = null;
@@ -10101,7 +10184,9 @@ notify pgrst, 'reload schema';
         c.setTransform(cv.width / G2.W, 0, 0, cv.height / G2.H, 0, 0);
         const it = s.show ? R.items[s.show] : null, v = it && it.live ? sref.current : vref.current, cv2 = cref.current;
         const out = {};
-        vmFrame(c, { G: G2, L: R.L, st: R.st, proj: R.proj, items: R.items, s, t, camFreeze: R.mode === "rec" ? freezeSnap.current : null, tb: R.mode === "review" && tk ? t - (tk.trim ? tk.trim[0] : 0) : R.mode === "rec" ? t : 99, cam: cv2 && cv2.readyState >= 2 ? cv2 : null, camOn: R.mode === "review" ? !!(cam && tk && tk.cam) : cam, pic: id => vmPic(R.items[id]), clip: it && it.kind === "vid" && v && v.readyState >= 2 ? v : null, words, prog, out });
+        let facingNow = R.proj.facing || "user";
+        if (R.mode === "review" && R.camParts && R.camParts.length) { let si = 0; for (let i = 0; i < R.camParts.length; i++) if (R.camParts[i].t <= t + 0.01) si = i; facingNow = R.camParts[si].facing; }
+        vmFrame(c, { G: G2, L: R.L, st: R.st, proj: R.proj, items: R.items, s, t, camFreeze: R.mode === "rec" ? freezeSnap.current : null, camFit: R.proj.camFit || "whole", camMirror: !!R.proj.mirror && facingNow !== "environment", tb: R.mode === "review" && tk ? t - (tk.trim ? tk.trim[0] : 0) : R.mode === "rec" ? t : 99, cam: cv2 && cv2.readyState >= 2 ? cv2 : null, camOn: R.mode === "review" ? !!(cam && tk && tk.cam) : cam, pic: id => vmPic(R.items[id]), clip: it && it.kind === "vid" && v && v.readyState >= 2 ? v : null, words, prog, out });
         rects.current = out;
         const d = drag.current;
         if (d && d.P.length > 1) {
@@ -10243,7 +10328,7 @@ notify pgrst, 'reload schema';
         const v = cref.current; if (v) { v.srcObject = s2; v.muted = true; v.play().catch(() => {}); }
         if (!r.current) { vmRec.close(s2); return; }
         camRec.current = vmRec.start(s2); if (paused) camRec.current.pause();
-        camSegs.current.push({ t: round2(nowT()), rec: camRec.current });
+        camSegs.current.push({ t: round2(nowT()), rec: camRec.current, facing });
       } catch (e) { toast("Couldn't switch the camera. Carrying on without it."); }
     }
     // ---- adding things ----
@@ -10278,7 +10363,7 @@ notify pgrst, 'reload schema';
         mic.current = await vmRec.open(false);
         r.current = vmRec.start(mic.current);
         camSegs.current = [];
-        if (camOn) { camRec.current = vmRec.start(stream.current); camSegs.current.push({ t: 0, rec: camRec.current }); }
+        if (camOn) { camRec.current = vmRec.start(stream.current); camSegs.current.push({ t: 0, rec: camRec.current, facing: projRef.current.facing || "user" }); }
       } catch (e) { vmRec.close(mic.current); mic.current = null; toast(camOn ? "The camera or microphone isn't available. Allow them, or switch to faceless." : "The microphone isn't available here."); return; }
       clipPos.current = {}; setCues(proj.bw ? [{ id: uid().slice(-7), t: 0, k: "bw", v: true }] : []); freezeSnap.current = null; setPaused(false); setClipOn(false); volLive(1); setMode("rec");
     }
@@ -10299,7 +10384,7 @@ notify pgrst, 'reload schema';
       const out = await c.stop();
       if (camRec.current) { const last = camSegs.current[camSegs.current.length - 1]; if (last) last.out = camRec.current.stop(); camRec.current = null; }
       const segs = [];
-      for (const g of camSegs.current) { if (!g.out) continue; try { const o = await g.out; if (o.blob && o.blob.size) segs.push({ t: g.t, blob: o.blob }); } catch (e) {} }
+      for (const g of camSegs.current) { if (!g.out) continue; try { const o = await g.out; if (o.blob && o.blob.size) segs.push({ t: g.t, blob: o.blob, facing: g.facing || "user" }); } catch (e) {} }
       camSegs.current = [];
       vmRec.close(mic.current); mic.current = null; vmRec.close(stream.current); stream.current = null;
       if (out.secs < 1) { setMode("ready"); toast("That was too short."); return; }
@@ -10311,13 +10396,13 @@ notify pgrst, 'reload schema';
     useEffect(() => {
       if (mode !== "review" || !proj.take) return;
       const tk = proj.take;
-      if (!tk.cleanBlob && !tk.cleanFailed && !(clean && clean.p != null)) {
+      if (proj.clean && !tk.cleanBlob && !tk.cleanFailed && !(clean && clean.p != null)) {
         setClean({ p: 0 });
         cleanVoice(tk.voice, v => setClean(x => (x && x.p != null ? { p: v } : x)))
           .then(cv => { setClean(null); setProj(p => (p.take && p.take.voice === tk.voice ? { take: Object.assign({}, p.take, { cleanBlob: cv.blob }) } : {})); })
-          .catch(() => { setClean(null); setProj(p => (p.take ? { take: Object.assign({}, p.take, { cleanFailed: true }) } : {})); });
+          .catch(e => { setClean(null); setProj(p => (p.take ? { take: Object.assign({}, p.take, { cleanFailed: e && e.code === "voicelost" ? "voice" : true }) } : {})); });
       }
-    }, [mode, proj.take && proj.take.voice]);
+    }, [mode, proj.take && proj.take.voice, proj.clean]);
     const subsErr = e => toast(e && e.code === "nokey" ? "Subtitles need OPENAI_API_KEY in Netlify." : "Couldn't make the subtitles. Check the connection and try again.");
     async function getSubs() {
       setBusy(true);
@@ -10424,6 +10509,11 @@ notify pgrst, 'reload schema';
             <button class=${"chip" + (proj.useHl && (proj.headlines || []).some(h => h.text) ? " on" : "")} onClick=${() => setSheet("hl")}>📰 Headlines opening</button>
             <button class="chip" onClick=${() => setSheet("snd")}>🔊 Sounds</button>
           </div>
+          ${camOn ? html`<div class="vmclipbar">
+            <button class=${"chip" + (proj.mirror ? " on" : "")} onClick=${() => setProj(p => ({ mirror: !p.mirror }))}>↔ ${proj.mirror ? "Flipped" : "Flip the picture"}</button>
+            <button class="chip" onClick=${() => setProj(p => ({ camFit: (p.camFit || "whole") === "whole" ? "fill" : "whole" }))}>${(proj.camFit || "whole") === "whole" ? "🔍 Whole camera picture" : "🔍 Filled (closer)"}</button>
+          </div>
+          <p class="help">Check the picture: hold up something with writing. If the writing looks backwards, tap ↔.</p>` : null}
           <p class="help">Add what you'll show, then press record and talk. While recording, tap a thing to show it, tap it again to come back to ${camOn ? "you" : "the title"}.${camOn ? " Switch layouts any time: Me, Split, Corner, Only it." : ""} Clips play while you talk, so you can react to them; wear earphones so their sound stays out of your microphone.${vmRec.canScreen() ? " On a computer you can also share your screen while recording (a YouTube tab, Instagram, anything) and react to it." : ""}</p>
           ${tray}${clipBar}
           ${peek && items[peek] ? html`<button class="chip" onClick=${() => removeItem(items[peek])}>🗑 Take the selected one out</button>` : null}
@@ -10463,7 +10553,7 @@ notify pgrst, 'reload schema';
             <label>Ends at <b>${fmtDur(tr[1])}</b><input type="range" min="0" max=${tk.secs} step="0.1" value=${tr[1]} onInput=${e => { const v = Math.max(+e.target.value, tr[0] + 1); setProj(p => ({ take: Object.assign({}, p.take, { trim: [tr[0], round1(v)] }) })); if (a) a.currentTime = Math.max(tr[0], v - 3); }}/></label>
           </div>
           <div class="revopts">
-            <button class=${"gamesw" + (proj.clean ? " on" : "")} onClick=${() => { if (a) a.pause(); setProj({ clean: !proj.clean }); }} aria-pressed=${proj.clean ? "true" : "false"}><span class="knob"></span><span>Remove background noise<small>${clean && clean.p != null ? "Cleaning… " + Math.round(clean.p * 100) + "%" : tk.cleanFailed ? "Couldn't clean this one; the original is used." : "Play it to hear the difference."}</small></span></button>
+            <button class=${"gamesw" + (proj.clean ? " on" : "")} onClick=${() => { if (a) a.pause(); setProj({ clean: !proj.clean }); }} aria-pressed=${proj.clean ? "true" : "false"}><span class="knob"></span><span>Remove background noise<small>${clean && clean.p != null ? "Cleaning… " + Math.round(clean.p * 100) + "%" : tk.cleanFailed === "voice" ? "Cleaning would have taken your voice away on this one, so your original recording is used." : tk.cleanFailed ? "Couldn't clean this one; the original is used." : proj.clean ? "Play it to hear the difference." : "Off: your recording as it is. Turn on if there's a lot of noise (fans, traffic)."}</small></span></button>
             ${st.caps === "off" ? html`<p class="help">Subtitles are off in My style.</p>` : html`<button class=${"gamesw" + (proj.subs ? " on" : "")} onClick=${() => setProj({ subs: !proj.subs })} aria-pressed=${proj.subs ? "true" : "false"}><span class="knob"></span><span>Subtitles<small>${tk.words ? "Ready. They show as you play it." : html`Your words as you say them. <button class="linkbtn" disabled=${busy} onClick=${e => { e.stopPropagation(); getSubs(); }}>${busy ? "Writing them…" : "See them now"}</button>`}</small></span></button>`}
             ${tk.cues.some(q => q.k === "play") ? html`<label class="vmvol">Clip sound <input type="range" min="0" max="1" step="0.05" value=${proj.clipVol} onInput=${e => setProj({ clipVol: +e.target.value })}/><small>${Math.round(proj.clipVol * 100)}%. It goes quieter by itself while you talk.</small></label>` : null}
             <div class="vmclipbar"><button class="chip" onClick=${() => setStyling(true)}>🎨 My style</button><button class="chip" onClick=${previewOpening}>▶ Try the opening</button><button class="chip" onClick=${() => setSheet("hl")}>📰 Headlines</button><button class="chip" onClick=${() => setSheet("snd")}>🔊 Sounds</button></div>
@@ -10997,7 +11087,7 @@ notify pgrst, 'reload schema';
   window.__kfArt = { kfBody, KF_CHARS, kfHit };
   window.__kfApi = { kfPress, kfStep, kfNew, kfSnd, kfAnn, annRec };
   window.__ink = { hitInk, inkGroup, straighten };
-  window.__mux = { lessonVideo, fixVideo, loadMux, vidJob, awake, player };
+  window.__mux = { lessonVideo, fixVideo, loadMux, vidJob, awake, player, cleanVoice };
   window.__ui = { PushBell, SetupCheck, VidJobPill, html, render, store, Board, ExplainStudio, LiveTools, stageAt, buildSound, live, player, ClassroomPlayer, crAssets, CR_W, CR_H, TalkBoard, vidJob, VideoMaker, vmExport, vmDb, vmNew, vmAt, vmFrame, vmGeo, VM_LOOKS, vmStyle, vmSaveStyle, VMStyle, vmIntro, vmOutro, vmLook };
   window.__lang = { viewOf, saveExpl, saveTileRec, uploadBlob, set: l => { REC_LANG = l; }, get: () => REC_LANG, store };
   root.innerHTML = "";
