@@ -3259,7 +3259,7 @@ notify pgrst, 'reload schema';
   const SETUP_ROWS = [
     ["SUPABASE_URL", "Class database address", "needed"], ["SUPABASE_KEY", "Class database key", "needed"],
     ["VAPID_PUBLIC_KEY", "Notifications: public key", "notifications"], ["VAPID_PRIVATE_KEY", "Notifications: private key", "notifications"], ["VAPID_SUBJECT", "Notifications: your email (mailto:…)", "notifications"],
-    ["OPENAI_API_KEY", "Tidy with ChatGPT", "tidy"], ["CF_TURN_KEY_ID", "Voice relay: Turn Token ID", "voice"], ["CF_TURN_API_TOKEN", "Voice relay: API Token", "voice"],
+    ["OPENAI_API_KEY", "ChatGPT: Tidy and subtitles", "tidy"], ["CF_TURN_KEY_ID", "Voice relay: Turn Token ID", "voice"], ["CF_TURN_API_TOKEN", "Voice relay: API Token", "voice"],
   ];
   function SetupCheck({ onClose }) {
     const [st, setSt] = useState(null);
@@ -3268,8 +3268,8 @@ notify pgrst, 'reload schema';
       <div class="sheet setupcheck" role="dialog" aria-label="Website setup">
         <h3>Website setup</h3>
         ${st == null ? html`<p class="help c">Checking…</p>`
-          : st === "none" ? html`<p class="help">The website's helper isn't answering. Make sure <b>config.mjs</b> is uploaded next to index.html, then redeploy.</p>`
-          : st === "old" ? html`<p class="help">The website is still running the <b>old config.mjs</b>. Upload the new one, then in Netlify: <b>Deploys → Trigger deploy → Deploy site</b>.</p>`
+          : st === "none" ? html`<p class="help">The website's helpers aren't running, so notifications, Tidy and subtitles can't work. Netlify only runs them when the site is deployed <b>from GitHub</b> (or the Netlify CLI). A drag-and-drop upload publishes the pages but leaves the helpers out. Put the files on GitHub and link the repository in Netlify: <b>Site configuration → Build & deploy → Link repository</b>.</p>`
+          : st === "old" ? html`<p class="help">The website is still running an <b>old helper</b>. In Netlify: <b>Deploys → Trigger deploy → Deploy site</b>.</p>`
           : html`<ul class="setuplist">${SETUP_ROWS.map(([k, label]) => html`<li key=${k} class=${st[k] ? "ok" : "no"}><span>${st[k] ? "✅" : "❌"}</span><span>${label}<small>${k}</small></span></li>`)}</ul>
             <p class="help">❌ means the website can't see that setting. In Netlify: <b>Site configuration → Environment variables</b>. Check the name is spelled exactly as shown, and that <b>Functions</b> is ticked under "Scopes". Then <b>Deploys → Trigger deploy → Deploy site</b>: new settings only reach the website after a new deploy.</p>`}
         <button class="btn quiet" onClick=${onClose}>Close</button>

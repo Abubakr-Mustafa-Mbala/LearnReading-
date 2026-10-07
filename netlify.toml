@@ -2,6 +2,7 @@
 [build]
   publish = "."
 
-# The small helpers sit next to index.html: turn.mjs (voice relay) and config.mjs (which Supabase project).
+# The website's small helpers (Supabase settings, notifications, Tidy, subtitles, voice relay).
+# Netlify only runs these when the site is deployed from GitHub (or the Netlify CLI), not by drag and drop.
 [functions]
-  directory = "."
+  directory = "netlify/functions"
