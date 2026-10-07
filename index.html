@@ -12,7 +12,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Andika:wght@400;700&display=swap">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&family=Merriweather:wght@900&family=Poppins:wght@600;700;800&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&family=Merriweather:wght@900&family=Permanent+Marker&family=Poppins:wght@600;700;800&display=swap">
 <style>
 :root{
   --paper:#F5F7F3; --paper-2:#E8EDE7; --rule:#DCE6EF; --margin:#EBB9B5;
@@ -954,6 +954,44 @@ a.btn{text-decoration:none}
 .thsmall{width:168px;height:94px;border-radius:8px;flex:0 0 auto}.thtiny{width:120px;height:67px;border-radius:6px;flex:0 0 auto}.throw.mini b{font-size:12px}
 .thcamv{position:relative;width:100%;border-radius:12px;overflow:hidden;background:#000}.thcamv video{width:100%;display:block;transform:scaleX(-1)}
 .thcount{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font:800 96px var(--font);color:#fff;text-shadow:0 4px 20px rgba(0,0,0,.6)}
+
+.vmstage.tall.ed{height:min(34vh,420px)}.vmstage.wide.ed{width:min(calc(100% - 20px),calc(30vh * 16 / 9))}
+.vmedbtn{width:100%;max-width:560px}
+.tl{width:100%;max-width:900px;display:flex;flex-direction:column;gap:8px}
+.tltop{display:flex;align-items:center;gap:6px;flex-wrap:wrap}.tltop .crtime small{opacity:.6}.tlsp{flex:1}
+.tlbox{position:relative;border-radius:12px;background:#15181D;overflow:hidden}
+.tlwrap{overflow-x:auto;overflow-y:hidden;-webkit-overflow-scrolling:touch;scrollbar-width:thin}
+.tlin{position:relative;box-sizing:border-box;padding-top:2px;padding-bottom:4px}
+.tlrow{position:relative;height:40px;margin:3px 0}
+.tlruler{height:16px;border-bottom:1px solid rgba(255,255,255,.12)}.tlruler span{position:absolute;top:0;height:100%;border-left:1px solid rgba(255,255,255,.25);font:600 10px var(--font);color:rgba(255,255,255,.6);padding-left:3px;white-space:nowrap}
+.tllay,.tlext{height:28px}
+.tllabels{position:absolute;left:0;top:2px;pointer-events:none;z-index:5;display:flex;flex-direction:column}.tllabels span{display:block;margin:3px 0;font:800 9px/1 var(--font);color:rgba(255,255,255,.75);background:rgba(21,24,29,.85);padding:2px 4px;border-radius:0 6px 6px 0;align-self:flex-start;box-sizing:border-box}.tllabels .r0{height:16px;background:none}.tllabels .r1{height:40px;padding-top:4px}.tllabels .r2{height:28px;padding-top:4px}.tllabels .r3{height:34px;padding-top:4px}
+.tlb{position:absolute;top:0;height:100%;border:0;border-radius:7px;background:#2F5D9E;color:#fff;display:flex;align-items:center;gap:4px;padding:0 5px;overflow:hidden;font:600 11px var(--font);cursor:pointer;box-sizing:border-box;border:1px solid rgba(255,255,255,.15)}
+.tlb img{height:30px;width:30px;object-fit:cover;border-radius:4px;flex:0 0 auto}.tlb em{font-style:normal;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.tlb.show{background:#2B6CB0}.tlb.show.vid{background:#B83280}.tlb.ban{background:#C53030;height:13px;top:0;font-size:9px}.tlb.top{background:#B7791F;height:13px;top:15px;font-size:9px}.tlb.bw{background:#666;height:6px;top:22px;padding:0}
+.tlb.on,.tlpt.on,.tlcut.on{outline:3px solid #FFD54A;outline-offset:-1px;z-index:2}
+.tlpt{position:absolute;top:2px;width:24px;height:24px;margin-left:-12px;border-radius:50%;border:0;background:#2D3748;color:#fff;font-size:13px;display:grid;place-items:center;padding:0;cursor:pointer;z-index:1}
+.tlwave{height:34px}.tlwave canvas{height:34px;display:block}
+.tlcut{position:absolute;top:18px;bottom:4px;border:0;background:repeating-linear-gradient(135deg,rgba(0,0,0,.72) 0 6px,rgba(229,62,62,.55) 6px 12px);color:#fff;font-size:14px;z-index:2;cursor:pointer;padding:0}
+.tlcut.live{pointer-events:none;background:rgba(229,62,62,.35)}
+.tltrim{position:absolute;top:18px;bottom:4px;background:rgba(0,0,0,.6);pointer-events:none;z-index:2}
+.tlhead{position:absolute;top:0;bottom:0;left:50%;width:2px;margin-left:-1px;background:#FFD54A;box-shadow:0 0 6px rgba(255,213,74,.8);pointer-events:none;z-index:4}
+.tlpan{background:var(--card,#fff);border:1px solid var(--line);border-radius:12px;padding:10px;display:flex;flex-direction:column;gap:8px}
+.tlhd{display:flex;align-items:center;gap:8px}.tlhd img{width:40px;height:40px;object-fit:cover;border-radius:6px}.tlhd small{margin-left:auto;color:var(--ink-2);font:600 12px var(--font)}.tlic{font-size:22px}
+.tladd{display:flex;flex-wrap:wrap;gap:6px}.tladd .tool{flex:1 1 80px}
+.chip.danger{color:#C53030;border-color:#F5B5B5}
+.vmpick{flex-wrap:wrap;max-height:46vh;overflow:auto}
+
+.thcell{cursor:pointer}.thcell small{line-height:1.35}.thcell small b{color:var(--ink)}
+.thdesign .thbody{gap:10px;align-items:stretch}
+.thstage{width:100%;max-width:820px;align-self:center}.thstage.tall{max-width:260px}
+.thcvtall{width:100%;aspect-ratio:9/16;border-radius:12px;background:#111;display:block}
+.thdesign .thcvbig{display:block}
+.thsep{width:12px}.help.c{text-align:center;margin:0}
+.chip.off{opacity:.55;text-decoration:line-through}
+.thpart{display:flex;flex-direction:column;gap:8px}
+.thsw{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-top:4px}.thsw .swatch{width:30px;height:30px;border-radius:50%;border:2px solid rgba(0,0,0,.15)}.thsw .swatch.on{outline:3px solid var(--blue);outline-offset:2px}
+.thshortsmall{width:90px;height:160px;border-radius:8px;flex:0 0 auto}
 </style>
 </head>
 <body>
@@ -10076,14 +10114,26 @@ notify pgrst, 'reload schema';
 
   /* ---- making the MP4 ---- */
   const VM_INTRO = 1.6, VM_OUTRO = 2.4;
+  // the parts of the recording that stay in the video: the trim, minus anything cut out
+  function vmKeep(take) {
+    const t0 = Math.max(0, take.trim ? take.trim[0] : 0), t1 = Math.min(take.secs, take.trim ? take.trim[1] : take.secs);
+    let out = [[t0, t1]];
+    for (const [a, b] of take.cuts || []) { const nx = []; for (const [x, y] of out) { if (b <= x || a >= y) nx.push([x, y]); else { if (a > x) nx.push([x, a]); if (b < y) nx.push([b, y]); } } out = nx; }
+    out = out.filter(([x, y]) => y - x > 0.05);
+    return out.length ? out : [[t0, Math.max(t0 + 0.5, t1)]];
+  }
+  const vmKeepLen = K => K.reduce((n, [a, b]) => n + b - a, 0);
+  function vmSrcAt(K, u) { let acc = 0; for (let i = 0; i < K.length; i++) { const d = K[i][1] - K[i][0]; if (u < acc + d || i === K.length - 1) return { t: K[i][0] + Math.min(d, Math.max(0, u - acc)), i }; acc += d; } return { t: 0, i: 0 }; }
+  function vmOutAt(K, t) { let acc = 0; for (const [a, b] of K) { if (t < a) return acc; if (t <= b) return acc + t - a; acc += b - a; } return acc; }
+  const vmShiftK = (words, K, lead) => (words ? words.filter(w => K.some(([a, b]) => w[1] > a && w[0] < b)).map(w => { const a = vmOutAt(K, w[0]), b = Math.max(a + 0.05, vmOutAt(K, w[1])); return [round2(a + (lead || 0)), round2(b + (lead || 0)), w[2]]; }) : null);
   async function vmExport(proj, voiceBlob, wordsIn, onProgress, styleIn, libIn) {
-    const allWords = wordsIn && wordsIn.all ? wordsIn.all : null, words = wordsIn && wordsIn.all ? wordsIn.caps : wordsIn;
+    const wrapped = !!wordsIn && !Array.isArray(wordsIn) && ("all" in wordsIn || "caps" in wordsIn), allWords = wrapped ? wordsIn.all || null : null, words = wrapped ? wordsIn.caps || null : wordsIn || null;
     const st = styleIn || vmStyle(), G = vmGeo(proj.fmt), F0 = VM_FMT[proj.fmt] || VM_FMT.tall, L = vmLook(st);
     await vmFonts(st);
     if (st.logo) { const im = vmLogo(st) || await new Promise(r => { const x = new Image(); x.onload = () => r(x); x.onerror = () => r(null); x.src = st.logo; vmLogos.set(st.logo, x); }); }
     const hd = (proj.quality || "1080") === "1080", OUT_W = hd ? F0.OW : F0.W, OUT_H = hd ? F0.OH : F0.H, FPS = 30;
     const take = proj.take, cues = (take.cues || []).slice().sort((a, b) => a.t - b.t), camOn = !!(proj.cam && take.cam);
-    const t0 = Math.max(0, take.trim ? take.trim[0] : 0), t1 = Math.min(take.secs, take.trim ? take.trim[1] : take.secs), body = Math.max(0.5, t1 - t0);
+    const K = vmKeep(take), t0 = K[0][0], t1 = K[K.length - 1][1], body = Math.max(0.5, vmKeepLen(K));
     const lib = libIn || await vmLib.get(), snd = vmOpener(proj, st, lib), plan = vmOpenPlan(proj, st, snd);
     const IN = plan.dur, OUTD = st.outro ? VM_OUTRO : 0, total = IN + body + OUTD;
     const items = {}; for (const it of proj.items) items[it.id] = it;
@@ -10135,9 +10185,9 @@ notify pgrst, 'reload schema';
     }
     try { ac.close(); } catch (e) {}
     // ---- the sound: your voice, with the clips' own sound under it (quieter while you talk) ----
-    const N = Math.ceil(total * rate) + 1, all = new Float32Array(N), off0 = Math.floor(IN * rate);
-    const vpart = voice.subarray(Math.floor(t0 * rate), Math.min(voice.length, Math.floor(t1 * rate)));
-    all.set(vpart.subarray(0, Math.max(0, N - off0)), off0);
+    // everything in recording time first (voice, the clips' sound under it, the sound effects), then only the parts you kept
+    const SN = Math.ceil(take.secs * rate) + 1, src = new Float32Array(SN);
+    src.set(voice.subarray(0, Math.min(voice.length, SN)));
     const vol = proj.clipVol == null ? 0.7 : proj.clipVol;
     const talkAt = t => { const i = Math.floor(t * 20); let m = 0; for (let j = i - 4; j <= i + 4; j++) m = Math.max(m, lv[j] || 0); return m; };
     if (vol > 0) {
@@ -10150,26 +10200,17 @@ notify pgrst, 'reload schema';
       }
       close(take.secs);
       for (const r of runs) {
-        const snd = clips[r.id].sound, a = Math.max(r.a, t0), b = Math.min(r.b, t1); if (b <= a) continue;
-        const i0 = off0 + Math.floor((a - t0) * rate), i1 = Math.min(N, off0 + Math.floor((b - t0) * rate)), s0 = Math.floor((r.at + (a - r.a)) * rate);
+        const snd = clips[r.id].sound, a = Math.max(0, r.a), b = Math.min(r.b, take.secs); if (b <= a) continue;
+        const i0 = Math.floor(a * rate), i1 = Math.min(SN, Math.floor(b * rate)), s0 = Math.floor((r.at + (a - r.a)) * rate);
         const fadeN = Math.max(1, Math.floor(rate * 0.03)); let g = -1, want = vol;
         for (let i = i0, j = s0; i < i1 && j < snd.length; i++, j++) {
-          if (((i - i0) & 255) === 0) { want = vol * volAt(t0 + (i - off0) / rate) * (1 - 0.65 * Math.min(1, Math.max(0, (talkAt(t0 + (i - off0) / rate) - 0.12) / 0.3))); if (g < 0) g = want; }
+          if (((i - i0) & 255) === 0) { want = vol * volAt(i / rate) * (1 - 0.65 * Math.min(1, Math.max(0, (talkAt(i / rate) - 0.12) / 0.3))); if (g < 0) g = want; }
           g += (want - g) * 0.002;
-          all[i] += snd[j] * g * Math.min(1, (i - i0) / fadeN, (i1 - i) / fadeN);
+          if (j >= 0) src[i] += snd[j] * g * Math.min(1, (i - i0) / fadeN, (i1 - i) / fadeN);
         }
       }
     }
-    // the opening sound (a nasheed, a saying), then the sound effects you tapped
-    if (snd && plan.snd > 0) {
-      try {
-        const ac2 = new OfflineAudioContext(1, 1, rate), ob = await new Promise(async (res, rej) => ac2.decodeAudioData(await snd.blob.arrayBuffer(), res, rej));
-        const off = new OfflineAudioContext(1, Math.ceil(ob.duration * rate) + 1, rate), sn = off.createBufferSource(); sn.buffer = ob; sn.connect(off.destination); sn.start();
-        const d = (await off.startRendering()).getChannelData(0), m = Math.min(d.length, Math.floor(plan.snd * rate), N), fo = Math.floor(rate * 0.5);
-        for (let i = 0; i < m; i++) all[i] += d[i] * 0.9 * Math.min(1, (m - i) / fo);
-      } catch (e) {}
-    }
-    const fxCues = cues.filter(q => q.k === "sfx" && q.t >= t0 && q.t < t1), fxBufs = new Map();
+    const fxCues = cues.filter(q => q.k === "sfx" && q.t >= 0 && q.t < take.secs && K.some(([a, b]) => q.t >= a - 0.01 && q.t < b)), fxBufs = new Map();
     for (const q of fxCues) {
       if (!fxBufs.has(q.v)) {
         let d = null;
@@ -10178,8 +10219,22 @@ notify pgrst, 'reload schema';
         fxBufs.set(q.v, d);
       }
       const d = fxBufs.get(q.v); if (!d) continue;
-      const at = off0 + Math.floor((q.t - t0) * rate);
-      for (let i = 0; i < d.length && at + i < N; i++) all[at + i] += d[i] * 0.8;
+      const at = Math.floor(q.t * rate);
+      for (let i = 0; i < d.length && at + i < SN; i++) src[at + i] += d[i] * 0.8;
+    }
+    const N = Math.ceil(total * rate) + 1, all = new Float32Array(N), off0 = Math.floor(IN * rate);
+    { let pos = off0; const fade = Math.max(1, Math.floor(rate * 0.012));
+      for (const [a, b] of K) { const i0 = Math.floor(a * rate), i1 = Math.min(SN, Math.floor(b * rate)), len = i1 - i0;
+        for (let k = 0; k < len && pos + k < N; k++) all[pos + k] = src[i0 + k] * (K.length > 1 ? Math.min(1, (k + 1) / fade, (len - k) / fade) : 1);
+        pos += len; } }
+    // the opening sound (a nasheed, a saying)
+    if (snd && plan.snd > 0) {
+      try {
+        const ac2 = new OfflineAudioContext(1, 1, rate), ob = await new Promise(async (res, rej) => ac2.decodeAudioData(await snd.blob.arrayBuffer(), res, rej));
+        const off = new OfflineAudioContext(1, Math.ceil(ob.duration * rate) + 1, rate), sn = off.createBufferSource(); sn.buffer = ob; sn.connect(off.destination); sn.start();
+        const d = (await off.startRendering()).getChannelData(0), m = Math.min(d.length, Math.floor(plan.snd * rate), N), fo = Math.floor(rate * 0.5);
+        for (let i = 0; i < m; i++) all[i] += d[i] * 0.9 * Math.min(1, (m - i) / fo);
+      } catch (e) {}
     }
     let peak = 0; for (let i = 0; i < N; i++) peak = Math.max(peak, Math.abs(all[i]));
     if (peak > 0.98) { const g = 0.97 / peak; for (let i = 0; i < N; i++) all[i] *= g; }
@@ -10198,7 +10253,7 @@ notify pgrst, 'reload schema';
     const n = Math.ceil(total * FPS);
     const closeIt = async x => { if (x && x.return) { try { await x.return(); } catch (e) {} } };
     const run = (sink, from, end) => sink.canvasesAtTimestamps((function* () { for (let x = from; x < end; x += 1 / FPS) yield x; })())[Symbol.asyncIterator]();
-    let it8 = null, itKey = null, still = null, camIt = null, camItSeg = -1, camLast = null, lastKey = null, lastT = -9, lastKF = -99, pending = null, hlIt = null, hlKey = -1, hlLast = null, frozenFor = null, frozen = null;
+    let pieceNow = 0, it8 = null, itKey = null, still = null, camIt = null, camItSeg = -1, camLast = null, lastKey = null, lastT = -9, lastKF = -99, pending = null, hlIt = null, hlKey = -1, hlLast = null, frozenFor = null, frozen = null;
     const flush = async next => { if (!pending) return; await vsrc.add(pending.T, next - pending.T, { keyFrame: pending.key }); pending = null; };
     for (let f = 0; f < n; f++) {
       const T = f / FPS;
@@ -10223,7 +10278,7 @@ notify pgrst, 'reload schema';
       }
       else if (T >= IN + body) { key = "out" + Math.min(T - IN - body, 1.2); draw = () => vmOutro(c, G, L, st, (T - IN - body) / OUTD); }
       else {
-        const t = t0 + (T - IN), s = vmAt(cues, t, camOn), it = s.show ? items[s.show] : null, k = it && it.kind === "vid" ? clips[it.id] : null;
+        const SA = vmSrcAt(K, T - IN), t = SA.t, s = vmAt(cues, t, camOn), it = s.show ? items[s.show] : null, k = it && it.kind === "vid" ? clips[it.id] : null;
         const ct = k ? vmClipT(s, t, k.secs) : 0, moving = k && s.play && s.play.on && ct < k.secs - 0.05;
         const camVis = camOn && (vmBoxes(G, s.eff, st).cam || (s.prev && t - s.effT < 0.4 && vmBoxes(G, s.prev, st).cam));
         let anim = (it && (it.kind === "map" || it.kind === "flag" || it.kind === "trip")) || t - s.showT < 0.4 || t - s.effT < 0.42 || (s.ban && t - s.banT < 0.4) || (s.pt && t - s.pt.t < 3.05) || s.sfx.some(q => t - q.t < (VM_FX_LEN[q.v] || 0) + 0.05);
@@ -10233,6 +10288,7 @@ notify pgrst, 'reload schema';
         if (words && st.caps === "word" && cw >= 0 && t - words[cw][0] < 0.25) anim = true;
         key = [s.show, s.ban, s.eff, s.marks.map(m => m.id).join(","), cw, k ? Math.round(ct * 100) : "", st.bar ? Math.round(T / total * G.W / 3) : "", anim || moving || camVis ? T : ""].join("|");
         draw = async () => {
+          if (SA.i !== pieceNow) { pieceNow = SA.i; await closeIt(it8); it8 = null; itKey = null; await closeIt(camIt); camIt = null; camItSeg = -1; }   // a part was cut out: pick the camera and the clip up again here
           let frame = null;
           if (k && !k.sink && k.E) frame = await k.E.at(ct);
           if (k && k.sink) {
@@ -10343,257 +10399,412 @@ notify pgrst, 'reload schema';
   }
   const thHex = (hex, a) => { const n = parseInt(String(hex).slice(1), 16); return "rgba(" + (n >> 16) + "," + ((n >> 8) & 255) + "," + (n & 255) + "," + a + ")"; };
   // the dark cinematic background
-  function thBackground(c, W, H, src, acc, opt) {
-    opt = opt || {};
-    const g = c.createLinearGradient(0, 0, W, H); g.addColorStop(0, "#0A0D12"); g.addColorStop(1, "#151A22"); c.fillStyle = g; c.fillRect(0, 0, W, H);
-    if (src) {
-      const iw = src.naturalWidth || src.width, ih = src.naturalHeight || src.height, r = thCoverRect(iw, ih, W, H, opt.fx == null ? 0.5 : opt.fx, 0.42);
-      if (opt.sharp) { c.save(); c.imageSmoothingQuality = "high"; c.drawImage(src, r[0], r[1], r[2], r[3], 0, 0, W, H); c.restore(); }
-      else thBlurInto(c, src, r[0], r[1], r[2], r[3], 0, 0, W, H, opt.blur || 26);
-      c.fillStyle = "rgba(4,8,14," + (opt.dark == null ? 0.5 : opt.dark) + ")"; c.fillRect(0, 0, W, H);
-      // teal shadows, warm highlights: the film look
-      c.save(); c.globalCompositeOperation = "soft-light"; const tg = c.createLinearGradient(0, H, W, 0); tg.addColorStop(0, "rgba(0,90,110,.55)"); tg.addColorStop(1, "rgba(255,140,40,.35)"); c.fillStyle = tg; c.fillRect(0, 0, W, H); c.restore();
-    }
-    // the accent light coming from one side
-    const lx = opt.light === "left" ? W * 0.05 : W * 0.95, lg = c.createRadialGradient(lx, H * 0.35, 0, lx, H * 0.35, Math.max(W, H) * 0.75);
-    lg.addColorStop(0, thHex(acc, src ? 0.32 : 0.45)); lg.addColorStop(0.5, thHex(acc, 0.08)); lg.addColorStop(1, thHex(acc, 0));
-    c.save(); c.globalCompositeOperation = "screen"; c.fillStyle = lg; c.fillRect(0, 0, W, H); c.restore();
-    const vg = c.createRadialGradient(W / 2, H / 2, Math.min(W, H) * 0.35, W / 2, H / 2, Math.hypot(W, H) * 0.62); vg.addColorStop(0, "rgba(0,0,0,0)"); vg.addColorStop(1, "rgba(0,0,0,.62)"); c.fillStyle = vg; c.fillRect(0, 0, W, H);
+  /* ---- the drawing engine: every thumbnail is made of parts (background, the thing, you, words, arrow, circle, label, frame)
+     that each look places; you can then move, resize, recolour or hide any part. ---- */
+  const TH_FONTS = { anton: { css: "Anton, Impact, \"Arial Narrow Bold\", sans-serif", w: 400, name: "Loud" }, poppins: { css: "Poppins, Arial, sans-serif", w: 800, name: "Clean" }, marker: { css: "\"Permanent Marker\", \"Comic Sans MS\", cursive", w: 400, name: "Marker" } };
+  const thFontOf = (f, s, it) => (it ? "italic " : "") + (TH_FONTS[f] || TH_FONTS.anton).w + " " + Math.max(4, Math.round(s)) + "px " + (TH_FONTS[f] || TH_FONTS.anton).css;
+  const thCase = (w, cs) => (cs === "lower" ? w.toLowerCase() : cs === "title" ? w.charAt(0).toUpperCase() + w.slice(1).toLowerCase() : w.toUpperCase());
+  const TH_BGS = { midnight: ["#0B0F17", "#1F2733"], purple: ["#3E0B5C", "#C2185B"], fire: ["#6E0D0D", "#FF6A00"], ocean: ["#0A2463", "#7A2BD8"], jungle: ["#06302A", "#16876C"], light: ["#F6F6F6", "#D9D9D9"] };
+  const TH_DECO = ["#E3262E", "#FFD400", "#FF7A00", "#FFFFFF", "#B620E0", "#22C55E", "#1E90FF"];
+  const TH_TXT = ["#FFFFFF", "#FFD400", "#111111", "#FF7A00", "#E3262E"];
+  // pictures cost a lot to prepare; keep what's been prepared
+  const thBlurC = new WeakMap();
+  function thBlurred(src, W, H, amt, fx) {
+    let m = thBlurC.get(src); if (!m) { m = new Map(); thBlurC.set(src, m); }
+    const key = W + "x" + H + "|" + amt + "|" + fx; if (m.has(key)) return m.get(key);
+    const iw = src.naturalWidth || src.width, ih = src.naturalHeight || src.height, r = thCoverRect(iw, ih, W, H, fx, 0.42), cv = thCanvas(W, H);
+    thBlurInto(cv.getContext("2d"), src, r[0], r[1], r[2], r[3], 0, 0, W, H, amt);
+    if (m.size > 8) m.delete(m.keys().next().value); m.set(key, cv); return cv;
   }
-  // a cut-out of you (or a thing): rim light in your colour, a crisp edge, a soft glow behind
-  function thCutout(c, img, info, cx, bottom, h, o) {
-    o = o || {};
-    let [x0, y0, x1, y1] = info.bb; const bw0 = x1 - x0;
-    if ((y1 - y0) / bw0 > 1.9) y1 = y0 + bw0 * 1.5;          // a whole body: keep the head and shoulders
-    const bw = x1 - x0, bh = y1 - y0, s = h / bh, dw = bw * s, dh = h, pad = Math.round(h * 0.06);
+  function thBg(c, W, H, B, P) {
+    const A = P.accCol, cu = P.cu || {}, kind0 = cu.bg && cu.bg !== "auto" ? cu.bg : B.kind;
+    const src = B.src === "face" ? P.face : B.src === "bg" ? P.bg || P.subj : P.bg || P.subj || (P.face && !thInfo(P.face).cut ? P.face : null);
+    const kind = (kind0 === "blur" || kind0 === "sharp") && !src ? "midnight" : kind0;
+    const dim = cu.dim != null ? cu.dim : B.dim != null ? B.dim : 0.5;
+    if (kind === "blur" || kind === "sharp") {
+      c.fillStyle = "#0A0D12"; c.fillRect(0, 0, W, H);
+      if (kind === "blur") c.drawImage(thBlurred(src, Math.round(W / 2), Math.round(H / 2), B.blur || 13, B.fx == null ? 0.5 : B.fx), 0, 0, W, H);
+      else { const iw = src.naturalWidth || src.width, ih = src.naturalHeight || src.height, r = thCoverRect(iw, ih, W, H, B.fx == null ? 0.5 : B.fx, 0.42); c.save(); c.imageSmoothingQuality = "high"; if ("filter" in c && B.vivid) c.filter = "saturate(1.35) contrast(1.1) brightness(1.04)"; c.drawImage(src, r[0], r[1], r[2], r[3], 0, 0, W, H); c.restore(); }
+      if (dim > 0) { c.fillStyle = "rgba(4,8,14," + dim + ")"; c.fillRect(0, 0, W, H); }
+      if (B.grade !== false && kind === "blur") { c.save(); c.globalCompositeOperation = "soft-light"; const tg = c.createLinearGradient(0, H, W, 0); tg.addColorStop(0, "rgba(0,90,110,.55)"); tg.addColorStop(1, "rgba(255,140,40,.35)"); c.fillStyle = tg; c.fillRect(0, 0, W, H); c.restore(); }
+    } else {
+      const cols = TH_BGS[kind] || TH_BGS.midnight, g = c.createLinearGradient(0, 0, W, H); g.addColorStop(0, cols[0]); g.addColorStop(1, cols[1]); c.fillStyle = g; c.fillRect(0, 0, W, H);
+      if (kind !== "light") { const rg = c.createRadialGradient(W * 0.5, H * 0.45, 0, W * 0.5, H * 0.45, Math.max(W, H) * 0.6); rg.addColorStop(0, "rgba(255,255,255,.16)"); rg.addColorStop(1, "rgba(255,255,255,0)"); c.fillStyle = rg; c.fillRect(0, 0, W, H); }
+      if (dim > 0.55 && kind !== "light") { c.fillStyle = "rgba(0,0,0," + (dim - 0.55) + ")"; c.fillRect(0, 0, W, H); }
+    }
+    if (B.light && kind !== "light") { const lx = B.light === "left" ? W * 0.05 : W * 0.95, lg = c.createRadialGradient(lx, H * 0.35, 0, lx, H * 0.35, Math.max(W, H) * 0.75); lg.addColorStop(0, thHex(A, 0.32)); lg.addColorStop(0.5, thHex(A, 0.08)); lg.addColorStop(1, thHex(A, 0)); c.save(); c.globalCompositeOperation = "screen"; c.fillStyle = lg; c.fillRect(0, 0, W, H); c.restore(); }
+    if (B.vignette !== false && kind !== "light") { const vg = c.createRadialGradient(W / 2, H / 2, Math.min(W, H) * 0.35, W / 2, H / 2, Math.hypot(W, H) * 0.62); vg.addColorStop(0, "rgba(0,0,0,0)"); vg.addColorStop(1, "rgba(0,0,0," + (B.vignette || 0.55) + ")"); c.fillStyle = vg; c.fillRect(0, 0, W, H); }
+    if (B.shade) { const sg = B.shade === "left" ? c.createLinearGradient(0, 0, W * 0.7, 0) : B.shade === "bottom" ? c.createLinearGradient(0, H * 0.35, 0, H) : c.createLinearGradient(0, 0, 0, H * 0.4); sg.addColorStop(B.shade === "top" ? 1 : 0, B.shade === "bottom" ? "rgba(0,0,0,0)" : "rgba(0,0,0,.7)"); sg.addColorStop(B.shade === "top" ? 0 : 1, B.shade === "bottom" ? "rgba(0,0,0,.78)" : "rgba(0,0,0,0)"); if (B.shade === "top") { const s2 = c.createLinearGradient(0, 0, 0, H * 0.4); s2.addColorStop(0, "rgba(0,0,0,.65)"); s2.addColorStop(1, "rgba(0,0,0,0)"); c.fillStyle = s2; } else c.fillStyle = sg; c.fillRect(0, 0, W, H); }
+  }
+  // a cut-out (you, or a thing), prepared once per size: soft shadow, glow, a crisp edge, rim light
+  const thCutC = new WeakMap();
+  function thCutParts(img, info, h, o) {
+    let m = thCutC.get(img); if (!m) { m = new Map(); thCutC.set(img, m); }
+    const H8 = Math.max(16, Math.round(h / 6) * 6), key = [H8, o.flip ? 1 : 0, o.acc, o.light, o.glow ? 1 : 0, o.edge || "", o.rim ? 1 : 0].join("|");
+    if (m.has(key)) return m.get(key);
+    let [x0, y0, x1, y1] = info.bb; const bw0 = x1 - x0; if ((y1 - y0) / bw0 > 1.9) y1 = y0 + bw0 * 1.5;
+    const bw = x1 - x0, bh = y1 - y0, s = H8 / bh, dw = bw * s, dh = H8, pad = Math.round(H8 * 0.06);
     const t = thCanvas(dw + pad * 2, dh + pad * 2), x = t.getContext("2d"); x.imageSmoothingQuality = "high";
     if (o.flip) { x.translate(t.width, 0); x.scale(-1, 1); }
     x.drawImage(img, x0, y0, bw, bh, pad, pad, dw, dh);
     const tint = col => { const q = thCanvas(t.width, t.height), y = q.getContext("2d"); y.drawImage(t, 0, 0); y.globalCompositeOperation = "source-in"; y.fillStyle = col; y.fillRect(0, 0, q.width, q.height); return q; };
-    const left = cx - t.width / 2, top = bottom - dh - pad;
-    // glow behind
-    if (o.glow !== false) { const gl = tint(o.acc); c.save(); c.globalAlpha = 0.85; thBlurInto(c, gl, 0, 0, gl.width, gl.height, left - h * 0.03, top - h * 0.03, gl.width + h * 0.06, gl.height + h * 0.06, h * 0.05); c.restore(); }
-    // a crisp outline
-    if (o.edge !== false) { const ed = tint(o.edgeCol || "#FFFFFF"), r = Math.max(2, h * 0.007); c.save(); for (let k = 0; k < 12; k++) { const a = k / 12 * Math.PI * 2; c.drawImage(ed, left + Math.cos(a) * r, top + Math.sin(a) * r); } c.restore(); }
-    // you, a little crisper
-    c.save(); if ("filter" in c) c.filter = "contrast(1.08) saturate(1.1)"; c.drawImage(t, left, top); c.restore();
-    // rim light on the side the light comes from
-    const rim = tint(o.acc), y2 = rim.getContext("2d"); y2.globalCompositeOperation = "destination-out"; const d = Math.max(3, h * 0.018) * (o.light === "left" ? 1 : -1); y2.drawImage(t, d, d * 0.15);
-    c.save(); c.globalCompositeOperation = "screen"; c.globalAlpha = 0.9; c.drawImage(rim, left, top); c.restore();
-    return { x: left + pad, y: top + pad, w: dw, h: dh };
+    const out = { t, pad, dw, dh, H8 };
+    const sh = tint("#000"), shc = thCanvas(t.width, t.height); thBlurInto(shc.getContext("2d"), sh, 0, 0, sh.width, sh.height, 0, 0, shc.width, shc.height, H8 * 0.02); out.shadow = shc;
+    if (o.glow) { const gl = tint(o.acc), g = thCanvas(t.width + H8 * 0.06, t.height + H8 * 0.06); thBlurInto(g.getContext("2d"), gl, 0, 0, gl.width, gl.height, 0, 0, g.width, g.height, H8 * 0.05); out.glow = g; }
+    if (o.edge) { const ed = tint(o.edge), e = thCanvas(t.width, t.height), ex = e.getContext("2d"), r = Math.max(2, H8 * 0.007); for (let k = 0; k < 12; k++) { const a = k / 12 * Math.PI * 2; ex.drawImage(ed, Math.cos(a) * r, Math.sin(a) * r); } out.edge = e; }
+    if (o.rim) { const rim = tint(o.acc), y2 = rim.getContext("2d"); y2.globalCompositeOperation = "destination-out"; const d = Math.max(3, H8 * 0.018) * (o.light === "left" ? 1 : -1); y2.drawImage(t, d, d * 0.15); out.rim = rim; }
+    if (m.size > 30) m.delete(m.keys().next().value); m.set(key, out); return out;
+  }
+  function thCutout(c, img, info, cx, bottom, h, o) {
+    o = o || {}; const p = thCutParts(img, info, h, o), k = h / p.H8, w = p.t.width * k, hh = p.t.height * k, left = cx - w / 2, top = bottom - p.dh * k - p.pad * k;
+    if (o.shadow !== false) { c.save(); c.globalAlpha = o.onLight ? 0.35 : 0.5; c.drawImage(p.shadow, left + h * 0.012, top + h * 0.018, w, hh); c.restore(); }
+    if (p.glow) { const gw = p.glow.width * k, gh = p.glow.height * k; c.save(); c.globalAlpha = 0.85; c.drawImage(p.glow, cx - gw / 2, top + hh / 2 - gh / 2, gw, gh); c.restore(); }
+    if (p.edge) c.drawImage(p.edge, left, top, w, hh);
+    c.save(); if ("filter" in c) c.filter = "contrast(1.08) saturate(1.1)"; c.drawImage(p.t, left, top, w, hh); c.restore();
+    if (p.rim) { c.save(); c.globalCompositeOperation = "screen"; c.globalAlpha = 0.9; c.drawImage(p.rim, left, top, w, hh); c.restore(); }
+    return { x: left + p.pad * k, y: top + p.pad * k, w: p.dw * k, h: p.dh * k };
   }
   // an ordinary photo of you: fills one side and melts into the background
   function thPhotoSide(c, img, side, W, H, frac, flip) {
-    const iw = img.naturalWidth || img.width, ih = img.naturalHeight || img.height, w = W * frac, x = side === "right" ? W - w : 0, r = thCoverRect(iw, ih, w, H, 0.5, 0.35);
+    const iw = img.naturalWidth || img.width, ih = img.naturalHeight || img.height, w = Math.min(W, W * frac), x = side === "right" ? W - w : 0, r = thCoverRect(iw, ih, w, H, 0.5, 0.35);
     const t = thCanvas(w, H), y = t.getContext("2d"); y.imageSmoothingQuality = "high";
     if (flip) { y.translate(w, 0); y.scale(-1, 1); }
     if ("filter" in y) y.filter = "contrast(1.08) saturate(1.1)"; y.drawImage(img, r[0], r[1], r[2], r[3], 0, 0, w, H); y.setTransform(1, 0, 0, 1, 0, 0); y.filter = "none";
-    y.globalCompositeOperation = "destination-in"; const m = y.createLinearGradient(side === "right" ? 0 : w, 0, side === "right" ? w * 0.42 : w * 0.58, 0); m.addColorStop(0, "rgba(0,0,0,0)"); m.addColorStop(1, "rgba(0,0,0,1)"); y.fillStyle = m; y.fillRect(0, 0, w, H);
-    c.drawImage(t, x, 0);
+    if (frac < 0.98) { y.globalCompositeOperation = "destination-in"; const m = y.createLinearGradient(side === "right" ? 0 : w, 0, side === "right" ? w * 0.42 : w * 0.58, 0); m.addColorStop(0, "rgba(0,0,0,0)"); m.addColorStop(1, "rgba(0,0,0,1)"); y.fillStyle = m; y.fillRect(0, 0, w, H); }
+    c.drawImage(t, x, 0); return { x, y: 0, w, h: H };
   }
-  // a photo shown as a card, a little tilted, with a white edge and a shadow
-  function thCard(c, img, bx, by, bw, bh, tilt, acc) {
-    const iw = img.naturalWidth || img.width, ih = img.naturalHeight || img.height, s = Math.min(bw / iw, bh / ih), w = iw * s, h = ih * s, b = Math.max(4, Math.min(w, h) * 0.022);
-    c.save(); c.translate(bx + bw / 2, by + bh / 2); c.rotate(tilt * Math.PI / 180);
-    c.shadowColor = "rgba(0,0,0,.6)"; c.shadowBlur = Math.min(w, h) * 0.08; c.shadowOffsetY = Math.min(w, h) * 0.03; c.fillStyle = "#FFFFFF"; c.fillRect(-w / 2 - b, -h / 2 - b, w + b * 2, h + b * 2);
-    c.shadowColor = "transparent"; c.imageSmoothingQuality = "high"; if ("filter" in c) c.filter = "contrast(1.06) saturate(1.08)"; c.drawImage(img, -w / 2, -h / 2, w, h); c.filter = "none";
-    if (acc) { c.strokeStyle = acc; c.lineWidth = b * 0.6; c.strokeRect(-w / 2 - b * 0.3, -h / 2 - b * 0.3, w + b * 0.6, h + b * 0.6); }
-    c.restore(); return { x: bx + bw / 2 - w / 2, y: by + bh / 2 - h / 2, w, h };
+  // a photo in a box: filled (cropped to fit), with an optional frame, a tilt and a shadow
+  function thPanel(c, img, x, y, w, h, o) {
+    o = o || {}; const iw = img.naturalWidth || img.width, ih = img.naturalHeight || img.height;
+    if (o.fit === "contain") { const s = Math.min(w / iw, h / ih); x += (w - iw * s) / 2; y += (h - ih * s) / 2; w = iw * s; h = ih * s; }
+    const fw = o.frame ? Math.max(3, Math.min(w, h) * (o.fw || 0.025)) : 0;
+    c.save(); c.translate(x + w / 2, y + h / 2); c.rotate((o.tilt || 0) * Math.PI / 180);
+    if (o.shadow !== false) { c.shadowColor = "rgba(0,0,0,.55)"; c.shadowBlur = Math.min(w, h) * 0.08; c.shadowOffsetY = Math.min(w, h) * 0.03; }
+    c.fillStyle = o.frame || "#000"; c.fillRect(-w / 2 - fw, -h / 2 - fw, w + fw * 2, h + fw * 2); c.shadowColor = "transparent";
+    const r = thCoverRect(iw, ih, w, h, 0.5, 0.42); c.imageSmoothingQuality = "high"; if ("filter" in c) c.filter = o.vivid ? "saturate(1.25) contrast(1.08)" : "contrast(1.06) saturate(1.08)";
+    c.drawImage(img, r[0], r[1], r[2], r[3], -w / 2, -h / 2, w, h); c.filter = "none"; c.restore();
+    return { x: x - fw, y: y - fw, w: w + fw * 2, h: h + fw * 2 };
   }
-  function thSubject(c, img, bx, by, bw, bh, tilt, acc, light) {
-    const inf = thInfo(img);
-    if (inf.cut) { const bb = inf.bb, s = Math.min(bw / (bb[2] - bb[0]), bh / (bb[3] - bb[1])); return thCutout(c, img, inf, bx + bw / 2, by + bh / 2 + (bb[3] - bb[1]) * s / 2, (bb[3] - bb[1]) * s, { acc, light }); }
-    return thCard(c, img, bx, by, bw, bh, tilt, null);
-  }
-  // the words: big condensed letters, each line as wide as the space allows, one word in your colour
-  const thFont = s => "400 " + Math.round(s) + "px Anton, Impact, \"Arial Narrow Bold\", sans-serif";
-  function thLayout(c, words, bw, bh, uniform) {
+  // the words: lines as wide as the space allows, one word in your colour
+  function thLayout(c, words, bw, bh, uniform, ff) {
     const n = words.length; let best = null;
-    const meas = t => { c.font = thFont(100); return c.measureText(t).width / 100; };
-    const splits = (k) => { const out = []; const rec = (st, left, acc) => { if (left === 1) { out.push(acc.concat([[st, n]])); return; } for (let e = st + 1; e <= n - left + 1; e++) rec(e, left - 1, acc.concat([[st, e]])); }; rec(0, k, []); return out; };
+    const meas = t => { c.font = ff(100); return c.measureText(t).width / 100; };
+    const splits = k => { const out = []; const rec = (st, left, acc) => { if (left === 1) { out.push(acc.concat([[st, n]])); return; } for (let e = st + 1; e <= n - left + 1; e++) rec(e, left - 1, acc.concat([[st, e]])); }; rec(0, k, []); return out; };
     for (let k = 1; k <= Math.min(4, n); k++) for (const sp of splits(k)) {
-      const lines = sp.map(([a, b]) => ({ a, b, t: words.slice(a, b).join(" ") })); const ws = lines.map(l => meas(l.t));
+      const lines = sp.map(([a, b]) => ({ a, b, t: words.slice(a, b).join(" ") })), ws = lines.map(l => meas(l.t));
       let sizes = uniform ? ws.map(() => Math.min.apply(null, ws.map(w => bw / w))) : ws.map(w => bw / w);
-      { const lo = Math.min.apply(null, sizes); sizes = sizes.map(v => Math.min(v, lo * 1.45)); }   // keep the lines in proportion
-      const lh = 1.04, tot = sizes.reduce((s, v) => s + v * lh, 0), f = Math.min(1, bh / tot); sizes = sizes.map(v => v * f);
-      const mx = Math.max.apply(null, sizes), mn = Math.min.apply(null, sizes);
+      { const lo = Math.min.apply(null, sizes); sizes = sizes.map(v => Math.min(v, lo * 1.45)); }
+      const tot = sizes.reduce((s, v) => s + v * 1.06, 0), f = Math.min(1, bh / tot); sizes = sizes.map(v => v * f);
       let score = sizes.reduce((s, v, i) => s + v * v * ws[i], 0);
-       if (k === 1 && n > 2) score *= 0.7; if (lines.some(l => l.b - l.a === 1 && words[l.a].length <= 2 && n > 2)) score *= 0.8;
+      if (k === 1 && n > 2) score *= 0.7; if (lines.some(l => l.b - l.a === 1 && words[l.a].length <= 2 && n > 2)) score *= 0.8;
       if (!best || score > best.score) best = { score, lines, sizes };
     }
     return best;
   }
-  function thText(c, words, accI, box, o) {
-    o = o || {}; if (!words.length) return null;
-    const L = thLayout(c, words, box.w, box.h, o.uniform); if (!L) return null;
-    const lh = 1.04, tot = L.sizes.reduce((s, v) => s + v * lh, 0); let y = box.y + (o.valign === "top" ? 0 : o.valign === "bottom" ? box.h - tot : (box.h - tot) / 2);
-    const out = { x0: 1e9, x1: -1e9, y0: y, y1: y + tot };
-    L.lines.forEach((ln, li) => {
-      const s = L.sizes[li]; c.font = thFont(s); c.textBaseline = "alphabetic"; c.lineJoin = "round";
-      const parts = []; let wsum = 0; const sp = c.measureText(" ").width;
+  function thText(c, words0, accI, box, o) {
+    o = o || {}; if (!words0.length) return null;
+    const words = words0.map(w => thCase(w, o.case)), ff = s => thFontOf(o.font, s, o.italic);
+    const card = o.style === "card", pad = card ? Math.min(box.w, box.h) * 0.12 : 0, inner = { x: box.x + pad, y: box.y + pad, w: box.w - pad * 2, h: box.h - pad * 2 };
+    const Lb = thLayout(c, words, inner.w, inner.h, o.uniform, ff); if (!Lb) return null;
+    const lh = 1.06, tot = Lb.sizes.reduce((s, v) => s + v * lh, 0);
+    let y = inner.y + (o.valign === "top" ? 0 : o.valign === "bottom" ? inner.h - tot : (inner.h - tot) / 2);
+    const lines = []; let x0 = 1e9, x1 = -1e9;
+    Lb.lines.forEach((ln, li) => {
+      const s = Lb.sizes[li]; c.font = ff(s); const sp = c.measureText(" ").width; const parts = []; let wsum = 0;
       for (let i = ln.a; i < ln.b; i++) { const w = c.measureText(words[i]).width; parts.push({ i, w }); wsum += w + (i < ln.b - 1 ? sp : 0); }
-      let x = o.align === "center" ? box.x + (box.w - wsum) / 2 : o.align === "right" ? box.x + box.w - wsum : box.x;
-      const base = y + s * 0.9;
-      out.x0 = Math.min(out.x0, x); out.x1 = Math.max(out.x1, x + wsum);
-      for (const p of parts) {
-        const acc = p.i === accI;
-        if (acc && o.boxAcc) {
-          c.save(); c.fillStyle = o.acc; c.shadowColor = "rgba(0,0,0,.5)"; c.shadowBlur = s * 0.12; c.shadowOffsetY = s * 0.05; const pd = s * 0.07;
-          c.beginPath(); c.roundRect ? c.roundRect(x - pd, base - s * 0.86, p.w + pd * 2, s * 0.98, s * 0.06) : c.rect(x - pd, base - s * 0.86, p.w + pd * 2, s * 0.98); c.fill(); c.restore();
-          c.fillStyle = o.accInk || "#111"; c.fillText(words[p.i], x, base);
-        } else {
-          if (o.soft) { c.save(); c.shadowColor = "rgba(0,0,0,.75)"; c.shadowBlur = s * 0.18; c.shadowOffsetY = s * 0.04; c.fillStyle = acc ? o.acc : "#FFFFFF"; c.fillText(words[p.i], x, base); c.restore(); }
-          else {
-            c.save(); c.fillStyle = "rgba(0,0,0,.55)"; c.fillText(words[p.i], x + s * 0.05, base + s * 0.06); c.restore();
-            c.strokeStyle = "#000000"; c.lineWidth = s * 0.11; c.strokeText(words[p.i], x, base);
-            c.fillStyle = acc ? o.acc : "#FFFFFF"; c.fillText(words[p.i], x, base);
-          }
-        }
-        x += p.w + sp;
-      }
-      y += s * lh;
+      const x = o.align === "center" ? inner.x + (inner.w - wsum) / 2 : o.align === "right" ? inner.x + inner.w - wsum : inner.x;
+      lines.push({ s, sp, parts, x, base: y + s * 0.9, top: y }); x0 = Math.min(x0, x); x1 = Math.max(x1, x + wsum); y += s * lh;
     });
-    return out;
+    const ext = { x: x0, y: lines[0].top, w: x1 - x0, h: tot };
+    const fill = o.fill || "#FFFFFF", acc = o.acc || "#FFD400";
+    c.save(); if (o.tilt) { const cx = ext.x + ext.w / 2, cy = ext.y + ext.h / 2; c.translate(cx, cy); c.rotate(o.tilt * Math.PI / 180); c.translate(-cx, -cy); }
+    if (card) { c.save(); c.shadowColor = "rgba(0,0,0,.35)"; c.shadowBlur = box.h * 0.08; c.shadowOffsetY = box.h * 0.03; c.fillStyle = o.cardCol || "#FFFFFF"; c.beginPath(); c.roundRect ? c.roundRect(box.x, box.y, box.w, box.h, Math.min(box.w, box.h) * 0.1) : c.rect(box.x, box.y, box.w, box.h); c.fill(); c.restore(); }
+    if (o.style === "tab") { const ph = lines[0].s * 0.35, pv = lines[0].s * 0.16; c.save(); c.shadowColor = "rgba(0,0,0,.4)"; c.shadowBlur = lines[0].s * 0.25; c.fillStyle = o.tabCol || "#E3262E"; c.beginPath(); c.roundRect ? c.roundRect(ext.x - ph, ext.y - pv, ext.w + ph * 2, ext.h + pv * 2, lines[0].s * 0.18) : c.rect(ext.x - ph, ext.y - pv, ext.w + ph * 2, ext.h + pv * 2); c.fill(); c.restore(); ext.x -= ph; ext.y -= pv; ext.w += ph * 2; ext.h += pv * 2; }
+    c.textBaseline = "alphabetic"; c.lineJoin = "round";
+    for (const L of lines) {
+      c.font = ff(L.s); let x = L.x;
+      for (const p of L.parts) {
+        const isAcc = p.i === accI, w = words[p.i];
+        if (isAcc && o.boxAcc) {
+          c.save(); c.fillStyle = acc; c.shadowColor = "rgba(0,0,0,.5)"; c.shadowBlur = L.s * 0.12; c.shadowOffsetY = L.s * 0.05; const pd = L.s * 0.07;
+          c.beginPath(); c.roundRect ? c.roundRect(x - pd, L.base - L.s * 0.86, p.w + pd * 2, L.s * 0.98, L.s * 0.06) : c.rect(x - pd, L.base - L.s * 0.86, p.w + pd * 2, L.s * 0.98); c.fill(); c.restore();
+          c.fillStyle = vmInk(acc); c.fillText(w, x, L.base);
+        } else if (o.style === "soft") { c.save(); c.shadowColor = "rgba(0,0,0,.75)"; c.shadowBlur = L.s * 0.18; c.shadowOffsetY = L.s * 0.04; c.fillStyle = isAcc ? acc : fill; c.fillText(w, x, L.base); c.restore(); }
+        else if (o.style === "plain" || card || o.style === "tab") { c.fillStyle = isAcc && !(o.style === "tab") ? acc : isAcc && o.style === "tab" ? (o.tabAcc || "#FFD400") : fill; c.fillText(w, x, L.base); }
+        else {
+          c.save(); c.fillStyle = "rgba(0,0,0,.55)"; c.fillText(w, x + L.s * 0.05, L.base + L.s * 0.06); c.restore();
+          c.strokeStyle = o.strokeCol || "#000000"; c.lineWidth = L.s * (o.font === "poppins" ? 0.14 : 0.11); c.strokeText(w, x, L.base);
+          c.fillStyle = isAcc ? acc : fill; c.fillText(w, x, L.base);
+        }
+        x += p.w + L.sp;
+      }
+    }
+    c.restore();
+    return card ? box : ext;
   }
   function thLabel(c, text, x, y, size, col, ink) {
-    if (!text) return 0; c.save(); c.font = "800 " + Math.round(size) + "px Poppins, Arial, sans-serif"; const w = c.measureText(text).width, ph = size * 0.45, pv = size * 0.28;
+    if (!text) return null; c.save(); c.font = "800 " + Math.round(size) + "px Poppins, Arial, sans-serif"; const w = c.measureText(text).width, ph = size * 0.45, pv = size * 0.28;
     c.shadowColor = "rgba(0,0,0,.45)"; c.shadowBlur = size * 0.3; c.fillStyle = col; c.beginPath(); c.roundRect ? c.roundRect(x, y, w + ph * 2, size + pv * 2, size * 0.18) : c.rect(x, y, w + ph * 2, size + pv * 2); c.fill();
-    c.shadowColor = "transparent"; c.fillStyle = ink; c.textBaseline = "middle"; c.fillText(text, x + ph, y + pv + size * 0.54); c.restore(); return size + pv * 2;
+    c.shadowColor = "transparent"; c.fillStyle = ink; c.textBaseline = "middle"; c.fillText(text, x + ph, y + pv + size * 0.54); c.restore(); return { x, y, w: w + ph * 2, h: size + pv * 2 };
   }
-  function thArrow(c, x0, y0, x1, y1, w, col) {
-    const mx = (x0 + x1) / 2 + (y1 - y0) * 0.25, my = (y0 + y1) / 2 - (x1 - x0) * 0.25, ang = Math.atan2(y1 - my, x1 - mx);
-    c.save(); c.lineCap = "round"; c.strokeStyle = "rgba(0,0,0,.55)"; c.lineWidth = w + 10; c.beginPath(); c.moveTo(x0, y0); c.quadraticCurveTo(mx, my, x1 - Math.cos(ang) * w, y1 - Math.sin(ang) * w); c.stroke();
-    c.strokeStyle = col; c.lineWidth = w; c.stroke();
-    c.translate(x1, y1); c.rotate(ang); c.fillStyle = col; c.strokeStyle = "rgba(0,0,0,.55)"; c.lineWidth = 5; c.beginPath(); c.moveTo(w * 0.6, 0); c.lineTo(-w * 2, -w * 1.6); c.lineTo(-w * 2, w * 1.6); c.closePath(); c.stroke(); c.fill(); c.restore();
+  function thArrow(c, x0, y0, x1, y1, w, col, bend, outline) {
+    const dx = x1 - x0, dy = y1 - y0, b = bend == null ? 0.25 : bend, mx = (x0 + x1) / 2 + dy * b, my = (y0 + y1) / 2 - dx * b, ang = Math.atan2(y1 - my, x1 - mx), hl = w * 2.3;
+    const ex = x1 - Math.cos(ang) * hl * 0.8, ey = y1 - Math.sin(ang) * hl * 0.8;
+    c.save(); c.lineCap = "round"; c.lineJoin = "round";
+    const path = () => { c.beginPath(); c.moveTo(x0, y0); c.quadraticCurveTo(mx, my, ex, ey); };
+    const head = () => { c.beginPath(); c.moveTo(x1, y1); c.lineTo(x1 - Math.cos(ang - 0.5) * hl, y1 - Math.sin(ang - 0.5) * hl); c.lineTo(x1 - Math.cos(ang + 0.5) * hl, y1 - Math.sin(ang + 0.5) * hl); c.closePath(); };
+    if (outline !== false) { c.strokeStyle = outline || "rgba(0,0,0,.6)"; c.lineWidth = w + Math.max(5, w * 0.5); path(); c.stroke(); head(); c.lineWidth = Math.max(5, w * 0.5); c.stroke(); }
+    c.strokeStyle = col; c.lineWidth = w; path(); c.stroke(); c.fillStyle = col; head(); c.fill();
+    c.restore();
+    return { x: Math.min(x0, x1, mx) - w, y: Math.min(y0, y1, my) - w, w: Math.abs(Math.max(x0, x1, mx) - Math.min(x0, x1, mx)) + w * 2, h: Math.abs(Math.max(y0, y1, my) - Math.min(y0, y1, my)) + w * 2 };
   }
-  function thLogo(c, logo, W, H, tall) {
+  function thRing(c, x, y, r, col, w) {
+    c.save(); c.lineWidth = w + 6; c.strokeStyle = "rgba(0,0,0,.45)"; c.beginPath(); c.ellipse(x, y, r * 1.12, r, -0.2, 0, Math.PI * 2); c.stroke();
+    c.lineWidth = w; c.strokeStyle = col; c.beginPath(); c.ellipse(x, y, r * 1.12, r, -0.2, 0, Math.PI * 2); c.stroke(); c.restore();
+    return { x: x - r * 1.2, y: y - r * 1.1, w: r * 2.4, h: r * 2.2 };
+  }
+  function thLogo(c, logo, W, H, tall, pos) {
     if (!logo) return; const iw = logo.naturalWidth || logo.width, ih = logo.naturalHeight || logo.height, h = Math.min(H * (tall ? 0.035 : 0.075), (W * 0.2) * ih / iw), w = h * iw / ih;
-    c.save(); c.globalAlpha = 0.92; c.shadowColor = "rgba(0,0,0,.6)"; c.shadowBlur = 8; c.drawImage(logo, tall ? (W - w) / 2 : W * 0.025, tall ? H * 0.045 : H - h - H * 0.035, w, h); c.restore();
+    const x = tall ? (W - w) / 2 : pos === "tl" ? W * 0.025 : pos === "tr" ? W - w - W * 0.025 : W * 0.025, y = tall ? H * 0.045 : pos === "tl" || pos === "tr" ? H * 0.035 : H - h - H * 0.035;
+    c.save(); c.globalAlpha = 0.92; c.shadowColor = "rgba(0,0,0,.6)"; c.shadowBlur = 8; c.drawImage(logo, x, y, w, h); c.restore();
   }
-  // the layouts. Each is a different picture, not the same one with a new background.
-  const TH_COMPS = {
-    classic: { name: "Face + words", need: "face" },
-    show: { name: "Show it", need: "both" },
-    hero: { name: "The thing first", need: "subject" },
-    words: { name: "Big words", need: "" },
-    versus: { name: "Side by side", need: "both" },
-    breaking: { name: "Breaking", need: "" },
-    photo: { name: "Photo", need: "any" },
+  /* ---- the looks: each is a different picture, built from the same parts ----
+     Positions are fractions of the width and height. */
+  const TH_LOOKS = {
+    frame: { name: "Reaction frame", tip: "You on the left, the thing in a framed box, a red title tab and arrow" },
+    headline: { name: "Headline + arrow", tip: "You on the left, the story fills the right, a line of words across the top, a frame round it" },
+    story: { name: "Colour story", tip: "A bold colour background, you and the person or thing, an arrow between you" },
+    note: { name: "Note card", tip: "A white note with a few words and a red arrow, you on the side, the scene behind" },
+    scene: { name: "Big scene", tip: "The whole picture bright and vivid, you in front, a small badge of words" },
+    me: { name: "Point at me", tip: "The scene behind, you in it, a small “ME” with an arrow" },
+    classic: { name: "Face + words", tip: "Dark and cinematic: big words on one side, you lit up on the other" },
+    show: { name: "Show it", tip: "You on one side, the thing on the other, an arrow to it" },
+    hero: { name: "The thing first", tip: "The thing big, you small in the corner" },
+    words: { name: "Big words", tip: "The words do the work; you at the edge" },
+    breaking: { name: "Breaking", tip: "A red BREAKING label, news-style" },
+    versus: { name: "Side by side", tip: "This against that, with VS" },
+    photo: { name: "Photo", tip: "Calm and photographic, small words" },
   };
+  function thLookSpec(id, tall, has, A, angle, lab) {
+    const red = "#E3262E", yel = "#FFD400";
+    const subjCut = has.subjCut, label = lab ? { x: 0.045, y: 0.07, text: lab, col: lab === "BREAKING" ? red : A } : null;
+    const E = { bg: { kind: "blur", dim: 0.55, light: "right" }, grain: 0.06, label, logo: "bl" };
+    if (!tall) switch (id) {
+      case "frame":
+        Object.assign(E, { bg: { kind: "light", vignette: false }, grain: 0.03, logo: "tr",
+          subj: { x: 0.34, y: 0.1, w: 0.62, h: 0.84, panel: true, frame: "#FFFFFF", fw: 0.02 },
+          face: { cx: 0.19, by: 1.02, h: 0.98, onLight: true },
+          text: { x: 0.5, y: 0.015, w: 0.36, h: 0.11, style: "tab", font: "poppins", case: "title", align: "center", uniform: true, tabCol: red, fill: "#FFFFFF" },
+          arrow: { x0: 0.86, y0: 0.27, x1: 0.73, y1: 0.47, w: 16, col: red, bend: 0.12 },
+          circle: { x: 0.66, y: 0.56, r: 0.1, col: red, on: false },
+          label: lab ? { x: 0.015, y: 0.88, text: lab, col: red } : null });
+        break;
+      case "headline":
+        Object.assign(E, { bg: { kind: "midnight", dim: 0.2, vignette: 0.35 }, logo: "bl",
+          subj: { x: 0.37, y: 0, w: 0.63, h: 1, panel: true, shadow: false },
+          face: { cx: 0.19, by: 1.02, h: 0.94 },
+          text: { x: 0.39, y: 0.025, w: 0.59, h: 0.15, style: "stroke", font: "poppins", case: "upper", align: "center", uniform: true },
+          arrow: { x0: 0.63, y0: 0.24, x1: 0.56, y1: 0.46, w: 13, col: yel, bend: -0.35 },
+          circle: { x: 0.7, y: 0.6, r: 0.11, col: yel, on: false },
+          border: { col: yel, w: 0.014 } });
+        break;
+      case "story":
+        Object.assign(E, { bg: { kind: "purple", dim: 0.3 }, logo: "bl",
+          subj: subjCut ? { x: 0.53, y: 0.1, w: 0.45, h: 0.95 } : { x: 0.53, y: 0.16, w: 0.42, h: 0.68, panel: true, frame: "#FFFFFF", fw: 0.02, tilt: 3 },
+          face: { cx: 0.24, by: 1.03, h: 0.98 },
+          text: { x: 0.33, y: 0.6, w: 0.3, h: 0.3, style: "stroke", font: "anton", case: "upper", align: "center", italic: true, tilt: -6 },
+          arrow: { x0: 0.38, y0: 0.42, x1: 0.56, y1: 0.36, w: 15, col: red, bend: 0.4, outline: "#FFFFFF" },
+          border: { col: "#B620E0", w: 0.016 } });
+        break;
+      case "note":
+        Object.assign(E, { bg: { kind: "sharp", dim: 0.12, vignette: 0.3 }, grain: 0.03, logo: "bl",
+          face: { cx: 0.77, by: 1.02, h: 0.92 },
+          text: { x: 0.035, y: 0.09, w: 0.4, h: 0.34, style: "card", font: "poppins", case: "lower", align: "left", fill: "#111111" },
+          arrow: { x0: 0.24, y0: 0.47, x1: 0.33, y1: 0.73, w: 9, col: red, bend: 0.45, outline: "rgba(255,255,255,.85)" } });
+        if (has.subj && has.bg) E.subj = { x: 0.06, y: 0.55, w: 0.34, h: 0.4, panel: true, frame: "#FFFFFF", fw: 0.02, tilt: -3 };
+        break;
+      case "scene":
+        Object.assign(E, { bg: { kind: "sharp", dim: 0, vivid: true, vignette: 0.25 }, grain: 0.02, logo: "tl",
+          face: { cx: 0.3, by: 1.03, h: 0.9 },
+          text: { x: 0.66, y: 0.03, w: 0.31, h: 0.15, style: "stroke", font: "anton", case: "upper", align: "right", uniform: true } });
+        break;
+      case "me":
+        Object.assign(E, { bg: { kind: "sharp", dim: 0.08, vignette: 0.35 }, grain: 0.03, logo: "bl",
+          face: { cx: 0.72, by: 1.02, h: 0.84 },
+          text: { x: 0.03, y: 0.03, w: 0.45, h: 0.16, style: "stroke", font: "anton", case: "upper", uniform: true },
+          sticker: { x: 0.34, y: 0.6, w: 0.18, h: 0.26, text: "ME", font: "poppins", case: "upper", fill: "#FFFFFF" },
+          arrow: { x0: 0.47, y0: 0.6, x1: 0.56, y1: 0.42, w: 11, col: "#FFFFFF", bend: -0.4, outline: "rgba(0,0,0,.7)" } });
+        break;
+      case "classic":
+        Object.assign(E, { bg: { kind: "blur", dim: 0.55, light: "right" },
+          face: { cx: 0.75, by: 0.97, h: 1.0, glow: true, edge: "#FFFFFF", rim: true, light: "right" },
+          text: { x: 0.045, y: 0.08, w: 0.5, h: 0.76, style: "stroke", font: "anton", case: "upper", lblAbove: true } });
+        break;
+      case "show":
+        Object.assign(E, { bg: { kind: "blur", dim: 0.68, blur: 17, light: "left" },
+          subj: subjCut ? { x: 0.47, y: 0.33, w: 0.5, h: 0.62, glow: true } : { x: 0.47, y: 0.33, w: 0.5, h: 0.6, panel: true, frame: "#FFFFFF", fw: 0.02, tilt: 2.5, fit: "contain" },
+          face: { cx: 0.22, by: 0.98, h: 0.98, glow: true, edge: "#FFFFFF", rim: true, light: "left" },
+          text: { x: 0.43, y: 0.04, w: 0.54, h: 0.27, style: "stroke", font: "anton", case: "upper", uniform: true, align: "center" },
+          arrow: { x0: 0.4, y0: 0.5, x1: 0.5, y1: 0.6, w: 13, col: A, bend: 0.3 } });
+        break;
+      case "hero":
+        Object.assign(E, { bg: { kind: "blur", dim: 0.6, light: "right" },
+          subj: subjCut ? { x: 0.03, y: 0.07, w: 0.56, h: 0.86, glow: true } : { x: 0.03, y: 0.1, w: 0.55, h: 0.8, panel: true, frame: "#FFFFFF", fw: 0.02, tilt: -2, fit: "contain" },
+          face: { cx: 0.84, by: 1.03, h: 0.6, glow: true, edge: "#FFFFFF", rim: true, light: "left" },
+          text: { x: 0.6, y: 0.07, w: 0.37, h: 0.48, style: "stroke", font: "anton", case: "upper", lblAbove: true },
+          label: lab ? { x: 0.6, y: 0.06, text: lab, col: lab === "BREAKING" ? red : A } : null });
+        break;
+      case "words":
+        Object.assign(E, { bg: { kind: "blur", dim: 0.72, blur: 20, light: "right" },
+          face: { cx: 0.87, by: 1.03, h: 0.95, glow: true, edge: "#FFFFFF", rim: true, light: "left" },
+          text: { x: 0.045, y: 0.07, w: has.face ? 0.66 : 0.91, h: 0.82, style: "stroke", font: "anton", case: "upper", boxAcc: true, lblAbove: true } });
+        break;
+      case "breaking":
+        Object.assign(E, { bg: { kind: "blur", dim: 0.45, blur: 7, light: "right", shade: "left" },
+          face: { cx: 0.8, by: 1.03, h: 0.82, glow: true, edge: "#FFFFFF", rim: true, light: "left", acc: red },
+          text: { x: 0.045, y: 0.24, w: 0.56, h: 0.5, style: "stroke", font: "anton", case: "upper", valign: "top" },
+          label: { x: 0.045, y: 0.09, text: lab || "BREAKING", col: red, size: 40 } });
+        break;
+      case "versus":
+        Object.assign(E, { bg: { kind: "split", shade: "top" },
+          subj: subjCut ? { x: 0.04, y: 0.25, w: 0.44, h: 0.7, glow: true } : null,
+          face: { cx: 0.76, by: 1.03, h: 0.8, glow: true, edge: "#FFFFFF", rim: true, light: "left" },
+          vs: { x: 0.51, y: 0.56, r: 58, text: angle === "Transformation" ? "→" : "VS" },
+          text: { x: 0.06, y: 0.03, w: 0.88, h: 0.19, style: "stroke", font: "anton", case: "upper", uniform: true, align: "center" } });
+        break;
+      case "photo":
+        Object.assign(E, { bg: { kind: "sharp", src: has.face && !has.faceCut ? "face" : null, dim: 0.1, light: "left", shade: "bottom" }, grain: 0.05,
+          face: has.face && !has.faceCut ? null : { cx: 0.7, by: 1.03, h: 0.95, light: "left" },
+          text: { x: 0.05, y: 0.56, w: 0.6, h: 0.32, style: "soft", font: "anton", case: "upper", uniform: true, valign: "bottom" } });
+        break;
+    }
+    else {
+      // Shorts / Reels cover: words above the bottom quarter, where the app's buttons sit
+      const t = { x: 0.07, y: 0.44, w: 0.86, h: 0.15, align: "center" };
+      const base = thLookSpec(id, false, has, A, angle, lab);
+      Object.assign(E, base, { logo: "tall" });
+      E.subj = base.subj ? Object.assign({}, base.subj, { x: 0.06, y: 0.07, w: 0.88, h: 0.36, tilt: base.subj.tilt ? base.subj.tilt / 2 : 0 }) : null;
+      E.face = base.face ? Object.assign({}, base.face, { cx: 0.5, by: 1.02, h: 0.38 }) : null;
+      E.text = base.text ? Object.assign({}, base.text, t, base.text.style === "tab" ? { y: 0.035, h: 0.06, x: 0.12, w: 0.76 } : {}, base.text.style === "card" ? { x: 0.08, y: 0.45, w: 0.84, h: 0.15 } : {}, base.text.valign === "bottom" ? { valign: "bottom" } : {}, { tilt: 0 }) : null;
+      if (id === "frame") { E.subj = Object.assign({}, E.subj, { y: 0.15, h: 0.34 }); E.text = Object.assign({}, E.text, { y: 0.085 }); }
+      if (!E.subj && id !== "scene" && id !== "me" && id !== "photo" && E.text) { E.text = Object.assign({}, E.text, { y: E.label ? 0.17 : 0.12, h: 0.34 }); if (E.label) E.label = Object.assign({}, E.label, { y: 0.1 }); }
+      if (id === "scene" || id === "me" || id === "photo") { E.subj = null; E.text = Object.assign({}, E.text, { y: 0.13, h: 0.16 }); E.face = E.face ? Object.assign({}, E.face, { h: 0.55 }) : null; }
+      if (id === "versus") { E.bg = { kind: "midnight" }; E.subj = base.subj || { x: 0.06, y: 0.07, w: 0.88, h: 0.34, panel: true, frame: "#FFFFFF", fw: 0.02 }; E.subj = Object.assign({}, E.subj, { x: 0.06, y: 0.07, w: 0.88, h: 0.34 }); E.vs = { x: 0.5, y: 0.46, r: 70, text: angle === "Transformation" ? "↓" : "VS" }; E.text = Object.assign({}, E.text, { y: 0.5, h: 0.12 }); E.face = Object.assign({}, E.face, { h: 0.38 }); }
+      E.arrow = base.arrow ? Object.assign({}, base.arrow, id === "me" ? { x0: 0.3, y0: 0.62, x1: 0.36, y1: 0.7 } : { x0: 0.8, y0: 0.44, x1: 0.7, y1: 0.34 }) : null;
+      E.circle = base.circle ? Object.assign({}, base.circle, { x: 0.5, y: 0.25, r: 0.08 }) : null;
+      E.sticker = base.sticker ? Object.assign({}, base.sticker, { x: 0.05, y: 0.5, w: 0.22, h: 0.08 }) : null;
+      E.label = base.label && !E.label ? null : E.label && E.subj ? Object.assign({}, E.label, { x: 0.07, y: id === "frame" ? 0.52 : 0.39 }) : E.label;
+      if (E.border) E.border = Object.assign({}, E.border, { w: 0.012 });
+    }
+    return E;
+  }
+  // which looks fit this video, in order
   function thPlan(type, angle, has) {
-    let order = { Reaction: ["classic", "show", "hero", "words", "photo"], News: ["breaking", "classic", "show", "hero", "photo"], Review: ["hero", "show", "classic", "words", "photo"],
-      Education: ["words", "classic", "show", "hero", "photo"], Business: ["words", "classic", "show", "hero", "photo"], Personal: ["photo", "classic", "words", "show", "hero"],
-      Documentary: ["photo", "hero", "classic", "breaking", "words"], Interview: ["show", "classic", "hero", "photo", "words"] }[type] || ["classic", "show", "hero", "words", "photo"];
+    let order = { Reaction: ["frame", "headline", "story", "classic", "note", "show", "me", "scene", "words", "hero", "photo"], News: ["breaking", "headline", "frame", "classic", "show", "story", "note", "hero", "words", "photo"],
+      Review: ["hero", "frame", "note", "scene", "show", "classic", "headline", "words", "story", "photo"], Education: ["words", "note", "frame", "classic", "headline", "show", "hero", "story", "photo"],
+      Business: ["words", "note", "classic", "headline", "frame", "show", "hero", "story", "photo"], Personal: ["scene", "photo", "me", "note", "story", "classic", "words", "frame"],
+      Documentary: ["photo", "scene", "headline", "breaking", "frame", "story", "hero", "classic", "words"], Interview: ["story", "frame", "show", "headline", "classic", "hero", "photo", "words"] }[type] || Object.keys(TH_LOOKS);
     order = order.slice();
     if (angle === "Comparison" || angle === "Transformation") order.unshift("versus");
-    if (angle === "Breaking" && order[0] !== "breaking") { order = order.filter(k => k !== "breaking"); order.unshift("breaking"); }
-    const ok = k => { const n = TH_COMPS[k].need; return n === "face" ? has.face : n === "subject" ? has.subj : n === "both" ? has.face && has.subj : n === "any" ? has.face || has.subj || has.bg : true; };
-    const out = []; for (const k of order) if (ok(k) && out.indexOf(k) < 0) out.push(k);
-    for (const k of ["words", "breaking", "classic"]) if (out.length < 3 && out.indexOf(k) < 0 && ok(k)) out.push(k);
-    return out.slice(0, 5);
+    if (angle === "Breaking") { order = order.filter(k => k !== "breaking"); order.unshift("breaking"); }
+    const need = { frame: "subj", headline: "subj", story: "face", note: "any", scene: "subj", me: "subjface", classic: "face", show: "both", hero: "subj", words: "", breaking: "", versus: "both", photo: "any" };
+    const ok = k => { const n = need[k]; return n === "subj" ? has.subj : n === "face" ? has.face : n === "both" || n === "subjface" ? has.face && has.subj : n === "any" ? has.face || has.subj || has.bg : true; };
+    const out = []; for (const k of order.concat(Object.keys(TH_LOOKS))) if (ok(k) && out.indexOf(k) < 0) out.push(k);
+    return out.slice(0, 9);
   }
-  // draw one thumbnail. P: { comp, words, acc, label, face, faceCut, subj, bg, logo, accCol, flip, tall }
+  // the parts a look has, so the editor can offer them
+  const TH_PARTS = { face: "You", subj: "The picture", text: "Words", arrow: "Arrow", tip: "Arrow tip", circle: "Circle", label: "Label", sticker: "“ME”", border: "Frame" };
+  // draw one thumbnail; returns where each part landed, for tapping and dragging
   function thDraw(c, W, H, P) {
-    const tall = H > W, A = P.accCol || "#FF7A00", ink = vmInk(A), face = P.face, subj = P.subj, fInf = face ? thInfo(face) : null, comp = P.comp;
-    const red = "#E0242B", lab = P.label, labCol = lab === "BREAKING" || comp === "breaking" ? red : A, labInk = labCol === red ? "#FFFFFF" : ink;
-    const words = P.words, accI = P.acc;
-    const bgSrc = P.bg || subj || (face && !fInf.cut ? face : null);
-    const U = Math.min(W, H) / 720;     // 1 at 1280×720
+    const tall = H > W, A = P.accCol || "#FF7A00", face = P.face, subj = P.subj, fInf = face ? thInfo(face) : null, sInf = subj ? thInfo(subj) : null;
+    const cu = P.cu || {}, el = cu.el || {}, on = cu.on || {};
+    const has = { face: !!face, faceCut: !!(fInf && fInf.cut), subj: !!subj, subjCut: !!(sInf && sInf.cut), bg: !!P.bg };
+    const E = thLookSpec(P.look || "classic", tall, has, A, P.angle, P.label);
+    const U = Math.min(W, H) / 720, rects = {};
+    const vis = (k, x) => !!x && (on[k] != null ? on[k] : x.on !== false);
+    const moved = (k, x) => { const o = el[k]; if (!o) return x; const k2 = o.k || 1, y = Object.assign({}, x); if (y.w != null) { const cx = y.x + y.w / 2 + (o.dx || 0), cy = y.y + y.h / 2 + (o.dy || 0); y.w *= k2; y.h *= k2; y.x = cx - y.w / 2; y.y = cy - y.h / 2; } else if (y.cx != null) { y.cx += o.dx || 0; y.by += o.dy || 0; y.h *= k2; } else if (y.r != null && y.x0 == null) { y.x += o.dx || 0; y.y += o.dy || 0; y.r *= k2; } return y; };
+    const deco = cu.deco || null, tcol = cu.textCol || null, acol = cu.accCol || null;
+    const fx = { x: v => v * W, y: v => v * H };
     c.save(); c.clearRect(0, 0, W, H);
-    const faceAt = (cx, h, light, opt) => {
-      if (!face) return null;
-      if (fInf.cut) return thCutout(c, face, fInf, cx, H + h * 0.04, h, Object.assign({ acc: A, light, flip: P.flip }, opt || {}));
-      thPhotoSide(c, face, cx > W / 2 ? "right" : "left", W, H, tall ? 1 : 0.55, P.flip); return null;
-    };
-    const labelAt = (x, y, sz) => thLabel(c, lab || (comp === "breaking" ? "BREAKING" : ""), x, y, sz, labCol, labInk);
-    if (!tall) {
-      if (comp === "classic") {
-        thBackground(c, W, H, bgSrc, A, { light: "right", dark: 0.55 });
-        faceAt(W * 0.75, H * 0.97, "right");
-        const lh = labelAt(W * 0.045, H * 0.07, 34 * U);
-        thText(c, words, accI, { x: W * 0.045, y: H * 0.08 + (lh ? lh + 14 * U : 0), w: W * 0.5, h: H * 0.76 - (lh ? lh + 14 * U : 0) }, { acc: A, accInk: ink });
-      } else if (comp === "show") {
-        thBackground(c, W, H, P.bg || subj, A, { light: "left", dark: 0.68, blur: 34 });
-        const r = thSubject(c, subj, W * 0.47, H * 0.33, W * 0.5, H * 0.6, 2.5, A, "left");
-        faceAt(W * 0.22, H * 0.98, "left");
-        const t = thText(c, words, accI, { x: W * 0.43, y: H * 0.04, w: W * 0.54, h: H * 0.27 }, { acc: A, accInk: ink, uniform: true, align: "center" });
-        if (lab) labelAt(r.x + 10 * U, r.y + 10 * U, 26 * U);
-        if (t) thArrow(c, W * 0.40, H * 0.50, r.x - 4 * U, r.y + r.h * 0.45, 13 * U, A);
-      } else if (comp === "hero") {
-        thBackground(c, W, H, P.bg || subj, A, { light: "right", dark: 0.6 });
-        thSubject(c, subj, W * 0.03, H * 0.07, W * 0.56, H * 0.86, -2, A, "right");
-        if (face) { if (fInf.cut) thCutout(c, face, fInf, W * 0.84, H * 1.03, H * 0.6, { acc: A, light: "left", flip: P.flip }); else thCard(c, face, W * 0.70, H * 0.55, W * 0.28, H * 0.42, 3, A); }
-        const lh = labelAt(W * 0.6, H * 0.06, 28 * U);
-        thText(c, words, accI, { x: W * 0.6, y: H * 0.07 + (lh ? lh + 10 * U : 0), w: W * 0.37, h: H * 0.48 - (lh ? lh : 0) }, { acc: A, accInk: ink });
-      } else if (comp === "words") {
-        thBackground(c, W, H, P.bg || subj, A, { light: "right", dark: 0.72, blur: 40 });
-        if (face) { if (fInf.cut) thCutout(c, face, fInf, W * 0.87, H * 1.03, H * 0.95, { acc: A, light: "left", flip: P.flip }); else thPhotoSide(c, face, "right", W, H, 0.42, P.flip); }
-        const lh = labelAt(W * 0.045, H * 0.06, 30 * U);
-        thText(c, words, accI, { x: W * 0.045, y: H * 0.07 + (lh ? lh + 10 * U : 0), w: face ? W * 0.66 : W * 0.91, h: H * 0.8 - (lh ? lh : 0) }, { acc: A, accInk: ink, boxAcc: true });
-      } else if (comp === "versus") {
-        thBackground(c, W, H, null, A, {});
-        c.save(); c.beginPath(); c.moveTo(0, 0); c.lineTo(W * 0.56, 0); c.lineTo(W * 0.46, H); c.lineTo(0, H); c.closePath(); c.clip();
-        const iw = subj.naturalWidth || subj.width, ih = subj.naturalHeight || subj.height; if (thInfo(subj).cut) { thBackground(c, W, H, subj, A, { light: "left" }); thSubject(c, subj, W * 0.04, H * 0.25, W * 0.44, H * 0.7, 0, A, "left"); }
-        else { const r = thCoverRect(iw, ih, W * 0.56, H, 0.5, 0.45); if ("filter" in c) c.filter = "contrast(1.08) saturate(1.05) brightness(.85)"; c.drawImage(subj, r[0], r[1], r[2], r[3], 0, 0, W * 0.56, H); c.filter = "none"; }
-        c.restore();
-        c.save(); c.beginPath(); c.moveTo(W * 0.56, 0); c.lineTo(W, 0); c.lineTo(W, H); c.lineTo(W * 0.46, H); c.closePath(); c.clip();
-        const g = c.createLinearGradient(W * 0.5, 0, W, H); g.addColorStop(0, vmDarker(vmDarker(A))); g.addColorStop(1, "#07090C"); c.fillStyle = g; c.fillRect(0, 0, W, H);
-        if (fInf.cut) thCutout(c, face, fInf, W * 0.76, H * 1.03, H * 0.8, { acc: A, light: "left", flip: P.flip }); else { const iw2 = face.naturalWidth || face.width, ih2 = face.naturalHeight || face.height, r = thCoverRect(iw2, ih2, W * 0.54, H, 0.5, 0.35); c.drawImage(face, r[0], r[1], r[2], r[3], W * 0.46, 0, W * 0.54, H); }
-        c.restore();
-        c.save(); c.strokeStyle = A; c.lineWidth = 10 * U; c.beginPath(); c.moveTo(W * 0.56, 0); c.lineTo(W * 0.46, H); c.stroke(); c.restore();
-        c.save(); c.translate(W * 0.51, H * 0.56); c.fillStyle = A; c.shadowColor = "rgba(0,0,0,.6)"; c.shadowBlur = 20 * U; c.beginPath(); c.arc(0, 0, 58 * U, 0, 7); c.fill(); c.shadowColor = "transparent";
-        c.font = thFont(58 * U); c.fillStyle = ink; c.textAlign = "center"; c.textBaseline = "middle"; c.fillText(P.angle === "Transformation" ? "→" : "VS", 0, 4 * U); c.restore();
-        const sh = c.createLinearGradient(0, 0, 0, H * 0.36); sh.addColorStop(0, "rgba(0,0,0,.65)"); sh.addColorStop(1, "rgba(0,0,0,0)"); c.fillStyle = sh; c.fillRect(0, 0, W, H * 0.36);
-        thText(c, words, accI, { x: W * 0.06, y: H * 0.03, w: W * 0.88, h: H * 0.19 }, { acc: A, accInk: ink, uniform: true, align: "center" });
-      } else if (comp === "breaking") {
-        thBackground(c, W, H, P.bg || subj || (face && !fInf.cut ? face : null), A, { light: "right", dark: 0.45, blur: 12 });
-        const lw = c.createLinearGradient(0, 0, W * 0.7, 0); lw.addColorStop(0, "rgba(0,0,0,.72)"); lw.addColorStop(1, "rgba(0,0,0,0)"); c.fillStyle = lw; c.fillRect(0, 0, W, H);
-        if (face && fInf.cut) thCutout(c, face, fInf, W * 0.8, H * 1.03, H * 0.82, { acc: red, light: "left", flip: P.flip });
-        const lh = thLabel(c, lab || "BREAKING", W * 0.045, H * 0.1, 40 * U, red, "#FFFFFF");
-        thText(c, words, accI, { x: W * 0.045, y: H * 0.13 + lh, w: W * 0.56, h: H * 0.62 - lh }, { acc: A, accInk: ink, valign: "top" });
-      } else {   // photo
-        const src = face && !fInf.cut ? face : P.bg || subj || face;
-        thBackground(c, W, H, src, A, { sharp: !thInfo(src).cut, dark: 0.12, light: "left" });
-        if (src === face && fInf.cut) thCutout(c, face, fInf, W * 0.7, H * 1.03, H * 0.95, { acc: A, light: "left", flip: P.flip, edge: false });
-        const bg = c.createLinearGradient(0, H * 0.35, 0, H); bg.addColorStop(0, "rgba(0,0,0,0)"); bg.addColorStop(1, "rgba(0,0,0,.78)"); c.fillStyle = bg; c.fillRect(0, 0, W, H);
-        thText(c, words, accI, { x: W * 0.05, y: H * 0.56, w: W * 0.6, h: H * 0.32 }, { acc: A, accInk: ink, soft: true, uniform: true, valign: "bottom" });
-      }
-      thLogo(c, P.logo, W, H, false);
-    } else {
-      // Shorts cover: keep the words above the bottom quarter, where the app's buttons sit
-      const subjBox = (x, y, w, h, t) => subj ? thSubject(c, subj, x, y, w, h, t, A, "right") : null;
-      if (comp === "photo") {
-        const src = face && !fInf.cut ? face : P.bg || subj || face;
-        thBackground(c, W, H, src, A, { sharp: !thInfo(src).cut, dark: 0.12 });
-        if (src === face && fInf.cut) thCutout(c, face, fInf, W * 0.5, H * 1.02, H * 0.62, { acc: A, flip: P.flip, edge: false });
-        const bg = c.createLinearGradient(0, H * 0.3, 0, H * 0.8); bg.addColorStop(0, "rgba(0,0,0,0)"); bg.addColorStop(1, "rgba(0,0,0,.7)"); c.fillStyle = bg; c.fillRect(0, 0, W, H);
-        thText(c, words, accI, { x: W * 0.07, y: H * 0.5, w: W * 0.86, h: H * 0.22 }, { acc: A, accInk: ink, soft: true, uniform: true, align: "center", valign: "bottom" });
-      } else {
-        thBackground(c, W, H, P.bg || subj || (face && !fInf.cut ? face : null), A, { dark: comp === "words" ? 0.72 : 0.55 });
-        if (comp === "versus" && subj && face) {
-          subjBox(W * 0.06, H * 0.08, W * 0.88, H * 0.36, -2);
-          c.save(); c.translate(W / 2, H * 0.47); c.fillStyle = A; c.beginPath(); c.arc(0, 0, 70, 0, 7); c.fill(); c.font = thFont(70); c.fillStyle = ink; c.textAlign = "center"; c.textBaseline = "middle"; c.fillText(P.angle === "Transformation" ? "↓" : "VS", 0, 5); c.restore();
-          faceAt(W * 0.5, H * 0.38, "left");
-          thText(c, words, accI, { x: W * 0.06, y: H * 0.5, w: W * 0.88, h: H * 0.12 }, { acc: A, accInk: ink, uniform: true, align: "center" });
-        } else if ((comp === "show" || comp === "hero") && subj) {
-          subjBox(W * 0.06, H * 0.07, W * 0.88, H * (comp === "hero" ? 0.46 : 0.36), comp === "hero" ? -2 : 2);
-          if (face) { if (fInf.cut) thCutout(c, face, fInf, W * 0.5, H * 1.02, H * (comp === "hero" ? 0.26 : 0.4), { acc: A, light: "right", flip: P.flip }); else thCard(c, face, W * 0.1, H * 0.72, W * 0.5, H * 0.22, -3, A); }
-          const ty = comp === "hero" ? H * 0.545 : H * 0.45;
-          const lh = labelAt(W * 0.07, ty, 44); thText(c, words, accI, { x: W * 0.07, y: ty + (lh ? lh + 12 : 0), w: W * 0.86, h: H * (comp === "hero" ? 0.17 : 0.17) - (lh ? lh : 0) }, { acc: A, accInk: ink, align: "center" });
-        } else {
-          if (comp === "breaking") { const lw = c.createLinearGradient(0, 0, 0, H * 0.6); lw.addColorStop(0, "rgba(0,0,0,.6)"); lw.addColorStop(1, "rgba(0,0,0,0)"); c.fillStyle = lw; c.fillRect(0, 0, W, H); }
-          if (face) { if (fInf.cut) thCutout(c, face, fInf, W * 0.5, H * 1.02, H * (comp === "words" ? 0.42 : 0.5), { acc: comp === "breaking" ? red : A, light: "right", flip: P.flip }); else thPhotoSide(c, face, "left", W, H, 1, P.flip); }
-          const lh = comp === "breaking" ? thLabel(c, lab || "BREAKING", W * 0.07, H * 0.12, 54, red, "#FFFFFF") : labelAt(W * 0.07, H * 0.12, 48);
-          thText(c, words, accI, { x: W * 0.07, y: H * 0.14 + (lh ? lh : 0), w: W * 0.86, h: H * (comp === "words" ? 0.36 : 0.3) - (lh ? lh : 0) }, { acc: A, accInk: ink, boxAcc: comp === "words", align: "center" });
-          if (comp === "breaking") { c.fillStyle = red; c.fillRect(0, H * 0.5, W, 10); }
-        }
-      }
-      thLogo(c, P.logo, W, H, true);
+    // background
+    if (E.bg.kind === "split") {
+      thBg(c, W, H, { kind: "midnight", vignette: false }, P);
+      const sx = 0.56, sx2 = 0.46;
+      if (subj && !sInf.cut) { c.save(); c.beginPath(); c.moveTo(0, 0); c.lineTo(W * sx, 0); c.lineTo(W * sx2, H); c.lineTo(0, H); c.closePath(); c.clip(); const iw = subj.naturalWidth || subj.width, ih = subj.naturalHeight || subj.height, r = thCoverRect(iw, ih, W * sx, H, 0.5, 0.45); if ("filter" in c) c.filter = "contrast(1.08) saturate(1.05) brightness(.85)"; c.drawImage(subj, r[0], r[1], r[2], r[3], 0, 0, W * sx, H); c.filter = "none"; c.restore(); rects.subj = { x: 0, y: 0, w: W * sx, h: H }; }
+      c.save(); c.beginPath(); c.moveTo(W * sx, 0); c.lineTo(W, 0); c.lineTo(W, H); c.lineTo(W * sx2, H); c.closePath(); c.clip(); const g = c.createLinearGradient(W * 0.5, 0, W, H); g.addColorStop(0, vmDarker(vmDarker(A))); g.addColorStop(1, "#07090C"); c.fillStyle = g; c.fillRect(0, 0, W, H); c.restore();
+      c.save(); c.strokeStyle = deco || A; c.lineWidth = 10 * U; c.beginPath(); c.moveTo(W * sx, 0); c.lineTo(W * sx2, H); c.stroke(); c.restore();
+    } else thBg(c, W, H, E.bg, P);
+    // the thing
+    if (subj && E.subj && vis("subj", E.subj)) {
+      const S = moved("subj", E.subj), bx = fx.x(S.x), by = fx.y(S.y), bw = S.w * W, bh = S.h * H;
+      if (sInf.cut) { const bb = sInf.bb, s = Math.min(bw / (bb[2] - bb[0]), bh / (bb[3] - bb[1])); rects.subj = thCutout(c, subj, sInf, bx + bw / 2, by + bh / 2 + (bb[3] - bb[1]) * s / 2, (bb[3] - bb[1]) * s, { acc: A, light: "left", glow: !!S.glow && cu.glow !== false, edge: S.glow ? "#FFFFFF" : null, rim: !!S.glow }); }
+      else rects.subj = thPanel(c, subj, bx, by, bw, bh, { frame: S.frame || null, fw: S.fw, tilt: S.tilt, fit: S.fit, shadow: S.shadow, vivid: E.bg.vivid });
     }
-    thGrain(c, W, H, 0.07);
+    // the circle goes under you, the arrow over
+    if (E.circle && vis("circle", E.circle)) { const C = moved("circle", E.circle); rects.circle = thRing(c, fx.x(C.x), fx.y(C.y), C.r * H, deco || C.col, 9 * U); }
+    // you
+    if (face && E.face && vis("face", E.face)) {
+      const F = moved("face", E.face), glowOn = cu.glow != null ? cu.glow : !!F.glow;
+      if (fInf.cut) rects.face = thCutout(c, face, fInf, fx.x(F.cx), fx.y(F.by), F.h * H, { acc: F.acc || A, light: F.light || "left", flip: P.flip, glow: glowOn, edge: glowOn ? F.edge || "#FFFFFF" : null, rim: glowOn && F.rim, onLight: F.onLight });
+      else if (tall) rects.face = thPanel(c, face, W * 0.1, H * 0.66, W * 0.8, H * 0.3, { frame: "#FFFFFF", fw: 0.02, tilt: -2 });
+      else if (E.bg.kind === "light" || (cu.bg === "light")) { const fh = Math.min(0.92, F.h * 0.9), fw2 = fh * H * 0.78 / W; rects.face = thPanel(c, face, fx.x(F.cx) - fw2 * W / 2, H * 0.05, fw2 * W, fh * H, { frame: "#FFFFFF", fw: 0.02, tilt: -2 }); }
+      else { const side = F.cx > 0.5 ? "right" : "left"; rects.face = thPhotoSide(c, face, side, W, H, Math.min(0.62, 0.48 * (el.face && el.face.k || 1)), P.flip); }
+    }
+    if (E.vs) { const V = E.vs; c.save(); c.translate(fx.x(V.x), fx.y(V.y)); c.fillStyle = deco || A; c.shadowColor = "rgba(0,0,0,.6)"; c.shadowBlur = 20 * U; c.beginPath(); c.arc(0, 0, V.r * U, 0, 7); c.fill(); c.shadowColor = "transparent"; c.font = thFontOf("anton", V.r * U); c.fillStyle = vmInk(deco || A); c.textAlign = "center"; c.textBaseline = "middle"; c.fillText(V.text, 0, 4 * U); c.restore(); }
+    if (E.arrow && vis("arrow", E.arrow)) {
+      const R = E.arrow, o = el.arrow || {}, t = el.tip || {}, k2 = o.k || 1;
+      const x0 = R.x0 + (o.dx || 0), y0 = R.y0 + (o.dy || 0), x1 = x0 + (R.x1 - R.x0) * k2 + (t.dx || 0), y1 = y0 + (R.y1 - R.y0) * k2 + (t.dy || 0);
+      rects.arrow = thArrow(c, fx.x(x0), fx.y(y0), fx.x(x1), fx.y(y1), R.w * U * Math.sqrt(k2), deco || R.col, R.bend, R.outline);
+      rects.tip = { x: fx.x(x1) - 30 * U, y: fx.y(y1) - 30 * U, w: 60 * U, h: 60 * U };
+    }
+    // the words
+    let lab = null;
+    if (E.label && vis("label", E.label) && !el.label && !E.label.fixed) {   // keep the label off your face and the words
+      const sz = (E.label.size || 32) * U, lw = (E.label.text.length * 0.62 * sz + sz) / W, lh2 = sz * 1.6 / H, R = rects.face, T0 = E.text;
+      const hitR = (x, y) => (R && x * W < R.x + R.w && (x + lw) * W > R.x && y * H < R.y + R.h && (y + lh2) * H > R.y) || (T0 && !T0.lblAbove && x < T0.x + T0.w && x + lw > T0.x && y < T0.y + T0.h && y + lh2 > T0.y) || x + lw > 0.99 || y + lh2 > 0.99;
+      const S0 = rects.subj, cands = [[E.label.x, E.label.y]].concat(S0 ? [[S0.x / W + 0.015, S0.y / H + 0.03], [S0.x / W + 0.015, (S0.y + S0.h) / H - lh2 - 0.03]] : []).concat([[0.045, 0.07], [0.55, 0.05], [0.045, 0.86], [0.6, 0.86]]);
+      const ok = cands.find(([x, y]) => !hitR(x, y)); if (ok) E.label = Object.assign({}, E.label, { x: ok[0], y: ok[1] });
+    }
+    if (E.label && vis("label", E.label)) { const Lb = moved("label", Object.assign({ w: 0.0001, h: 0.0001 }, E.label)), red = "#E3262E", col = E.label.text === "BREAKING" ? red : deco && !E.label.size ? deco : E.label.col; lab = thLabel(c, E.label.text, fx.x(Lb.x), fx.y(Lb.y), (E.label.size || 32) * U * ((el.label && el.label.k) || 1), col, vmInk(col)); rects.label = lab; }
+    if (E.text && vis("text", E.text) && P.words && P.words.length) {
+      let X = moved("text", E.text);
+      if (X.lblAbove && lab && !(el.text) && Math.abs(lab.y / H - X.y) < 0.1) { const dy = (lab.y + lab.h) / H + 0.02 - X.y; X = Object.assign({}, X, { y: X.y + dy, h: X.h - dy }); }
+      const font = cu.font || X.font, cs = cu.case || X.case;
+      rects.text = thText(c, P.words, P.acc, { x: fx.x(X.x), y: fx.y(X.y), w: X.w * W, h: X.h * H }, Object.assign({}, X, { font, case: cs, fill: tcol || X.fill || "#FFFFFF", acc: acol || (X.style === "card" ? "#E3262E" : A), tabCol: deco || X.tabCol, tabAcc: acol || (vmInk(deco || X.tabCol || "#E3262E") === "#FFFFFF" ? "#FFD400" : "#E3262E") }, X.style === "tab" && !tcol ? { fill: vmInk(deco || X.tabCol || "#E3262E") === "#FFFFFF" ? "#FFFFFF" : "#111111" } : {}));
+    }
+    if (E.sticker && vis("sticker", E.sticker)) { const K = moved("sticker", E.sticker); rects.sticker = thText(c, [cu.stickerText || K.text], -1, { x: fx.x(K.x), y: fx.y(K.y), w: K.w * W, h: K.h * H }, { font: K.font, case: K.case, fill: tcol || K.fill, align: "center", tilt: -6 }); }
+    thLogo(c, P.logo, W, H, tall, E.logo);
+    if (E.border && vis("border", E.border)) { const bw = E.border.w * Math.min(W, H) * (tall ? 1.4 : 1); c.save(); c.strokeStyle = cu.border || E.border.col; c.lineWidth = bw * 2; c.strokeRect(0, 0, W, H); c.restore(); }
+    if (E.grain) thGrain(c, W, H, E.grain);
     c.restore();
+    return rects;
   }
-  // YouTube allows 2 MB: a JPEG that fits
+  const thPartsOf = (look, tall, has) => { const E = thLookSpec(look, tall, has, "#FF7A00", "", "x"); return Object.keys(TH_PARTS).filter(k => k === "tip" ? !!E.arrow : !!E[k]); };
+  const TH_KEYS = ["look", "acc", "label", "face", "subj", "bg", "logo", "accCol", "flip", "angle", "cu"];
+  function THPreview({ P, W, H, cls, onClick }) {
+    const ref = useRef(null), last = useRef(null);
+    useEffect(() => {
+      const cv = ref.current; if (!cv) return;
+      const L = last.current; if (L && L.W === W && TH_KEYS.every(k => L.P[k] === P[k]) && L.P.words.join(" ") === P.words.join(" ")) return;
+      const me = { P, W, done: false }; last.current = me; let alive = true;
+      const t = setTimeout(async () => { try { await document.fonts.load("400 60px Anton"); } catch (e) {} if (alive) { thDraw(cv.getContext("2d"), W, H, P); me.done = true; } }, L ? 160 : 0);
+      return () => { alive = false; clearTimeout(t); if (last.current === me && !me.done) last.current = null; };
+    });
+    return html`<canvas ref=${ref} width=${W} height=${H} class=${cls || ""} onClick=${onClick}></canvas>`;
+  }
+  // the big one you can touch: tap a part to pick it, drag to move it
+  function THEditCanvas({ P, W, H, sel, onSel, onMove, cls }) {
+    const ref = useRef(null), rects = useRef({}), drag = useRef(null), raf = useRef(0), Pref = useRef(P);
+    Pref.current = P;
+    const paint = () => { cancelAnimationFrame(raf.current); raf.current = requestAnimationFrame(() => { const cv = ref.current; if (!cv) return; const c = cv.getContext("2d"); rects.current = thDraw(c, W, H, Pref.current) || {}; const s = drag.current ? drag.current.key : sel; const R = s && rects.current[s]; if (R) { c.save(); c.setLineDash([12, 8]); c.lineWidth = 3; c.strokeStyle = "#FFD54A"; c.strokeRect(R.x, R.y, R.w, R.h); c.restore(); } }); };
+    useEffect(() => { document.fonts.load("400 60px Anton").catch(() => {}).then(paint); });
+    const at = e => { const b = ref.current.getBoundingClientRect(); return [(e.clientX - b.left) / b.width * W, (e.clientY - b.top) / b.height * H]; };
+    const hit = p => { for (const k of ["sticker", "label", "tip", "text", "circle", "arrow", "face", "subj"]) { const R = rects.current[k]; if (R && p[0] >= R.x && p[0] <= R.x + R.w && p[1] >= R.y && p[1] <= R.y + R.h) return k; } return null; };
+    const down = e => { const p = at(e), k = hit(p); onSel(k); if (!k) return; e.preventDefault(); try { e.currentTarget.setPointerCapture(e.pointerId); } catch (x) {} drag.current = { key: k, p, id: e.pointerId, moved: false }; };
+    const move = e => { const d = drag.current; if (!d || d.id !== e.pointerId) return; const p = at(e), dx = (p[0] - d.p[0]) / W, dy = (p[1] - d.p[1]) / H; if (!d.moved && Math.hypot(dx * W, dy * H) < 6) return; d.moved = true; d.p = p; onMove(d.key, dx, dy, true); };
+    const up = e => { const d = drag.current; if (!d || d.id !== e.pointerId) return; drag.current = null; if (d.moved) onMove(d.key, 0, 0, false); paint(); };
+    return html`<canvas ref=${ref} width=${W} height=${H} class=${cls || ""} style="touch-action:none" onPointerDown=${down} onPointerMove=${move} onPointerUp=${up} onPointerCancel=${up}></canvas>`;
+  }
   async function thJpeg(cv) { for (const q of [0.92, 0.86, 0.8, 0.72, 0.62]) { const b = await new Promise(r => cv.toBlob(r, "image/jpeg", q)); if (b && b.size < 1.95e6) return b; } return new Promise(r => cv.toBlob(r, "image/jpeg", 0.55)); }
   // cut a person out of a photo, right here on the phone (MediaPipe selfie segmentation, loaded the first time it's needed)
   const TH_SEG = "https://cdn.jsdelivr.net/npm/@mediapipe/selfie_segmentation@0.1.1675465747/";
@@ -10634,18 +10845,6 @@ notify pgrst, 'reload schema';
     const r = await vmTimeout(fetch("/.netlify/functions/thumbtext", { method: "POST", headers: { "content-type": "application/json", authorization: "Bearer " + (tok || "") }, body: JSON.stringify(o) }), 30000);
     const j = await r.json().catch(() => ({})); if (j.off) throw new Error("off"); if (!r.ok) throw new Error(j.error || "fail"); return j;
   }
-  const TH_KEYS = ["comp", "acc", "label", "face", "subj", "bg", "logo", "accCol", "flip", "angle"];
-  function THPreview({ P, W, H, cls, onClick }) {
-    const ref = useRef(null), last = useRef(null);
-    useEffect(() => {
-      const cv = ref.current; if (!cv) return;
-      const L = last.current; if (L && L.W === W && TH_KEYS.every(k => L.P[k] === P[k]) && L.P.words.join(" ") === P.words.join(" ")) return;
-      const me = { P, W, done: false }; last.current = me; let alive = true;
-      const t = setTimeout(async () => { try { await document.fonts.load("400 60px Anton"); } catch (e) {} if (alive) { thDraw(cv.getContext("2d"), W, H, P); me.done = true; } }, L ? 160 : 0);
-      return () => { alive = false; clearTimeout(t); if (last.current === me && !me.done) last.current = null; };
-    });
-    return html`<canvas ref=${ref} width=${W} height=${H} class=${cls || ""} onClick=${onClick}></canvas>`;
-  }
   function THFaceCam({ onClose, onSnap }) {
     const vref = useRef(null), [mood, setMood] = useState("shocked"), [count, setCount] = useState(0), [err, setErr] = useState("");
     useEffect(() => {
@@ -10670,6 +10869,65 @@ notify pgrst, 'reload schema';
         <p class="help">Face a window or a lamp, so your face is bright. Big expressions read best when the picture is small.</p>
         <button class="btn" disabled=${!!count || !!err} onClick=${snap}>📸 Take it (3 seconds)</button>
         <button class="btn quiet" onClick=${onClose}>Close</button>
+      </div>
+    </div>`;
+  }
+  // one look, opened big: move things with your finger, change colours, fonts, the background; YouTube and Shorts each
+  function THDesigner({ P0, d, up, vi, st, busy, onExport, onClose }) {
+    const [tall, setTall] = useState(false), [sel, setSel] = useState(null), [live, setLive] = useState(null);
+    const key = P0.look + (tall ? ":t" : ""), saved = (d.custom || {})[key] || {}, cu = live || saved;
+    const P = Object.assign({}, P0, { cu }), W = tall ? 540 : 1280, H = tall ? 960 : 720;
+    const has = { face: !!P0.face, faceCut: !!(P0.face && thInfo(P0.face).cut), subj: !!P0.subj, subjCut: !!(P0.subj && thInfo(P0.subj).cut), bg: !!P0.bg };
+    const E = thLookSpec(P0.look, tall, has, P0.accCol, P0.angle, P0.label || "x"), parts = Object.keys(TH_PARTS).filter(k => k === "tip" ? !!E.arrow : !!E[k] && (k !== "face" || has.face) && (k !== "subj" || has.subj));
+    const setCu = (o, keep) => { const n = Object.assign({}, cu, o); if (keep) { setLive(n); return; } setLive(null); const all = Object.assign({}, d.custom || {}, { [key]: n }); up({ custom: all }); };
+    const elOf = k => (cu.el || {})[k] || {};
+    const setEl = (k, o, keep) => setCu({ el: Object.assign({}, cu.el || {}, { [k]: Object.assign({}, elOf(k), o) }) }, keep);
+    const onMove = (k, dx, dy, keep) => { if (!keep) { setCu({}, false); return; } const e = elOf(k); setEl(k, { dx: (e.dx || 0) + dx, dy: (e.dy || 0) + dy }, true); };
+    const isOn = k => { const o = (cu.on || {})[k]; return o != null ? o : !!E[k] && E[k].on !== false; };
+    const tog = k => setCu({ on: Object.assign({}, cu.on || {}, { [k]: !isOn(k) }) });
+    const sw = (list, val, f, lbl) => html`<div class="thsw">${list.map(c2 => html`<button key=${c2} class=${"swatch" + (val === c2 ? " on" : "")} style=${"background:" + c2} onClick=${() => f(c2)} aria-label=${lbl + " " + c2}></button>`)}<button class=${"chip" + (!val ? " on" : "")} onClick=${() => f(null)}>Look's own</button></div>`;
+    const pick = sel && parts.indexOf(sel) >= 0 ? sel : null;
+    return html`<div class="full studio thdesign" role="dialog" aria-label="Edit the thumbnail">
+      <div class="fhead"><span>🖼 ${TH_LOOKS[P0.look].name}</span><button class="iconbtn" onClick=${onClose} aria-label="Close"><${Ic.x}/></button></div>
+      <div class="sbody thbody">
+        <div class="vmchips c"><button class=${"chip" + (!tall ? " on" : "")} onClick=${() => { setTall(false); setSel(null); }}>▭ YouTube</button><button class=${"chip" + (tall ? " on" : "")} onClick=${() => { setTall(true); setSel(null); }}>▯ Shorts / Reels</button>
+          <span class="thsep"></span>${[0, 1, 2].map(i => html`<button key=${i} class=${"chip" + (vi === i ? " on" : "")} disabled=${!d.texts[i]} onClick=${() => up({ vi: i })}>${"ABC"[i]}</button>`)}</div>
+        <div class=${"thstage" + (tall ? " tall" : "")}><${THEditCanvas} P=${P} W=${W} H=${H} sel=${pick} onSel=${setSel} onMove=${onMove} cls=${tall ? "thcvtall" : "thcvbig"}/></div>
+        <p class="help c">Tap a part to pick it, drag it to move it.</p>
+        <div class="vmchips c">${parts.filter(k => k !== "border").map(k => html`<button key=${k} class=${"chip" + (pick === k ? " on" : "") + (!isOn(k === "tip" ? "arrow" : k) ? " off" : "")} onClick=${() => setSel(pick === k ? null : k)}>${TH_PARTS[k]}</button>`)}</div>
+        ${pick ? html`<div class="card thpart">
+          <b>${TH_PARTS[pick]}</b>
+          ${pick !== "tip" ? html`<label class="vmvol">Size <input type="range" min="0.4" max="2" step="0.02" value=${elOf(pick).k || 1} onInput=${e => setEl(pick, { k: +e.target.value }, true)} onChange=${e => setEl(pick, { k: +e.target.value })}/></label>` : html`<p class="help">Drag the tip to point the arrow at something.</p>`}
+          <div class="vmchips">
+            ${pick !== "text" && pick !== "tip" ? html`<button class="chip" onClick=${() => tog(pick)}>${isOn(pick) ? "🙈 Hide it" : "👁 Show it"}</button>` : null}
+            <button class="chip" onClick=${() => { const el = Object.assign({}, cu.el || {}); delete el[pick]; if (pick === "arrow") delete el.tip; setCu({ el }); }}>↺ Put it back</button>
+          </div>
+          ${pick === "sticker" ? html`<div class="field"><input value=${cu.stickerText || E.sticker.text} onInput=${e => setCu({ stickerText: e.target.value.toUpperCase().slice(0, 12) })}/></div>` : null}
+        </div>` : null}
+        <h4 class="vmh">Add or take away</h4>
+        <div class="vmchips">${["arrow", "circle", "label", "border", "sticker"].filter(k => E[k] || (k === "circle" && E.circle)).map(k => html`<button key=${k} class=${"chip" + (isOn(k) ? " on" : "")} onClick=${() => tog(k)}>${isOn(k) ? "✓ " : "＋ "}${TH_PARTS[k]}</button>`)}
+          ${has.faceCut || has.subjCut ? html`<button class=${"chip" + (cu.glow ? " on" : cu.glow === false ? "" : E.face && E.face.glow ? " on" : "")} onClick=${() => setCu({ glow: !(cu.glow != null ? cu.glow : !!(E.face && E.face.glow)) })}>✨ Glow round me</button>` : null}</div>
+        <h4 class="vmh">Words</h4>
+        <div class="vmchips">${[[null, "Look's own"]].concat(Object.keys(TH_FONTS).map(k => [k, TH_FONTS[k].name])).map(([k, n]) => html`<button key=${n} class=${"chip" + ((cu.font || null) === k ? " on" : "")} style=${k ? "font-family:" + TH_FONTS[k].css + ";font-weight:" + TH_FONTS[k].w : ""} onClick=${() => setCu({ font: k })}>${n}</button>`)}</div>
+        <div class="vmchips">${[[null, "Look's own"], ["upper", "CAPS"], ["title", "Title Case"], ["lower", "lower case"]].map(([k, n]) => html`<button key=${n} class=${"chip" + ((cu.case || null) === k ? " on" : "")} onClick=${() => setCu({ case: k })}>${n}</button>`)}</div>
+        <div class="vml">Words colour${sw(TH_TXT, cu.textCol || null, v => setCu({ textCol: v }), "Words colour")}</div>
+        <div class="vml">The coloured word${sw([st.acc || "#FF7A00"].concat(TH_DECO.filter(x => x !== (st.acc || "#FF7A00"))), cu.accCol || null, v => setCu({ accCol: v }), "Accent")}</div>
+        <div class="vml">Arrow, circle and tab colour${sw(TH_DECO, cu.deco || null, v => setCu({ deco: v }), "Arrow colour")}</div>
+        ${E.border ? html`<div class="vml">Frame colour${sw(TH_DECO, cu.border || null, v => setCu({ border: v }), "Frame colour")}</div>` : null}
+        <h4 class="vmh">Background</h4>
+        <div class="vmchips">${[[null, "Look's own"], ["blur", "Picture, soft"], ["sharp", "Picture, sharp"], ["midnight", "Midnight"], ["purple", "Purple"], ["fire", "Fire"], ["ocean", "Ocean"], ["jungle", "Jungle"], ["light", "Light"]].map(([k, n]) => html`<button key=${n} class=${"chip" + ((cu.bg || null) === k ? " on" : "")} style=${k && TH_BGS[k] ? "background:linear-gradient(135deg," + TH_BGS[k][0] + "," + TH_BGS[k][1] + ");color:" + (k === "light" ? "#111" : "#fff") : ""} onClick=${() => setCu({ bg: k })}>${n}</button>`)}</div>
+        <label class="vmvol">Darker or lighter <input type="range" min="0" max="0.85" step="0.01" value=${cu.dim != null ? cu.dim : (E.bg && E.bg.dim != null ? E.bg.dim : 0.5)} onInput=${e => setCu({ dim: +e.target.value }, true)} onChange=${e => setCu({ dim: +e.target.value })}/></label>
+        <button class="chip" onClick=${() => { setLive(null); const all = Object.assign({}, d.custom || {}); delete all[key]; up({ custom: all }); setSel(null); }}>↺ Start this look again</button>
+        <div class="thfeed"><span class="thfeedlbl">How it looks in the feed</span>
+          ${tall ? html`<div class="throw"><${THPreview} P=${P} W=${135} H=${240} cls="thshortsmall"/><div><b>${d.title || d.topic || "Your video title"}</b><small>Shorts</small></div></div>`
+            : html`<div class="throw"><${THPreview} P=${P} W=${336} H=${189} cls="thsmall"/><div><b>${d.title || d.topic || "Your video title"}</b><small>${st.name || "Your channel"} · 1.2K views</small></div></div>
+            <div class="throw mini"><${THPreview} P=${P} W=${168} H=${94} cls="thtiny"/><div><b>${d.title || d.topic || "Your video title"}</b></div></div>`}
+        </div>
+        <div class="field"><label for="thti">The video's title (it gives the context the picture doesn't)</label><input id="thti" value=${d.title} onInput=${e => up({ title: e.target.value })} placeholder="The New Policy Just Changed Everything — Here's What It Means"/></div>
+      </div>
+      <div class="sfoot">
+        <button class="btn" disabled=${!!busy} onClick=${() => onExport(Object.assign({}, P0, { cu: (d.custom || {})[P0.look] || null }), false)}>⬇️ Save for YouTube (1280×720)</button>
+        <button class="btn quiet" disabled=${!!busy} onClick=${() => onExport(Object.assign({}, P0, { cu: (d.custom || {})[P0.look + ":t"] || null }), true)}>⬇️ Save the Shorts / Reels cover (1080×1920)</button>
       </div>
     </div>`;
   }
@@ -10708,9 +10966,10 @@ notify pgrst, 'reload schema';
     const ranked = d.faceId !== "auto" ? ready.filter(f => f.id === d.faceId) : ready.slice().sort((a, b) => { const ia = want.indexOf(a.mood), ib = want.indexOf(b.mood); return (ia < 0 ? 99 : ia) - (ib < 0 ? 99 : ib); });
     const matched = d.faceId === "auto" ? ranked.filter(f => want.indexOf(f.mood) >= 0) : ranked, pool = matched.length ? matched : ranked;
     const subjImg = imgs.subj || null, bgImg = imgs.bg || null;
-    const comps = thPlan(d.type, d.angle, { face: pool.length > 0, subj: !!subjImg, bg: !!bgImg });
+    const looks = thPlan(d.type, d.angle, { face: pool.length > 0, subj: !!subjImg, bg: !!bgImg });
     const vi = d.vi || 0, wordsOf = i => thWordsOf(d.texts[i]), accOf = i => (d.accs[i] >= 0 && d.accs[i] < wordsOf(i).length ? d.accs[i] : thAutoAcc(wordsOf(i)));
-    const specs = comps.map((comp, k) => ({ comp, words: wordsOf(vi), acc: accOf(vi), label: d.label, face: pool.length ? imgs["f:" + pool[k % pool.length].id] : null, subj: subjImg, bg: bgImg, logo: logoImg.current, accCol: st.acc || "#FF7A00", flip: !!d.flip, angle: d.angle }));
+    const custom = d.custom || {};
+    const specs = looks.map((look, k) => ({ look, words: wordsOf(vi), acc: accOf(vi), label: d.label, face: pool.length ? imgs["f:" + pool[k % pool.length].id] : null, subj: subjImg, bg: bgImg, logo: logoImg.current, accCol: st.acc || "#FF7A00", flip: !!d.flip, angle: d.angle, cu: custom[look] || null }));
     const wc = wordsOf(vi).length;
     async function addFace(file, mood) {
       setBusy("Adding your photo…");
@@ -10744,7 +11003,7 @@ notify pgrst, 'reload schema';
       try {
         await document.fonts.load("400 60px Anton").catch(() => {});
         const W = tall ? 1080 : 1280, H = tall ? 1920 : 720, cv = thCanvas(W, H); thDraw(cv.getContext("2d"), W, H, spec);
-        const blob = await thJpeg(cv), name = (d.topic || "thumbnail").replace(/[^\w-]+/g, "-").slice(0, 40) + "-" + spec.comp + "-" + "ABC"[vi] + (tall ? "-shorts" : "") + ".jpg";
+        const blob = await thJpeg(cv), name = (d.topic || "thumbnail").replace(/[^\w-]+/g, "-").slice(0, 40) + "-" + spec.look + "-" + "ABC"[vi] + (tall ? "-shorts" : "") + ".jpg";
         const file = new File([blob], name, { type: "image/jpeg" });
         if (navigator.canShare && navigator.canShare({ files: [file] })) { try { await navigator.share({ files: [file], title: name }); setBusy(""); return; } catch (e) { if (e && e.name === "AbortError") { setBusy(""); return; } } }
         const a = document.createElement("a"); a.href = URL.createObjectURL(blob); a.download = name; document.body.appendChild(a); a.click(); a.remove(); setTimeout(() => URL.revokeObjectURL(a.href), 4000);
@@ -10753,11 +11012,12 @@ notify pgrst, 'reload schema';
       setBusy("");
     }
     const pickFile = (cb, accept) => { const i = document.createElement("input"); i.type = "file"; i.accept = accept || "image/*"; i.onchange = () => { const f = i.files && i.files[0]; if (f) cb(f); }; i.click(); };
-    const big = pick != null && specs[pick] ? specs[pick] : null;
+    const big = pick != null ? specs.find(x => x.look === pick) || null : null;
+    if (big) return html`<${THDesigner} P0=${Object.assign({}, big, { cu: null })} d=${d} up=${up} vi=${vi} st=${st} busy=${busy} onExport=${exportIt} onClose=${() => setPick(null)}/>${busy ? html`<div class="thbusy">${busy}</div>` : null}`;
     return html`<div class="full studio thstudio" role="dialog" aria-label="Thumbnail studio">
       <div class="fhead"><span>🖼 Thumbnails</span><button class="iconbtn" onClick=${onClose} aria-label="Close"><${Ic.x}/></button></div>
       <div class="sbody thbody">
-        <p class="help">Your face, one thing, a few big words. It makes different layouts; pick one, try the A/B/C words, and save it for YouTube or Shorts.</p>
+        <p class="help">Your face, one thing, a few big words. It makes different looks, like the big channels use; open one to move things, change colours, fonts and the background, try the A/B/C words, and save it for YouTube or Shorts.</p>
         <div class="vml">What kind of video?<div class="vmchips">${TH_TYPES.map(t => html`<button key=${t} class=${"chip" + (d.type === t ? " on" : "")} onClick=${() => up({ type: t })}>${t}</button>`)}</div></div>
         <div class="vml">The angle: what makes people click<div class="vmchips">${TH_ANGLES.map(t => html`<button key=${t} class=${"chip" + (d.angle === t ? " on" : "")} onClick=${() => { const old = TH_WORDS[d.angle] || [], fresh = d.texts.every(x => !x.trim() || old.indexOf(x) >= 0); up(Object.assign({ angle: t, label: t === "Breaking" ? "BREAKING" : d.label === "BREAKING" ? "" : d.label }, fresh ? { texts: TH_WORDS[t].slice(0, 3), accs: [-1, -1, -1] } : {})); }}>${t}</button>`)}</div></div>
         <div class="field"><label for="tht">What's the video about? (for the word ideas)</label><input id="tht" value=${d.topic} onInput=${e => up({ topic: e.target.value })} placeholder="For example: the new fuel price, and what it means"/></div>
@@ -10796,27 +11056,12 @@ notify pgrst, 'reload schema';
           ${d.bg ? html`<button class="chip" onClick=${() => up({ bg: null })}>No background</button>` : null}
         </div>
 
-        <h4 class="vmh">Your thumbnails <small>${comps.length} layouts · words ${"ABC"[vi]}</small></h4>
-        <div class="thgrid">${specs.map((P, k) => html`<div key=${P.comp + k} class="thcell"><${THPreview} P=${P} W=${640} H=${360} cls="thcv" onClick=${() => setPick(k)}/><small>${TH_COMPS[P.comp].name}</small></div>`)}</div>
+        <h4 class="vmh">Your thumbnails <small>${looks.length} looks · words ${"ABC"[vi]} · tap one to make it yours</small></h4>
+        <div class="thgrid">${specs.map(P => html`<div key=${P.look} class="thcell" onClick=${() => setPick(P.look)}><${THPreview} P=${P} W=${640} H=${360} cls="thcv"/><small><b>${TH_LOOKS[P.look].name}</b>${custom[P.look] ? " · ✏️ yours" : ""}<br/>${TH_LOOKS[P.look].tip}</small></div>`)}</div>
         ${!pool.length && !subjImg ? html`<p class="help">Add your face and a picture for the real thing — these are just the words for now.</p>` : null}
       </div>
       ${busy ? html`<div class="thbusy">${busy}</div>` : null}
       ${cam ? html`<${THFaceCam} onClose=${() => setCam(false)} onSnap=${(b, m) => { setCam(false); addFace(b, m); }}/>` : null}
-      ${big ? html`<div class="scrim" onClick=${e => { if (e.target === e.currentTarget) setPick(null); }}>
-        <div class="sheet thbig" role="dialog" aria-label="Thumbnail">
-          <${THPreview} P=${big} W=${1280} H=${720} cls="thcvbig"/>
-          <div class="vmchips c">${[0, 1, 2].map(i => html`<button key=${i} class=${"chip" + (vi === i ? " on" : "")} disabled=${!d.texts[i]} onClick=${() => up({ vi: i })}>${"ABC"[i]}</button>`)}</div>
-          <div class="thfeed"><span class="thfeedlbl">How it looks in the feed</span>
-            <div class="throw"><${THPreview} P=${big} W=${336} H=${189} cls="thsmall"/><div><b>${d.title || d.topic || "Your video title"}</b><small>${st.name || "Your channel"} · 1.2K views</small></div></div>
-            <div class="throw mini"><${THPreview} P=${big} W=${168} H=${94} cls="thtiny"/><div><b>${d.title || d.topic || "Your video title"}</b></div></div>
-          </div>
-          <div class="field"><label for="thti">The video's title (it gives the context the picture doesn't)</label><input id="thti" value=${d.title} onInput=${e => up({ title: e.target.value })} placeholder="The New Policy Just Changed Everything — Here's What It Means"/></div>
-          <button class="btn" disabled=${!!busy} onClick=${() => exportIt(big, false)}>⬇️ Save for YouTube (1280×720)</button>
-          <button class="btn quiet" disabled=${!!busy} onClick=${() => exportIt(big, true)}>⬇️ Save as a Shorts / Reels cover (1080×1920)</button>
-          <${THPreview} P=${big} W=${270} H=${480} cls="thtall"/>
-          <button class="btn quiet" onClick=${() => setPick(null)}>Close</button>
-        </div>
-      </div>` : null}
     </div>`;
   }
   function VideoMaker({ onClose }) {
@@ -11105,6 +11350,290 @@ notify pgrst, 'reload schema';
       </div>
     </div>`;
   }
+  /* ===================== the editor: fix the video after recording =====================
+     The recording is laid out on a timeline. What showed when, the layouts, the effects, the strips:
+     all of it can be added, moved, changed or taken out, and parts can be cut out. Nothing is permanent. */
+  const vmCid = () => uid().slice(-7);
+  const r2e = n => Math.round(n * 100) / 100;
+  function vmTrack(cues, secs) {
+    const Q = (cues || []).slice().sort((a, b) => a.t - b.t);
+    const T = { secs, shows: [], lays: [], bans: [], tops: [], bws: [], pts: [], other: [] };
+    let sh = null, bn = null, tp = null;
+    const cS = t => { if (sh) { sh.b = t; if (sh.b - sh.a > 0.02) T.shows.push(sh); sh = null; } };
+    const cB = t => { if (bn) { bn.b = t; if (bn.b - bn.a > 0.02) T.bans.push(bn); bn = null; } };
+    const cT = t => { if (tp) { tp.b = t; if (tp.b - tp.a > 0.02) T.tops.push(tp); tp = null; } };
+    for (const q of Q) {
+      switch (q.k) {
+        case "show": cS(q.t); sh = { id: q.id || vmCid(), a: q.t, ref: q.ref, at: q.at || 0, ev: [] }; break;
+        case "hide": cS(q.t); break;
+        case "play": case "stop": if (sh) sh.ev.push({ t: q.t, k: q.k, at: q.at || 0 }); break;
+        case "lay": T.lays.push({ id: q.id || vmCid(), t: q.t, v: q.v }); break;
+        case "ban": cB(q.t); bn = { id: q.id || vmCid(), a: q.t, ref: q.ref }; break;
+        case "banx": cB(q.t); break;
+        case "top": cT(q.t); tp = { id: q.id || vmCid(), a: q.t, ref: q.ref }; break;
+        case "topx": cT(q.t); break;
+        case "bw": T.bws.push({ id: q.id || vmCid(), t: q.t, v: !!q.v }); break;
+        case "sfx": case "o": case "pt": T.pts.push(Object.assign({}, q, { id: q.id || vmCid() })); break;
+        default: T.other.push(q);
+      }
+    }
+    cS(secs); cB(secs); cT(secs);
+    return T;
+  }
+  function vmUntrack(T) {
+    const out = [], end = T.secs - 0.02;
+    const ivs = (list, kOn, kOff, extra) => {
+      const L = list.slice().sort((a, b) => a.a - b.a);
+      L.forEach((x, i) => {
+        out.push(Object.assign({ id: x.id || vmCid(), t: r2e(x.a), k: kOn, ref: x.ref }, extra ? extra(x) : {}));
+        if (kOn === "show") for (const e of x.ev) if (e.t >= x.a - 0.001 && e.t < x.b) out.push({ id: vmCid(), t: r2e(Math.max(e.t, x.a)), k: e.k, at: r2e(e.at || 0) });
+        const nx = L[i + 1]; if (x.b < end && !(nx && Math.abs(nx.a - x.b) < 0.02)) out.push({ id: vmCid(), t: r2e(x.b), k: kOff });
+      });
+    };
+    ivs(T.shows, "show", "hide", x => ({ at: r2e(x.at || 0) }));
+    ivs(T.bans, "ban", "banx"); ivs(T.tops, "top", "topx");
+    for (const x of T.lays) out.push({ id: x.id, t: r2e(x.t), k: "lay", v: x.v });
+    for (const x of T.bws) out.push({ id: x.id, t: r2e(x.t), k: "bw", v: x.v });
+    for (const x of T.pts) out.push(x);
+    for (const x of T.other) out.push(x);
+    const pr = q => (q.k === "hide" || q.k === "banx" || q.k === "topx" ? 0 : q.k === "show" || q.k === "ban" || q.k === "top" ? 1 : 2);
+    return out.sort((a, b) => a.t - b.t || pr(a) - pr(b));
+  }
+  // where a clip is (and whether it's moving) at a moment inside its stretch
+  function vmClipState(x, t) { let pos = x.at || 0, run = false, lt = x.a; for (const e of x.ev) { if (e.t > t) break; pos = e.at || 0; run = e.k === "play"; lt = e.t; } return { pos: run ? pos + (t - lt) : pos, run }; }
+  function vmHeadAt(x, t) { const c = vmClipState(x, t), ev = x.ev.filter(e => e.t > t); if (c.run) ev.unshift({ t, k: "play", at: r2e(c.pos) }); return Object.assign({}, x, { a: t, at: r2e(c.pos), ev }); }
+  // put a stretch in place; whatever was showing there makes room
+  function vmPlace(list, nx, isShow) {
+    const out = [];
+    for (const x of list) {
+      if (x.id === nx.id) continue;
+      if (x.b <= nx.a + 0.001 || x.a >= nx.b - 0.001) { out.push(x); continue; }
+      if (x.a < nx.a) out.push(Object.assign({}, x, { b: nx.a }, isShow ? { ev: x.ev.filter(e => e.t < nx.a) } : {}));
+      if (x.b > nx.b) out.push(Object.assign(isShow ? vmHeadAt(x, nx.b) : Object.assign({}, x, { a: nx.b }), { id: out.some(y => y.id === x.id) ? vmCid() : x.id }));
+    }
+    out.push(nx); return out.sort((a, b) => a.a - b.a);
+  }
+  const vmLayAt = (T, t) => { let v = "cam"; for (const x of T.lays.slice().sort((a, b) => a.t - b.t)) { if (x.t > t + 0.001) break; v = x.v; } return v; };
+  const vmBwAt = (T, t) => { let v = false; for (const x of T.bws.slice().sort((a, b) => a.t - b.t)) { if (x.t > t + 0.001) break; v = x.v; } return v; };
+  function vmStepRange(list, a, b, v, valAt, secs) {
+    const after = valAt(b), L = list.filter(x => x.t < a - 0.04 || x.t > b + 0.001);
+    L.push({ id: vmCid(), t: a, v }); if (b < secs - 0.05 && after !== v && !L.some(x => Math.abs(x.t - b) < 0.04)) L.push({ id: vmCid(), t: b, v: after });
+    return L.sort((x, y) => x.t - y.t);
+  }
+  // a layout switch that sat right where a thing started or stopped moves with it
+  function vmLayFollow(T, from, to) { if (Math.abs(from - to) < 0.01) return T; const hit = T.lays.find(x => Math.abs(x.t - from) < 0.06); if (!hit) return T; return Object.assign({}, T, { lays: T.lays.filter(x => x === hit || Math.abs(x.t - to) >= 0.05).map(x => (x === hit ? Object.assign({}, x, { t: to }) : x)).sort((a, b) => a.t - b.t) }); }
+  const VME = {
+    addShow(T, it, a, b, camOn, showLay) {
+      const isClip = it.kind === "vid";
+      let N = Object.assign({}, T, { shows: vmPlace(T.shows, { id: vmCid(), ref: it.id, a, b, at: 0, ev: isClip ? [{ t: a, k: "play", at: 0 }] : [] }, true) });
+      if (camOn && vmLayAt(N, a) === "cam") N = Object.assign({}, N, { lays: vmStepRange(N.lays, a, b, showLay && showLay !== "cam" ? showLay : "split", t => vmLayAt(N, t), T.secs) });
+      return N;
+    },
+    showStart(T, id, t) { const x = T.shows.find(y => y.id === id); if (!x || t >= x.b - 0.2) return T; const nx = t < x.a ? Object.assign({}, x, { a: t }) : vmHeadAt(x, t); return vmLayFollow(Object.assign({}, T, { shows: vmPlace(T.shows.filter(y => y.id !== id), nx, true) }), x.a, t); },
+    showEnd(T, id, t) { const x = T.shows.find(y => y.id === id); if (!x || t <= x.a + 0.2) return T; const nx = Object.assign({}, x, { b: t, ev: x.ev.filter(e => e.t < t) }); return vmLayFollow(Object.assign({}, T, { shows: vmPlace(T.shows.filter(y => y.id !== id), nx, true) }), x.b, t); },
+    showSwap(T, id, it) { return Object.assign({}, T, { shows: T.shows.map(x => (x.id === id ? Object.assign({}, x, { ref: it.id, at: 0, ev: it.kind === "vid" ? [{ t: x.a, k: "play", at: 0 }] : [] }) : x)) }); },
+    clipRun(T, id, on, from) { return Object.assign({}, T, { shows: T.shows.map(x => (x.id === id ? Object.assign({}, x, { at: r2e(from), ev: on ? [{ t: x.a, k: "play", at: r2e(from) }] : [] }) : x)) }); },
+    showDel(T, id) { return Object.assign({}, T, { shows: T.shows.filter(x => x.id !== id) }); },
+    layFrom(T, t, v) { const L = T.lays.filter(x => Math.abs(x.t - t) >= 0.05); L.push({ id: vmCid(), t, v }); return Object.assign({}, T, { lays: L.sort((a, b) => a.t - b.t) }); },
+    layRange(T, a, b, v) { return Object.assign({}, T, { lays: vmStepRange(T.lays, a, b, v, t => vmLayAt(T, t), T.secs) }); },
+    laySet(T, seg, v) { if (seg.id) return Object.assign({}, T, { lays: T.lays.map(x => (x.id === seg.id ? Object.assign({}, x, { v }) : x)) }); return VME.layFrom(T, 0, v); },
+    layDel(T, id) { return Object.assign({}, T, { lays: T.lays.filter(x => x.id !== id) }); },
+    ivAdd(T, key, it, a, b) { return Object.assign({}, T, { [key]: vmPlace(T[key], { id: vmCid(), ref: it.id, a, b }, false) }); },
+    ivStart(T, key, id, t) { const x = T[key].find(y => y.id === id); if (!x || t >= x.b - 0.2) return T; return Object.assign({}, T, { [key]: vmPlace(T[key].filter(y => y.id !== id), Object.assign({}, x, { a: t }), false) }); },
+    ivEnd(T, key, id, t) { const x = T[key].find(y => y.id === id); if (!x || t <= x.a + 0.2) return T; return Object.assign({}, T, { [key]: vmPlace(T[key].filter(y => y.id !== id), Object.assign({}, x, { b: t }), false) }); },
+    ivDel(T, key, id) { return Object.assign({}, T, { [key]: T[key].filter(x => x.id !== id) }); },
+    bwRange(T, a, b, on) { return Object.assign({}, T, { bws: vmStepRange(T.bws, a, b, on, t => vmBwAt(T, t), T.secs) }); },
+    bwDel(T, id) { return Object.assign({}, T, { bws: T.bws.filter(x => x.id !== id) }); },
+    ptAdd(T, q) { return Object.assign({}, T, { pts: T.pts.concat(Object.assign({ id: vmCid() }, q)).sort((a, b) => a.t - b.t) }); },
+    ptMove(T, id, t) { return Object.assign({}, T, { pts: T.pts.map(x => (x.id === id ? Object.assign({}, x, { t: r2e(t) }) : x)).sort((a, b) => a.t - b.t) }); },
+    ptDel(T, id) { return Object.assign({}, T, { pts: T.pts.filter(x => x.id !== id), other: T.other.filter(q => !(q.k === "rm" && q.ref === id)) }); },
+  };
+  function vmCutAdd(cuts, a, b) {
+    const L = (cuts || []).concat([[Math.min(a, b), Math.max(a, b)]]).sort((x, y) => x[0] - y[0]), out = [];
+    for (const c of L) { const l = out[out.length - 1]; if (l && c[0] <= l[1] + 0.05) l[1] = Math.max(l[1], c[1]); else out.push([r2e(c[0]), r2e(c[1])]); }
+    return out;
+  }
+  const vmItemIcon = it => (!it ? "❔" : it.kind === "vid" ? (it.screen ? "🖥" : "▶") : it.kind === "img" ? "🖼" : it.kind === "map" ? "🗺" : it.kind === "flag" ? "🏳" : it.kind === "trip" ? "✈" : it.kind === "read" ? "📜" : it.kind === "ban" ? "▬" : it.kind === "top" ? "🔝" : "Aa");
+  const vmItemName = it => (!it ? "(taken out)" : it.kind === "vid" ? it.name || "Clip" : it.kind === "img" ? it.name || "Picture" : it.kind === "trip" ? (it.stops || []).map(x => x.name).join(" → ") : it.name || it.text || "Words");
+  const vmItemDur = it => (it.kind === "vid" ? Math.max(2, Math.min(it.secs || 8, 20)) : it.kind === "trip" ? 0.9 + Math.max(1, (it.stops || []).length - 1) * VM_LEG + 2.5 : it.kind === "map" ? 6 : it.kind === "read" ? 8 : 4);
+  const VM_PTS = { sfx: q => (q.v === "boom" ? "💥" : q.v === "freeze" ? "🥶" : q.v === "zoom" ? "🔎" : "🎵"), o: q => (q.s === "circle" ? "⭕" : q.s === "arrow" ? "➡️" : q.s === "hl" ? "🖍" : "✏️"), pt: () => "👉" };
+  const vmPtName = q => (q.k === "sfx" ? (q.v === "boom" ? "Boom" : q.v === "freeze" ? "Freeze" : q.v === "zoom" ? "Zoom in" : "Your sound") : q.k === "pt" ? "Pointer" : q.s === "circle" ? "Circle" : q.s === "arrow" ? "Arrow" : q.s === "hl" ? "Highlight" : "Drawing");
+  const VM_LAYC = { cam: "#3B7DD8", split: "#7A4FD0", pip: "#1F9E8A", thing: "#C2671B" };
+  // pick what to show: anything already in the video, or something new
+  function VMPick({ items, kinds, title, onPick, onClose, onAddFile, onAddText, onAddPlace }) {
+    const L = items.filter(it => (kinds ? kinds.indexOf(it.kind) >= 0 : ["ban", "top"].indexOf(it.kind) < 0) && !it.live);
+    return html`<div class="scrim" onClick=${e => { if (e.target === e.currentTarget) onClose(); }}>
+      <div class="sheet" role="dialog" aria-label=${title}>
+        <h3 style="margin:0">${title}</h3>
+        ${L.length ? html`<div class="mtray vmpick">${L.map(it => html`<button key=${it.id} class=${"mthumb" + (it.kind === "vid" && it.thumb || it.kind === "img" || it.thumb ? "" : " vmtxt")} onClick=${() => onPick(it)}>
+          ${it.kind === "img" ? html`<img src=${vmUrl(it)} alt=""/>` : it.thumb ? html`<img src=${it.thumb} alt=""/>` : html`<span class="vmtxtin">${vmItemIcon(it)} ${vmItemName(it)}</span>`}
+          ${it.kind === "vid" || it.kind === "map" || it.kind === "trip" || it.kind === "flag" ? html`<span class="mbadge">${vmItemIcon(it)} ${it.kind === "vid" ? fmtDur(it.secs || 0) : vmItemName(it)}</span>` : null}
+        </button>`)}</div>` : html`<p class="help">Nothing here yet. Add it below.</p>`}
+        <div class="vmchips">
+          ${onAddFile ? html`<button class="btn slim quiet" onClick=${onAddFile}>＋ Picture / clip</button>` : null}
+          ${onAddText ? html`<button class="btn slim quiet" onClick=${onAddText}>＋ Words</button>` : null}
+          ${onAddPlace ? html`<button class="btn slim quiet" onClick=${onAddPlace}>＋ Map / flag</button>` : null}
+        </div>
+        <button class="btn quiet" onClick=${onClose}>Close</button>
+      </div>
+    </div>`;
+  }
+  function VMTimeline({ take, items, camOn, st, lib, aref, onTake, onDirty, onPlay, onDone, addFile, addText, addPlace }) {
+    const secs = take.secs, [pps, setPps] = useState(() => Math.max(12, Math.min(60, 2400 / Math.max(10, secs))));
+    const [sel, setSel] = useState(null), [pick, setPick] = useState(null), [cutA, setCutA] = useState(null), [panel, setPanel] = useState(null), [, setTk] = useState(0);
+    const wrap = useRef(null), prog = useRef(null), hist = useRef({ back: [], fwd: [] }), wave = useRef(null), lv = useRef(null);
+    const T = useMemo(() => vmTrack(take.cues, secs), [take.cues, secs]);
+    const a = aref.current, now = a ? a.currentTime || 0 : 0;
+    const half = wrap.current ? wrap.current.clientWidth / 2 : 180, W = Math.round(secs * pps);
+    // every change can be taken back
+    function commit(next) {
+      const h = hist.current; h.back.push({ cues: take.cues, cuts: take.cuts || [] }); if (h.back.length > 60) h.back.shift(); h.fwd = [];
+      onTake(next);
+    }
+    const setT = N => commit({ cues: vmUntrack(N), cuts: take.cuts || [] });
+    const setCuts = c => commit({ cues: take.cues, cuts: c });
+    function undo() { const h = hist.current, x = h.back.pop(); if (!x) { toast("Nothing to take back."); return; } h.fwd.push({ cues: take.cues, cuts: take.cuts || [] }); onTake(x); setSel(null); }
+    function redo() { const h = hist.current, x = h.fwd.pop(); if (!x) return; h.back.push({ cues: take.cues, cuts: take.cuts || [] }); onTake(x); }
+    // the timeline follows the playing video; moving the timeline moves the video
+    useEffect(() => {
+      let raf = 0; const f = () => {
+        raf = requestAnimationFrame(f); const A = aref.current, w = wrap.current; if (!A || !w) return;
+        if (!A.paused) { const x = Math.round(A.currentTime * pps); if (Math.abs(w.scrollLeft - x) > 1) { prog.current = x; w.scrollLeft = x; } setTk(n => n + 1); }
+      };
+      raf = requestAnimationFrame(f); return () => cancelAnimationFrame(raf);
+    }, [pps]);
+    useEffect(() => { const w = wrap.current, A = aref.current; if (w && A) { const x = Math.round((A.currentTime || 0) * pps); if (Math.abs(w.scrollLeft - x) > 1) { prog.current = x; w.scrollLeft = x; } } }, [pps]);
+    const onScroll = () => {
+      const w = wrap.current, A = aref.current; if (!w || !A) return;
+      if (prog.current != null) { const ex = prog.current; prog.current = null; if (Math.abs(w.scrollLeft - ex) < 3) return; }
+      if (!A.paused) A.pause();
+      A.currentTime = Math.max(0, Math.min(secs, w.scrollLeft / pps)); onDirty(); setTk(n => n + 1);
+    };
+    const goTo = t => { const w = wrap.current, A = aref.current; if (A) { A.currentTime = Math.max(0, Math.min(secs, t)); } if (w) { const x = Math.round(t * pps); if (Math.abs(w.scrollLeft - x) > 1) { prog.current = x; w.scrollLeft = x; } } onDirty(); setTk(n => n + 1); };
+    // your voice, drawn under everything, so you can see where you talk
+    useEffect(() => {
+      let alive = true;
+      (async () => {
+        try {
+          const AC = window.AudioContext || window.webkitAudioContext, ac = new AC(), raw = await take.voice.arrayBuffer();
+          const ab = await new Promise((res, rej) => ac.decodeAudioData(raw, res, rej)); try { ac.close(); } catch (e) {}
+          if (alive && ab) { lv.current = levelsOf(ab); setTk(n => n + 1); }
+        } catch (e) {}
+      })();
+      return () => { alive = false; };
+    }, [take.voice]);
+    useEffect(() => {
+      const cv = wave.current, L = lv.current; if (!cv || !L) return;
+      const w = Math.min(16000, W), h = 34; cv.width = w; cv.height = h; const c = cv.getContext("2d"); c.clearRect(0, 0, w, h); c.fillStyle = "rgba(232,89,12,.55)";
+      const per = L.length / w; for (let x = 0; x < w; x++) { let m = 0; for (let j = Math.floor(x * per); j < Math.floor((x + 1) * per) + 1 && j < L.length; j++) m = Math.max(m, L[j]); const y = Math.max(1, Math.min(1, m) * (h - 2)); c.fillRect(x, (h - y) / 2, 1, y); }
+    }, [W, lv.current]);
+    const px = t => Math.round(t * pps);
+    const segs = useMemo(() => { const L = T.lays.slice().sort((x, y) => x.t - y.t), out = []; let cur = { id: null, a: 0, v: "cam" }; for (const x of L) { if (x.t - cur.a > 0.01) out.push(Object.assign({}, cur, { b: x.t })); cur = { id: x.id, a: x.t, v: x.v }; } out.push(Object.assign({}, cur, { b: secs })); return out; }, [T]);
+    const bwSegs = useMemo(() => { const L = T.bws.slice().sort((x, y) => x.t - y.t), out = []; for (let i = 0; i < L.length; i++) if (L[i].v) out.push({ id: L[i].id, a: L[i].t, b: L[i + 1] ? L[i + 1].t : secs }); return out; }, [T]);
+    const S = sel ? (sel.type === "show" ? T.shows.find(x => x.id === sel.id) : sel.type === "ban" ? T.bans.find(x => x.id === sel.id) : sel.type === "top" ? T.tops.find(x => x.id === sel.id) : sel.type === "pt" ? T.pts.find(x => x.id === sel.id) : sel.type === "lay" ? segs.find(x => (x.id || "0") === sel.id) : sel.type === "bw" ? bwSegs.find(x => x.id === sel.id) : sel.type === "cut" ? (take.cuts || [])[sel.i] : null) : null;
+    if (sel && !S) setTimeout(() => setSel(null), 0);
+    const tap = (type, x, extra) => e => { e.stopPropagation(); setSel(Object.assign({ type, id: x.id || "0" }, extra || {})); setPanel(null); };
+    const blk = (x, cls, label, sty, onTap, on) => html`<button class=${"tlb " + cls + (on ? " on" : "")} style=${"left:" + px(x.a) + "px;width:" + Math.max(10, px(x.b) - px(x.a)) + "px;" + (sty || "")} onClick=${onTap}>${label}</button>`;
+    const fmt = t => Math.floor(t / 60) + ":" + (t % 60).toFixed(1).padStart(4, "0");
+    const lays = camOn ? VM_LAYS : VM_LAYS.filter(([k]) => k === "thing");
+    const thumbOf = it => (!it ? null : it.kind === "img" ? vmUrl(it) : it.thumb || null);
+    // ---- what you can do, here ----
+    let pan = null;
+    if (cutA != null) pan = html`<div class="tlpan">
+      <b>✂️ Cutting out a part</b><p class="help">From ${fmt(cutA)}. Now move the timeline to where the part ends${now > cutA ? " (now " + fmt(now) + ", " + (now - cutA).toFixed(1) + "s)" : ""}, then tap the button.</p>
+      <div class="vmchips"><button class="btn slim" disabled=${now <= cutA + 0.1} onClick=${() => { setCuts(vmCutAdd(take.cuts, cutA, now)); setCutA(null); toast("Cut out. Tap the dark part to put it back."); }}>✂️ The part ends here</button><button class="chip" onClick=${() => setCutA(null)}>Cancel</button></div></div>`;
+    else if (S && sel.type === "show") {
+      const it = items[S.ref], isClip = it && it.kind === "vid", cs = isClip ? vmClipState(S, S.a) : null;
+      pan = html`<div class="tlpan">
+        <div class="tlhd">${thumbOf(it) ? html`<img src=${thumbOf(it)} alt=""/>` : html`<span class="tlic">${vmItemIcon(it)}</span>`}<b>${vmItemName(it)}</b><small>${fmt(S.a)} → ${fmt(S.b)}</small></div>
+        <div class="vmchips">
+          <button class="chip" onClick=${() => setT(VME.showStart(T, S.id, now))}>⇤ Starts here</button>
+          <button class="chip" onClick=${() => setT(VME.showEnd(T, S.id, now))}>Ends here ⇥</button>
+          <button class="chip" onClick=${() => { goTo(S.a); onPlay(); }}>▶ Watch it</button>
+          <button class="chip" onClick=${() => setPick({ mode: "swap", id: S.id })}>🔁 Show something else</button>
+          <button class="chip danger" onClick=${() => { setT(VME.showDel(T, S.id)); setSel(null); }}>🗑 Take it out</button>
+        </div>
+        ${isClip ? html`<div class="vmchips"><button class=${"chip" + (cs && S.ev.some(e => e.k === "play") ? " on" : "")} onClick=${() => setT(VME.clipRun(T, S.id, true, S.at || 0))}>▶ The clip plays</button><button class=${"chip" + (!S.ev.some(e => e.k === "play") ? " on" : "")} onClick=${() => setT(VME.clipRun(T, S.id, false, S.at || 0))}>⏸ A still picture</button></div>
+          <label class="vmvol">The clip starts from <b>${fmt(S.at || 0)}</b><input type="range" min="0" max=${Math.max(1, (it.secs || 1) - 0.5)} step="0.1" value=${S.at || 0} onChange=${e => setT(VME.clipRun(T, S.id, S.ev.some(q => q.k === "play"), +e.target.value))}/></label>` : null}
+        ${camOn ? html`<div class="vml">How it shows<div class="vmchips">${VM_LAYS.map(([k, ic, lbl]) => html`<button key=${k} class=${"chip" + (vmLayAt(T, S.a + 0.01) === k ? " on" : "")} onClick=${() => setT(VME.layRange(T, S.a, S.b, k))}>${ic} ${lbl}</button>`)}</div></div>` : null}
+      </div>`;
+    } else if (S && (sel.type === "ban" || sel.type === "top")) {
+      const key = sel.type === "ban" ? "bans" : "tops", it = items[S.ref];
+      pan = html`<div class="tlpan"><div class="tlhd"><span class="tlic">${vmItemIcon(it)}</span><b>${vmItemName(it)}</b><small>${fmt(S.a)} → ${fmt(S.b)}</small></div>
+        <div class="vmchips"><button class="chip" onClick=${() => setT(VME.ivStart(T, key, S.id, now))}>⇤ Starts here</button><button class="chip" onClick=${() => setT(VME.ivEnd(T, key, S.id, now))}>Ends here ⇥</button><button class="chip danger" onClick=${() => { setT(VME.ivDel(T, key, S.id)); setSel(null); }}>🗑 Take it out</button></div></div>`;
+    } else if (S && sel.type === "lay") {
+      pan = html`<div class="tlpan"><div class="tlhd"><b>Layout</b><small>${fmt(S.a)} → ${fmt(S.b)}</small></div>
+        <div class="vmchips">${VM_LAYS.map(([k, ic, lbl]) => html`<button key=${k} class=${"chip" + (S.v === k ? " on" : "")} onClick=${() => setT(VME.layRange(T, S.a, S.b, k))}>${ic} ${lbl}</button>`)}</div>
+        ${S.id ? html`<button class="chip" onClick=${() => { setT(VME.layDel(T, S.id)); setSel(null); }}>🗑 Remove this switch</button>` : null}</div>`;
+    } else if (S && sel.type === "bw") {
+      pan = html`<div class="tlpan"><div class="tlhd"><b>⚫ Black & white</b><small>${fmt(S.a)} → ${fmt(S.b)}</small></div><button class="chip danger" onClick=${() => { setT(VME.bwRange(T, S.a, S.b, false)); setSel(null); }}>🗑 Back to colour here</button></div>`;
+    } else if (S && sel.type === "pt") {
+      pan = html`<div class="tlpan"><div class="tlhd"><span class="tlic">${(VM_PTS[S.k] || (() => "•"))(S)}</span><b>${vmPtName(S)}</b><small>at ${fmt(S.t)}</small></div>
+        <div class="vmchips"><button class="chip" onClick=${() => setT(VME.ptMove(T, S.id, now))}>↔ Move it here</button><button class="chip" onClick=${() => goTo(Math.max(0, S.t - 1))}>👀 Go to it</button><button class="chip danger" onClick=${() => { setT(VME.ptDel(T, S.id)); setSel(null); }}>🗑 Take it out</button></div></div>`;
+    } else if (S && sel.type === "cut") {
+      pan = html`<div class="tlpan"><div class="tlhd"><b>✂️ Cut out</b><small>${fmt(S[0])} → ${fmt(S[1])} (${(S[1] - S[0]).toFixed(1)}s)</small></div><button class="chip" onClick=${() => { setCuts((take.cuts || []).filter((_, i) => i !== sel.i)); setSel(null); }}>↩ Put it back</button></div>`;
+    } else {
+      pan = html`<div class="tlpan">
+        <b>Add at ${fmt(now)}</b>
+        <div class="tladd">
+          <button class="tool" onClick=${() => setPick({ mode: "add" })}><span>🖼</span>Show something</button>
+          ${camOn ? html`<button class=${"tool" + (panel === "lay" ? " on" : "")} onClick=${() => setPanel(panel === "lay" ? null : "lay")}><span>▦</span>Layout</button>` : null}
+          <button class=${"tool" + (panel === "fx" ? " on" : "")} onClick=${() => setPanel(panel === "fx" ? null : "fx")}><span>💥</span>Effect</button>
+          <button class="tool" onClick=${() => setPick({ mode: "strip" })}><span>▬</span>Strip / title</button>
+          ${camOn ? html`<button class="tool" onClick=${() => { const on = !vmBwAt(T, now); setT(VME.bwRange(T, now, secs, on)); toast(on ? "Black & white from here. Tap the grey bar to change where it ends." : "Colour from here."); }}><span>⚫</span>B&W</button>` : null}
+          <button class="tool" onClick=${() => { setCutA(now); setSel(null); }}><span>✂️</span>Cut a part</button>
+        </div>
+        ${panel === "lay" ? html`<div class="vmchips">${VM_LAYS.map(([k, ic, lbl]) => html`<button key=${k} class=${"chip" + (vmLayAt(T, now) === k ? " on" : "")} onClick=${() => { setT(VME.layFrom(T, now, k)); setPanel(null); }}>${ic} ${lbl} from here</button>`)}</div>` : null}
+        ${panel === "fx" ? html`<div class="vmchips">${VM_FX.map(([k, ic, lbl]) => html`<button key=${k} class="chip" onClick=${() => { setT(VME.ptAdd(T, { t: r2e(now), k: "sfx", v: k })); vmPlaySfx(k, lib); setPanel(null); }}>${ic} ${lbl}</button>`)}${(lib.sounds || []).map(x => html`<button key=${x.id} class="chip" onClick=${() => { setT(VME.ptAdd(T, { t: r2e(now), k: "sfx", v: "own:" + x.id })); setPanel(null); }}>🎵 ${x.name}</button>`)}</div>` : null}
+        <p class="help">Move the timeline to a moment, then add. Tap anything on the timeline to change it or take it out.</p>
+      </div>`;
+    }
+    const pickDone = it => {
+      const P = pick; setPick(null);
+      if (P.mode === "swap") { setT(VME.showSwap(T, P.id, it)); return; }
+      if (it.kind === "ban" || it.kind === "top") { const key = it.kind === "ban" ? "bans" : "tops"; const b = Math.min(secs, now + 4); setT(VME.ivAdd(T, key, it, now, b)); return; }
+      const b = Math.min(secs, now + vmItemDur(it)); if (b - now < 0.3) { toast("That's the very end. Move back a little."); return; }
+      const N = VME.addShow(T, it, now, b, camOn, st.showLay); setT(N);
+      const nx = N.shows.find(x => x.ref === it.id && Math.abs(x.a - now) < 0.01); if (nx) setSel({ type: "show", id: nx.id });
+      toast("Added. Move to where it should stop and tap “Ends here”.");
+    };
+    return html`<div class="tl">
+      <div class="tltop">
+        <button class="crbtn dark" onClick=${onPlay} aria-label=${a && !a.paused ? "Pause" : "Play"}>${a && !a.paused ? html`<${Ic.pause} size=${18}/>` : html`<${Ic.play} size=${18}/>`}</button>
+        <span class="crtime">${fmt(now)}<small> / ${fmtDur(secs)}</small></span>
+        <button class="chip" onClick=${() => goTo(now - 1)} aria-label="Back a second">−1s</button><button class="chip" onClick=${() => goTo(now + 1)} aria-label="On a second">+1s</button>
+        <span class="tlsp"></span>
+        <button class="chip" onClick=${undo} aria-label="Undo">↶</button><button class="chip" onClick=${redo} aria-label="Redo">↷</button>
+        <button class="chip" onClick=${() => setPps(p => Math.max(6, p / 1.6))} aria-label="Zoom out">－</button><button class="chip" onClick=${() => setPps(p => Math.min(200, p * 1.6))} aria-label="Zoom in">＋</button>
+      </div>
+      <div class="tlbox">
+        <div class="tlwrap" ref=${wrap} onScroll=${onScroll} onClick=${() => setSel(null)}>
+          <div class="tlin" style=${"width:" + (W + half * 2) + "px;padding:0 " + half + "px"}>
+            <div class="tlrow tlruler" style=${"width:" + W + "px"}>${Array.from({ length: Math.floor(secs / (pps > 30 ? 1 : pps > 12 ? 5 : 10)) + 1 }, (_, i) => { const st2 = pps > 30 ? 1 : pps > 12 ? 5 : 10, t = i * st2; return html`<span key=${i} style=${"left:" + px(t) + "px"}>${t % (st2 * (pps > 30 ? 5 : 2)) === 0 ? fmtDur(t) : ""}</span>`; })}</div>
+            <div class="tlrow tlshow" style=${"width:" + W + "px"}>${T.shows.map(x => { const it = items[x.ref], th = thumbOf(it); return blk(x, "show" + (it && it.kind === "vid" ? " vid" : ""), html`${th ? html`<img src=${th} alt=""/>` : html`<span>${vmItemIcon(it)}</span>`}<em>${vmItemName(it)}</em>`, "", tap("show", x), sel && sel.type === "show" && sel.id === x.id); })}</div>
+            ${camOn ? html`<div class="tlrow tllay" style=${"width:" + W + "px"}>${segs.map((x, i) => blk(x, "lay", html`<span>${(VM_LAYS.find(l => l[0] === x.v) || [, "?"])[1]}</span><em>${(VM_LAYS.find(l => l[0] === x.v) || [, , x.v])[2]}</em>`, "background:" + (VM_LAYC[x.v] || "#666"), tap("lay", x), sel && sel.type === "lay" && sel.id === (x.id || "0")))}</div>` : null}
+            <div class="tlrow tlext" style=${"width:" + W + "px"}>
+              ${T.bans.map(x => blk(x, "ban", html`<span>▬</span><em>${vmItemName(items[x.ref])}</em>`, "", tap("ban", x), sel && sel.id === x.id))}
+              ${T.tops.map(x => blk(x, "top", html`<span>🔝</span><em>${vmItemName(items[x.ref])}</em>`, "", tap("top", x), sel && sel.id === x.id))}
+              ${bwSegs.map(x => blk(x, "bw", html`<span>⚫</span>`, "", tap("bw", x), sel && sel.id === x.id))}
+              ${T.pts.map(q => html`<button key=${q.id} class=${"tlpt" + (sel && sel.id === q.id ? " on" : "")} style=${"left:" + px(q.t) + "px"} onClick=${tap("pt", q)} title=${vmPtName(q)}>${(VM_PTS[q.k] || (() => "•"))(q)}</button>`)}
+            </div>
+            <div class="tlrow tlwave" style=${"width:" + W + "px"}><canvas ref=${wave} style=${"width:" + W + "px"}></canvas></div>
+            ${(take.cuts || []).map((c, i) => html`<button key=${"c" + i} class=${"tlcut" + (sel && sel.type === "cut" && sel.i === i ? " on" : "")} style=${"left:" + (half + px(c[0])) + "px;width:" + Math.max(6, px(c[1]) - px(c[0])) + "px"} onClick=${e => { e.stopPropagation(); setSel({ type: "cut", id: "c" + i, i }); }}>✂️</button>`)}
+            ${take.trim && take.trim[0] > 0.05 ? html`<div class="tltrim" style=${"left:" + half + "px;width:" + px(take.trim[0]) + "px"}></div>` : null}
+            ${take.trim && take.trim[1] < secs - 0.05 ? html`<div class="tltrim" style=${"left:" + (half + px(take.trim[1])) + "px;width:" + (px(secs) - px(take.trim[1])) + "px"}></div>` : null}
+            ${cutA != null ? html`<div class="tlcut live" style=${"left:" + (half + px(Math.min(cutA, now))) + "px;width:" + Math.abs(px(now) - px(cutA)) + "px"}></div>` : null}
+          </div>
+        </div>
+        <div class="tlhead"></div>
+        <div class="tllabels"><span class="r0"></span><span class="r1">Shown</span>${camOn ? html`<span class="r2">Layout</span>` : null}<span class="r2">Extras</span><span class="r3">Voice</span></div>
+      </div>
+      ${pan}
+      <div class="srow"><button class="btn" onClick=${onDone}>✓ Done editing</button></div>
+      ${pick ? html`<${VMPick} items=${Object.values(items)} kinds=${pick.mode === "strip" ? ["ban", "top"] : null} title=${pick.mode === "strip" ? "Which strip or title?" : pick.mode === "swap" ? "Show this instead" : "What to show at " + fmt(now) + "?"}
+        onPick=${pickDone} onClose=${() => setPick(null)} onAddFile=${pick.mode !== "strip" ? addFile : null} onAddText=${addText} onAddPlace=${pick.mode !== "strip" ? addPlace : null}/>` : null}
+    </div>`;
+  }
   function VMEdit({ start, onClose }) {
     const [proj, setProjS] = useState(start);
     const projRef = useRef(start), saveT = useRef(null);
@@ -11126,6 +11655,8 @@ notify pgrst, 'reload schema';
     const [paused, setPaused] = useState(false);
     const [peek, setPeek] = useState(null);
     const [sheet, setSheet] = useState(null);
+    const [edOn, setEdOn] = useState(false);   // the timeline editor
+    const camSnap = useRef({ cv: null, at: 0 });   // your last good camera picture, so it never goes blank
     const [lessonPick, setLessonPick] = useState(false);
     const [clean, setClean] = useState(null);
     const [busy, setBusy] = useState(false);
@@ -11136,6 +11667,7 @@ notify pgrst, 'reload schema';
     useEffect(() => { vmLib.get().then(setLib); }, [styling]);
     const freezeSnap = useRef(null);
     const mic = useRef(null), camRec = useRef(null), camSegs = useRef([]), scr = useRef(null), sref = useRef(null);
+    const fileRef2 = useRef(null);
     const r = useRef(null), stream = useRef(null), cvRef = useRef(null), vref = useRef(null), cref = useRef(null), aref = useRef(null), fileRef = useRef(null), drag = useRef(null), rects = useRef({}), S = useRef({});
     const G = vmGeo(proj.fmt), L = vmLook(st);
     const items = useMemo(() => { const m = {}; for (const it of proj.items) m[it.id] = it; return m; }, [proj.items]);
@@ -11161,7 +11693,7 @@ notify pgrst, 'reload schema';
     }, [mode, camOn, proj.facing]);
     const voiceOf = P => (P.take ? (P.clean && P.take.cleanBlob ? P.take.cleanBlob : P.take.voice) : null);
     const voice = () => voiceOf(projRef.current);
-    const voiceUrl = useMemo(() => { const b = voice(); return b ? URL.createObjectURL(b) : null; }, [proj.take, proj.clean]);
+    const voiceUrl = useMemo(() => { const b = voice(); return b ? URL.createObjectURL(b) : null; }, [proj.take && proj.take.voice, proj.take && proj.take.cleanBlob, proj.clean]);
     // your camera, in parts (a new part each time you flipped it)
     const camParts = useMemo(() => { const tk = proj.take; if (!tk || !tk.cam) return []; return (tk.camSegs && tk.camSegs.length ? tk.camSegs : [{ t: 0, blob: tk.voice }]).map(g => ({ t: g.t, url: URL.createObjectURL(g.blob), facing: g.facing || "user" })); }, [proj.take && proj.take.voice]);
     S.current.camParts = camParts;
@@ -11201,8 +11733,10 @@ notify pgrst, 'reload schema';
         }
         if (R.mode === "rec") { t = nowT(); s = vmAt(cuesRef.current, t, cam); }
         else if (R.mode === "review" && tk) {
-          const a = aref.current; t = a ? a.currentTime || 0 : 0; s = vmAt(tk.cues, t, cam && tk.cam); R.rs = s; words = R.proj.subs ? tk.words : null;
-          const tr = tk.trim || [0, tk.secs]; prog = (t - tr[0]) / Math.max(1, tr[1] - tr[0]);
+          const a = aref.current; t = a ? a.currentTime || 0 : 0;
+          if (a && !a.paused && tk.cuts) for (const cu of tk.cuts) if (t >= cu[0] && t < cu[1] - 0.04) { a.currentTime = cu[1]; t = cu[1]; break; }   // cut out: jump over it
+          s = vmAt(tk.cues, t, cam && tk.cam); R.rs = s; words = R.proj.subs ? tk.words : null;
+          const KK = vmKeep(tk); prog = vmOutAt(KK, t) / Math.max(1, vmKeepLen(KK));
           const it = s.show ? R.items[s.show] : null, v = vref.current, playing = a && !a.paused;
           if (it && it.kind === "vid" && v) { if (v.dataset.id !== it.id) loadClip(it, 0); const want = vmClipT(s, t, it.secs); sync(v, want, s.play && s.play.on && playing && want < (it.secs || 1e9) - 0.05, Math.max(0, Math.min(1, R.proj.clipVol * s.vol))); }
           else if (v && !v.paused) v.pause();
@@ -11233,7 +11767,10 @@ notify pgrst, 'reload schema';
         const out = {};
         let facingNow = R.proj.facing || "user";
         if (R.mode === "review" && R.camParts && R.camParts.length) { let si = 0; for (let i = 0; i < R.camParts.length; i++) if (R.camParts[i].t <= t + 0.01) si = i; facingNow = R.camParts[si].facing; }
-        vmFrame(c, { G: G2, L: R.L, st: R.st, proj: R.proj, items: R.items, s, t, camFreeze: R.mode === "rec" ? freezeSnap.current : null, camFit: R.proj.camFit || "whole", camMirror: !!R.proj.mirror && facingNow !== "environment", tb: R.mode === "review" && tk ? t - (tk.trim ? tk.trim[0] : 0) : R.mode === "rec" ? t : 99, cam: cv2 && cv2.readyState >= 2 ? cv2 : null, camOn: R.mode === "review" ? !!(cam && tk && tk.cam) : cam, pic: id => vmPic(R.items[id]), clip: clipSrc, lite: VM_WEAK && R.mode === "rec", words, readWords: R.mode === "review" && tk ? tk.words : null, prog, out });
+        let camSrc = cv2 && cv2.readyState >= 2 && cv2.videoWidth ? cv2 : null;
+        if (camSrc && R.mode === "review" && now - camSnap.current.at > 400) { const cs = camSnap.current; if (!cs.cv) cs.cv = document.createElement("canvas"); const k = Math.min(1, 540 / Math.max(camSrc.videoWidth, camSrc.videoHeight)); cs.cv.width = Math.round(camSrc.videoWidth * k); cs.cv.height = Math.round(camSrc.videoHeight * k); try { cs.cv.getContext("2d").drawImage(camSrc, 0, 0, cs.cv.width, cs.cv.height); cs.at = now; } catch (e) {} }
+        if (!camSrc && R.mode === "review" && camSnap.current.at) camSrc = camSnap.current.cv;
+        vmFrame(c, { G: G2, L: R.L, st: R.st, proj: R.proj, items: R.items, s, t, camFreeze: R.mode === "rec" ? freezeSnap.current : null, camFit: R.proj.camFit || "whole", camMirror: !!R.proj.mirror && facingNow !== "environment", tb: R.mode === "review" && tk ? t - (tk.trim ? tk.trim[0] : 0) : R.mode === "rec" ? t : 99, cam: camSrc, camOn: R.mode === "review" ? !!(cam && tk && tk.cam) : cam, pic: id => vmPic(R.items[id]), clip: clipSrc, lite: VM_WEAK && R.mode === "rec", words, readWords: R.mode === "review" && tk ? tk.words : null, prog, out });
         rects.current = out;
         const d = drag.current;
         if (d && d.P.length > 1) {
@@ -11503,7 +12040,7 @@ notify pgrst, 'reload schema';
       const a = aref.current; if (!a) return;
       if (!a.paused) { a.pause(); return; }
       const tr = proj.take.trim || [0, proj.take.secs];
-      if (from != null) a.currentTime = from; else if (a.currentTime < tr[0] || a.currentTime >= tr[1] - 0.1) a.currentTime = tr[0];
+      if (from != null) a.currentTime = from; else if (!edOn && (a.currentTime < tr[0] || a.currentTime >= tr[1] - 0.1)) a.currentTime = tr[0]; else if (edOn && a.currentTime >= proj.take.secs - 0.1) a.currentTime = 0;
       a.play().catch(() => {});
     }
     useEffect(() => { setTick(x => x + 1); }, [mode, voiceUrl]);
@@ -11529,7 +12066,7 @@ notify pgrst, 'reload schema';
       const P = projRef.current, tr = P.take.trim || [0, P.take.secs];
       const slug = String(P.title || "video").toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "").slice(0, 40) || "video";
       const lib2 = await vmLib.get(), plan = vmOpenPlan(P, style, vmOpener(P, style, lib2));
-      const srt = words && words.length && P.subs ? makeSrt(vmShift(words, tr[0], tr[1], plan.dur)) : null;
+      const srt = words && words.length && P.subs ? makeSrt(vmShiftK(words, vmKeep(P.take), plan.dur)) : null;
       vidJob.run({ lid: "vm-" + P.id, label: "“" + (P.title || "your video") + "”", name: slug + "-" + P.fmt + ".mp4", title: "🎬 " + (P.title || "Video") + " (" + VM_FMT[P.fmt].name.toLowerCase() + ")", srt },
         onP => vmExport(P, voiceOf(P), { caps: P.subs && style.caps !== "off" ? words : null, all: words }, onP, style, lib2));
     }
@@ -11582,7 +12119,7 @@ notify pgrst, 'reload schema';
         <button class="iconbtn" onClick=${() => { if (rec && !window.confirm("Stop and throw away this recording?")) return; onClose(); }} aria-label="Close"><${Ic.x}/></button>
       </div>
       <div class="sbody">
-        <div class=${"vmstage " + proj.fmt}>
+        <div class=${"vmstage " + proj.fmt + (edOn && mode === "review" ? " ed" : "")}>
           <video ref=${vref} class="vmunder" playsinline preload="auto"></video>
           <video ref=${cref} class="vmunder" playsinline muted autoplay preload="auto"></video>
           <video ref=${sref} class="vmunder" playsinline muted autoplay></video>
@@ -11640,7 +12177,13 @@ notify pgrst, 'reload schema';
             <button class=${"btn quiet" + (paused ? " on" : "")} onClick=${pauseRec}>${paused ? "▶ Resume" : "⏸ Pause"}</button>
             <button class="big red" onClick=${stopRec} aria-label="Stop recording"><${Ic.stop} size=${28}/></button>
           </div>` : null}
-        ${mode === "review" && tk ? html`
+        ${mode === "review" && tk && edOn ? html`<${VMTimeline} take=${tk} items=${items} camOn=${!!(camOn && tk.cam)} st=${st} lib=${lib} aref=${aref}
+            onTake=${x => { setProj(p => ({ take: Object.assign({}, p.take, { cues: x.cues, cuts: x.cuts }) })); S.current.dirty = true; }}
+            onDirty=${() => { S.current.dirty = true; }} onPlay=${() => playReview()} onDone=${() => { if (a) a.pause(); setEdOn(false); }}
+            addFile=${() => fileRef2.current && fileRef2.current.click()} addText=${() => setSheet("text")} addPlace=${() => setSheet("place")}/>
+          <input ref=${fileRef2} type="file" accept="image/*,video/*" multiple style="display:none" onChange=${addFiles}/>` : null}
+        ${mode === "review" && tk && !edOn ? html`
+          <button class="btn vmedbtn" onClick=${() => { if (a) a.pause(); setEdOn(true); }}>✂️ Edit the video: fix, add or cut anything</button>
           <div class="vmplay">
             <button class="crbtn dark" onClick=${() => playReview()} aria-label=${a && !a.paused ? "Pause" : "Play"}>${a && !a.paused ? html`<${Ic.pause} size=${18}/>` : html`<${Ic.play} size=${18}/>`}</button>
             <span class="crtime">${fmtDur(rt)} / ${fmtDur(tk.secs)}</span>
@@ -12189,7 +12732,7 @@ notify pgrst, 'reload schema';
   window.__kfApi = { kfPress, kfStep, kfNew, kfSnd, kfAnn, annRec };
   window.__ink = { hitInk, inkGroup, straighten };
   window.__mux = { lessonVideo, fixVideo, loadMux, vidJob, awake, player, cleanVoice };
-  window.__ui = { PushBell, SetupCheck, VidJobPill, html, render, store, Board, ExplainStudio, LiveTools, stageAt, buildSound, live, player, ClassroomPlayer, crAssets, CR_W, CR_H, TalkBoard, vidJob, VideoMaker, vmExport, vmDb, vmNew, vmAt, vmFrame, vmGeo, VM_LOOKS, vmStyle, vmSaveStyle, VMStyle, vmIntro, vmOutro, vmLook, vmElemSrc, vmPrepClip, vmWorld, thDraw, thPlan, thCutPerson, thLib, VMThumbs, thInfo };
+  window.__ui = { PushBell, SetupCheck, VidJobPill, html, render, store, Board, ExplainStudio, LiveTools, stageAt, buildSound, live, player, ClassroomPlayer, crAssets, CR_W, CR_H, TalkBoard, vidJob, VideoMaker, vmExport, vmDb, vmNew, vmAt, vmFrame, vmGeo, VM_LOOKS, vmStyle, vmSaveStyle, VMStyle, vmIntro, vmOutro, vmLook, vmElemSrc, vmPrepClip, vmWorld, vmTrack, vmUntrack, VME, vmKeep, vmSrcAt, thDraw, thPlan, thCutPerson, thLib, VMThumbs, thInfo };
   window.__lang = { viewOf, saveExpl, saveTileRec, uploadBlob, set: l => { REC_LANG = l; }, get: () => REC_LANG, store };
   root.innerHTML = "";
   render(html`<${App}/>`, root);
