@@ -426,6 +426,11 @@ img{max-width:100%}
 .vmhl input,.vmhl select{font:400 15px var(--font);padding:8px 10px;border-radius:10px;border:1px solid var(--line);background:var(--paper);color:var(--ink);min-width:0}
 .vmsnd{display:inline-flex;align-items:center;gap:6px;flex-wrap:wrap;font:600 14px var(--font);color:var(--ink)}
 .vmfx .tool{flex:1 0 60px}
+.vmstage canvas.vmcv{position:relative;z-index:1}
+.vmunder{position:absolute;left:0;top:0;width:100%;height:100%;object-fit:cover;z-index:0;pointer-events:none}
+.vmcv.recnd{touch-action:manipulation}
+.vmscrub{flex:1 1 100%;min-width:0;accent-color:#E8590C}
+.big.busy{opacity:.75}
 .vmlessons{display:flex;flex-wrap:wrap;gap:6px;max-height:50vh;overflow:auto}
 .full.studio.vm .sbody{flex:0 0 auto;overflow:visible}
 .full.studio.vm .sfoot{flex:1 1 auto;min-height:0;overflow:auto;padding-bottom:14px}
@@ -9117,8 +9122,40 @@ notify pgrst, 'reload schema';
     try { const d = g.getImageData(0, 0, cv.width, cv.height), p = d.data; for (let i = 0; i < p.length; i += 4) { const v = p[i] * 0.299 + p[i + 1] * 0.587 + p[i + 2] * 0.114; p[i] = p[i + 1] = p[i + 2] = v; } g.putImageData(d, 0, 0); } catch (e) {}
     c.drawImage(cv, x, y, w, h);
   }
-  const VM_FX = [["boom", "💥", "Boom"], ["shock", "😮", "Shock"], ["freeze", "🥶", "Freeze"], ["zoom", "🔎", "Zoom in"], ["whoosh", "🌀", "Whoosh"], ["ding", "✨", "Ding"], ["pop", "🫧", "Pop"]];
-  const VM_FX_SND = { boom: "boom", shock: "zing", freeze: "stop", whoosh: "whoosh", ding: "ding", pop: "pop", zoom: null };
+  const VM_FX = [["boom", "💥", "Boom"], ["freeze", "🥶", "Freeze"], ["zoom", "🔎", "Zoom in"]];
+  const VM_FX_SND = { boom: "boom", shock: "zing", freeze: null, whoosh: "whoosh", ding: "ding", pop: "pop", zoom: null };
+  // slower phones: lighter preview and a 720p video, so nothing stalls
+  const VM_WEAK = !!((navigator.deviceMemory && navigator.deviceMemory <= 4) || (navigator.hardwareConcurrency && navigator.hardwareConcurrency <= 4));
+  const vmTimeout = (p, ms, code) => Promise.race([p, new Promise((_, rej) => setTimeout(() => rej({ code: code || "timeout" }), ms))]);
+  // a clip from the phone: check it plays here; make big ones lighter (at most 1280 on the long side)
+  async function vmPrepClip(file, onP) {
+    const info = await new Promise(res => {
+      const v = document.createElement("video"), u = URL.createObjectURL(file); let done = false;
+      const fin = x => { if (done) return; done = true; try { v.removeAttribute("src"); v.load(); } catch (e) {} URL.revokeObjectURL(u); res(x); };
+      v.muted = true; v.playsInline = true; v.preload = "auto";
+      v.onloadeddata = () => fin({ ok: v.videoWidth > 0, w: v.videoWidth, h: v.videoHeight, secs: isFinite(v.duration) ? v.duration : 0 });
+      v.onerror = () => fin({ ok: false }); setTimeout(() => fin({ ok: false, slow: true }), 15000); v.src = u;
+    });
+    if (info.ok && Math.max(info.w, info.h) <= 1280) return { blob: null, info };
+    const MB = await loadMux();
+    const input = new MB.Input({ source: new MB.BlobSource(file), formats: MB.ALL_FORMATS });
+    const vt = await input.getPrimaryVideoTrack(); if (!vt) return { blob: null, info };
+    const wide = vt.displayWidth >= vt.displayHeight, big = Math.max(vt.displayWidth, vt.displayHeight) > 1280;
+    const output = new MB.Output({ format: new MB.Mp4OutputFormat({ fastStart: "in-memory" }), target: new MB.BufferTarget() });
+    const conv = await MB.Conversion.init({ input, output, video: Object.assign({ bitrate: 1600000, forceTranscode: !info.ok }, big ? (wide ? { width: 1280 } : { height: 1280 }) : {}), audio: { bitrate: 128000 } });
+    if (!conv.isValid) return { blob: null, info, bad: !info.ok };
+    conv.onProgress = v => onP && onP(v);
+    await conv.execute();
+    const out = new Blob([output.target.buffer], { type: "video/mp4" });
+    return { blob: out, info: Object.assign({}, info, { secs: (await input.computeDuration().catch(() => 0)) || info.secs }) };
+  }
+  // a video read by playing it in a hidden player (when the phone can't read it the fast way)
+  async function vmElemSrc(blob) {
+    const v = document.createElement("video"); v.muted = true; v.playsInline = true; v.preload = "auto"; v.src = URL.createObjectURL(blob);
+    await new Promise(res => { v.onloadeddata = res; v.onerror = res; setTimeout(res, 10000); });
+    if (!v.videoWidth) return null;
+    return { el: v, at: t => new Promise(res => { t = Math.max(0, Math.min(t, (isFinite(v.duration) ? v.duration : 1e9) - 0.05)); if (Math.abs(v.currentTime - t) < 0.002 && v.readyState >= 2) return res(v); let done = false; const fin = () => { if (done) return; done = true; v.removeEventListener("seeked", fin); res(v); }; v.addEventListener("seeked", fin); v.currentTime = t; setTimeout(fin, 2000); }) };
+  }
   const VM_FX_LEN = { boom: 0.5, shock: 1.55, freeze: 1.6, zoom: 3.05, whoosh: 0, ding: 0, pop: 0 };
   // a sound effect, made from scratch as numbers (so it's ours to use, on any video)
   function vmSynth(kind, sr) {
@@ -9599,14 +9636,14 @@ notify pgrst, 'reload schema';
     async open(cam, facing, fmt) {
       if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia || !window.MediaRecorder) throw new Error("nomic");
       const audio = { echoCancellation: true, noiseSuppression: true, autoGainControl: true };
-      if (!cam) return navigator.mediaDevices.getUserMedia({ audio });
+      if (!cam) return vmTimeout(navigator.mediaDevices.getUserMedia({ audio }), 12000, "micslow");
       // record the camera in a kind of file this phone can read back when the video is made
       if (this.avc == null) { try { this.avc = !!(window.VideoDecoder && (await VideoDecoder.isConfigSupported({ codec: "avc1.42E01E", codedWidth: 1280, codedHeight: 720 })).supported); } catch (e) { this.avc = false; } }
       const tall = fmt !== "wide";
       // resizeMode "none": the camera's own full picture (asking for a tall shape makes phones cut it down, which looks zoomed in)
       let s0;
-      try { s0 = await navigator.mediaDevices.getUserMedia({ video: { facingMode: facing || "user", width: { ideal: 1920 }, height: { ideal: 1440 }, frameRate: { ideal: 30 }, resizeMode: "none" } }); }
-      catch (e) { s0 = await navigator.mediaDevices.getUserMedia({ video: { facingMode: facing || "user" } }); }
+      try { s0 = await vmTimeout(navigator.mediaDevices.getUserMedia({ video: { facingMode: facing || "user", width: { ideal: VM_WEAK ? 960 : 1280 }, height: { ideal: VM_WEAK ? 720 : 960 }, frameRate: { ideal: 30, max: 30 }, resizeMode: "none" } }), 12000, "camslow"); }
+      catch (e) { if (e && e.name === "NotAllowedError") throw e; s0 = await vmTimeout(navigator.mediaDevices.getUserMedia({ video: { facingMode: facing || "user" } }), 12000, "camslow"); }
       try { const tr = s0.getVideoTracks()[0], cap = tr.getCapabilities ? tr.getCapabilities() : {}; if (cap.zoom && cap.zoom.min != null) await tr.applyConstraints({ advanced: [{ zoom: cap.zoom.min }] }); } catch (e) {}
       return s0;
     },
@@ -9621,12 +9658,13 @@ notify pgrst, 'reload schema';
       const kinds = vid && aud ? ["video/mp4;codecs=avc1.42E01E,mp4a.40.2", "video/mp4", "video/webm;codecs=vp8,opus", "video/webm;codecs=vp9,opus", "video/webm"]
         : vid ? ["video/mp4;codecs=avc1.42E01E", "video/mp4", "video/webm;codecs=vp8", "video/webm;codecs=vp9", "video/webm"] : ["audio/mp4;codecs=mp4a.40.2", "audio/mp4", "audio/webm;codecs=opus", "audio/webm"];
       let mime = ""; for (const k of kinds) { if (vid && this.avc === false && /mp4/.test(k) && kinds.some(x => /webm/.test(x) && MediaRecorder.isTypeSupported(x))) continue; try { if (MediaRecorder.isTypeSupported(k)) { mime = k; break; } } catch (e) {} }
-      const opts = vid ? (aud ? { videoBitsPerSecond: 2500000, audioBitsPerSecond: 128000 } : { videoBitsPerSecond: 2500000 }) : { audioBitsPerSecond: 48000 };
+      const vb = VM_WEAK ? 1500000 : 2500000, opts = vid ? (aud ? { videoBitsPerSecond: vb, audioBitsPerSecond: 128000 } : { videoBitsPerSecond: vb }) : { audioBitsPerSecond: 48000 };
       if (mime) opts.mimeType = mime;
       let mr; try { mr = new MediaRecorder(stream, opts); } catch (e) { mr = new MediaRecorder(stream); }
       const chunks = [], t0 = Date.now(); let held = 0, pausedAt = 0;
       mr.ondataavailable = e => { if (e.data && e.data.size) chunks.push(e.data); };
-      mr.start(500);
+      try { mr.start(500); }
+      catch (e) { mr = new MediaRecorder(stream); mime = ""; mr.ondataavailable = ev => { if (ev.data && ev.data.size) chunks.push(ev.data); }; mr.start(500); }   // this phone didn't like the chosen kind of file: let it pick
       const type = () => (mr.mimeType || mime || (vid ? "video/webm" : "audio/webm")).split(";")[0];
       const at = ms => Math.max(0, ((ms == null ? Date.now() : ms) - t0 - held - (pausedAt ? Date.now() - pausedAt : 0)) / 1000);
       return {
@@ -9677,7 +9715,7 @@ notify pgrst, 'reload schema';
     const st = styleIn || vmStyle(), G = vmGeo(proj.fmt), F0 = VM_FMT[proj.fmt] || VM_FMT.tall, L = vmLook(st);
     await vmFonts(st);
     if (st.logo) { const im = vmLogo(st) || await new Promise(r => { const x = new Image(); x.onload = () => r(x); x.onerror = () => r(null); x.src = st.logo; vmLogos.set(st.logo, x); }); }
-    const OUT_W = F0.OW, OUT_H = F0.OH, FPS = 30;
+    const hd = proj.quality ? proj.quality === "1080" : !VM_WEAK, OUT_W = hd ? F0.OW : F0.W, OUT_H = hd ? F0.OH : F0.H, FPS = 30;
     const take = proj.take, cues = (take.cues || []).slice().sort((a, b) => a.t - b.t), camOn = !!(proj.cam && take.cam);
     const t0 = Math.max(0, take.trim ? take.trim[0] : 0), t1 = Math.min(take.secs, take.trim ? take.trim[1] : take.secs), body = Math.max(0.5, t1 - t0);
     const lib = libIn || await vmLib.get(), snd = vmOpener(proj, st, lib), plan = vmOpenPlan(proj, st, snd);
@@ -9708,7 +9746,8 @@ notify pgrst, 'reload schema';
     // you, from the camera recording
     // the camera can come in parts (each time you flipped it); older recordings had it all in one file with the voice
     const camSegs = [];
-    for (const g of camOn ? (take.camSegs && take.camSegs.length ? take.camSegs : [{ t: 0, blob: take.voice }]) : []) { let S0 = null; try { S0 = g.blob ? await sinkOf(g.blob, 1080) : null; } catch (e) {} camSegs.push({ t: g.t, S: S0, facing: g.facing || "user" }); }
+    const tested = async (S0, blob) => { if (S0) { try { const w = await vmTimeout(S0.sink.getCanvas(S0.first + 0.05), 8000); if (w && w.canvas) return { S: S0, E: null }; } catch (e) {} } return { S: null, E: blob ? await vmElemSrc(blob).catch(() => null) : null }; };
+    for (const g of camOn ? (take.camSegs && take.camSegs.length ? take.camSegs : [{ t: 0, blob: take.voice }]) : []) { let S0 = null; try { S0 = g.blob ? await sinkOf(g.blob, hd ? 1080 : 720) : null; } catch (e) {} const T0 = await tested(S0, g.blob); camSegs.push({ t: g.t, S: T0.S, E: T0.E, facing: g.facing || "user" }); }
     const segAt = t => { let k = -1; for (let i = 0; i < camSegs.length; i++) if (camSegs[i].t <= t + 0.01) k = i; return k; };
     const volCues = cues.filter(q => q.k === "vol"), volAt = t => { let v = 1; for (const q of volCues) { if (q.t > t) break; v = q.v; } return v; };
     // the pictures and clips that get shown
@@ -9719,7 +9758,7 @@ notify pgrst, 'reload schema';
       if (it.kind === "img") { try { pics[id] = await createImageBitmap(it.blob); } catch (e) {} }
       if (it.kind === "vid") {
         const k = { secs: it.secs || 0, sink: null, sound: null, still: new Map() };
-        try { const S0 = await sinkOf(it.blob, 1080); if (S0) { k.sink = S0.sink; k.first = S0.first; k.secs = (await S0.input.computeDuration()) || k.secs; } } catch (e) {}
+        try { const S0 = await sinkOf(it.blob, hd ? 1080 : 720); const T0 = await tested(S0, it.blob); if (T0.S) { k.sink = S0.sink; k.first = S0.first; k.secs = (await S0.input.computeDuration()) || k.secs; } else k.E = T0.E; } catch (e) {}
         try { k.sound = mono(await decode(await it.blob.arrayBuffer())); } catch (e) { k.sound = null; }
         clips[id] = k;
       }
@@ -9779,7 +9818,7 @@ notify pgrst, 'reload schema';
     // ---- the pictures ----
     const cv = document.createElement("canvas"); cv.width = OUT_W; cv.height = OUT_H;
     const c = cv.getContext("2d"), cache = new Map();
-    const vsrc = new MB.CanvasSource(cv, { codec: vcodec, bitrate: camOn ? 6000000 : 4500000, bitrateMode: "variable", latencyMode: "realtime" });
+    const vsrc = new MB.CanvasSource(cv, { codec: vcodec, bitrate: Math.round((camOn ? 6000000 : 4500000) * (hd ? 1 : 0.55)), bitrateMode: "variable", latencyMode: "realtime" });
     const asrc = new MB.AudioBufferSource({ codec: acodec, bitrate: 128000 });
     output.addVideoTrack(vsrc, { frameRate: FPS });
     output.addAudioTrack(asrc);
@@ -9801,6 +9840,7 @@ notify pgrst, 'reload schema';
           if (plan.hl) {
             const i = Math.min(plan.hl.length - 1, Math.floor(T / VM_HL)), h = plan.hl[i], hi = h.ref ? items[h.ref] : null;
             if (hi && hi.kind === "img") src = pics[hi.id] || null;
+            else if (hi && hi.kind === "vid" && clips[hi.id] && !clips[hi.id].sink && clips[hi.id].E) src = await clips[hi.id].E.at(T - i * VM_HL);
             else if (hi && hi.kind === "vid" && clips[hi.id] && clips[hi.id].sink) {
               const k = clips[hi.id];
               if (hlKey !== i) { await closeIt(hlIt); hlKey = i; hlIt = run(k.sink, k.first || 0, (k.first || 0) + Math.max(0.5, k.secs)); hlLast = null; }
@@ -9823,6 +9863,7 @@ notify pgrst, 'reload schema';
         key = [s.show, s.ban, s.eff, s.marks.map(m => m.id).join(","), cw, k ? Math.round(ct * 100) : "", st.bar ? Math.round(T / total * G.W / 3) : "", anim || moving || camVis ? T : ""].join("|");
         draw = async () => {
           let frame = null;
+          if (k && !k.sink && k.E) frame = await k.E.at(ct);
           if (k && k.sink) {
             if (moving) {
               const sk = s.show + "@" + s.play.t;
@@ -9838,13 +9879,14 @@ notify pgrst, 'reload schema';
           }
           let camF = null;
           const fz = vmFxAt(s, t).freeze;
-          if (fz && camVis) { if (frozenFor !== fz.id) { frozenFor = fz.id; frozen = camLast; } if (camIt) { await closeIt(camIt); camIt = null; camItSeg = -1; } camF = frozen; }
+          if (fz && camVis) { if (frozenFor !== fz.id) { frozenFor = fz.id; frozen = camLast; if (frozen && frozen.tagName === "VIDEO") { const cc = document.createElement("canvas"); cc.width = frozen.videoWidth; cc.height = frozen.videoHeight; cc.getContext("2d").drawImage(frozen, 0, 0); frozen = cc; } } if (camIt) { await closeIt(camIt); camIt = null; camItSeg = -1; } camF = frozen; }
           else { frozenFor = null; }
           const si = camVis && !fz ? segAt(t) : -1, sg = si >= 0 ? camSegs[si] : null;
           if (sg && sg.S) {
             if (!camIt || camItSeg !== si) { await closeIt(camIt); camItSeg = si; camIt = run(sg.S.sink, Math.max(0, t - sg.t) + sg.S.first, take.secs - sg.t + sg.S.first + 1); }
             const r = await camIt.next(); camF = r.done || !r.value ? camLast : r.value.canvas; if (camF) camLast = camF;
-          } else if (camIt && !fz) { await closeIt(camIt); camIt = null; camItSeg = -1; }
+          } else if (sg && sg.E) { camF = await sg.E.at(Math.max(0, t - sg.t)); camLast = camF; }
+          else if (camIt && !fz) { await closeIt(camIt); camIt = null; camItSeg = -1; }
           const segNow = camSegs[segAt(t)] || camSegs[0];
           vmFrame(c, { G, L, st, proj, items, s, t, tb, cam: camF || camLast, camFreeze: frozen, camOn, camFit: proj.camFit || "whole", camMirror: !!proj.mirror && (!segNow || segNow.facing !== "environment"), pic: id => pics[id] || null, clip: frame, words, cache, prog: (T - IN) / body });
         };
@@ -9855,7 +9897,7 @@ notify pgrst, 'reload schema';
       await draw();
       const kf = T - lastKF >= 3 - 1e-6; if (kf) lastKF = T;
       pending = { T, key: kf }; lastKey = key; lastT = T;
-      if (f % 8 === 0) { if (onProgress) onProgress(T / total); await yieldUi(); }
+      if (f % (VM_WEAK ? 1 : 3) === 0) { if (onProgress && f % 6 === 0) onProgress(T / total); await yieldUi(); }
     }
     await flush(n / FPS);
     await closeIt(it8); await closeIt(camIt); await closeIt(hlIt);
@@ -10061,9 +10103,9 @@ notify pgrst, 'reload schema';
           <button class="chip" onClick=${() => openRef.current && openRef.current.click()}>＋ ${cur ? "A different one for this video" : "Add an opening sound"}</button>
           <input ref=${openRef} type="file" accept="audio/*,video/mp4" style="display:none" onChange=${pickOpen}/>
         </div>
-        <div class="vml">Effects to tap while recording (tap one to hear it)
+        <div class="vml">Effects to tap while recording (Boom has a sound; Freeze and Zoom in are silent)
           <div class="vmchips">${VM_FX.map(([k, ic, lbl]) => html`<button key=${k} class="chip" onClick=${() => vmPlaySfx(k, lib)}>${ic} ${lbl}</button>`)}</div>
-          <p class="help">Boom shakes the picture. Shock zooms in on you. Freeze stops you in black and white for a moment. Zoom in moves in slowly.</p>
+          <p class="help">Boom shakes the picture. Freeze stops you in black and white for a moment. Zoom in moves in slowly. For other sounds, add your own below.</p>
         </div>
         <div class="vml">Your own sounds
           ${lib.sounds.length ? html`<div class="vmchips">${lib.sounds.map(x => html`<span key=${x.id} class="vmsnd"><button class="chip" onClick=${() => vmPlaySfx("own:" + x.id, lib)}>🎵 ${x.name}</button><button class="chip" onClick=${() => delOwn(x.id)} aria-label=${"Remove " + x.name}>✕</button></span>`)}</div>` : html`<p class="help">Add short sound files (a sound you made or have the right to use). They show as buttons while you record.</p>`}
@@ -10085,6 +10127,9 @@ notify pgrst, 'reload schema';
     const [cues, setCuesS] = useState([]); const cuesRef = useRef([]);
     const setCues = l => { cuesRef.current = l; setCuesS(l); };
     const [tool, setTool] = useState("point");
+    const [drawOn, setDrawOn] = useState(false);
+    const [starting, setStarting] = useState(false);
+    const [prep, setPrep] = useState({});   // clips being made ready: id -> progress
     const [col, setCol] = useState(VM_COLS[0]);
     const [paused, setPaused] = useState(false);
     const [peek, setPeek] = useState(null);
@@ -10138,10 +10183,10 @@ notify pgrst, 'reload schema';
       const sync = (v, want, run, vol) => { if (!v) return; if (vol != null) v.volume = vol; if (run) { if (v.paused) v.play().catch(() => {}); if (Math.abs(v.currentTime - want) > 0.3) v.currentTime = want; } else { if (!v.paused) v.pause(); if (Math.abs(v.currentTime - want) > 0.08) try { v.currentTime = want; } catch (e) {} } };
       const tick = now => {
         raf = requestAnimationFrame(tick);
-        if (now - last < 33 || document.hidden) return;
+        if (now - last < (VM_WEAK ? 45 : 33) || document.hidden) return;
         const R0 = S.current; if (R0.mode === "review" && !R0.op && aref.current && aref.current.paused && now - last < 250 && !R0.dirty) return;
         last = now; R0.dirty = false;
-        const R = S.current, G2 = R.G, w = Math.round(cv.clientWidth * Math.min(1.5, window.devicePixelRatio || 1));
+        const R = S.current, G2 = R.G, w = Math.round(cv.clientWidth * Math.min(VM_WEAK ? 1 : 1.5, window.devicePixelRatio || 1));
         if (!w) return;
         const h = Math.round(w * G2.H / G2.W); if (cv.width !== w || cv.height !== h) { cv.width = w; cv.height = h; }
         let s, t, words = null, prog = null;
@@ -10208,7 +10253,7 @@ notify pgrst, 'reload schema';
       return ["frame", { x: 0, y: 0, w: G.W, h: G.H }];
     }
     const nz = (R, p) => [round2((p[0] - R.x) / R.w * 1000) / 1000, round2((p[1] - R.y) / R.h * 1000) / 1000];
-    const down = e => { if (!rec) return; e.preventDefault(); try { e.currentTarget.setPointerCapture(e.pointerId); } catch (x) {} drag.current = { id: e.pointerId, tool, at: Date.now(), P: [at(e)] }; };
+    const down = e => { if (!rec || !drawOn) return; e.preventDefault(); try { e.currentTarget.setPointerCapture(e.pointerId); } catch (x) {} drag.current = { id: e.pointerId, tool, at: Date.now(), P: [at(e)] }; };
     const move = e => { const d = drag.current; if (!d || d.id !== e.pointerId) return; const q = at(e), l = d.P[d.P.length - 1]; if (Math.hypot(q[0] - l[0], q[1] - l[1]) >= 4) d.P.push(q); };
     const up = e => {
       const d = drag.current; if (!d || d.id !== e.pointerId) return; drag.current = null;
@@ -10241,6 +10286,7 @@ notify pgrst, 'reload schema';
         if (camOn && s.lay === "cam" && st.showLay !== "cam") setLay(st.showLay);
         return;
       }
+      if (it.kind === "vid" && it.bad) { toast("That clip can't play on this phone. Try another copy of it."); return; }
       if (it.kind === "vid") { const from = clipPos.current[it.id] || 0; add({ k: "show", ref: it.id, at: round2(from) }); loadClip(it, from); }
       else add({ k: "show", ref: it.id });
       if (camOn && s.lay === "cam" && st.showLay !== "cam") setLay(st.showLay);
@@ -10340,7 +10386,21 @@ notify pgrst, 'reload schema';
         const it = { id: uid(), kind: isVid ? "vid" : "img", name: f.name || "", blob: isVid ? f : await shrinkPic(f), secs: 0 };
         if (isVid) { it.secs = round1(await vmDur(f)); if (it.secs > 1200) toast("That clip is long. It works, but making the video will take a while."); }
         setProj(p => ({ items: p.items.concat(it) }));
+        if (isVid) prepClip(it.id, f);
       }
+    }
+    // a clip is checked, and big ones are made lighter, in the background (they play smoother while you react)
+    async function prepClip(id, f) {
+      setPrep(p => Object.assign({}, p, { [id]: 0 }));
+      try {
+        const r = await vmPrepClip(f, v => setPrep(p => (p[id] != null ? Object.assign({}, p, { [id]: v }) : p)));
+        if (r.blob) {
+          const u = vmUrls.get(id); if (u) { URL.revokeObjectURL(u); vmUrls.delete(id); }
+          const v = vref.current; if (v && v.dataset.id === id) { delete v.dataset.id; }
+          setProj(p => ({ items: p.items.map(x => (x.id === id ? Object.assign({}, x, { blob: r.blob, secs: round1(r.info.secs || x.secs), light: true }) : x)) }));
+        } else if (r.bad || !r.info.ok) { toast("This video can't play on this phone. Try another copy of it (for example, save it again from WhatsApp or the gallery)."); setProj(p => ({ items: p.items.map(x => (x.id === id ? Object.assign({}, x, { bad: true }) : x)) })); }
+      } catch (e) { /* keep the original */ }
+      setPrep(p => { const q = Object.assign({}, p); delete q[id]; return q; });
     }
     async function shrinkPic(f) {
       try { const bm = await createImageBitmap(f), sc = Math.min(1, 1920 / Math.max(bm.width, bm.height)); if (sc >= 1 && f.size < 3e6) return f;
@@ -10356,15 +10416,29 @@ notify pgrst, 'reload schema';
     function removeItem(it) { if (rec || !it) return; if (!window.confirm("Take this out of the video?")) return; setProj(p => ({ items: p.items.filter(x => x.id !== it.id) })); if (peek === it.id) setPeek(null); }
     // ---- recording ----
     async function startRec() {
+      if (starting) return;
       if (proj.take && !window.confirm("Record again? The recording you have now is replaced.")) return;
       setPeek(null); if (aref.current) aref.current.pause();
+      const v0 = vref.current; if (v0 && !v0.paused) v0.pause();
+      setStarting(true);
+      let step = "mic";
       try {
-        if (camOn) { if (!stream.current) await openCam(); if (!stream.current) throw new Error("nocam"); }
-        mic.current = await vmRec.open(false);
-        r.current = vmRec.start(mic.current);
+        if (camOn) { step = "cam"; if (!stream.current || !stream.current.getVideoTracks().some(t => t.readyState === "live")) await openCam(); if (!stream.current) throw { code: "nocam" }; }
+        step = "mic"; mic.current = await vmRec.open(false);
+        step = "rec"; r.current = vmRec.start(mic.current);
         camSegs.current = [];
-        if (camOn) { camRec.current = vmRec.start(stream.current); camSegs.current.push({ t: 0, rec: camRec.current, facing: projRef.current.facing || "user" }); }
-      } catch (e) { vmRec.close(mic.current); mic.current = null; toast(camOn ? "The camera or microphone isn't available. Allow them, or switch to faceless." : "The microphone isn't available here."); return; }
+        if (camOn) { step = "camrec"; camRec.current = vmRec.start(stream.current); camSegs.current.push({ t: 0, rec: camRec.current, facing: projRef.current.facing || "user" }); }
+      } catch (e) {
+        if (r.current) { r.current.cancel(); r.current = null; }
+        vmRec.close(mic.current); mic.current = null; setStarting(false);
+        const denied = e && (e.name === "NotAllowedError" || e.name === "SecurityError");
+        toast(denied ? "The " + (step === "cam" ? "camera" : "microphone") + " is blocked. Allow it for this website in the browser's settings, then try again."
+          : step === "cam" || (e && e.code === "camslow") ? "The camera didn't start. Close other apps that use it, or switch to faceless, then try again."
+          : step === "mic" || (e && e.code === "micslow") ? "The microphone didn't start. Close other apps that use it, then try again."
+          : "This phone couldn't start recording. Try again, or switch to faceless.");
+        return;
+      }
+      setStarting(false);
       clipPos.current = {}; setCues(proj.bw ? [{ id: uid().slice(-7), t: 0, k: "bw", v: true }] : []); freezeSnap.current = null; setPaused(false); setClipOn(false); volLive(1); setMode("rec");
     }
     function pauseRec() {
@@ -10453,7 +10527,7 @@ notify pgrst, 'reload schema';
         const on = rec ? (it.kind === "ban" ? s.ban === it.id : s.show === it.id) : peek === it.id;
         return html`<button key=${it.id} class=${"mthumb" + (on ? " on" : "") + (it.kind === "text" || it.kind === "ban" || it.live || (it.kind === "vid" && !it.blob) ? " vmtxt" : "")} onClick=${() => tapItem(it)} onContextMenu=${e => { e.preventDefault(); removeItem(it); }} aria-label=${it.kind === "vid" ? "Show this clip" : it.kind === "img" ? "Show this picture" : "Show these words"}>
           ${it.live || (it.kind === "vid" && !it.blob) ? html`<span class="vmtxtin">🖥 Your screen${it.live ? html`<br/><b class="vmlive">● live</b>` : ""}</span>`
-            : it.kind === "vid" ? html`<video src=${vmUrl(it) + "#t=0.5"} preload="metadata" muted playsinline></video><span class="mbadge">${it.screen ? "🖥" : "▶"} ${fmtDur(it.secs || 0)}</span>`
+            : it.kind === "vid" ? html`<video src=${vmUrl(it) + "#t=0.5"} preload="metadata" muted playsinline></video><span class="mbadge">${it.screen ? "🖥" : "▶"} ${fmtDur(it.secs || 0)}</span>${prep[it.id] != null ? html`<span class="mup">${Math.round(prep[it.id] * 100)}%</span>` : it.bad ? html`<span class="mup">!</span>` : null}`
             : it.kind === "img" ? html`<img src=${vmUrl(it)} alt=""/>`
             : html`<span class="vmtxtin">${it.kind === "ban" ? "▬ " : ""}${it.text}</span>`}
         </button>`;
@@ -10478,6 +10552,9 @@ notify pgrst, 'reload schema';
       ${rec ? html`<button class="btn slim" onClick=${() => (clipOn ? stopClip() : playClip())}>${clipOn ? "⏸ Pause the clip" : "▶ Play the clip"}</button>`
         : html`<button class="btn slim" onClick=${() => { const v = vref.current; if (v) { if (v.paused) v.play().catch(() => {}); else v.pause(); setTick(x => x + 1); } }}>${vref.current && !vref.current.paused ? "⏸" : "▶"} Try it</button>`}
       <button class="chip" onClick=${() => seekClip(5)}>5s ⏩</button>
+      <input class="vmscrub" type="range" min="0" max=${Math.max(1, shownClip.secs || (vref.current && vref.current.duration) || 1)} step="0.1" value=${vref.current ? vref.current.currentTime || 0 : 0} aria-label="Skim through the clip"
+        onInput=${e => { const v = vref.current; if (v) { if (!v.paused && rec) stopClip(); v.currentTime = +e.target.value; setTick(x => x + 1); } }}
+        onChange=${e => { const v = vref.current, it = clipItem(); if (v && it) { clipPos.current[it.id] = v.currentTime; if (rec) add({ k: "stop", at: round2(v.currentTime) }); } }}/>
       ${rec ? volBar : html`<span class="vmvolrow"><button class="chip" onClick=${() => volLive(cvol > 0 ? 0 : 1)}>${cvol > 0 ? "🔊" : "🔇"}</button><input type="range" min="0" max="1" step="0.05" value=${cvol} aria-label="Clip sound" onInput=${e => volLive(+e.target.value)}/></span>`}
     </div>` : null;
     if (styling) return html`<${VMStyle} onClose=${() => { setStyling(false); setSt(vmStyle()); }}/>`;
@@ -10488,14 +10565,14 @@ notify pgrst, 'reload schema';
       </div>
       <div class="sbody">
         <div class=${"vmstage " + proj.fmt}>
-          <canvas ref=${cvRef} class=${"vmcv " + proj.fmt + (rec ? " rec" : "")} onPointerDown=${down} onPointerMove=${move} onPointerUp=${up} onPointerCancel=${() => { drag.current = null; }} aria-label="The video"></canvas>
+          <video ref=${vref} class="vmunder" playsinline preload="auto"></video>
+          <video ref=${cref} class="vmunder" playsinline muted autoplay preload="auto"></video>
+          <video ref=${sref} class="vmunder" playsinline muted autoplay></video>
+          <canvas ref=${cvRef} class=${"vmcv " + proj.fmt + (rec ? (drawOn ? " rec" : " recnd") : "")} onPointerDown=${down} onPointerMove=${move} onPointerUp=${up} onPointerCancel=${() => { drag.current = null; }} aria-label="The video"></canvas>
           ${rec && paused ? html`<div class="pausedtag">⏸ Paused</div>` : null}
           ${rec ? html`<div class="vmrectag"><span class="recdot"></span>${fmtDur(nowT())}</div>` : null}
           ${mode === "review" && a && a.paused ? html`<button class="crplay" onClick=${() => playReview()} aria-label="Play"><${Ic.play} size=${34}/></button>` : null}
         </div>
-        <video ref=${vref} class="vmhidden" playsinline preload="auto"></video>
-        <video ref=${cref} class="vmhidden" playsinline muted autoplay preload="auto"></video>
-        <video ref=${sref} class="vmhidden" playsinline muted autoplay></video>
         ${voiceUrl ? html`<audio ref=${aref} src=${voiceUrl} preload="auto"></audio>` : null}
       </div>
       <div class="sfoot">
@@ -10525,19 +10602,20 @@ notify pgrst, 'reload schema';
           </div>
           <div class="srow">
             ${tk ? html`<button class="btn quiet" onClick=${() => setMode("review")}>Back to the recording</button>` : null}
-            <button class="big red" onClick=${startRec} aria-label="Start recording"><${Ic.mic} size=${30}/></button>
+            <button class=${"big red" + (starting ? " busy" : "")} onClick=${startRec} disabled=${starting} aria-label="Start recording">${starting ? html`<span class="spin"></span>` : html`<${Ic.mic} size=${30}/>`}</button>
+            ${starting ? html`<span class="help">Starting…</span>` : null}
           </div>` : null}
         ${rec ? html`
           ${proj.notes ? html`<div class="vmnotes">${proj.notes}</div>` : null}
           ${camOn ? html`<div class="tools vmlays" role="toolbar" aria-label="Layout">${VM_LAYS.map(([k, ic, lbl]) => html`<button key=${k} class=${"tool" + (s.lay === k ? " on" : "")} aria-pressed=${s.lay === k ? "true" : "false"} onClick=${() => setLay(k)}><span>${ic}</span>${lbl}</button>`)}<button class="tool" onClick=${flipCam}><span>🔄</span>Flip</button><button class=${"tool" + (s.bw ? " on" : "")} onClick=${toggleBw}><span>⚫</span>B&W</button></div>` : null}
-          <div class="tools vmfx" role="toolbar" aria-label="Effects">${VM_FX.map(([k, ic, lbl]) => html`<button key=${k} class="tool" onClick=${() => fxTap(k)}><span>${ic}</span>${lbl}</button>`)}${lib.sounds.map(x => html`<button key=${x.id} class="tool" onClick=${() => fxTap("own:" + x.id)}><span>🎵</span>${x.name}</button>`)}</div>
           ${tray}${clipBar}
-          <div class="tools" role="toolbar" aria-label="Tools">
+          <div class="tools vmfx" role="toolbar" aria-label="Effects">${VM_FX.map(([k, ic, lbl]) => html`<button key=${k} class="tool" onClick=${() => fxTap(k)}><span>${ic}</span>${lbl}</button>`)}${lib.sounds.map(x => html`<button key=${x.id} class="tool" onClick=${() => fxTap("own:" + x.id)}><span>🎵</span>${x.name}</button>`)}<button class=${"tool" + (drawOn ? " on" : "")} onClick=${() => setDrawOn(!drawOn)}><span>✏️</span>Draw</button></div>
+          ${drawOn ? html`<div class="tools" role="toolbar" aria-label="Drawing">
             ${VM_TOOLS.map(([k, ic, lbl]) => html`<button key=${k} class=${"tool" + (tool === k ? " on" : "")} aria-pressed=${tool === k ? "true" : "false"} onClick=${() => setTool(k)}><span>${ic}</span>${lbl}</button>`)}
             <button class="tool" onClick=${undo}><span>↶</span>Undo</button>
             <button class="tool" onClick=${() => add({ k: "clr" })}><span>✨</span>Clear</button>
           </div>
-          <div class="subbar">${VM_COLS.map(c2 => html`<button key=${c2} class=${"swatch" + (col === c2 ? " on" : "")} style=${"background:" + c2} onClick=${() => setCol(c2)} aria-label="Colour"></button>`)}</div>
+          <div class="subbar">${VM_COLS.map(c2 => html`<button key=${c2} class=${"swatch" + (col === c2 ? " on" : "")} style=${"background:" + c2} onClick=${() => setCol(c2)} aria-label="Colour"></button>`)}</div>` : null}
           <div class="srow">
             <button class=${"btn quiet" + (paused ? " on" : "")} onClick=${pauseRec}>${paused ? "▶ Resume" : "⏸ Pause"}</button>
             <button class="big red" onClick=${stopRec} aria-label="Stop recording"><${Ic.stop} size=${28}/></button>
@@ -11088,7 +11166,7 @@ notify pgrst, 'reload schema';
   window.__kfApi = { kfPress, kfStep, kfNew, kfSnd, kfAnn, annRec };
   window.__ink = { hitInk, inkGroup, straighten };
   window.__mux = { lessonVideo, fixVideo, loadMux, vidJob, awake, player, cleanVoice };
-  window.__ui = { PushBell, SetupCheck, VidJobPill, html, render, store, Board, ExplainStudio, LiveTools, stageAt, buildSound, live, player, ClassroomPlayer, crAssets, CR_W, CR_H, TalkBoard, vidJob, VideoMaker, vmExport, vmDb, vmNew, vmAt, vmFrame, vmGeo, VM_LOOKS, vmStyle, vmSaveStyle, VMStyle, vmIntro, vmOutro, vmLook };
+  window.__ui = { PushBell, SetupCheck, VidJobPill, html, render, store, Board, ExplainStudio, LiveTools, stageAt, buildSound, live, player, ClassroomPlayer, crAssets, CR_W, CR_H, TalkBoard, vidJob, VideoMaker, vmExport, vmDb, vmNew, vmAt, vmFrame, vmGeo, VM_LOOKS, vmStyle, vmSaveStyle, VMStyle, vmIntro, vmOutro, vmLook, vmElemSrc, vmPrepClip };
   window.__lang = { viewOf, saveExpl, saveTileRec, uploadBlob, set: l => { REC_LANG = l; }, get: () => REC_LANG, store };
   root.innerHTML = "";
   render(html`<${App}/>`, root);
