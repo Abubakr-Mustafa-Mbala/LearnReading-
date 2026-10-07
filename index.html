@@ -437,6 +437,7 @@ img{max-width:100%}
 .vmplaces{max-height:88vh}
 .vmsearch{font:400 16px var(--font);padding:10px 12px;border-radius:12px;border:1px solid var(--line);background:var(--paper);color:var(--ink)}
 .vmclist{display:flex;flex-direction:column;gap:2px;max-height:48vh;overflow:auto}
+.vmclist.short{max-height:30vh}
 .vmcrow{display:flex;align-items:center;gap:12px;padding:8px 6px;border:0;background:none;color:var(--ink);font:500 16px var(--font);text-align:left;border-radius:10px}
 .vmcrow:active{background:var(--paper-2)}
 .vmcrow img{width:36px;height:27px;border-radius:3px;box-shadow:0 0 0 1px var(--line);object-fit:cover}
@@ -9151,7 +9152,7 @@ notify pgrst, 'reload schema';
       v.onloadeddata = () => fin({ ok: v.videoWidth > 0, w: v.videoWidth, h: v.videoHeight, secs: isFinite(v.duration) ? v.duration : 0 });
       v.onerror = () => fin({ ok: false }); setTimeout(() => fin({ ok: false, slow: true }), 15000); v.src = u;
     });
-    if (info.ok && Math.max(info.w, info.h) <= 1280) return { blob: null, info };
+    if (info.ok && Math.max(info.w, info.h) <= 1920) return { blob: null, info };
     const MB = await loadMux();
     const input = new MB.Input({ source: new MB.BlobSource(file), formats: MB.ALL_FORMATS });
     const vt = await input.getPrimaryVideoTrack(); if (!vt) return { blob: null, info };
@@ -9264,7 +9265,7 @@ notify pgrst, 'reload schema';
   const VM_HL = 2.6;
   function vmHeadline(c, G, L, st, h, i, n, k, src) {
     vmBg(c, G, L);
-    if (src && src.place) { const F2 = { G, L, st, s: { showT: 0 }, t: k * VM_HL }; (src.place.kind === "map" ? vmMap : vmFlagCard)(c, F2, src.place, { x: 0, y: 0, w: G.W, h: G.H }, k * VM_HL * 1.6); src = null; }
+    if (src && src.place) { const F2 = { G, L, st, s: { showT: 0 }, t: k * VM_HL }; (src.place.kind === "map" ? vmMap : src.place.kind === "trip" ? vmTrip : vmFlagCard)(c, F2, src.place, { x: 0, y: 0, w: G.W, h: G.H }, k * VM_HL * (src.place.kind === "trip" ? 3 : 1.6)); src = null; }
     if (src) { const [sw, sh] = vmSize(src); if (sw) { const z = 1 + 0.08 * k, s0 = Math.max(G.W / sw, G.H / sh) * z; c.drawImage(src, G.W / 2 - sw * s0 / 2, G.H / 2 - sh * s0 / 2, sw * s0, sh * s0); } }
     const g = c.createLinearGradient(0, G.H * 0.35, 0, G.H); g.addColorStop(0, "rgba(0,0,0,0)"); g.addColorStop(1, "rgba(0,0,0,.85)"); c.fillStyle = g; c.fillRect(0, 0, G.W, G.H);
     const a = crEase(k / 0.12), tagW = G.tall ? 300 : 260, tagH = G.tall ? 64 : 54, x0 = G.tall ? 40 : 60, y0 = G.H * (G.tall ? 0.6 : 0.52);
@@ -9377,6 +9378,70 @@ notify pgrst, 'reload schema';
     c.restore();
     return box;
   }
+
+  // a journey: the line travels from country to country, the map following along
+  const VM_LEG = 3.4, vmTripCache = new WeakMap();
+  function vmTripPlan(it) {
+    const st = (it.stops || []).map(x => { const ct = VMW && x.n ? VMW.by50.get(x.n) : null, f = ct ? vmFocus(ct) : null; return f ? Object.assign({ ct, f, cx: (f[0] + f[2]) / 2, cy: (f[1] + f[3]) / 2 }, x) : null; }).filter(Boolean);
+    return st;
+  }
+  const vmFitView = (pts, box, pad) => { let x0 = 1e9, y0 = 1e9, x1 = -1e9, y1 = -1e9; for (const p of pts) { x0 = Math.min(x0, p[0]); y0 = Math.min(y0, p[1]); x1 = Math.max(x1, p[2]); y1 = Math.max(y1, p[3]); } const w = x1 - x0, h = y1 - y0; return { cx: (x0 + x1) / 2, cy: (y0 + y1) / 2, s: Math.max(0.01, w * pad, h * pad * box.w / box.h) }; };
+  const vmViewLerp = (a, b, k) => ({ cx: crLerp(a.cx, b.cx, k), cy: crLerp(a.cy, b.cy, k), s: Math.exp(crLerp(Math.log(a.s), Math.log(b.s), k)) });
+  function vmTrip(c, F, it, box, a) {
+    const { L, st, G } = F;
+    c.save(); vmClip(c, box);
+    const og = c.createLinearGradient(0, box.y, 0, box.y + box.h); og.addColorStop(0, "#7DB4D8"); og.addColorStop(1, "#4F8FBF"); c.fillStyle = og; c.fillRect(box.x, box.y, box.w, box.h);
+    if (!VMW) { vmWorld().catch(() => {}); c.restore(); return box; }
+    let S = vmTripCache.get(it); if (!S) { S = vmTripPlan(it); vmTripCache.set(it, S); } if (!S.length) { c.restore(); return box; }
+    const n = S.length, legs = Math.max(0, n - 1), T0 = 0.9, end = T0 + legs * VM_LEG;
+    const views = [vmFitView([S[0].f], box, 2.6)]; for (let i = 0; i < legs; i++) views.push(vmFitView([S[i].f, S[i + 1].f], box, 1.7));
+    const all = vmFitView(S.map(x => x.f), box, 1.5);
+    let view, leg = -1, p = 0;
+    if (a < T0 || !legs) view = views[0];
+    else if (a < end) { leg = Math.min(legs - 1, Math.floor((a - T0) / VM_LEG)); const u = (a - T0 - leg * VM_LEG) / VM_LEG; view = vmViewLerp(views[leg], views[leg + 1], crEase(Math.min(1, u / 0.35))); p = Math.max(0, Math.min(1, (u - 0.25) / 0.6)); }
+    else { leg = legs; view = vmViewLerp(views[legs], all, crEase(Math.min(1, (a - end) / 1.4))); }
+    const k = box.w / view.s, tf = { x: x => box.x + box.w / 2 + (x - view.cx) * k, y: y => box.y + box.h / 2 + (y - view.cy) * k };
+    const vx0 = view.cx - view.s / 2, vx1 = view.cx + view.s / 2, vy0 = view.cy - view.s * box.h / box.w / 2, vy1 = view.cy + view.s * box.h / box.w / 2;
+    const set = view.s > 0.18 ? VMW.c110 : VMW.c50;
+    c.fillStyle = "#F1ECE1"; c.strokeStyle = "rgba(120,110,95,.55)"; c.lineWidth = G.tall ? 1.4 : 1.2; c.lineJoin = "round";
+    for (const ct of set) { const b = ct.b; if (b[2] < vx0 || b[0] > vx1 || b[3] < vy0 || b[1] > vy1) continue; vmMapPath(c, ct, tf, 0.8); c.fill(); c.stroke(); }
+    // countries reached so far light up
+    const reached = leg < 0 ? 1 : Math.min(n, leg + 1 + (p >= 1 ? 1 : 0));
+    for (let i = 0; i < reached; i++) { c.save(); vmMapPath(c, S[i].ct, tf, 0.5); c.globalAlpha = i === reached - 1 ? 0.55 : 0.35; c.fillStyle = L.acc; c.fill(); c.globalAlpha = 1; c.strokeStyle = L.acc; c.lineWidth = 2.5; c.stroke(); c.restore(); }
+    // the route: a curved dashed line, with a marker travelling along it
+    const pt = i => [tf.x(S[i].cx), tf.y(S[i].cy)];
+    const curve = (A, B) => { const mx = (A[0] + B[0]) / 2, my = (A[1] + B[1]) / 2, dx = B[0] - A[0], dy = B[1] - A[1], d = Math.hypot(dx, dy) || 1; return [mx - dy / d * d * 0.22, my + dx / d * d * 0.22 - d * 0.12]; };
+    const qAt = (A, C, B, u) => [(1 - u) * (1 - u) * A[0] + 2 * (1 - u) * u * C[0] + u * u * B[0], (1 - u) * (1 - u) * A[1] + 2 * (1 - u) * u * C[1] + u * u * B[1]];
+    c.lineCap = "round"; c.setLineDash([16, 12]);
+    for (let i = 0; i < legs; i++) {
+      const done = i < leg ? 1 : i === leg ? p : 0; if (done <= 0) continue;
+      const A = pt(i), B = pt(i + 1), C = curve(A, B);
+      c.strokeStyle = "rgba(0,0,0,.35)"; c.lineWidth = 9; c.beginPath(); c.moveTo(A[0], A[1]); for (let u = 0.02; u <= done + 1e-6; u += 0.02) { const q = qAt(A, C, B, Math.min(u, done)); c.lineTo(q[0], q[1] + 2); } c.stroke();
+      c.strokeStyle = "#FFFFFF"; c.lineWidth = 6; c.beginPath(); c.moveTo(A[0], A[1]); for (let u = 0.02; u <= done + 1e-6; u += 0.02) { const q = qAt(A, C, B, Math.min(u, done)); c.lineTo(q[0], q[1]); } c.stroke();
+      if (i === leg && p < 1) {   // the traveller
+        const q = qAt(A, C, B, p), q2 = qAt(A, C, B, Math.min(1, p + 0.02)), ang = Math.atan2(q2[1] - q[1], q2[0] - q[0]);
+        c.setLineDash([]); c.save(); c.translate(q[0], q[1]); c.rotate(ang);
+        c.fillStyle = L.acc; c.strokeStyle = "#FFFFFF"; c.lineWidth = 4; c.beginPath(); c.moveTo(34, 0); c.lineTo(-20, -21); c.lineTo(-9, 0); c.lineTo(-20, 21); c.closePath(); c.fill(); c.stroke();
+        c.restore(); c.setLineDash([16, 12]);
+      }
+    }
+    c.setLineDash([]);
+    // a dot on every stop reached, with its name
+    for (let i = 0; i < reached; i++) {
+      const [x, y] = pt(i); c.fillStyle = "#FFFFFF"; c.beginPath(); c.arc(x, y, 11, 0, 7); c.fill(); c.fillStyle = L.acc; c.beginPath(); c.arc(x, y, 7, 0, 7); c.fill();
+      c.font = vmFont(st, G.tall ? 30 : 26, 700); c.textAlign = "center"; c.textBaseline = "bottom"; c.lineJoin = "round"; c.lineWidth = 6; c.strokeStyle = "rgba(0,0,0,.7)"; c.strokeText(S[i].name, x, y - 16); c.fillStyle = "#FFFFFF"; c.fillText(S[i].name, x, y - 16);
+    }
+    // the card for where we are now: its flag, its name, and which stop it is
+    const cur = Math.max(0, Math.min(n - 1, leg < 0 ? 0 : leg + (p >= 1 ? 1 : 0))), fl = vmFlag(S[cur].a2), fs = G.tall ? 46 : 40;
+    const label = (n > 1 ? (cur + 1) + ". " : "") + S[cur].name;
+    vmFit(c, st, label, box.w - 220, fs); const nw = c.measureText(label).width, fh = fs * 1.25, fw = fl ? fh * 4 / 3 : 0, W2 = fw + nw + (fl ? 70 : 48), H2 = fh + 28;
+    const x = box.x + box.w / 2 - W2 / 2, y = box.y + (G.tall ? Math.max(40, box.h * 0.08) : 30);
+    c.fillStyle = "rgba(0,0,0,.35)"; crRR(c, x + 4, y + 6, W2, H2, 16); c.fill(); c.fillStyle = "#FFFFFF"; crRR(c, x, y, W2, H2, 16); c.fill();
+    if (fl) { c.drawImage(fl, x + 20, y + 14, fw, fh); c.strokeStyle = "rgba(0,0,0,.15)"; c.lineWidth = 1; c.strokeRect(x + 20, y + 14, fw, fh); }
+    c.fillStyle = "#14181C"; c.textAlign = "left"; c.textBaseline = "middle"; c.fillText(label, x + (fl ? fw + 44 : 24), y + H2 / 2 + 2);
+    c.restore();
+    return box;
+  }
   // a country's flag, big
   function vmFlagCard(c, F, it, box, a) {
     const { L, st, G } = F; c.save(); vmClip(c, box); vmBg(c, G, L, box);
@@ -9460,8 +9525,17 @@ notify pgrst, 'reload schema';
     if (L.chalk) { for (let i = 0; i < 300; i++) { c.fillStyle = "rgba(255,255,255," + (0.012 + crHash(i) * 0.022).toFixed(3) + ")"; c.fillRect(B.x + crHash(i * 3.1) * B.w, B.y + crHash(i * 7.7) * B.h, 2 + crHash(i * 5) * 3, 1 + crHash(i * 9) * 2); } }
   }
   const vmTiny = document.createElement("canvas");
+  const vmLiveBlur = new WeakMap();
   function vmBlurOf(src, cache) {
     if (cache && cache.has(src)) return cache.get(src);
+    if (!cache && src && src.tagName === "VIDEO") {   // a playing video: copying it out is costly on phones
+      const o = vmLiveBlur.get(src), now = performance.now();
+      if (o && now - o.at < 600) return o.cv;
+      const [sw, sh] = vmSize(src); if (!sw) return o ? o.cv : null;
+      const cv = o ? o.cv : document.createElement("canvas"); cv.width = 24; cv.height = Math.max(1, Math.round(24 * sh / sw));
+      try { cv.getContext("2d").drawImage(src, 0, 0, cv.width, cv.height); } catch (e) {}
+      vmLiveBlur.set(src, { cv, at: now }); return cv;
+    }
     const [sw, sh] = vmSize(src); if (!sw) return null;
     const cv = cache ? document.createElement("canvas") : vmTiny;
     cv.width = 24; cv.height = Math.max(1, Math.round(24 * sh / sw));
@@ -9512,9 +9586,9 @@ notify pgrst, 'reload schema';
       if (tr === "zoom") { const z = 0.93 + 0.07 * k; D = { x: R.x + R.w * (1 - z) / 2, y: R.y + R.h * (1 - z) / 2, w: R.w * z, h: R.h * z }; }
       else if (tr === "slide") D = { x: R.x, y: R.y + (1 - k) * box.h * 0.25, w: R.w, h: R.h };
       c.drawImage(src, D.x, D.y, D.w, D.h);
-    } else if (it.kind === "map" || it.kind === "flag") {
+    } else if (it.kind === "map" || it.kind === "flag" || it.kind === "trip") {
       c.restore(); c.save(); c.globalAlpha = (box.a == null ? 1 : box.a) * ka;
-      (it.kind === "map" ? vmMap : vmFlagCard)(c, F, it, box, F.t - F.s.showT);
+      (it.kind === "map" ? vmMap : it.kind === "trip" ? vmTrip : vmFlagCard)(c, F, it, box, F.t - F.s.showT);
     } else if (it.kind === "read") {
       vmReadCard(c, F, it, box, ka);
     } else if (it.kind === "text") {
@@ -9770,13 +9844,39 @@ notify pgrst, 'reload schema';
   }
 
   /* ---- projects, kept on this phone ---- */
+  const vmMediaKey = new WeakMap();   // a file already kept on the phone -> its key, so it's never copied again
   const vmDb = {
     p: null,
-    db() { if (!this.p) this.p = new Promise((res, rej) => { const r = indexedDB.open("reading-class-videomaker", 1); r.onupgradeneeded = () => r.result.createObjectStore("projects", { keyPath: "id" }); r.onsuccess = () => res(r.result); r.onerror = () => rej(r.error); }); return this.p; },
-    async op(mode, f) { const d = await this.db(); return new Promise((res, rej) => { const r = f(d.transaction("projects", mode).objectStore("projects")); r.onsuccess = () => res(r.result); r.onerror = () => rej(r.error); }); },
+    db() { if (!this.p) this.p = new Promise((res, rej) => { const r = indexedDB.open("reading-class-videomaker", 2); r.onupgradeneeded = () => { const d = r.result; if (!d.objectStoreNames.contains("projects")) d.createObjectStore("projects", { keyPath: "id" }); if (!d.objectStoreNames.contains("media")) d.createObjectStore("media"); }; r.onsuccess = () => res(r.result); r.onerror = () => rej(r.error); }); return this.p; },
+    async op(mode, f, store) { const d = await this.db(); return new Promise((res, rej) => { const r = f(d.transaction(store || "projects", mode).objectStore(store || "projects")); r.onsuccess = () => res(r.result); r.onerror = () => rej(r.error); }); },
     all() { return this.op("readonly", s => s.getAll()); },
-    put(p) { return this.op("readwrite", s => s.put(p)); },
-    del(id) { return this.op("readwrite", s => s.delete(id)); },
+    async media(b) {
+      if (!(b instanceof Blob)) return b;
+      if (vmMediaKey.has(b)) return { __m: vmMediaKey.get(b) };
+      const key = uid(); await this.op("readwrite", s => s.put(b, key), "media"); vmMediaKey.set(b, key); return { __m: key };
+    },
+    async unmedia(v) { if (!v || !v.__m) return v; const b = await this.op("readonly", s => s.get(v.__m), "media").catch(() => null); if (b) vmMediaKey.set(b, v.__m); return b || null; },
+    // swap every big file for a small reference (and back)
+    async walk(p, f) {
+      const q = Object.assign({}, p);
+      if (q.items) q.items = await Promise.all(q.items.map(async it => (it.blob ? Object.assign({}, it, { blob: await f(it.blob) }) : it)));
+      if (q.openerBlob) q.openerBlob = await f(q.openerBlob);
+      if (q.take) {
+        const tk = Object.assign({}, q.take);
+        if (tk.voice) tk.voice = await f(tk.voice);
+        if (tk.cleanBlob) tk.cleanBlob = await f(tk.cleanBlob);
+        if (tk.camSegs) tk.camSegs = await Promise.all(tk.camSegs.map(async g => Object.assign({}, g, { blob: await f(g.blob) })));
+        q.take = tk;
+      }
+      return q;
+    },
+    async put(p) { if (String(p.id).indexOf("__") === 0) return this.op("readwrite", s => s.put(p)); const q = await this.walk(p, b => this.media(b)); return this.op("readwrite", s => s.put(q)); },
+    load(p) { return this.walk(p, v => this.unmedia(v)); },
+    async del(id) {
+      const p = await this.op("readonly", s => s.get(id)).catch(() => null);
+      if (p) { const keys = []; await this.walk(p, v => { if (v && v.__m) keys.push(v.__m); return v; }); for (const k of keys) await this.op("readwrite", s => s.delete(k), "media").catch(() => {}); }
+      return this.op("readwrite", s => s.delete(id));
+    },
   };
   const vmLib = {
     async get() { const all = await vmDb.all().catch(() => []); const o = all.find(x => x.id === "__opener") || null, sd = all.find(x => x.id === "__sounds"); return { opener: o, sounds: sd ? sd.list || [] : [] }; },
@@ -9949,9 +10049,9 @@ notify pgrst, 'reload schema';
     const volCues = cues.filter(q => q.k === "vol"), volAt = t => { let v = 1; for (const q of volCues) { if (q.t > t) break; v = q.v; } return v; };
     // the pictures and clips that get shown
     const used = new Set(cues.filter(q => q.k === "show").map(q => q.ref).concat(plan.hl ? plan.hl.map(h => h.ref).filter(Boolean) : []));
-    if ([...used].some(id => items[id] && (items[id].kind === "map" || items[id].kind === "flag"))) {
+    if ([...used].some(id => items[id] && (items[id].kind === "map" || items[id].kind === "flag" || items[id].kind === "trip"))) {
       await vmWorld();
-      for (const id of used) { const it = items[id]; if (it && it.a2) { vmFlag(it.a2); const im = vmFlags.get(it.a2); if (im) { try { await im.decode(); } catch (e) {} } } }
+      for (const id of used) { const it = items[id]; if (!it) continue; for (const a2 of [it.a2].concat((it.stops || []).map(x => x.a2)).filter(Boolean)) { vmFlag(a2); const im = vmFlags.get(a2); if (im) { try { await im.decode(); } catch (e) {} } } }
     }
     const pics = {}, clips = {};
     for (const id of used) {
@@ -10040,7 +10140,7 @@ notify pgrst, 'reload schema';
           let src = null;
           if (plan.hl) {
             const i = Math.min(plan.hl.length - 1, Math.floor(T / VM_HL)), h = plan.hl[i], hi = h.ref ? items[h.ref] : null;
-            if (hi && (hi.kind === "map" || hi.kind === "flag")) src = { place: hi };
+            if (hi && (hi.kind === "map" || hi.kind === "flag" || hi.kind === "trip")) src = { place: hi };
             else if (hi && hi.kind === "img") src = pics[hi.id] || null;
             else if (hi && hi.kind === "vid" && clips[hi.id] && !clips[hi.id].sink && clips[hi.id].E) src = await clips[hi.id].E.at(T - i * VM_HL);
             else if (hi && hi.kind === "vid" && clips[hi.id] && clips[hi.id].sink) {
@@ -10057,7 +10157,7 @@ notify pgrst, 'reload schema';
         const t = t0 + (T - IN), s = vmAt(cues, t, camOn), it = s.show ? items[s.show] : null, k = it && it.kind === "vid" ? clips[it.id] : null;
         const ct = k ? vmClipT(s, t, k.secs) : 0, moving = k && s.play && s.play.on && ct < k.secs - 0.05;
         const camVis = camOn && (vmBoxes(G, s.eff, st).cam || (s.prev && t - s.effT < 0.4 && vmBoxes(G, s.prev, st).cam));
-        let anim = (it && (it.kind === "map" || it.kind === "flag")) || t - s.showT < 0.4 || t - s.effT < 0.42 || (s.ban && t - s.banT < 0.4) || (s.pt && t - s.pt.t < 3.05) || s.sfx.some(q => t - q.t < (VM_FX_LEN[q.v] || 0) + 0.05);
+        let anim = (it && (it.kind === "map" || it.kind === "flag" || it.kind === "trip")) || t - s.showT < 0.4 || t - s.effT < 0.42 || (s.ban && t - s.banT < 0.4) || (s.pt && t - s.pt.t < 3.05) || s.sfx.some(q => t - q.t < (VM_FX_LEN[q.v] || 0) + 0.05);
         for (const m of s.marks) if (t - m.t < vmMarkDur(m) + 0.05) anim = true;
         const tb = T - IN; if (st.nameTag && st.name && ((tb > 0.35 && tb < 1.05) || (tb > 4.75 && tb < 5.45))) anim = true;
         let cw = -1; if (words) for (let i = 0; i < words.length; i++) { if (words[i][0] > t) break; cw = i; }
@@ -10133,7 +10233,7 @@ notify pgrst, 'reload schema';
         ${(list || []).filter(p => String(p.id).indexOf("__") !== 0).map(p => html`<div class="card vmcard" key=${p.id}>
           <span class=${"vmshape " + p.fmt}></span>
           <span class="rowmain"><b>${p.title || "Untitled"}</b><small>${(VM_FMT[p.fmt] || VM_FMT.tall).name}${p.cam ? " · camera" : " · faceless"} · ${p.take ? "recorded, " + fmtDur(p.take.secs) : "not recorded yet"} · ${new Date(p.updatedAt).toLocaleDateString()}</small></span>
-          <button class="btn slim" onClick=${() => setOpen(p)}>Open</button>
+          <button class="btn slim" onClick=${async () => { try { setOpen(await vmDb.load(p)); } catch (e) { toast("Couldn't open that video."); } }}>Open</button>
           ${p.series ? html`<button class="btn slim quiet" title="Start the next day of this series" onClick=${() => { const q = vmNew(p.fmt, "", p.cam); q.series = Object.assign({}, p.series, { day: p.series.day + 1 }); q.topTitle = vmDayTitle(q.series); q.mirror = p.mirror; q.camFit = p.camFit; q.fit = p.fit; vmDb.put(q).catch(() => {}); setOpen(q); }}>Day ${p.series.day + 1} ➜</button>` : null}
           <button class=${"btn slim quiet" + (arm === p.id ? " danger" : "")} onClick=${async () => { if (arm !== p.id) { setArm(p.id); setTimeout(() => setArm(a => (a === p.id ? null : a)), 3500); return; } await vmDb.del(p.id).catch(() => {}); setArm(null); load(); }}>${arm === p.id ? "Delete?" : "🗑"}</button>
         </div>`)}
@@ -10273,7 +10373,7 @@ notify pgrst, 'reload schema';
 
   // pick a country: a map that zooms into it, or its flag
   function VMPlaces({ onClose, onAdd }) {
-    const [w, setW] = useState(VMW), [err, setErr] = useState(false), [q, setQ] = useState(""), [sel, setSel] = useState(null);
+    const [w, setW] = useState(VMW), [err, setErr] = useState(false), [q, setQ] = useState(""), [sel, setSel] = useState(null), [trip, setTrip] = useState(null);
     useEffect(() => { if (!w) vmWorld().then(setW).catch(() => setErr(true)); }, []);
     const norm = x => String(x).toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
     const list = w ? w.countries.filter(c => !q || norm(c.name).includes(norm(q)) || c.a2.toLowerCase() === norm(q)) : [];
@@ -10281,12 +10381,19 @@ notify pgrst, 'reload schema';
     return html`<div class="scrim" onClick=${e => { if (e.target === e.currentTarget) onClose(); }}>
       <div class="sheet vmplaces" role="dialog" aria-label="Map or flag">
         <h3 style="margin:0">🗺 A map or a flag</h3>
-        ${err ? html`<p class="help">The map couldn't load. Check the connection and try again.</p>` : !w ? html`<p class="help">Loading the world map…</p>` : sel ? html`
+        ${err ? html`<p class="help">The map couldn't load. Check the connection and try again.</p>` : !w ? html`<p class="help">Loading the world map…</p>` : trip ? html`
+          <p class="help">✈ A journey. Tap countries in the order they were visited. The line travels from one to the next, about ${VM_LEG} seconds each.</p>
+          <div class="vmchips">${trip.map((c, i) => html`<span key=${i} class="vmsnd"><button class="chip">${i + 1}. ${c.name}</button><button class="chip" onClick=${() => setTrip(trip.filter((_, j) => j !== i))} aria-label="Remove">✕</button></span>`)}</div>
+          <input class="vmsearch" value=${q} onInput=${e => setQ(e.target.value)} placeholder="Add a country…"/>
+          <div class="vmclist short">${list.filter(c => c.n && w.by50.has(c.n)).slice(0, 60).map(c => html`<button key=${c.a2} class="vmcrow" onClick=${() => { setTrip(trip.concat(c)); setQ(""); }}><img src=${flagUrl(c)} alt="" loading="lazy"/><span>${c.name}</span></button>`)}</div>
+          <button class="btn" disabled=${trip.length < 2} onClick=${() => onAdd({ kind: "trip", name: trip.map(c => c.name).join(" → "), stops: trip.map(c => ({ a2: c.a2, n: c.n, name: c.name })), thumb: flagUrl(trip[0]) })}>Add the journey (${trip.length} stops)</button>
+          <button class="btn quiet" onClick=${() => setTrip(null)}>← Back</button>` : sel ? html`
           <div class="vmsel"><img src=${flagUrl(sel)} alt=""/><b>${sel.name}</b></div>
           <button class="btn" disabled=${!sel.n || !w.by50.has(sel.n)} onClick=${() => onAdd({ kind: "map", a2: sel.a2, n: sel.n, name: sel.name, thumb: flagUrl(sel) })}>🗺 A map that zooms into ${sel.name}</button>
           ${!sel.n || !w.by50.has(sel.n) ? html`<p class="help">This one is too small to show on the world map, but its flag works.</p>` : null}
           <button class="btn quiet" onClick=${() => onAdd({ kind: "flag", a2: sel.a2, n: sel.n, name: sel.name, thumb: flagUrl(sel) })}>🏳 Its flag, big</button>
           <button class="btn quiet" onClick=${() => setSel(null)}>← Another country</button>` : html`
+          <button class="btn quiet" onClick=${() => { setTrip([]); setQ(""); }}>✈ A journey: from one country to the next</button>
           <input class="vmsearch" value=${q} onInput=${e => setQ(e.target.value)} placeholder="Search: Ethiopia, Zambia, Palestine…" autofocus/>
           <div class="vmclist">${list.slice(0, 120).map(c => html`<button key=${c.a2} class="vmcrow" onClick=${() => setSel(c)}><img src=${flagUrl(c)} alt="" loading="lazy"/><span>${c.name}</span></button>`)}</div>`}
         <button class="btn quiet" onClick=${onClose}>Close</button>
@@ -10296,7 +10403,7 @@ notify pgrst, 'reload schema';
   // the news-style opening: up to four headlines, each over a picture or clip
   function VMHeadlines({ proj, onSave, onClose, onTry }) {
     const [hl, setHl] = useState(() => { const h = (proj.headlines || []).slice(0, 4).map(x => Object.assign({}, x)); while (h.length < 3) h.push({ text: "", ref: "" }); return h; });
-    const media = proj.items.filter(i => ((i.kind === "img" || i.kind === "vid") && i.blob) || i.kind === "map" || i.kind === "flag");
+    const media = proj.items.filter(i => ((i.kind === "img" || i.kind === "vid") && i.blob) || i.kind === "map" || i.kind === "flag" || i.kind === "trip");
     const label = (it, i) => (it.kind === "img" ? "🖼 " : it.kind === "map" ? "🗺 " : it.kind === "flag" ? "🏳 " : "▶ ") + (it.name ? it.name.replace(/\.\w+$/, "").slice(0, 22) : (it.kind === "img" ? "Picture " : "Clip ") + (i + 1));
     const set = (i, p) => setHl(h => h.map((x, j) => (j === i ? Object.assign({}, x, p) : x)));
     const keep = () => ({ headlines: hl.filter(h => h.text.trim()).map(h => ({ text: h.text.trim(), ref: h.ref || "" })), useHl: hl.some(h => h.text.trim()) });
@@ -10444,7 +10551,7 @@ notify pgrst, 'reload schema';
             c.setTransform(cv.width / G2.W, 0, 0, cv.height / G2.H, 0, 0);
             vmDrawOpening(c, G2, R.L, R.st, R.proj, plan, T, i => {
               const h = plan.hl[i], it = h.ref ? R.items[h.ref] : null; if (!it) return null;
-              if (it.kind === "map" || it.kind === "flag") return { place: it };
+              if (it.kind === "map" || it.kind === "flag" || it.kind === "trip") return { place: it };
               if (it.kind === "img") return vmPic(it);
               const v = vref.current; if (!v) return null;
               if (R.op.vi !== i) { R.op.vi = i; loadClip(it, 0); v.muted = true; v.play().catch(() => {}); }
@@ -10482,7 +10589,7 @@ notify pgrst, 'reload schema';
           if (v.readyState >= 2 && v.videoWidth) {
             clipSrc = v;
             const sn = snap.current;
-            if (now - sn.at > 400 || sn.id !== it.id) { if (!sn.cv) sn.cv = document.createElement("canvas"); const k = Math.min(1, 640 / Math.max(v.videoWidth, v.videoHeight)); sn.cv.width = Math.round(v.videoWidth * k); sn.cv.height = Math.round(v.videoHeight * k); try { sn.cv.getContext("2d").drawImage(v, 0, 0, sn.cv.width, sn.cv.height); sn.at = now; sn.id = it.id; } catch (e) {} }
+            if (now - sn.at > 1200 || sn.id !== it.id) { if (!sn.cv) sn.cv = document.createElement("canvas"); const k = Math.min(1, 640 / Math.max(v.videoWidth, v.videoHeight)); sn.cv.width = Math.round(v.videoWidth * k); sn.cv.height = Math.round(v.videoHeight * k); try { sn.cv.getContext("2d").drawImage(v, 0, 0, sn.cv.width, sn.cv.height); sn.at = now; sn.id = it.id; } catch (e) {} }
           } else if (snap.current.id === it.id && snap.current.cv) clipSrc = snap.current.cv;
         }
         const out = {};
@@ -10799,7 +10906,7 @@ notify pgrst, 'reload schema';
         return html`<button key=${it.id} class=${"mthumb" + (on ? " on" : "") + (it.kind === "text" || it.kind === "ban" || it.kind === "top" || it.kind === "read" || it.live || (it.kind === "vid" && !it.blob) ? " vmtxt" : "")} onClick=${() => tapItem(it)} onContextMenu=${e => { e.preventDefault(); removeItem(it); }} aria-label=${it.kind === "vid" ? "Show this clip" : it.kind === "img" ? "Show this picture" : "Show these words"}>
           ${it.live || (it.kind === "vid" && !it.blob) ? html`<span class="vmtxtin">🖥 Your screen${it.live ? html`<br/><b class="vmlive">● live</b>` : ""}</span>`
             : it.kind === "vid" ? html`${it.thumb ? html`<img src=${it.thumb} alt=""/>` : html`<span class="vmtxtin">▶</span>`}<span class="mbadge">${it.screen ? "🖥" : "▶"} ${fmtDur(it.secs || 0)}</span>${prep[it.id] != null ? html`<span class="mup">${Math.round(prep[it.id] * 100)}%</span>` : it.bad ? html`<span class="mup">!</span>` : null}`
-            : it.kind === "map" || it.kind === "flag" ? html`${it.thumb ? html`<img src=${it.thumb} alt=""/>` : null}<span class="mbadge">${it.kind === "map" ? "🗺" : "🏳"} ${it.name}</span>`
+            : it.kind === "map" || it.kind === "flag" || it.kind === "trip" ? html`${it.thumb ? html`<img src=${it.thumb} alt=""/>` : null}<span class="mbadge">${it.kind === "map" ? "🗺" : it.kind === "trip" ? "✈" : "🏳"} ${it.kind === "trip" ? (it.stops || []).length + " stops" : it.name}</span>`
             : it.kind === "img" ? html`<img src=${vmUrl(it)} alt=""/>`
             : html`<span class="vmtxtin">${it.kind === "ban" ? "▬ " : it.kind === "top" ? "🔝 " : it.kind === "read" ? "📜 " : ""}${it.text}</span>`}
         </button>`;
