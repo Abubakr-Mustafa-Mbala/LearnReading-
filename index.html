@@ -13,6 +13,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Andika:wght@400;700&display=swap">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&family=Archivo+Black&family=Bangers&family=Bebas+Neue&family=Luckiest+Guy&family=Merriweather:wght@900&family=Montserrat:ital,wght@0,900;1,900&family=Oswald:wght@700&family=Permanent+Marker&family=Playfair+Display:ital,wght@0,900;1,900&family=Poppins:wght@600;700;800&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@900&family=Barlow+Condensed:ital,wght@0,800;1,800&family=Teko:wght@700&family=Russo+One&family=Black+Ops+One&family=Bungee&family=Righteous&family=Caveat+Brush&family=Rubik+Mono+One&family=DM+Serif+Display&family=Abril+Fatface&family=Lilita+One&family=Titan+One&family=Fredoka:wght@700&family=Kanit:ital,wght@0,900;1,900&family=Bowlby+One&family=Pacifico&family=Cinzel:wght@900&family=Orbitron:wght@900&family=Staatliches&family=Alfa+Slab+One&family=Space+Grotesk:wght@700&display=swap">
 <style>
 :root{
   --paper:#F5F7F3; --paper-2:#E8EDE7; --rule:#DCE6EF; --margin:#EBB9B5;
@@ -671,6 +672,8 @@ img{max-width:100%}
 .kfch{display:flex;flex-direction:column;align-items:center;gap:4px;border:0;border-radius:14px;padding:8px 6px 10px;background:rgba(241,236,220,.1);color:var(--chalk);font-weight:700;font-size:14px;min-width:96px}
 .kfch.on{box-shadow:inset 0 0 0 3px #FFE27A;background:rgba(255,226,122,.16)}
 .kfwho{padding:0;width:44px;height:44px}
+.turnbar{display:flex;align-items:center;gap:10px;margin:8px 10px;padding:10px 12px;border-radius:14px;background:#E8590C;color:#fff;box-shadow:0 6px 18px rgba(232,89,12,.35);animation:bob .8s infinite alternate}.turnbar .tbh{font-size:28px}.turnbar div{flex:1;display:flex;flex-direction:column;line-height:1.25}.turnbar b{font-size:18px}.turnbar span{font-size:14px}.turnbar .btn{background:#fff;color:#E8590C;flex:0 0 auto}
+.board.fitrows{container-type:inline-size}.board.fitrows .brow.one{display:flex;flex-wrap:nowrap;justify-content:center;gap:0}.board.fitrows .brow.one .tile{flex:0 1 auto;padding:6px .25em 8px;font-size:clamp(14px,calc((100cqw - 24px) / var(--fit)),46px);min-height:0}
 .board.passage .brow{display:flex;flex-wrap:wrap;justify-content:flex-start;gap:0 2px;margin-bottom:14px}
 .board.passage .brow .tile{flex:0 0 auto;width:auto;text-align:left}
 .board.passage .tile{font-size:clamp(21px,5.8vw,27px);min-width:0;min-height:42px;padding:4px 4px 6px}
@@ -764,6 +767,16 @@ img{max-width:100%}
 .rgtitle{font-size:20px}
 .rg{padding-bottom:40px}
 .rgintro{color:#5B6B7B;margin:4px 2px 12px;line-height:1.45}
+.coursebtn{display:flex;align-items:center;gap:12px;text-align:left;font-size:24px;padding:12px 14px}.coursebtn span{display:flex;flex-direction:column;font-size:15px;line-height:1.3}.coursebtn small{font-weight:400;color:var(--muted,#667);font-size:13px}
+.stagehead small{display:block;font-size:13px;font-weight:400;color:var(--muted,#667);margin-top:2px}
+.howcard{background:#FFF8E6;border:1px solid #F1DFAF;border-radius:14px;padding:12px 14px;margin:0 0 14px}.howcard ol{margin:6px 0 0;padding-left:20px}.howcard li{margin:4px 0;line-height:1.4}
+.cstage{background:#fff;border:1px solid var(--line);border-radius:14px;margin:0 0 14px;padding:12px 14px}.cshead{display:flex;gap:10px;align-items:flex-start;justify-content:space-between;margin-bottom:6px}.cshead b{font-size:17px}.cshead small{display:block;color:var(--muted,#667);font-size:13px;margin-top:2px}.cdone{color:#2E7D5B;font-weight:700;font-size:13px;white-space:nowrap}
+.cadd{border:1.5px solid #2E7D5B;background:#fff;color:#2E7D5B;font-weight:700;border-radius:999px;padding:7px 14px;font-size:14px;cursor:pointer}.cadd:disabled{opacity:.5}
+.cgroup{font-size:12px;font-weight:700;letter-spacing:.03em;text-transform:uppercase;color:#8A6D2B;margin:12px 0 4px}
+.crow{display:flex;align-items:center;gap:10px;padding:7px 0;border-top:1px solid #F0F0F0}.cno{width:26px;height:26px;border-radius:50%;background:#2E7D5B;color:#fff;display:grid;place-items:center;font-size:13px;font-weight:700;flex:0 0 auto}.cmain{flex:1;min-width:0;display:flex;flex-direction:column}.cmain small{color:var(--muted,#667);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-family:Andika,sans-serif}
+.rgrule{background:#22392D;color:#F1ECDC;border-radius:12px;padding:10px 12px;margin:0 0 10px;font-size:17px;font-weight:700;line-height:1.35;font-family:Andika,sans-serif}.rgrule small{display:block;font-size:11px;letter-spacing:.12em;color:#F4D36B;margin-bottom:2px}
+.rgsteps{background:#F6F8F7;border-radius:12px;padding:10px 12px;margin:10px 0}.rgsteps ol{margin:4px 0 0;padding-left:20px}.rgsteps li{margin:3px 0}.rgwhy{color:#444}
+.rgcard .btn.slim{margin:0 0 14px}
 .rgcard{background:#fff;border:1px solid var(--line);border-radius:14px;margin:0 0 10px;padding:0 14px}
 .rgcard summary{list-style:none;cursor:pointer;display:flex;align-items:center;gap:10px;padding:14px 0;font-weight:700;font-size:17px}
 .rgcard summary::-webkit-details-marker{display:none}
@@ -1014,6 +1027,7 @@ a.btn{text-decoration:none}
 .tsgradb{border:2px solid transparent;border-radius:10px;padding:6px 10px;font:800 11px var(--font);color:#111;text-transform:capitalize}.tsgradb.on{border-color:#fff;outline:2px solid #1E6BFF}
 .tstext textarea{background:#1C2026;color:#fff;border:1px solid #2C3138;border-radius:10px;padding:10px;font:700 18px var(--font);width:100%;box-sizing:border-box}
 .tsbgph{width:64px;height:40px;border-radius:8px;overflow:hidden;border:2px solid #2C3138;padding:0;background:#1C2026;color:#fff;font-size:20px}.tsbgph img{width:100%;height:100%;object-fit:cover}.tsbgph.on{border-color:#1E6BFF}
+.tslooks{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}.tslookb{background:none;border:2px solid #2C3138;border-radius:10px;padding:0;overflow:hidden;color:#C9CED6;cursor:pointer;text-align:left}.tslookb img{display:block;width:100%;aspect-ratio:16/9;object-fit:cover}.tslookb small{display:block;padding:3px 6px;font-size:11px}.tslookb.on{border-color:#fff;outline:2px solid #1E6BFF}.tsfontup{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-top:8px}
 .tsbgb{width:44px;height:30px;border-radius:8px;border:2px solid #2C3138}.tsbgb.on{border-color:#fff;outline:2px solid #1E6BFF}
 .tslayers{display:flex;flex-direction:column;gap:6px;max-width:640px;margin:0 auto}.tslay{display:flex;gap:6px;align-items:center;background:#1C2026;border:1px solid #2C3138;border-radius:10px;padding:4px}.tslay.on{border-color:#1E6BFF}
 .tslayname{flex:1;display:flex;gap:8px;align-items:center;background:none;border:0;color:#fff;font:600 13px var(--font);text-align:left;padding:6px}.tslayname span{width:26px;text-align:center}
@@ -1536,6 +1550,7 @@ notify pgrst, 'reload schema';
 
   /* ================= utilities ================= */
   const STAGES = { 1: "Foundation", 2: "English rules", 3: "Reading", 4: "More practice" };
+  const STAGE_WHAT = { 1: "Letters, their sounds, joining sounds (ba be bi bo bu), three-letter words, first sentences", 2: "The spelling rules, one per lesson: sh ch th, magic e, vowel teams, bossy r…", 3: "Short stories using only what he has learned", 4: "Word games: change letters, longer words, word families, read and answer" };
   const COLORS = ["#2E7D5B", "#1F4FA3", "#B5572E", "#7A4FB0", "#B23A5B", "#2B7A8C"];
   const sleep = ms => new Promise(r => setTimeout(r, ms));
   const uid = () => Date.now().toString(36) + Math.random().toString(36).slice(2, 9);
@@ -2284,7 +2299,8 @@ notify pgrst, 'reload schema';
   function crFit(c, text, maxW, size, weight) { let s = size; for (; s > 10; s -= 1) { c.font = (weight || 400) + " " + s + "px Andika, sans-serif"; if (c.measureText(text).width <= maxW) break; } return s; }
   // where the words go: the whole board, less a strip at the bottom when a word gets built there
   // (the bottom of the board is always kept for a word, so the words never jump when one gets built)
-  const crArea = () => ({ x: CR_BOARD.x + 50, y: CR_BOARD.y + 70, w: CR_BOARD.w - 100, h: CR_BOARD.h - 70 - 128 });
+  // the whole board is used; a strip at the bottom is kept only when a word gets built there
+  const crArea = stripOn => ({ x: CR_BOARD.x + 40, y: CR_BOARD.y + 72, w: CR_BOARD.w - 80, h: CR_BOARD.h - 72 - (stripOn ? 128 : 92) });
   const crStripY = () => CR_BOARD.y + CR_BOARD.h - 74;
 
   function crBook(c, x, y, w, h, col, band, label) {
@@ -2380,9 +2396,11 @@ notify pgrst, 'reload schema';
     const c = document.createElement("canvas").getContext("2d");
     const rows = parseBoard(lesson.board, lesson.stage === 3), A = crArea(stripOn), passage = lesson.stage === 3;
     let best = null;
-    for (let size = 150; size >= 16; size -= 4) {
+    // as big as the board allows; each row you wrote stays one line (exactly as on your phone's board), so "the top row" is the same row for everyone
+    for (let size = 230; size >= 16; size -= 3) {
       c.font = "600 " + size + "px Andika, sans-serif";
-      const lineH = size * 1.3, gap = size * (passage ? 0.28 : 0.42), pad = size * 0.14, items = [];
+      const lineH = size * (passage ? 1.3 : 1.2), gap = size * (passage ? 0.28 : 0.42), pad = size * 0.14, items = [];
+      if (!passage && size > 22 && rows.some(row => row.reduce((w, t) => w + c.measureText(t.d || t.t).width + pad * 2 + gap, -gap) > A.w)) continue;
       let y = 0, widest = 0;
       for (let r = 0; r < rows.length; r++) {
         let line = [], x = 0;
@@ -2512,7 +2530,9 @@ notify pgrst, 'reload schema';
     if (F.turnCue && (t - F.turnCue.t < 2.2 || F.waiting)) {
       const k = crEase((t - F.turnCue.t) / 0.3), w = 260, x0 = CR_BOARD.x + CR_BOARD.w - w - 30, y0 = CR_BOARD.y + 22;
       c.save(); c.globalAlpha = k; c.fillStyle = "#E8590C"; crRR(c, x0, y0, w, 60, 30); c.fill();
-      c.fillStyle = "#fff"; c.font = "700 34px Andika, sans-serif"; c.textAlign = "center"; c.textBaseline = "middle"; c.fillText("Your turn!", x0 + w / 2, y0 + 31); c.restore();
+      c.fillStyle = "#fff"; c.font = "700 34px Andika, sans-serif"; c.textAlign = "center"; c.textBaseline = "middle"; c.fillText("Your turn!", x0 + w / 2, y0 + 31);
+      if (F.waiting) { const sub = F.turnCue.tile ? "Say it, then tap the answer" : "Say it, then tap ▶ Continue"; c.font = "600 24px Andika, sans-serif"; const sw = c.measureText(sub).width + 36; c.fillStyle = "rgba(0,0,0,.55)"; crRR(c, x0 + w - sw, y0 + 70, sw, 40, 20); c.fill(); c.fillStyle = "#FFE7C2"; c.fillText(sub, x0 + w - sw / 2, y0 + 91); }
+      c.restore();
     }
     // the desk, the things that move, then the stick in front of it all
     c.drawImage(F.front, 0, 0);
@@ -2722,7 +2742,7 @@ notify pgrst, 'reload schema';
     const cvRef = useRef(null), S = useRef({}), pen = useRef(null);
     const list = useMemo(() => crSorted(cues), [cues]);
     const fx = useMemo(() => fxOnly(list), [list]);
-    const stripOn = hasStrip(list);
+    const stripOn = hasStrip(list) || tool === "word";
     const A = useMemo(() => crAssets(lesson, number, stripOn), [lesson.id, lesson.board, lesson.title, lesson.stage, number, stripOn]);
     S.current = { list, fx, A, nowT, tool, penCol };
     useEffect(() => {
@@ -7512,6 +7532,8 @@ notify pgrst, 'reload schema';
   }
   function Board({ lesson, number, ix, tkey, onTile, points, edit, cue, mark, turn, flash, hint, follow, stage, clip, onClipEnd, clipLabel, strip, voice, onPen, penCol }) {
     const rowsOf = useMemo(() => parseBoard(lesson.board, lesson.stage === 3), [lesson.board]);
+    // every row you wrote is one line, as wide as the widest row allows: the same rows, in the same lines, as the classroom your students watch
+    const fitEm = useMemo(() => { if (lesson.stage === 3) return 0; const c = document.createElement("canvas").getContext("2d"); c.font = "600 100px Andika, sans-serif"; let m = 0; for (const row of rowsOf) { if (row.some(t => t.s)) continue; m = Math.max(m, row.reduce((w, t) => w + c.measureText(t.d || t.t).width / 100 + 0.62, 0)); } return Math.round(m * 100) / 100; }, [rowsOf]);
     const boardRef = useRef(null), stickRef = useRef(null);
     const cp = posOf(rowsOf, cue), mp = posOf(rowsOf, mark), hp = posOf(rowsOf, hint);
     const cpKey = cp ? cp.r + "-" + cp.c : "";
@@ -7530,11 +7552,11 @@ notify pgrst, 'reload schema';
     }, [cpKey, lesson.board, follow]);
     const at = (p, ri, ti) => p && p.r === ri && p.c === ti;
     return html`<div class=${"boardwrap" + (edit ? " edit" : "")}>
-      <div class=${"board" + (cp ? " cueing" : "") + (turn ? " turn" : "") + (lesson.stage === 3 ? " passage" : "") + (strip || (stage && stage.strip.length) ? " hasstrip" : "") + (onPen ? " pening" : "")} ref=${boardRef}>
+      <div class=${"board" + (cp ? " cueing" : "") + (turn ? " turn" : "") + (lesson.stage === 3 ? " passage" : "") + (strip || (stage && stage.strip.length) ? " hasstrip" : "") + (onPen ? " pening" : "") + (fitEm ? " fitrows" : "")} style=${fitEm ? "--fit:" + fitEm : null} ref=${boardRef}>
         <div class="bnum" aria-label=${"Lesson " + number}>Lesson ${number}</div>
         ${voice ? html`<${VoiceBars} src=${voice.src} secs=${voice.secs} k=${voice.k}/>` : null}
         ${turn ? html`<div class="turnhint" aria-label="Your turn"><${Ic.hand} size=${32}/></div>` : null}
-        ${rowsOf.length ? rowsOf.map((row, ri) => html`<div class="brow" key=${ri} style=${row.some(t => (t.d || t.t).length > 2) ? "--cols:" + Math.max(1, Math.min(5, row.length)) : null}>${row.map((t, ti) => {
+        ${rowsOf.length ? rowsOf.map((row, ri) => html`<div class=${"brow" + (fitEm && !row.some(t => t.s) ? " one" : "")} key=${ri} style=${row.some(t => (t.d || t.t).length > 2) ? "--cols:" + Math.max(1, Math.min(5, row.length)) : null}>${row.map((t, ti) => {
           const snd = soundFor(ix, lesson.id, t.t);
           const cls = "tile" + (t.s ? " sent" : "") + (tkey === "tile:" + lesson.id + ":" + t.t ? " on" : "") + (!snd ? " mute" : "") +
             (edit ? (snd ? (snd.own ? " own" : " borrow") : " miss") : "") + (points && points.indexOf(t.t) >= 0 ? " pt" : "") +
@@ -8045,6 +8067,7 @@ notify pgrst, 'reload schema';
       </div>` : null}
       ${teacher && L.on ? html`<${ClassPanel} s=${s} who=${who} lessonTitle=${lesson.title} lessonNo=${vIdx + 1} studentId=${student.id}/>` : null}
       ${teacher && L.on && L.mode !== "write" ? html`<${LiveTools} lesson=${lesson} tool=${ltool} setTool=${setLtool} pen=${lpen} setPen=${setLpen} stage=${liveStage}/>` : null}
+      ${turn && !teacher ? html`<div class="turnbar" role="status"><span class="tbh">✋</span><div><b>Your turn!</b><span>${turn.cue.tile ? "Say the answer out loud, then tap it on the board." + (turn.tries >= 2 ? " Look — it's glowing." : "") : "Say it out loud: read it, or answer the teacher's question. Then tap ▶ Continue."}</span></div>${turn.cue.tile ? null : html`<button class="btn slim" onClick=${resume}>▶ Continue</button>`}</div>` : null}
       ${showClass ? html`<${ClassroomPlayer} lesson=${lesson} number=${vIdx + 1} k=${"explain:" + lid} src=${srcFor(lesson.explain)} secs=${lesson.explainSecs} cues=${lesson.cues || []} ix=${ix}
         onTile=${onTile} waiting=${!!turn} cheer=${flash && flash.ok ? flash : null}/>` : null}
       ${L.on && L.mode === "write"
@@ -8194,34 +8217,47 @@ notify pgrst, 'reload schema';
 
   /* ================= spelling rules: a guide for the teacher ================= */
   const RULES = [
-    { t: "Sounds before names", r: "Every letter has a name (bee) and a sound (/b/). To read, he needs the sound. Teach the sound first; names can come later.", ex: "b = /b/ · m = /mmm/ · s = /sss/", x: "", say: "Keep sounds short: /b/, not \"buh\". Sounds like s, m, f, n can be stretched: sssss." },
-    { t: "Short vowels", r: "a e i o u each have a short sound. When a consonant closes the vowel in (cat, pen, sit, hot, cup), the vowel is short.", ex: "a apple · e egg · i ink · o on · u up", x: "", say: "\"When a consonant shuts the door after the vowel, the vowel says its short sound.\"" },
-    { t: "Why u can sound like \"a\"", r: "Short u is the sound \"uh\": cup, but, sun, mud. It is close to the \"a\" in many languages, which is why it can sound like an a. English short a is different: the a in cat.", ex: "uh: cup · but · sun · mud", x: "o also says \"uh\" in some common words: son, mother, love, come, some, money. u says \"oo\" in put, push, pull, full, bush. u says \"you\" in cute, music, student.", say: "\"Short u says uh, like when you're surprised: uh!\"" },
-    { t: "Long vowels: open syllables", r: "When a vowel ends a syllable (nothing closes it in), it usually says its name.", ex: "go · me · hi · be-gin · mu-sic · ro-bot", x: "", say: "\"Door open, the vowel says its name.\"" },
-    { t: "Magic e", r: "Vowel, consonant, then e at the end: the e makes no sound but makes the vowel say its name.", ex: "cap → cape · pin → pine · hop → hope · cut → cute", x: "Common words that break it: have, give, live, come, some, done, love, one.", say: "\"Magic e jumps over the letter and makes the vowel say its name.\"" },
-    { t: "Soft c and soft g", r: "c says /s/ before e, i or y, and /k/ before everything else. g often says /j/ before e, i or y.", ex: "conceal: con (k) + ceal (s) · cent · city · cycle · cat · cut · gem · giant · gym", x: "Hard g stays in some common words: get, give, girl, gift, begin.", say: "\"Look at the letter after c. If it's e, i or y, c says /s/.\"" },
-    { t: "Two letters, one sound", r: "Some pairs of letters make one new sound.", ex: "sh ship · ch chip · th thin / this · ph phone (f) · wh when (w) · ck duck · ng sing · nk bank · qu queen (kw)", x: "ck comes right after a short vowel: duck, back, kick.", say: "\"These two are best friends: together they make one sound.\"" },
-    { t: "ch has three sounds", r: "Most words: /ch/ as in chip. Words that came from Greek: /k/. Words from French: /sh/. Spelling alone can't tell you which, so learn the common ones by sight.", ex: "chip · chair · character (k) · school (k) · Christmas (k) · chemist (k) · chef (sh) · machine (sh)", x: "", say: "\"ch usually says /ch/. A few words borrowed from other languages kept their own sound.\"" },
-    { t: "Vowel teams", r: "Two vowels together often make one sound. Teach each team on its own.", ex: "ai rain · ay day · ee see · ea eat · oa boat · ow snow · oo moon / book · ou out · ow cow · oi coin · oy boy · igh night · ie pie · ue blue · ew new", x: "ay, oy and ow usually come at the end of a word; ai, oi and ou in the middle. ea can also say \"e\": head, bread.", say: "\"These two vowels work as a team.\"" },
-    { t: "Bossy r", r: "An r after a vowel changes the vowel's sound.", ex: "ar car · or fork · er her · ir bird · ur turn · air hair · are care", x: "er, ir and ur all say the same sound. You learn which one by seeing the word.", say: "\"r is bossy: it changes the vowel in front of it.\"" },
-    { t: "The lazy vowel (schwa)", r: "In longer words, the vowel in the weak part often says a quiet \"uh\". This is the biggest reason English spelling seems random: you can't hear which vowel it is.", ex: "about · pencil · lemon · banana · doctor", x: "", say: "To spell it, say the word slowly the way it's written: lem-ON, pen-CIL." },
-    { t: "Silent letters", r: "Some letters are written but not said. Most of them were said hundreds of years ago.", ex: "kn knee · wr write · mb lamb · gh night · gn sign · h hour · t listen", x: "", say: "\"This letter is asleep: we write it, but we don't say it.\"" },
-    { t: "Endings", r: "-s says /s/ or /z/. -es comes after s, x, ch, sh. -ed has three sounds. Short vowel: double the last letter before -ing. Magic e: drop the e.", ex: "cats (s) · dogs (z) · boxes · jumped (t) · played (d) · wanted (id) · hop → hopping · hope → hoping", x: "", say: "\"-ed always means it already happened, whatever sound it makes.\"" },
-    { t: "y has three jobs", r: "At the start of a word, y is a consonant. At the end of a short word, it says \"eye\". At the end of a longer word, it says \"ee\".", ex: "yes · my · fly · happy · baby · gym (i)", x: "", say: "" },
-    { t: "Tricky words", r: "Some very common words don't follow the rules. Learn them by sight, two or three a week.", ex: "the · a · I · to · do · was · said · of · you · your · they · are · one · two · could · would · should · who · what · where · there · their · people", x: "", say: "Show him the part that's normal and the part that's tricky: in said, s and d are normal, ai is the tricky part." },
+    { t: "Sounds before names", r: "Every letter has a name (bee) and a sound (/b/). To read, he needs the sound. Teach the sound first; names can come later.", ex: "b = /b/ · m = /mmm/ · s = /sss/", x: "", say: "Keep sounds short: /b/, not \"buh\". Sounds like s, m, f, n can be stretched: sssss.", rule: "Read a letter by its SOUND, not its name.", les: ["s1-02"] },
+    { t: "Short vowels", r: "a e i o u each have a short sound. When a consonant closes the vowel in (cat, pen, sit, hot, cup), the vowel is short.", ex: "a apple · e egg · i ink · o on · u up", x: "", say: "\"When a consonant shuts the door after the vowel, the vowel says its short sound.\"", rule: "A vowel closed in by a consonant (cat, pen, sit, hot, cup) says its SHORT sound.", les: ["s1-03", "s1-07"] },
+    { t: "Why u can sound like \"a\"", r: "Short u is the sound \"uh\": cup, but, sun, mud. It is close to the \"a\" in many languages, which is why it can sound like an a. English short a is different: the a in cat.", ex: "uh: cup · but · sun · mud", x: "o also says \"uh\" in some common words: son, mother, love, come, some, money. u says \"oo\" in put, push, pull, full, bush. u says \"you\" in cute, music, student.", say: "\"Short u says uh, like when you're surprised: uh!\"", rule: "Short u says /uh/ (cup, sun) — not the 'oo' of our languages.", les: ["s1-11"] },
+    { t: "Long vowels: open syllables", r: "When a vowel ends a syllable (nothing closes it in), it usually says its name.", ex: "go · me · hi · be-gin · mu-sic · ro-bot", x: "", say: "\"Door open, the vowel says its name.\"", rule: "A vowel at the END of a syllable says its NAME: go, me, ba-by.", les: ["s2-13"] },
+    { t: "Magic e", r: "Vowel, consonant, then e at the end: the e makes no sound but makes the vowel say its name.", ex: "cap → cape · pin → pine · hop → hope · cut → cute", x: "Common words that break it: have, give, live, come, some, done, love, one.", say: "\"Magic e jumps over the letter and makes the vowel say its name.\"", rule: "Vowel + consonant + e at the end: the e is silent and the vowel says its NAME.", les: ["s2-03", "s2-04"] },
+    { t: "Soft c and soft g", r: "c says /s/ before e, i or y, and /k/ before everything else. g often says /j/ before e, i or y.", ex: "conceal: con (k) + ceal (s) · cent · city · cycle · cat · cut · gem · giant · gym", x: "Hard g stays in some common words: get, give, girl, gift, begin.", say: "\"Look at the letter after c. If it's e, i or y, c says /s/.\"", rule: "Before e, i or y: c says /s/ and g says /j/. Anywhere else: /k/ and /g/.", les: ["s2-09"] },
+    { t: "Two letters, one sound", r: "Some pairs of letters make one new sound.", ex: "sh ship · ch chip · th thin / this · ph phone (f) · wh when (w) · ck duck · ng sing · nk bank · qu queen (kw)", x: "ck comes right after a short vowel: duck, back, kick.", say: "\"These two are best friends: together they make one sound.\"", rule: "sh, ch, th, ph, wh, ck, ng: two letters, ONE sound. Read them together.", les: ["s2-01", "s2-02"] },
+    { t: "ch has three sounds", r: "Most words: /ch/ as in chip. Words that came from Greek: /k/. Words from French: /sh/. Spelling alone can't tell you which, so learn the common ones by sight.", ex: "chip · chair · character (k) · school (k) · Christmas (k) · chemist (k) · chef (sh) · machine (sh)", x: "", say: "\"ch usually says /ch/. A few words borrowed from other languages kept their own sound.\"", rule: "ch says /ch/. In a few borrowed words it says /k/ (school) or /sh/ (chef).", les: ["s2-17"] },
+    { t: "Vowel teams", r: "Two vowels together often make one sound. Teach each team on its own.", ex: "ai rain · ay day · ee see · ea eat · oa boat · ow snow · oo moon / book · ou out · ow cow · oi coin · oy boy · igh night · ie pie · ue blue · ew new", x: "ay, oy and ow usually come at the end of a word; ai, oi and ou in the middle. ea can also say \"e\": head, bread.", say: "\"These two vowels work as a team.\"", rule: "Two vowels side by side make ONE sound. Learn each team.", les: ["s2-05", "s2-06", "s2-07", "s2-15", "s2-16"] },
+    { t: "Bossy r", r: "An r after a vowel changes the vowel's sound.", ex: "ar car · or fork · er her · ir bird · ur turn · air hair · are care", x: "er, ir and ur all say the same sound. You learn which one by seeing the word.", say: "\"r is bossy: it changes the vowel in front of it.\"", rule: "An r after a vowel changes the vowel: ar, or, er, ir, ur.", les: ["s2-08"] },
+    { t: "The lazy vowel (schwa)", r: "In longer words, the vowel in the weak part often says a quiet \"uh\". This is the biggest reason English spelling seems random: you can't hear which vowel it is.", ex: "about · pencil · lemon · banana · doctor", x: "", say: "To spell it, say the word slowly the way it's written: lem-ON, pen-CIL.", rule: "In longer words the weak vowel says a quiet /uh/.", les: ["s2-19"] },
+    { t: "Silent letters", r: "Some letters are written but not said. Most of them were said hundreds of years ago.", ex: "kn knee · wr write · mb lamb · gh night · gn sign · h hour · t listen", x: "", say: "\"This letter is asleep: we write it, but we don't say it.\"", rule: "kn, wr, mb, gh: one letter is written but not said.", les: ["s2-18"] },
+    { t: "Endings", r: "-s says /s/ or /z/. -es comes after s, x, ch, sh. -ed has three sounds. Short vowel: double the last letter before -ing. Magic e: drop the e.", ex: "cats (s) · dogs (z) · boxes · jumped (t) · played (d) · wanted (id) · hop → hopping · hope → hoping", x: "", say: "\"-ed always means it already happened, whatever sound it makes.\"", rule: "-s says /s/ or /z/. -ed says /t/, /d/ or /id/. Short vowel: double before -ing. Magic e: drop the e.", les: ["s2-10", "s2-20"] },
+    { t: "y has three jobs", r: "At the start of a word, y is a consonant. At the end of a short word, it says \"eye\". At the end of a longer word, it says \"ee\".", ex: "yes · my · fly · happy · baby · gym (i)", x: "", say: "", rule: "y = /y/ at the start, 'eye' at the end of a short word, 'ee' at the end of a longer word.", les: ["s2-14"] },
+    { t: "Tricky words", r: "Some very common words don't follow the rules. Learn them by sight, two or three a week.", ex: "the · a · I · to · do · was · said · of · you · your · they · are · one · two · could · would · should · who · what · where · there · their · people", x: "", say: "Show him the part that's normal and the part that's tricky: in said, s and d are normal, ai is the tricky part.", rule: "Some very common words break the rules. Learn them by sight.", les: ["s2-11"] },
   ];
-  function RulesGuide({ onClose }) {
+  function RulesGuide({ onClose, s, onOpen }) {
+    const [busy, setBusy] = useState(false);
+    async function teach(r) {
+      const id = r.les[0], have = s.lessons.some(l => l.id === id);
+      if (!have) { setBusy(true); try { await addLessons(PACK_ALL.filter(l => r.les.includes(l[0])), s); toast("Added to your list, in course order."); } catch (e) { toast(errText(e)); setBusy(false); return; } setBusy(false); }
+      onClose(); onOpen(id);
+    }
     return html`<div class="full sheetpage" role="dialog" aria-label="Spelling rules">
-      <div class="fhead"><b class="rgtitle">Spelling rules</b><button class="iconbtn" onClick=${onClose} aria-label="Close"><${Ic.x}/></button></div>
+      <div class="fhead"><b class="rgtitle">📏 Spelling rules</b><button class="iconbtn" onClick=${onClose} aria-label="Close"><${Ic.x}/></button></div>
       <div class="sbody rg">
-        <p class="rgintro">Why English words sound the way they do, with what to say when you teach each rule. Tap a rule to open it.</p>
-        ${RULES.map((r, i) => html`<details class="rgcard" key=${i}>
+        <p class="rgintro">The 15 rules of English reading, in teaching order. Each one has its own lesson in the course: tap <b>Teach this rule</b> to open it (it's added to your list if it isn't there yet).</p>
+        ${RULES.map((r, i) => {
+          const L = PACK_ALL.find(l => l[0] === r.les[0]);
+          return html`<details class="rgcard" key=${i}>
           <summary><span class="rgn">${i + 1}</span>${r.t}</summary>
-          <p>${r.r}</p>
+          <div class="rgrule"><small>THE RULE</small>${r.rule}</div>
           <div class="rgex">${r.ex}</div>
-          ${r.x ? html`<p class="rgx"><b>But:</b> ${r.x}</p>` : null}
-          ${r.say ? html`<p class="rgsay"><b>Say:</b> ${r.say}</p>` : null}
-        </details>`)}
+          ${r.x ? html`<p class="rgx"><b>Breaks the rule:</b> ${r.x}</p>` : null}
+          <p class="rgwhy"><b>Why:</b> ${r.r}</p>
+          <div class="rgsteps"><b>Teach it in 3 steps</b><ol>
+            <li>Write the rule's letters on the board and say the rule${r.say ? html`: <i>${r.say.replace(/^"|"$/g, "")}</i>` : "."}</li>
+            <li>Read the examples with the stick, slowly, then a bit faster.</li>
+            <li>✋ Your turn: say one of the words — the student taps it and reads it back.</li></ol></div>
+          ${L ? html`<button class="btn slim" disabled=${busy} onClick=${() => teach(r)}>📘 Teach this rule: “${L[3]}”</button>` : null}
+        </details>`; })}
       </div>
     </div>`;
   }
@@ -8283,8 +8319,10 @@ notify pgrst, 'reload schema';
     if (cur.length) parts.push(cur.join("\n"));
     return parts.filter(Boolean);
   }
+  // The whole course, in order. Each lesson comes with its board written and notes on what to say and what students do.
   const LESSON_PACKS = [
-    { key: "s2", title: "Stage 2: English rules", about: "12 lessons: sh, ch, th, magic e, ee, ai, oo, ar, soft c and g, endings and tricky words.", lessons: [
+    { key: "s1", title: "Stage 1: Foundation", about: "From letters to first sentences.", groups: [[1, 4, "Letters and their sounds"], [5, 6, "Joining sounds: ba be bi bo bu"], [7, 11, "Three-letter words, one vowel at a time"], [12, 13, "Change the vowel, change one letter"], [14, 14, "Two consonants together"], [15, 15, "First sentences"]], lessons: [["s1-01", 1, 1, "The alphabet", "Aa Bb Cc Dd Ee Ff Gg\nHh Ii Jj Kk Ll Mm Nn\nOo Pp Qq Rr Ss Tt Uu\nVv Ww Xx Yy Zz", "A quick check on the order and the letter NAMES. He says he knows these, so keep it short. Record each tile with the letter's name. Point out that big and small letters are the same letter, and that books mostly use the small ones."], ["s1-02", 1, 2, "Letters have sounds", "a b c d e f g\nh i j k l m n\no p q r s t u\nv w x y z", "The big idea of the whole course: every letter has a name and a sound, and reading uses the sound. Record each tile with its SOUND, not its name. Keep c and g hard, as in cup and go. q almost always travels with u and says 'kw'. x at the end of a word says 'ks', as in box."], ["s1-03", 1, 3, "The five vowels", "a e i o u\nbag bed sit hot cup", "Vowels are the letters that sing, and every English word has at least one. Tell him plainly that English vowels don't always sound like the vowels in our language: the u in cup is not the u in our words. This is the lesson that stops 'kut' for cut. The top row reuses the sounds from lesson 2, so only the five words need recording."], ["s1-04", 1, 4, "Consonants", "b c d f g h j\nk l m n p q r\ns t v w x y z", "The other 21 letters. They can't make a word on their own; they need a vowel beside them. These tiles reuse the sounds you recorded in lesson 2, so there's nothing new to record. Mention y: at the start of a word it's a consonant, as in yes."], ["s1-05", 1, 5, "Joining sounds, part 1", "ba be bi bo bu\nda de di do du\nfa fe fi fo fu\nha he hi ho hu\nja je ji jo ju\nka ke ki ko ku\nla le li lo lu\nma me mi mo mu\nna ne ni no nu", "Consonant plus vowel, joined, exactly the way we learned. Use the English vowel sounds from lesson 3. These are pieces of words, not words. A few look like real words (he, me, no, do); real words follow other rules we'll meet later, so treat these as pieces for now. Good homework: copy the chart into his book."], ["s1-06", 1, 6, "Joining sounds, part 2", "pa pe pi po pu\nra re ri ro ru\nsa se si so su\nta te ti to tu\nva ve vi vo vu\nwa we wi wo wu\nya ye yi yo yu\nza ze zi zo zu\nca co cu\nga go gu", "Same chart, the rest of the consonants. c and g only join with a, o and u here on purpose: before e and i they usually change their sound, and that's a rule for later. Same warning as part 1: so, to, we and go are pieces here, not the real words."], ["s1-07", 1, 7, "Words with a", "bag cab dad fan\ngas ham jam lab\nman map tax van", "Three sounds joined into a word: b-a-g, bag. Have him say each sound, then say them faster until it becomes the word. Every word here follows rules he already has, so there's nothing to memorise."], ["s1-08", 1, 8, "Words with e", "bed beg jet leg\nmen net pen red\nset ten wet yes", "Same method with e. Watch that he keeps e different from i: bed, not bid."], ["s1-09", 1, 9, "Words with i", "big bin dig fix\nhit kid lip mix\npin six tin win", "Same method with i. x at the end says 'ks' (fix, mix, six)."], ["s1-10", 1, 10, "Words with o", "box cot dog hot\njob jog lot mop\nnot pot rod top", "Same method with o."], ["s1-11", 1, 11, "Words with u", "bus bug cup cut\nfun gum hut jug\nmud nut run sun", "Same method with u, the vowel behind the 'kut' problem, so go slowly. Worth warning him that a small group of words breaks this (put, push, pull, full, bush). Don't teach them yet; just tell him they exist, so a surprise later doesn't make him doubt the rule."], ["s1-12", 1, 12, "Change the vowel", "bat bet bit but\nhat hit hot hut\nbag beg big bug\npan pen pin\nsat set sit\ncat cot cut\ntap tip top\nfan fin fun\nham him hum", "Only the vowel changes in each row. Read across slowly and make every vowel sound clearly different. This is the drill that stops him reading every u like the u in our language. Most of these words already have recordings from lessons 7 to 11."], ["s1-13", 1, 13, "Change one letter", "cat hat mat rat sat\ncan pan man fan van\npet net jet wet set\npig big dig wig fig\nhot pot not lot dot\nsun run fun bun\ncat cap cup pup pop top tip tin", "Playing with letters, like we did in class: change the first letter, then the last, then the middle. The last row is a chain; each word changes one letter from the word before it. Good homework: build his own chain in his book and read it to you."], ["s1-14", 1, 14, "Two consonants together", "stop step spin swim\nflag frog drum trip\nplan glad club slip\nhand lamp milk jump\nbest desk list tent", "Two consonants side by side: each keeps its own sound, just said quickly together, s-t-o-p. The first three rows have them at the start, the last two at the end. (Pairs that make a brand-new sound, like sh, ch and th, are a rule for later.)"], ["s1-15", 1, 15, "First sentences", "the a I is to\nI can fix the van.\nSam got a job.\nThe bus is red.\nI got ten cups.\nTom and Pat run to the bus.", "Five small words to know by sight for now: the, a, I, is, to. Tell him they don't follow the rules yet and we'll explain them later. Re-record 'a' and 'to' in this lesson: the ones reused from earlier are the letter sound and the sound piece, not the words. Then real sentences using only what he's learned. Record each sentence at a natural speed and have him read them to you."]] },
+    { key: "s2", title: "Stage 2: English rules", about: "The spelling rules, one lesson each, in the order he needs them.", groups: [[1, 2, "Two letters, one sound: sh ch th ck ng wh ph"], [3, 4, "Magic e"], [5, 7, "Vowel teams: ee ea ai ay oa ow oo"], [8, 8, "Bossy r: ar or er ir ur"], [9, 9, "Soft c and soft g"], [10, 11, "Endings and tricky words"], [12, 12, "Sentences with the new rules"], [13, 20, "More rules: open syllables, y, more teams, ch, silent letters, schwa, -ing"]], lessons: [
       ["s2-01", 2, 1, "sh, ch, th", "sh ch th\nship shop fish dish\nchip chat much rich\nthin this that bath", "Two letters, one new sound. sh as in ship, ch as in chip, th as in thin. Tell him to look for the pair before he sounds the word out: s-h is not s then h."],
       ["s2-02", 2, 2, "ck, ng, wh, ph", "ck ng wh ph\nback duck neck sick\nring song long king\nwhen whip what\nphone graph", "More pairs that make one sound. ck says k, ng is the sound at the end of song, wh says w, ph says f."],
       ["s2-03", 2, 3, "Magic e with a", "cap cape\ntap tape\nmad made\ncan cane\nmake bake take lake game name", "The e at the end is silent, but it makes the a say its name. Read each pair across: cap, cape. This is the rule that fixes most long-vowel mistakes."],
@@ -8297,41 +8335,73 @@ notify pgrst, 'reload schema';
       ["s2-10", 2, 10, "Endings: -s, -ed, -ing", "cats dogs bags\njumped played wanted\njumping playing reading", "Find the word you know, then add the ending. -ed can sound like t, d or id."],
       ["s2-11", 2, 11, "Tricky words", "the said was you they\nwhat where who come some\none two are were your", "Common words that don't follow the rules. Learn them by sight, a few at a time, and keep coming back to them."],
       ["s2-12", 2, 12, "Sentences with the new rules", "The ship is in the sea.\nI see a cat on the boat.\nShe made a cake for me.\nWe play in the park.", "Real sentences using Stage 2 rules. Have him read each one to you, then read it back to him smoothly."],
+      ["s2-13", 2, 13, "Open syllables: the vowel says its name", "go no so\nme he we be\nhi I\nba-by ti-ger ro-bot\nmu-sic pa-per o-pen", "RULE: when a vowel ENDS a syllable (nothing closes it in), it says its NAME. Compare with Stage 1: in 'got' the t closes the o in, so it's short; in 'go' nothing closes it, so it says its name. Read the long words in parts with the stick: ba-by. YOUR TURN ideas: 'Which part says its name?'"],
+      ["s2-14", 2, 14, "y has three jobs", "yes yet yam\nmy by fly cry\nhappy baby funny sunny\ngym myth", "RULE: at the START of a word y is a consonant (yes). At the END of a short word it says 'eye' (my). At the END of a longer word it says 'ee' (happy). Read row by row and say which job y is doing. YOUR TURN: 'Find a y that says ee.'"],
+      ["s2-15", 2, 15, "More vowel teams: ou, ow, oi, oy", "ou ow oi oy\nout loud cloud\ncow now down\ncoin oil join\nboy toy enjoy", "RULE: ou and ow (in cow) both say 'ow', as when you're hurt. oi and oy both say 'oy'. oi and ou sit in the middle of a word; ow and oy usually come at the end. YOUR TURN: 'Which word ends with oy?'"],
+      ["s2-16", 2, 16, "igh, ie, ue, ew", "igh ie ue ew\nnight light high\npie tie lie\nblue glue true\nnew few grew", "RULE: igh and ie both say the long i (eye). ue and ew both say 'oo' (or 'you'). The g and h in igh are silent. YOUR TURN: 'Tap the word that says night.'"],
+      ["s2-17", 2, 17, "ch has three sounds", "ch\nchip chair much\nschool Christmas chemist\nchef machine", "RULE: ch usually says /ch/ (chip). In some words that came from Greek it says /k/ (school). In some words from French it says /sh/ (chef). Teach the first row as the rule and the other two rows as words to know by sight."],
+      ["s2-18", 2, 18, "Silent letters", "kn wr mb gh\nknee knife know\nwrite wrong wrap\nlamb thumb climb\nnight right light", "RULE: in kn the k is silent, in wr the w is silent, in mb the b is silent, in igh the gh is silent. We write them, but we don't say them. Circle the silent letter in each word as you read it."],
+      ["s2-19", 2, 19, "The lazy vowel (schwa)", "about again\npencil lemon\nbanana sofa\ndoctor teacher", "RULE: in longer words the weak part often says a quiet 'uh', whatever vowel is written: a-bout, pen-cil, lem-on. That's why spelling these words is hard. To spell them, say the word slowly the way it's WRITTEN: lem-ON, pen-CIL."],
+      ["s2-20", 2, 20, "Adding -ing: double or drop", "hop hopping\nrun running\nsit sitting\nhope hoping\nmake making\nride riding", "RULE: a short vowel word doubles its last letter before -ing (hop, hopping) so the vowel stays short. A magic e word drops the e (hope, hoping). Read each pair across and ask: short vowel or magic e?"]
     ] },
-    { key: "s3", title: "Stage 3: First reading passages", about: "2 short passages he can read with you. Add your own by pasting text or a PDF.", lessons: [
+    { key: "s3", title: "Stage 3: Reading stories", about: "Short stories that only use what he has learned so far. Read together with the stick, then he reads alone. Add your own stories any time with “Add a reading passage”.", groups: [], lessons: [
       ["s3-01", 3, 1, "The red bus", "Sam got on the bus. The bus was red.\nSam sat at the back. He had a bag and a hat.\nThe bus went up the hill and down the hill. It was fun!", "A short story using only Stage 1 skills and a few sight words. Read it to him first with the stick, then let him read it back while pointing at each word."],
       ["s3-02", 3, 2, "At the shop", "Tembo went to the shop to get milk and bread.\nThe shop was big. It had lots of things to eat.\nHe paid the man, put the milk in his bag and went home.", "Uses sh, th, ee and a few tricky words from Stage 2. Ask him a question after each line: who, where, what."],
+      ["s3-03", 3, 3, "My cat", "I have a cat. Her name is Pip.\nPip is fat and has a red bag.\nShe naps on the mat in the sun. Pip is a fun cat!", "Stage 1 skills only, with the sight words I, the, is, has, her, she. Read it to him first with the stick, then he reads it back, pointing at each word. YOUR TURN: stop at 'Pip' and ask what the cat is called."],
+      ["s3-04", 3, 4, "The big fish", "Seth went to the sea with his dad.\nThey sat on a rock and fed the fish.\nA big fish came up. It was green and quick!\nSeth said, \"I wish I had a ship.\"", "Uses sh, th, ee, ck and a few tricky words (they, said, was). After each line ask: who? where? what happened?"],
+      ["s3-05", 3, 5, "A day at the farm", "Kate and Jake rode to the farm on a cart.\nThey fed the hens and the goats.\nA man gave them a cake and a cup of milk.\nIt was a great day. They will come back in May.", "Uses magic e (Kate, rode, gave), ar (farm, cart), oa, ay. Have him find every magic e word after reading."],
+      ["s3-06", 3, 6, "The night sky", "At night, Amina looks up at the sky.\nThe moon is big and bright.\nShe can count the stars, one by one.\nA soft wind blows. Now it is time to sleep.", "Uses igh, oo, ou, ow and y as 'eye'. Read it slowly together, then let him read it alone. YOUR TURN: 'Find the word that tells us when.'"]
     ] },
+    { key: "s4", title: "Stage 4: More practice", about: "Word games that make reading quick and sure: change letters, build longer words, word families, read and answer.", groups: [], lessons: [["s4-01", 4, 1, "Change the vowel: all five", "bag beg big bog bug\npat pet pit pot put\nhat het hit hot hut\nlag leg lig log lug", "Every row keeps the same first and last letter and changes only the vowel, a e i o u. Some are not real words: that's fine, they test the vowel sound only. Read across fast once he's sure. YOUR TURN: say one, he taps it."], ["s4-02", 4, 2, "Change two letters", "ship shop chop chip\nthin then than that\nsing sang song long\nclap clip slip slap\nstop step stem stamp", "Each word changes one or two letters from the one before it. Say what changed each time: 'sh became ch', 'i became o'. Good homework: make his own chain of four words."], ["s4-03", 4, 3, "Build a longer word", "at cat chat\nin pin spin\nan pan plan\nlay play plays\nrain train trains", "Start with a small word he knows and add letters to the front or the end. Read the small word first, then the bigger ones. This shows him that long words are made of short parts."], ["s4-04", 4, 4, "Word families", "cat hat mat\ncake lake make\nrain pain train\nlight night right\nfun run sun", "Words in a family share the same ending and rhyme. Read the ending first (at, ake, ain, ight, un), then add the first sound. YOUR TURN: 'Tap the word that rhymes with sun.'"], ["s4-05", 4, 5, "Read and answer", "Tom has a red ball.\nThe ball is in the box.\nTom kicks the ball to Ana.\nAna kicks it back to Tom.", "Read each sentence together, then ask a question about it: What colour is the ball? Where is the ball? Who kicks it? He answers by tapping the word. This turns reading into understanding."]] },
   ];
-  async function addPack(pack, s) {
+  const PACK_ALL = LESSON_PACKS.reduce((a, p) => a.concat(p.lessons), []);
+  async function addLessons(list, s) {
     const have = new Set(s.lessons.map(l => l.id));
     let added = 0;
-    for (const [id, stage, order, title, board, note] of pack.lessons) {
+    for (const [id, stage, order, title, board, note] of list) {
       if (have.has(id)) continue;
       await rt.db.collection("lessons").doc(id).set({ stage, order, title, board, note, explain: null, explainSecs: 0, updatedAt: Date.now() });
       added++;
     }
     return added;
   }
-  function PacksSheet({ s, onClose }) {
+  const addPack = (pack, s) => addLessons(pack.lessons, s);
+  function PacksSheet({ s, onClose, onOpen }) {
     const [busy, setBusy] = useState(null);
-    const have = new Set(s.lessons.map(l => l.id));
-    return html`<div class="scrim" onClick=${e => { if (e.target === e.currentTarget) onClose(); }}>
-      <div class="sheet" role="dialog" aria-label="Ready-made lessons">
-        <b>Ready-made lessons</b>
-        <p class="help">These are added after your own lessons, with notes on what to explain. You still record your voice and the tiles.</p>
+    const byId = new Map(s.lessons.map(l => [l.id, l]));
+    const numOf = id => { const i = s.lessons.findIndex(l => l.id === id); return i < 0 ? null : i + 1; };
+    async function addSome(list, key) {
+      setBusy(key);
+      try { const n = await addLessons(list, s); toast(n ? "Added " + n + (n === 1 ? " lesson" : " lessons") + " to your list, in course order." : "They're already in your list."); } catch (e) { toast(errText(e)); }
+      setBusy(null);
+    }
+    return html`<div class="full sheetpage" role="dialog" aria-label="The course">
+      <div class="fhead"><b class="rgtitle">📘 The course</b><button class="iconbtn" onClick=${onClose} aria-label="Close"><${Ic.x}/></button></div>
+      <div class="sbody rg course">
+        <p class="rgintro">The whole reading course, in the order you teach it. Every lesson comes with its board already written and notes on what to say. Tap <b>Add</b> to put a lesson in your list (or add a whole stage at once), then open it and record.</p>
+        <div class="howcard"><b>How each lesson works</b>
+          <ol><li><b>Record the tiles</b>: tap each letter or word on the board and say its sound. Students tap a tile to hear you.</li>
+          <li><b>Record your explanation</b> on the board: talk, and tap what you're talking about — students see the stick point at exactly that tile.</li>
+          <li>Add <b>✋ Your turn</b> moments: ask a question, tap Your turn, then tap the right answer. The lesson stops for the student until they tap it.</li>
+          <li>When they've got it, tap <b>Pass</b> on their page: the next lesson opens for them.</li></ol></div>
         ${LESSON_PACKS.map(p => {
-          const left = p.lessons.filter(l => !have.has(l[0])).length;
-          return html`<div class="card" key=${p.key}>
-            <b>${p.title}</b><p class="help">${p.about}</p>
-            <button class="btn" disabled=${!left || busy} onClick=${async () => {
-              setBusy(p.key);
-              try { const n = await addPack(p, s); toast(n ? "Added " + n + " lessons." : "Already added."); } catch (e) { toast(errText(e)); }
-              setBusy(null);
-            }}>${busy === p.key ? "Adding…" : left ? "Add " + left + " lessons" : "Added"}</button>
-          </div>`;
+          const miss = p.lessons.filter(l => !byId.has(l[0]));
+          const head = o => (p.groups || []).find(g => g[0] === o);
+          return html`<section class="cstage" key=${p.key}>
+            <div class="cshead"><div><b>${p.title}</b><small>${p.about}</small></div>
+              ${miss.length ? html`<button class="btn slim" disabled=${!!busy} onClick=${() => addSome(miss, p.key)}>${busy === p.key ? "Adding…" : miss.length === p.lessons.length ? "Add all " + miss.length : "Add the " + miss.length + " missing"}</button>` : html`<span class="cdone">✓ All in your list</span>`}</div>
+            ${p.lessons.map(l => {
+              const g = head(l[2]), have = byId.get(l[0]), n = have ? numOf(l[0]) : null;
+              return html`<${Fragment} key=${l[0]}>
+                ${g ? html`<div class="cgroup">${g[0] === g[1] ? "Lesson " + g[0] : "Lessons " + g[0] + "–" + g[1]} · ${g[2]}</div>` : null}
+                <div class="crow">
+                  <span class="cno">${l[2]}</span>
+                  <div class="cmain"><b>${l[3]}</b><small>${String(l[4]).split("\n")[0].slice(0, 48)}</small></div>
+                  ${have ? html`<button class="chip on" onClick=${() => { onClose(); onOpen(l[0]); }}>${have.explain ? "✓ Open" : "Open"}${n ? " · #" + n : ""}</button>` : html`<button class="cadd" disabled=${!!busy} onClick=${() => addSome([l], l[0])}>＋ Add</button>`}
+                </div></${Fragment}>`;
+            })}
+          </section>`;
         })}
-        <button class="btn quiet" onClick=${onClose}>Close</button>
       </div>
     </div>`;
   }
@@ -8394,7 +8464,7 @@ notify pgrst, 'reload schema';
         let ok = 0;
         for (const t of tiles) if (soundFor(ix, l.id, t.t)) ok++;
         return html`<${Fragment} key=${l.id}>
-          ${head ? html`<h2 class="stagehead">Stage ${stg}${STAGES[stg] ? ": " + STAGES[stg] : ""}</h2>` : null}
+          ${head ? html`<h2 class="stagehead">Stage ${stg}${STAGES[stg] ? ": " + STAGES[stg] : ""}${STAGE_WHAT[stg] ? html`<small>${STAGE_WHAT[stg]}</small>` : null}</h2>` : null}
           <button class="row" onClick=${() => onOpen(l.id)}>
             <span class="num">${i + 1}</span>
             <span class="rowmain"><b>${l.title || "Untitled lesson"}</b>
@@ -8407,8 +8477,8 @@ notify pgrst, 'reload schema';
       }) : html`<div class="empty"><p>No lessons yet. Add the first one.</p></div>`}
       <button class="btn sec" onClick=${() => add(false)}><${Ic.plus} size=${20}/>Add a lesson</button>
       <button class="btn sec" onClick=${() => add(true)}><${Ic.book} size=${20}/>Add a reading passage</button>
-      <button class="btn quiet" onClick=${() => setPacks(true)}><${Ic.plus} size=${20}/>Ready-made lessons</button>
-      <button class="btn quiet" onClick=${() => setRules(true)}><${Ic.book} size=${20}/>Spelling rules</button>
+      <button class="btn quiet coursebtn" onClick=${() => setPacks(true)}>📘<span><b>The course</b><small>Every lesson in order, ready to add: letters → sounds → words → rules → stories</small></span></button>
+      <button class="btn quiet coursebtn" onClick=${() => setRules(true)}>📏<span><b>Spelling rules</b><small>The 15 rules, each with a lesson to teach it</small></span></button>
       <${AnnouncerCard} s=${s} ix=${ix}/>
       ${onLang ? html`<div class="field langpick"><label for="tlang">Recording in</label>
         <select id="tlang" value=${lang || "en"} disabled=${!store.s.hasExpl && (lang || "en") === "en"} onChange=${e => {
@@ -8422,8 +8492,8 @@ notify pgrst, 'reload schema';
           onLang(v);
         }}>${[...new Set(myLangs().concat(lang || "en"))].map(c => html`<option value=${c}>${langName(c)}${langCount(c) ? " · " + langCount(c) + " recorded" : ""}</option>`)}<option value="__add">+ Add a language…</option></select>
         <small>${(lang || "en") === "en" ? "Record your lessons in any language first. Then pick one of them for each student." : "You're recording in " + langName(lang) + ". Students you set to " + langName(lang) + " hear these. English stays as it is."}</small></div>` : null}
-      ${packs ? html`<${PacksSheet} s=${s} onClose=${() => setPacks(false)}/>` : null}
-      ${rules ? html`<${RulesGuide} onClose=${() => setRules(false)}/>` : null}
+      ${packs ? html`<${PacksSheet} s=${s} onOpen=${onOpen} onClose=${() => setPacks(false)}/>` : null}
+      ${rules ? html`<${RulesGuide} s=${s} onOpen=${onOpen} onClose=${() => setRules(false)}/>` : null}
     </section>`;
   }
 
@@ -8542,7 +8612,7 @@ notify pgrst, 'reload schema';
       if (armRef.current != null) { if (it) { add({ t: armRef.current, k: "w", tile: it.t.t, r: it.r, c: it.c }); armRef.current = null; setArming(null); } return; }
       const t = elapsed();
       if (tool === "erase") {   // rub out just the thing under your finger
-        const b = board(), pic = b.img ? crPic(b.img.a) : null, A = crAssets(lesson, number, true);
+        const b = board(), pic = b.img ? crPic(b.img.a) : null, A = crAssets(lesson, number, hasStrip(cuesRef.current) || tool === "word");
         const hit = crPickAt(b, A.lay, x, y, pic);
         if (hit) add({ t, k: "rm", ref: hit.id }); else toast("Tap right on the mark, letter or picture to rub it out.");
         return;
@@ -8709,12 +8779,12 @@ notify pgrst, 'reload schema';
       </div>
       <div class="sfoot">
         ${mode === "ready" ? html`
-          <p class="help">This is the board your students will see. Press record and talk them through it. While recording: <b>👉 Point</b> at a word (or anywhere, even on a picture), <b>⭕ Circle</b> or <b>〰️ Underline</b> it (tap it again to take it off), <b>✏️ Draw</b> with your finger, <b>🔤 Make a word</b> by tapping its letters. <b>🧽 Rub out</b> one thing by tapping it, <b>↶ Undo</b> takes back the last thing. <b>⏸ Pause</b> any time, for example to add a picture.</p>
+          <p class="help">This is the board your students will see. Press record and talk them through it. While recording: <b>👉 Point</b> at a word (or anywhere, even on a picture), <b>⭕ Circle</b> or <b>〰️ Underline</b> it (tap it again to take it off), <b>✏️ Draw</b> with your finger, <b>🔤 Make a word</b> by tapping its letters. <b>🧽 Rub out</b> one thing by tapping it, <b>↶ Undo</b> takes back the last thing. <b>⏸ Pause</b> any time, for example to add a picture. <b>✋ Your turn</b> makes students answer: ask a question, tap Your turn, then tap the right answer — the lesson stops for them until they tap it.</p>
           ${tray}
           <button class="big red" onClick=${start} aria-label="Start recording"><${Ic.mic} size=${30}/></button>` : null}
         ${rec ? html`
           <div class="srow"><span class="recind">${paused ? html`<span class="pausedot"></span>` : html`<span class="recdot"></span>`}${recClip ? "Paused for the video" : paused ? "Paused · " + fmtDur(nowT()) : fmtDur(nowT())}</span><span class="help">${counts}</span></div>
-          ${arming != null ? html`<p class="armnote">Now tap the right answer on the board, or <button class="linkbtn" onClick=${noAnswer}>No answer</button></p>` : null}
+          ${arming != null ? html`<p class="armnote"><b>Your turn is set.</b> Ask your question out loud now (for example “Which one says /b/?”), then <b>tap the right answer on the board</b>. When students watch, the lesson stops here until they tap that answer (after two wrong taps it glows to help them). Nothing to tap — you just want them to read or repeat aloud? <button class="linkbtn" onClick=${noAnswer}>They just say it</button> (the lesson waits until they tap Continue).</p>` : null}
           <div class="tools" role="toolbar" aria-label="Tools">
             ${STUDIO_TOOLS.map(([k, ic, lbl]) => html`<button key=${k} class=${"tool" + (tool === k ? " on" : "")} aria-pressed=${tool === k ? "true" : "false"} onClick=${() => setTool(k)}><span>${ic}</span>${lbl}</button>`)}
           </div>
@@ -10454,7 +10524,7 @@ notify pgrst, 'reload schema';
     Breaking: ["THEY CHANGED IT.", "IT'S OFFICIAL", "JUST IN", "THIS CHANGES EVERYTHING"],
   };
   const TH_POWER = /^(REALLY|LIED|LIE|CHANGED|CHANGES|STOP|EVERYTHING|WORTH|NEVER|SECRET|TRUTH|WRONG|MISTAKE|LATER|NOBODY|WHAT|WHY|CRAZY|OFFICIAL|BANNED|FREE|FAKE|REAL|ZERO|DAYS?|VS|NOT|BEFORE|AFTER|BROKE|RICH|FAILED|WORKED|EXPECT|BELIEVE|TRUE|THIS)$/;
-  const TH_LABELS = ["", "BREAKING", "NEW", "UPDATE", "WORTH IT?", "EXPOSED", "DAY 1"];
+  const TH_LABELS = ["", "DAY 1", "PART 1", "NEW", "UPDATE", "BREAKING", "WORTH IT?", "EXPOSED", "FINALLY", "SECRET", "TRUE STORY"];
   const thWordsOf = t => String(t || "").toUpperCase().replace(/\s+/g, " ").trim().split(" ").filter(Boolean);
   function thAutoAcc(words) {
     if (!words.length) return -1;
@@ -10631,11 +10701,34 @@ notify pgrst, 'reload schema';
     { k: "mont", n: "Montserrat", css: "Montserrat", w: 900 }, { k: "archivo", n: "Archivo Black", css: "\"Archivo Black\"", w: 400 },
     { k: "oswald", n: "Oswald", css: "Oswald", w: 700 }, { k: "poppins", n: "Poppins", css: "Poppins", w: 800 },
     { k: "bangers", n: "Bangers", css: "Bangers", w: 400 }, { k: "lucky", n: "Luckiest Guy", css: "\"Luckiest Guy\"", w: 400 },
-    { k: "marker", n: "Marker", css: "\"Permanent Marker\"", w: 400 }, { k: "playfair", n: "Playfair", css: "\"Playfair Display\"", w: 900 },
+    { k: "marker", n: "Marker", css: "\"Permanent Marker\"", w: 400 }, { k: "playfair", n: "Playfair", css: "\"Playfair Display\"", w: 900 }, { k: "andika", n: "Andika (chalk)", css: "Andika", w: 700 },
+    { k: "inter", n: "Inter Black", css: "Inter", w: 900 }, { k: "barlow", n: "Barlow Condensed", css: "\"Barlow Condensed\"", w: 800 }, { k: "kanit", n: "Kanit", css: "Kanit", w: 900 },
+    { k: "teko", n: "Teko", css: "Teko", w: 700 }, { k: "staat", n: "Staatliches", css: "Staatliches", w: 400 }, { k: "bowlby", n: "Bowlby One", css: "\"Bowlby One\"", w: 400 },
+    { k: "rubikmono", n: "Rubik Mono", css: "\"Rubik Mono One\"", w: 400 }, { k: "russo", n: "Russo One", css: "\"Russo One\"", w: 400 }, { k: "bungee", n: "Bungee", css: "Bungee", w: 400 },
+    { k: "titan", n: "Titan One", css: "\"Titan One\"", w: 400 }, { k: "lilita", n: "Lilita One", css: "\"Lilita One\"", w: 400 }, { k: "fredoka", n: "Fredoka", css: "Fredoka", w: 700 },
+    { k: "righteous", n: "Righteous", css: "Righteous", w: 400 }, { k: "orbitron", n: "Orbitron", css: "Orbitron", w: 900 }, { k: "blackops", n: "Black Ops", css: "\"Black Ops One\"", w: 400 },
+    { k: "alfa", n: "Alfa Slab", css: "\"Alfa Slab One\"", w: 400 }, { k: "space", n: "Space Grotesk", css: "\"Space Grotesk\"", w: 700 }, { k: "dmserif", n: "DM Serif", css: "\"DM Serif Display\"", w: 400 },
+    { k: "abril", n: "Abril Fatface", css: "\"Abril Fatface\"", w: 400 }, { k: "cinzel", n: "Cinzel", css: "Cinzel", w: 900 }, { k: "caveat", n: "Caveat Brush", css: "\"Caveat Brush\"", w: 400 },
+    { k: "pacifico", n: "Pacifico", css: "Pacifico", w: 400 },
   ];
+  // your own fonts (a .ttf, .otf or .woff file from your phone), kept on this phone
+  let tsUFP = null;
+  async function tsAddFont(f) {
+    if (TS_FONTS.some(x => x.k === "u_" + f.id)) return;
+    const fam = "UF_" + f.id, ff = new FontFace(fam, await f.blob.arrayBuffer()); await ff.load(); document.fonts.add(ff);
+    TS_FONTS.push({ k: "u_" + f.id, n: f.name, css: "\"" + fam + "\"", w: 400, user: true });
+  }
+  function tsUserFonts() { if (!tsUFP) tsUFP = vmDb.op("readonly", st2 => st2.get("__fonts")).then(async r => { for (const f of (r && r.list) || []) { try { await tsAddFont(f); } catch (e) {} } }).catch(() => {}); return tsUFP; }
+  async function tsUploadFont(file) {
+    const id = tsUid(), name = String(file.name || "My font").replace(/\.[a-z0-9]+$/i, "").replace(/[-_]+/g, " ").slice(0, 28) || "My font", f = { id, name, blob: file };
+    await tsAddFont(f);
+    const r = await vmDb.op("readonly", st2 => st2.get("__fonts")).catch(() => null);
+    await vmDb.put({ id: "__fonts", list: ((r && r.list) || []).concat(f) }).catch(() => {});
+    return "u_" + id;
+  }
   const tsFontOf = k => TS_FONTS.find(f => f.k === k) || TS_FONTS[0];
   const tsFont = (L, size) => { const f = tsFontOf(L.font); return (L.italic ? "italic " : "") + f.w + " " + Math.max(1, Math.round(size)) + "px " + f.css + ", Impact, sans-serif"; };
-  async function tsFontsReady(keys) { try { await Promise.race([Promise.all((keys || TS_FONTS.map(f => f.k)).map(k => { const f = tsFontOf(k); return Promise.all([document.fonts.load(f.w + " 80px " + f.css).catch(() => {}), document.fonts.load("italic " + f.w + " 80px " + f.css).catch(() => {})]); })), new Promise(r => setTimeout(r, 5000))]); } catch (e) {} }
+  async function tsFontsReady(keys) { await tsUserFonts(); try { await Promise.race([Promise.all((keys || TS_FONTS.map(f => f.k)).map(k => { const f = tsFontOf(k); return Promise.all([document.fonts.load(f.w + " 80px " + f.css).catch(() => {}), document.fonts.load("italic " + f.w + " 80px " + f.css).catch(() => {})]); })), new Promise(r => setTimeout(r, 5000))]); } catch (e) {} }
   const TS_COLS = ["#FFFFFF", "#000000", "#FFD400", "#FF7A00", "#E3262E", "#FF3D7F", "#B620E0", "#1E90FF", "#22C55E", "#00E5FF", "#8B5A2B", "#9AA0A6"];
   const TS_GRADS = { gold: ["#FFF27A", "#FF9500"], fire: ["#FFD000", "#FF2E00"], ice: ["#FFFFFF", "#7FD8FF"], silver: ["#FFFFFF", "#B9C0C8"], pink: ["#FFC2E0", "#FF2E8A"], lime: ["#F4FF6A", "#22C55E"] };
   const TS_BGS = {
@@ -10783,7 +10876,8 @@ notify pgrst, 'reload schema';
     const fillFor = (s, y) => {
       const g = s.acc ? (L.accGrad ? TS_GRADS[L.accGrad] : null) : (L.grad ? TS_GRADS[L.grad] : null);
       if (g) { const gr = c.createLinearGradient(0, y - size * 0.82, 0, y + size * 0.05); gr.addColorStop(0, g[0]); gr.addColorStop(1, g[1]); return gr; }
-      return s.acc ? L.acc || "#FFD400" : L.color || "#FFFFFF";
+      const col = s.acc ? L.acc || "#FFD400" : L.color || "#FFFFFF";
+      return L.chalk && /^#[0-9a-f]{6}$/i.test(col) ? tsChalkPat(c, col) : col;
     };
     each((s, x, y) => { c.fillStyle = fillFor(s, y); c.fillText(s.t, x, y); });
     if ("letterSpacing" in c) c.letterSpacing = "0px";
@@ -10845,11 +10939,147 @@ notify pgrst, 'reload schema';
     if (B.grade === "cinema") { x.globalCompositeOperation = "soft-light"; const g = x.createLinearGradient(0, H, W, 0); g.addColorStop(0, "rgba(0,110,130,.6)"); g.addColorStop(1, "rgba(255,140,40,.45)"); x.fillStyle = g; x.fillRect(0, 0, W, H); x.globalCompositeOperation = "source-over"; }
     if (m.size > 6) m.delete(m.keys().next().value); m.set(key, cv); return cv;
   }
+  // ---- premium backgrounds: real light, haze and depth (every edge soft, like a camera's) ----
+  const TS_LOOKS = {
+    beams: { n: "Light beams", base: ["#1A0A02", "#000000"], tint: 0.35, c1: "#FF8A00", c2: "#FFE7A8", x: 0.62, y: 0.5 },
+    stage: { n: "Stage", base: ["#0B0D14", "#000000"], tint: 0.1, c1: "#DCE8FF", c2: "#FF7A00", x: 0.5, y: 0.35 },
+    bokeh: { n: "Bokeh", base: ["#0A0F1E", "#000000"], tint: 0.22, c1: "#FF7A00", c2: "#FFD68A", x: 0.5, y: 0.45 },
+    aurora: { n: "Aurora", base: ["#050816", "#000000"], tint: 0.12, c1: "#7A2BD8", c2: "#22D3EE", x: 0.5, y: 0.45 },
+    smoke: { n: "Smoke", base: ["#0B0B0E", "#000000"], tint: 0.15, c1: "#3B82F6", c2: "#A855F7", x: 0.5, y: 0.45 },
+    neon: { n: "Neon", base: ["#0A0418", "#000000"], tint: 0.1, c1: "#FF2E8A", c2: "#00E5FF", x: 0.5, y: 0.5 },
+    gold: { n: "Luxury gold", base: ["#140B02", "#000000"], tint: 0.18, c1: "#FFB547", c2: "#FF6A00", x: 0.82, y: 0.12 },
+    fire: { n: "Fire & smoke", base: ["#1A0500", "#000000"], tint: 0.3, c1: "#FF4D00", c2: "#FFC300", x: 0.5, y: 0.9 },
+    clean: { n: "Clean studio", base: ["#FFFFFF", "#C9CDD3"], tint: 0.05, c1: "#FF7A00", c2: "#7FD8FF", x: 0.5, y: 0.42 },
+  };
+  const tsRnd = seed => { let a = (seed >>> 0) || 1; return () => { a = (a + 0x6D2B79F5) | 0; let t = Math.imul(a ^ (a >>> 15), 1 | a); t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t; return ((t ^ (t >>> 14)) >>> 0) / 4294967296; }; };
+  const tsHex6 = s => (/^#[0-9a-f]{6}$/i.test(s || "") ? s : null);
+  const tsMix = (a, b, k) => { const p = parseInt(a.slice(1), 16), q = parseInt(b.slice(1), 16), m = s => Math.round(((p >> s) & 255) * (1 - k) + ((q >> s) & 255) * k); return "#" + ((1 << 24) + (m(16) << 16) + (m(8) << 8) + m(0)).toString(16).slice(1); };
+  const tsCv = (w, h) => { const c = document.createElement("canvas"); c.width = Math.max(1, Math.round(w)); c.height = Math.max(1, Math.round(h)); return c; };
+  // a soft copy of a layer (blur where the phone can, otherwise shrink-and-enlarge)
+  function tsSoft(src, r, opaque) {
+    if (!(r > 0.5)) return src;
+    const o = tsCv(src.width, src.height), x = o.getContext("2d");
+    if (opaque) x.drawImage(src, 0, 0);
+    if (VM_FILTER) { x.filter = "blur(" + r.toFixed(1) + "px)"; x.drawImage(src, 0, 0); x.filter = "none"; return o; }
+    let cur = src, k = 1; while (k * 2 <= r / 1.5) { const s = tsCv(cur.width / 2, cur.height / 2), sx = s.getContext("2d"); sx.imageSmoothingQuality = "high"; sx.drawImage(cur, 0, 0, s.width, s.height); cur = s; k *= 2; }
+    x.imageSmoothingQuality = "high"; x.drawImage(cur, 0, 0, o.width, o.height); return o;
+  }
+  // clouds: layers of soft random noise
+  function tsNoise(w, h, R, oct) {
+    const out = tsCv(w, h), x = out.getContext("2d"); x.fillStyle = "#000"; x.fillRect(0, 0, w, h);
+    let a = 0.55;
+    for (let o = 0; o < (oct || 5); o++) {
+      const n = 3 * Math.pow(2, o), s = tsCv(n, Math.max(2, Math.round(n * h / w))), sx = s.getContext("2d"), d = sx.createImageData(s.width, s.height);
+      for (let i = 0; i < d.data.length; i += 4) { const v = R() * 255; d.data[i] = d.data[i + 1] = d.data[i + 2] = v; d.data[i + 3] = 255; }
+      sx.putImageData(d, 0, 0);
+      x.globalCompositeOperation = o ? "lighter" : "source-over"; x.globalAlpha = a; x.imageSmoothingEnabled = true; x.imageSmoothingQuality = "high";
+      x.drawImage(tsSoft(s, 0), 0, 0, w, h); a *= 0.5;
+    }
+    // deepen it: wisps of smoke rather than an even fog
+    const sm = tsSoft(out, h * 0.015, true), y = sm.getContext("2d"); y.globalCompositeOperation = "multiply"; y.drawImage(sm, 0, 0); y.drawImage(sm, 0, 0);
+    y.globalCompositeOperation = "source-over"; y.globalAlpha = 1; const t = tsCv(w, h), tx = t.getContext("2d"); tx.drawImage(sm, 0, 0); tx.globalCompositeOperation = "lighter"; tx.drawImage(sm, 0, 0); tx.drawImage(sm, 0, 0);
+    return t;
+  }
+  function tsTint(src, col) { const o = tsCv(src.width, src.height), x = o.getContext("2d"); x.drawImage(src, 0, 0); x.globalCompositeOperation = "multiply"; x.fillStyle = col; x.fillRect(0, 0, o.width, o.height); return o; }
+  function tsMakeLook(w, h, B) {
+    const L = TS_LOOKS[B.look] || TS_LOOKS.beams, R = tsRnd(B.seed || 7);
+    const c1 = tsHex6(B.col) || L.c1, c2 = tsHex6(B.col2) || L.c2, fx = B.x == null ? L.x : B.x, fy = B.y == null ? L.y : B.y, amt = B.amt == null ? 1 : B.amt;
+    const cv = tsCv(w, h), c = cv.getContext("2d"), D = Math.hypot(w, h), cx = w * fx, cy = h * fy;
+    const layer = () => { const l = tsCv(w, h); return [l, l.getContext("2d")]; };
+    const put = (l, blur, op, a) => { c.save(); c.globalCompositeOperation = op || "screen"; c.globalAlpha = Math.max(0, Math.min(1, (a == null ? 1 : a) * amt)); c.drawImage(tsSoft(l, blur || 0), 0, 0); c.restore(); };
+    const glow = (x, X, Y, r, col, a, sy) => { x.save(); x.translate(X, Y); x.scale(1, sy || 1); const g = x.createRadialGradient(0, 0, 0, 0, 0, r); g.addColorStop(0, tsHexA(col, a)); g.addColorStop(0.35, tsHexA(col, a * 0.45)); g.addColorStop(1, tsHexA(col, 0)); x.fillStyle = g; x.fillRect(-r, -r, r * 2, r * 2); x.restore(); };
+    const dust = (n, col, big) => { const [l, x] = layer(); for (let i = 0; i < n; i++) { const px = R() * w, py = R() * h, dd = Math.hypot(px - cx, py - cy) / D, r = big ? h * (0.008 + R() * 0.03) : 0.4 + R() * 1.6, a = (big ? 0.12 + R() * 0.25 : 0.25 + R() * 0.65) * Math.max(0.15, 1 - dd * 1.6); x.fillStyle = tsHexA(R() < 0.3 ? "#FFFFFF" : col, a); x.beginPath(); x.arc(px, py, r, 0, Math.PI * 2); x.fill(); } return l; };
+    // the base: deep colour lit from where the light comes from
+    const b0 = B.look === "clean" ? L.base[0] : tsMix(L.base[0], c1, L.tint), bg = c.createRadialGradient(cx, cy, 0, cx, cy, D * 0.8);
+    bg.addColorStop(0, b0); bg.addColorStop(1, B.look === "clean" ? tsMix(L.base[1], c1, 0.04) : L.base[1]); c.fillStyle = bg; c.fillRect(0, 0, w, h);
+    switch (B.look) {
+      case "stage": {
+        const [l, x] = layer(), xs = [fx - 0.3, fx, fx + 0.3];
+        xs.forEach((bx, i) => { const tx = w * bx, sp = w * (0.16 + R() * 0.1), lean = (R() - 0.5) * w * 0.25, g = x.createLinearGradient(0, 0, 0, h); g.addColorStop(0, tsHexA(c1, i === 1 ? 0.75 : 0.5)); g.addColorStop(0.7, tsHexA(c1, 0.12)); g.addColorStop(1, tsHexA(c1, 0)); x.fillStyle = g; x.beginPath(); x.moveTo(tx - w * 0.012, -h * 0.05); x.lineTo(tx + w * 0.012, -h * 0.05); x.lineTo(tx + lean + sp, h * 1.05); x.lineTo(tx + lean - sp, h * 1.05); x.closePath(); x.fill(); });
+        put(l, h * 0.025, "screen", 0.8);
+        const n = tsTint(tsNoise(w, h, R, 5), c1); const [m, mx] = layer(); mx.drawImage(n, 0, 0); mx.globalCompositeOperation = "destination-in"; const fg = mx.createLinearGradient(0, h * 0.35, 0, h); fg.addColorStop(0, "rgba(0,0,0,0)"); fg.addColorStop(1, "rgba(0,0,0,1)"); mx.fillStyle = fg; mx.fillRect(0, 0, w, h); put(m, 0, "screen", 0.35);
+        const [f, fx2] = layer(); glow(fx2, cx, h * 0.97, w * 0.5, c2, 0.75, 0.22); glow(fx2, cx, h * 0.6, D * 0.3, c2, 0.3); put(f, h * 0.01, "screen");
+        put(dust(70, c1, false), 0, "screen", 0.6);
+        break;
+      }
+      case "bokeh": {
+        const [g0, gx] = layer(); glow(gx, cx, cy, D * 0.5, c1, 0.4); put(g0, 0, "screen");
+        const pick = () => { const r = R(); return r < 0.45 ? c1 : r < 0.85 ? c2 : tsMix(c1, c2, 0.5); };
+        const [far, fa] = layer(); for (let i = 0; i < 34; i++) { fa.fillStyle = tsHexA(pick(), 0.1 + R() * 0.25); fa.beginPath(); fa.arc(R() * w, R() * h, h * (0.03 + R() * 0.07), 0, Math.PI * 2); fa.fill(); } put(far, h * 0.022, "screen");
+        const [near, na] = layer(); for (let i = 0; i < 16; i++) { const X = R() * w, Y = R() * h, r = h * (0.05 + R() * 0.09), col = pick(), a = 0.12 + R() * 0.22, g = na.createRadialGradient(X, Y, 0, X, Y, r); g.addColorStop(0, tsHexA(col, a * 0.55)); g.addColorStop(0.82, tsHexA(col, a * 0.8)); g.addColorStop(0.96, tsHexA(col, a * 1.25)); g.addColorStop(1, tsHexA(col, 0)); na.fillStyle = g; na.beginPath(); na.arc(X, Y, r, 0, Math.PI * 2); na.fill(); } put(near, h * 0.004, "screen");
+        break;
+      }
+      case "aurora": {
+        const [l, x] = layer(); for (let i = 0; i < 5; i++) glow(x, w * (0.1 + R() * 0.8), h * (0.1 + R() * 0.8), D * (0.22 + R() * 0.2), i % 3 === 0 ? c1 : i % 3 === 1 ? c2 : tsMix(c1, c2, 0.5), 0.6); put(l, h * 0.05, "screen");
+        const [r2, rx] = layer();
+        for (let k = 0; k < 3; k++) { const y0 = h * (0.25 + R() * 0.5), amp = h * (0.08 + R() * 0.12), ph = R() * 6, g = rx.createLinearGradient(0, 0, w, 0); g.addColorStop(0, tsHexA(c2, 0)); g.addColorStop(0.3, tsHexA(c2, 0.55)); g.addColorStop(0.7, tsHexA(c1, 0.55)); g.addColorStop(1, tsHexA(c1, 0)); rx.strokeStyle = g; rx.lineWidth = h * (0.03 + R() * 0.07); rx.beginPath(); for (let i = 0; i <= 40; i++) { const X = w * i / 40, Y = y0 + Math.sin(i / 40 * Math.PI * 2 + ph) * amp; i ? rx.lineTo(X, Y) : rx.moveTo(X, Y); } rx.stroke(); }
+        put(r2, h * 0.035, "screen", 0.9);
+        put(dust(60, c2, false), 0, "screen", 0.5);
+        break;
+      }
+      case "smoke": case "fire": {
+        const n = tsNoise(w, h, R, 6);
+        put(tsTint(n, c1), 0, "screen", B.look === "fire" ? 0.75 : 0.6);
+        const n2 = tsNoise(w, h, R, 4); put(tsTint(n2, c2), 0, "screen", 0.3);
+        const [g0, gx] = layer(); glow(gx, cx, cy, D * 0.45, c1, 0.55); if (B.look === "fire") glow(gx, cx, h * 1.02, w * 0.6, c2, 0.8, 0.35); put(g0, 0, "screen");
+        if (B.look === "fire") put(dust(140, c2, false), 0, "screen", 0.9);
+        break;
+      }
+      case "neon": {
+        const [l, x] = layer(); glow(x, -w * 0.05, h * fy, D * 0.55, c1, 0.85); glow(x, w * 1.05, h * 0.3, D * 0.5, c2, 0.75); put(l, 0, "screen");
+        const hz = h * 0.78, [gr, gx] = layer(); gx.strokeStyle = tsHexA(c2, 0.5); gx.lineWidth = Math.max(1, h * 0.0025);
+        for (let i = -14; i <= 14; i++) { gx.beginPath(); gx.moveTo(w * 0.5 + i * w * 0.015, hz); gx.lineTo(w * 0.5 + i * w * 0.16, h * 1.02); gx.stroke(); }
+        for (let i = 1; i < 9; i++) { const y = hz + (h - hz) * Math.pow(i / 8, 1.8); gx.beginPath(); gx.moveTo(0, y); gx.lineTo(w, y); gx.stroke(); }
+        gx.globalCompositeOperation = "destination-in"; const mg = gx.createLinearGradient(0, hz, 0, h); mg.addColorStop(0, "rgba(0,0,0,0.15)"); mg.addColorStop(1, "rgba(0,0,0,1)"); gx.fillStyle = mg; gx.fillRect(0, 0, w, h);
+        put(gr, h * 0.002, "screen", 0.7);
+        const [hl, hx] = layer(), lg = hx.createLinearGradient(0, 0, w, 0); lg.addColorStop(0, tsHexA(c1, 0)); lg.addColorStop(0.5, tsHexA(tsMix(c1, "#FFFFFF", 0.5), 1)); lg.addColorStop(1, tsHexA(c2, 0)); hx.fillStyle = lg; hx.fillRect(0, hz - h * 0.004, w, h * 0.008); put(hl, h * 0.006, "screen"); put(hl, 0, "screen", 0.8);
+        break;
+      }
+      case "gold": {
+        const [l, x] = layer(); glow(x, cx, cy, D * 0.6, c1, 0.8); glow(x, w * 0.08, h * 0.92, D * 0.4, c2, 0.35); put(l, 0, "screen");
+        const [s2, sx] = layer(); sx.translate(cx, cy); sx.rotate(Math.atan2(h * 0.5 - cy, w * 0.5 - cx)); for (let i = 0; i < 4; i++) { const off = (R() - 0.5) * h * 0.5, th = h * (0.04 + R() * 0.08), g = sx.createLinearGradient(0, 0, D, 0); g.addColorStop(0, tsHexA(c1, 0.5)); g.addColorStop(1, tsHexA(c1, 0)); sx.fillStyle = g; sx.fillRect(0, off - th / 2, D, th); } put(s2, h * 0.03, "screen", 0.6);
+        put(dust(30, c1, true), h * 0.012, "screen"); put(dust(170, c1, false), 0, "screen");
+        break;
+      }
+      case "clean": {
+        const [l, x] = layer(); glow(x, w * 0.88, h * 0.85, D * 0.38, c1, 0.3); glow(x, w * 0.1, h * 0.12, D * 0.3, c2, 0.25); put(l, h * 0.02, "source-over");
+        break;
+      }
+      default: { // light beams from one point
+        const [g0, gx] = layer(); glow(gx, cx, cy, D * 0.45, c1, 0.7); put(g0, 0, "screen");
+        const [l, x] = layer();
+        for (let i = 0; i < 18; i++) { const a0 = R() * Math.PI * 2, wd = 0.02 + R() * 0.07, len = D * (0.6 + R() * 0.5), a = 0.2 + R() * 0.6, g = x.createRadialGradient(cx, cy, 0, cx, cy, len); g.addColorStop(0, tsHexA(c2, a)); g.addColorStop(0.4, tsHexA(c2, a * 0.35)); g.addColorStop(1, tsHexA(c2, 0)); x.fillStyle = g; x.beginPath(); x.moveTo(cx, cy); x.arc(cx, cy, len, a0, a0 + wd); x.closePath(); x.fill(); }
+        put(l, h * 0.012, "screen", 0.85);
+        const [h0, hx] = layer(); glow(hx, cx, cy, D * 0.12, c2, 0.9); glow(hx, cx, cy, D * 0.035, "#FFFFFF", 0.8); put(h0, 0, "screen");
+        put(dust(25, c2, true), h * 0.01, "screen", 0.8); put(dust(90, c2, false), 0, "screen", 0.8);
+      }
+    }
+    return cv;
+  }
+  const tsLookC = new Map(), tsLookT = {};
+  const tsLookThumb = k => tsLookT[k] || (tsLookT[k] = (() => { try { return tsMakeLook(176, 99, { look: k }).toDataURL("image/jpeg", 0.85); } catch (e) { return ""; } })());
+  function tsLookCanvas(w, h, B) {
+    const key = JSON.stringify([w, h, B.look, B.col, B.col2, B.x, B.y, B.seed, B.amt]);
+    let cv = tsLookC.get(key);
+    if (!cv) { cv = tsMakeLook(w, h, B); if (tsLookC.size > 12) tsLookC.delete(tsLookC.keys().next().value); tsLookC.set(key, cv); }
+    return cv;
+  }
+  function tsDrawLook(c, W, H, B, k) { k = k || 2; c.save(); c.imageSmoothingQuality = "high"; c.drawImage(tsLookCanvas(Math.round(W / k), Math.round(H / k), B), 0, 0, W, H); c.restore(); }
+  // the old hard rays, now soft beams of light
+  function tsSoftRays(W, H, B) {
+    const w = Math.round(W / 2), h = Math.round(H / 2), key = JSON.stringify(["rays", w, h, B.rays]);
+    let cv = tsLookC.get(key); if (cv) return cv;
+    const l = tsCv(w, h), x = l.getContext("2d"), cx = w * B.rays.x, cy = h * B.rays.y, n = B.rays.n || 18, R = Math.hypot(w, h), Rn = tsRnd(n * 31 + 5);
+    for (let i = 0; i < n; i++) { const a0 = i / n * Math.PI * 2 + (B.rays.spin || 0) + (Rn() - 0.5) * 0.12, wd = Math.PI / n * (0.4 + Rn() * 0.9), a = 0.45 + Rn() * 0.55, g = x.createRadialGradient(cx, cy, 0, cx, cy, R * 0.8); g.addColorStop(0, tsHexA(B.rays.col || "#FFFFFF", a)); g.addColorStop(0.45, tsHexA(B.rays.col || "#FFFFFF", a * 0.35)); g.addColorStop(1, tsHexA(B.rays.col || "#FFFFFF", 0)); x.fillStyle = g; x.beginPath(); x.moveTo(cx, cy); x.arc(cx, cy, R, a0, a0 + wd); x.closePath(); x.fill(); }
+    cv = tsSoft(l, h * 0.01); tsLookC.set(key, cv); return cv;
+  }
   let tsGrainC = null;
   function tsDrawBg(c, doc, imgs, S) {
     const W = doc.W, H = doc.H, B = doc.bg || {};
     const P = TS_BGS[B.preset] || null, g = B.g || (P && P.g) || ["#111", "#000"], radial = B.radial != null ? B.radial : P ? !!P.radial : false;
-    if (B.kind === "photo" && imgs[B.src]) c.drawImage(tsBgPhoto(imgs[B.src], Math.round(W * Math.min(1, S.px)), Math.round(H * Math.min(1, S.px)), B), 0, 0, W, H);
+    if (B.kind === "chalk") tsDrawChalkBg(c, W, H, B);
+    else if (B.kind === "look") tsDrawLook(c, W, H, B, S && S.fast ? 4 : 2);
+    else if (B.kind === "photo" && imgs[B.src]) c.drawImage(tsBgPhoto(imgs[B.src], Math.round(W * Math.min(1, S.px)), Math.round(H * Math.min(1, S.px)), B), 0, 0, W, H);
     else if (B.kind === "solid") { c.fillStyle = B.col || "#111"; c.fillRect(0, 0, W, H); }
     else {
       let gr; if (radial) { gr = c.createRadialGradient(W * (B.gx == null ? 0.5 : B.gx), H * (B.gy == null ? 0.45 : B.gy), 0, W * (B.gx == null ? 0.5 : B.gx), H * (B.gy == null ? 0.45 : B.gy), Math.hypot(W, H) * 0.62); }
@@ -10857,14 +11087,8 @@ notify pgrst, 'reload schema';
       gr.addColorStop(0, g[0]); gr.addColorStop(1, g[1]); c.fillStyle = gr; c.fillRect(0, 0, W, H);
     }
     if (B.dim > 0) { c.fillStyle = "rgba(0,0,0," + B.dim + ")"; c.fillRect(0, 0, W, H); }
-    // sun rays
-    if (B.rays && B.rays.a > 0) {
-      const cx = W * B.rays.x, cy = H * B.rays.y, n = B.rays.n || 18, R = Math.hypot(W, H);
-      const rg = c.createRadialGradient(cx, cy, 0, cx, cy, R * 0.75); rg.addColorStop(0, tsHexA(B.rays.col || "#FFFFFF", 1)); rg.addColorStop(0.5, tsHexA(B.rays.col || "#FFFFFF", 0.45)); rg.addColorStop(1, tsHexA(B.rays.col || "#FFFFFF", 0));
-      c.save(); c.globalAlpha = B.rays.a; c.fillStyle = rg; c.beginPath();
-      for (let i = 0; i < n; i++) { const a0 = i / n * Math.PI * 2 + (B.rays.spin || 0), a1 = a0 + Math.PI / n; c.moveTo(cx, cy); c.lineTo(cx + Math.cos(a0) * R, cy + Math.sin(a0) * R); c.lineTo(cx + Math.cos(a1) * R, cy + Math.sin(a1) * R); c.closePath(); }
-      c.fill(); c.restore();
-    }
+    // rays of light (soft, like real light through haze)
+    if (B.rays && B.rays.a > 0) { c.save(); c.globalAlpha = B.rays.a; c.globalCompositeOperation = "screen"; c.imageSmoothingQuality = "high"; c.drawImage(tsSoftRays(W, H, B), 0, 0, W, H); c.restore(); }
     // a light behind the subject
     if (B.spot && B.spot.a > 0) { const cx = W * B.spot.x, cy = H * B.spot.y, r = Math.max(W, H) * (B.spot.r || 0.45); const sg = c.createRadialGradient(cx, cy, 0, cx, cy, r); sg.addColorStop(0, tsHexA(B.spot.col, B.spot.a)); sg.addColorStop(0.45, tsHexA(B.spot.col, B.spot.a * 0.35)); sg.addColorStop(1, tsHexA(B.spot.col, 0)); c.save(); c.globalCompositeOperation = "screen"; c.fillStyle = sg; c.fillRect(0, 0, W, H); c.restore(); }
     if (B.vig > 0) { const vg = c.createRadialGradient(W / 2, H / 2, Math.min(W, H) * 0.32, W / 2, H / 2, Math.hypot(W, H) * 0.6); vg.addColorStop(0, "rgba(0,0,0,0)"); vg.addColorStop(1, "rgba(0,0,0," + B.vig + ")"); c.fillStyle = vg; c.fillRect(0, 0, W, H); }
@@ -10900,7 +11124,7 @@ notify pgrst, 'reload schema';
   }
   // the picture, finished, as a file (YouTube takes up to 2 MB)
   async function tsExport(doc, maxBytes) {
-    await tsFontsReady(); const imgs = await tsLoadAll(doc);
+    await tsFontsReady(Array.from(new Set(doc.layers.filter(l => l.type === "text").map(l => l.font || "anton")))); const imgs = await tsLoadAll(doc);
     const cv = document.createElement("canvas"); cv.width = doc.W; cv.height = doc.H; const c = cv.getContext("2d"); c.imageSmoothingQuality = "high";
     tsRender(c, doc, imgs, { px: 1 });
     for (const q of [0.95, 0.92, 0.88, 0.84, 0.78, 0.7]) { const b = await new Promise(r => cv.toBlob(r, "image/jpeg", q)); if (b && b.size < (maxBytes || 1.95e6)) return b; }
@@ -10962,7 +11186,7 @@ notify pgrst, 'reload schema';
     let bg = { kind: "grad", preset: "night", vig: 0.55, grain: 0.035 };
     switch (tpl) {
       case "spotlight":
-        bg = BP ? photoBg(BP, { blur: 26, dim: 0.58, grade: "cinema", vig: 0.6, spot: { x: T ? 0.5 : 0.72, y: T ? 0.72 : 0.45, col: acc, a: 0.6, r: 0.42 } }) : { kind: "grad", preset: "night", vig: 0.55, grain: 0.035, spot: { x: T ? 0.5 : 0.72, y: T ? 0.72 : 0.45, col: acc, a: 0.7, r: 0.45 } };
+        bg = BP ? photoBg(BP, { blur: 26, dim: 0.58, grade: "cinema", vig: 0.6, spot: { x: T ? 0.5 : 0.72, y: T ? 0.72 : 0.45, col: acc, a: 0.6, r: 0.42 } }) : { kind: "look", look: "stage", col2: acc, x: T ? 0.5 : 0.72, vig: 0.45, grain: 0.035 };
         if (!T) {
           subjAt(W * 0.29, H * 0.64, W * 0.4, { rot: -4, maxH: H * 0.62 });
           face(W * 0.73, H * 1.02, H * 1.0, { rim: { col: acc, side: "right" } });
@@ -10975,7 +11199,7 @@ notify pgrst, 'reload schema';
         }
         break;
       case "split":
-        bg = BP ? photoBg(BP, { grade: "pop", dim: 0.05, vig: 0.4, fx: T ? 0.5 : 0.35 }) : { kind: "grad", preset: "ember", vig: 0.5, grain: 0.03 };
+        bg = BP ? photoBg(BP, { grade: "pop", dim: 0.05, vig: 0.4, fx: T ? 0.5 : 0.35 }) : { kind: "look", look: "smoke", col: "#C81E2B", col2: acc, vig: 0.45, grain: 0.03 };
         if (!T) {
           rect(W * 0.86, H * 0.5, W * 0.56, H * 1.02, { fill: "#06080C", fade: "h", fadeAt: 0.5 });
           face(W * 0.79, H * 1.02, H * 1.02, { rim: { col: acc, side: "left" } });
@@ -10991,8 +11215,7 @@ notify pgrst, 'reload schema';
         }
         break;
       case "sunburst": {
-        const g2 = [acc, "#7A1600"];
-        bg = { kind: "grad", g: g2, radial: true, gx: T ? 0.5 : 0.62, gy: T ? 0.62 : 0.5, rays: { x: T ? 0.5 : 0.62, y: T ? 0.62 : 0.5, a: 0.28, col: "#FFF4C2", n: 22 }, vig: 0.35, grain: 0.03 };
+        bg = { kind: "look", look: "beams", col: acc, col2: "#FFE7A8", x: T ? 0.5 : 0.66, y: T ? 0.62 : 0.42, vig: 0.4, grain: 0.03 };
         if (!T) {
           subjAt(W * 0.26, H * 0.38, W * 0.34, { rot: -6, maxH: H * 0.56, fw: 16 });
           face(W * 0.69, H * 1.02, H * 1.0, { shadow: { blur: 60, dist: 22, a: 0.65 } });
@@ -11005,7 +11228,7 @@ notify pgrst, 'reload schema';
         break;
       }
       case "breaking":
-        bg = BP ? photoBg(BP, { blur: 7, dim: 0.35, grade: "cinema", vig: 0.55 }) : { kind: "grad", preset: "blood", vig: 0.5, grain: 0.03 };
+        bg = BP ? photoBg(BP, { blur: 7, dim: 0.35, grade: "cinema", vig: 0.55 }) : { kind: "look", look: "smoke", col: "#B0001E", col2: "#FF3B3B", vig: 0.5, grain: 0.035 };
         if (!T) {
           rect(W * 0.3, H * 0.5, W * 0.62, H * 1.02, { fill: "#000000", fade: "h", fadeRev: true, fadeAt: 0.4, op: 0.85 });
           face(W * 0.77, H * 1.02, H * 0.95, { rim: { col: "#FF2A2A", side: "left" } });
@@ -11021,7 +11244,7 @@ notify pgrst, 'reload schema';
         break;
       case "bigword": {
         const m = /\*([^*]+)\*/.exec(text), big = (m ? m[1] : text.split(/\s+/)[0]).replace(/[^\w'?!.]/g, ""), rest = text.replace(/\*/g, "").replace(big, "").replace(/\s+/g, " ").trim();
-        bg = BP ? photoBg(BP, { blur: 30, dim: 0.65, grade: "cinema", vig: 0.6, spot: { x: 0.5, y: 0.5, col: acc, a: 0.5, r: 0.45 } }) : { kind: "grad", preset: "royal", vig: 0.5, grain: 0.035, spot: { x: 0.5, y: T ? 0.55 : 0.5, col: acc, a: 0.55, r: 0.45 } };
+        bg = BP ? photoBg(BP, { blur: 30, dim: 0.65, grade: "cinema", vig: 0.6, spot: { x: 0.5, y: 0.5, col: acc, a: 0.5, r: 0.45 } }) : { kind: "look", look: "aurora", col: "#7A2BD8", col2: acc, vig: 0.5, grain: 0.035 };
         if (!T) {
           words(big.toUpperCase(), W * 0.5, H * 0.46, W * 0.94, H * 0.66, { font: "anton", upper: true, color: "#FFFFFF", grad: "silver", stroke: { w: 0, col: "#000" }, shadow: { kind: "soft", col: "rgba(0,0,0,.8)" }, ls: 0.01 }, { maxSize: 760 });
           face(W * 0.5, H * 1.02, H * 0.92, { rim: { col: acc, side: "left" } });
@@ -11035,7 +11258,7 @@ notify pgrst, 'reload schema';
         break;
       }
       case "versus":
-        bg = { kind: "grad", preset: "ocean", vig: 0.45, grain: 0.03 };
+        bg = { kind: "look", look: "neon", vig: 0.4, grain: 0.03 };
         if (!T) {
           if (S && !S.cut) img(S, W * 0.25, H * 0.5, W * 0.5, { crop: tsCoverCrop(S, W * 0.5, H), fx: { adj: { c: 0.08, s: 0.1 } }, role: "subj" });
           else if (S) subjAt(W * 0.25, H * 0.55, W * 0.36, { maxH: H * 0.8 });
@@ -11053,7 +11276,7 @@ notify pgrst, 'reload schema';
         }
         break;
       case "zoom":
-        bg = BP ? photoBg(BP, { grade: "pop", dim: 0.08, vig: 0.4 }) : { kind: "grad", preset: "studio", vig: 0.5 };
+        bg = BP ? photoBg(BP, { grade: "pop", dim: 0.08, vig: 0.4 }) : { kind: "look", look: "bokeh", col: acc, vig: 0.45, grain: 0.03 };
         if (BP) {
           const crop = { x: 0.42, y: 0.3, w: 0.26, h: 0.26 * (tsSize0(BP)[0] / tsSize0(BP)[1]) }; crop.h = Math.min(0.5, crop.h);
           const mx = T ? W * 0.5 : W * 0.77, my = T ? H * 0.33 : H * 0.38, mw = T ? W * 0.6 : W * 0.32;
@@ -11065,14 +11288,14 @@ notify pgrst, 'reload schema';
         words(tsLines(text, T ? 2 : 2), T ? W * 0.5 : W * 0.28, T ? H * 0.08 : H * 0.14, T ? W * 0.88 : W * 0.48, T ? H * 0.12 : H * 0.2, TS_STYLES.heavy(acc), { rot: -2, shadow: { kind: "3d", depth: 10, col: "#000", angle: 120 } });
         break;
       case "product":
-        bg = { kind: "grad", preset: "studio", gx: 0.5, gy: 0.25, vig: 0.6, grain: 0.03, spot: { x: T ? 0.5 : 0.52, y: 0.28, col: "#FFFFFF", a: 0.22, r: 0.5 } };
+        bg = { kind: "look", look: "stage", col: "#FFFFFF", col2: acc, x: T ? 0.5 : 0.52, vig: 0.5, grain: 0.03 };
         if (S) { if (S.cut) img(S, T ? W * 0.5 : W * 0.52, T ? H * 0.4 : H * 0.53, Math.min(T ? W * 0.8 : W * 0.4, (T ? H * 0.38 : H * 0.72) / S.ar), { fx: { shadow: { blur: 40, dist: 14, a: 0.5 }, floor: true, glow: { col: acc, size: 40, a: 0.45 }, adj: { c: 0.08, s: 0.12 } }, role: "subj" }); else subjAt(T ? W * 0.5 : W * 0.5, T ? H * 0.38 : H * 0.5, T ? W * 0.8 : W * 0.42, { maxH: H * 0.7 }); }
         face(T ? W * 0.5 : W * 0.15, H * 1.02, T ? H * 0.38 : H * 0.66, { rim: { col: acc, side: "right" } });
         words(tsLines(text, 2), T ? W * 0.5 : W * 0.82, T ? H * 0.1 : H * 0.3, T ? W * 0.86 : W * 0.32, T ? H * 0.14 : H * 0.4, TS_STYLES.heavy(acc), { color: "#FFD400", acc: "#FFFFFF", accGrad: null, grad: "gold" });
         if (!T && S) arrow(W * 0.78, H * 0.55, W * 0.68, H * 0.62, 0.3);
         break;
       case "note":
-        bg = BP ? photoBg(BP, { blur: 5, dim: 0.12, vig: 0.35 }) : { kind: "grad", preset: "sky", vig: 0.3 };
+        bg = BP ? photoBg(BP, { blur: 5, dim: 0.12, vig: 0.35 }) : { kind: "look", look: "clean", col: acc, vig: 0.15, grain: 0.02 };
         if (!T) {
           rect(W * 0.26, H * 0.29, W * 0.42, H * 0.36, { fill: "#FFFFFF", r: 34, rot: -2, shadow: true });
           words(tsLines(text.toLowerCase(), 2), W * 0.26, H * 0.29, W * 0.36, H * 0.27, TS_STYLES.note(), { rot: -2 });
@@ -11086,7 +11309,7 @@ notify pgrst, 'reload schema';
         }
         break;
       case "cinema":
-        bg = BP ? photoBg(BP, { grade: "cinema", dim: 0.18, vig: 0.55, grain: 0.05 }) : { kind: "grad", preset: "studio", vig: 0.6, grain: 0.05 };
+        bg = BP ? photoBg(BP, { grade: "cinema", dim: 0.18, vig: 0.55, grain: 0.05 }) : { kind: "look", look: "gold", vig: 0.55, grain: 0.05 };
         if (!T) {
           face(W * 0.74, H * 0.9, H * 0.8, { shadow: { blur: 60, dist: 10, a: 0.5 } });
           rect(W * 0.5, H * 0.05, W, H * 0.1, { fill: "#000000" }); rect(W * 0.5, H * 0.95, W, H * 0.1, { fill: "#000000" });
@@ -11330,7 +11553,8 @@ notify pgrst, 'reload schema';
     else if (panel === "text" && L && L.type === "text") body = html`<div class="tscol tstext">
       <textarea rows="2" value=${L.text} onInput=${e => upL(sel, { text: e.target.value }, true)} onChange=${e => upL(sel, { text: e.target.value })} placeholder="Your words"></textarea>
       <p class="help">Put a word between stars to colour it: THEY *LIED*. New line = new line.</p>
-      <div class="tsfonts">${TS_FONTS.map(f => html`<button key=${f.k} class=${"tsfontb" + (L.font === f.k ? " on" : "")} style=${"font-family:" + f.css + ";font-weight:" + f.w} onClick=${() => upL(sel, { font: f.k })}>${f.n}</button>`)}</div>
+      <div class="tsfonts">${TS_FONTS.map(f => html`<button key=${f.k} class=${"tsfontb" + (L.font === f.k ? " on" : "")} style=${"font-family:" + f.css + ";font-weight:" + f.w} onClick=${() => upL(sel, { font: f.k })}>${f.user ? "★ " : ""}${f.n}</button>`)}</div>
+      <div class="tsfontup"><button class="chip" onClick=${() => pickFile(async f => { try { const k = await tsUploadFont(f); upL(sel, { font: k }); toast("Added “" + tsFontOf(k).n + "”. It's in your font list now."); } catch (e) { toast("That file isn't a font this phone can read. Use a .ttf, .otf or .woff file."); } }, ".ttf,.otf,.woff,.woff2,font/*,application/font-woff,application/x-font-ttf,application/octet-stream")}>＋ Add your own font</button><small class="help">Any .ttf / .otf / .woff file — from dafont, Google Fonts, or a font you bought.</small></div>
       <div class="tsrow"><button class=${"chip" + (L.upper ? " on" : "")} onClick=${() => upL(sel, { upper: !L.upper })}>ABC</button><button class=${"chip" + (L.italic ? " on" : "")} onClick=${() => upL(sel, { italic: !L.italic })}><i>I</i></button>${["left", "center", "right"].map(a => html`<button key=${a} class=${"chip" + ((L.align || "center") === a ? " on" : "")} onClick=${() => upL(sel, { align: a })}>${a === "left" ? "⇤" : a === "right" ? "⇥" : "↔"}</button>`)}</div>
       ${S("Size", 20, Math.round(H * 0.7), 1, L.size, (v, lv) => upL(sel, { size: v }, lv))}
       ${S("Letter spacing", -0.05, 0.4, 0.01, L.ls || 0, (v, lv) => upL(sel, { ls: v }, lv))}
@@ -11385,8 +11609,15 @@ notify pgrst, 'reload schema';
       ${B.kind === "photo" ? html`${S("Blur", 0, 60, 1, B.blur || 0, (v, lv) => upBg({ blur: v }, lv))}${S("Zoom", 1, 3, 0.01, B.zoom || 1, (v, lv) => upBg({ zoom: v }, lv), v => v.toFixed(2) + "×")}
         <p class="help">Drag the background with your finger to move it.</p>
         <div class="tsrow">${[["", "Natural"], ["cinema", "Film"], ["pop", "Vivid"], ["warm", "Warm"], ["cool", "Cool"], ["fade", "Soft"], ["bw", "B&W"]].map(([k, n]) => html`<button key=${n} class=${"chip" + ((B.grade || "") === k ? " on" : "")} onClick=${() => upBg({ grade: k })}>${n}</button>`)}<button class=${"chip" + (B.flip ? " on" : "")} onClick=${() => upBg({ flip: !B.flip })}>↔</button></div>` : null}
-      <div class="tslbl">Colours</div>
-      <div class="tsrow">${Object.keys(TS_BGS).map(k => html`<button key=${k} class=${"tsbgb" + (B.kind !== "photo" && B.kind !== "solid" && B.preset === k && !B.g ? " on" : "")} style=${"background:" + (TS_BGS[k].radial ? "radial-gradient(" + TS_BGS[k].g[0] + "," + TS_BGS[k].g[1] + ")" : "linear-gradient(135deg," + TS_BGS[k].g[0] + "," + TS_BGS[k].g[1] + ")")} onClick=${() => upBg({ kind: "grad", preset: k, g: null, radial: null, angle: null })}></button>`)}</div>
+      <div class="tslbl">Premium looks <small>real light, haze and depth</small></div>
+      <div class="tslooks">${Object.keys(TS_LOOKS).map(k => html`<button key=${k} class=${"tslookb" + (B.kind === "look" && B.look === k ? " on" : "")} onClick=${() => upBg({ kind: "look", look: k, col: k === "clean" || k === "neon" || k === "aurora" || k === "smoke" ? null : st.acc || null, col2: null, x: null, y: null, seed: null, amt: null, rays: null })}><img src=${tsLookThumb(k)} alt=""/><small>${TS_LOOKS[k].n}</small></button>`)}</div>
+      ${B.kind === "look" ? html`<div class="tslbl">Light colour</div><${TSSw} value=${B.col || TS_LOOKS[B.look].c1} onPick=${c2 => upBg({ col: c2 })}/>
+        <div class="tslbl">Second colour</div><${TSSw} value=${B.col2 || TS_LOOKS[B.look].c2} onPick=${c2 => upBg({ col2: c2 })}/>
+        ${S("Light from ↔", 0, 1, 0.01, B.x == null ? TS_LOOKS[B.look].x : B.x, (v, lv) => upBg({ x: v }, lv), pct)}${S("Light from ↕", 0, 1, 0.01, B.y == null ? TS_LOOKS[B.look].y : B.y, (v, lv) => upBg({ y: v }, lv), pct)}
+        ${S("Strength", 0.2, 1.4, 0.01, B.amt == null ? 1 : B.amt, (v, lv) => upBg({ amt: v }, lv), pct)}
+        <div class="tsrow"><button class="chip" onClick=${() => upBg({ seed: Math.floor(Math.random() * 1e6) })}>🎲 Shuffle the light</button></div>` : null}
+      <div class="tslbl">Plain colours</div>
+      <div class="tsrow">${Object.keys(TS_BGS).map(k => html`<button key=${k} class=${"tsbgb" + (B.kind !== "photo" && B.kind !== "solid" && B.kind !== "look" && B.kind !== "chalk" && B.preset === k && !B.g ? " on" : "")} style=${"background:" + (TS_BGS[k].radial ? "radial-gradient(" + TS_BGS[k].g[0] + "," + TS_BGS[k].g[1] + ")" : "linear-gradient(135deg," + TS_BGS[k].g[0] + "," + TS_BGS[k].g[1] + ")")} onClick=${() => upBg({ kind: "grad", preset: k, g: null, radial: null, angle: null })}></button>`)}</div>
       ${S("Darker", 0, 0.9, 0.01, B.dim || 0, (v, lv) => upBg({ dim: v }, lv), pct)}
       <div class="tslbl">A light behind</div>
       <div class="tsrow">${[[null, "Off"], [0.25, "Left"], [0.5, "Middle"], [0.75, "Right"]].map(([x, n]) => html`<button key=${n} class=${"chip" + ((B.spot && B.spot.a > 0 ? B.spot.x : null) === x ? " on" : "")} onClick=${() => upBg({ spot: x == null ? null : Object.assign({ col: st.acc || "#FF7A00", a: 0.6, r: 0.45, y: 0.45 }, B.spot || {}, { x, a: (B.spot && B.spot.a) || 0.6 }) })}>${n}</button>`)}</div>
@@ -11426,6 +11657,159 @@ notify pgrst, 'reload schema';
       ${busy ? html`<div class="thbusy">${busy}</div>` : null}
     </div>`;
   }
+  /* ---- lesson thumbnails: Reading class, faceless, a real chalkboard, one series look ---- */
+  // chalk: a slightly broken white (or coloured) texture, like real chalk on a board
+  const tsChalkC = new Map();
+  function tsChalkPat(c, col) {
+    let cv = tsChalkC.get(col);
+    if (!cv) {
+      cv = document.createElement("canvas"); cv.width = cv.height = 256; const x = cv.getContext("2d"), d = x.createImageData(256, 256), n = parseInt(String(col).slice(1), 16), r = n >> 16, g = (n >> 8) & 255, b = n & 255;
+      let seed = 7; const rnd = () => { seed = (seed * 16807) % 2147483647; return seed / 2147483647; };
+      for (let i = 0; i < d.data.length; i += 4) { const v = rnd(); d.data[i] = r; d.data[i + 1] = g; d.data[i + 2] = b; d.data[i + 3] = v < 0.12 ? 70 + v * 900 : 205 + v * 50; }
+      x.putImageData(d, 0, 0);
+      x.globalCompositeOperation = "destination-out"; x.strokeStyle = "rgba(0,0,0,.35)"; x.lineWidth = 1;
+      for (let k = 0; k < 40; k++) { x.beginPath(); const y0 = rnd() * 256; x.moveTo(0, y0); x.lineTo(256, y0 + (rnd() - 0.5) * 30); x.stroke(); }
+      tsChalkC.set(col, cv);
+    }
+    return c.createPattern(cv, "repeat");
+  }
+  // the board itself: green slate, old chalk smudges, an optional wooden frame
+  function tsDrawChalkBg(c, W, H, B) {
+    const g = c.createRadialGradient(W * 0.5, H * 0.42, 0, W * 0.5, H * 0.42, Math.hypot(W, H) * 0.7); g.addColorStop(0, B.c1 || "#2F5A45"); g.addColorStop(1, B.c2 || "#14271D"); c.fillStyle = g; c.fillRect(0, 0, W, H);
+    let seed = 11; const rnd = () => { seed = (seed * 16807) % 2147483647; return seed / 2147483647; };
+    c.save();
+    for (let i = 0; i < 16; i++) { const x = rnd() * W, y = rnd() * H, r = (0.12 + rnd() * 0.3) * Math.max(W, H), sg = c.createRadialGradient(x, y, 0, x, y, r); sg.addColorStop(0, "rgba(255,255,255," + (0.02 + rnd() * 0.035).toFixed(3) + ")"); sg.addColorStop(1, "rgba(255,255,255,0)"); c.fillStyle = sg; c.fillRect(0, 0, W, H); }
+    c.strokeStyle = "rgba(255,255,255,.035)"; c.lineCap = "round";
+    for (let i = 0; i < 9; i++) { c.lineWidth = (0.03 + rnd() * 0.06) * H; c.beginPath(); const y = rnd() * H, x0 = rnd() * W * 0.5; c.moveTo(x0, y); c.quadraticCurveTo(x0 + W * 0.25, y + (rnd() - 0.5) * H * 0.2, x0 + W * (0.3 + rnd() * 0.4), y + (rnd() - 0.5) * H * 0.1); c.stroke(); }
+    c.restore();
+    if (B.wood) {
+      const fw = Math.min(W, H) * 0.035;
+      c.save(); c.lineWidth = fw * 2; const wg = c.createLinearGradient(0, 0, W, H); wg.addColorStop(0, "#8A5A2B"); wg.addColorStop(0.5, "#6B4220"); wg.addColorStop(1, "#4A2C14"); c.strokeStyle = wg; c.strokeRect(0, 0, W, H);
+      c.lineWidth = 3; c.strokeStyle = "rgba(0,0,0,.45)"; c.strokeRect(fw, fw, W - fw * 2, H - fw * 2); c.strokeStyle = "rgba(255,220,170,.25)"; c.strokeRect(fw * 0.4, fw * 0.4, W - fw * 0.8, H - fw * 0.8);
+      c.fillStyle = "rgba(0,0,0,.35)"; c.fillRect(fw, fw, W - fw * 2, fw * 0.5); c.restore();
+    }
+  }
+  const tsLWords = board => String(board || "").split(/\n|\s{2,}|\t/).map(w => w.trim()).filter(Boolean);
+  const TS_LTPLS = {
+    lchalk: { name: "Chalkboard", tip: "Your lesson's words in chalk, on a real-looking board" },
+    lnumber: { name: "Big number", tip: "A huge lesson number — perfect for a series" },
+    lboard: { name: "The lesson board", tip: "Your actual lesson board, with a bold title" },
+    lfromto: { name: "Before → after", tip: "Letters you can't read yet → the word you can" },
+    lseries: { name: "Series banner", tip: "Same banner every time, only the number and words change" },
+  };
+  // fill a design with one lesson's details (also used to reuse your series look for every lesson)
+  function tsApplyLesson(doc, LI, boardA) {
+    const D = Object.assign({}, doc, { layers: doc.layers.map(L => {
+      if (!L.role) return L;
+      if (L.tmpl) return Object.assign({}, L, { text: L.tmpl.replace(/\{n\}/g, LI.n).replace(/\{title\}/g, LI.title).replace(/\{word\}/g, LI.words[0] || LI.title).replace(/\{spaced\}/g, (LI.words[0] || "").split("").join(" ")) });
+      if (L.role === "lword") { const w = LI.words[L.wi] || ""; return Object.assign({}, L, { text: w, hidden: !w }); }
+      if (L.role === "lboard" && boardA) return Object.assign({}, L, { src: boardA.id });
+      return L;
+    }), assets: Object.assign({}, doc.assets) });
+    if (boardA) { D.assets[boardA.id] = boardA.blob; if (D.bg && D.bg.role === "lboard") D.bg = Object.assign({}, D.bg, { src: boardA.id }); }
+    D.text = LI.title; D.lesson = LI.n; return D;
+  }
+  // keep a design as your series look: the lesson's number, title and words become blanks to fill in
+  function tsLookFrom(doc, LI) {
+    const fill = t => t.replace(/\{n\}/g, LI.n).replace(/\{title\}/g, LI.title).replace(/\{word\}/g, LI.words[0] || LI.title).replace(/\{spaced\}/g, (LI.words[0] || "").split("").join(" "));
+    return Object.assign({}, doc, { thumb: null, layers: doc.layers.map(L => {
+      if (!L.role || !L.tmpl || fill(L.tmpl) === L.text) return L;
+      let t = String(L.text); if (LI.title) t = t.split(LI.title).join("{title}"); t = t.replace(new RegExp("\\b" + LI.n + "\\b", "g"), "{n}");
+      return Object.assign({}, L, { tmpl: t });
+    }) });
+  }
+  function tsMakeLesson(tpl, A, LI) {
+    const T = !!A.tall, W = T ? 1080 : 1920, H = T ? 1920 : 1080, acc = A.acc || "#FF7A00", layers = [], words = LI.words.slice(0, T ? 4 : 6);
+    const chalk = (o) => Object.assign({ font: "andika", upper: false, color: "#F4F1E8", acc: "#FFE066", chalk: true, stroke: { w: 0, col: "#000" }, shadow: { kind: "soft", col: "rgba(255,255,255,.18)" } }, o || {});
+    const txt = (role, tmpl, x, y, maxW, maxH, style, extra) => { const L = Object.assign({ id: tsUid(), type: "text", role, tmpl, text: tmpl, x, y, rot: 0, align: "center", size: 100 }, style, extra || {}); L.text = tmpl.replace(/\{n\}/g, LI.n).replace(/\{title\}/g, LI.title).replace(/\{word\}/g, LI.words[0] || LI.title).replace(/\{spaced\}/g, (LI.words[0] || "").split("").join(" ")); tsFit(L, maxW, maxH, extra && extra.maxSize); delete L.maxSize; layers.push(L); return L; };
+    const word = (i, x, y, maxW, maxH, style, extra) => { const w = words[i]; if (!w) return; const L = Object.assign({ id: tsUid(), type: "text", role: "lword", wi: i, text: w, x, y, rot: 0, align: "center", size: 100 }, style, extra || {}); tsFit(L, maxW, maxH, extra && extra.maxSize); delete L.maxSize; layers.push(L); };
+    const rect = (x, y, w, h, extra) => layers.push(Object.assign({ id: tsUid(), type: "rect", x, y, w, h, rot: 0, fill: "#000" }, extra || {}));
+    const ring = (x, y, w, h, extra) => layers.push(Object.assign({ id: tsUid(), type: "ring", x, y, w, h, rot: -6, sw: T ? 9 : 11, col: "#FFE066", outline: null, style: "scribble" }, extra || {}));
+    const tile = (i, x, y, w, h, extra) => { if (!words[i]) return; rect(x, y, w, h, Object.assign({ fill: "#F4F1E8", r: Math.min(w, h) * 0.18, shadow: true }, extra || {})); word(i, x, y + h * 0.02, w * 0.84, h * 0.66, { font: "andika", color: "#14271D", stroke: { w: 0, col: "#000" }, shadow: { kind: "none" } }); };
+    const grid = (x0, y0, x1, y1, cols, style) => { const n = words.length; if (!n) return; const rows = Math.ceil(n / cols), cw = (x1 - x0) / cols, rh = (y1 - y0) / rows; words.forEach((w, i) => { const r = Math.floor(i / cols), k = i % cols, inRow = Math.min(cols, n - r * cols), off = (cols - inRow) * cw / 2; style(i, x0 + off + cw * (k + 0.5), y0 + rh * (r + 0.5), cw, rh); }); };
+    let bg = { kind: "chalk", wood: true, vig: 0.35, grain: 0.05 };
+    switch (tpl) {
+      case "lchalk":
+        if (!T) {
+          txt("lnum", "LESSON {n}", W * 0.17, H * 0.12, W * 0.24, H * 0.07, chalk({ font: "mont", upper: true, color: "#FFE066", ls: 0.08 }));
+          txt("ltitle", "{title}", W * 0.5, H * 0.27, W * 0.84, H * 0.2, chalk({ font: "andika" }));
+          rect(W * 0.5, H * 0.39, W * 0.5, 6, { fill: "#F4F1E8", op: 0.5, r: 3 });
+          grid(W * 0.1, H * 0.46, W * 0.9, H * 0.88, words.length > 4 ? 3 : 2, (i, x, y, cw, rh) => word(i, x, y, cw * 0.8, rh * 0.72, chalk({ color: i === 0 ? "#FFE066" : "#F4F1E8" })));
+          if (words[0]) { const cols = words.length > 4 ? 3 : 2, rows = Math.ceil(words.length / cols), cw = W * 0.8 / cols, rh = H * 0.42 / rows, inRow = Math.min(cols, words.length), off = (cols - inRow) * cw / 2; ring(W * 0.1 + off + cw * 0.5, H * 0.46 + rh * 0.5, cw * 0.78, rh * 0.85); }
+        } else {
+          txt("lnum", "LESSON {n}", W * 0.5, H * 0.1, W * 0.6, H * 0.045, chalk({ font: "mont", upper: true, color: "#FFE066", ls: 0.08 }));
+          txt("ltitle", "{title}", W * 0.5, H * 0.21, W * 0.84, H * 0.12, chalk());
+          grid(W * 0.1, H * 0.32, W * 0.9, H * 0.78, 1, (i, x, y, cw, rh) => word(i, x, y, cw * 0.8, rh * 0.7, chalk({ color: i === 0 ? "#FFE066" : "#F4F1E8" })));
+        }
+        break;
+      case "lnumber":
+        bg = { kind: "look", look: "beams", col: acc, col2: "#FFE7A8", x: T ? 0.5 : 0.26, y: T ? 0.3 : 0.5, vig: 0.5, grain: 0.04 };
+        if (!T) {
+          txt("lnum", "{n}", W * 0.26, H * 0.52, W * 0.42, H * 0.84, { font: "anton", upper: true, color: "#FFFFFF", grad: "gold", stroke: { w: 0, col: "#000" }, shadow: { kind: "3d", depth: 22, col: "#3A1400", angle: 120 } }, { maxSize: 900 });
+          txt("lkick", "LESSON", W * 0.68, H * 0.17, W * 0.5, H * 0.08, { font: "mont", upper: true, color: acc, ls: 0.3, stroke: { w: 0, col: "#000" }, shadow: { kind: "none" } });
+          txt("ltitle", "{title}", W * 0.68, H * 0.33, W * 0.56, H * 0.2, Object.assign(TS_STYLES.heavy(acc), { upper: true }));
+          grid(W * 0.42, H * 0.5, W * 0.96, H * 0.9, 3, (i, x, y, cw, rh) => tile(i, x, y, cw * 0.86, Math.min(rh * 0.78, H * 0.16)));
+        } else {
+          txt("lkick", "LESSON", W * 0.5, H * 0.07, W * 0.6, H * 0.04, { font: "mont", upper: true, color: acc, ls: 0.3, stroke: { w: 0, col: "#000" }, shadow: { kind: "none" } });
+          txt("lnum", "{n}", W * 0.5, H * 0.27, W * 0.8, H * 0.3, { font: "anton", upper: true, color: "#FFFFFF", grad: "gold", stroke: { w: 0, col: "#000" }, shadow: { kind: "3d", depth: 20, col: "#3A1400", angle: 120 } }, { maxSize: 700 });
+          txt("ltitle", "{title}", W * 0.5, H * 0.5, W * 0.88, H * 0.11, Object.assign(TS_STYLES.heavy(acc), { upper: true }));
+          grid(W * 0.08, H * 0.58, W * 0.92, H * 0.8, 2, (i, x, y, cw, rh) => tile(i, x, y, cw * 0.86, Math.min(rh * 0.78, H * 0.08)));
+        }
+        break;
+      case "lboard":
+        bg = A.boardPic ? { kind: "photo", src: A.boardPic.id, role: "lboard", blur: 0, dim: 0.12, zoom: 1.04, grade: "pop", vig: 0.5, grain: 0.03 } : bg;
+        if (!T) {
+          rect(W * 0.5, H * 0.78, W * 1.02, H * 0.46, { fill: "#000000", fade: "v", fadeAt: 0.55, op: 0.9 });
+          txt("lnum", "LESSON {n}", W * 0.15, H * 0.12, W * 0.24, H * 0.085, TS_STYLES.tag(acc));
+          txt("ltitle", "{title}", W * 0.5, H * 0.8, W * 0.9, H * 0.25, Object.assign(TS_STYLES.heavy(acc), { upper: true }));
+        } else {
+          rect(W * 0.5, H * 0.8, W * 1.02, H * 0.4, { fill: "#000000", fade: "v", fadeAt: 0.5, op: 0.9 });
+          txt("lnum", "LESSON {n}", W * 0.5, H * 0.08, W * 0.6, H * 0.05, TS_STYLES.tag(acc));
+          txt("ltitle", "{title}", W * 0.5, H * 0.78, W * 0.9, H * 0.16, Object.assign(TS_STYLES.heavy(acc), { upper: true }));
+        }
+        break;
+      case "lfromto":
+        bg = { kind: "chalk", wood: false, vig: 0.4, grain: 0.05 };
+        if (!T) {
+          rect(W * 0.25, H * 0.5, W * 0.5, H * 1.02, { fill: "#000000", op: 0.35 });
+          txt("lspaced", "{spaced}", W * 0.23, H * 0.44, W * 0.34, H * 0.2, chalk({ color: "#9BA79F", ls: 0.12 }));
+          txt("lq", "???", W * 0.25, H * 0.66, W * 0.2, H * 0.14, chalk({ color: "#FF8A8A", font: "anton" }));
+          layers.push({ id: tsUid(), type: "arrow", x: W * 0.43, y: H * 0.52, a: [0, 0], b: [W * 0.12, 0], c: [W * 0.06, -H * 0.12], w: 28, col: "#FFE066", outline: null, style: "brush" });
+          txt("lword0", "{word}", W * 0.76, H * 0.47, W * 0.4, H * 0.3, chalk({ color: "#FFFFFF" }), { maxSize: 300 });
+          txt("lok", "✓", W * 0.76, H * 0.72, W * 0.1, H * 0.14, chalk({ color: "#7CF29A", font: "poppins" }));
+          txt("lnum", "LESSON {n} · {title}", W * 0.5, H * 0.9, W * 0.8, H * 0.07, chalk({ font: "mont", upper: true, color: "#FFE066", ls: 0.06 }));
+        } else {
+          rect(W * 0.5, H * 0.25, W * 1.02, H * 0.5, { fill: "#000000", op: 0.35 });
+          txt("lspaced", "{spaced}", W * 0.5, H * 0.2, W * 0.8, H * 0.1, chalk({ color: "#9BA79F", ls: 0.12 }));
+          txt("lq", "???", W * 0.5, H * 0.33, W * 0.4, H * 0.07, chalk({ color: "#FF8A8A", font: "anton" }));
+          layers.push({ id: tsUid(), type: "arrow", x: W * 0.5, y: H * 0.42, a: [0, 0], b: [0, H * 0.12], c: [W * 0.1, H * 0.06], w: 26, col: "#FFE066", outline: null, style: "brush" });
+          txt("lword0", "{word}", W * 0.5, H * 0.65, W * 0.84, H * 0.16, chalk({ color: "#FFFFFF" }), { maxSize: 300 });
+          txt("lnum", "LESSON {n}", W * 0.5, H * 0.08, W * 0.6, H * 0.045, chalk({ font: "mont", upper: true, color: "#FFE066", ls: 0.06 }));
+        }
+        break;
+      case "lseries":
+        bg = { kind: "look", look: "bokeh", col: acc, vig: 0.45, grain: 0.03 };
+        if (!T) {
+          rect(W * 0.5, H * 0.075, W, H * 0.15, { fill: acc });
+          txt("lseries", "READING CLASS", W * 0.3, H * 0.075, W * 0.5, H * 0.08, { font: "mont", upper: true, color: vmInk(acc), ls: 0.2, stroke: { w: 0, col: "#000" }, shadow: { kind: "none" } });
+          txt("lnum", "LESSON {n}", W * 0.82, H * 0.075, W * 0.3, H * 0.09, { font: "anton", upper: true, color: vmInk(acc), stroke: { w: 0, col: "#000" }, shadow: { kind: "none" } });
+          rect(W * 0.5, H * 0.54, W * 0.86, H * 0.56, { fill: "#1E3A2C", r: 24, shadow: true, stroke: "#6B4220", sw: 18 });
+          grid(W * 0.12, H * 0.3, W * 0.88, H * 0.78, words.length > 4 ? 3 : words.length > 2 ? 2 : 1, (i, x, y, cw, rh) => word(i, x, y, cw * 0.8, rh * 0.75, chalk({ color: i === 0 ? "#FFE066" : "#F4F1E8" })));
+          txt("ltitle", "{title}", W * 0.5, H * 0.91, W * 0.86, H * 0.1, Object.assign(TS_STYLES.heavy(acc), { upper: true, shadow: { kind: "hard", col: "#000" } }));
+        } else {
+          rect(W * 0.5, H * 0.05, W, H * 0.1, { fill: acc });
+          txt("lseries", "READING CLASS", W * 0.5, H * 0.035, W * 0.7, H * 0.03, { font: "mont", upper: true, color: vmInk(acc), ls: 0.2, stroke: { w: 0, col: "#000" }, shadow: { kind: "none" } });
+          txt("lnum", "LESSON {n}", W * 0.5, H * 0.075, W * 0.6, H * 0.035, { font: "anton", upper: true, color: vmInk(acc), stroke: { w: 0, col: "#000" }, shadow: { kind: "none" } });
+          rect(W * 0.5, H * 0.45, W * 0.88, H * 0.5, { fill: "#1E3A2C", r: 24, shadow: true, stroke: "#6B4220", sw: 16 });
+          grid(W * 0.1, H * 0.22, W * 0.9, H * 0.68, 1, (i, x, y, cw, rh) => word(i, x, y, cw * 0.8, rh * 0.75, chalk({ color: i === 0 ? "#FFE066" : "#F4F1E8" })));
+          txt("ltitle", "{title}", W * 0.5, H * 0.8, W * 0.88, H * 0.08, Object.assign(TS_STYLES.heavy(acc), { upper: true }));
+        }
+        break;
+    }
+    if (A.logo) { const lw = T ? W * 0.18 : W * 0.09; layers.push({ id: tsUid(), type: "logo", src: A.logo.id, x: T ? W * 0.5 : W - W * 0.035 - lw / 2, y: T ? H * 0.94 : H * 0.93 - lw * A.logo.ar / 2, w: lw, rot: 0, op: 0.9, fx: { shadow: { blur: 12, dist: 3, a: 0.6 } } }); }
+    const assets = {}; for (const o of [A.boardPic, A.logo]) if (o && o.blob) assets[o.id] = o.blob;
+    return { id: tsUid(), tpl, W, H, fmt: T ? "short" : "yt", bg, layers, assets, text: LI.title, lesson: LI.n, updated: Date.now() };
+  }
   // ---- the studio's home: your designs, and starting a new one ----
   const tsLib = {
     async designs() { const all = await vmDb.all().catch(() => []); return all.filter(x => String(x.id).indexOf("__d_") === 0).map(x => x.d).filter(Boolean).sort((a, b) => b.updated - a.updated); },
@@ -11440,17 +11824,21 @@ notify pgrst, 'reload schema';
     useEffect(() => { let alive = true; const t = setTimeout(async () => { await tsFontsReady(); const imgs = await tsLoadAll(doc); const cv = ref.current; if (!cv || !alive) return; const W2 = Math.round(w * Math.min(2, window.devicePixelRatio || 1)), H2 = Math.round(W2 * doc.H / doc.W); cv.width = W2; cv.height = H2; const c = cv.getContext("2d"); c.setTransform(W2 / doc.W, 0, 0, W2 / doc.W, 0, 0); tsRender(c, doc, imgs, { px: W2 / doc.W }); }, 120); return () => { alive = false; clearTimeout(t); }; }, [doc]);
     return html`<canvas ref=${ref} class=${cls || ""} onClick=${onClick}></canvas>`;
   }
-  function VMThumbs({ onClose, from }) {
+  function VMThumbs({ onClose, from, lesson }) {
     const st = useMemo(() => vmStyle(), []);
+    useEffect(() => { tsUserFonts(); }, []);
+    const LI = useMemo(() => (lesson ? { n: lesson.n, title: (lesson.les.title || "Lesson " + lesson.n).trim(), words: tsLWords(lesson.les.board) } : null), [lesson]);
+    const [boardA, setBoardA] = useState(null), [look, setLook] = useState(null);
+    useEffect(() => { if (!lesson) return; vmDb.all().then(all => { const r = all.find(x => x.id === "__lessonlook"); setLook(r ? r.look : null); }).catch(() => {}); vmLessonPic(lesson.les, lesson.n).then(async b => { if (!b) return; const bm = await createImageBitmap(b); setBoardA({ id: "board_" + lesson.n, blob: b, cut: false, ar: bm.height / bm.width, w: bm.width, h: bm.height }); }).catch(() => {}); }, []);
     const [faces, setFaces] = useState([]), [designs, setDesigns] = useState(null), [d, setD] = useState(null), [busy, setBusy] = useState(""), [cam, setCam] = useState(null), [open, setOpen] = useState(null), [fin, setFin] = useState(null), [sugs, setSugs] = useState(null), [assets, setAssets] = useState({});
     const camDone = useRef(null);
     const logoA = useRef(null);
     useEffect(() => {
-      thLib.get().then(l => { setFaces(l.faces || []); let dr = Object.assign({ fmt: "yt", type: "Reaction", angle: "Curiosity", text: "", label: "", faceId: null, subj: null, subjCut: "keep", bgPhoto: null }, l.draft && l.draft.v3 ? l.draft : {}); if (from) dr = Object.assign({}, dr, { topic: from.title || "", subj: from.subj || dr.subj }); if (!dr.text) dr.text = TH_WORDS[dr.angle][0]; setD(dr); });
+      thLib.get().then(l => { setFaces(l.faces || []); let dr = Object.assign({ fmt: "yt", type: "Reaction", angle: "Curiosity", text: "", label: "", faceId: null, subj: null, subjCut: "keep", bgPhoto: null }, l.draft && l.draft.v3 ? l.draft : {}); if (from) dr = Object.assign({}, dr, { topic: from.title || "", subj: from.subj || dr.subj }); if (lesson) dr = Object.assign({}, dr, { text: (lesson.les.title || "Lesson " + lesson.n).trim(), label: "" }); if (!dr.text) dr.text = TH_WORDS[dr.angle][0]; setD(dr); });
       tsLib.designs().then(setDesigns);
       if (st.logo) fetch(st.logo).then(r => r.blob()).then(async b => { const bm = await createImageBitmap(b); logoA.current = { id: "logo", blob: b, cut: true, ar: bm.height / bm.width, w: bm.width, h: bm.height }; setAssets(a => Object.assign({}, a)); }).catch(() => {});
     }, []);
-    const up = o => setD(p => { const n = Object.assign({}, p, o, { v3: true }); thLib.setDraft(n).catch(() => {}); return n; });
+    const up = o => setD(p => { const n = Object.assign({}, p, o, { v3: true }); if (!lesson) thLib.setDraft(n).catch(() => {}); return n; });
     // the face and the story picture, ready for the designs
     const face = d && (faces.find(f => f.id === d.faceId) || faces[0]) || null;
     useEffect(() => {
@@ -11463,9 +11851,15 @@ notify pgrst, 'reload schema';
       return () => { alive = false; };
     }, [face && face.id, face && face.blob, d && d.subj, d && d.subjCutBlob]);
     const docs = useMemo(() => {
-      if (!d) return []; const A = { tall: d.fmt === "short", face: assets.face, subj: assets.subj, text: d.text, label: d.label, acc: st.acc || "#FF7A00", logo: logoA.current };
-      return Object.keys(TS_TPLS).map(k => tsMake(k, A));
-    }, [d && d.fmt, d && d.text, d && d.label, assets]);
+      if (!d) return []; const A = { tall: d.fmt === "short", face: lesson ? null : assets.face, subj: lesson ? assets.subj || boardA : assets.subj, text: d.text, label: d.label, acc: st.acc || "#FF7A00", logo: logoA.current };
+      if (!lesson) return Object.keys(TS_TPLS).map(k => tsMake(k, A));
+      const L2 = Object.assign({}, LI, { title: String(d.text || LI.title).replace(/\*/g, "") }), out = [];
+      const lk = look && look[d.fmt === "short" ? "short" : "yt"]; if (lk) out.push(Object.assign(tsApplyLesson(lk, L2, boardA), { id: tsUid(), tpl: "series", updated: Date.now() }));
+      for (const k of Object.keys(TS_LTPLS)) out.push(tsMakeLesson(k, Object.assign({}, A, { boardPic: boardA }), L2));
+      for (const k of Object.keys(TS_TPLS)) out.push(tsMake(k, A));
+      return out;
+    }, [d && d.fmt, d && d.text, d && d.label, assets, boardA, look]);
+    const tplName = k => (TS_TPLS[k] || TS_LTPLS[k] || { name: "⭐ Your series look", tip: "The look you chose for all your lessons, with this lesson's number and words" });
     async function addFace(src, mood) {
       setBusy(tsStageText("prepare"));
       let cutBlob = null; try { cutBlob = await tsCutOut(src, "person", (s2, p2) => setBusy(tsStageText(s2, p2))); } catch (e) { toast(e && e.message === "nobody" ? "Couldn't find you in that photo. Try one where your face and shoulders are clear." : "Couldn't cut it out just now (the tool downloads once — check the connection). Saved the photo as it is."); }
@@ -11520,8 +11914,10 @@ notify pgrst, 'reload schema';
         <div class="field"><label for="tsw">The words (3 to 6 is best). Put a word in *stars* to colour it.</label><input id="tsw" value=${d.text} onInput=${e => up({ text: e.target.value })} placeholder="THEY *LIED* TO US"/></div>
         <div class="vml">Ideas for<div class="vmchips">${TH_ANGLES.map(t => html`<button key=${t} class=${"chip" + (d.angle === t ? " on" : "")} onClick=${() => up({ angle: t })}>${t}</button>`)}</div></div>
         <div class="vmchips">${ideas.map(t => html`<button key=${t} class="chip idea" onClick=${() => up({ text: t })}>${t}</button>`)}<button class="chip" onClick=${suggest} disabled=${!!busy}>✨ More ideas</button></div>
-        <div class="vml">A small label (optional)<div class="vmchips">${TH_LABELS.map(t => html`<button key=${t || "none"} class=${"chip" + (d.label === t ? " on" : "")} onClick=${() => up({ label: t })}>${t || "None"}</button>`)}</div></div>
-        <h4 class="vmh">You <small>cut out automatically, sharp edges</small></h4>
+        <div class="field"><label for="tslab">A small label (optional) — type anything: DAY 2, PART 3, EPISODE 4…</label><input id="tslab" value=${d.label || ""} maxlength="24" onInput=${e => up({ label: e.target.value.toUpperCase() })} placeholder="e.g. DAY 2"/></div>
+        <div class="vmchips">${(() => { const m = /^(DAY|PART|EPISODE|EP|LESSON|WEEK)\s*(\d+)$/i.exec(String(d.label || "").trim()); const nx = m ? [m[1].toUpperCase() + " " + (+m[2] + 1)] : []; return nx.concat(TH_LABELS).filter((t, i, a2) => a2.indexOf(t) === i); })().map(t => html`<button key=${t || "none"} class=${"chip" + ((d.label || "") === t ? " on" : "")} onClick=${() => up({ label: t })}>${t ? (/^\w+ \d+$/.test(t) && t !== "DAY 1" ? "➜ " + t : t) : "None"}</button>`)}</div>
+        ${lesson ? html`<p class="help">Lesson ${LI.n}: “${LI.title}”. The designs use this lesson's board and words. Lessons stay faceless.</p>` : null}
+        ${lesson ? null : html`<h4 class="vmh">You <small>cut out automatically, sharp edges</small></h4>
         <div class="thfaces">
           <button class="thface add" onClick=${() => setCam(true)}><span>📸</span><small>Take one</small></button>
           <button class="thface add" onClick=${() => pickFile(f => addFace(f, "surprised"))}><span>＋</span><small>From gallery</small></button>
@@ -11533,10 +11929,11 @@ notify pgrst, 'reload schema';
           <button class="btn slim quiet" onClick=${() => pickFile(f => setSubj(f, "keep"))}>${d.subj ? "🔁 Another picture" : "＋ A picture"}</button>
           ${d.subj ? html`<button class=${"chip" + (d.subjCut === "keep" ? " on" : "")} onClick=${() => setSubj(d.subj, "keep")}>Keep the photo</button><button class=${"chip" + (d.subjCut === "person" ? " on" : "")} onClick=${() => setSubj(d.subj, "person")}>✂️ Cut out a person</button><button class=${"chip" + (d.subjCut === "thing" ? " on" : "")} onClick=${() => setSubj(d.subj, "thing")}>✂️ Cut out a thing</button><button class="chip" onClick=${() => up({ subj: null, subjCutBlob: null })}>Remove</button>` : null}
         </div>
+        `}
         <h4 class="vmh">Pick a starting design <small>then make it yours: move, resize, recolour, add anything</small></h4>
         <div class=${"tsgal" + (d.fmt === "short" ? " tall" : "")}>
-          ${docs.map(doc => html`<div key=${doc.tpl} class="tsgi" onClick=${async () => { const n = await saveDesign(doc); setOpen(n); }}><${TSPreview} doc=${doc} w=${d.fmt === "short" ? 180 : 420} cls="tsgcv"/><small><b>${TS_TPLS[doc.tpl].name}</b> · ${TS_TPLS[doc.tpl].tip}</small></div>`)}
-          <div class="tsgi blank" onClick=${async () => { const W = d.fmt === "short" ? 1080 : 1920, H = d.fmt === "short" ? 1920 : 1080; const n = await saveDesign({ id: tsUid(), tpl: "blank", W, H, fmt: d.fmt, bg: { kind: "grad", preset: "night", vig: 0.5, grain: 0.03 }, layers: [], assets: {}, text: d.text, updated: Date.now() }); setOpen(n); }}><div class=${"tsblank" + (d.fmt === "short" ? " tall" : "")}>＋</div><small><b>Blank</b> · start from nothing</small></div>
+          ${docs.map(doc => html`<div key=${doc.tpl} class="tsgi" onClick=${async () => { const n = await saveDesign(doc); setOpen(n); }}><${TSPreview} doc=${doc} w=${d.fmt === "short" ? 180 : 420} cls="tsgcv"/><small><b>${tplName(doc.tpl).name}</b> · ${tplName(doc.tpl).tip}</small></div>`)}
+          <div class="tsgi blank" onClick=${async () => { const W = d.fmt === "short" ? 1080 : 1920, H = d.fmt === "short" ? 1920 : 1080; const n = await saveDesign({ id: tsUid(), tpl: "blank", W, H, fmt: d.fmt, bg: { kind: "look", look: "smoke", col: st.acc || "#3B82F6", vig: 0.45, grain: 0.03 }, layers: [], assets: {}, text: d.text, updated: Date.now() }); setOpen(n); }}><div class=${"tsblank" + (d.fmt === "short" ? " tall" : "")}>＋</div><small><b>Blank</b> · start from nothing</small></div>
         </div>
       </div>
       ${fin ? html`<div class="scrim" onClick=${e => { if (e.target === e.currentTarget) setFin(null); }}><div class="sheet tsfin" role="dialog" aria-label="Your thumbnail">
@@ -11546,7 +11943,10 @@ notify pgrst, 'reload schema';
           <div class="throw mini"><${TSPreview} doc=${fin} w=${120} cls="thtiny"/><div><b>${d.title || String(fin.text || "").replace(/\*/g, "")}</b></div></div></div>` : null}
         <button class="btn" disabled=${!!busy} onClick=${() => exportIt(fin)}>⬇️ Save it — full HD (${fin.W}×${fin.H})</button>
         <div class="tsrow c"><button class="btn quiet slim" onClick=${() => { const x = fin; setFin(null); setOpen(x); }}>✏️ Keep editing</button>
-          ${fin.tpl && fin.tpl !== "blank" ? html`<button class="btn quiet slim" onClick=${async () => { const A = { tall: fin.fmt !== "short", face: assets.face, subj: assets.subj, text: fin.text || d.text, label: fin.label || d.label, acc: st.acc || "#FF7A00", logo: logoA.current }; const n = await saveDesign(tsMake(fin.tpl, A)); setFin(null); setOpen(n); }}>${fin.fmt === "short" ? "▭ Make the YouTube version" : "▯ Make the Shorts version"}</button>` : null}
+          ${fin.tpl && fin.tpl !== "blank" ? html`<button class="btn quiet slim" onClick=${async () => { const A = { tall: fin.fmt !== "short", face: assets.face, subj: assets.subj, text: fin.text || d.text, label: fin.label || d.label, acc: st.acc || "#FF7A00", logo: logoA.current }; const L2 = LI ? Object.assign({}, LI, { title: String(fin.text || d.text || LI.title).replace(/\*/g, "") }) : null, lk = look && look[fin.fmt === "short" ? "yt" : "short"];
+            const nd = TS_LTPLS[fin.tpl] ? tsMakeLesson(fin.tpl, Object.assign({}, A, { face: null, boardPic: boardA }), L2) : fin.tpl === "series" ? (lk ? Object.assign(tsApplyLesson(lk, L2, boardA), { id: tsUid(), tpl: "series" }) : tsMakeLesson("lseries", Object.assign({}, A, { face: null, boardPic: boardA }), L2)) : tsMake(fin.tpl, LI ? Object.assign({}, A, { face: null, subj: assets.subj || boardA }) : A);
+            const n = await saveDesign(nd); setFin(null); setOpen(n); }}>${fin.fmt === "short" ? "▭ Make the YouTube version" : "▯ Make the Shorts version"}</button>` : null}
+          ${LI ? html`<button class="btn quiet slim" onClick=${async () => { const lk = Object.assign({}, look || {}, { [fin.fmt === "short" ? "short" : "yt"]: tsLookFrom(fin, Object.assign({}, LI, { title: String(fin.text || LI.title).replace(/\*/g, "") })) }); setLook(lk); await vmDb.put({ id: "__lessonlook", look: lk }).catch(() => {}); toast("Saved. Every lesson now starts with this look — just its own number and words."); }}>⭐ Use this look for every lesson</button>` : null}
           <button class="btn quiet slim" onClick=${async () => { const n = Object.assign(tsClone(Object.assign({}, fin, { assets: {} })), { assets: fin.assets, id: tsUid(), updated: Date.now() }); await saveDesign(n); setFin(null); setOpen(n); }}>⧉ Make a B version</button></div>
         <button class="btn quiet" onClick=${() => setFin(null)}>Close</button>
       </div></div>` : null}
@@ -12294,7 +12694,7 @@ notify pgrst, 'reload schema';
     const seqLenNow = () => { const tk2 = projRef.current.take; return tk2 ? vmSeqLen(vmSeq(tk2)) : 0; };
     const plNowR = () => { const q = plR.current; return q.on ? Math.min(seqLenNow(), q.u0 + (performance.now() - q.t0) / 1000) : q.u; };
     const plSeekR = u => { const q = plR.current; u = Math.max(0, Math.min(seqLenNow(), u)); q.u = u; q.u0 = u; q.t0 = performance.now(); S.current.dirty = true; S.current.lastRt = null; };
-    const plPauseR = () => { const q = plR.current; q.u = plNowR(); q.on = false; for (const el of [aref.current, vref.current, cref.current]) if (el && !el.paused) el.pause(); setTick(x => x + 1); };
+    const plPauseR = () => { const q = plR.current; q.u = plNowR(); q.on = false; for (const el of [aref.current, vref.current, cref.current]) if (el && !el.paused && !el.srcObject) el.pause(); setTick(x => x + 1); };
     const plPlayR = () => { const q = plR.current; let u = plNowR(); if (u >= seqLenNow() - 0.05) u = 0; q.u = u; q.u0 = u; q.t0 = performance.now(); q.on = true; S.current.lastRt = null; setTick(x => x + 1); };
     const plApi = { now: plNowR, seek: plSeekR, playing: () => plR.current.on, pause: plPauseR, play: plPlayR, toggle: () => (plR.current.on ? plPauseR() : plPlayR()) };
     const camSnap = useRef({ cv: null, at: 0 });   // your last good camera picture, so it never goes blank
@@ -12320,6 +12720,13 @@ notify pgrst, 'reload schema';
     useEffect(() => { if (rec) awake.on("vm"); else awake.off("vm"); return () => awake.off("vm"); }, [rec]);
     useEffect(() => () => { clearTimeout(saveT.current); vmDb.put(projRef.current).catch(() => {}); if (r.current) r.current.cancel(); if (camRec.current) camRec.current.cancel(); if (scr.current) { scr.current.rec.cancel(); vmRec.close(scr.current.stream); } vmRec.close(stream.current); vmRec.close(mic.current); if (aref.current) aref.current.pause(); }, []);
     // the camera: on while you get ready and while you record
+    // the microphone opens while you get ready (opening it at the tap is what made recording slow to start)
+    async function warmMic() {
+      if (mic.current && mic.current.getAudioTracks().some(t => t.readyState === "live")) return mic.current;
+      if (S.current.micP) return S.current.micP;
+      S.current.micP = vmRec.open(false).then(m => { if (S.current.mode !== "ready" && S.current.mode !== "rec" && !r.current) { vmRec.close(m); return null; } mic.current = m; return m; }).finally(() => { S.current.micP = null; });
+      return S.current.micP.catch(() => null);
+    }
     async function openCam() {
       vmRec.close(stream.current); stream.current = null;
       try {
@@ -12329,6 +12736,7 @@ notify pgrst, 'reload schema';
     }
     useEffect(() => {
       if (mode === "ready" && camOn) openCam();
+      if (mode === "ready") warmMic();
       if (mode === "ready" && !camOn) { vmRec.close(stream.current); stream.current = null; }
       if (mode === "review") { vmRec.close(stream.current); stream.current = null; }
     }, [mode, camOn, proj.facing]);
@@ -12407,6 +12815,7 @@ notify pgrst, 'reload schema';
         }
         c.setTransform(cv.width / G2.W, 0, 0, cv.height / G2.H, 0, 0);
         const it = s.show ? R.items[s.show] : null, v = it && it.live ? sref.current : vref.current, cv2 = cref.current;
+        if (cv2 && cv2.srcObject && cv2.paused && R.mode !== "review" && now - (R.camKick || 0) > 500) { R.camKick = now; cv2.play().catch(() => {}); }
         let clipSrc = null;
         if (it && it.kind === "vid" && v) {
           if (v.readyState >= 2 && v.videoWidth) {
@@ -12627,7 +13036,7 @@ notify pgrst, 'reload schema';
       let step = "mic";
       try {
         if (camOn) { step = "cam"; if (!stream.current || !stream.current.getVideoTracks().some(t => t.readyState === "live")) await openCam(); if (!stream.current) throw { code: "nocam" }; }
-        step = "mic"; mic.current = await vmRec.open(false);
+        step = "mic"; if (!mic.current || !mic.current.getAudioTracks().some(t => t.readyState === "live")) { if (S.current.micP) await S.current.micP.catch(() => {}); if (!mic.current || !mic.current.getAudioTracks().some(t => t.readyState === "live")) mic.current = await vmRec.open(false); }
         step = "rec"; r.current = vmRec.start(mic.current);
         camSegs.current = [];
         if (camOn) { step = "camrec"; camRec.current = vmRec.start(stream.current); camSegs.current.push({ t: 0, rec: camRec.current, facing: projRef.current.facing || "user" }); }
@@ -12947,6 +13356,7 @@ notify pgrst, 'reload schema';
     }
     const [stepOpen, setStepOpen] = useState(false);
     const [studio, setStudio] = useState(false);
+    const [thumbs, setThumbs] = useState(false);
     const [tile, setTile] = useState(null);
     const [armDel, setArmDel] = useState(false);
     useEffect(() => { if (!dirty) setBoard(lesson.board || ""); }, [lesson.board]);
@@ -13010,6 +13420,7 @@ notify pgrst, 'reload schema';
           <p class="help">They play this while looking at the board. Record with the board so your stick points at each tile as you talk, and add Your turn moments so they have to answer. Speak in the language they're most comfortable with.</p>
           <${ExplainRecorder} lesson=${lesson} pst=${pst} onStudio=${() => { player.stop(); setStudio(true); }}/>
           ${lesson.explain ? html`<${LessonVideoBtn} lesson=${lesson} number=${idx + 1}/>` : null}
+          <button class="btn quiet vidbtn" onClick=${() => { player.stop(); setThumbs(true); }}>🖼 Make its YouTube thumbnail</button>
         </div>
         <div class="card">
           <div class="lbl">The board</div>
@@ -13051,6 +13462,7 @@ notify pgrst, 'reload schema';
       </div>
       ${stepOpen ? html`<${StepRecorder} ix=${ix} lesson=${lesson} onClose=${() => setStepOpen(false)}/>` : null}
       ${studio ? html`<${ExplainStudio} ix=${ix} lesson=${lesson} number=${idx + 1} onClose=${() => setStudio(false)}/>` : null}
+      ${thumbs ? html`<${VMThumbs} lesson=${{ les: lesson, n: idx + 1 }} onClose=${() => setThumbs(false)}/>` : null}
       ${tile ? html`<${TileSheet} ix=${ix} lesson=${lesson} lessons=${s.lessons} text=${tile} onClose=${() => setTile(null)}/>` : null}
     </div>`;
   }
@@ -13374,7 +13786,7 @@ notify pgrst, 'reload schema';
   window.__kfApi = { kfPress, kfStep, kfNew, kfSnd, kfAnn, annRec };
   window.__ink = { hitInk, inkGroup, straighten };
   window.__mux = { lessonVideo, fixVideo, loadMux, vidJob, awake, player, cleanVoice };
-  window.__ui = { PushBell, SetupCheck, VidJobPill, html, render, store, Board, ExplainStudio, LiveTools, stageAt, buildSound, live, player, ClassroomPlayer, crAssets, CR_W, CR_H, TalkBoard, vidJob, VideoMaker, vmExport, vmDb, vmNew, vmAt, vmFrame, vmGeo, VM_LOOKS, vmStyle, vmSaveStyle, VMStyle, vmIntro, vmOutro, vmLook, vmElemSrc, vmPrepClip, vmWorld, vmTrack, vmUntrack, VME, vmKeep, vmSrcAt, thLib, VMThumbs, thInfo, tsMake, tsRender, tsLoadAll, tsExport, tsCutOut, tsLib, TS_TPLS };
+  window.__ui = { LessonsList, PacksSheet, RulesGuide, LESSON_PACKS, crFrame, crSorted, stageAt0: stageAt, PushBell, SetupCheck, VidJobPill, html, render, store, Board, ExplainStudio, LiveTools, stageAt, buildSound, live, player, ClassroomPlayer, crAssets, CR_W, CR_H, TalkBoard, vidJob, VideoMaker, vmExport, vmDb, vmNew, vmAt, vmFrame, vmGeo, VM_LOOKS, vmStyle, vmSaveStyle, VMStyle, vmIntro, vmOutro, vmLook, vmElemSrc, vmPrepClip, vmWorld, vmTrack, vmUntrack, VME, vmKeep, vmSrcAt, thLib, VMThumbs, thInfo, tsMake, tsRender, tsLoadAll, tsExport, tsCutOut, tsLib, TS_TPLS };
   window.__lang = { viewOf, saveExpl, saveTileRec, uploadBlob, set: l => { REC_LANG = l; }, get: () => REC_LANG, store };
   root.innerHTML = "";
   render(html`<${App}/>`, root);
