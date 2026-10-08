@@ -413,6 +413,19 @@ img{max-width:100%}
 .vmfmt.on{border-color:var(--blue);background:var(--blue-soft);color:var(--blue)}
 .vmfmt .vmshape{margin-bottom:4px}
 .vmlock{pointer-events:none;opacity:.45}
+.vmhealth{background:#FFF4E5;border-radius:10px;padding:8px 10px;margin:6px 0}.vmhealth.ok{background:#E9F7EE}.vmhealth small{display:block;color:#888;font-size:11px;margin-top:2px}
+.duog{position:fixed;inset:0;background:#000;color:#fff;display:flex;align-items:center;justify-content:center;font-family:var(--font)}
+.duobig{width:100%;height:100%;object-fit:contain;background:#000}
+.duome{position:absolute;right:12px;top:12px;width:28vw;max-width:180px;aspect-ratio:3/4;object-fit:cover;border-radius:14px;border:2px solid #fff;transform:scaleX(-1);background:#222}
+.duocard{position:absolute;left:16px;right:16px;bottom:24px;background:#fff;color:#111;border-radius:18px;padding:18px;display:flex;flex-direction:column;gap:10px;max-width:520px;margin:0 auto}
+.duocard p{margin:0;color:#444;font-size:14px}.duoerr{color:#C62828!important}
+.duomsg{position:absolute;top:45%;left:0;right:0;text-align:center;font:700 17px var(--font);text-shadow:0 2px 8px #000}
+.duosv{position:absolute;left:12px;top:12px;width:30vw;max-width:200px;border-radius:10px;border:2px solid #FFD400;background:#111;opacity:0;pointer-events:none}.duosv.on{opacity:1}.duoshare{position:absolute;left:0;right:0;bottom:64px;display:flex;gap:8px;justify-content:center;align-items:center;flex-wrap:wrap;padding:0 10px}
+.duobar{position:absolute;left:0;right:0;bottom:16px;display:flex;gap:8px;justify-content:center;align-items:center}
+.duolive{background:#E3262E;border-radius:999px;padding:6px 10px;font:800 12px var(--font)}
+.duotag{position:absolute;left:10px;top:10px;z-index:3;background:rgba(0,0,0,.6);color:#fff;border-radius:999px;padding:5px 10px;font:700 12px var(--font)}
+.duolink{background:#F2F4F7;border-radius:10px;padding:10px;font:600 12px monospace;word-break:break-all;max-height:70px;overflow:auto}
+.duost{font-weight:700;color:#8A6D2B}.duost.ok{color:#2E7D5B}
 .vmcount{position:absolute;inset:0;z-index:5;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;background:rgba(0,0,0,.35);color:#fff;text-align:center;padding:20px}.vmcount b{font:900 140px/1 var(--font);text-shadow:0 6px 30px rgba(0,0,0,.6);animation:vmpop 1s ease-out infinite}.vmcount b.sm{font-size:60px;animation:none}.vmcount small{font:700 16px/1.35 var(--font);text-shadow:0 2px 8px rgba(0,0,0,.8)}.vmcount.go{background:rgba(227,38,46,.25)}.vmcount.go b{font-size:56px;color:#fff;animation:none}@keyframes vmpop{0%{transform:scale(1.25);opacity:.4}25%{transform:scale(1);opacity:1}100%{transform:scale(.92);opacity:.85}}
 .vmrectag{position:absolute;right:10px;top:10px;background:rgba(0,0,0,.6);color:#fff;font:700 14px var(--font);border-radius:999px;padding:5px 12px;z-index:2;display:flex;align-items:center;gap:6px;font-variant-numeric:tabular-nums}
 .vmchips{display:flex;flex-wrap:wrap;gap:6px;margin-top:4px}.vmchips.c{justify-content:center;margin:0 0 6px}
@@ -1026,7 +1039,7 @@ a.btn{text-decoration:none}
 .ccsub small{color:#8B9099;font:600 12px var(--font)}
 .ccchips{display:flex;flex-wrap:wrap;gap:6px}
 .ccchip{border:0;border-radius:999px;background:#2A2D35;color:#EDEFF2;font:700 13px var(--font);padding:8px 12px;cursor:pointer}
-.ccchip.on{background:#FFD400;color:#111}.ccchip.danger{background:#5A1D22}
+.ccchip.on{background:#FFD400;color:#111}.ccchip input[type=color]{width:22px;height:22px;border:0;padding:0;background:none;vertical-align:middle;margin-left:4px}.ccchip.danger{background:#5A1D22}
 .ccslide{display:flex;flex-direction:column;gap:4px;font:700 13px var(--font)}.ccslide input{accent-color:#FFD400;width:100%}
 .ccbar{display:flex;gap:2px;overflow-x:auto;padding:6px 6px 4px;scrollbar-width:none;border-top:1px solid #1E2026;margin-top:4px}
 .ccbar::-webkit-scrollbar{display:none}
@@ -9302,7 +9315,7 @@ notify pgrst, 'reload schema';
       } catch (e) {
         console.warn("video", e);
         this.set(Object.assign({}, info, { p: null, err: true }));
-        toast(e && e.message === "nocodec" ? "This phone can't make videos. Try Chrome on Android or a newer iPhone." : "Couldn't make the video. Try again.");
+        toast(e && e.message === "nocodec" ? "This phone can't make videos. Try Chrome on Android or a newer iPhone." : "Couldn't make the video. Try again. (" + String((e && (e.message || e.name)) || e || "").slice(0, 80) + ")");
       }
       awake.off("video");
     },
@@ -9363,6 +9376,9 @@ notify pgrst, 'reload schema';
     anton: { name: "Loud", css: "Anton", w: 400 },
     andika: { name: "Friendly", css: "Andika", w: 700 },
     serif: { name: "Classic", css: "Merriweather", w: 900 },
+    mont: { name: "Montserrat", css: "Montserrat", w: 900 }, bebas: { name: "Bebas", css: "Bebas Neue", w: 400 }, archivo: { name: "Archivo", css: "Archivo Black", w: 400 },
+    kanit: { name: "Kanit", css: "Kanit", w: 900 }, lilita: { name: "Lilita", css: "Lilita One", w: 400 }, fredoka: { name: "Fredoka", css: "Fredoka", w: 700 },
+    bangers: { name: "Comic", css: "Bangers", w: 400 }, lucky: { name: "Luckiest", css: "Luckiest Guy", w: 400 }, marker: { name: "Marker", css: "Permanent Marker", w: 400 },
   };
   const VM_CAPS = [["pop", "Pop (big, 3 words)"], ["hl", "Highlighted word"], ["box", "Box (a line at a time)"], ["word", "One word at a time"], ["off", "No subtitles"]];
   const VM_LAYS = [["cam", "🙂", "Me"], ["split", "⬒", "Split"], ["pip", "▣", "Corner"], ["thing", "🖼", "Only it"]];
@@ -9388,7 +9404,7 @@ notify pgrst, 'reload schema';
   }
   const vmFont = (st, size, w) => { const f = VM_FONTS[st.font] || VM_FONTS.poppins; return (w || f.w) + " " + Math.round(size) + "px \"" + f.css + "\", Andika, sans-serif"; };
   function vmFit(c, st, text, maxW, size, w) { let s = size; for (; s > 12; s -= 2) { c.font = vmFont(st, s, w); if (c.measureText(text).width <= maxW) break; } c.font = vmFont(st, s, w); return s; }
-  async function vmFonts(st) { try { const f = VM_FONTS[st.font] || VM_FONTS.poppins; await Promise.race([Promise.all([document.fonts.load(f.w + " 40px \"" + f.css + "\""), document.fonts.load("700 40px Andika")]), new Promise(r => setTimeout(r, 4000))]); } catch (e) {} }
+  async function vmFonts(st) { try { const f = VM_FONTS[st.font] || VM_FONTS.poppins, f2 = VM_FONTS[st.capFont] || f; await Promise.race([Promise.all([document.fonts.load(f.w + " 40px \"" + f.css + "\""), document.fonts.load(f2.w + " 40px \"" + f2.css + "\""), document.fonts.load("700 40px Andika")]), new Promise(r => setTimeout(r, 4000))]); } catch (e) {} }
   const vmLogos = new Map();
   function vmLogo(st) { if (!st.logo) return null; if (!vmLogos.has(st.logo)) { const im = new Image(); im.src = st.logo; vmLogos.set(st.logo, im); } const im = vmLogos.get(st.logo); return im.complete && im.naturalWidth ? im : null; }
   const vmGeo = fmt => { const F = VM_FMT[fmt] || VM_FMT.tall; return { fmt, W: F.W, H: F.H, tall: fmt !== "wide" }; };
@@ -9778,6 +9794,7 @@ notify pgrst, 'reload schema';
     for (const q of cues) {
       if (q.t > t) break;
       switch (q.k) {
+        case "duo": s.duo = q.v; s.duoT = q.t; break;
         case "show": s.show = q.ref; s.showT = q.t; s.marks = []; s.play = { on: false, at: q.at || 0, t: q.t }; break;
         case "hide": s.show = null; s.showT = q.t; s.marks = s.marks.filter(m => m.on !== "thing"); s.play = null; break;
         case "play": if (s.play) s.play = { on: true, at: q.at, t: q.t }; break;
@@ -9917,7 +9934,14 @@ notify pgrst, 'reload schema';
     else c.rect(b.x, b.y, b.w, b.h);
   }
   // you, from the camera: the picture as the camera sees it (not mirrored), filling your box
+  // a 3D presenter for faceless videos (one of the game's characters), drawn wherever "you" would be
+  let vmAvaLibP = null;
+  function vmAvaLib() { if (!vmAvaLibP) vmAvaLibP = new Promise((res, rej) => { if (window.VMAva) return res(window.VMAva); const sc = document.createElement("script"); sc.src = "presenter3d.js"; sc.onload = () => (window.VMAva ? res(window.VMAva) : rej(new Error("ava"))); sc.onerror = () => { vmAvaLibP = null; rej(new Error("ava")); }; document.head.appendChild(sc); }); return vmAvaLibP; }
+  async function vmAvaMake(name) { const V = await vmAvaLib(); return V.create(name + ".glb"); }
+  const VM_AVAS = [["c_remy", "Remy"], ["c_nala", "Nala"], ["c_boss", "Boss"], ["c_ninja", "Ninja"], ["c_wrestler", "Champ"], ["c_vampire", "Vamp"], ["c_exo", "Exo"], ["c_girl", "Mira"]];
+  const vmAvaLevel = (lv, t) => (lv ? Math.min(1, (lv[Math.max(0, Math.floor(t * 20))] || 0) * 1.6) : 0);
   function vmCam(c, F, src, b) {
+    if (src && src.vmAva) src = src.vmAva.render(b.w / b.h, Math.min(src.h || 960, Math.max(320, b.h * 1.1)));
     const { L, st } = F;
     c.save(); c.globalAlpha = b.a == null ? 1 : b.a;
     const shape = b.pip ? st.camShape : "square";
@@ -10010,13 +10034,13 @@ notify pgrst, 'reload schema';
   // how far down the subtitles sit (0 = top, 1 = bottom). Away from the bottom by default: apps cover it with their buttons
   const vmCapAt = (st, G, textOn) => { if (st.capY != null) return st.capY; if (st.capPos === "high") return G.tall ? 0.3 : 0.18; if (st.capPos === "mid" && !textOn) return G.tall ? 0.56 : 0.5; return G.tall ? 0.7 : 0.9; };
   function vmCaption(c, F, y) {
-    const { G, L, st, words, t } = F, mode = st.caps; if (!words || mode === "off") return;
+    const { G, L, words, t } = F, st = F.st.capFont ? Object.assign({}, F.st, { font: F.st.capFont }) : F.st, mode = st.caps; if (!words || mode === "off") return;
     const key = mode + G.fmt; let cc = vmCapCache.get(words); if (!cc) { cc = {}; vmCapCache.set(words, cc); } if (!cc[key]) cc[key] = vmCapLines(words, mode, G.tall);
     const line = cc[key].find(l => t >= l[0][0] - 0.1 && t <= l[l.length - 1][1] + (mode === "word" ? 0.25 : 0.45)); if (!line) return;
-    const up = mode !== "box", parts = line.map(w => (up ? w[2].toUpperCase() : w[2]));
-    const big = mode === "word" ? (G.tall ? 110 : 96) : mode === "pop" || mode === "hl" ? (G.tall ? 66 : 58) : G.tall ? 44 : 42;
+    const up = st.capCase === "upper" ? true : st.capCase === "as" ? false : mode !== "box", parts = line.map(w => (up ? w[2].toUpperCase() : w[2]));
+    const big = (mode === "word" ? (G.tall ? 110 : 96) : mode === "pop" || mode === "hl" ? (G.tall ? 66 : 58) : G.tall ? 44 : 42) * (st.capSize || 1);
     const hi = st.capHi || L.acc, tx = st.capText || "#FFFFFF", bx = st.capBox || "rgba(0,0,0,.66)";
-    let fs = vmFit(c, st, parts.join(" "), G.W - 80, big);
+    let fs = vmFit(c, st, parts.join(" "), G.W - 80, big); c.font = vmFont(st, fs);
     if (mode === "word") { const k = crEase((t - line[0][0] + 0.1) / 0.18); fs *= 0.7 + 0.3 * k; c.font = vmFont(st, fs); }
     c.textBaseline = "middle"; c.textAlign = "left"; c.lineJoin = "round";
     const ws = parts.map(p => c.measureText(p).width), sp = c.measureText(" ").width, tot = ws.reduce((a, b) => a + b, 0) + sp * (parts.length - 1);
@@ -10096,7 +10120,19 @@ notify pgrst, 'reload schema';
     if (!it && !camB) { c.save(); c.font = vmFont(st, 10); vmWords(c, st, L, F.proj.title || "", { x: 50, y: G.H * 0.2, w: G.W - 100, h: G.H * 0.5 }, G.tall ? 92 : 84, 1); c.restore(); }
     let thingR = null;
     if (thingB && it) thingR = vmThing(c, F, it, thingB, crEase((t - s.showT) / 0.35));
-    if (camB) { F.gray = s.bw || !!fx.freeze; vmCam(c, F, fx.freeze && F.camFreeze ? F.camFreeze : F.cam, camB); F.gray = false; }
+    let hostB = camB, guestB = null;
+    if (camB && F.guest) {   // a friend reacting with you: share your space (or give it to them)
+      const m = s.duo || "both";
+      if (m === "friend") { guestB = camB; hostB = null; }
+      else if (m === "both") {
+        if (camB.pip) guestB = Object.assign({}, camB, { x: G.W - camB.x - camB.w });
+        else if (camB.h >= camB.w * 1.05) { hostB = Object.assign({}, camB, { h: camB.h / 2 }); guestB = Object.assign({}, camB, { y: camB.y + camB.h / 2, h: camB.h / 2 }); }
+        else { hostB = Object.assign({}, camB, { w: camB.w / 2 }); guestB = Object.assign({}, camB, { x: camB.x + camB.w / 2, w: camB.w / 2 }); }
+      }
+    }
+    if (hostB) { F.gray = s.bw || !!fx.freeze; vmCam(c, F, fx.freeze && F.camFreeze ? F.camFreeze : F.cam, hostB); F.gray = false; }
+    if (guestB) { const mir = F.camMirror; F.camMirror = false; F.gray = s.bw; vmCam(c, F, F.guest, guestB); F.gray = false; F.camMirror = mir;
+      if (hostB && !guestB.pip) { c.fillStyle = L.acc; if (guestB.y > hostB.y + 1) c.fillRect(guestB.x, guestB.y - 3, guestB.w, 6); else c.fillRect(guestB.x - 3, guestB.y, 6, guestB.h); } }
     if (s.eff === "split" && kB > 0.6) { c.fillStyle = L.acc; if (G.tall) c.fillRect(0, G.H / 2 - 3, G.W, 6); else c.fillRect(G.W / 2 - 3, 0, 6, G.H); }
     if (F.out) { F.out.thing = thingR && thingB && (thingB.a == null || thingB.a > 0.5) ? Object.assign({ box: thingB }, thingR) : null; F.out.cam = camB && (camB.a == null || camB.a > 0.5) ? camB : null; }
     const R = on => (on === "thing" ? thingR : on === "cam" ? camB : full);
@@ -10356,6 +10392,7 @@ notify pgrst, 'reload schema';
     const mono = ab => { if (ab.numberOfChannels === 1) return ab.getChannelData(0); const d = new Float32Array(ab.length), n = ab.numberOfChannels; for (let ch = 0; ch < n; ch++) { const x = ab.getChannelData(ch); for (let k = 0; k < x.length; k++) d[k] += x[k] / n; } return d; };
     const vbuf = await decode(await voiceBlob.arrayBuffer());
     const voice = mono(vbuf), rate = vbuf.sampleRate, lv = levelsOf(vbuf);
+    const avaP = !camOn && proj.avatar ? await vmAvaMake(proj.avatar).catch(() => null) : null, camOn2 = camOn || !!avaP;
     const sinkOf = async (blob, max) => {
       const input = new MB.Input({ source: new MB.BlobSource(blob), formats: MB.ALL_FORMATS });
       const vt = await input.getPrimaryVideoTrack(); if (!vt) return null;
@@ -10370,6 +10407,10 @@ notify pgrst, 'reload schema';
     const tested = async (S0, blob) => { if (S0) { try { const w = await vmTimeout(S0.sink.getCanvas(S0.first + 0.05), 8000); if (w && w.canvas) return { S: S0, E: null }; } catch (e) {} } return { S: null, E: blob ? await vmElemSrc(blob).catch(() => null) : null }; };
     for (const g of camOn ? (take.camSegs && take.camSegs.length ? take.camSegs : [{ t: 0, blob: take.voice }]) : []) { let S0 = null; try { S0 = g.blob ? await sinkOf(g.blob, hd ? 1080 : 720) : null; } catch (e) {} const T0 = await tested(S0, g.blob); camSegs.push({ t: g.t, S: T0.S, E: T0.E, facing: g.facing || "user" }); }
     const segAt = t => { let k = -1; for (let i = 0; i < camSegs.length; i++) if (camSegs[i].t <= t + 0.01) k = i; return k; };
+    const gSegs = [];
+    for (const g of take.guestSegs || []) { let S0 = null; try { S0 = g.blob ? await sinkOf(g.blob, hd ? 720 : 540) : null; } catch (e) {} const T0 = await tested(S0, g.blob); gSegs.push({ t: g.t, t1: g.t1, S: T0.S, E: T0.E }); }
+    const gSegAt = t => { let k = -1; for (let i = 0; i < gSegs.length; i++) if (gSegs[i].t <= t + 0.01) k = i; return k >= 0 && (!gSegs[k].t1 || t <= gSegs[k].t1 + 0.05) ? k : -1; };
+    let gIt = null, gItSeg = -1, gLast = null;
     const volCues = cues.filter(q => q.k === "vol"), volAt = t => { let v = 1; for (const q of volCues) { if (q.t > t) break; v = q.v; } return v; };
     // the pictures and clips that get shown
     const used = new Set(cues.filter(q => q.k === "show").map(q => q.ref).concat(plan.hl ? plan.hl.map(h => h.ref).filter(Boolean) : []).concat(P.filter(p => p.kind !== "rec").map(p => p.src)));
@@ -10510,7 +10551,7 @@ notify pgrst, 'reload schema';
       else if (T >= IN + body) { key = "out" + Math.min(T - IN - body, 1.2); draw = () => vmOutro(c, G, L, st, (T - IN - body) / OUTD); }
       else {
         const SA = vmSeqAt(P, T - IN), p = SA.p, sp = p.sp || 1, dir = p.rev ? -1 : 1, trOn = SA.i > 0 && p.tr && p.tr !== "cut" && SA.lu < VM_TRD && havePrev;
-        const pieceIn = async () => { if (SA.i !== pieceNow) { pieceNow = SA.i; const sx = snapC.getContext("2d"); sx.setTransform(1, 0, 0, 1, 0, 0); sx.drawImage(cv, 0, 0); havePrev = true; await closeIt(it8); it8 = null; itKey = null; await closeIt(camIt); camIt = null; camItSeg = -1; await closeIt(pit); pit = null; } };
+        const pieceIn = async () => { if (SA.i !== pieceNow) { pieceNow = SA.i; const sx = snapC.getContext("2d"); sx.setTransform(1, 0, 0, 1, 0, 0); sx.drawImage(cv, 0, 0); havePrev = true; await closeIt(it8); it8 = null; itKey = null; await closeIt(camIt); camIt = null; camItSeg = -1; await closeIt(gIt); gIt = null; gItSeg = -1; await closeIt(pit); pit = null; } };
         if (p.kind !== "rec") {
           const it = items[p.src], k = it && it.kind === "vid" ? clips[it.id] : null;
           key = ["p", SA.i, k ? T : "", p.kind === "img" && p.kb !== false ? T : "", trOn ? T : "", st.bar ? Math.round(T / total * G.W / 3) : "", titleKey(T - IN)].join("|");
@@ -10525,7 +10566,7 @@ notify pgrst, 'reload schema';
             vmFrame(c, { G, L, st, proj, items, s: s0, t: 1000, tb: T - IN, cam: null, camOn: false, camFit: proj.camFit || "whole", pic: id => (id === p.src && kb ? kb : pics[id] || null), clip: frame, words: null, readWords: null, cache, prog: (T - IN) / body });
           };
         } else {
-        const t = SA.t, s = vmAt(cues, t, camOn), it = s.show ? items[s.show] : null, k = it && it.kind === "vid" ? clips[it.id] : null;
+        const t = SA.t, s = vmAt(cues, t, camOn2), it = s.show ? items[s.show] : null, k = it && it.kind === "vid" ? clips[it.id] : null;
         const ct = k ? vmClipT(s, t, k.secs) : 0, moving = k && s.play && s.play.on && ct < k.secs - 0.05;
         const camVis = camOn && (vmBoxes(G, s.eff, st).cam || (s.prev && t - s.effT < 0.4 && vmBoxes(G, s.prev, st).cam));
         let anim = (it && (it.kind === "map" || it.kind === "flag" || it.kind === "trip")) || t - s.showT < 0.4 || t - s.effT < 0.42 || (s.ban && t - s.banT < 0.4) || (s.pt && t - s.pt.t < 3.05) || s.sfx.some(q => t - q.t < (VM_FX_LEN[q.v] || 0) + 0.05);
@@ -10561,8 +10602,12 @@ notify pgrst, 'reload schema';
             const r = await camIt.next(); camF = r.done || !r.value ? camLast : r.value.canvas; if (camF) camLast = camF;
           } else if (sg && sg.E) { camF = await sg.E.at(Math.max(0, t - sg.t)); camLast = camF; }
           else if (camIt && !fz) { await closeIt(camIt); camIt = null; camItSeg = -1; }
+          let gF = null; const gi = camOn2 && gSegs.length ? gSegAt(t) : -1, gsg = gi >= 0 ? gSegs[gi] : null;
+          if (gsg && gsg.S) { if (!gIt || gItSeg !== gi) { await closeIt(gIt); gItSeg = gi; gIt = runTs(gsg.S.sink, Math.max(0, t - gsg.t) + gsg.S.first, dir * sp / FPS, gsg.S.first, (gsg.t1 || take.secs) - gsg.t + gsg.S.first + 1); } const r2 = await gIt.next(); gF = r2.done || !r2.value ? gLast : r2.value.canvas; if (gF) gLast = gF; }
+          else if (gsg && gsg.E) { gF = await gsg.E.at(Math.max(0, t - gsg.t)); gLast = gF; }
+          else if (gIt) { await closeIt(gIt); gIt = null; gItSeg = -1; }
           const segNow = camSegs[segAt(t)] || camSegs[0];
-          vmFrame(c, { G, L, st, proj, items, s, t, tb, readWords: allWords || words, cam: camF || camLast, camFreeze: frozen, camOn, camFit: proj.camFit || "whole", camMirror: !!proj.mirror && (!segNow || segNow.facing !== "environment"), pic: id => pics[id] || null, clip: frame, words, cache, prog: (T - IN) / body });
+          vmFrame(c, { G, L, st, proj, items, s, t, tb, readWords: allWords || words, cam: avaP ? (avaP.pose(t, vmAvaLevel(lv, t), { acc: st.acc }), { vmAva: avaP, h: hd ? 1080 : 720 }) : camF || camLast, camFreeze: frozen, camOn: camOn2, guest: gsg ? gF || gLast : null, camFit: proj.camFit || "whole", camMirror: !!proj.mirror && (!segNow || segNow.facing !== "environment"), pic: id => pics[id] || null, clip: frame, words, cache, prog: (T - IN) / body });
         };
       }
         }
@@ -11231,17 +11276,22 @@ notify pgrst, 'reload schema';
     note: () => ({ font: "poppins", upper: false, color: "#111111", acc: "#E3262E", stroke: { w: 0, col: "#000" }, shadow: { kind: "none" }, align: "left", lh: 1.08 }),
   };
   const TS_TPLS = {
-    reaction: { name: "Big reaction", tip: "MrBeast style: a giant face, the thing it's about, bright and clean" },
-    story: { name: "Story + you", tip: "News & commentary: the story's photo, you on the side, a yellow caption, one red arrow" },
-    bignum: { name: "Big number", tip: "One huge number or stat (“99%”, “$1,000”, “30 DAYS”) and your face" },
+    dylan: { name: "Dylan Page style", tip: "You on a light wall, the story in a red frame with a red tab, a red arrow" },
+    omar: { name: "Omar Agamy style", tip: "You on your coloured wall, the story in a yellow frame, a white headline" },
+    rwj: { name: "Ray William Johnson style", tip: "A purple frame, your big face, who it's about, one word, a red arrow" },
+    inscene: { name: "hxsain style", tip: "The scene fills it, you're inside it, “ME” with a yellow arrow" },
+    label: { name: "John Casterline style", tip: "The thing it's about, a plain white label, your face on the side" },
+    reaction: { name: "MrBeast style", tip: "A giant face and the thing it's about, bright and clean" },
     beforeafter: { name: "Before / after", tip: "Two sides, one difference — type “$1 vs $100” for your own labels" },
-    doc: { name: "Documentary", tip: "Film colours, a real photo, a hand-drawn red circle, few words" },
-    calm: { name: "Clean & calm", tip: "Light, simple and trustworthy — for teaching and how-to videos" },
-    minimal: { name: "Minimal", tip: "One subject, lots of space, small confident words — the premium look" },
+    bignum: { name: "Big number", tip: "One huge number or stat and your face" },
     breaking: { name: "Breaking news", tip: "News-desk headline, red tag, you on the side" },
+    doc: { name: "Documentary", tip: "Film colours, a real photo, a hand-drawn red circle" },
+    calm: { name: "Clean & calm", tip: "Light, simple and trustworthy — for teaching" },
+    minimal: { name: "Minimal", tip: "One subject, lots of space, small words" },
     bigword: { name: "Big word", tip: "One giant word behind you, for depth" },
     product: { name: "Product hero", tip: "The thing in a studio light, you beside it" },
   };
+
 
   // put the strongest word in colour (*like this*) if you haven't chosen one
   function tsAccent(text) {
@@ -11280,8 +11330,97 @@ notify pgrst, 'reload schema';
     // two colours at most, the person lit and coloured to belong in the scene, nothing in the bottom-right corner (YouTube's time label sits there)
     const PRO = (font, extra) => Object.assign({ font: font || "anton", upper: true, color: "#FFFFFF", acc: "#FFD400", stroke: { rel: 0.085, col: "#000000" }, shadow: { kind: "pro" } }, extra || {});
     const lit = (side, col, more) => Object.assign({ shadow: { blur: 70, dist: 18, a: 0.5 }, adj: { c: 0.1, s: 0.18, b: 0.03 }, rim: { col: col || "#FFFFFF", side: side || "left" } }, more || {});
+    const panel = (x, y, w, h, col, bw) => {
+      if (sub && !sub.cut) img(sub, x, y, w, { crop: tsCoverCrop(sub, w, h), frame: { w: bw, col }, fx: { shadow: { blur: 30, dist: 8, a: 0.35 }, adj: { c: 0.06, s: 0.1 } }, role: "subj" });
+      else { rect(x, y, w + bw * 2, h + bw * 2, { fill: col, r: 4 }); rect(x, y, w, h, { fill: sub ? "#20242B" : "#2A2F38", r: 2 }); if (sub) img(sub, x, y + h * 0.05, Math.min(w * 0.86, h * 0.86 / sub.ar), { fx: { shadow: { blur: 30, dist: 10, a: 0.5 } }, role: "subj" }); }
+    };
     const sub = S || null, word3 = t => { const w = String(t).split(/\s+/).filter(Boolean); return w.slice(0, 4).join(" "); };
     switch (tpl) {
+      // ---- the formats of the channels you showed me, as close as they are ----
+      case "dylan": {   // Dylan Page: you on a light wall, the story in a red frame with a red tab, a red arrow
+        bg = { kind: "solid", col: "#E6E8EB", vig: 0.12, grain: 0.015 };
+        const tab = { font: "mont", upper: false, color: "#FFFFFF", acc: "#FFFFFF", box: { on: true, col: "#E3262E", pad: 0.22, r: 0.14, skew: 0 }, stroke: { w: 0, col: "#000" }, shadow: { kind: "none" } };
+        const titleCase = s2 => String(s2).replace(/\*/g, "").toLowerCase().replace(/(^|\s)(\S)/g, (q, a2, c1) => a2 + c1.toUpperCase());
+        if (!T) {
+          panel(W * 0.69, H * 0.52, W * 0.585, H * 0.86, "#E3262E", 9);
+          face(W * 0.19, H * 1.03, H * 1.0, { shadow: { blur: 40, dist: 10, a: 0.25 }, adj: { c: 0.06, s: 0.08 }, blend: 0 });
+          words(titleCase(word3(text)), W * 0.69, H * 0.085, W * 0.4, H * 0.085, tab);
+          if (sub) arrow(W * 0.88, H * 0.3, W * 0.78, H * 0.46, 0.15, { col: "#E3262E", outline: "#FFFFFF", w: 24, style: "clean" });
+        } else {
+          panel(W * 0.5, H * 0.3, W * 0.92, H * 0.38, "#E3262E", 9);
+          words(titleCase(word3(text)), W * 0.5, H * 0.1, W * 0.7, H * 0.05, tab);
+          if (sub) arrow(W * 0.8, H * 0.2, W * 0.66, H * 0.3, 0.15, { col: "#E3262E", outline: "#FFFFFF", w: 22, style: "clean" });
+          face(W * 0.5, H * 1.01, H * 0.52, { shadow: { blur: 40, dist: 10, a: 0.25 }, blend: 0 });
+        }
+        break;
+      }
+      case "omar": {   // Omar Agamy: you on your coloured wall, the story in a yellow frame, a white headline in capitals, a yellow arrow
+        bg = { kind: "grad", g: ["#2C6A4F", "#123326"], radial: true, gx: 0.18, gy: 0.5, vig: 0.3, grain: 0.02 };
+        const head = { font: "archivo", upper: true, color: "#FFFFFF", acc: "#FFD400", stroke: { rel: 0.12, col: "#000000" }, shadow: { kind: "none" }, ls: 0.01 };
+        if (!T) {
+          panel(W * 0.665, H * 0.5, W * 0.64, H * 0.94, "#FFD400", 7);
+          face(W * 0.17, H * 1.03, H * 0.98, { shadow: { blur: 40, dist: 10, a: 0.35 }, adj: { c: 0.06, s: 0.06 }, blend: 0.2 });
+          words(String(word3(text)).replace(/\*/g, "").toUpperCase(), W * 0.665, H * 0.09, W * 0.6, H * 0.09, head);
+          if (sub) arrow(W * 0.6, H * 0.3, W * 0.66, H * 0.48, -0.4, { col: "#FFD400", outline: "#000000", w: 22, style: "clean" });
+        } else {
+          panel(W * 0.5, H * 0.3, W * 0.94, H * 0.4, "#FFD400", 7);
+          words(String(word3(text)).replace(/\*/g, "").toUpperCase(), W * 0.5, H * 0.13, W * 0.86, H * 0.045, head);
+          face(W * 0.5, H * 1.01, H * 0.52, { blend: 0.2 });
+        }
+        break;
+      }
+      case "rwj": {   // Ray William Johnson: a coloured frame round everything, a big face, the person it's about, one word, a red arrow
+        bg = BP ? photoBg(BP, { blur: 6, dim: 0.25, grade: "cinema", vig: 0.45 }) : { kind: "look", look: "smoke", col: "#1E3A8A", col2: "#4C1D95", vig: 0.45, grain: 0.03 };
+        const WORD = { font: "mont", italic: true, upper: true, color: "#FFFFFF", acc: "#FFFFFF", stroke: { w: 0, col: "#000" }, shadow: { kind: "pro" } };
+        if (!T) {
+          if (sub && sub.cut) img(sub, W * 0.74, H * 0.6, Math.min(W * 0.44, H * 0.86 / sub.ar), { fx: { shadow: { blur: 50, dist: 16, a: 0.55 }, adj: { c: 0.08, s: 0.1 } }, role: "subj" });
+          else if (sub && sub !== BP) img(sub, W * 0.74, H * 0.5, W * 0.52, { crop: tsCoverCrop(sub, W * 0.52, H), fx: { adj: { c: 0.08, s: 0.1 } }, role: "subj" });
+          face(W * 0.3, H * 1.03, H * 1.02, { shadow: { blur: 50, dist: 12, a: 0.45 }, adj: { c: 0.1, s: 0.12 }, blend: 0.35 });
+          words((((/\*([^*]+)\*/.exec(tsAccent(String(text).replace(/\*/g, ""))) || [])[1]) || String(text).split(/\s+/)[0] || "").toUpperCase(), W * 0.56, H * 0.66, W * 0.26, H * 0.17, WORD, { rot: -6 });
+          if (sub) arrow(W * 0.57, H * 0.46, W * 0.68, H * 0.33, -0.45, { col: "#E3262E", outline: "#FFFFFF", w: 24, style: "clean" });
+          rect(W * 0.5, H * 0.5, W - 16, H - 16, { fill: null, stroke: "#B620E0", sw: 22, r: 18 });
+        } else {
+          if (sub && sub.cut) img(sub, W * 0.5, H * 0.3, Math.min(W * 0.8, H * 0.36 / sub.ar), { fx: { shadow: { blur: 50, dist: 16, a: 0.55 } }, role: "subj" });
+          else if (sub && sub !== BP) img(sub, W * 0.5, H * 0.26, W, { crop: tsCoverCrop(sub, W, H * 0.52), role: "subj" });
+          words((((/\*([^*]+)\*/.exec(tsAccent(String(text).replace(/\*/g, ""))) || [])[1]) || String(text).split(/\s+/)[0] || "").toUpperCase(), W * 0.5, H * 0.53, W * 0.6, H * 0.08, WORD, { rot: -6 });
+          face(W * 0.5, H * 1.01, H * 0.5, { blend: 0.35 });
+          rect(W * 0.5, H * 0.5, W - 16, H - 16, { fill: null, stroke: "#B620E0", sw: 22, r: 18 });
+        }
+        break;
+      }
+      case "inscene": {   // hxsain: the scene fills everything, you're put inside it, "ME" with a yellow arrow
+        bg = BP ? photoBg(BP, { grade: "pop", dim: 0.04, vig: 0.3 }) : { kind: "look", look: "bokeh", col: acc, vig: 0.35, grain: 0.02 };
+        const ME = { font: "anton", upper: true, color: "#FFFFFF", acc: "#FFFFFF", stroke: { rel: 0.07, col: "#000000" }, shadow: { kind: "pro" } };
+        const Q = { font: "mont", upper: false, color: "#FFFFFF", acc: "#FFD400", stroke: { rel: 0.05, col: "#000000" }, shadow: { kind: "soft", col: "rgba(0,0,0,.8)" } };
+        if (!T) {
+          if (sub && sub.cut) img(sub, W * 0.36, H * 0.58, Math.min(W * 0.4, H * 0.8 / sub.ar), { fx: { shadow: { blur: 40, dist: 14, a: 0.5 }, adj: { c: 0.06, s: 0.12 } }, role: "subj" });
+          face(W * 0.72, H * 1.03, H * 0.92, { shadow: { blur: 40, dist: 12, a: 0.45 }, adj: { c: 0.08, s: 0.1 }, blend: 0.55 });
+          words("ME", W * 0.12, H * 0.78, W * 0.16, H * 0.2, ME);
+          arrow(W * 0.17, H * 0.62, W * 0.52, H * 0.38, -0.35, { col: "#FFD400", outline: "#000000", w: 26, style: "clean" });
+          if (String(text).trim()) words("“" + String(word3(text)).replace(/\*/g, "").toLowerCase() + "”", W * 0.44, H * 0.92, W * 0.5, H * 0.1, Q);
+        } else {
+          if (sub && sub.cut) img(sub, W * 0.5, H * 0.32, Math.min(W * 0.8, H * 0.36 / sub.ar), { fx: { shadow: { blur: 40, dist: 14, a: 0.5 } }, role: "subj" });
+          words("ME", W * 0.2, H * 0.56, W * 0.3, H * 0.08, ME);
+          arrow(W * 0.24, H * 0.6, W * 0.44, H * 0.7, 0.3, { col: "#FFD400", outline: "#000000", w: 22, style: "clean" });
+          face(W * 0.56, H * 1.01, H * 0.48, { blend: 0.55 });
+        }
+        break;
+      }
+      case "label": {   // John Casterline: the thing it's about, a plain white label, your face on the side
+        bg = BP ? photoBg(BP, { grade: "pop", dim: 0.05, vig: 0.25 }) : { kind: "look", look: "clean", col: acc, vig: 0.12, grain: 0.015 };
+        const LAB = { font: "poppins", upper: false, color: "#111111", acc: "#E3262E", box: { on: true, col: "#FFFFFF", pad: 0.22, r: 0.16, skew: 0 }, stroke: { w: 0, col: "#000" }, shadow: { kind: "none" } };
+        if (!T) {
+          if (sub && sub.cut) img(sub, W * 0.33, H * 0.58, Math.min(W * 0.44, H * 0.78 / sub.ar), { fx: { shadow: { blur: 40, dist: 16, a: 0.45 }, floor: true, adj: { c: 0.06, s: 0.12 } }, role: "subj" });
+          face(W * 0.77, H * 1.03, H * 0.95, { shadow: { blur: 40, dist: 12, a: 0.4 }, adj: { c: 0.08, s: 0.1 }, blend: 0.4 });
+          words(String(word3(text)).replace(/\*/g, "").toLowerCase(), W * 0.27, H * 0.16, W * 0.42, H * 0.13, LAB, { rot: -2 });
+          if (sub) arrow(W * 0.4, H * 0.24, W * 0.36, H * 0.4, 0.35, { col: "#E3262E", outline: "#FFFFFF", w: 22, style: "clean" });
+        } else {
+          if (sub && sub.cut) img(sub, W * 0.5, H * 0.36, Math.min(W * 0.84, H * 0.34 / sub.ar), { fx: { shadow: { blur: 40, dist: 16, a: 0.45 }, floor: true }, role: "subj" });
+          words(String(word3(text)).replace(/\*/g, "").toLowerCase(), W * 0.5, H * 0.12, W * 0.8, H * 0.06, LAB, { rot: -2 });
+          face(W * 0.5, H * 1.01, H * 0.48, { blend: 0.4 });
+        }
+        break;
+      }
       case "reaction": {   // MrBeast style: a giant reaction face and the thing it's about, bright and clean
         bg = BP && !(S && S.cut) ? photoBg(BP, { blur: 12, dim: 0.08, grade: "pop", vig: 0.3 }) : { kind: "grad", g: ["#6FD0FF", "#1563D2"], radial: true, gx: T ? 0.5 : 0.32, gy: 0.35, vig: 0.28, grain: 0.02, spot: { x: T ? 0.5 : 0.3, y: 0.45, col: "#FFFFFF", a: 0.35, r: 0.42 } };
         if (!T) {
@@ -11437,7 +11576,7 @@ notify pgrst, 'reload schema';
         break;
     }
     // the label you chose (BREAKING, NEW…) if the design doesn't already have one
-    if (A.label && tpl !== "breaking") { const rightTop = !T && /^(reaction|doc|calm|bignum|minimal|story)$/.test(tpl); words(A.label, T ? W * 0.5 : rightTop ? W * 0.86 : W * 0.12, T ? H * 0.035 : tpl === "beforeafter" ? H * 0.9 : H * 0.075, T ? W * 0.4 : W * 0.18, T ? H * 0.028 : H * 0.05, TS_STYLES.tag(A.label === "BREAKING" ? "#E3262E" : acc), tpl === "beforeafter" && !T ? { x: W * 0.5 } : {}); }
+    if (A.label && tpl !== "breaking") { const rightTop = !T && /^(reaction|doc|calm|bignum|minimal|story|rwj|inscene|label)$/.test(tpl); if (/^(dylan|omar)$/.test(tpl) && !T) { words(A.label, W * 0.19, H * 0.07, W * 0.2, H * 0.05, TS_STYLES.tag(acc), {}); } else words(A.label, T ? W * 0.5 : rightTop ? W * 0.86 : W * 0.12, T ? H * 0.035 : tpl === "beforeafter" ? H * 0.9 : H * 0.075, T ? W * 0.4 : W * 0.18, T ? H * 0.028 : H * 0.05, TS_STYLES.tag(A.label === "BREAKING" ? "#E3262E" : acc), tpl === "beforeafter" && !T ? { x: W * 0.5 } : {}); }
     if (A.logo) { const lw = T ? W * 0.17 : W * 0.1, top = T || tpl === "breaking" || tpl === "story" || tpl === "beforeafter"; layers.push({ id: tsUid(), type: "logo", src: A.logo.id, x: top ? W - W * 0.03 - lw / 2 : W * 0.035 + lw / 2, y: top ? (tpl === "cinema" && !T ? H * 0.05 : H * 0.03) + lw * A.logo.ar / 2 : H * 0.955 - lw * A.logo.ar / 2, w: lw, rot: 0, op: 0.92, fx: { shadow: { blur: 12, dist: 3, a: 0.6 } } }); }
     const assets = {}; for (const o of [F, S, A.bgPhoto, A.logo]) if (o && o.blob) assets[o.id] = o.blob;
     return { id: tsUid(), tpl, W, H, fmt: T ? "short" : "yt", bg, layers, assets, text: A.text, label: A.label || "", updated: Date.now() };
@@ -12064,6 +12203,131 @@ notify pgrst, 'reload schema';
       ${busy ? html`<div class="thbusy">${busy}</div>` : null}
     </div>`;
   }
+  /* ===================== React together: a friend joins your video from their own phone =====================
+     You send a link. They open it, allow camera and microphone, and see the video as you're making it (your screen, with them in it).
+     Their camera and voice come to your phone and are recorded with yours, so you react together. */
+  async function vmDuoPeer(o) {
+    // o: { sb, room, role: "host" | "guest", local: MediaStream, onRemote(stream), onPhase(phase) }
+    const ch = o.sb.channel("react-" + o.room, { config: { broadcast: { self: false } } });
+    let pc = null, gen = 0, pending = [], closed = false, helloT = null, lastOffer = 0, phase = "waiting";
+    const ice = await call.iceServers().catch(() => [{ urls: ["stun:stun.l.google.com:19302"] }]);
+    const setPhase = p => { if (p !== phase) { phase = p; o.onPhase && o.onPhase(p); } };
+    const send = m => { try { ch.send({ type: "broadcast", event: "rtc", payload: m }); } catch (e) {} };
+    const closePc = () => { const p = pc; pc = null; if (p) { try { p.ontrack = p.onicecandidate = p.onconnectionstatechange = null; p.close(); } catch (e) {} } };
+    const make = () => {
+      closePc(); const p = new RTCPeerConnection({ iceServers: ice }); pc = p;
+      const lt = o.local ? o.local.getTracks() : [];
+      lt.forEach(t => { if (t.kind === "video") try { t.contentHint = o.hint || "motion"; } catch (e) {} p.addTrack(t, o.local); });
+      if (!lt.length) { p.addTransceiver("video", { direction: "recvonly" }); p.addTransceiver("audio", { direction: "recvonly" }); }
+      p.ontrack = e => { if (pc === p) o.onRemote && o.onRemote((e.streams && e.streams[0]) || new MediaStream([e.track])); };
+      p.onicecandidate = e => { if (e.candidate && pc === p) send({ k: "ice", gen, c: e.candidate.toJSON ? e.candidate.toJSON() : e.candidate }); };
+      p.onconnectionstatechange = () => { if (pc !== p) return; const s = p.connectionState; if (s === "connected") { setPhase("connected"); for (const sd of p.getSenders()) if (sd.track && sd.track.kind === "video") { try { const pr = sd.getParameters(); pr.encodings = (pr.encodings && pr.encodings.length ? pr.encodings : [{}]).map(e2 => Object.assign(e2, { maxBitrate: o.maxBitrate || 1800000, maxFramerate: 30 })); pr.degradationPreference = "maintain-framerate"; sd.setParameters(pr).catch(() => {}); } catch (e) {} } } else if (s === "failed" || s === "disconnected") { setPhase("reconnecting"); if (o.role === "guest") send({ k: "hello" }); else setTimeout(() => offer(), 1500); } };
+      return p;
+    };
+    async function offer() {
+      if (closed || Date.now() - lastOffer < 2000) return; lastOffer = Date.now();
+      gen = Date.now(); pending = []; const g = gen, p = make();
+      const d = await p.createOffer(); if (g !== gen) return; await p.setLocalDescription(d);
+      send({ k: "offer", gen: g, sdp: { type: p.localDescription.type, sdp: p.localDescription.sdp } }); if (phase !== "connected") setPhase("connecting");
+    }
+    async function onMsg(m) {
+      if (closed || !m) return;
+      try {
+        if (m.k === "hello" && o.role === "host") await offer();
+        else if (m.k === "offer" && o.role === "guest") { gen = m.gen; pending = []; const p = make(); await p.setRemoteDescription(m.sdp); for (const c of pending) { try { await p.addIceCandidate(c); } catch (e) {} } pending = []; const a = await p.createAnswer(); await p.setLocalDescription(a); send({ k: "answer", gen: m.gen, sdp: { type: p.localDescription.type, sdp: p.localDescription.sdp } }); setPhase("connecting"); }
+        else if (m.k === "answer" && o.role === "host") { if (pc && m.gen === gen && !pc.remoteDescription) { await pc.setRemoteDescription(m.sdp); for (const c of pending) { try { await pc.addIceCandidate(c); } catch (e) {} } pending = []; } }
+        else if (m.k === "ice") { if (m.gen !== gen) return; if (pc && pc.remoteDescription) { try { await pc.addIceCandidate(m.c); } catch (e) {} } else pending.push(m.c); }
+        else if (m.k === "bye") { closePc(); setPhase(o.role === "host" ? "waiting" : "ended"); o.onRemote && o.onRemote(null); }
+        else if (m.k === "host-hi" && o.role === "guest" && phase !== "connected") send({ k: "hello" });
+      } catch (e) {}
+    }
+    ch.on("broadcast", { event: "rtc" }, ({ payload }) => onMsg(payload));
+    await new Promise((res, rej) => { let done = false; ch.subscribe(st => { if (st === "SUBSCRIBED" && !done) { done = true; res(); } else if ((st === "CHANNEL_ERROR" || st === "TIMED_OUT") && !done) { done = true; rej(new Error("channel")); } }); setTimeout(() => { if (!done) { done = true; rej(new Error("channel")); } }, 15000); });
+    if (o.role === "guest") { send({ k: "hello" }); helloT = setInterval(() => { if (phase !== "connected") send({ k: "hello" }); }, 3000); }
+    else { send({ k: "host-hi" }); helloT = setInterval(() => { if (phase !== "connected") send({ k: "host-hi" }); }, 4000); }
+    return {
+      get phase() { return phase; },
+      close() { if (closed) return; closed = true; send({ k: "bye" }); clearInterval(helloT); closePc(); try { o.sb.removeChannel(ch); } catch (e) {} },
+    };
+  }
+  const vmGuestUrls = new WeakMap();
+  const vmGuestUrl = b => { let u = vmGuestUrls.get(b); if (!u) { u = URL.createObjectURL(b); vmGuestUrls.set(b, u); } return u; };
+  const vmDuoLink = room => location.origin + location.pathname + "#r=" + b64url(JSON.stringify({ u: cfg.url, k: cfg.key, r: room }));
+  function readDuoLink() { const m = /[#&?]r=([A-Za-z0-9_-]+)/.exec((location.hash || "") + "&" + (location.search || "")); if (!m) return null; try { const j = JSON.parse(unb64url(m[1])); return j && j.u && j.k && j.r ? j : null; } catch (e) { return null; } }
+
+  // the friend's screen: what you're making (with them in it), themselves small in the corner
+  function ReactGuest({ link }) {
+    const [phase, setPhase] = useState("start"), [muted, setMuted] = useState(false), [err, setErr] = useState("");
+    const big = useRef(null), me = useRef(null), peer = useRef(null), local = useRef(null), sb2r = useRef(null);
+    const [share, setShare] = useState(null);   // { kind: "video" | "screen", playing }
+    const shareRef = useRef(null), sv = useRef(null), fileRef = useRef(null);
+    // share a video from this phone, or this computer's screen: it goes to your friend's video, and you both see it
+    async function startShare(stream, kind) {
+      stopShare(true);
+      try {
+        const p2 = await vmDuoPeer({ sb: sb2r.current, room: link.r + "s", role: "guest", local: stream, hint: kind === "screen" ? "detail" : "motion", maxBitrate: 2500000, onRemote: () => {}, onPhase: () => {} });
+        shareRef.current = { p2, stream, kind }; setShare({ kind, playing: true });
+      } catch (e) { stream.getTracks().forEach(t => t.stop()); setErr("Couldn't share. Check your internet, then try again."); }
+    }
+    function stopShare(quiet) {
+      const S0 = shareRef.current; shareRef.current = null; if (!S0) { if (!quiet) setShare(null); return; }
+      try { S0.p2.close(); } catch (e) {} if (S0.kind === "screen") S0.stream.getTracks().forEach(t => t.stop());
+      const v = sv.current; if (v && S0.kind === "video") { v.pause(); v.removeAttribute("src"); v.load(); }
+      setShare(null);
+    }
+    async function shareVideo(f) {
+      const v = sv.current; if (!v || !f) return;
+      v.src = URL.createObjectURL(f); v.muted = false; v.playsInline = true; v.loop = false;
+      try { await v.play(); } catch (e) {}
+      let stream = null;
+      try { stream = v.captureStream ? v.captureStream() : v.mozCaptureStream ? v.mozCaptureStream() : null; } catch (e) { stream = null; }
+      if (!stream || !stream.getVideoTracks().length) {   // phones without it: draw the video, and take its sound through the speakers' path
+        const cv = document.createElement("canvas"); cv.width = 1280; cv.height = 720; const c = cv.getContext("2d");
+        const draw = () => { if (!shareRef.current) return; const w = v.videoWidth || 1280, h = v.videoHeight || 720; if (cv.width !== w) { cv.width = w; cv.height = h; } c.drawImage(v, 0, 0, w, h); requestAnimationFrame(draw); };
+        stream = cv.captureStream(30);
+        try { const ac = new (window.AudioContext || window.webkitAudioContext)(), src = ac.createMediaElementSource(v), d = ac.createMediaStreamDestination(); src.connect(d); src.connect(ac.destination); d.stream.getAudioTracks().forEach(t => stream.addTrack(t)); } catch (e) {}
+        setTimeout(draw, 50);
+      }
+      v.onended = () => setShare(s2 => (s2 ? Object.assign({}, s2, { playing: false }) : s2));
+      await startShare(stream, "video");
+    }
+    async function shareScreen() {
+      try { const ds = await navigator.mediaDevices.getDisplayMedia({ video: { frameRate: { ideal: 30 } }, audio: true }); const t0 = ds.getVideoTracks()[0]; if (t0) t0.addEventListener("ended", () => stopShare()); await startShare(ds, "screen"); }
+      catch (e) { if (e && e.name !== "NotAllowedError") setErr("This phone can't share its screen from the browser. Share a video instead, or join from a computer."); }
+    }
+    async function join(facing) {
+      setErr(""); setPhase("opening");
+      try {
+        if (local.current) local.current.getTracks().forEach(t => t.stop());
+        local.current = await navigator.mediaDevices.getUserMedia({ video: { facingMode: facing || "user", width: { ideal: 960 }, height: { ideal: 720 }, frameRate: { ideal: 30, max: 30 } }, audio: { echoCancellation: true, noiseSuppression: true, autoGainControl: true } });
+        if (me.current) { me.current.srcObject = local.current; me.current.play().catch(() => {}); }
+        if (peer.current) peer.current.close();
+        const sb2 = sb2r.current || (sb2r.current = window.supabase.createClient(link.u, link.k, { auth: { persistSession: false, autoRefreshToken: false, detectSessionInUrl: false } }));
+        peer.current = await vmDuoPeer({ sb: sb2, room: link.r, role: "guest", local: local.current,
+          onRemote: s => { const v = big.current; if (v) { v.srcObject = s; v.play().catch(() => {}); } },
+          onPhase: setPhase });
+        setPhase(p => (p === "opening" ? "waiting" : p));
+        try { if ("wakeLock" in navigator) await navigator.wakeLock.request("screen"); } catch (e) {}
+      } catch (e) { setPhase("start"); setErr(e && e.name === "NotAllowedError" ? "Allow the camera and microphone for this website, then try again." : "Couldn't connect. Check your internet, then try again."); }
+    }
+    function leave() { stopShare(true); if (peer.current) peer.current.close(); peer.current = null; if (local.current) local.current.getTracks().forEach(t => t.stop()); setPhase("ended"); }
+    function mute() { const m = !muted; setMuted(m); if (local.current) local.current.getAudioTracks().forEach(t => { t.enabled = !m; }); }
+    useEffect(() => () => leave(), []);
+    const msg = { start: "", opening: "Opening your camera…", waiting: "Waiting for your friend to let you in…", connecting: "Connecting…", connected: "", reconnecting: "Reconnecting…", ended: "The reaction has ended. Thanks for joining!" }[phase];
+    return html`<div class="duog">
+      <video ref=${big} class="duobig" playsinline autoplay></video>
+      <video ref=${me} class="duome" playsinline autoplay muted></video>
+      ${phase === "start" ? html`<div class="duocard"><b>🎬 You're invited to react to a video together</b><p>Your camera and microphone are recorded into the video. Use earphones if you can, so the sound doesn't echo.</p>${err ? html`<p class="duoerr">${err}</p>` : null}<button class="btn" onClick=${() => join("user")}>📷 Join with camera and mic</button></div>` : null}
+      ${msg ? html`<div class="duomsg">${msg}</div>` : null}
+      <video ref=${sv} class=${"duosv" + (share && share.kind === "video" ? " on" : "")} playsinline></video>
+      <input ref=${fileRef} type="file" accept="video/*" style="display:none" onChange=${e => { const f = e.target.files && e.target.files[0]; e.target.value = ""; if (f) shareVideo(f); }}/>
+      ${phase === "connected" ? html`<div class="duoshare">${share ? html`<span class="duolive">🎞 Sharing ${share.kind === "screen" ? "your screen" : "a video"}</span>
+          ${share.kind === "video" ? html`<button class="btn slim quiet" onClick=${() => { const v = sv.current; if (!v) return; if (v.paused) { v.play().catch(() => {}); setShare(Object.assign({}, share, { playing: true })); } else { v.pause(); setShare(Object.assign({}, share, { playing: false })); } }}>${share.playing ? "⏸ Pause" : "▶ Play"}</button>` : null}
+          <button class="btn slim danger" onClick=${() => stopShare()}>⏹ Stop sharing</button>`
+        : html`<button class="btn slim quiet" onClick=${() => fileRef.current && fileRef.current.click()}>🎞 Share a video</button>${navigator.mediaDevices && navigator.mediaDevices.getDisplayMedia ? html`<button class="btn slim quiet" onClick=${shareScreen}>🖥 Share my screen</button>` : null}`}</div>` : null}
+      ${phase !== "start" && phase !== "ended" ? html`<div class="duobar">${phase === "connected" ? html`<span class="duolive">● LIVE</span>` : null}<button class="btn slim quiet" onClick=${mute}>${muted ? "🔇 Unmute" : "🎙 Mute"}</button><button class="btn slim quiet" onClick=${() => join(local.current && local.current.getVideoTracks()[0] && (local.current.getVideoTracks()[0].getSettings().facingMode === "environment") ? "user" : "environment")}>🔄 Flip</button><button class="btn slim danger" onClick=${leave}>Leave</button></div>` : null}
+    </div>`;
+  }
   function VideoMaker({ onClose }) {
     const [list, setList] = useState(null);
     const [open, setOpen] = useState(null);
@@ -12072,6 +12336,22 @@ notify pgrst, 'reload schema';
     const [arm, setArm] = useState(null);
     const [thumbs, setThumbs] = useState(null);
     const load = () => vmDb.all().then(l => setList(l.sort((a, b) => b.updatedAt - a.updatedAt))).catch(() => setList([]));
+    // the sound of a video from the phone, as a simple file every phone can read (so making the video never trips over the phone's format)
+    async function vmVoiceOf(file, secs) {
+      const SR = secs > 900 ? 24000 : 48000, out = new Float32Array(Math.ceil((secs + 0.5) * SR));
+      const wav = () => { const n = out.length, b = new ArrayBuffer(44 + n * 2), d = new DataView(b), w = (o, t) => { for (let i = 0; i < t.length; i++) d.setUint8(o + i, t.charCodeAt(i)); };
+        w(0, "RIFF"); d.setUint32(4, 36 + n * 2, true); w(8, "WAVE"); w(12, "fmt "); d.setUint32(16, 16, true); d.setUint16(20, 1, true); d.setUint16(22, 1, true); d.setUint32(24, SR, true); d.setUint32(28, SR * 2, true); d.setUint16(32, 2, true); d.setUint16(34, 16, true); w(36, "data"); d.setUint32(40, n * 2, true);
+        for (let i = 0; i < n; i++) { const v = Math.max(-1, Math.min(1, out[i])); d.setInt16(44 + i * 2, v < 0 ? v * 0x8000 : v * 0x7fff, true); } return new Blob([b], { type: "audio/wav" }); };
+      const put = (ab, at) => { const ch = ab.numberOfChannels, len = ab.length, k = ab.sampleRate / SR, data = []; for (let c = 0; c < ch; c++) data.push(ab.getChannelData(c)); const o0 = Math.round(at * SR), n = Math.floor(len / k);
+        for (let i = 0; i < n && o0 + i < out.length; i++) { const x = i * k, x0 = Math.floor(x), f = x - x0; let v = 0; for (let c = 0; c < ch; c++) { const a = data[c][x0] || 0, b2 = data[c][Math.min(len - 1, x0 + 1)] || 0; v += a + (b2 - a) * f; } if (o0 + i >= 0) out[o0 + i] = v / ch; } };
+      try {
+        const MB = await loadMux(), input = new MB.Input({ source: new MB.BlobSource(file), formats: MB.ALL_FORMATS }), at = await input.getPrimaryAudioTrack();
+        if (!at) return wav();   // a video with no sound: silence
+        if (!at.canDecode || await at.canDecode()) { let first = 0; try { first = await at.getFirstTimestamp(); } catch (e) {} for await (const w2 of new MB.AudioBufferSink(at).buffers()) put(w2.buffer, w2.timestamp - first); return wav(); }
+      } catch (e) {}
+      try { const ac = new (window.AudioContext || window.webkitAudioContext)(), raw = await file.arrayBuffer(), ab = await new Promise((res, rej) => ac.decodeAudioData(raw, res, rej)); try { ac.close(); } catch (e) {} put(ab, 0); return wav(); } catch (e) {}
+      return null;
+    }
     // any video from the phone opens straight in the editor, as if you had recorded it here
     function importVid() {
       const i = document.createElement("input"); i.type = "file"; i.accept = "video/*,.mp4,.mov,.m4v,.webm";
@@ -12083,7 +12363,10 @@ notify pgrst, 'reload schema';
         const p = vmNew(info.h > info.w ? "tall" : "wide", String(f.name || "My video").replace(/\.[a-z0-9]+$/i, "").slice(0, 60), true);
         p.facing = "environment"; p.mirror = false; p.camFit = "fill"; p.openEd = true;
         const secs = Math.round(info.secs * 100) / 100;
-        p.take = { voice: f, cam: true, camSegs: [{ t: 0, blob: f, facing: "environment" }], secs, cues: [], trim: [0, secs], words: null, cleanBlob: null, imported: true };
+        toast("Getting the sound ready…");
+        const vo = await vmVoiceOf(f, secs);
+        if (!vo) { toast("Couldn't read the sound of that video. Try another copy of it (for example, save it again from WhatsApp or the gallery)."); return; }
+        p.take = { voice: vo, cam: true, camSegs: [{ t: 0, blob: f, facing: "environment" }], secs, cues: [], trim: [0, secs], words: null, cleanBlob: null, imported: true };
         await vmDb.put(p).catch(() => {}); setOpen(p);
       };
       i.click();
@@ -12146,8 +12429,9 @@ notify pgrst, 'reload schema';
     </div>`;
   }
   // My style: how every video looks, with a moving preview
-  function VMStyle({ onClose }) {
+  function VMStyle({ onClose, focus }) {
     const [st, setSt] = useState(vmStyle);
+    useEffect(() => { if (!focus) return; setTimeout(() => { const el = document.getElementById("vst-" + focus); if (el) el.scrollIntoView({ block: "start", behavior: "smooth" }); }, 250); }, []);
     const [fmt, setFmt] = useState("tall");
     const [op, setOp] = useState(null);
     useEffect(() => { vmLib.get().then(l => setOp(l.opener)); }, []);
@@ -12203,7 +12487,7 @@ notify pgrst, 'reload schema';
         <label class="vml">Your name (shown at the start)<input value=${st.name} placeholder="Abubakr" onInput=${e => set({ name: e.target.value.slice(0, 40) })}/></label>
         <label class="vml">What you do (under your name)<input value=${st.role} placeholder="Reading teacher · Lusaka" onInput=${e => set({ role: e.target.value.slice(0, 50) })}/></label>
         <label class="vml">Your @name on the video<input value=${st.handle} placeholder="@yourname" onInput=${e => set({ handle: e.target.value.slice(0, 40) })}/></label>
-        <div class="vml">Logo: big in the opening and the ending, and in the top corner all the way through
+        <div class="vml" id="vst-open">Logo: big in the opening and the ending, and in the top corner all the way through
           ${st.logo ? html`<span class="vmlogo"><img src=${st.logo} alt="Your logo"/><button class="chip" onClick=${() => set({ logo: null })}>Remove</button></span>
             ${chips([["s", "Small"], ["m", "Medium"], ["l", "Large"]], "logoSize")}` : html`<button class="chip" onClick=${() => logoRef.current && logoRef.current.click()}>＋ Add your logo</button>`}
           <input ref=${logoRef} type="file" accept="image/*" style="display:none" onChange=${pickLogo}/></div>
@@ -12218,7 +12502,7 @@ notify pgrst, 'reload schema';
             <label class="vmcolor"><input type="color" value=${st.acc || "#FFD54A"} onInput=${e => set({ acc: e.target.value })}/>Your brand colour</label></div>
           <label class="vmcolor">Background <input type="color" value=${(st.bg && st.bg[0]) || (VM_LOOKS[st.look] || VM_LOOKS.night).bg[0]} onInput=${e => set({ bg: [e.target.value, vmDarker(e.target.value)] })}/>${st.bg ? html`<button class="chip" onClick=${() => set({ bg: null })}>Use the look's own</button>` : null}</label></div>
         <div class="vml">Letters<div class="vmchips">${Object.keys(VM_FONTS).map(k => html`<button key=${k} class=${"chip" + (st.font === k ? " on" : "")} style=${"font-family:'" + VM_FONTS[k].css + "';font-weight:" + VM_FONTS[k].w} onClick=${() => set({ font: k })}>${VM_FONTS[k].name}</button>`)}</div></div>
-        <div class="vml">Subtitles${chips(VM_CAPS, "caps")}
+        <div class="vml" id="vst-caps">Subtitles${chips(VM_CAPS, "caps")}
           ${st.caps !== "off" ? html`
             <div class="vmchips">${[["high", "High"], ["mid", "Middle"], ["low", "Lower"]].map(([v, l]) => html`<button key=${v} class=${"chip" + (st.capY == null && (st.capPos || "low") === v ? " on" : "")} onClick=${() => set({ capPos: v, capY: null })}>${l}</button>`)}</div>
             <label class="vmvol">Or exactly where: <b>${Math.round((st.capY != null ? st.capY : vmCapAt(st, vmGeo("tall"), false)) * 100)}% down</b><input type="range" min="0.12" max="0.9" step="0.01" value=${st.capY != null ? st.capY : vmCapAt(st, vmGeo("tall"), false)} onInput=${e => set({ capY: +e.target.value })}/></label>
@@ -12227,6 +12511,9 @@ notify pgrst, 'reload schema';
               <label class="vmcolor"><input type="color" value=${st.capHi || vmLook(st).acc} onInput=${e => set({ capHi: e.target.value })}/>Word being said</label>
               ${st.caps === "box" ? html`<label class="vmcolor"><input type="color" value=${st.capBox && st.capBox[0] === "#" ? st.capBox : "#000000"} onInput=${e => set({ capBox: e.target.value })}/>Box</label>` : null}
             </div>
+            <div class="vml">Subtitle letters<div class="vmchips"><button class=${"chip" + (!st.capFont ? " on" : "")} onClick=${() => set({ capFont: null })}>Same as the video</button>${Object.keys(VM_FONTS).map(k => html`<button key=${k} class=${"chip" + (st.capFont === k ? " on" : "")} style=${"font-family:'" + VM_FONTS[k].css + "';font-weight:" + VM_FONTS[k].w} onClick=${() => set({ capFont: k })}>${VM_FONTS[k].name}</button>`)}</div></div>
+            <label class="vmvol">Size <b>${Math.round((st.capSize || 1) * 100)}%</b><input type="range" min="0.6" max="1.6" step="0.05" value=${st.capSize || 1} onInput=${e => set({ capSize: +e.target.value })}/></label>
+            ${chips([["", "Automatic"], ["upper", "ALL CAPS"], ["as", "As I said it"]], "capCase")}
             <p class="help">TikTok, Reels and Shorts put their buttons along the bottom and right, so subtitles a bit above the middle are seen best.</p>` : null}</div>
         <div class="vml">When you show something${chips([["split", "Split: you on top"], ["pip", "You in the corner"], ["thing", "Only the thing"]], "showLay")}</div>
         <div class="vml">You in the corner looks${chips([["round", "Rounded"], ["circle", "Circle"], ["square", "Square"]], "camShape")}</div>
@@ -12612,7 +12899,7 @@ notify pgrst, 'reload schema';
   const vmThumbAt = (S, t) => { if (!S || !S.list.length) return null; let i = Math.max(0, Math.min(S.list.length - 1, Math.round(t / S.step))); for (let k = 0; k < 4 && !S.list[i]; k++) i = Math.max(0, i - 1); return S.list[i] ? S.list[i].url : null; };
 
   /* ===== the editor: a big picture on top, a timeline you slide under a fixed line, tools along the bottom (like CapCut) ===== */
-  function VMTimeline({ take, items, camOn, st, lib, pl, onTake, onDirty, onDone, addFile, addText, addPlace, music, setMusic, titles, setTitles }) {
+  function VMTimeline({ take, items, camOn, st, lib, pl, onTake, onDirty, onDone, addFile, addText, addPlace, music, setMusic, titles, setTitles, sty }) {
     const P = useMemo(() => vmSeq(take), [take.seq, take.trim, take.cuts, take.secs]);
     const len = vmSeqLen(P), secs = take.secs;
     const [pps, setPps] = useState(() => Math.max(14, Math.min(70, 2600 / Math.max(10, len))));
@@ -12773,7 +13060,25 @@ notify pgrst, 'reload schema';
         ${tool("▬", "Strip", () => { if (!needRec()) setPick({ mode: "strip" }); })}
         ${tool("✂️", "Cut a part", () => { setCutA(now); setSel(null); })}
         ${tool("⏩", "No pauses", () => { const r = VMS.noPauses(P, lv.current, 0.6, 0.09); if (!r.n) { toast("No long pauses found."); return; } setP(r.P); toast("Took out " + r.n + " pauses (" + r.secs.toFixed(1) + "s). Undo (↶) if you want them back."); })}
-        ${camOn ? tool("⚫", "B&W", () => { if (needRec()) return; const on = !vmBwAt(T, tnow); setT(VME.bwRange(T, tnow, secs, on)); toast(on ? "Black & white from here." : "Colour from here."); }) : null}`;
+        ${camOn ? tool("⚫", "B&W", () => { if (needRec()) return; const on = !vmBwAt(T, tnow); setT(VME.bwRange(T, tnow, secs, on)); toast(on ? "Black & white from here." : "Colour from here."); }) : null}
+        ${sty ? tool("💬", "Captions", () => togglePanel("caps"), { on: panel === "caps" }) : null}
+        ${sty ? tool("🎬", "Opening", () => togglePanel("open"), { on: panel === "open" }) : null}`;
+      if (panel === "caps" && sty) { const S2 = sty.st, set = sty.set, ch = (list, key) => html`<div class="ccchips">${list.map(([v, l]) => html`<button key=${String(v)} class=${"ccchip" + ((S2[key] || "") === v ? " on" : "")} onClick=${() => set({ [key]: v })}>${l}</button>`)}</div>`;
+        sub = html`<div class="ccsub">
+          <div class="ccchips"><button class=${"ccchip" + (sty.subs ? " on" : "")} onClick=${() => sty.setSubs(!sty.subs)}>${sty.subs ? "✓ Captions on" : "Captions off"}</button>${!sty.hasWords ? html`<button class="ccchip" disabled=${sty.busy} onClick=${sty.getWords}>${sty.busy ? "Listening…" : "✨ Make the captions now"}</button>` : null}</div>
+          <small>Style</small>${ch(VM_CAPS.filter(x => x[0] !== "off"), "caps")}
+          <small>Letters</small><div class="ccchips"><button class=${"ccchip" + (!S2.capFont ? " on" : "")} onClick=${() => set({ capFont: null })}>Same as video</button>${Object.keys(VM_FONTS).map(k => html`<button key=${k} class=${"ccchip" + (S2.capFont === k ? " on" : "")} style=${"font-family:'" + VM_FONTS[k].css + "'"} onClick=${() => set({ capFont: k })}>${VM_FONTS[k].name}</button>`)}</div>
+          <small>Where</small>${ch([["high", "High"], ["mid", "Middle"], ["low", "Lower"]], "capPos")}
+          <label class="ccslide">Size <b>${Math.round((S2.capSize || 1) * 100)}%</b><input type="range" min="0.6" max="1.6" step="0.05" value=${S2.capSize || 1} onChange=${e => set({ capSize: +e.target.value })}/></label>
+          ${ch([["", "Auto case"], ["upper", "ALL CAPS"], ["as", "As said"]], "capCase")}
+          <div class="ccchips"><label class="ccchip">Words <input type="color" value=${S2.capText || "#FFFFFF"} onChange=${e => set({ capText: e.target.value })}/></label><label class="ccchip">Word being said <input type="color" value=${S2.capHi || st.acc || "#FFD54A"} onChange=${e => set({ capHi: e.target.value })}/></label></div>
+          <small>Press play to see them. They're saved to My style, so every video gets them.</small></div>`; }
+      if (panel === "open" && sty) { const S2 = sty.st, set = sty.set, sw = (k, label) => html`<button class=${"ccchip" + (S2[k] ? " on" : "")} onClick=${() => set({ [k]: !S2[k] })}>${S2[k] ? "✓ " : ""}${label}</button>`;
+        sub = html`<div class="ccsub">
+          <small>How the video starts and ends</small>
+          <div class="ccchips">${sw("intro", "Opening: logo + title")}${sw("nameTag", "Name tag at the start")}${sw("outro", "Ending: follow @name")}${sw("bar", "Progress bar")}${sw("tagOn", "@name on every frame")}</div>
+          <div class="ccchips"><button class=${"ccchip" + (sty.useHl ? " on" : "")} onClick=${sty.headlines}>📰 Headlines opening${sty.useHl ? " ✓" : ""}</button><button class="ccchip" onClick=${() => sty.more("open")}>🖼 Logo, opening sound, colours…</button></div>
+          <small>Press play from the start to see it.</small></div>`; }
       if (panel === "lay") sub = html`<div class="ccsub"><div class="ccchips">${VM_LAYS.map(([k, ic, lbl]) => html`<button key=${k} class=${"ccchip" + (vmLayAt(T, tnow) === k ? " on" : "")} onClick=${() => { setT(VME.layFrom(T, tnow, k)); setPanel(null); }}>${ic} ${lbl}</button>`)}</div><small>From the white line onwards.</small></div>`;
       if (panel === "fx") sub = html`<div class="ccsub"><div class="ccchips">${VM_FX.map(([k, ic, lbl]) => html`<button key=${k} class="ccchip" onClick=${() => { setT(VME.ptAdd(T, { t: r2e(tnow), k: "sfx", v: k })); vmPlaySfx(k, lib); setPanel(null); }}>${ic} ${lbl}</button>`)}${(lib.sounds || []).map(x => html`<button key=${x.id} class="ccchip" onClick=${() => { setT(VME.ptAdd(T, { t: r2e(tnow), k: "sfx", v: "own:" + x.id })); setPanel(null); }}>🎵 ${x.name}</button>`)}</div><small>Put at the white line.</small></div>`;
     }
@@ -12781,7 +13086,9 @@ notify pgrst, 'reload schema';
       const Pk = pick; setPick(null);
       if (Pk.mode === "clip") { if (it.kind !== "vid" && it.kind !== "img") { toast("Pick a video or a photo."); return; } const Q = VMS.insert(P, now, it.kind === "vid" ? { kind: "vid", src: it.id, a: 0, b: Math.max(0.5, it.secs || 5) } : { kind: "img", src: it.id, d: 3, kb: true }); setP(Q); const nw = Q.find(q => !P.some(o => o.id === q.id) && q.src === it.id); if (nw) setSel({ type: "piece", id: nw.id }); toast("Added. Drag its white edges to trim it."); return; }
       if (Pk.mode === "swap") { setT(VME.showSwap(T, Pk.id, it)); return; }
-      if (it.kind === "ban" || it.kind === "top") { const key = it.kind === "ban" ? "bans" : "tops"; setT(VME.ivAdd(T, key, it, tnow, Math.min(secs, tnow + 4))); return; }
+      if (it.kind === "ban" || it.kind === "top") { if (tnow == null) { toast("Added. Slide onto your recording, tap Strip and pick it."); return; } const key = it.kind === "ban" ? "bans" : "tops"; const N = VME.ivAdd(T, key, it, tnow, Math.min(secs, tnow + 4)); setT(N); const nx = N[key].find(x => x.ref === it.id); if (nx) setSel({ type: key === "bans" ? "ban" : "top", id: nx.id }); toast("Added for 4 seconds. Slide and tap Starts here / Ends here to change when."); return; }
+      if (Pk.mode === "strip") { toast("For a strip, pick “A headline strip” or “A big title at the top”."); return; }
+      if (tnow == null) { toast("Added. Slide onto your recording and tap Overlay to show it."); return; }
       const b = Math.min(secs, tnow + vmItemDur(it)); if (b - tnow < 0.3) { toast("That's the very end. Slide back a little."); return; }
       const N = VME.addShow(T, it, tnow, b, camOn, st.showLay); setT(N);
       const nx = N.shows.find(x => x.ref === it.id && Math.abs(x.a - tnow) < 0.01); if (nx) setSel({ type: "show", id: nx.id });
@@ -12842,7 +13149,7 @@ notify pgrst, 'reload schema';
       ${sub}
       <div class="ccbar">${bar}</div>
       ${pick ? html`<${VMPick} items=${Object.values(items)} kinds=${pick.mode === "strip" ? ["ban", "top"] : pick.mode === "clip" ? ["vid", "img"] : null} title=${pick.mode === "strip" ? "Which strip or title?" : pick.mode === "swap" ? "Show this instead" : pick.mode === "clip" ? "Which video or photo goes in at " + fmt(now) + "?" : "What to show over you at " + fmt(now) + "?"}
-        onPick=${pickDone} onClose=${() => setPick(null)} onAddFile=${pick.mode !== "strip" ? addFile : null} onAddText=${pick.mode === "clip" ? null : addText} onAddPlace=${pick.mode === "add" || pick.mode === "swap" ? addPlace : null}/>` : null}
+        onPick=${pickDone} onClose=${() => setPick(null)} onAddFile=${pick.mode !== "strip" ? () => addFile(pickDone) : null} onAddText=${pick.mode === "clip" ? null : () => addText(pickDone)} onAddPlace=${pick.mode === "add" || pick.mode === "swap" ? () => addPlace(pickDone) : null}/>` : null}
     </div>`;
   }
   // a title over the video: words, look, where, when
@@ -12901,7 +13208,61 @@ notify pgrst, 'reload schema';
     const [paused, setPaused] = useState(false);
     const [peek, setPeek] = useState(null);
     const [sheet, setSheet] = useState(null);
-    const [edOn, setEdOn] = useState(!!(start.openEd && start.take));   // the timeline editor
+    const [edOn, setEdOn] = useState(!!(start.openEd && start.take));
+    const afterAdd = useRef(null), styleFocus = useRef(null);
+    // ---- a friend reacting with you ----
+    const [duo, setDuo] = useState(null);   // { room, link, phase, guest }
+    const duoRef = useRef(null), gref = useRef(null), gpref = useRef(null), guestRec = useRef(null), guestSegs = useRef([]);
+    function voiceSrc() {
+      const D = duoRef.current, m = mic.current; if (!D || !m) return m;
+      if (D.micStream !== m) { try { if (D.micSrc) D.micSrc.disconnect(); } catch (e) {} D.micSrc = vmAC.createMediaStreamSource(m); D.micSrc.connect(D.recDest); D.micSrc.connect(D.sendDest); D.micStream = m; }
+      return D.recDest.stream;
+    }
+    function guestSegStart() {
+      const D = duoRef.current; if (!D || !D.remote || !r.current || guestRec.current) return;
+      const vt = D.remote.getVideoTracks().filter(t => t.readyState === "live"); if (!vt.length) return;
+      try { guestRec.current = vmRec.start(new MediaStream(vt)); guestSegs.current.push({ t: round2(nowT()), rec: guestRec.current }); } catch (e) { guestRec.current = null; }
+    }
+    function guestSegEnd() { const g = guestSegs.current[guestSegs.current.length - 1]; if (guestRec.current && g && !g.out) { g.out = guestRec.current.stop(); g.t1 = round2(nowT()); } guestRec.current = null; }
+    async function startDuo() {
+      if (duoRef.current) { setSheet("duo"); return; }
+      if (!sb) { toast("Inviting a friend needs the class to be connected (sign in first)."); return; }
+      try {
+        await warmMic(); if (!mic.current) throw new Error("mic");
+        if (!vmAC) vmAC = new (window.AudioContext || window.webkitAudioContext)(); if (vmAC.state === "suspended") await vmAC.resume();
+        const room = uid(), D = { room, recDest: vmAC.createMediaStreamDestination(), sendDest: vmAC.createMediaStreamDestination(), remote: null, remSrc: null };
+        const v = vref.current; if (v && !v.__src) { try { v.__src = vmAC.createMediaElementSource(v); v.__src.connect(vmAC.destination); } catch (e) {} } if (v && v.__src) v.__src.connect(D.sendDest);
+        duoRef.current = D; voiceSrc();
+        const vt = cvRef.current.captureStream(24).getVideoTracks()[0];
+        D.send = new MediaStream([vt].concat(D.sendDest.stream.getAudioTracks()));
+        setDuo({ room, link: vmDuoLink(room), phase: "waiting" }); setSheet("duo");
+        stopRoll();   // the recorders restart with your friend's voice mixed in
+        D.peer = await vmDuoPeer({ sb, room, role: "host", local: D.send,
+          onPhase: ph => setDuo(d => (d ? Object.assign({}, d, { phase: ph }) : d)),
+          onRemote: st2 => {
+            const g = gref.current;
+            if (!st2) { guestSegEnd(); D.remote = null; if (g) g.srcObject = null; setDuo(d => (d ? Object.assign({}, d, { guest: false }) : d)); S.current.dirty = true; return; }
+            if (D.remote === st2 && st2.getVideoTracks().length && st2.getAudioTracks().length && D.remSrc) return;
+            D.remote = st2; if (g) { g.srcObject = st2; g.play().catch(() => {}); }
+            if (st2.getAudioTracks().length && D.remStream !== st2) { try { if (D.remSrc) D.remSrc.disconnect(); } catch (e) {} D.remSrc = vmAC.createMediaStreamSource(st2); D.remSrc.connect(D.recDest); D.remStream = st2; }
+            if (st2.getVideoTracks().length) { if (r.current) { guestSegEnd(); guestSegStart(); } setDuo(d => (d ? Object.assign({}, d, { guest: true }) : d)); }
+          } });
+        D.sharePeer = await vmDuoPeer({ sb, room: room + "s", role: "host", local: null,
+          onRemote: st3 => {
+            if (!st3) { D.share = null; setDuo(d => (d ? Object.assign({}, d, { sharing: false }) : d)); if (scr.current && scr.current.friend) stopShare(); return; }
+            if (!st3.getVideoTracks().length) return;
+            D.share = st3; setDuo(d => (d ? Object.assign({}, d, { sharing: true }) : d));
+            if (S.current.mode === "rec") liveShare(st3, true); else toast("Your friend is sharing a video. It shows when you press record.");
+          } });
+      } catch (e) { toast("Couldn't start the invite. Check the connection and try again."); endDuo(); }
+    }
+    function endDuo() {
+      const D = duoRef.current; duoRef.current = null; setDuo(null);
+      if (D) { try { D.peer && D.peer.close(); D.sharePeer && D.sharePeer.close(); } catch (e) {} try { D.micSrc && D.micSrc.disconnect(); D.remSrc && D.remSrc.disconnect(); } catch (e) {} if (D.send) D.send.getVideoTracks().forEach(t => t.stop()); }
+      const g = gref.current; if (g) g.srcObject = null;
+      if (S.current.mode === "rec") guestSegEnd(); else stopRoll();
+    }
+    useEffect(() => () => { if (duoRef.current) endDuo(); }, []);   // the editor waiting for something you're adding, to put it on the timeline   // the timeline editor
     // the player: the finished video's own clock (pieces, speeds, reverse), driving the recording, the camera and the clips
     const plR = useRef({ u: 0, on: false, t0: 0, u0: 0 });
     const seqLenNow = () => { const tk2 = projRef.current.take; return tk2 ? vmSeqLen(vmSeq(tk2)) : 0; };
@@ -12925,7 +13286,7 @@ notify pgrst, 'reload schema';
     const r = useRef(null), stream = useRef(null), cvRef = useRef(null), vref = useRef(null), cref = useRef(null), aref = useRef(null), fileRef = useRef(null), drag = useRef(null), rects = useRef({}), S = useRef({});
     const G = vmGeo(proj.fmt), L = vmLook(st);
     const items = useMemo(() => { const m = {}; for (const it of proj.items) m[it.id] = it; return m; }, [proj.items]);
-    const rec = mode === "rec", camOn = !!proj.cam;
+    const rec = mode === "rec", camReal = !!proj.cam, ava = !camReal && proj.avatar ? proj.avatar : null, camOn = camReal || !!ava;
     const nowT = () => (r.current ? r.current.at() : 0);
     const add = q => { const x = Object.assign({ id: uid().slice(-7), t: round2(nowT()) }, q); setCues(cuesRef.current.concat(x)); return x; };
     const cur = () => vmAt(cuesRef.current, 1e9, camOn);
@@ -12940,7 +13301,28 @@ notify pgrst, 'reload schema';
       S.current.micP = vmRec.open(false).then(m => { if (S.current.mode !== "ready" && S.current.mode !== "rec" && !r.current) { vmRec.close(m); return null; } mic.current = m; return m; }).finally(() => { S.current.micP = null; });
       return S.current.micP.catch(() => null);
     }
+    // the recorders start while you get ready (a phone can take seconds to start recording video, and freezes while it does):
+    // pressing record only marks the moment; everything before it is cut off. They're restarted now and then so the file stays small.
+    const rollT = useRef(0);
+    function stopRoll() { if (S.current.mode === "rec") return; if (r.current) { r.current.cancel(); r.current = null; } if (camRec.current) { camRec.current.cancel(); camRec.current = null; } camSegs.current = []; if (guestRec.current) { guestRec.current.cancel(); guestRec.current = null; } guestSegs.current = []; }
+    function startRoll() {
+      if (r.current || S.current.mode !== "ready" || S.current.counting) return false;
+      const m = mic.current; if (!m || !m.getAudioTracks().some(t => t.readyState === "live")) return false;
+      const wantCam = !!projRef.current.cam, camLive = !!(stream.current && stream.current.getVideoTracks().some(t => t.readyState === "live"));
+      if (wantCam && !camLive) return false;
+      try {
+        r.current = vmRec.start(voiceSrc() || m); camSegs.current = []; guestSegs.current = []; guestRec.current = null;
+        if (wantCam) { camRec.current = vmRec.start(stream.current); camSegs.current.push({ t: 0, rec: camRec.current, facing: projRef.current.facing || "user" }); }
+        guestSegStart(); rollT.current = Date.now(); return true;
+      } catch (e) { stopRoll(); return false; }
+    }
+    useEffect(() => {
+      if (mode !== "ready") return;
+      const i = setInterval(() => { if (S.current.counting || S.current.starting) return; if (r.current && Date.now() - rollT.current > 150000) stopRoll(); if (!r.current) startRoll(); }, 1200);
+      return () => clearInterval(i);
+    }, [mode, camOn]);
     async function openCam() {
+      stopRoll();
       vmRec.close(stream.current); stream.current = null;
       try {
         const s = await vmRec.open(true, projRef.current.facing, projRef.current.fmt); stream.current = s; setCamErr(null);
@@ -12948,11 +13330,13 @@ notify pgrst, 'reload schema';
       } catch (e) { setCamErr(e && e.name === "NotAllowedError" ? "blocked" : "none"); }
     }
     useEffect(() => {
-      if (mode === "ready" && camOn) openCam();
+      if (mode === "ready") stopRoll();
+      if (mode === "review") stopRoll();
+      if (mode === "ready" && camReal) openCam();
       if (mode === "ready") warmMic();
-      if (mode === "ready" && !camOn) { vmRec.close(stream.current); stream.current = null; }
+      if (mode === "ready" && !camReal) { vmRec.close(stream.current); stream.current = null; }
       if (mode === "review") { vmRec.close(stream.current); stream.current = null; }
-    }, [mode, camOn, proj.facing]);
+    }, [mode, camReal, proj.facing]);
     const voiceOf = P => (P.take ? (P.clean && P.take.cleanBlob ? P.take.cleanBlob : P.take.voice) : null);
     const voice = () => voiceOf(projRef.current);
     const voiceUrl = useMemo(() => { const b = voice(); return b ? URL.createObjectURL(b) : null; }, [proj.take && proj.take.voice, proj.take && proj.take.cleanBlob, proj.clean]);
@@ -12962,7 +13346,25 @@ notify pgrst, 'reload schema';
     const clipItem = () => { const s = rec ? cur() : mode === "review" ? S.current.rs : null; const id = rec || mode === "review" ? s && s.show : peek; const it = id ? items[id] : null; return it && it.kind === "vid" ? it : null; };
     function loadClip(it, at) { const v = vref.current; if (!v) return; const u = vmUrl(it); if (v.dataset.id !== it.id) { v.dataset.id = it.id; delete v.dataset.woke; v.preload = "auto"; v.src = u; } try { v.currentTime = at || 0; } catch (e) {} }
     // ---- drawing, many times a second ----
-    Object.assign(S.current, { items, proj, mode, peek, L, G, st, col, camOn, lib, pl: plR.current, plNow: plNowR, plPause: plPauseR });
+    Object.assign(S.current, { items, proj, mode, peek, L, G, st, col, camOn, ava, lib, pl: plR.current, plNow: plNowR, plPause: plPauseR });
+    // the presenter, and how loud you are (live while recording, from the recording afterwards)
+    const avaRef = useRef(null);
+    useEffect(() => {
+      if (!ava) return; let alive = true;
+      vmAvaMake(ava).then(P => { if (!alive) { P.dispose(); return; } if (avaRef.current) avaRef.current.P.dispose(); avaRef.current = { name: ava, P }; S.current.dirty = true; }).catch(() => toast("Couldn't load the presenter on this phone."));
+      return () => { alive = false; };
+    }, [ava]);
+    useEffect(() => () => { if (avaRef.current) avaRef.current.P.dispose(); }, []);
+    useEffect(() => {
+      if (!ava || !proj.take || !proj.take.voice) return; let alive = true;
+      (async () => { try { const ac = new (window.AudioContext || window.webkitAudioContext)(), raw = await proj.take.voice.arrayBuffer(), ab = await new Promise((res, rej) => ac.decodeAudioData(raw, res, rej)); try { ac.close(); } catch (e) {} if (alive) S.current.avaLv = levelsOf(ab); } catch (e) {} })();
+      return () => { alive = false; };
+    }, [ava, proj.take && proj.take.voice]);
+    const liveLevel = () => {
+      const m = mic.current; if (!m) return 0; let A = S.current.an;
+      if (!A || A.stream !== m) { try { if (!vmAC) vmAC = new (window.AudioContext || window.webkitAudioContext)(); const an = vmAC.createAnalyser(); an.fftSize = 512; vmAC.createMediaStreamSource(m).connect(an); A = S.current.an = { stream: m, an, buf: new Float32Array(512) }; } catch (e) { return 0; } }
+      A.an.getFloatTimeDomainData(A.buf); let q = 0; for (let i = 0; i < A.buf.length; i++) q += A.buf[i] * A.buf[i]; return Math.min(1, Math.sqrt(q / A.buf.length) * 6);
+    };
     useEffect(() => {
       const cv = cvRef.current; if (!cv) return;
       const c = cv.getContext("2d"); let raf = 0, last = 0;
@@ -13000,7 +13402,7 @@ notify pgrst, 'reload schema';
           const SA = vmSeqAt(P, Math.min(u, Math.max(0, len - 0.001))), p = SA.p, playing = q.on, a = aref.current, v = vref.current, sp = p.sp || 1, run = playing && !p.rev;
           prog = u / Math.max(0.5, len); R.u = u; R.vidPiece = p.kind !== "rec";
           if (p.kind === "rec") {
-            t = SA.t; s = vmAt(tk.cues, t, cam && tk.cam); R.rs = s; words = R.proj.subs ? tk.words : null;
+            t = SA.t; s = vmAt(tk.cues, t, cam && (tk.cam || !!R.ava)); R.rs = s; words = R.proj.subs ? tk.words : null;
             if (a) { try { a.playbackRate = sp; } catch (e) {} a.volume = Math.max(0, Math.min(1, p.vol == null ? 1 : p.vol)); if (run) { if (a.paused) a.play().catch(() => {}); if (Math.abs(a.currentTime - t) > 0.3) a.currentTime = t; } else { if (!a.paused) a.pause(); if (Math.abs(a.currentTime - t) > 0.05) try { a.currentTime = t; } catch (e) {} } }
             const it = s.show ? R.items[s.show] : null;
             if (it && it.kind === "vid" && v) { if (v.dataset.id !== it.id) loadClip(it, 0); try { v.playbackRate = sp; } catch (e) {} const want = vmClipT(s, t, it.secs); sync(v, want, s.play && s.play.on && run && want < (it.secs || 1e9) - 0.05, Math.max(0, Math.min(1, R.proj.clipVol * s.vol))); }
@@ -13045,7 +13447,18 @@ notify pgrst, 'reload schema';
         let camSrc = cv2 && cv2.readyState >= 2 && cv2.videoWidth ? cv2 : null;
         if (camSrc && R.mode === "review" && now - camSnap.current.at > 400) { const cs = camSnap.current; if (!cs.cv) cs.cv = document.createElement("canvas"); const k = Math.min(1, 540 / Math.max(camSrc.videoWidth, camSrc.videoHeight)); cs.cv.width = Math.round(camSrc.videoWidth * k); cs.cv.height = Math.round(camSrc.videoHeight * k); try { cs.cv.getContext("2d").drawImage(camSrc, 0, 0, cs.cv.width, cs.cv.height); cs.at = now; } catch (e) {} }
         if (!camSrc && R.mode === "review" && camSnap.current.at) camSrc = camSnap.current.cv;
-        vmFrame(c, { G: G2, L: R.L, st: R.st, proj: R.proj, items: R.items, s, t, camFreeze: R.mode === "rec" ? freezeSnap.current : null, camFit: R.proj.camFit || "whole", camMirror: !!R.proj.mirror && facingNow !== "environment", tb: R.mode === "review" && tk ? R.u || 0 : R.mode === "rec" ? t : 99, cam: camSrc, camOn: R.mode === "review" ? !!(cam && tk && tk.cam) && !R.vidPiece : cam, pic: id => vmPic(R.items[id]), clip: clipSrc, lite: VM_WEAK && R.mode === "rec", words, readWords: R.mode === "review" && tk ? tk.words : null, prog, out });
+        let guestSrc = null;
+        if (R.mode !== "review") { const g = gref.current; if (duoRef.current && duoRef.current.remote && g && g.readyState >= 2 && g.videoWidth) guestSrc = g; }
+        else if (tk && tk.guestSegs && tk.guestSegs.length) {
+          const gp = gpref.current, gs = tk.guestSegs; let gi = -1; for (let i = 0; i < gs.length; i++) if (gs[i].t <= t + 0.01) gi = i;
+          if (gi >= 0 && (!gs[gi].t1 || t <= gs[gi].t1) && gp) {
+            if (gp.dataset.seg !== String(gi)) { gp.src = vmGuestUrl(gs[gi].blob); gp.dataset.seg = String(gi); gp.muted = true; }
+            const want = Math.max(0, t - gs[gi].t), run2 = R.pl && R.pl.on; if (run2) { if (gp.paused) gp.play().catch(() => {}); if (Math.abs(gp.currentTime - want) > 0.35) gp.currentTime = want; } else { if (!gp.paused) gp.pause(); if (Math.abs(gp.currentTime - want) > 0.08) try { gp.currentTime = want; } catch (e) {} }
+            if (gp.readyState >= 2 && gp.videoWidth) guestSrc = gp;
+          } else if (gp && !gp.paused) gp.pause();
+        }
+        if (R.ava && avaRef.current) { const P2 = avaRef.current.P, rv = R.mode === "review"; P2.pose(rv ? t : now / 1000, rv ? vmAvaLevel(R.avaLv, t) : liveLevel(), { acc: R.st.acc }); camSrc = { vmAva: P2, h: VM_WEAK ? 520 : 720 }; }
+        vmFrame(c, { G: G2, L: R.L, st: R.st, proj: R.proj, items: R.items, s, t, camFreeze: R.mode === "rec" ? freezeSnap.current : null, camFit: R.proj.camFit || "whole", camMirror: !!R.proj.mirror && facingNow !== "environment", tb: R.mode === "review" && tk ? R.u || 0 : R.mode === "rec" ? t : 99, cam: camSrc, camOn: R.mode === "review" ? !!(cam && tk && (tk.cam || R.ava)) && !R.vidPiece : cam, pic: id => vmPic(R.items[id]), clip: clipSrc, lite: VM_WEAK && R.mode === "rec", words, readWords: R.mode === "review" && tk ? tk.words : null, prog, out, guest: guestSrc });
         rects.current = out;
         if (R.mode === "review" && R.proj.titles && R.proj.titles.length) { c.setTransform(cv.width / G2.W, 0, 0, cv.height / G2.H, 0, 0); vmDrawTitles(c, G2, R.proj.titles, R.u || 0, R.st.acc || R.L.acc, cv.width / G2.W); }
         const d = drag.current;
@@ -13094,6 +13507,7 @@ notify pgrst, 'reload schema';
     function tapItem(it) {
       if (!rec) { if (it.live) return; setPeek(peek === it.id ? null : it.id); if (it.kind === "vid") loadClip(it, 0); return; }
       const s = cur();
+      if (it.kind === "read" && s.show !== it.id && !S.current.readTold) { S.current.readTold = true; toast("Read it out loud. When you stop, it listens to your voice and the words light up as you said them."); }
       if (it.kind === "ban") { add(s.ban === it.id ? { k: "banx" } : { k: "ban", ref: it.id }); return; }
       if (it.kind === "top") { add(s.top === it.id ? { k: "topx" } : { k: "top", ref: it.id }); return; }
       if (s.show === it.id) { stopClip(); add({ k: "hide" }); if (camOn) setLay("cam"); return; }
@@ -13148,23 +13562,29 @@ notify pgrst, 'reload schema';
     // your computer screen (a YouTube tab, Instagram in the browser, anything): recorded while you record, shown like a clip
     async function shareScreen() {
       if (!rec) { toast("Press record first, then share your screen."); return; }
-      if (scr.current) { toast("Your screen is already being shared."); return; }
+      if (scr.current) { toast("Something is already being shared."); return; }
       let ds; try { ds = await vmRec.screen(); } catch (e) { if (e && e.name !== "NotAllowedError") toast("Couldn't share the screen here."); return; }
       if (!r.current) { vmRec.close(ds); return; }
+      liveShare(ds, false);
+      if (!scr.current.sound) toast("Sharing without sound. To include it, share a tab and tick “Share tab audio”.");
+    }
+    // something shared live (your screen, or a video or screen from your friend): recorded while you record, shown like a clip
+    function liveShare(ds, friend) {
+      if (!r.current || !ds || !ds.getVideoTracks().length) return;
+      if (scr.current) { if (scr.current.stream === ds) return; if (scr.current.friend) stopShare(); else return; }
       const id = uid(), startT = round2(nowT()), sr = vmRec.start(ds); if (paused) sr.pause();
-      scr.current = { id, stream: ds, rec: sr, startT, sound: ds.getAudioTracks().length > 0 };
-      const v = sref.current; if (v) { v.srcObject = ds; v.muted = true; v.play().catch(() => {}); }
-      const tr0 = ds.getVideoTracks()[0]; if (tr0) tr0.addEventListener("ended", () => stopShare());
-      setProj(p => ({ items: p.items.concat({ id, kind: "vid", name: "Screen", screen: true, live: true, secs: 0, blob: null }) }));
+      scr.current = { id, stream: ds, rec: sr, startT, sound: ds.getAudioTracks().length > 0, friend: !!friend };
+      const v = sref.current; if (v) { v.srcObject = ds; v.muted = !friend; v.play().catch(() => {}); }
+      const tr0 = ds.getVideoTracks()[0]; if (tr0) tr0.addEventListener("ended", () => { if (scr.current && scr.current.id === id) stopShare(); });
+      setProj(p => ({ items: p.items.concat({ id, kind: "vid", name: friend ? "From my friend" : "Screen", screen: true, live: true, secs: 0, blob: null }) }));
       const s = cur(); stopClip();
       add({ k: "show", ref: id, at: 0 }); if (!paused) add({ k: "play", at: 0 });
       if (camOn && s.lay === "cam" && st.showLay !== "cam") setLay(st.showLay);
-      if (!scr.current.sound) toast("Sharing without sound. To include it, share a tab and tick “Share tab audio”.");
     }
     async function stopShare() {
       const S0 = scr.current; if (!S0) return; scr.current = null;
       const s = cur(); if (r.current && s.show === S0.id && s.play && s.play.on) add({ k: "stop", at: round2(Math.max(0, nowT() - S0.startT)) });
-      const out = await S0.rec.stop(); vmRec.close(S0.stream);
+      const out = await S0.rec.stop(); if (!S0.friend) vmRec.close(S0.stream);
       const v = sref.current; if (v) v.srcObject = null;
       setProj(p => ({ items: p.items.map(x => (x.id === S0.id ? Object.assign({}, x, { live: false, blob: out.blob, secs: round1(out.secs) }) : x)) }));
     }
@@ -13208,6 +13628,7 @@ notify pgrst, 'reload schema';
         const it = { id: uid(), kind: isVid ? "vid" : "img", name: f.name || "", blob: isVid ? f : await shrinkPic(f), secs: 0 };
         if (isVid) { it.secs = round1(await vmDur(f)); if (it.secs > 1200) toast("That clip is long. It works, but making the video will take a while."); }
         setProj(p => ({ items: p.items.concat(it) }));
+        if (afterAdd.current) { const cb = afterAdd.current; afterAdd.current = null; setTimeout(() => cb(it), 60); }
         if (isVid) { vmPoster(f).then(th => { if (th) setProj(p => ({ items: p.items.map(x => (x.id === it.id ? Object.assign({}, x, { thumb: th }) : x)) })); }); prepClip(it.id, f); }
       }
     }
@@ -13247,14 +13668,16 @@ notify pgrst, 'reload schema';
       if (proj.take && !window.confirm("Record again? The recording you have now is replaced.")) return;
       setPeek(null); plPauseR();
       const v0 = vref.current; if (v0 && !v0.paused) v0.pause();
-      setStarting(true);
+      setStarting(true); S.current.starting = true;
       let step = "mic";
-      try {
-        if (camOn) { step = "cam"; if (!stream.current || !stream.current.getVideoTracks().some(t => t.readyState === "live")) await openCam(); if (!stream.current) throw { code: "nocam" }; }
+      const rolling = !!(r.current && (!camReal || camRec.current));
+      if (!rolling) stopRoll();
+      if (!rolling) try {
+        if (camReal) { step = "cam"; if (!stream.current || !stream.current.getVideoTracks().some(t => t.readyState === "live")) await openCam(); if (!stream.current) throw { code: "nocam" }; }
         step = "mic"; if (!mic.current || !mic.current.getAudioTracks().some(t => t.readyState === "live")) { if (S.current.micP) await S.current.micP.catch(() => {}); if (!mic.current || !mic.current.getAudioTracks().some(t => t.readyState === "live")) mic.current = await vmRec.open(false); }
-        step = "rec"; r.current = vmRec.start(mic.current);
+        step = "rec"; r.current = vmRec.start(voiceSrc() || mic.current); guestSegs.current = []; guestRec.current = null; guestSegStart();
         camSegs.current = [];
-        if (camOn) { step = "camrec"; camRec.current = vmRec.start(stream.current); camSegs.current.push({ t: 0, rec: camRec.current, facing: projRef.current.facing || "user" }); }
+        if (camReal) { step = "camrec"; camRec.current = vmRec.start(stream.current); camSegs.current.push({ t: 0, rec: camRec.current, facing: projRef.current.facing || "user" }); }
       } catch (e) {
         if (r.current) { r.current.cancel(); r.current = null; }
         vmRec.close(mic.current); mic.current = null; setStarting(false);
@@ -13263,17 +13686,18 @@ notify pgrst, 'reload schema';
           : step === "cam" || (e && e.code === "camslow") ? "The camera didn't start. Close other apps that use it, or switch to faceless, then try again."
           : step === "mic" || (e && e.code === "micslow") ? "The microphone didn't start. Close other apps that use it, then try again."
           : "This phone couldn't start recording. Try again, or switch to faceless.");
-        return;
+        S.current.starting = false; return;
       }
-      setStarting(false);
+      setStarting(false); S.current.starting = false;
       // 3 · 2 · 1, and the clock only starts once the camera picture is really moving; what came before is cut off
       const go = await countIn(); if (go == null) return;
-      S.current.go = go;
+      S.current.go = go; healthStart();
+      if (duoRef.current && duoRef.current.share) { const sh = duoRef.current.share; setTimeout(() => liveShare(sh, true), 80); }
       clipPos.current = {}; setCues(proj.bw ? [{ id: uid().slice(-7), t: go, k: "bw", v: true }] : []); freezeSnap.current = null; setPaused(false); setClipOn(false); volLive(1); setMode("rec");
     }
     const beep = (f, d) => { try { if (!vmAC) vmAC = new (window.AudioContext || window.webkitAudioContext)(); const o = vmAC.createOscillator(), g = vmAC.createGain(), t = vmAC.currentTime; o.frequency.value = f; g.gain.setValueAtTime(0.0001, t); g.gain.exponentialRampToValueAtTime(0.25, t + 0.01); g.gain.exponentialRampToValueAtTime(0.0001, t + d); o.connect(g); g.connect(vmAC.destination); o.start(t); o.stop(t + d + 0.02); } catch (e) {} };
     async function countIn() {
-      const v = cref.current, rvfc = !!(camOn && v && v.requestVideoFrameCallback);
+      const v = cref.current, rvfc = !!(camReal && v && v.requestVideoFrameCallback);
       let frames = 0; const cnt = () => { frames++; if (S.current.counting && v.requestVideoFrameCallback) v.requestVideoFrameCallback(cnt); };
       S.current.counting = true; if (rvfc) v.requestVideoFrameCallback(cnt);
       const moving = async () => { if (!rvfc) return true; const f0 = frames; await sleep(500); return frames - f0 >= 4; };
@@ -13292,11 +13716,29 @@ notify pgrst, 'reload schema';
     }
     function pauseRec() {
       if (!r.current) return;
-      const all = [r.current, camRec.current, scr.current && scr.current.rec].filter(Boolean);
+      const all = [r.current, camRec.current, guestRec.current, scr.current && scr.current.rec].filter(Boolean);
       if (paused) {
         all.forEach(x => x.resume()); setPaused(false);
         const s = cur(), it = s.show ? items[s.show] : null; if (it && it.live && scr.current) add({ k: "play", at: liveAt() });
       } else { stopClip(); all.forEach(x => x.pause()); setPaused(true); }
+    }
+    // start over: the same recorders carry on, the new start is marked after 3 · 2 · 1 and everything before it is cut off
+    async function startOver() {
+      if (!r.current || count) return;
+      if (!window.confirm("Start over from the beginning? What you've recorded so far is thrown away.")) return;
+      stopClip();
+      if (paused) { [r.current, camRec.current, guestRec.current, scr.current && scr.current.rec].filter(Boolean).forEach(x => x.resume()); setPaused(false); }
+      const go = await countIn(); if (go == null) return;
+      S.current.go = go; healthStart(); clipPos.current = {}; freezeSnap.current = null;
+      setCues(projRef.current.bw ? [{ id: uid().slice(-7), t: go, k: "bw", v: true }] : []); volLive(1);
+    }
+    // a check of how smoothly this phone recorded: freezes of the screen and of the camera picture
+    function healthStart() {
+      const H = { t0: performance.now(), main: [], cam: [], last: performance.now(), lastCam: 0 }; S.current.health = H;
+      const tick = now => { if (S.current.health !== H || S.current.mode === "review") return; const gap = now - H.last; if (gap > 400 && H.main.length < 40) H.main.push([Math.round((H.last - H.t0) / 100) / 10, Math.round(gap)]); H.last = now; requestAnimationFrame(tick); };
+      requestAnimationFrame(tick);
+      const v = cref.current;
+      if (camReal && v && v.requestVideoFrameCallback) { const fr = now => { if (S.current.health !== H || S.current.mode === "review") return; if (H.lastCam && now - H.lastCam > 500 && H.cam.length < 40) H.cam.push([Math.round((H.lastCam - H.t0) / 100) / 10, Math.round(now - H.lastCam)]); H.lastCam = now; v.requestVideoFrameCallback(fr); }; v.requestVideoFrameCallback(fr); }
     }
     function undo() { const s = cur(); const m = s.marks[s.marks.length - 1]; if (m) add({ k: "rm", ref: m.id }); else toast("Nothing to take back."); }
     async function stopRec() {
@@ -13309,13 +13751,26 @@ notify pgrst, 'reload schema';
       const segs = [];
       for (const g of camSegs.current) { if (!g.out) continue; try { const o = await g.out; if (o.blob && o.blob.size) segs.push({ t: g.t, blob: o.blob, facing: g.facing || "user" }); } catch (e) {} }
       camSegs.current = [];
-      vmRec.close(mic.current); mic.current = null; vmRec.close(stream.current); stream.current = null;
+      guestSegEnd(); const gsegs = [];
+      for (const g of guestSegs.current) { if (!g.out) continue; try { const o = await g.out; if (o.blob && o.blob.size) gsegs.push({ t: g.t, t1: g.t1 || null, blob: o.blob }); } catch (e) {} }
+      guestSegs.current = [];
+      if (!duoRef.current) { vmRec.close(mic.current); mic.current = null; } vmRec.close(stream.current); stream.current = null;
       if (out.secs < 1) { setMode("ready"); toast("That was too short."); return; }
       const list = cuesRef.current.slice().sort((a, b) => a.t - b.t).map(q => Object.assign({}, q));
-      setProj({ take: { voice: out.blob, cam: segs.length > 0, camSegs: segs, secs: round2(out.secs), cues: list, trim: [Math.min(round2(out.secs) - 0.5, Math.max(0, S.current.go || 0)), round2(out.secs)], words: null, cleanBlob: null } });
+      setProj({ take: { voice: out.blob, cam: segs.length > 0, camSegs: segs, secs: round2(out.secs), cues: list, trim: [Math.min(round2(out.secs) - 0.5, Math.max(0, S.current.go || 0)), round2(out.secs)], words: null, cleanBlob: null, guestSegs: gsegs, health: S.current.health ? { main: S.current.health.main, cam: S.current.health.cam, weak: !!VM_WEAK, ua: navigator.userAgent.slice(0, 120) } : null } });
+      S.current.health = null;
       const sw = pendingSwaps.current; pendingSwaps.current = []; sw.forEach(f => f());
       setMode("review");
     }
+    // something to read out was shown: listen to the recording now, so its words light up as you said them
+    useEffect(() => {
+      if (mode !== "review" || !proj.take || proj.take.words) return;
+      const tk = proj.take; if (S.current.readTried === tk.voice) return;
+      if (!(tk.cues || []).some(q => q.k === "show" && items[q.ref] && items[q.ref].kind === "read")) return;
+      S.current.readTried = tk.voice; toast("Listening to your reading, so the words light up…");
+      vmTranscribe(voice()).then(words => { setProj(p => (p.take && p.take.voice === tk.voice ? { take: Object.assign({}, p.take, { words, wordsFor: p.clean && p.take.cleanBlob ? "clean" : "raw" }) } : {})); S.current.dirty = true; toast("Done: the words now light up as you read them. Press play."); })
+        .catch(e => toast(e && e.code === "nokey" ? "The words light up once OPENAI_API_KEY is set in Netlify (the same key subtitles use)." : "Couldn't listen to the reading. Check the connection, then tap Subtitles to try again."));
+    }, [mode, proj.take && proj.take.voice]);
     // after recording: take the background noise out (in the background)
     useEffect(() => {
       if (mode !== "review" || !proj.take) return;
@@ -13366,7 +13821,7 @@ notify pgrst, 'reload schema';
       ${proj.items.map(it => {
         const on = rec ? (it.kind === "ban" ? s.ban === it.id : it.kind === "top" ? s.top === it.id : s.show === it.id) : peek === it.id;
         return html`<button key=${it.id} class=${"mthumb" + (on ? " on" : "") + (it.kind === "text" || it.kind === "ban" || it.kind === "top" || it.kind === "read" || it.live || (it.kind === "vid" && !it.blob) ? " vmtxt" : "")} onClick=${() => tapItem(it)} onContextMenu=${e => { e.preventDefault(); removeItem(it); }} aria-label=${it.kind === "vid" ? "Show this clip" : it.kind === "img" ? "Show this picture" : "Show these words"}>
-          ${it.live || (it.kind === "vid" && !it.blob) ? html`<span class="vmtxtin">🖥 Your screen${it.live ? html`<br/><b class="vmlive">● live</b>` : ""}</span>`
+          ${it.live || (it.kind === "vid" && !it.blob) ? html`<span class="vmtxtin">${it.name === "From my friend" ? "🎞 From your friend" : "🖥 Your screen"}${it.live ? html`<br/><b class="vmlive">● live</b>` : ""}</span>`
             : it.kind === "vid" ? html`${it.thumb ? html`<img src=${it.thumb} alt=""/>` : html`<span class="vmtxtin">▶</span>`}<span class="mbadge">${it.screen ? "🖥" : "▶"} ${fmtDur(it.secs || 0)}</span>${prep[it.id] != null ? html`<span class="mup">${Math.round(prep[it.id] * 100)}%</span>` : it.bad ? html`<span class="mup">!</span>` : null}`
             : it.kind === "map" || it.kind === "flag" || it.kind === "trip" ? html`${it.thumb ? html`<img src=${it.thumb} alt=""/>` : null}<span class="mbadge">${it.kind === "map" ? "🗺" : it.kind === "trip" ? "✈" : "🏳"} ${it.kind === "trip" ? (it.stops || []).length + " stops" : it.name}</span>`
             : it.kind === "img" ? html`<img src=${vmUrl(it)} alt=""/>`
@@ -13385,7 +13840,7 @@ notify pgrst, 'reload schema';
       <button class="chip" onClick=${() => setVol(cvol > 0 ? 0 : 1)} aria-label=${cvol > 0 ? "Mute the clip" : "Unmute the clip"}>${cvol > 0 ? "🔊" : "🔇"}</button>
       <input type="range" min="0" max="1" step="0.05" value=${cvol} aria-label="Clip sound" onInput=${e => volLive(+e.target.value)} onChange=${e => setVol(+e.target.value)}/></span>`;
     const clipBar = shownClip && shownClip.live ? html`<div class="vmclipbar">
-      <span class="vmlive">● Sharing your screen</span>
+      <span class="vmlive">● ${scr.current && scr.current.friend ? "Your friend is sharing" : "Sharing your screen"}</span>
       ${rec ? html`<button class="btn slim" onClick=${() => (cur().play && cur().play.on ? stopClip() : playClip())}>${cur().play && cur().play.on ? "⏸ Freeze it" : "▶ Carry on"}</button>` : null}
       <button class="chip" onClick=${stopShare}>■ Stop sharing</button>
       ${scr.current && scr.current.sound ? volBar : null}
@@ -13399,7 +13854,7 @@ notify pgrst, 'reload schema';
         onChange=${e => { const v = vref.current, it = clipItem(); if (v && it) { clipPos.current[it.id] = v.currentTime; if (rec) { add({ k: "stop", at: round2(v.currentTime) }); if (scrubWasOn.current) setTimeout(playClip, 30); } } scrubWasOn.current = false; }}/>
       ${rec ? volBar : html`<span class="vmvolrow"><button class="chip" onClick=${() => volLive(cvol > 0 ? 0 : 1)}>${cvol > 0 ? "🔊" : "🔇"}</button><input type="range" min="0" max="1" step="0.05" value=${cvol} aria-label="Clip sound" onInput=${e => volLive(+e.target.value)}/></span>`}
     </div>` : null;
-    if (styling) return html`<${VMStyle} onClose=${() => { setStyling(false); setSt(vmStyle()); }}/>`;
+    if (styling) return html`<${VMStyle} focus=${styleFocus.current} onClose=${() => { setStyling(false); styleFocus.current = null; setSt(vmStyle()); S.current.dirty = true; }}/>`;
     return html`<div class="full studio vm" role="dialog" aria-label="Make a video">
       <div class="fhead">
         <span>🎬 ${proj.title || "Untitled"} · ${VM_FMT[proj.fmt].name}${camOn ? " · 📷" : ""}</span>
@@ -13410,9 +13865,12 @@ notify pgrst, 'reload schema';
           <video ref=${vref} class="vmunder" playsinline preload="auto"></video>
           <video ref=${cref} class="vmunder" playsinline muted autoplay preload="auto"></video>
           <video ref=${sref} class="vmunder" playsinline muted autoplay></video>
+          <video ref=${gref} class="vmunder" playsinline autoplay></video>
+          <video ref=${gpref} class="vmunder" playsinline muted preload="auto"></video>
+          ${duo && duo.guest && mode !== "review" ? html`<div class="duotag">👥 ${duo.phase === "connected" ? "Your friend is live" + (duo.sharing ? " · sharing 🎞" : "") : "Reconnecting…"}</div>` : null}
           <canvas ref=${cvRef} class=${"vmcv " + proj.fmt + (rec ? (drawOn ? " rec" : " recnd") : "")} onPointerDown=${down} onPointerMove=${move} onPointerUp=${up} onPointerCancel=${() => { drag.current = null; }} aria-label="The video"></canvas>
           ${rec && paused ? html`<div class="pausedtag">⏸ Paused</div>` : null}
-          ${rec ? html`<div class="vmrectag"><span class="recdot"></span>${fmtDur(nowT() - (S.current.go || 0))}</div>` : null}
+          ${rec && !count ? html`<div class="vmrectag"><span class="recdot"></span>${fmtDur(nowT() - (S.current.go || 0))}</div>` : null}
           ${count ? html`<div class=${"vmcount" + (count === "go" ? " go" : "")} role="status">${count === "go" ? html`<b>● REC</b><small>Recording — go!</small>` : count === "cam" ? html`<b class="sm">⏳</b><small>Waiting for the camera picture to move…<br/>The recording starts the moment it does.</small><button class="btn slim quiet" onClick=${cancelCount}>Cancel</button>` : html`<b>${count}</b><small>Get ready… recording starts at 0</small><button class="btn slim quiet" onClick=${cancelCount}>Cancel</button>`}</div>` : null}
           ${mode === "review" && !plR.current.on ? html`<button class="crplay" onClick=${() => playReview()} aria-label="Play"><${Ic.play} size=${34}/></button>` : null}
         </div>
@@ -13420,16 +13878,18 @@ notify pgrst, 'reload schema';
       </div>
       <div class=${"sfoot" + (count ? " vmlock" : "")}>
         ${mode === "ready" ? html`
-          ${camOn && camErr ? html`<p class="help warn">${camErr === "blocked" ? "The camera is blocked. Allow it in the browser's settings for this site, or switch to faceless." : "No camera found. Switch to faceless, or try another phone."}</p>` : null}
+          ${camReal && camErr ? html`<p class="help warn">${camErr === "blocked" ? "The camera is blocked. Allow it in the browser's settings for this site, or switch to faceless." : "No camera found. Switch to faceless, or try another phone."}</p>` : null}
           <div class="vmclipbar">
-            <button class=${"chip" + (camOn ? " on" : "")} onClick=${() => setProj({ cam: !camOn })}>${camOn ? "📷 Camera on" : "🎙️ Faceless"}</button>
-            ${camOn ? html`<button class="chip" onClick=${flipCam}>🔄 ${proj.facing === "environment" ? "Back camera" : "Front camera"}</button>` : null}
-            ${camOn ? html`<button class=${"chip" + (proj.bw ? " on" : "")} onClick=${toggleBw}>⚫ Black & white</button>` : null}
+            <button class=${"chip" + (camReal ? " on" : "")} onClick=${() => setProj({ cam: !camReal })}>${camReal ? "📷 Camera on" : "🎙️ Faceless"}</button>
+            ${camReal ? html`<button class="chip" onClick=${flipCam}>🔄 ${proj.facing === "environment" ? "Back camera" : "Front camera"}</button>` : null}
+            ${camReal ? html`<button class=${"chip" + (proj.bw ? " on" : "")} onClick=${toggleBw}>⚫ Black & white</button>` : null}
+            <button class=${"chip" + (duo ? " on" : "")} onClick=${startDuo}>👥 ${duo ? (duo.guest ? "Friend joined ✓" : "Waiting for your friend…") : "React with a friend"}</button>
             <button class="chip" onClick=${() => setStyling(true)}>🎨 My style</button>
             <button class=${"chip" + (proj.useHl && (proj.headlines || []).some(h => h.text) ? " on" : "")} onClick=${() => setSheet("hl")}>📰 Headlines opening</button>
             <button class="chip" onClick=${() => setSheet("snd")}>🔊 Sounds</button>
           </div>
-          ${camOn ? html`<div class="vmclipbar">
+          ${!camReal ? html`<div class="vml">🧍 A presenter instead of you <small>a 3D character that moves while you talk</small><div class="vmchips"><button class=${"chip" + (!proj.avatar ? " on" : "")} onClick=${() => setProj({ avatar: null })}>None (just the board)</button>${VM_AVAS.map(([k, n]) => html`<button key=${k} class=${"chip" + (proj.avatar === k ? " on" : "")} onClick=${() => setProj({ avatar: k })}>${n}</button>`)}</div></div>` : null}
+          ${camReal ? html`<div class="vmclipbar">
             <button class=${"chip" + (proj.mirror ? " on" : "")} onClick=${() => setProj(p => { try { localStorage.setItem("vm.mirror", p.mirror ? "0" : "1"); } catch (e) {} return { mirror: !p.mirror }; })}>↔ ${proj.mirror ? "Flipped (mirror)" : "Not flipped"}</button>
             <button class="chip" onClick=${() => setProj(p => ({ camFit: (p.camFit || "whole") === "whole" ? "fill" : "whole" }))}>${(proj.camFit || "whole") === "whole" ? "🔍 Whole camera picture" : "🔍 Filled (closer)"}</button>
           </div>
@@ -13451,6 +13911,7 @@ notify pgrst, 'reload schema';
           </div>` : null}
         ${rec ? html`
           ${proj.notes ? html`<div class="vmnotes">${proj.notes}</div>` : null}
+          ${duo && duo.guest ? html`<div class="tools vmlays" role="toolbar" aria-label="Who's on screen">${[["both", "👥", "Both of us"], ["me", "🙂", "Only me"], ["friend", "🧑", "Only my friend"]].map(([k, ic, lbl]) => html`<button key=${k} class=${"tool" + ((s.duo || "both") === k ? " on" : "")} onClick=${() => add({ k: "duo", v: k })}><span>${ic}</span>${lbl}</button>`)}</div>` : null}
           ${camOn ? html`<div class="tools vmlays" role="toolbar" aria-label="Layout">${VM_LAYS.map(([k, ic, lbl]) => html`<button key=${k} class=${"tool" + (s.lay === k ? " on" : "")} aria-pressed=${s.lay === k ? "true" : "false"} onClick=${() => setLay(k)}><span>${ic}</span>${lbl}</button>`)}<button class="tool" onClick=${flipCam}><span>🔄</span>Flip</button><button class=${"tool" + (s.bw ? " on" : "")} onClick=${toggleBw}><span>⚫</span>B&W</button></div>` : null}
           ${tray}${clipBar}
           <div class="tools vmfx" role="toolbar" aria-label="Effects">${VM_FX.map(([k, ic, lbl]) => html`<button key=${k} class="tool" onClick=${() => fxTap(k)}><span>${ic}</span>${lbl}</button>`)}${lib.sounds.map(x => html`<button key=${x.id} class="tool" onClick=${() => fxTap("own:" + x.id)}><span>🎵</span>${x.name}</button>`)}${s.show && items[s.show] && items[s.show].kind !== "text" ? html`<button class=${"tool" + (hlOn ? " on" : "")} onClick=${() => setHlOn(!hlOn)}><span>🖍</span>Highlight</button>` : null}</div>
@@ -13462,16 +13923,19 @@ notify pgrst, 'reload schema';
           </div>
           <div class="subbar">${VM_COLS.map(c2 => html`<button key=${c2} class=${"swatch" + (col === c2 ? " on" : "")} style=${"background:" + c2} onClick=${() => setCol(c2)} aria-label="Colour"></button>`)}</div>` : null}
           <div class="srow">
-            <button class=${"btn quiet" + (paused ? " on" : "")} onClick=${pauseRec}>${paused ? "▶ Resume" : "⏸ Pause"}</button>
+            <button class=${"btn quiet" + (paused ? " on" : "")} onClick=${pauseRec}>${paused ? "▶ Continue" : "⏸ Pause"}</button>
+            ${paused ? html`<button class="btn quiet" onClick=${startOver}>↺ Start over</button>` : null}
             <button class="big red" onClick=${stopRec} aria-label="Stop recording"><${Ic.stop} size=${28}/></button>
           </div>` : null}
-        ${mode === "review" && tk && edOn ? html`<${VMTimeline} take=${tk} items=${items} camOn=${!!(camOn && tk.cam)} st=${st} lib=${lib} pl=${plApi}
+        ${mode === "review" && tk && edOn ? html`<${VMTimeline} take=${tk} items=${items} camOn=${!!(camOn && (tk.cam || ava))} st=${st} lib=${lib} pl=${plApi}
             onTake=${x => { setProj(p => ({ take: Object.assign({}, p.take, x) })); S.current.dirty = true; }}
             music=${proj.music || null} setMusic=${m => { setProj({ music: m }); S.current.dirty = true; }} titles=${proj.titles || []} setTitles=${x => { setProj({ titles: x }); S.current.dirty = true; }}
             onDirty=${() => { S.current.dirty = true; }} onDone=${() => { plPauseR(); setEdOn(false); }}
-            addFile=${() => fileRef2.current && fileRef2.current.click()} addText=${() => setSheet("text")} addPlace=${() => setSheet("place")}/>
+            sty=${{ st, set: patch => { const n = Object.assign({}, st, patch); vmSaveStyle(n); setSt(n); S.current.dirty = true; }, subs: !!proj.subs, setSubs: v => { setProj({ subs: v }); S.current.dirty = true; }, hasWords: !!tk.words, busy, getWords: () => { if (!proj.subs) setProj({ subs: true }); getSubs(); }, useHl: !!proj.useHl, headlines: () => setSheet("hl"), more: k => { styleFocus.current = k; setStyling(true); } }}
+            addFile=${cb => { afterAdd.current = cb || null; fileRef2.current && fileRef2.current.click(); }} addText=${cb => { afterAdd.current = cb || null; setSheet("text"); }} addPlace=${cb => { afterAdd.current = cb || null; setSheet("place"); }}/>
           <input ref=${fileRef2} type="file" accept="image/*,video/*" multiple style="display:none" onChange=${addFiles}/>` : null}
         ${mode === "review" && tk && !edOn ? html`
+          ${tk.health ? (() => { const H = tk.health, m = H.main || [], c2 = H.cam || [], worst = Math.max(0, ...m.map(x => x[1]), ...c2.map(x => x[1])) / 1000; return m.length || c2.length ? html`<p class="help vmhealth">🔎 Recording check: ${m.length ? "the screen stopped " + m.length + "×" : ""}${m.length && c2.length ? ", " : ""}${c2.length ? "the camera picture stopped " + c2.length + "×" : ""} (longest ${worst.toFixed(1)}s, first at ${fmtDur((m[0] || c2[0])[0])}). If you noticed it, screenshot this and send it to me. <small>${m.slice(0, 6).map(x => x[0] + "s:" + x[1]).join(" ")} | ${c2.slice(0, 6).map(x => x[0] + "s:" + x[1]).join(" ")}</small></p>` : html`<p class="help vmhealth ok">🔎 Recording check: smooth all the way ✓</p>`; })() : null}
           <button class="btn vmedbtn" onClick=${() => { plPauseR(); setEdOn(true); }}>✂️ Edit the video: clips, speed, cuts, titles, music…</button>
           <div class="vmplay">
             <button class="crbtn dark" onClick=${() => playReview()} aria-label=${plR.current.on ? "Pause" : "Play"}>${plR.current.on ? html`<${Ic.pause} size=${18}/>` : html`<${Ic.play} size=${18}/>`}</button>
@@ -13505,10 +13969,18 @@ notify pgrst, 'reload schema';
           </div>` : null}
       </div>
       ${sheet === "subs" && proj.take && proj.take.words ? html`<${VMSubsEdit} words=${proj.take.words} onSeek=${t2 => { const u2 = vmSeqOutOf(vmSeq(proj.take), t2); plSeekR(u2 == null ? 0 : u2); plPlayR(); }} onClose=${() => setSheet(null)} onSave=${w => { setProj(p => ({ take: Object.assign({}, p.take, { words: w, wordsFor: "edited" }) })); setSheet(null); toast("Subtitles corrected."); }}/>` : null}
-      ${sheet === "place" ? html`<${VMPlaces} onClose=${() => setSheet(null)} onAdd=${it => { setSheet(null); setProj(p => ({ items: p.items.concat(Object.assign({ id: uid() }, it)) })); }}/>` : null}
+      ${sheet === "place" ? html`<${VMPlaces} onClose=${() => { setSheet(null); afterAdd.current = null; }} onAdd=${it => { setSheet(null); const n = Object.assign({ id: uid() }, it); setProj(p => ({ items: p.items.concat(n) })); if (afterAdd.current) { const cb = afterAdd.current; afterAdd.current = null; setTimeout(() => cb(n), 60); } }}/>` : null}
       ${sheet === "hl" ? html`<${VMHeadlines} proj=${proj} onClose=${() => setSheet(null)} onSave=${p => { setProj(p); setSheet(null); }} onTry=${() => { setSheet(null); setTimeout(previewOpening, 50); }}/>` : null}
       ${sheet === "snd" ? html`<${VMSounds} proj=${proj} setProj=${setProj} lib=${lib} setLib=${setLib} st=${st} onClose=${() => setSheet(null)}/>` : null}
-      ${sheet === "text" ? html`<${VMAddText} onClose=${() => setSheet(null)} onAdd=${it => { setSheet(null); setProj(p => ({ items: p.items.concat(Object.assign({ id: uid() }, it)) })); }}/>` : null}
+      ${sheet === "duo" && duo ? html`<div class="scrim" onClick=${e => { if (e.target === e.currentTarget) setSheet(null); }}><div class="sheet" role="dialog" aria-label="React with a friend">
+        <h3 style="margin:0">👥 React with a friend</h3>
+        <p class="help">Send your friend this link. When they open it and tap Join, they see your video as you make it, and their camera and voice are recorded with yours. You both should wear earphones, so sound doesn't echo.</p>
+        <div class="duolink">${duo.link}</div>
+        <div class="vmchips"><button class="btn slim" onClick=${async () => { try { await navigator.clipboard.writeText(duo.link); toast("Link copied."); } catch (e) { toast("Couldn't copy. Use WhatsApp instead."); } }}>📋 Copy link</button><a class="btn slim quiet" href=${"https://wa.me/?text=" + encodeURIComponent("Come react to a video with me 🎬 " + duo.link)} target="_blank" rel="noopener">WhatsApp</a></div>
+        <p class=${"duost " + (duo.guest ? "ok" : "")}>${duo.guest ? "✓ Your friend is in. Close this and press record." : duo.phase === "connecting" ? "Connecting to your friend…" : "Waiting for your friend to open the link…"}</p>
+        <div class="vmchips"><button class="btn quiet slim" onClick=${() => setSheet(null)}>Close</button><button class="btn quiet slim danger" onClick=${() => { endDuo(); setSheet(null); }}>End the invite</button></div>
+      </div></div>` : null}
+      ${sheet === "text" ? html`<${VMAddText} onClose=${() => { setSheet(null); afterAdd.current = null; }} onAdd=${it => { setSheet(null); const n = Object.assign({ id: uid() }, it); setProj(p => ({ items: p.items.concat(n) })); if (afterAdd.current) { const cb = afterAdd.current; afterAdd.current = null; setTimeout(() => cb(n), 60); } }}/>` : null}
       ${lessonPick ? html`<div class="scrim" onClick=${e => { if (e.target === e.currentTarget) setLessonPick(false); }}><div class="sheet" role="dialog" aria-label="Pick a lesson">
         <h3 style="margin:0">Which lesson's board?</h3>
         <div class="vmlessons">${store.s.lessons.map((l, i) => html`<button key=${l.id} class="chip" onClick=${() => addLesson(i)}>${i + 1}. ${l.title || "Lesson"}</button>`)}</div>
@@ -14027,8 +14499,9 @@ notify pgrst, 'reload schema';
   window.__ui = { LessonsList, PacksSheet, RulesGuide, LESSON_PACKS, crFrame, crSorted, stageAt0: stageAt, PushBell, SetupCheck, VidJobPill, html, render, store, Board, ExplainStudio, LiveTools, stageAt, buildSound, live, player, ClassroomPlayer, crAssets, CR_W, CR_H, TalkBoard, vidJob, VideoMaker, vmExport, vmDb, vmNew, vmAt, vmFrame, vmGeo, VM_LOOKS, vmStyle, vmSaveStyle, VMStyle, vmIntro, vmOutro, vmLook, vmElemSrc, vmPrepClip, vmWorld, vmTrack, vmUntrack, VME, vmKeep, vmSrcAt, thLib, VMThumbs, thInfo, tsMake, tsRender, tsLoadAll, tsExport, tsCutOut, tsLib, TS_TPLS };
   window.__lang = { viewOf, saveExpl, saveTileRec, uploadBlob, set: l => { REC_LANG = l; }, get: () => REC_LANG, store };
   root.innerHTML = "";
-  render(html`<${App}/>`, root);
-  boot();
+  const duoLink = readDuoLink();
+  if (duoLink) render(html`<${ReactGuest} link=${duoLink}/>`, root);
+  else { render(html`<${App}/>`, root); boot(); }
 })();
 </script>
 </body>
