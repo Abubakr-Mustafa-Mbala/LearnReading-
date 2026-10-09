@@ -12,7 +12,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Andika:wght@400;700&display=swap">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&family=Archivo+Black&family=Bangers&family=Bebas+Neue&family=Luckiest+Guy&family=Merriweather:wght@900&family=Montserrat:ital,wght@0,900;1,900&family=Oswald:wght@700&family=Permanent+Marker&family=Playfair+Display:ital,wght@0,900;1,900&family=Poppins:wght@600;700;800&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&family=Archivo+Black&family=Bangers&family=Marcellus&family=Bebas+Neue&family=Luckiest+Guy&family=Merriweather:wght@900&family=Montserrat:ital,wght@0,900;1,900&family=Oswald:wght@700&family=Permanent+Marker&family=Playfair+Display:ital,wght@0,900;1,900&family=Poppins:wght@600;700;800&display=swap">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@900&family=Barlow+Condensed:ital,wght@0,800;1,800&family=Teko:wght@700&family=Russo+One&family=Black+Ops+One&family=Bungee&family=Righteous&family=Caveat+Brush&family=Rubik+Mono+One&family=DM+Serif+Display&family=Abril+Fatface&family=Lilita+One&family=Titan+One&family=Fredoka:wght@700&family=Kanit:ital,wght@0,900;1,900&family=Bowlby+One&family=Pacifico&family=Cinzel:wght@900&family=Orbitron:wght@900&family=Staatliches&family=Alfa+Slab+One&family=Space+Grotesk:wght@700&display=swap">
 <style>
 :root{
@@ -426,12 +426,35 @@ img{max-width:100%}
 .duotag{position:absolute;left:10px;top:10px;z-index:3;background:rgba(0,0,0,.6);color:#fff;border-radius:999px;padding:5px 10px;font:700 12px var(--font)}
 .duolink{background:#F2F4F7;border-radius:10px;padding:10px;font:600 12px monospace;word-break:break-all;max-height:70px;overflow:auto}
 .duost{font-weight:700;color:#8A6D2B}.duost.ok{color:#2E7D5B}
+.vmstep{display:flex;flex-direction:column;gap:8px;margin:4px 0 14px}.vmstep>b{font:800 15px var(--font)}
+.vmlookcards{display:grid;grid-template-columns:repeat(auto-fill,minmax(96px,1fr));gap:8px}
+.vmlookcard{position:relative;height:96px;border-radius:14px;border:3px solid transparent;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;cursor:pointer;color:#fff;overflow:hidden}
+.vmlookcard.on{border-color:#1E6BFF;box-shadow:0 0 0 2px #fff inset}.vmlookcard .lk1{font-size:30px;line-height:1}.vmlookcard .lk2{width:40%;height:5px;border-radius:3px}.vmlookcard small{font:700 11px var(--font);color:#fff;text-shadow:0 1px 3px #000}
+.swatch.big{width:38px;height:38px}
+.vmcapcards{display:grid;grid-template-columns:repeat(auto-fill,minmax(120px,1fr));gap:8px}
+.vmcapcard{background:#14171C;color:#fff;border:3px solid transparent;border-radius:14px;padding:12px 8px;display:flex;flex-direction:column;align-items:center;gap:4px;cursor:pointer}
+.vmcapcard span{font:900 17px var(--font);text-shadow:0 0 0 #000}.vmcapcard.pop span,.vmcapcard.word span{-webkit-text-stroke:1px #000}.vmcapcard.word span{color:var(--acc)}.vmcapcard.hl i{font-style:normal;background:var(--acc);color:#111;border-radius:6px;padding:0 4px}.vmcapcard.box span{background:rgba(0,0,0,.7);border:1px solid #444;border-radius:6px;padding:2px 8px;font-weight:600;font-size:14px}
+.vmcapcard small{color:#aab;font-size:11px}.vmcapcard.on{border-color:#1E6BFF}
+.vmrow2{display:grid;grid-template-columns:1fr 1fr;gap:8px}.vmrow2 input{min-width:0}
+.vmmore{border-top:1px solid var(--line);padding-top:10px;margin-top:6px}.vmmore summary{font:700 14px var(--font);cursor:pointer;padding:6px 0;color:#1E4FA3}
+.tierctl{display:flex;flex-direction:column;gap:6px;background:#111318;border-radius:14px;padding:8px;color:#fff}.tierctl small{color:#9aa;text-align:center}
+.tierpick{display:flex;gap:6px;overflow-x:auto}.tierthumb{position:relative;flex:0 0 auto;width:62px;height:62px;border-radius:10px;border:3px solid transparent;overflow:hidden;padding:0;background:#2B303A;color:#fff;font:700 11px var(--font)}
+.tierthumb img{width:100%;height:100%;object-fit:cover}.tierthumb.on{border-color:#FFD400}.tierthumb.done{opacity:.45}.tierthumb b{position:absolute;right:2px;bottom:2px;background:#000;border-radius:6px;padding:0 5px;font-size:12px}
+.tierbtns{display:flex;gap:6px}.tierbtns button{flex:1;height:48px;border:0;border-radius:10px;font:900 22px var(--font);color:#111}.tierbtns button:disabled{opacity:.35}.tierbtns .tierundo{flex:0 0 48px;background:#2B303A;color:#fff}
+.tierents{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:6px;max-height:40vh;overflow:auto}.tierent{display:flex;align-items:center;gap:6px;background:#F2F4F7;border-radius:10px;padding:4px}.tierent img,.tierent>span{width:44px;height:44px;object-fit:cover;border-radius:8px;flex:0 0 auto;display:grid;place-items:center;background:#ddd;font-size:10px;overflow:hidden}.tierent input{min-width:0;flex:1}
+.tieradd{display:flex;gap:4px;flex:1}.tieradd input{flex:1;min-width:0}
+.pcphoto{width:84px;height:84px;border-radius:50%;border:2px dashed #aaa;background:#f5f5f5;overflow:hidden;padding:0;flex:0 0 auto}.pcphoto img{width:100%;height:100%;object-fit:cover}
+.pcrow{display:flex;align-items:center;gap:8px}.pcic{width:32px;height:32px;border-radius:8px;color:#fff;display:grid;place-items:center;font:800 15px Arial,sans-serif;flex:0 0 auto}.pcrow input{flex:1;min-width:0}
+.vmreadbox{display:flex;flex-direction:column;gap:6px;border:1px solid var(--line);border-radius:12px;padding:10px}.vmreadbox small{color:#667}
 .vmcount{position:absolute;inset:0;z-index:5;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;background:rgba(0,0,0,.35);color:#fff;text-align:center;padding:20px}.vmcount b{font:900 140px/1 var(--font);text-shadow:0 6px 30px rgba(0,0,0,.6);animation:vmpop 1s ease-out infinite}.vmcount b.sm{font-size:60px;animation:none}.vmcount small{font:700 16px/1.35 var(--font);text-shadow:0 2px 8px rgba(0,0,0,.8)}.vmcount.go{background:rgba(227,38,46,.25)}.vmcount.go b{font-size:56px;color:#fff;animation:none}@keyframes vmpop{0%{transform:scale(1.25);opacity:.4}25%{transform:scale(1);opacity:1}100%{transform:scale(.92);opacity:.85}}
 .vmrectag{position:absolute;right:10px;top:10px;background:rgba(0,0,0,.6);color:#fff;font:700 14px var(--font);border-radius:999px;padding:5px 12px;z-index:2;display:flex;align-items:center;gap:6px;font-variant-numeric:tabular-nums}
 .vmchips{display:flex;flex-wrap:wrap;gap:6px;margin-top:4px}.vmchips.c{justify-content:center;margin:0 0 6px}
 .vml{display:flex;flex-direction:column;gap:3px;width:100%;max-width:560px;font:600 13px var(--font);color:var(--ink-2)}
 .vml input{font:400 15px var(--font);padding:8px 10px;border-radius:10px;border:1px solid var(--line);background:var(--paper);color:var(--ink)}
-.vmlogo{display:flex;align-items:center;gap:10px}.vmlogo img{width:48px;height:48px;object-fit:contain;border-radius:8px;background:var(--paper-2)}
+.vmlogo{display:flex;align-items:center;gap:10px}.vmlogo img{width:48px;height:48px;object-fit:contain;border-radius:8px;background:#3a4450}.vmlogo img.dk{background:#e9e4da}.vbggrid{display:grid;grid-template-columns:repeat(4,1fr);gap:6px}.vbgtile{display:flex;flex-direction:column;align-items:center;gap:2px;padding:8px 2px;border-radius:12px;border:2px solid transparent;background:var(--paper-2);color:inherit;font:inherit;font-size:12px;line-height:1.2;text-align:center;cursor:pointer}.vbgtile span{font-size:22px}.vbgtile.on{border-color:var(--acc,#E8590C);background:var(--paper)}.vbgpics{display:flex;flex-wrap:wrap;gap:8px}.vbgpic{position:relative;width:72px;height:96px;border-radius:10px;overflow:hidden;border:2px solid transparent}.vbgpic.on{border-color:var(--acc,#E8590C)}.vbgpic button{width:100%;height:100%;border:0;background:#333 center/cover;cursor:pointer}.vbgpic i{position:absolute;top:2px;right:2px;background:rgba(0,0,0,.6);color:#fff;border-radius:50%;width:20px;height:20px;font-style:normal;font-size:12px;display:flex;align-items:center;justify-content:center;cursor:pointer}.vbgpic.add{display:flex;flex-direction:column;align-items:center;justify-content:center;background:var(--paper-2);font-size:26px;cursor:pointer;border:2px dashed #999}.vbgpic.add small{font-size:11px}.vmcrow.on{outline:2px solid var(--acc,#E8590C)}.vmbehind{max-height:88vh;overflow:auto}
+.vmlogos{display:flex;flex-wrap:wrap;gap:8px;margin-top:6px}.vmlogot{position:relative;display:flex;align-items:center;justify-content:center;width:120px;height:64px;border-radius:12px;border:2px solid transparent;background:#2b333d;overflow:hidden;font:inherit;font-size:13px;color:#fff;cursor:pointer}.vmlogot.on{border-color:var(--acc,#E8590C);box-shadow:0 0 0 2px rgba(232,89,12,.25)}.vmlogot button{width:100%;height:100%;border:0;background:none;padding:6px;cursor:pointer}.vmlogot img{width:100%;height:100%;object-fit:contain}.vmlogot i{position:absolute;top:2px;right:2px;width:20px;height:20px;border-radius:50%;background:rgba(0,0,0,.65);color:#fff;font-style:normal;font-size:11px;display:flex;align-items:center;justify-content:center;cursor:pointer}.vmlogot.none,.vmlogot.add{background:var(--paper-2);color:inherit;border:2px dashed #9aa}.vmlogot.none.on{border-style:solid}
+.vmpostprev{position:relative;max-height:46vh;overflow:auto;border-radius:12px;background:#111}.vmpostprev img{display:block;width:100%}.vmpostprev svg{position:absolute;inset:0;width:100%;height:100%}.vmpostprev rect{fill:rgba(255,213,74,.35);stroke:rgba(255,170,0,.8);stroke-width:1}.vmpost{max-height:90vh;overflow:auto}
+.ccdot{display:inline-block;width:12px;height:12px;border-radius:50%;margin-right:5px;vertical-align:-1px;box-shadow:0 0 0 1px rgba(255,255,255,.5)}.vmlogoopts{display:flex;flex-direction:column;gap:8px;margin-top:6px}
 .vmic{font-size:24px;line-height:1}
 .help.warn{color:var(--rec)}
 .vmform{align-items:stretch}.vmform .vml,.vmform .revopts{align-self:center}
@@ -9378,14 +9401,14 @@ notify pgrst, 'reload schema';
     serif: { name: "Classic", css: "Merriweather", w: 900 },
     mont: { name: "Montserrat", css: "Montserrat", w: 900 }, bebas: { name: "Bebas", css: "Bebas Neue", w: 400 }, archivo: { name: "Archivo", css: "Archivo Black", w: 400 },
     kanit: { name: "Kanit", css: "Kanit", w: 900 }, lilita: { name: "Lilita", css: "Lilita One", w: 400 }, fredoka: { name: "Fredoka", css: "Fredoka", w: 700 },
-    bangers: { name: "Comic", css: "Bangers", w: 400 }, lucky: { name: "Luckiest", css: "Luckiest Guy", w: 400 }, marker: { name: "Marker", css: "Permanent Marker", w: 400 },
+    bangers: { name: "Comic", css: "Bangers", w: 400 }, lucky: { name: "Luckiest", css: "Luckiest Guy", w: 400 }, marker: { name: "Marker", css: "Permanent Marker", w: 400 }, classic: { name: "Classic", css: "Marcellus", w: 400 },
   };
   const VM_CAPS = [["pop", "Pop (big, 3 words)"], ["hl", "Highlighted word"], ["box", "Box (a line at a time)"], ["word", "One word at a time"], ["off", "No subtitles"]];
   const VM_LAYS = [["cam", "🙂", "Me"], ["split", "⬒", "Split"], ["pip", "▣", "Corner"], ["thing", "🖼", "Only it"]];
   const VM_COLS = ["#FFE27A", "#FF5A5A", "#FFFFFF", "#5AC8FF", "#6EE07A"];
   const VM_TOOLS = [["point", "👉", "Point"], ["circle", "⭕", "Circle"], ["arrow", "➡️", "Arrow"], ["pen", "✏️", "Draw"], ["erase", "🧽", "Rub out"]];
   const VM_STYLE0 = { preset: "bold", look: "night", acc: "#FFD54A", font: "anton", caps: "pop", capPos: "low", showLay: "split", camShape: "round", trans: "zoom",
-    name: "", role: "", handle: "", logo: null, logoSize: "m", nameTag: true, intro: true, outro: true, bar: true, tagOn: true };
+    name: "", role: "", handle: "", logo: null, logoSize: "m", logoColor: "", logoCut: false, logoPos: "tl", logoSub: "", logoSocial: false, socials: ["x", "tg", "ig"], nameTag: true, intro: true, outro: true, bar: true, tagOn: true };
   const VM_PRESETS = {
     bold: { name: "Bold Shorts", look: "night", acc: "#FFD54A", font: "anton", caps: "pop", capPos: "low", showLay: "split", camShape: "round", trans: "zoom", bar: true },
     news: { name: "News desk", look: "news", acc: "#E53935", font: "poppins", caps: "box", capPos: "low", showLay: "pip", camShape: "square", trans: "slide", bar: false },
@@ -9406,7 +9429,92 @@ notify pgrst, 'reload schema';
   function vmFit(c, st, text, maxW, size, w) { let s = size; for (; s > 12; s -= 2) { c.font = vmFont(st, s, w); if (c.measureText(text).width <= maxW) break; } c.font = vmFont(st, s, w); return s; }
   async function vmFonts(st) { try { const f = VM_FONTS[st.font] || VM_FONTS.poppins, f2 = VM_FONTS[st.capFont] || f; await Promise.race([Promise.all([document.fonts.load(f.w + " 40px \"" + f.css + "\""), document.fonts.load(f2.w + " 40px \"" + f2.css + "\""), document.fonts.load("700 40px Andika")]), new Promise(r => setTimeout(r, 4000))]); } catch (e) {} }
   const vmLogos = new Map();
-  function vmLogo(st) { if (!st.logo) return null; if (!vmLogos.has(st.logo)) { const im = new Image(); im.src = st.logo; vmLogos.set(st.logo, im); } const im = vmLogos.get(st.logo); return im.complete && im.naturalWidth ? im : null; }
+  function vmLogoRaw(st) { if (!st.logo) return null; if (!vmLogos.has(st.logo)) { const im = new Image(); im.src = st.logo; vmLogos.set(st.logo, im); } const im = vmLogos.get(st.logo); return im.complete && im.naturalWidth ? im : null; }
+  // your logo in any colour: its plain background taken away, then painted one colour (orange → black, blue, white…)
+  const vmLogoFx = new Map();
+  function vmLogoBg(im) {
+    // the colour around the edge, if the logo sits on a plain, solid background (white paper, black, a colour)
+    const [w, h] = vmSize(im), k = Math.min(1, 160 / Math.max(w, h)), cv = document.createElement("canvas"); cv.width = Math.max(1, Math.round(w * k)); cv.height = Math.max(1, Math.round(h * k));
+    const x = cv.getContext("2d", { willReadFrequently: true }); x.drawImage(im, 0, 0, cv.width, cv.height); const d = x.getImageData(0, 0, cv.width, cv.height).data, px = [];
+    for (let i = 0; i < cv.width; i++) { px.push(i, (cv.height - 1) * cv.width + i); } for (let j = 0; j < cv.height; j++) { px.push(j * cv.width, j * cv.width + cv.width - 1); }
+    let opaque = 0; const r = [], g = [], b = []; for (const p of px) { if (d[p * 4 + 3] > 240) { opaque++; r.push(d[p * 4]); g.push(d[p * 4 + 1]); b.push(d[p * 4 + 2]); } }
+    if (opaque < px.length * 0.85) return null;
+    const med = a => a.sort((m, n) => m - n)[a.length >> 1], bg = [med(r), med(g), med(b)];
+    let near = 0; for (let i = 0; i < r.length; i++) if (Math.abs(r[i] - bg[0]) + Math.abs(g[i] - bg[1]) + Math.abs(b[i] - bg[2]) < 60) near++;
+    return near > r.length * 0.8 ? bg : null;
+  }
+  function vmLogoPaint(im, col, cut, solid) {
+    const [w, h] = vmSize(im), cv = document.createElement("canvas"); cv.width = w; cv.height = h; const x = cv.getContext("2d", { willReadFrequently: true }); x.drawImage(im, 0, 0);
+    const bg = cut ? vmLogoBg(im) : null;
+    if (bg) {
+      const D = x.getImageData(0, 0, w, h), d = D.data;
+      for (let i = 0; i < d.length; i += 4) {
+        const dr = d[i] - bg[0], dg = d[i + 1] - bg[1], db = d[i + 2] - bg[2], dist = Math.sqrt(dr * dr + dg * dg + db * db);
+        const a = Math.max(0, Math.min(1, (dist - 28) / 90));
+        if (a <= 0) { d[i + 3] = 0; continue; }
+        if (a < 1) { for (let c = 0; c < 3; c++) d[i + c] = Math.max(0, Math.min(255, (d[i + c] - bg[c] * (1 - a)) / a)); }   // the soft edge keeps no halo of the old background
+        d[i + 3] = Math.round(d[i + 3] * a);
+      }
+      x.putImageData(D, 0, 0);
+    }
+    if (col && solid) { x.globalCompositeOperation = "source-in"; x.fillStyle = col; x.fillRect(0, 0, w, h); }
+    else if (col) vmLogoTint(x, w, h, col);
+    return cv;
+  }
+  // a new colour that keeps the logo's own light and shine (its bright lines, glow and gold edges stay; only the colour changes)
+  function vmLogoTint(x, w, h, col) {
+    const n = parseInt(col.slice(1), 16), tr = (n >> 16) / 255, tg = ((n >> 8) & 255) / 255, tb = (n & 255) / 255;
+    const hsl = (r, g, b) => { const mx = Math.max(r, g, b), mn = Math.min(r, g, b), l = (mx + mn) / 2; if (mx === mn) return [0, 0, l]; const d = mx - mn, s2 = l > 0.5 ? d / (2 - mx - mn) : d / (mx + mn); const hh = mx === r ? (g - b) / d + (g < b ? 6 : 0) : mx === g ? (b - r) / d + 2 : (r - g) / d + 4; return [hh / 6, s2, l]; };
+    const h2r = (p2, q2, t2) => { if (t2 < 0) t2 += 1; if (t2 > 1) t2 -= 1; return t2 < 1 / 6 ? p2 + (q2 - p2) * 6 * t2 : t2 < 1 / 2 ? q2 : t2 < 2 / 3 ? p2 + (q2 - p2) * (2 / 3 - t2) * 6 : p2; };
+    const [th, ts, tl] = hsl(tr, tg, tb), D = x.getImageData(0, 0, w, h), d = D.data;
+    for (let i = 0; i < d.length; i += 4) {
+      if (!d[i + 3]) continue;
+      const [, s0, l0] = hsl(d[i] / 255, d[i + 1] / 255, d[i + 2] / 255); let S2, L2;
+      if (ts < 0.1) { S2 = 0; L2 = tl > 0.6 ? 0.74 + 0.26 * l0 : tl < 0.3 ? 0.04 + 0.32 * l0 : tl * 0.6 + l0 * 0.4; }   // white, black, grey: shaded, no colour
+      else { S2 = Math.min(1, ts * (0.72 + 0.28 * s0)); L2 = Math.min(0.9, tl * (0.5 + 0.78 * l0) + (l0 > 0.85 ? (l0 - 0.85) * 1.2 : 0)); }   // every part takes the colour; bright parts stay brighter, so the shine stays
+      let r, g, b; if (!S2) r = g = b = L2; else { const q2 = L2 < 0.5 ? L2 * (1 + S2) : L2 + S2 - L2 * S2, p2 = 2 * L2 - q2; r = h2r(p2, q2, th + 1 / 3); g = h2r(p2, q2, th); b = h2r(p2, q2, th - 1 / 3); }
+      d[i] = r * 255; d[i + 1] = g * 255; d[i + 2] = b * 255;
+    }
+    x.putImageData(D, 0, 0);
+  }
+  // this video's own logo choice (which logo, or none; its colour; where), on top of My style
+  function vmStyleFor(st, proj) {
+    let o = st; const L0 = vmLogoList(st);
+    const b = proj && proj.brand; if (!b) return o; o = Object.assign({}, st);
+    if (b.logo === "none") o.logo = null; else if (b.logo) { const L = L0.find(x => x.id === b.logo); if (L) { o.logo = L.src; o.logoCut = !!L.cut; } }
+    if (b.color != null) o.logoColor = b.color; if (b.solid != null) o.logoSolid = b.solid; if (b.pos) o.logoPos = b.pos;
+    return o;
+  }
+  // your logos (you can keep a few, like a calligraphy one and a neon one); the one in use is st.logo
+  const vmLogoList = st => (st.logos && st.logos.length ? st.logos : st.logo ? [{ id: "l1", src: st.logo, cut: !!st.logoCut }] : []);
+  function vmLogo(st, over) {
+    const im = vmLogoRaw(st); if (!im) return null;
+    const col = over || st.logoColor || "", cut = !!st.logoCut, solid = !!st.logoSolid; if (!col && !cut) return im;
+    let m = vmLogoFx.get(st.logo); if (!m) { if (vmLogoFx.size > 5) vmLogoFx.clear(); m = {}; vmLogoFx.set(st.logo, m); }
+    const key = col + "|" + cut + "|" + solid; return m[key] || (m[key] = vmLogoPaint(im, col, cut, solid));
+  }
+  // over the opening and the ending: if your logo colour would disappear into the background, it shows in the text colour instead
+  const vmLum = hex => { const n = parseInt(String(hex || "#000").slice(1), 16); return (0.299 * (n >> 16) + 0.587 * ((n >> 8) & 255) + 0.114 * (n & 255)) / 255; };
+  const vmLogoOn = (st, L) => (st.logoColor && Math.abs(vmLum(st.logoColor) - vmLum(L.bg[0])) < 0.18 ? vmLogo(st, L.ink) : vmLogo(st));
+  // the logo as a picture file, in your chosen colour (for thumbnails)
+  async function vmLogoBlob(st) {
+    if (!st.logoColor && !st.logoCut) return fetch(st.logo).then(r => r.blob());
+    const im = await new Promise((res, rej) => { const x = new Image(); x.onload = () => res(x); x.onerror = rej; x.src = st.logo; });
+    const cv = vmLogoPaint(im, st.logoColor || "", !!st.logoCut, !!st.logoSolid); return new Promise(r => cv.toBlob(r, "image/png"));
+  }
+  // the little icons in the social row under your logo
+  const VM_SOCIALS = [["x", "X"], ["tg", "Telegram"], ["ig", "Instagram"], ["tt", "TikTok"], ["yt", "YouTube"], ["fb", "Facebook"], ["wa", "WhatsApp"]];
+  function vmSocIcon(c, k, x, y, s, col) {
+    c.save(); c.translate(x, y); c.scale(s / 24, s / 24); c.fillStyle = col; c.strokeStyle = col; c.lineCap = "round"; c.lineJoin = "round";
+    if (k === "x") { c.lineWidth = 2.6; c.beginPath(); c.moveTo(4, 3); c.lineTo(20, 21); c.stroke(); c.lineWidth = 1.6; c.beginPath(); c.moveTo(19.5, 3); c.lineTo(4.5, 21); c.stroke(); c.lineWidth = 1.4; c.strokeRect(2.2, 2.2, 0.1, 0.1); }
+    else if (k === "tg") { c.beginPath(); c.moveTo(2, 11.2); c.lineTo(21.5, 3.5); c.lineTo(18.2, 20.5); c.lineTo(12.6, 16.2); c.lineTo(9.6, 19.2); c.lineTo(9.4, 14.6); c.lineTo(17.6, 7.2); c.lineTo(7.6, 13.4); c.closePath(); c.fill(); }
+    else if (k === "ig") { c.lineWidth = 2.2; crRR(c, 3, 3, 18, 18, 5.5); c.stroke(); c.beginPath(); c.arc(12, 12, 4.3, 0, 7); c.stroke(); c.beginPath(); c.arc(17.3, 6.7, 1.3, 0, 7); c.fill(); }
+    else if (k === "tt") { c.lineWidth = 3; c.beginPath(); c.moveTo(13, 3); c.lineTo(13, 16); c.stroke(); c.beginPath(); c.arc(9, 16.5, 4, 0, 7); c.lineWidth = 2.6; c.stroke(); c.beginPath(); c.moveTo(13, 3.5); c.quadraticCurveTo(14.5, 8, 19.5, 8.2); c.stroke(); }
+    else if (k === "yt") { crRR(c, 1.5, 5, 21, 14, 4.5); c.fill(); c.globalCompositeOperation = "destination-out"; c.beginPath(); c.moveTo(10, 8.8); c.lineTo(15.6, 12); c.lineTo(10, 15.2); c.closePath(); c.fill(); }
+    else if (k === "fb") { c.beginPath(); c.arc(12, 12, 10, 0, 7); c.fill(); c.globalCompositeOperation = "destination-out"; c.font = "900 17px Arial, sans-serif"; c.textAlign = "center"; c.textBaseline = "alphabetic"; c.fillText("f", 13, 20.5); }
+    else if (k === "wa") { c.lineWidth = 2.1; c.beginPath(); c.arc(12, 11.6, 8.6, 0.75 * Math.PI, 2.62 * Math.PI); c.stroke(); c.beginPath(); c.moveTo(6.2, 17.6); c.lineTo(3.4, 20.8); c.lineTo(7.6, 19.6); c.stroke(); c.lineWidth = 2.4; c.beginPath(); c.moveTo(9, 8.5); c.quadraticCurveTo(9.5, 14.3, 15.2, 15); c.stroke(); }
+    c.restore();
+  }
   const vmGeo = fmt => { const F = VM_FMT[fmt] || VM_FMT.tall; return { fmt, W: F.W, H: F.H, tall: fmt !== "wide" }; };
   const vmSize = s => (!s ? [0, 0] : s.videoWidth ? [s.videoWidth, s.videoHeight] : s.naturalWidth ? [s.naturalWidth, s.naturalHeight] : [s.width || 0, s.height || 0]);
 
@@ -9615,6 +9723,183 @@ notify pgrst, 'reload schema';
     if (!vmFlags.has(a2)) { const c = VMW.byA2.get(a2); if (!c) return null; const im = new Image(); im.src = "data:image/svg+xml;charset=utf-8," + encodeURIComponent(c.svg.replace(/<svg /, '<svg width="640" height="480" ')); vmFlags.set(a2, im); }
     const im = vmFlags.get(a2); return im.complete && im.naturalWidth ? im : null;
   }
+  /* ===================== Behind me: the room behind you taken away, something else put there =====================
+     A small model finds you in each camera picture, right on the phone (nothing is sent anywhere).
+     The outline of you and the picture of you always come from the SAME moment, so moving fast never opens a gap
+     showing the room. The edge is softened a little so it blends, and pulled in a touch so no shop shows around you. */
+  const VM_MP = "https://cdn.jsdelivr.net/npm/@mediapipe/selfie_segmentation@0.1.1675465747/";
+  let vmSegP = null;
+  function vmSeg() {
+    if (vmSegP) return vmSegP;
+    vmSegP = (async () => {
+      if (!window.SelfieSegmentation) await new Promise((res, rej) => { const sc = document.createElement("script"); sc.src = VM_MP + "selfie_segmentation.js"; sc.crossOrigin = "anonymous"; sc.onload = res; sc.onerror = () => rej(new Error("load")); document.head.appendChild(sc); });
+      const m = new window.SelfieSegmentation({ locateFile: f => VM_MP + f });
+      m.setOptions({ modelSelection: 0, selfieMode: false });
+      let cb = null; m.onResults(r => { const f = cb; cb = null; if (f) f(r); });
+      await m.initialize();
+      let chain = Promise.resolve();
+      // run(picture, draw): draw(results) is called while the results are still valid (they only live inside the callback)
+      const run = (img, draw) => { const p = chain.then(() => new Promise((res, rej) => { cb = r => { try { res(draw(r)); } catch (e) { rej(e); } }; m.send({ image: img }).catch(e => { cb = null; rej(e); }); })); chain = p.catch(() => {}); return p; };
+      return { run };
+    })();
+    vmSegP.catch(() => { vmSegP = null; });
+    return vmSegP;
+  }
+  const VM_VBGS = [["off", "🏪", "My real room"], ["blur", "🌫", "Blur it"], ["black", "⬛", "Black"], ["color", "🎨", "A colour"], ["paper", "📰", "Newspaper"], ["studio", "💡", "Studio"], ["flag", "🏳️", "A flag"], ["pic", "🖼", "My picture"]];
+  const vmVbgOn = v => !!(v && v.k && v.k !== "off");
+  const vmVbgName = v => (!vmVbgOn(v) ? "My real room" : v.k === "flag" && VMW && VMW.byA2.get(v.a2) ? VMW.byA2.get(v.a2).name + " flag" : (VM_VBGS.find(x => x[0] === v.k) || [0, 0, "Background"])[2]);
+  // your saved background pictures (a newspaper, a studio photo…), kept on the phone for every video
+  const vmVbgLib = {
+    async list() { const all = await vmDb.all().catch(() => []); const r = all.find(x => x.id === "__vbgs"); return r ? r.list || [] : []; },
+    async add(blob) { const l = await this.list(), id = "bg" + uid(); l.unshift({ id, blob }); await vmDb.put({ id: "__vbgs", list: l.slice(0, 12) }); return id; },
+    async del(id) { const l = (await this.list()).filter(x => x.id !== id); await vmDb.put({ id: "__vbgs", list: l }); },
+  };
+  const vmVbgPics = new Map();
+  async function vmVbgPic(id) {
+    if (!id) return null; if (vmVbgPics.has(id)) return vmVbgPics.get(id);
+    const e = (await vmVbgLib.list()).find(x => x.id === id); let bm = null;
+    if (e && e.blob) { try { const b0 = await createImageBitmap(e.blob), k = Math.min(1, 1600 / Math.max(b0.width, b0.height)); bm = k < 1 ? await createImageBitmap(e.blob, { resizeWidth: Math.round(b0.width * k), resizeHeight: Math.round(b0.height * k), resizeQuality: "high" }) : b0; } catch (x) {} }
+    vmVbgPics.set(id, bm); return bm;
+  }
+  // get the pictures a background needs ready before it's drawn (flags need the world list)
+  async function vmVbgPrep(v) {
+    if (!vmVbgOn(v)) return;
+    if (v.k === "pic") await vmVbgPic(v.ref);
+    if (v.k === "flag") { await vmWorld().catch(() => {}); vmFlag(v.a2); const im = vmFlags.get(v.a2); if (im) { try { await im.decode(); } catch (e) {} } }
+  }
+  // a newspaper page, made right here (no one else's paper)
+  let vmPaperCv = null;
+  function vmPaper() {
+    if (vmPaperCv) return vmPaperCv;
+    const W = 1200, H = 1600, cv = document.createElement("canvas"); cv.width = W; cv.height = H; const c = cv.getContext("2d");
+    let seed = 7; const rnd = () => ((seed = (seed * 16807) % 2147483647) / 2147483647);
+    const g = c.createLinearGradient(0, 0, W, H); g.addColorStop(0, "#EFE9DC"); g.addColorStop(1, "#DCD3C0"); c.fillStyle = g; c.fillRect(0, 0, W, H);
+    for (let i = 0; i < 2600; i++) { c.fillStyle = "rgba(90,70,40," + (rnd() * 0.05).toFixed(3) + ")"; c.fillRect(rnd() * W, rnd() * H, 2, 2); }
+    c.fillStyle = "#1B1B1B"; c.textAlign = "center"; c.textBaseline = "alphabetic";
+    c.font = "900 118px Georgia, 'Times New Roman', serif"; c.fillText("THE DAILY READER", W / 2, 150);
+    c.fillRect(40, 178, W - 80, 5); c.fillRect(40, 190, W - 80, 2);
+    c.font = "600 24px Georgia, serif"; c.fillText("EDITION  ·  NEWS  ·  STORIES  ·  THE WORLD TODAY", W / 2, 225); c.fillRect(40, 244, W - 80, 2);
+    c.textAlign = "left"; c.font = "900 76px Georgia, serif"; c.fillText("Big news from around", 50, 330); c.fillText("the world today", 50, 410);
+    const words = "the of and to in is that for it as was with on by at this from are be have an or not they which you one all were we when there can more if out so said what up its about into than them only other new some could time these two may then do first any my now such like our over man me even most made after also did many before must through back years where much your way well down should because each just those people how too little state good very make world still own see men work long get here between both life being under never day same another know while last might us great old year off come since against go came right used take three".split(" ");
+    const col = (x, y, w, h) => { c.font = "400 17px Georgia, serif"; c.fillStyle = "#2A2A2A"; for (let yy = y; yy < y + h; yy += 22) { let line = "", xx = 0; while (true) { const wd = words[Math.floor(rnd() * words.length)] + " "; const ww = c.measureText(wd).width; if (xx + ww > w) break; line += wd; xx += ww; } c.fillText(line, x, yy); } };
+    // a photo box, columns of small print, a second headline
+    c.fillStyle = "#8C8577"; c.fillRect(50, 450, 660, 430); c.fillStyle = "#6F695D"; c.beginPath(); c.moveTo(50, 880); c.lineTo(260, 640); c.lineTo(420, 800); c.lineTo(540, 690); c.lineTo(710, 880); c.closePath(); c.fill(); c.beginPath(); c.arc(600, 540, 46, 0, 7); c.fillStyle = "#B4AD9F"; c.fill();
+    col(740, 470, 410, 420); col(50, 920, 340, 640); col(410, 920, 340, 640);
+    c.fillStyle = "#1B1B1B"; c.font = "900 44px Georgia, serif"; c.fillText("Reading changes lives", 780, 960); c.fillRect(780, 980, 360, 3); col(780, 1020, 370, 540);
+    c.fillRect(395, 920, 2, 640); c.fillRect(765, 450, 2, 1110);
+    vmPaperCv = cv; return cv;
+  }
+  function vmVbgCover(c, im, w, h, mirror, wave, top) {
+    const [iw, ih] = vmSize(im); if (!iw) return false; const k = Math.max(w / iw, h / ih), dw = iw * k, dh = ih * k;
+    c.save(); if (mirror) { c.translate(w, 0); c.scale(-1, 1); }
+    if (wave == null) c.drawImage(im, (w - dw) / 2, top ? 0 : (h - dh) / 2, dw, dh);
+    else {   // a flag gently moving in the wind, filling the whole picture
+      const N = 48, sw = iw / N, x0 = (w - dw) / 2, y0 = (h - dh) / 2, dsw = dw / N;
+      for (let i = 0; i < N; i++) { const u = i / N, ph = wave * 1.6 - u * 5.5, dy = Math.sin(ph) * dh * 0.018, sh = Math.cos(ph);
+        c.drawImage(im, i * sw, 0, sw, ih, x0 + i * dsw - 0.5, y0 + dy - dh * 0.02, dsw + 1, dh * 1.04);
+        c.fillStyle = sh < 0 ? "rgba(0,0,0," + (-sh * 0.16).toFixed(3) + ")" : "rgba(255,255,255," + (sh * 0.06).toFixed(3) + ")"; c.fillRect(x0 + i * dsw - 0.5, 0, dsw + 1, h); }
+    }
+    c.restore(); return true;
+  }
+  // a soft blur made by shrinking and growing the picture (works on every phone)
+  const vmVbgTmp = {};
+  function vmSoftBlur(img, w, h) {
+    const a = vmVbgTmp.a || (vmVbgTmp.a = document.createElement("canvas")), b = vmVbgTmp.b || (vmVbgTmp.b = document.createElement("canvas"));
+    a.width = Math.max(2, Math.round(w / 6)); a.height = Math.max(2, Math.round(h / 6)); b.width = Math.max(2, Math.round(w / 24)); b.height = Math.max(2, Math.round(h / 24));
+    const ax = a.getContext("2d"), bx = b.getContext("2d"); ax.imageSmoothingQuality = bx.imageSmoothingQuality = "high";
+    ax.drawImage(img, 0, 0, a.width, a.height); bx.drawImage(a, 0, 0, b.width, b.height); ax.clearRect(0, 0, a.width, a.height); ax.drawImage(b, 0, 0, a.width, a.height); return a;
+  }
+  function vmVbgPaint(c, v, w, h, img, mirror, t) {
+    if (v.k === "black") { c.fillStyle = "#000"; c.fillRect(0, 0, w, h); return; }
+    if (v.k === "color") { const col = v.c || "#1E6BFF", g = c.createRadialGradient(w * 0.5, h * 0.35, 10, w * 0.5, h * 0.5, Math.max(w, h) * 0.75); g.addColorStop(0, col); g.addColorStop(1, vmDarker(col)); c.fillStyle = g; c.fillRect(0, 0, w, h); return; }
+    if (v.k === "studio") { const g = c.createRadialGradient(w * 0.5, h * 0.3, 10, w * 0.5, h * 0.45, Math.max(w, h) * 0.8); g.addColorStop(0, "#3B4757"); g.addColorStop(0.55, "#18202B"); g.addColorStop(1, "#06090D"); c.fillStyle = g; c.fillRect(0, 0, w, h); return; }
+    if (v.k === "blur") { const b = vmVbgTmp.room || vmSoftBlur(img, w, h); c.save(); c.imageSmoothingQuality = "high"; c.drawImage(b, -w * 0.03, -h * 0.03, w * 1.06, h * 1.06); c.fillStyle = "rgba(0,0,0,.12)"; c.fillRect(0, 0, w, h); c.restore(); return; }
+    if (v.k === "paper" && vmVbgCover(c, vmPaper(), w, h, mirror, null, true)) return;
+    if (v.k === "pic") { const p = vmVbgPics.get(v.ref); if (p && vmVbgCover(c, p, w, h, mirror)) return; }
+    if (v.k === "flag") { const f0 = vmFlag(v.a2), f = f0 && vmFlagRaster(f0, 960, Math.round(960 * (f0.naturalHeight || 480) / (f0.naturalWidth || 640))); if (f && vmVbgCover(c, f, w, h, mirror, t || 0)) { c.fillStyle = "rgba(0,0,0,.1)"; c.fillRect(0, 0, w, h); return; } }
+    c.fillStyle = "#000"; c.fillRect(0, 0, w, h);
+  }
+  // put you over the new background. r: the model's results (picture and outline of the same moment)
+  // box blur of a float picture (across, then down), radius R; out may be the same as tmp-free input
+  function vmBox(src, dst, tmp, mw, mh, R) {
+    const dv = 1 / (2 * R + 1);
+    for (let y = 0; y < mh; y++) { const o = y * mw; let sm = 0; for (let x = -R; x <= R; x++) sm += src[o + Math.min(mw - 1, Math.max(0, x))]; for (let x = 0; x < mw; x++) { tmp[o + x] = sm * dv; sm += src[o + Math.min(mw - 1, x + R + 1)] - src[o + Math.max(0, x - R)]; } }
+    for (let x = 0; x < mw; x++) { let sm = 0; for (let y = -R; y <= R; y++) sm += tmp[Math.min(mh - 1, Math.max(0, y)) * mw + x]; for (let y = 0; y < mh; y++) { dst[y * mw + x] = sm * dv; sm += tmp[Math.min(mh - 1, y + R + 1) * mw + x] - tmp[Math.max(0, y - R) * mw + x]; } }
+  }
+  const vmF32 = (k, n) => { let a = vmVbgTmp[k]; if (!a || a.length !== n) a = vmVbgTmp[k] = new Float32Array(n); return a; };
+  // put you over the new background. r: the model's results (picture and outline of the same moment).
+  // fine: the careful version for the finished video (the edge colours are cleaned of the room too)
+  function vmKeyDraw(r, out, v, mirror, t, fine) {
+    const img = r.image, mask = r.segmentationMask, [iw, ih] = vmSize(img); if (!iw) return null;
+    const k = Math.min(1, 1280 / Math.max(iw, ih)), w = Math.round(iw * k), h = Math.round(ih * k);
+    if (out.width !== w || out.height !== h) { out.width = w; out.height = h; }
+    const mw = Math.min(fine ? 640 : 400, w), mh = Math.max(32, Math.round(mw * h / w)), n = mw * mh;
+    const mk = vmVbgTmp.m || (vmVbgTmp.m = document.createElement("canvas")), gk = vmVbgTmp.g || (vmVbgTmp.g = document.createElement("canvas"));
+    if (mk.width !== mw || mk.height !== mh) { mk.width = mw; mk.height = mh; } if (gk.width !== mw || gk.height !== mh) { gk.width = mw; gk.height = mh; }
+    const mx = mk.getContext("2d", { willReadFrequently: true }), gx = gk.getContext("2d", { willReadFrequently: true });
+    mx.globalCompositeOperation = "copy"; mx.imageSmoothingEnabled = true; mx.imageSmoothingQuality = "high"; mx.drawImage(mask, 0, 0, mw, mh); mx.globalCompositeOperation = "source-over";
+    gx.globalCompositeOperation = "copy"; gx.drawImage(img, 0, 0, mw, mh); gx.globalCompositeOperation = "source-over";
+    const D = mx.getImageData(0, 0, mw, mh), d = D.data, G = gx.getImageData(0, 0, mw, mh).data;
+    const P = vmF32("P", n), I = vmF32("I", n), T = vmF32("T", n), mI = vmF32("mI", n), mP = vmF32("mP", n), II = vmF32("II", n), IP = vmF32("IP", n);
+    for (let i = 0, j = 0; j < n; i += 4, j++) { P[j] = (d[i + 3] < 255 ? d[i + 3] : d[i]) / 255; I[j] = (0.299 * G[i] + 0.587 * G[i + 1] + 0.114 * G[i + 2]) / 255; II[j] = I[j] * I[j]; IP[j] = I[j] * P[j]; }
+    // the outline follows the real edges of you in the picture (hair, fingers, shoulders), not just the model's rough guess
+    const R = Math.max(3, Math.round(mw / 80)), eps = 0.0025;
+    vmBox(I, mI, T, mw, mh, R); vmBox(P, mP, T, mw, mh, R); vmBox(II, II, T, mw, mh, R); vmBox(IP, IP, T, mw, mh, R);
+    for (let j = 0; j < n; j++) { const va = II[j] - mI[j] * mI[j], cv = IP[j] - mI[j] * mP[j], a = cv / (va + eps); II[j] = a; IP[j] = mP[j] - a * mI[j]; }
+    vmBox(II, II, T, mw, mh, R); vmBox(IP, IP, T, mw, mh, R);
+    for (let j = 0; j < n; j++) { const q = (II[j] * I[j] + IP[j]) * Math.min(1, mP[j] * 4), x = Math.max(0, Math.min(1, (q - 0.34) / 0.36)); P[j] = x * x * (3 - 2 * x); }
+    // no stray specks or thin slivers of the room: a bit has to belong to a solid part of you to stay
+    vmBox(P, mI, T, mw, mh, Math.max(3, Math.round(mw / 160)));
+    for (let i = 0, j = 0; j < n; i += 4, j++) { const a = Math.min(P[j], mI[j] * 1.5); P[j] = a; d[i] = d[i + 1] = d[i + 2] = 255; d[i + 3] = Math.round(a * 255); }
+    mx.putImageData(D, 0, 0);
+    const c = out.getContext("2d", { willReadFrequently: !!fine }); c.save(); c.globalCompositeOperation = "copy"; c.imageSmoothingEnabled = true; c.imageSmoothingQuality = "high"; c.drawImage(mk, 0, 0, w, h);
+    c.globalCompositeOperation = "source-in"; c.drawImage(img, 0, 0, w, h); c.restore();
+    if (fine) vmUnspill(c, w, h, G, P, mw, mh);
+    if (v && v.k === "blur") vmVbgTmp.room = vmRoomBlur(G, P, mw, mh);
+    if (v && v.k !== "cut") { c.save(); c.globalCompositeOperation = "destination-over"; vmVbgPaint(c, v, w, h, img, mirror, t); c.restore(); }
+    return out;
+  }
+  // your room, blurred, with you taken out of it first (so no glow of you smears around you)
+  function vmRoomBlur(G, A, mw, mh) {
+    const f = 4, sw = Math.max(2, Math.floor(mw / f)), sh = Math.max(2, Math.floor(mh / f)), n = sw * sh;
+    const R = vmF32("rR", n), Gg = vmF32("rG", n), B = vmF32("rB", n), W = vmF32("rW", n), T = vmF32("rT", n);
+    R.fill(0); Gg.fill(0); B.fill(0); W.fill(0);
+    for (let y = 0; y < sh * f; y++) for (let x = 0; x < sw * f; x++) { const j = y * mw + x, i = j * 4, o = 1 - A[j], k = Math.floor(y / f) * sw + Math.floor(x / f); W[k] += o; R[k] += G[i] * o; Gg[k] += G[i + 1] * o; B[k] += G[i + 2] * o; }
+    for (let p = 0; p < 2; p++) for (const X of [R, Gg, B, W]) vmBox(X, X, T, sw, sh, 5);
+    const cv = vmVbgTmp.rc || (vmVbgTmp.rc = document.createElement("canvas")); if (cv.width !== sw || cv.height !== sh) { cv.width = sw; cv.height = sh; }
+    const x2 = cv.getContext("2d"), D = x2.createImageData(sw, sh), d = D.data;
+    for (let k = 0; k < n; k++) { const ww = Math.max(1e-4, W[k]); d[k * 4] = R[k] / ww; d[k * 4 + 1] = Gg[k] / ww; d[k * 4 + 2] = B[k] / ww; d[k * 4 + 3] = 255; }
+    x2.putImageData(D, 0, 0); return cv;
+  }
+  // the see-through edge (hair, fingers moving) still holds a little of the room's colour: take it out, so no light or white rim shows
+  function vmUnspill(c, w, h, G, A, mw, mh) {
+    const n = mw * mh, Br = vmF32("Br", n), Bg = vmF32("Bg", n), Bb = vmF32("Bb", n), Wt = vmF32("Wt", n), T = vmF32("T", n), R = Math.max(4, Math.round(mw / 50));
+    for (let i = 0, j = 0; j < n; i += 4, j++) { const o = 1 - A[j]; Wt[j] = o; Br[j] = G[i] * o; Bg[j] = G[i + 1] * o; Bb[j] = G[i + 2] * o; }
+    vmBox(Wt, Wt, T, mw, mh, R); vmBox(Br, Br, T, mw, mh, R); vmBox(Bg, Bg, T, mw, mh, R); vmBox(Bb, Bb, T, mw, mh, R);
+    const D = c.getImageData(0, 0, w, h), d = D.data, sx = mw / w, sy = mh / h;
+    for (let y = 0; y < h; y++) {
+      const my = Math.min(mh - 1, Math.floor(y * sy)) * mw;
+      for (let x = 0, i = y * w * 4; x < w; x++, i += 4) {
+        const al = d[i + 3]; if (al < 6 || al > 249) continue;
+        const j = my + Math.min(mw - 1, Math.floor(x * sx)), ww = Wt[j]; if (ww < 0.02) continue;
+        const a = Math.max(0.3, al / 255), br = Br[j] / ww, bg = Bg[j] / ww, bb = Bb[j] / ww;
+        d[i] = Math.max(0, Math.min(255, (d[i] - (1 - a) * br) / a)); d[i + 1] = Math.max(0, Math.min(255, (d[i + 1] - (1 - a) * bg) / a)); d[i + 2] = Math.max(0, Math.min(255, (d[i + 2] - (1 - a) * bb) / a));
+      }
+    }
+    c.putImageData(D, 0, 0);
+  }
+  // while you record and watch: keeps up with the camera without ever holding the phone back
+  function vmKeyer() {
+    const K = { cv: document.createElement("canvas"), busy: false, ready: false, fail: false, key: "", cost: 30, doneAt: 0 };
+    // gentle: on a slow phone it works at most half the time, and lighter still while the countdown starts the recording
+    K.feed = (src, v, mirror, t, calm) => {
+      const kk = JSON.stringify(v) + mirror; if (kk !== K.key) { K.key = kk; K.ready = false; vmVbgPrep(v).catch(() => {}); }
+      const now = performance.now(); if (K.busy || K.fail || (K.ready && (calm ? K.cost > 60 || now - K.doneAt < 250 : now - K.doneAt < K.cost))) return; K.busy = true;
+      const t0 = performance.now();
+      vmSeg().then(seg => seg.run(src, r => { if (vmKeyDraw(r, K.cv, v, mirror, t) && K.key === kk) K.ready = true; })).catch(() => { K.fail = true; }).finally(() => { K.busy = false; K.doneAt = performance.now(); K.cost = K.cost * 0.7 + (K.doneAt - t0) * 0.3; });
+    };
+    return K;
+  }
   function vmMapPath(c, ct, tf, min) {
     c.beginPath();
     for (const p of ct.P) for (const r of p.rs) {
@@ -9790,11 +10075,15 @@ notify pgrst, 'reload schema';
   // the layout actually showing: N = just the title, T = just the thing, C = just you, split, pip
   function vmEff(s, cam) { if (!cam) return s.show ? "T" : "N"; if (!s.show || s.lay === "cam") return "C"; return s.lay === "thing" ? "T" : s.lay; }
   function vmAt(cues, t, cam) {
-    const s = { show: null, showT: -9, marks: [], pt: null, ban: null, banT: -9, play: null, lay: "cam", eff: cam ? "C" : "N", effT: -9, prev: null, vol: 1, bw: false, sfx: [] };
+    const s = { show: null, showT: -9, marks: [], pt: null, ban: null, banT: -9, play: null, lay: "cam", eff: cam ? "C" : "N", effT: -9, prev: null, vol: 1, bw: false, sfx: [], tiers: {} };
     for (const q of cues) {
       if (q.t > t) break;
       switch (q.k) {
         case "duo": s.duo = q.v; s.duoT = q.t; break;
+        case "vbg": s.vbg = q.v || { k: "off" }; break;
+        case "tierf": { const T2 = s.tiers[q.ref] || (s.tiers[q.ref] = { p: {}, f: null }); T2.f = { e: q.e, t: q.t }; break; }
+        case "tier": { const T2 = s.tiers[q.ref] || (s.tiers[q.ref] = { p: {}, f: null }); T2.p = Object.assign({}, T2.p, { [q.e]: { v: q.v, t: q.t } }); if (T2.f && T2.f.e === q.e) T2.f = null; break; }
+        case "tierx": { const T2 = s.tiers[q.ref]; if (T2) { T2.p = Object.assign({}, T2.p); delete T2.p[q.e]; } break; }
         case "show": s.show = q.ref; s.showT = q.t; s.marks = []; s.play = { on: false, at: q.at || 0, t: q.t }; break;
         case "hide": s.show = null; s.showT = q.t; s.marks = s.marks.filter(m => m.on !== "thing"); s.play = null; break;
         case "play": if (s.play) s.play = { on: true, at: q.at, t: q.t }; break;
@@ -9896,6 +10185,116 @@ notify pgrst, 'reload schema';
     const lw = Math.min(box.w * 0.35, 220) * k; c.fillStyle = L.acc; c.fillRect(box.x + box.w / 2 - lw / 2, y0 + (wr.lines.length - 0.5) * wr.lh + 12, lw, 8);
   }
   // the thing you're showing, in its box. Returns where it sits (your marks stick to it)
+  /* ===================== Tier lists (S to F) and person cards ===================== */
+  const VM_TIERS = [["S", "#FF7F7F"], ["A", "#FFBF7F"], ["B", "#FFDF7F"], ["C", "#FFFF7F"], ["D", "#BFFF7F"], ["F", "#7FBFFF"]];
+  const vmEntries = new Map();   // every tier entry by id, so its picture can be found
+  const vmCover = (c, im, x, y, w, h) => { const [sw, sh] = vmSize(im); if (!sw) return; const k = Math.max(w / sw, h / sh), cw = w / k, ch = h / k; c.drawImage(im, (sw - cw) / 2, (sh - ch) / 2, cw, ch, x, y, w, h); };
+  function vmTierState(s, id) { return (s.tiers && s.tiers[id]) || { p: {}, f: null }; }
+  function vmTier(c, F, it, box) {
+    const { G, L, st, t, s } = F, S = vmTierState(s, it.id), ents = it.entries || [];
+    c.fillStyle = "#101216"; c.fillRect(box.x, box.y, box.w, box.h);
+    const pad = Math.round(Math.min(box.w, box.h) * 0.025), titleH = it.title ? Math.max(40, box.h * 0.075) : 0;
+    if (it.title) { c.save(); c.fillStyle = "#fff"; c.textAlign = "center"; c.textBaseline = "middle"; const fs = vmFit(c, st, it.title.toUpperCase(), box.w - pad * 4, titleH * 0.7); c.font = vmFont(st, fs); c.fillText(it.title.toUpperCase(), box.x + box.w / 2, box.y + pad + titleH / 2); c.restore(); }
+    const top = box.y + pad + titleH, rowH = (box.y + box.h - pad - top) / VM_TIERS.length, lw = Math.min(rowH * 1.15, box.w * 0.18), slot = rowH - 8;
+    const placed = Object.keys(S.p).map(e => Object.assign({ e }, S.p[e])).sort((a, b) => a.t - b.t);
+    const center = [box.x + box.w / 2, box.y + box.h / 2], bigW = Math.min(box.w * 0.62, box.h * 0.46);
+    VM_TIERS.forEach(([lab, col], i) => {
+      const y = top + i * rowH;
+      c.fillStyle = col; c.fillRect(box.x + pad, y + 2, lw, rowH - 4);
+      c.fillStyle = "#111"; c.textAlign = "center"; c.textBaseline = "middle"; c.font = vmFont(st, rowH * 0.42, 900); c.fillText(lab, box.x + pad + lw / 2, y + rowH / 2);
+      c.fillStyle = "#1B1E24"; c.fillRect(box.x + pad + lw + 4, y + 2, box.w - pad * 2 - lw - 4, rowH - 4);
+      let x = box.x + pad + lw + 10;
+      for (const P of placed.filter(q => q.v === lab)) {
+        const e = ents.find(z => z.id === P.e); if (!e) continue;
+        const k = crEase((t - P.t) / 0.45), tx = x, ty = y + 4;
+        const fx = center[0] - bigW / 2, fy = center[1] - bigW / 2, X = crLerp(fx, tx, k), Y = crLerp(fy, ty, k), Wd = crLerp(bigW, slot, k);
+        c.save(); vmTierTile(c, F, e, X, Y, Wd, Wd); if (k >= 1) { c.strokeStyle = "rgba(255,255,255,.15)"; c.lineWidth = 2; c.strokeRect(X, Y, Wd, Wd); } c.restore();
+        x += slot + 6;
+      }
+    });
+    // what's being ranked right now: big in the middle
+    const f = S.f && !S.p[S.f.e] ? S.f : null, fe = f ? ents.find(z => z.id === f.e) : null;
+    if (fe) {
+      const k = crEase((t - f.t) / 0.3), w = bigW * (0.7 + 0.3 * k), X = center[0] - w / 2, Y = center[1] - w / 2;
+      c.save(); c.globalAlpha *= k; c.fillStyle = "rgba(0,0,0,.55)"; c.fillRect(box.x, box.y, box.w, box.h);
+      c.shadowColor = "rgba(0,0,0,.6)"; c.shadowBlur = 30; vmTierTile(c, F, fe, X, Y, w, w); c.shadowBlur = 0;
+      c.strokeStyle = L.acc; c.lineWidth = 6; c.strokeRect(X, Y, w, w);
+      if (fe.name) { c.fillStyle = "#fff"; c.textAlign = "center"; c.textBaseline = "top"; const fs = vmFit(c, st, fe.name, box.w - 40, Math.max(28, w * 0.13)); c.font = vmFont(st, fs); c.lineWidth = fs * 0.18; c.strokeStyle = "#000"; c.strokeText(fe.name, center[0], Y + w + 14); c.fillText(fe.name, center[0], Y + w + 14); }
+      c.restore();
+    }
+  }
+  function vmTierTile(c, F, e, x, y, w, h) {
+    const im = F.pic(e.id);
+    if (im) vmCover(c, im, x, y, w, h);
+    else { c.fillStyle = "#2B303A"; c.fillRect(x, y, w, h); c.fillStyle = "#fff"; c.textAlign = "center"; c.textBaseline = "middle"; const fs = vmFit(c, F.st, e.name || "?", w - 8, h * 0.28); c.font = vmFont(F.st, fs); c.fillText(e.name || "?", x + w / 2, y + h / 2); }
+  }
+  // a person card: photo, name, where they are, and their pages
+  const VM_SOC = [["ig", "Instagram", "#E1306C", "◎"], ["tt", "TikTok", "#111111", "♪"], ["yt", "YouTube", "#FF0000", "▶"], ["fb", "Facebook", "#1877F2", "f"], ["x", "X", "#000000", "X"], ["web", "Website", "#2E7D5B", "🌐"]];
+  function vmPerson(c, F, it, box, T) {
+    const { G, L, st } = F;
+    const g = c.createLinearGradient(box.x, box.y, box.x, box.y + box.h); g.addColorStop(0, "#151922"); g.addColorStop(1, "#07080B"); c.fillStyle = g; c.fillRect(box.x, box.y, box.w, box.h);
+    const wide = box.w > box.h * 1.2, ph = wide ? Math.min(box.h * 0.62, box.w * 0.34) : Math.min(box.w * 0.5, box.h * 0.3);
+    const px = wide ? box.x + box.w * 0.27 : box.x + box.w / 2, py = wide ? box.y + box.h * 0.48 : box.y + box.h * 0.27;
+    const k0 = crEase(T / 0.4), im = F.pic(it.id);
+    c.save(); c.globalAlpha *= k0; c.beginPath(); c.arc(px, py, ph / 2 * (0.85 + 0.15 * k0), 0, 7); c.closePath(); c.save(); c.clip();
+    if (im) vmCover(c, im, px - ph / 2, py - ph / 2, ph, ph); else { c.fillStyle = "#333"; c.fillRect(px - ph / 2, py - ph / 2, ph, ph); }
+    c.restore(); c.strokeStyle = L.acc; c.lineWidth = Math.max(6, ph * 0.03); c.beginPath(); c.arc(px, py, ph / 2 * (0.85 + 0.15 * k0), 0, 7); c.stroke(); c.restore();
+    const tx = wide ? box.x + box.w * 0.52 : box.x + box.w * 0.1, tw = wide ? box.w * 0.44 : box.w * 0.8;
+    let y = wide ? box.y + box.h * 0.2 : py + ph / 2 + box.h * 0.04;
+    c.textAlign = wide ? "left" : "left"; c.textBaseline = "top";
+    const nameFs = vmFit(c, st, it.name || "", tw, wide ? box.h * 0.1 : box.w * 0.11);
+    c.globalAlpha = crEase((T - 0.15) / 0.35); c.fillStyle = "#fff"; c.font = vmFont(st, nameFs); c.fillText(it.name || "", tx, y); y += nameFs * 1.15;
+    if (it.about) { const fs = Math.min(nameFs * 0.45, 40); c.font = vmFont(st, fs, 600); c.fillStyle = "#AEB6C2"; c.fillText(it.about, tx, y); y += fs * 1.5; }
+    const rows = VM_SOC.filter(([k]) => it[k]), rh = Math.min(wide ? box.h * 0.11 : box.w * 0.1, 84);
+    rows.forEach(([k, name, col, ic], i) => {
+      const a = crEase((T - 0.35 - i * 0.18) / 0.3); if (a <= 0) return;
+      c.save(); c.globalAlpha = a; c.translate((1 - a) * 40, 0);
+      c.fillStyle = col; crRR(c, tx, y, rh, rh, rh * 0.24); c.fill();
+      c.fillStyle = "#fff"; c.textAlign = "center"; c.textBaseline = "middle"; c.font = "800 " + Math.round(rh * 0.55) + "px Arial, sans-serif"; c.fillText(ic, tx + rh / 2, y + rh / 2 + 2);
+      c.textAlign = "left"; c.font = vmFont(st, Math.min(rh * 0.42, vmFit(c, st, String(it[k]), tw - rh - 20, rh * 0.42)), 700); c.fillStyle = "#fff"; c.fillText(String(it[k]), tx + rh + 16, y + rh / 2);
+      c.restore(); y += rh + rh * 0.25;
+    });
+    c.globalAlpha = 1;
+  }
+  // making a tier list
+  function VMTierSheet({ onClose, onAdd }) {
+    const [title, setTitle] = useState(""), [ents, setEnts] = useState([]), [name, setName] = useState(""), fileRef = useRef(null);
+    async function addFiles(e) {
+      const fs = Array.from(e.target.files || []); e.target.value = "";
+      for (const f of fs) {
+        const isVid = /^video\//.test(f.type); let blob = f;
+        if (isVid) { const th = await vmPoster(f).catch(() => null); if (!th) continue; blob = await (await fetch(th)).blob(); }
+        else { try { const bm = await createImageBitmap(f), k = Math.min(1, 700 / Math.max(bm.width, bm.height)), cv = document.createElement("canvas"); cv.width = Math.round(bm.width * k); cv.height = Math.round(bm.height * k); cv.getContext("2d").drawImage(bm, 0, 0, cv.width, cv.height); blob = await new Promise(r => cv.toBlob(r, "image/jpeg", 0.88)); } catch (x) {} }
+        const n = String(f.name || "").replace(/\.\w+$/, "").replace(/[-_]+/g, " ").slice(0, 30);
+        setEnts(l => l.concat({ id: uid(), name: /^(img|vid|image|video|screenshot|whatsapp)/i.test(n) ? "" : n, blob, url: URL.createObjectURL(blob) }));
+      }
+    }
+    return html`<div class="scrim" onClick=${e => { if (e.target === e.currentTarget) onClose(); }}><div class="sheet" role="dialog" aria-label="Tier list">
+      <h3 style="margin:0">🏆 Tier list (S to F)</h3>
+      <div class="field"><label for="tlt">What are you ranking?</label><input id="tlt" value=${title} onInput=${e => setTitle(e.target.value.slice(0, 50))} placeholder="For example: Best places in Lusaka"/></div>
+      <div class="tierents">${ents.map((x, i) => html`<div key=${x.id} class="tierent">${x.url ? html`<img src=${x.url} alt=""/>` : html`<span>${x.name}</span>`}<input value=${x.name} placeholder="Name" onInput=${e => setEnts(l => l.map(y => (y.id === x.id ? Object.assign({}, y, { name: e.target.value.slice(0, 30) }) : y)))}/><button class="chip" onClick=${() => setEnts(l => l.filter(y => y.id !== x.id))}>✕</button></div>`)}</div>
+      <div class="vmchips"><button class="btn slim quiet" onClick=${() => fileRef.current && fileRef.current.click()}>＋ Photos / videos</button>
+        <input ref=${fileRef} type="file" accept="image/*,video/*" multiple style="display:none" onChange=${addFiles}/>
+        <span class="tieradd"><input value=${name} placeholder="…or just a name" onInput=${e => setName(e.target.value)} onKeyDown=${e => { if (e.key === "Enter" && name.trim()) { setEnts(l => l.concat({ id: uid(), name: name.trim().slice(0, 30), blob: null })); setName(""); } }}/><button class="chip" disabled=${!name.trim()} onClick=${() => { setEnts(l => l.concat({ id: uid(), name: name.trim().slice(0, 30), blob: null })); setName(""); }}>＋</button></span></div>
+      <p class="help">While recording: tap the tier list to show it, tap a picture to show it big, then tap S, A, B, C, D or F. It flies into its row.</p>
+      <button class="btn" disabled=${!ents.length} onClick=${() => onAdd({ kind: "tier", name: title.trim() || "Tier list", title: title.trim(), entries: ents.map(x => ({ id: x.id, name: x.name, blob: x.blob })) })}>Add the tier list (${ents.length})</button>
+      <button class="btn quiet" onClick=${onClose}>Close</button>
+    </div></div>`;
+  }
+  function VMPersonSheet({ onClose, onAdd }) {
+    const [P, setP] = useState({ name: "", about: "", ig: "", tt: "", yt: "", fb: "", x: "", web: "" }), [photo, setPhoto] = useState(null), fileRef = useRef(null);
+    const set = o => setP(p => Object.assign({}, p, o));
+    async function pick(e) { const f = e.target.files && e.target.files[0]; e.target.value = ""; if (!f) return; try { const bm = await createImageBitmap(f), k = Math.min(1, 900 / Math.max(bm.width, bm.height)), cv = document.createElement("canvas"); cv.width = Math.round(bm.width * k); cv.height = Math.round(bm.height * k); cv.getContext("2d").drawImage(bm, 0, 0, cv.width, cv.height); const b = await new Promise(r => cv.toBlob(r, "image/jpeg", 0.9)); setPhoto({ blob: b, url: URL.createObjectURL(b) }); } catch (x) { toast("That picture couldn't be used."); } }
+    return html`<div class="scrim" onClick=${e => { if (e.target === e.currentTarget) onClose(); }}><div class="sheet" role="dialog" aria-label="Person card">
+      <h3 style="margin:0">👤 Person card</h3>
+      <div class="vmchips"><button class="pcphoto" onClick=${() => fileRef.current && fileRef.current.click()}>${photo ? html`<img src=${photo.url} alt=""/>` : "＋ Photo"}</button><input ref=${fileRef} type="file" accept="image/*" style="display:none" onChange=${pick}/>
+        <div style="flex:1;display:flex;flex-direction:column;gap:6px"><input value=${P.name} placeholder="Name (e.g. Hussein)" onInput=${e => set({ name: e.target.value.slice(0, 40) })}/><input value=${P.about} placeholder="About (e.g. YouTuber · 2M subscribers · Lusaka)" onInput=${e => set({ about: e.target.value.slice(0, 60) })}/></div></div>
+      ${VM_SOC.map(([k, n, col, ic]) => html`<label key=${k} class="pcrow"><span class="pcic" style=${"background:" + col}>${ic}</span><input value=${P[k]} placeholder=${n + (k === "web" ? " (address)" : " (@name)")} onInput=${e => set({ [k]: e.target.value.slice(0, 50) })}/></label>`)}
+      <p class="help">Only what you fill in shows. Add a map of where they live with “Map / flag”.</p>
+      <button class="btn" disabled=${!P.name.trim()} onClick=${() => onAdd(Object.assign({ kind: "person" }, P, { name: P.name.trim(), blob: photo ? photo.blob : null }))}>Add the card</button>
+      <button class="btn quiet" onClick=${onClose}>Close</button>
+    </div></div>`;
+  }
   function vmThing(c, F, it, box, k) {
     const { G, L, st } = F;
     c.save(); c.globalAlpha = box.a == null ? 1 : box.a; vmClip(c, box);
@@ -9917,8 +10316,12 @@ notify pgrst, 'reload schema';
     } else if (it.kind === "map" || it.kind === "flag" || it.kind === "trip") {
       c.restore(); c.save(); c.globalAlpha = (box.a == null ? 1 : box.a) * ka;
       (it.kind === "map" ? vmMap : it.kind === "trip" ? vmTrip : vmFlagCard)(c, F, it, box, F.t - F.s.showT);
+    } else if (it.kind === "tier") { vmTier(c, F, it, box);
+    } else if (it.kind === "person") { vmPerson(c, F, it, box, F.t - F.s.showT);
     } else if (it.kind === "read") {
       vmReadCard(c, F, it, box, ka);
+    } else if (it.kind === "post") {
+      vmPost(c, F, it, box, ka, "only");
     } else if (it.kind === "text") {
       vmBg(c, G, L, box); c.globalAlpha *= ka;
       const top = G.tall ? (F.s.eff === "split" ? 90 : F.s.eff === "pip" ? 330 : 0) : 0, bot = G.tall && box.y + box.h > G.H * 0.8 ? 230 : 0, inner = { x: box.x, y: box.y + top, w: box.w, h: box.h - top - bot };
@@ -9962,7 +10365,7 @@ notify pgrst, 'reload schema';
   }
   // a headline strip, like the news
   function vmBanner(c, F, text, k) {
-    const { G, L, st } = F, B = G.tall ? { x: 0, y: G.H * 0.835, w: G.W, h: 88 } : { x: 40, y: G.H - 200, w: G.W * 0.7, h: 70 }, x = B.x - (1 - k) * (B.w + 40);
+    const { G, L, st } = F, low = st.logoPos === "bc" && st.logo, B = G.tall ? { x: 0, y: G.H * (low ? 0.7 : 0.835), w: G.W, h: 88 } : { x: 40, y: G.H - (low ? 420 : 200), w: G.W * 0.7, h: 70 }, x = B.x - (1 - k) * (B.w + 40);
     c.save();
     c.fillStyle = "rgba(0,0,0,.28)"; c.fillRect(x + 6, B.y + 8, B.w, B.h);
     c.fillStyle = L.acc; c.fillRect(x, B.y, B.w, B.h);
@@ -10032,7 +10435,7 @@ notify pgrst, 'reload schema';
   }
   const vmCapCache = new Map();
   // how far down the subtitles sit (0 = top, 1 = bottom). Away from the bottom by default: apps cover it with their buttons
-  const vmCapAt = (st, G, textOn) => { if (st.capY != null) return st.capY; if (st.capPos === "high") return G.tall ? 0.3 : 0.18; if (st.capPos === "mid" && !textOn) return G.tall ? 0.56 : 0.5; return G.tall ? 0.7 : 0.9; };
+  const vmCapAt = (st, G, textOn) => { if (st.capY != null) return st.capY; if (st.capPos === "high") return G.tall ? 0.3 : 0.18; if (st.capPos === "mid" && !textOn) return G.tall ? 0.56 : 0.5; return G.tall ? (st.logoPos === "bc" && st.logo ? 0.62 : 0.7) : st.logoPos === "bc" && st.logo ? 0.66 : 0.9; };
   function vmCaption(c, F, y) {
     const { G, L, words, t } = F, st = F.st.capFont ? Object.assign({}, F.st, { font: F.st.capFont }) : F.st, mode = st.caps; if (!words || mode === "off") return;
     const key = mode + G.fmt; let cc = vmCapCache.get(words); if (!cc) { cc = {}; vmCapCache.set(words, cc); } if (!cc[key]) cc[key] = vmCapLines(words, mode, G.tall);
@@ -10049,16 +10452,47 @@ notify pgrst, 'reload schema';
     line.forEach((w, i) => {
       const on = t >= w[0] && t <= w[1] + 0.1;
       if (mode === "hl" && on) { c.fillStyle = hi; crRR(c, x - fs * 0.16, y - fs * 0.66, ws[i] + fs * 0.32, fs * 1.32, fs * 0.22); c.fill(); c.fillStyle = vmInk(hi); c.fillText(parts[i], x, y); x += ws[i] + sp; return; }
-      if (mode !== "box") { c.lineWidth = fs * 0.2; c.strokeStyle = "rgba(0,0,0,.9)"; c.strokeText(parts[i], x, y); }
-      c.fillStyle = mode === "word" ? hi : on && mode !== "hl" ? hi : tx; c.fillText(parts[i], x, y); x += ws[i] + sp;
+      const fill = mode === "word" ? hi : on && mode !== "hl" ? hi : tx;
+      if (mode !== "box" && st.capFx === "shadow") {   // a soft dark shadow behind the words, no hard outline
+        c.save(); c.shadowColor = "rgba(0,0,0,.92)"; c.shadowBlur = fs * 0.45; c.shadowOffsetY = fs * 0.04; c.fillStyle = fill; c.fillText(parts[i], x, y); c.shadowBlur = fs * 0.18; c.fillText(parts[i], x, y); c.restore();
+        c.fillStyle = fill; c.fillText(parts[i], x, y); x += ws[i] + sp; return;
+      }
+      if (mode !== "box" && st.capFx !== "none") { c.lineWidth = fs * 0.2; c.strokeStyle = "rgba(0,0,0,.9)"; c.strokeText(parts[i], x, y); }
+      c.fillStyle = fill; c.fillText(parts[i], x, y); x += ws[i] + sp;
     });
   }
+  // your logo on every frame: in a top corner, or along the bottom in the middle with your name and a row of your socials under it
   function vmLogoMark(c, F) {
-    const { G, st } = F, im = vmLogo(st); if (!im) return;
+    const { G, st } = F, im = vmLogo(st), pos = st.logoPos || "tl";
+    if (pos === "bc") { vmLogoFoot(c, F, im); return; }
+    if (!im) return;
     const z = { s: 0.7, m: 1, l: 1.4 }[st.logoSize || "m"] || 1, maxW = G.W * (G.tall ? 0.34 : 0.22) * z, maxH = (G.tall ? 110 : 90) * z;
-    const [sw, sh] = vmSize(im), k = Math.min(maxW / sw, maxH / sh), w = sw * k, h = sh * k, x = 24, y = (F.prog != null && st.bar ? 22 : 18);
+    const [sw, sh] = vmSize(im), k = Math.min(maxW / sw, maxH / sh), w = sw * k, h = sh * k, x = pos === "tr" ? G.W - 24 - w : pos === "tc" ? (G.W - w) / 2 : 24, y = (F.prog != null && st.bar ? 22 : 18);
     c.save(); c.shadowColor = "rgba(0,0,0,.45)"; c.shadowBlur = 10; c.shadowOffsetY = 3; c.drawImage(im, x, y, w, h); c.restore();
     return y + h;
+  }
+  function vmLogoFoot(c, F, im) {
+    const { G, st } = F, z = { s: 0.75, m: 1, l: 1.3 }[st.logoSize || "m"] || 1, col = st.logoColor || "#FFFFFF";
+    const soc = st.logoSocial && st.handle ? (st.socials || []).filter(k => VM_SOCIALS.some(x => x[0] === k)) : [], hand = st.handle && (st.logoSocial || st.tagOn) ? st.handle : "";
+    const subFs = (G.tall ? 22 : 20) * z, pillH = (G.tall ? 36 : 32) * z, gap = 8 * z;
+    let bottom = G.H - (G.tall ? G.H * 0.045 : 22), y = bottom;
+    c.save(); c.textAlign = "center"; c.textBaseline = "middle"; c.shadowColor = "rgba(0,0,0,.55)"; c.shadowBlur = 8; c.shadowOffsetY = 2;
+    // the row of socials: icons | @handle, in a thin rounded outline
+    if (hand) {
+      c.font = "700 " + Math.round(pillH * 0.44) + "px Poppins, Andika, sans-serif"; const tw = c.measureText(hand).width, ic = pillH * 0.52, icGap = ic * 0.55;
+      const iconsW = soc.length ? soc.length * ic + (soc.length - 1) * icGap + pillH * 0.6 : 0, w = (soc.length ? pillH * 0.55 : pillH * 0.45) + iconsW + tw + pillH * 0.45, x0 = G.W / 2 - w / 2, yT = y - pillH;
+      if (soc.length) { c.lineWidth = 2 * z; c.strokeStyle = col; crRR(c, x0, yT, w, pillH, pillH / 2); c.stroke(); }
+      let x = x0 + (soc.length ? pillH * 0.55 : pillH * 0.45);
+      soc.forEach(k => { vmSocIcon(c, k, x, yT + (pillH - ic) / 2, ic, col); x += ic + icGap; });
+      if (soc.length) { x += pillH * 0.3 - icGap; c.fillStyle = col; c.fillRect(x - 1, yT + pillH * 0.24, 2 * z, pillH * 0.52); x += pillH * 0.3; }
+      c.fillStyle = col; c.textAlign = "left"; c.fillText(hand, x, yT + pillH / 2 + 1); c.textAlign = "center";
+      y = yT - gap;
+    }
+    if (st.logoSub) { c.font = "800 " + Math.round(subFs) + "px Poppins, Andika, sans-serif"; let fs = subFs; while (fs > 10 && c.measureText(st.logoSub).width > G.W * 0.86) { fs -= 1; c.font = "800 " + Math.round(fs) + "px Poppins, Andika, sans-serif"; }
+      c.fillStyle = col; if (c.letterSpacing !== undefined) c.letterSpacing = Math.round(fs * 0.06) + "px"; c.fillText(st.logoSub, G.W / 2, y - fs * 0.6); if (c.letterSpacing !== undefined) c.letterSpacing = "0px"; y -= fs * 1.25 + gap * 0.5; }
+    if (im) { const [sw, sh] = vmSize(im), k = Math.min(G.W * (G.tall ? 0.62 : 0.36) * z / sw, (G.tall ? 190 : 120) * z / sh), w = sw * k, h = sh * k; c.drawImage(im, G.W / 2 - w / 2, y - h, w, h); y -= h; }
+    c.restore();
+    return y;
   }
   // which word of a pasted text you were saying when: matched to your subtitles, in order
   const vmReadCache = new Map();
@@ -10075,26 +10509,32 @@ notify pgrst, 'reload schema';
     const r = { toks, times }; const cc = c0 || {}; cc[key] = r; vmReadCache.set(words, cc); return r;
   }
   function vmReadCard(c, F, it, box, ka) {
-    const { G, st, t, s } = F, pad = Math.min(box.w, box.h) * 0.07, room = (F.proj.topTitle || s.top) && box.y < 60 ? (G.tall ? 150 : 90) : 0, card = { x: box.x + pad, y: box.y + pad * (G.tall ? 1.6 : 1) + room, w: box.w - pad * 2, h: box.h - pad * (G.tall ? 3.2 : 2) - room };
+    const { G, st, t, s } = F;
     c.save(); c.globalAlpha *= ka;
-    c.fillStyle = "rgba(0,0,0,.35)"; crRR(c, card.x + 6, card.y + 10, card.w, card.h, 22); c.fill();
-    c.fillStyle = "#FFFDF7"; crRR(c, card.x, card.y, card.w, card.h, 22); c.fill();
+    // where it came from (a screenshot, a post), dimmed behind the words
+    const src = it.blob ? F.pic(it.id) : null;
+    if (src) { vmCover(c, src, box.x, box.y, box.w, box.h); c.fillStyle = "rgba(0,0,0,.55)"; c.fillRect(box.x, box.y, box.w, box.h); }
     const A = F.readWords ? vmReadAlign(it, F.readWords, s.showT) : { toks: String(it.text || "").split(/\s+/).filter(Boolean), times: [] };
-    const ip = card.w * 0.07, maxW = card.w - ip * 2, maxH = card.h - ip * 2;
-    let fs = G.tall ? 52 : 46, lines;
+    const cw = Math.min(box.w * (G.tall ? 0.88 : 0.72), 1200), ip = Math.round(cw * 0.07), maxW = cw - ip * 2, maxH = box.h * 0.72 - ip * 2 - (it.who ? 60 : 0);
+    let fs = G.tall ? 58 : 50, lines;
     for (; fs > 16; fs -= 2) {
       c.font = vmFont(st, fs, 600); const sp = c.measureText(" ").width; lines = [[]]; let x = 0;
       A.toks.forEach((w, i) => { const ww = c.measureText(w).width; if (x > 0 && x + ww > maxW) { lines.push([]); x = 0; } lines[lines.length - 1].push({ w, i, x, ww }); x += ww + sp; });
-      if (lines.length * fs * 1.45 <= maxH) break;
+      if (lines.length * fs * 1.4 <= maxH) break;
     }
+    const lh = fs * 1.4, whoH = it.who ? Math.max(30, fs * 0.8) : 0, ch = lines.length * lh + ip * 2 + whoH, card = { x: box.x + (box.w - cw) / 2, y: box.y + (box.h - ch) / 2, w: cw, h: ch };
+    c.fillStyle = "rgba(0,0,0,.35)"; crRR(c, card.x + 6, card.y + 10, card.w, card.h, 22); c.fill();
+    c.fillStyle = "#FFFDF7"; crRR(c, card.x, card.y, card.w, card.h, 22); c.fill();
+    c.fillStyle = F.L.acc; c.fillRect(card.x, card.y + 22, 8, card.h - 44);
     c.font = vmFont(st, fs, 600); c.textBaseline = "middle"; c.textAlign = "left";
-    const lh = fs * 1.45, y0 = card.y + ip + Math.max(0, (maxH - lines.length * lh) / 2) + lh / 2;
+    const y0 = card.y + ip + lh / 2;
     lines.forEach((ln, li) => ln.forEach(o => {
       const tm = A.times[o.i], read = tm != null && tm <= t, now = read && (A.times[o.i + 1] == null || A.times[o.i + 1] > t);
       const x = card.x + ip + o.x, y = y0 + li * lh;
-      if (read) { c.fillStyle = now ? "rgba(255,200,0,.85)" : "rgba(255,221,0,.5)"; c.fillRect(x - fs * 0.12, y - fs * 0.62, o.ww + fs * 0.24 + (ln[ln.indexOf(o) + 1] && A.times[o.i + 1] != null && A.times[o.i + 1] <= t ? c.measureText(" ").width - fs * 0.24 : 0), fs * 1.24); }
+      if (read) { c.fillStyle = now ? "rgba(255,200,0,.9)" : "rgba(255,221,0,.5)"; crRR(c, x - fs * 0.1, y - fs * 0.6, o.ww + fs * 0.2, fs * 1.2, fs * 0.18); c.fill(); }
       c.fillStyle = "#1A1A1A"; c.fillText(o.w, x, y);
     }));
+    if (it.who) { c.font = vmFont(st, whoH * 0.7, 700); c.fillStyle = "#666"; c.fillText("— " + it.who, card.x + ip, card.y + card.h - ip / 2 - whoH / 2); }
     c.restore();
   }
   // the big title along the top: white letters with a thick black edge, as large as fits
@@ -10119,8 +10559,11 @@ notify pgrst, 'reload schema';
     const it = s.show ? F.items[s.show] : null;
     if (!it && !camB) { c.save(); c.font = vmFont(st, 10); vmWords(c, st, L, F.proj.title || "", { x: 50, y: G.H * 0.2, w: G.W - 100, h: G.H * 0.5 }, G.tall ? 92 : 84, 1); c.restore(); }
     let thingR = null;
-    if (thingB && it) thingR = vmThing(c, F, it, thingB, crEase((t - s.showT) / 0.35));
-    let hostB = camB, guestB = null;
+    // a post behind you: you in front of it, or small in its corner
+    const post = !!(it && it.kind === "post" && F.camOn && F.camCut && !F.guest && (s.lay === "cam" || s.lay === "pip"));
+    if (post) { const md = s.lay === "cam" ? "front" : "corner"; vmPost(c, F, it, full, crEase((t - s.showT) / 0.35), md); vmCutDraw(c, F, F.camCut, md); thingR = full; }
+    else if (thingB && it) thingR = vmThing(c, F, it, thingB, crEase((t - s.showT) / 0.35));
+    let hostB = post ? null : camB, guestB = null;
     if (camB && F.guest) {   // a friend reacting with you: share your space (or give it to them)
       const m = s.duo || "both";
       if (m === "friend") { guestB = camB; hostB = null; }
@@ -10147,18 +10590,19 @@ notify pgrst, 'reload schema';
     const logoBottom = vmLogoMark(c, F) || 0;
     const topIt = s.top && F.items[s.top] ? F.items[s.top] : null, topText = topIt ? topIt.text : F.proj.topTitle;
     if (topText) vmTopTitle(c, F, topText, Math.max(G.tall ? 120 : 70, logoBottom + (G.tall ? 70 : 50)), topIt ? crEase((t - s.topT) / 0.3) : 1);
-    if (st.handle && st.tagOn) {
+    if (st.handle && st.tagOn && st.logoPos !== "bc") {
       c.font = vmFont(st, G.tall ? 28 : 24, 700); c.textBaseline = "middle"; c.textAlign = G.tall ? "center" : "right";
       const x = G.tall ? G.W / 2 : G.W - 28, y = G.tall ? G.H - 56 : (F.prog != null && st.bar ? 44 : 36);
       c.lineWidth = 5; c.strokeStyle = "rgba(0,0,0,.45)"; c.lineJoin = "round"; c.strokeText(st.handle, x, y); c.fillStyle = "rgba(255,255,255,.92)"; c.fillText(st.handle, x, y);
     }
-    if (F.words && !(it && it.kind === "read" && thingB)) vmCaption(c, F, capY);   // a read-along card already lights up the words
+    const postRead = !!(it && it.kind === "post" && it.ocr && it.ocr.words && it.ocr.words.length && F.readWords && (post ? s.lay !== "cam" : thingB));
+    if (F.words && !(it && it.kind === "read" && thingB) && !postRead) vmCaption(c, F, capY);   // a read-along card already lights up the words
     if (F.prog != null && st.bar) { c.fillStyle = "rgba(255,255,255,.22)"; c.fillRect(0, 0, G.W, 8); c.fillStyle = L.acc; c.fillRect(0, 0, G.W * Math.max(0, Math.min(1, F.prog)), 8); }
   }
   // the short opening, and the "follow me" ending
   function vmIntro(c, G, L, st, title, k) {
     vmBg(c, G, L);
-    const im = vmLogo(st), a = crEase(k / 0.35);
+    const im = vmLogoOn(st, L), a = crEase(k / 0.35);
     let y = G.H * (G.tall ? 0.36 : 0.3);
     if (im) { const [sw, sh] = vmSize(im), s = Math.min(G.W * 0.82 / sw, (G.tall ? 330 : 230) / sh) * (0.7 + 0.3 * a); c.save(); c.globalAlpha = a; c.drawImage(im, G.W / 2 - sw * s / 2, y - sh * s / 2, sw * s, sh * s); c.restore(); y += sh * s / 2 + (G.tall ? 110 : 70); }
     const b = crEase((k - 0.15) / 0.4);
@@ -10169,7 +10613,7 @@ notify pgrst, 'reload schema';
   }
   function vmOutro(c, G, L, st, k) {
     vmBg(c, G, L);
-    const im = vmLogo(st), a = crEase(k / 0.3);
+    const im = vmLogoOn(st, L), a = crEase(k / 0.3);
     c.save(); c.globalAlpha = a; c.textAlign = "center"; c.textBaseline = "middle";
     let y = G.H * (G.tall ? 0.34 : 0.28);
     if (im) { const [sw, sh] = vmSize(im), s = Math.min(G.W * 0.72 / sw, (G.tall ? 280 : 200) / sh); c.drawImage(im, G.W / 2 - sw * s / 2, y - sh * s / 2, sw * s, sh * s); y += sh * s / 2 + (G.tall ? 90 : 60); }
@@ -10206,7 +10650,7 @@ notify pgrst, 'reload schema';
     // swap every big file for a small reference (and back)
     async walk(p, f) {
       const q = Object.assign({}, p);
-      if (q.items) q.items = await Promise.all(q.items.map(async it => (it.blob ? Object.assign({}, it, { blob: await f(it.blob) }) : it)));
+      if (q.items) q.items = await Promise.all(q.items.map(async it => { let o = it.blob ? Object.assign({}, it, { blob: await f(it.blob) }) : it; if (it.entries) o = Object.assign({}, o, { entries: await Promise.all(it.entries.map(async e => (e.blob ? Object.assign({}, e, { blob: await f(e.blob) }) : e))) }); return o; }));
       if (q.openerBlob) q.openerBlob = await f(q.openerBlob);
       if (q.music && q.music.blob) q.music = Object.assign({}, q.music, { blob: await f(q.music.blob) });
       if (q.take) {
@@ -10266,7 +10710,7 @@ notify pgrst, 'reload schema';
     if (!vmPics.has(it.id)) { const im = new Image(); im.src = vmUrl(it); vmPics.set(it.id, im); }
     const im = vmPics.get(it.id); return im.complete && im.naturalWidth ? im : null;
   }
-  const vmNew = (fmt, title, cam) => ({ id: uid(), title: title || "", fmt: fmt || "tall", cam: !!cam, facing: "user", fit: "fit", notes: "", clipVol: 0.7, subs: true, clean: false, mirror: (() => { try { return localStorage.getItem("vm.mirror") !== "0"; } catch (e) { return true; } })(), camFit: "whole", items: [], take: null, createdAt: Date.now(), updatedAt: Date.now() });
+  const vmNew = (fmt, title, cam) => ({ id: uid(), title: title || "", fmt: fmt || "tall", cam: !!cam, vbg: (() => { try { return JSON.parse(localStorage.getItem("vm.vbg") || "null"); } catch (e) { return null; } })(), facing: "user", fit: "fit", notes: "", clipVol: 0.7, subs: true, clean: false, mirror: (() => { try { return localStorage.getItem("vm.mirror") !== "0"; } catch (e) { return true; } })(), camFit: "whole", items: [], take: null, createdAt: Date.now(), updatedAt: Date.now() });
   // a lesson's board as a picture, to show in a promo
   async function vmLessonPic(lesson, number) {
     const cv = document.createElement("canvas"); cv.width = CR_W; cv.height = CR_H;
@@ -10393,6 +10837,11 @@ notify pgrst, 'reload schema';
     const vbuf = await decode(await voiceBlob.arrayBuffer());
     const voice = mono(vbuf), rate = vbuf.sampleRate, lv = levelsOf(vbuf);
     const avaP = !camOn && proj.avatar ? await vmAvaMake(proj.avatar).catch(() => null) : null, camOn2 = camOn || !!avaP;
+    // behind you: the background you picked, put in frame by frame (each frame waits for its own outline, so it's exact)
+    const vbgs = [proj.vbg].concat(cues.filter(q => q.k === "vbg").map(q => q.v)).filter(vmVbgOn);
+    let segX = null; const keyCv = document.createElement("canvas"), cutCv = document.createElement("canvas");
+    const posts = cues.some(q => q.k === "show" && items[q.ref] && items[q.ref].kind === "post");
+    if (camOn && (vbgs.length || posts)) { try { segX = await vmTimeout(vmSeg(), 60000); for (const v of vbgs) await vmVbgPrep(v); } catch (e) { segX = null; } }
     const sinkOf = async (blob, max) => {
       const input = new MB.Input({ source: new MB.BlobSource(blob), formats: MB.ALL_FORMATS });
       const vt = await input.getPrimaryVideoTrack(); if (!vt) return null;
@@ -10419,9 +10868,10 @@ notify pgrst, 'reload schema';
       for (const id of used) { const it = items[id]; if (!it) continue; for (const a2 of [it.a2].concat((it.stops || []).map(x => x.a2)).filter(Boolean)) { vmFlag(a2); const im = vmFlags.get(a2); if (im) { try { await im.decode(); } catch (e) {} } } }
     }
     const pics = {}, clips = {};
+    for (const id of used) { const it = items[id]; if (it && it.entries) for (const e of it.entries) { vmEntries.set(e.id, e); if (e.blob) { try { pics[e.id] = await createImageBitmap(e.blob); } catch (x) {} } } }
     for (const id of used) {
       const it = items[id]; if (!it || !it.blob) continue;
-      if (it.kind === "img") { try { pics[id] = await createImageBitmap(it.blob); } catch (e) {} }
+      if (it.kind === "img" || it.kind === "person" || it.kind === "read" || it.kind === "post") { try { pics[id] = await createImageBitmap(it.blob); } catch (e) {} }
       if (it.kind === "vid") {
         const k = { secs: it.secs || 0, sink: null, sound: null, still: new Map() };
         try { const S0 = await sinkOf(it.blob, hd ? 1080 : 720); const T0 = await tested(S0, it.blob); if (T0.S) { k.sink = S0.sink; k.first = S0.first; k.secs = (await S0.input.computeDuration()) || k.secs; } else k.E = T0.E; } catch (e) {}
@@ -10569,7 +11019,7 @@ notify pgrst, 'reload schema';
         const t = SA.t, s = vmAt(cues, t, camOn2), it = s.show ? items[s.show] : null, k = it && it.kind === "vid" ? clips[it.id] : null;
         const ct = k ? vmClipT(s, t, k.secs) : 0, moving = k && s.play && s.play.on && ct < k.secs - 0.05;
         const camVis = camOn && (vmBoxes(G, s.eff, st).cam || (s.prev && t - s.effT < 0.4 && vmBoxes(G, s.prev, st).cam));
-        let anim = (it && (it.kind === "map" || it.kind === "flag" || it.kind === "trip")) || t - s.showT < 0.4 || t - s.effT < 0.42 || (s.ban && t - s.banT < 0.4) || (s.pt && t - s.pt.t < 3.05) || s.sfx.some(q => t - q.t < (VM_FX_LEN[q.v] || 0) + 0.05);
+        let anim = (it && (it.kind === "map" || it.kind === "flag" || it.kind === "trip" || it.kind === "tier" || it.kind === "person")) || t - s.showT < 0.4 || t - s.effT < 0.42 || (s.ban && t - s.banT < 0.4) || (s.pt && t - s.pt.t < 3.05) || s.sfx.some(q => t - q.t < (VM_FX_LEN[q.v] || 0) + 0.05);
         for (const m of s.marks) if (t - m.t < vmMarkDur(m) + 0.05) anim = true;
         const tb = T - IN; if (st.nameTag && st.name && ((tb > 0.35 && tb < 1.05) || (tb > 4.75 && tb < 5.45))) anim = true;
         let cw = -1; if (words) for (let i = 0; i < words.length; i++) { if (words[i][0] > t) break; cw = i; }
@@ -10607,7 +11057,10 @@ notify pgrst, 'reload schema';
           else if (gsg && gsg.E) { gF = await gsg.E.at(Math.max(0, t - gsg.t)); gLast = gF; }
           else if (gIt) { await closeIt(gIt); gIt = null; gItSeg = -1; }
           const segNow = camSegs[segAt(t)] || camSegs[0];
-          vmFrame(c, { G, L, st, proj, items, s, t, tb, readWords: allWords || words, cam: avaP ? (avaP.pose(t, vmAvaLevel(lv, t), { acc: st.acc }), { vmAva: avaP, h: hd ? 1080 : 720 }) : camF || camLast, camFreeze: frozen, camOn: camOn2, guest: gsg ? gF || gLast : null, camFit: proj.camFit || "whole", camMirror: !!proj.mirror && (!segNow || segNow.facing !== "environment"), pic: id => pics[id] || null, clip: frame, words, cache, prog: (T - IN) / body });
+          let camK = camF || camLast, camCut = null; const vbNow = s.vbg !== undefined ? s.vbg : proj.vbg, itP = s.show ? items[s.show] : null;
+          if (segX && camK && !gsg && itP && itP.kind === "post" && (s.lay === "cam" || s.lay === "pip")) { try { camCut = await vmTimeout(segX.run(camK, r => vmKeyDraw(r, cutCv, { k: "cut" }, false, t, true)), 15000); } catch (e) {} }
+          if (segX && camK && camVis && !camCut && vmVbgOn(vbNow)) { try { camK = (await vmTimeout(segX.run(camK, r => vmKeyDraw(r, keyCv, vbNow, !!proj.mirror && (!segNow || segNow.facing !== "environment"), t, true)), 15000)) || camK; } catch (e) {} }
+          vmFrame(c, { G, L, st, proj, items, s, t, tb, readWords: allWords || words, cam: avaP ? (avaP.pose(t, vmAvaLevel(lv, t), { acc: st.acc }), { vmAva: avaP, h: hd ? 1080 : 720 }) : camK, camFreeze: frozen, camOn: camOn2, guest: gsg ? gF || gLast : null, camFit: proj.camFit || "whole", camMirror: !!proj.mirror && (!segNow || segNow.facing !== "environment"), pic: id => pics[id] || null, clip: frame, words, cache, prog: (T - IN) / body, camCut });
         };
       }
         }
@@ -11790,7 +12243,7 @@ notify pgrst, 'reload schema';
       <button class="tstile" onClick=${() => { addLayer({ id: tsUid(), type: "ring", x: W / 2, y: H / 2, w: H * 0.3, h: H * 0.24, rot: -8, sw: 14, col: "#E3262E", outline: "#000000", style: "scribble" }); setPanel("shape"); }}><span>◯</span>Circle</button>
       <button class="tstile" onClick=${() => { addLayer({ id: tsUid(), type: "rect", x: W / 2, y: H * 0.85, w: W * 0.6, h: H * 0.12, rot: 0, fill: "#E3262E", r: 16 }); setPanel("shape"); }}><span>▭</span>Box / bar</button>
       <button class="tstile" onClick=${() => setPanel("emoji")}><span>😱</span>Emoji</button>
-      ${st.logo ? html`<button class="tstile" onClick=${async () => { const b = await fetch(st.logo).then(r => r.blob()), bm = await createImageBitmap(b), id = "logo", w = W * 0.12; addLayer({ id: tsUid(), type: "logo", src: id, x: W * 0.09, y: H * 0.92, w, rot: 0, op: 0.92, fx: { shadow: { blur: 12, dist: 3, a: 0.6 } } }, { [id]: b }); setPanel(null); }}><span>⭐</span>Logo</button>` : null}
+      ${st.logo ? html`<button class="tstile" onClick=${async () => { const b = await vmLogoBlob(st), bm = await createImageBitmap(b), id = "logo", w = W * 0.12; addLayer({ id: tsUid(), type: "logo", src: id, x: W * 0.09, y: H * 0.92, w, rot: 0, op: 0.92, fx: { shadow: { blur: 12, dist: 3, a: 0.6 } } }, { [id]: b }); setPanel(null); }}><span>⭐</span>Logo</button>` : null}
     </div>`;
     else if (panel === "me") body = html`<div class="tsfaces">
       ${faces.map(f => html`<button key=${f.id} class="tsface" onClick=${() => addFace(f)}><img src=${tsUrl(f.blob)} alt=""/><small>${TH_MOOD_EMO[f.mood] || ""} ${f.mood}</small></button>`)}
@@ -12086,7 +12539,7 @@ notify pgrst, 'reload schema';
     useEffect(() => {
       thLib.get().then(l => { setFaces(l.faces || []); let dr = Object.assign({ fmt: "yt", type: "Reaction", angle: "Curiosity", text: "", label: "", faceId: null, subj: null, subjCut: "keep", bgPhoto: null }, l.draft && l.draft.v3 ? l.draft : {}); if (from) dr = Object.assign({}, dr, { topic: from.title || "", subj: from.subj || dr.subj }); if (lesson) dr = Object.assign({}, dr, { text: (lesson.les.title || "Lesson " + lesson.n).trim(), label: "" }); if (!dr.text) dr.text = TH_WORDS[dr.angle][0]; setD(dr); });
       tsLib.designs().then(setDesigns);
-      if (st.logo) fetch(st.logo).then(r => r.blob()).then(async b => { const bm = await createImageBitmap(b); logoA.current = { id: "logo", blob: b, cut: true, ar: bm.height / bm.width, w: bm.width, h: bm.height }; setAssets(a => Object.assign({}, a)); }).catch(() => {});
+      if (st.logo) vmLogoBlob(st).then(async b => { const bm = await createImageBitmap(b); logoA.current = { id: "logo", blob: b, cut: true, ar: bm.height / bm.width, w: bm.width, h: bm.height }; setAssets(a => Object.assign({}, a)); }).catch(() => {});
     }, []);
     const up = o => setD(p => { const n = Object.assign({}, p, o, { v3: true }); if (!lesson) thLib.setDraft(n).catch(() => {}); return n; });
     // the face and the story picture, ready for the designs
@@ -12180,10 +12633,11 @@ notify pgrst, 'reload schema';
           ${d.subj ? html`<button class=${"chip" + (d.subjCut === "keep" ? " on" : "")} onClick=${() => setSubj(d.subj, "keep")}>Keep the photo</button><button class=${"chip" + (d.subjCut === "person" ? " on" : "")} onClick=${() => setSubj(d.subj, "person")}>✂️ Cut out a person</button><button class=${"chip" + (d.subjCut === "thing" ? " on" : "")} onClick=${() => setSubj(d.subj, "thing")}>✂️ Cut out a thing</button><button class="chip" onClick=${() => up({ subj: null, subjCutBlob: null })}>Remove</button>` : null}
         </div>
         `}
-        <h4 class="vmh">Pick a starting design <small>then make it yours: move, resize, recolour, add anything</small></h4>
+        <h4 class="vmh">Design it your way <small>start blank, or from a design below — then move, resize, recolour, add pictures, words, arrows, shapes, emoji, anything</small></h4>
         <div class=${"tsgal" + (d.fmt === "short" ? " tall" : "")}>
+          <div class="tsgi blank" onClick=${async () => { const W = d.fmt === "short" ? 1080 : 1920, H = d.fmt === "short" ? 1920 : 1080; const n = await saveDesign({ id: tsUid(), tpl: "blank", W, H, fmt: d.fmt, bg: { kind: "look", look: "smoke", col: st.acc || "#3B82F6", vig: 0.45, grain: 0.03 }, layers: [], assets: {}, text: d.text, updated: Date.now() }); setOpen(n); }}><div class=${"tsblank" + (d.fmt === "short" ? " tall" : "")}>＋</div><small><b>✏️ Blank: design your own</b> · an empty canvas, add anything</small></div>
           ${docs.map(doc => html`<div key=${doc.tpl} class="tsgi" onClick=${async () => { const n = await saveDesign(doc); setOpen(n); }}><${TSPreview} doc=${doc} w=${d.fmt === "short" ? 180 : 420} cls="tsgcv"/><small><b>${tplName(doc.tpl).name}</b> · ${tplName(doc.tpl).tip}</small></div>`)}
-          <div class="tsgi blank" onClick=${async () => { const W = d.fmt === "short" ? 1080 : 1920, H = d.fmt === "short" ? 1920 : 1080; const n = await saveDesign({ id: tsUid(), tpl: "blank", W, H, fmt: d.fmt, bg: { kind: "look", look: "smoke", col: st.acc || "#3B82F6", vig: 0.45, grain: 0.03 }, layers: [], assets: {}, text: d.text, updated: Date.now() }); setOpen(n); }}><div class=${"tsblank" + (d.fmt === "short" ? " tall" : "")}>＋</div><small><b>Blank</b> · start from nothing</small></div>
+          
         </div>
       </div>
       ${fin ? html`<div class="scrim" onClick=${e => { if (e.target === e.currentTarget) setFin(null); }}><div class="sheet tsfin" role="dialog" aria-label="Your thumbnail">
@@ -12402,20 +12856,22 @@ notify pgrst, 'reload schema';
     const [series, setSeries] = useState("");
     const [fmt, setFmt] = useState("tall");
     const [cam, setCam] = useState(() => { try { return localStorage.getItem("rc.vmcam") !== "0"; } catch (e) { return true; } });
+    const [kind, setKind] = useState("talk");
     return html`<div class="scrim" onClick=${e => { if (e.target === e.currentTarget) onClose(); }}>
       <div class="sheet" role="dialog" aria-label="New video">
         <h3 style="margin:0">New video</h3>
         <div class="field"><label for="vmt">What's it called?</label><input id="vmt" value=${title} onInput=${e => setTitle(e.target.value)} placeholder="For example: Quick update on today's news"/></div>
         <div class="vmfmts">${["tall", "wide"].map(f => html`<button key=${f} class=${"vmfmt" + (fmt === f ? " on" : "")} onClick=${() => setFmt(f)} aria-pressed=${fmt === f ? "true" : "false"}><span class=${"vmshape " + f}></span><b>${VM_FMT[f].name}</b><small>${VM_FMT[f].for}</small></button>`)}</div>
         <div class="vmfmts">${[[true, "📷", "With my camera", "You on screen, with what you show"], [false, "🎙️", "Faceless", "Only your voice"]].map(([v, ic, a, b]) => html`<button key=${a} class=${"vmfmt" + (cam === v ? " on" : "")} onClick=${() => setCam(v)} aria-pressed=${cam === v ? "true" : "false"}><span class="vmic">${ic}</span><b>${a}</b><small>${b}</small></button>`)}</div>
+        <div class="vml">What kind of video?<div class="vmchips">${[["talk", "🎙 Talk / react"], ["rank", "🏆 Rank things (S–F)"], ["person", "👤 About a person"], ["react", "👥 React with a friend"]].map(([k, n]) => html`<button key=${k} class=${"chip" + (kind === k ? " on" : "")} onClick=${() => setKind(k)}>${n}</button>`)}</div></div>
         <div class="field"><label for="vms">Part of a series? (optional)</label><input id="vms" value=${series} onInput=${e => setSeries(e.target.value)} placeholder="For example: 30 days of reading"/></div>
-        <button class="btn" onClick=${() => { try { localStorage.setItem("rc.vmcam", cam ? "1" : "0"); } catch (e) {} const p = vmNew(fmt, title.trim(), cam); if (series.trim()) { const m = /(\d+)\s*days?/i.exec(series); p.series = { name: series.trim(), day: 1, of: m ? +m[1] : 0 }; p.topTitle = vmDayTitle(p.series); } onMake(p); }}>Start</button>
+        <button class="btn" onClick=${() => { try { localStorage.setItem("rc.vmcam", cam ? "1" : "0"); } catch (e) {} const p = vmNew(fmt, title.trim(), cam); if (kind !== "talk") p.startWith = kind; if (series.trim()) { const m = /(\d+)\s*days?/i.exec(series); p.series = { name: series.trim(), day: 1, of: m ? +m[1] : 0 }; p.topTitle = vmDayTitle(p.series); } onMake(p); }}>Start</button>
         <button class="btn quiet" onClick=${onClose}>Close</button>
       </div>
     </div>`;
   }
   function VMAddText({ onClose, onAdd }) {
-    const [text, setText] = useState("");
+    const [text, setText] = useState(""), [who, setWho] = useState(""), [pic, setPic] = useState(null), picRef = useRef(null);
     return html`<div class="scrim" onClick=${e => { if (e.target === e.currentTarget) onClose(); }}>
       <div class="sheet" role="dialog" aria-label="Add words">
         <h3 style="margin:0">Words on the screen</h3>
@@ -12423,7 +12879,10 @@ notify pgrst, 'reload schema';
         <button class="btn" disabled=${!text.trim()} onClick=${() => onAdd({ kind: "text", text: text.trim() })}>Big, as its own screen</button>
         <button class="btn quiet" disabled=${!text.trim()} onClick=${() => onAdd({ kind: "ban", text: text.trim().replace(/\s+/g, " ") })}>A headline strip, over whatever is showing</button>
         <button class="btn quiet" disabled=${!text.trim()} onClick=${() => onAdd({ kind: "top", text: text.trim().replace(/\s+/g, " ").toUpperCase() })}>A big title at the top (a name, like ANNA)</button>
-        <button class="btn quiet" disabled=${!text.trim()} onClick=${() => onAdd({ kind: "read", text: text.trim() })}>📜 Something to read out (a post, a report): the words light up as you read them</button>
+        <div class="vmreadbox"><b>📜 Something to read out</b> <small>a post, a statement, something someone said</small>
+          <input value=${who} placeholder="Who said it / where it's from (optional)" onInput=${e => setWho(e.target.value.slice(0, 60))}/>
+          <div class="vmchips"><button class="chip" onClick=${() => picRef.current && picRef.current.click()}>${pic ? "✓ Picture added" : "＋ A screenshot of where it's from (optional)"}</button><input ref=${picRef} type="file" accept="image/*" style="display:none" onChange=${e => { const f = e.target.files && e.target.files[0]; e.target.value = ""; if (f) setPic(f); }}/></div>
+          <button class="btn quiet" disabled=${!text.trim()} onClick=${() => onAdd(Object.assign({ kind: "read", text: text.trim(), who: who.trim() }, pic ? { blob: pic } : {}))}>Add it to read out</button></div>
         <button class="btn quiet" onClick=${onClose}>Close</button>
       </div>
     </div>`;
@@ -12470,10 +12929,46 @@ notify pgrst, 'reload schema';
     useEffect(() => { vmFonts(st); }, [st.font]);
     async function pickLogo(e) {
       const f = e.target.files && e.target.files[0]; e.target.value = ""; if (!f) return;
-      try { const bm = await createImageBitmap(f), s = Math.min(1, 600 / Math.max(bm.width, bm.height)), cv = document.createElement("canvas"); cv.width = Math.round(bm.width * s); cv.height = Math.round(bm.height * s); cv.getContext("2d").drawImage(bm, 0, 0, cv.width, cv.height); set({ logo: cv.toDataURL("image/png") }); }
+      try {
+        const bm = await createImageBitmap(f), s = Math.min(1, 1000 / Math.max(bm.width, bm.height)), cv = document.createElement("canvas"); cv.width = Math.round(bm.width * s); cv.height = Math.round(bm.height * s); cv.getContext("2d").drawImage(bm, 0, 0, cv.width, cv.height);
+        let src = cv.toDataURL("image/webp", 0.92); if (src.indexOf("data:image/webp") !== 0) src = cv.toDataURL("image/png");
+        const cut = !!vmLogoBg(cv), L = { id: "l" + uid().slice(-6), src, cut }, list = vmLogoList(st).concat(L).slice(-4);
+        set({ logos: list, logo: src, logoCut: cut });
+      }
       catch (x) { toast("That picture couldn't be used."); }
     }
     const chips = (list, key) => html`<div class="vmchips">${list.map(([v, label]) => html`<button key=${String(v)} class=${"chip" + (st[key] === v ? " on" : "")} onClick=${() => set({ [key]: v })}>${label}</button>`)}</div>`;
+    const [logoPrev, setLogoPrev] = useState(null), [logoHasBg, setLogoHasBg] = useState(false);
+    useEffect(() => {
+      if (!st.logo) { setLogoPrev(null); return; } let live = true; const im = new Image();
+      im.onload = () => { if (!live) return; try { setLogoHasBg(!!vmLogoBg(im)); setLogoPrev(st.logoColor || st.logoCut ? vmLogoPaint(im, st.logoColor || "", !!st.logoCut, !!st.logoSolid).toDataURL("image/png") : st.logo); } catch (e) { setLogoPrev(st.logo); } };
+      im.src = st.logo; return () => { live = false; };
+    }, [st.logo, st.logoColor, st.logoCut, st.logoSolid]);
+    const logos = vmLogoList(st);
+    const useLogo = L => set({ logo: L.src, logoCut: !!L.cut, logos });
+    const dropLogo = L => { const list = logos.filter(x => x.id !== L.id); set(Object.assign({ logos: list }, st.logo === L.src ? { logo: null, logoCut: false } : {})); };
+    const logoOpts = () => html`<div class="vmlogoopts">
+      <div class="vml">Your logos <small>tap one to use it on your videos (you can pick another one for any single video too)</small>
+        <div class="vmlogos">
+          <button class=${"vmlogot none" + (!st.logo ? " on" : "")} onClick=${() => set({ logo: null, logoCut: false, logos })}>No logo</button>
+          ${logos.map(L => html`<span key=${L.id} class=${"vmlogot" + (st.logo === L.src ? " on" : "")}><button onClick=${() => useLogo(L)} aria-label="Use this logo"><img src=${st.logo === L.src && logoPrev ? logoPrev : L.src} alt=""/></button><i role="button" aria-label="Delete this logo" onClick=${() => dropLogo(L)}>✕</i></span>`)}
+          ${logos.length < 4 ? html`<button class="vmlogot add" onClick=${() => logoRef.current && logoRef.current.click()}>＋ Add a logo</button>` : null}
+        </div></div>
+      ${st.logo ? html`
+      <div class="vml">Logo colour <small>change it to match each video</small><div class="vmchips">
+        <button class=${"chip" + (!st.logoColor ? " on" : "")} onClick=${() => set({ logoColor: "" })}>Its own colours</button>
+        ${[["#FFFFFF", "White"], ["#111111", "Black"], ["#1E6BFF", "Blue"], ["#FF7A00", "Orange"], ["#F4C430", "Gold"], ["#2EBD59", "Green"], ["#E53935", "Red"]].map(([v, l]) => html`<button key=${v} class=${"swatch big" + (st.logoColor === v ? " on" : "")} style=${"background:" + v} onClick=${() => set({ logoColor: v })} aria-label=${l} title=${l}></button>`)}
+        <label class="vmcolor"><input type="color" value=${st.logoColor || "#FF7A00"} onInput=${e => set({ logoColor: e.target.value })}/>Any colour</label></div>
+        ${st.logoColor ? html`<div class="vmchips"><button class=${"chip" + (!st.logoSolid ? " on" : "")} onClick=${() => set({ logoSolid: false })}>✨ Keep its shine and glow</button><button class=${"chip" + (st.logoSolid ? " on" : "")} onClick=${() => set({ logoSolid: true })}>⬤ One flat colour</button></div>` : null}</div>
+      ${logoHasBg || st.logoCut ? html`<button class=${"gamesw" + (st.logoCut ? " on" : "")} onClick=${() => set({ logoCut: !st.logoCut })} aria-pressed=${st.logoCut ? "true" : "false"}><span class="knob"></span><span>Take away the logo's background<small>Your logo is on a plain background. Take it away so only the logo shows on the video.</small></span></button>` : null}
+      <div class="vml">Where it sits${chips([["tl", "Top left"], ["tc", "Top middle"], ["tr", "Top right"], ["bc", "Bottom middle, with my name and socials"]], "logoPos")}</div>
+      ${chips([["s", "Small"], ["m", "Medium"], ["l", "Large"]], "logoSize")}
+      ${st.logoPos === "bc" ? html`
+        <label class="vml">Words under the logo (you can leave it empty)<input value=${st.logoSub || ""} placeholder="ABUBAKR MBALA" onInput=${e => set({ logoSub: e.target.value.slice(0, 40) })}/></label>
+        <button class=${"gamesw" + (st.logoSocial ? " on" : "")} onClick=${() => set({ logoSocial: !st.logoSocial })} aria-pressed=${st.logoSocial ? "true" : "false"}><span class="knob"></span><span>Social row under it<small>Little icons, then your @name, in a thin rounded line</small></span></button>
+        ${st.logoSocial ? html`${!st.handle ? html`<p class="help">Type your @name above so it shows in the row.</p>` : null}
+          <div class="vmchips">${VM_SOCIALS.map(([k, l]) => { const on = (st.socials || []).includes(k); return html`<button key=${k} class=${"chip" + (on ? " on" : "")} onClick=${() => set({ socials: on ? (st.socials || []).filter(x => x !== k) : VM_SOCIALS.map(x => x[0]).filter(x => x === k || (st.socials || []).includes(x)) })}>${on ? "✓ " : ""}${l}</button>`; })}</div>` : null}` : null}` : null}
+    </div>`;
     const sw = (key, label, note) => html`<button class=${"gamesw" + (st[key] ? " on" : "")} onClick=${() => set({ [key]: !st[key] })} aria-pressed=${st[key] ? "true" : "false"}><span class="knob"></span><span>${label}${note ? html`<small>${note}</small>` : null}</span></button>`;
     return html`<div class="full studio vm vmstyle" role="dialog" aria-label="My style">
       <div class="fhead"><span>🎨 My style</span><button class="iconbtn" onClick=${onClose} aria-label="Close"><${Ic.x}/></button></div>
@@ -12483,13 +12978,23 @@ notify pgrst, 'reload schema';
       </div>
       <div class="sfoot vmform">
         <p class="help">One look on every video, so people know it's you. Start from one of these, then make it yours.</p>
-        <div class="vmchips">${Object.keys(VM_PRESETS).map(k => html`<button key=${k} class=${"chip" + (st.preset === k ? " on" : "")} onClick=${() => { const p = Object.assign({}, VM_PRESETS[k]); delete p.name; set(Object.assign(p, { preset: k })); }}>${VM_PRESETS[k].name}</button>`)}</div>
+        <div class="vmstep"><b>1 · Pick a look</b>
+          <div class="vmlookcards">${Object.keys(VM_PRESETS).map(k => { const P = VM_PRESETS[k], Lk = VM_LOOKS[P.look] || VM_LOOKS.night, F = VM_FONTS[P.font] || VM_FONTS.poppins; return html`<button key=${k} class=${"vmlookcard" + (st.preset === k ? " on" : "")} style=${"background:linear-gradient(160deg," + Lk.bg[0] + "," + Lk.bg[1] + ")"} onClick=${() => { const p = Object.assign({}, P); delete p.name; set(Object.assign(p, { preset: k, bg: null, capFont: null })); }}><span class="lk1" style=${"font-family:'" + F.css + "';font-weight:" + F.w + ";color:" + P.acc}>Aa</span><span class="lk2" style=${"background:" + P.acc}></span><small>${P.name}</small></button>`; })}</div></div>
+        <div class="vmstep"><b>2 · Your colour</b>
+          <div class="vmchips">${VM_ACCS.map(a => html`<button key=${a} class=${"swatch big" + (st.acc === a ? " on" : "")} style=${"background:" + a} onClick=${() => set({ acc: a, capHi: null })} aria-label="Colour"></button>`)}<label class="vmcolor"><input type="color" value=${st.acc || "#FFD54A"} onInput=${e => set({ acc: e.target.value, capHi: null })}/>Any colour</label></div></div>
+        <div class="vmstep"><b>3 · How your subtitles look</b>
+          <div class="vmcapcards">${[["pop", "BIG WORDS", "3 at a time"], ["hl", "Highlighted", "the word you say lights up"], ["box", "In a box", "a line at a time"], ["word", "ONE", "word at a time"], ["off", "None", "no subtitles"]].map(([k, a, b]) => html`<button key=${k} class=${"vmcapcard " + k + (st.caps === k ? " on" : "")} onClick=${() => set({ caps: k })} style=${"--acc:" + (st.acc || "#FFD54A")}><span>${k === "hl" ? html`Highlighted <i>word</i>` : a}</span><small>${b}</small></button>`)}</div>
+          ${st.caps !== "off" && st.caps !== "box" ? chips([[undefined, "Black outline"], ["shadow", "Soft shadow (like a film)"]], "capFx") : null}</div>
+        <div class="vmstep"><b>4 · Your name and logo</b>
+          <div class="vmrow2"><input value=${st.name} placeholder="Your name" onInput=${e => set({ name: e.target.value.slice(0, 40) })}/><input value=${st.handle} placeholder="@yourname" onInput=${e => set({ handle: e.target.value.slice(0, 40) })}/></div>
+          ${logoOpts()}</div>
+        <div class="srow"><button class="btn" onClick=${() => { if (vmSaveStyle(st)) { toast("Saved. Every video now uses your style."); onClose(); } else toast("Couldn't save. Try a smaller logo."); }}>✓ Save my style</button></div>
+        <details class="vmmore" open=${!!focus}><summary>More settings (fonts, sizes, opening, ending…)</summary>
         <label class="vml">Your name (shown at the start)<input value=${st.name} placeholder="Abubakr" onInput=${e => set({ name: e.target.value.slice(0, 40) })}/></label>
         <label class="vml">What you do (under your name)<input value=${st.role} placeholder="Reading teacher · Lusaka" onInput=${e => set({ role: e.target.value.slice(0, 50) })}/></label>
         <label class="vml">Your @name on the video<input value=${st.handle} placeholder="@yourname" onInput=${e => set({ handle: e.target.value.slice(0, 40) })}/></label>
-        <div class="vml" id="vst-open">Logo: big in the opening and the ending, and in the top corner all the way through
-          ${st.logo ? html`<span class="vmlogo"><img src=${st.logo} alt="Your logo"/><button class="chip" onClick=${() => set({ logo: null })}>Remove</button></span>
-            ${chips([["s", "Small"], ["m", "Medium"], ["l", "Large"]], "logoSize")}` : html`<button class="chip" onClick=${() => logoRef.current && logoRef.current.click()}>＋ Add your logo</button>`}
+        <div class="vml" id="vst-open">Logo: big in the opening and the ending, and on every frame where you choose (step 4)
+          ${st.logo ? null : html`<button class="chip" onClick=${() => logoRef.current && logoRef.current.click()}>＋ Add your logo</button>`}
           <input ref=${logoRef} type="file" accept="image/*" style="display:none" onChange=${pickLogo}/></div>
         <div class="vml">Opening sound (a nasheed, a saying, a sound), on every video
           ${op && op.blob ? html`<div class="vmsnd"><button class="chip" onClick=${() => { const a = new Audio(URL.createObjectURL(op.blob)); a.play().catch(() => {}); setTimeout(() => a.pause(), (st.openerUse || 8) * 1000); }}>▶</button><span>${op.name}</span><button class="chip" onClick=${async () => { await vmLib.setOpener(null).catch(() => {}); setOp(null); }}>Remove</button></div>
@@ -12514,6 +13019,7 @@ notify pgrst, 'reload schema';
             <div class="vml">Subtitle letters<div class="vmchips"><button class=${"chip" + (!st.capFont ? " on" : "")} onClick=${() => set({ capFont: null })}>Same as the video</button>${Object.keys(VM_FONTS).map(k => html`<button key=${k} class=${"chip" + (st.capFont === k ? " on" : "")} style=${"font-family:'" + VM_FONTS[k].css + "';font-weight:" + VM_FONTS[k].w} onClick=${() => set({ capFont: k })}>${VM_FONTS[k].name}</button>`)}</div></div>
             <label class="vmvol">Size <b>${Math.round((st.capSize || 1) * 100)}%</b><input type="range" min="0.6" max="1.6" step="0.05" value=${st.capSize || 1} onInput=${e => set({ capSize: +e.target.value })}/></label>
             ${chips([["", "Automatic"], ["upper", "ALL CAPS"], ["as", "As I said it"]], "capCase")}
+            <div class="vml">Around the words${chips([[undefined, "Black outline"], ["shadow", "Soft shadow"], ["none", "Nothing"]], "capFx")}</div>
             <p class="help">TikTok, Reels and Shorts put their buttons along the bottom and right, so subtitles a bit above the middle are seen best.</p>` : null}</div>
         <div class="vml">When you show something${chips([["split", "Split: you on top"], ["pip", "You in the corner"], ["thing", "Only the thing"]], "showLay")}</div>
         <div class="vml">You in the corner looks${chips([["round", "Rounded"], ["circle", "Circle"], ["square", "Square"]], "camShape")}</div>
@@ -12525,6 +13031,7 @@ notify pgrst, 'reload schema';
           ${sw("bar", "Progress bar", "A thin line along the top that fills up")}
           ${sw("tagOn", "@name on every frame")}
         </div>
+        </details>
         <div class="srow"><button class="btn quiet" onClick=${onClose}>Close</button><button class="btn" onClick=${() => { if (vmSaveStyle(st)) { toast("Saved. Every video now uses your style."); onClose(); } else toast("Couldn't save. Try a smaller logo."); }}>Save my style</button></div>
       </div>
     </div>`;
@@ -12559,6 +13066,171 @@ notify pgrst, 'reload schema';
     </div>`;
   }
   // pick a country: a map that zooms into it, or its flag
+  // this video's logo: which one (or none), its colour, where
+  function VMBrand({ st, proj, setProj, onClose, onMore }) {
+    const b = proj.brand || {}, logos = vmLogoList(st), set = x => setProj(p => ({ brand: Object.assign({}, p.brand || {}, x) }));
+    const cur = b.logo === "none" ? "none" : b.logo || (logos.find(L => L.src === st.logo) || {}).id || (st.logo ? "l1" : "none");
+    const col = b.color != null ? b.color : st.logoColor || "", solid = b.solid != null ? b.solid : !!st.logoSolid, pos = b.pos || st.logoPos || "tl";
+    const eff = vmStyleFor(st, proj), [prev, setPrev] = useState(null);
+    useEffect(() => { if (!eff.logo) { setPrev(null); return; } let live = true; const im = new Image(); im.onload = () => { if (live) try { setPrev(vmLogoPaint(im, eff.logoColor || "", !!eff.logoCut, !!eff.logoSolid).toDataURL("image/png")); } catch (e) {} }; im.src = eff.logo; return () => { live = false; }; }, [eff.logo, eff.logoColor, eff.logoCut, eff.logoSolid]);
+    return html`<div class="scrim" onClick=${e => { if (e.target === e.currentTarget) onClose(); }}>
+      <div class="sheet vmbrand" role="dialog" aria-label="This video's logo">
+        <h3 style="margin:0">⭐ Logo on this video</h3>
+        ${!logos.length ? html`<p class="help">You haven't added a logo yet.</p><button class="btn" onClick=${onMore}>＋ Add my logo in My style</button>` : html`
+        <div class="vmlogos">
+          <button class=${"vmlogot none" + (cur === "none" ? " on" : "")} onClick=${() => set({ logo: "none" })}>No logo</button>
+          ${logos.map(L => html`<span key=${L.id} class=${"vmlogot" + (cur === L.id ? " on" : "")}><button onClick=${() => set({ logo: L.id })} aria-label="Use this logo"><img src=${cur === L.id && prev ? prev : L.src} alt=""/></button></span>`)}
+        </div>
+        ${cur !== "none" ? html`
+          <div class="vml">Colour<div class="vmchips">
+            <button class=${"chip" + (!col ? " on" : "")} onClick=${() => set({ color: "" })}>Its own colours</button>
+            ${[["#FFFFFF", "White"], ["#111111", "Black"], ["#1E6BFF", "Blue"], ["#FF7A00", "Orange"], ["#F4C430", "Gold"], ["#2EBD59", "Green"], ["#E53935", "Red"]].map(([v, l]) => html`<button key=${v} class=${"swatch big" + (col === v ? " on" : "")} style=${"background:" + v} onClick=${() => set({ color: v })} aria-label=${l} title=${l}></button>`)}
+            <label class="vmcolor"><input type="color" value=${col || "#FF7A00"} onInput=${e => set({ color: e.target.value })}/>Any colour</label></div>
+            ${col ? html`<div class="vmchips"><button class=${"chip" + (!solid ? " on" : "")} onClick=${() => set({ solid: false })}>✨ Keep its shine</button><button class=${"chip" + (solid ? " on" : "")} onClick=${() => set({ solid: true })}>⬤ One flat colour</button></div>` : null}</div>
+          <div class="vml">Where<div class="vmchips">${[["tl", "Top left"], ["tc", "Top middle"], ["tr", "Top right"], ["bc", "Bottom middle"]].map(([v, l]) => html`<button key=${v} class=${"chip" + (pos === v ? " on" : "")} onClick=${() => set({ pos: v })}>${l}</button>`)}</div></div>` : null}
+        <p class="help">Only for this video. Your usual logo and colour are set in 🎨 My style.</p>
+        <button class="chip" onClick=${onMore}>🎨 Name, socials row, size… (My style)</button>`}
+        <button class="btn" onClick=${onClose}>Done</button>
+      </div>
+    </div>`;
+  }
+  // choose what's behind you
+  function VMBehind({ value, onPick, onClose, review, hereT }) {
+    const [k, setK] = useState(vmVbgOn(value) ? value.k : "off"), [w, setW] = useState(VMW), [q, setQ] = useState(""), [pics, setPics] = useState(null), [scope, setScope] = useState("all");
+    const fileRef = useRef(null);
+    useEffect(() => { vmVbgLib.list().then(l => setPics(l.map(x => ({ id: x.id, url: URL.createObjectURL(x.blob) })))).catch(() => setPics([])); vmSeg().catch(() => {}); }, []);
+    useEffect(() => { if (k === "flag" && !w) vmWorld().then(setW).catch(() => {}); }, [k]);
+    const pick = v => onPick(v, scope);
+    const norm = x => String(x).toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g, "");
+    const flagUrl = c => "data:image/svg+xml;charset=utf-8," + encodeURIComponent(c.svg);
+    async function addPic(e) { const f = e.target.files && e.target.files[0]; e.target.value = ""; if (!f) return; try { await createImageBitmap(f); const id = await vmVbgLib.add(f); setPics(p => [{ id, url: URL.createObjectURL(f) }].concat(p || [])); pick({ k: "pic", ref: id }); } catch (x) { toast("That picture couldn't be used."); } }
+    const cols = ["#000000", "#FFFFFF", "#1E6BFF", "#0E3B2E", "#7A1F2B", "#F4C430", "#2EBD59", "#FF7A00"];
+    return html`<div class="scrim" onClick=${e => { if (e.target === e.currentTarget) onClose(); }}>
+      <div class="sheet vmbehind" role="dialog" aria-label="Behind me">
+        <h3 style="margin:0">🪄 Behind me</h3>
+        <p class="help">Takes away the room behind you, like a green screen, and puts something else there. Works best with light in front of you and your whole head and shoulders in the picture.</p>
+        ${review ? html`<div class="vmchips"><button class=${"chip" + (scope === "all" ? " on" : "")} onClick=${() => setScope("all")}>The whole video</button>${hereT != null ? html`<button class=${"chip" + (scope === "here" ? " on" : "")} onClick=${() => setScope("here")}>From the white line on</button>` : null}</div>` : null}
+        <div class="vbggrid">${VM_VBGS.map(([kk, ic, lbl]) => html`<button key=${kk} class=${"vbgtile" + (k === kk ? " on" : "")} onClick=${() => { setK(kk); if (kk === "off" || kk === "blur" || kk === "black" || kk === "paper" || kk === "studio") pick(kk === "off" ? null : { k: kk }); }}><span>${ic}</span>${lbl}</button>`)}</div>
+        ${k === "color" ? html`<div class="vmchips">${cols.map(c => html`<button key=${c} class=${"swatch big" + (value && value.k === "color" && value.c === c ? " on" : "")} style=${"background:" + c} onClick=${() => pick({ k: "color", c })} aria-label="Colour"></button>`)}<label class="vmcolor"><input type="color" value=${(value && value.c) || "#1E6BFF"} onChange=${e => pick({ k: "color", c: e.target.value })}/>Any colour</label></div>` : null}
+        ${k === "pic" ? html`<div class="vbgpics">
+            <button class="vbgpic add" onClick=${() => fileRef.current && fileRef.current.click()}>＋<small>Add a picture</small></button>
+            ${(pics || []).map(x => html`<span key=${x.id} class=${"vbgpic" + (value && value.ref === x.id ? " on" : "")}><button style=${"background-image:url(" + x.url + ")"} onClick=${() => pick({ k: "pic", ref: x.id })} aria-label="Use this picture"></button><i role="button" aria-label="Delete" onClick=${async () => { await vmVbgLib.del(x.id); setPics(p => p.filter(y => y.id !== x.id)); }}>✕</i></span>`)}
+          </div><p class="help">A photo of a newspaper, a library, a mosque, a city… It's kept on this phone for your next videos.</p>
+          <input ref=${fileRef} type="file" accept="image/*" style="display:none" onChange=${addPic}/>` : null}
+        ${k === "flag" ? (!w ? html`<p class="help">Loading the flags…</p>` : html`<input class="vmsearch" value=${q} onInput=${e => setQ(e.target.value)} placeholder="Search: Zambia, Palestine…"/>
+          <div class="vmclist short">${w.countries.filter(c => !q || norm(c.name).includes(norm(q))).slice(0, 80).map(c => html`<button key=${c.a2} class=${"vmcrow" + (value && value.a2 === c.a2 ? " on" : "")} onClick=${() => pick({ k: "flag", a2: c.a2 })}><img src=${flagUrl(c)} alt="" loading="lazy"/><span>${c.name}</span></button>`)}</div>`) : null}
+        <p class="help">The first time, it downloads a small helper (about 6 MB). Your recording keeps the real camera, so you can change or remove the background later in the editor.</p>
+        <button class="btn" onClick=${onClose}>Done</button>
+      </div>
+    </div>`;
+  }
+  /* ===================== A post to read out (someone's tweet, a statement, a page) =====================
+     The picture of the post goes behind you. You can stand in front of it, step into the corner, or leave the screen.
+     While you read it, the words you say light up on the post itself and the view glides along the lines, zoomed in to read. */
+  const VM_TESS = "https://cdn.jsdelivr.net/npm/tesseract.js@5.1.1/dist/";
+  let vmTessP = null, vmTessLog = null;
+  function vmTess() {
+    if (vmTessP) return vmTessP;
+    vmTessP = (async () => {
+      if (!window.Tesseract) await new Promise((res, rej) => { const sc = document.createElement("script"); sc.src = VM_TESS + "tesseract.min.js"; sc.onload = res; sc.onerror = () => rej(new Error("load")); document.head.appendChild(sc); });
+      return window.Tesseract.createWorker("eng", 1, { workerPath: VM_TESS + "worker.min.js", corePath: "https://cdn.jsdelivr.net/npm/tesseract.js-core@5.1.1", langPath: "https://cdn.jsdelivr.net/npm/@tesseract.js-data/eng@1.0.0/4.0.0_best_int", logger: m => { if (vmTessLog) vmTessLog(m); } });
+    })();
+    vmTessP.catch(() => { vmTessP = null; });
+    return vmTessP;
+  }
+  // find every word on the picture and where it sits (on the phone; nothing is sent anywhere)
+  async function vmOcr(blob, onProg) {
+    const bm = await createImageBitmap(blob), k = Math.min(2, Math.max(1, 1400 / bm.width)), cv = document.createElement("canvas");
+    cv.width = Math.round(bm.width * k); cv.height = Math.round(bm.height * k); cv.getContext("2d").drawImage(bm, 0, 0, cv.width, cv.height);
+    vmTessLog = m => { if (onProg && m && m.status === "recognizing text") onProg(m.progress || 0); };
+    try {
+      const w = await vmTess(), { data } = await w.recognize(cv), out = [];
+      (data.lines || []).forEach((ln, li) => (ln.words || []).forEach(wd => { const t = String(wd.text || "").trim(); if (!t || (wd.confidence || 0) < 35) return; const b = wd.bbox; out.push([t, b.x0 / k, b.y0 / k, b.x1 / k, b.y1 / k, li]); }));
+      return { w: bm.width, h: bm.height, words: out };
+    } finally { vmTessLog = null; }
+  }
+  // which word you were saying when, matched to your voice
+  function vmPostAlign(it, words, t0) {
+    if (!it.ocr || !it.ocr.words || !it.ocr.words.length || !words) return null;
+    let p = vmPostTxt.get(it.ocr); if (!p) { p = { id: it.id + "#post", text: it.ocr.words.map(w => w[0]).join(" ") }; vmPostTxt.set(it.ocr, p); }
+    return vmReadAlign(p, words, t0);
+  }
+  const vmPostTxt = new WeakMap();
+  // where the view is at time t: the whole post first, then gliding from line to line as you read
+  function vmPostView(it, A, t, box, iw, ih, focusY) {
+    const base = { s: Math.min(box.w / iw, box.h / ih), cx: iw / 2, cy: ih / 2 };
+    if (base.s * ih > box.h * 0.98 || base.s * iw < box.w * 0.9) { base.s = Math.min(box.w / iw, box.h * 1.6 / ih); base.cy = Math.min(ih / 2, box.h / base.s / 2); }
+    if (!A) return base;
+    const W = it.ocr.words, sx = iw / it.ocr.w, sy = ih / it.ocr.h;
+    let cur = -1; for (let i = 0; i < A.times.length; i++) if (A.times[i] != null && A.times[i] <= t) cur = i;
+    if (cur < 0) return base;
+    const lineOf = i => { const li = W[i][5]; let x0 = 1e9, y0 = 1e9, x1 = -1e9, y1 = -1e9, t0 = Infinity; W.forEach((w, j) => { if (w[5] !== li) return; x0 = Math.min(x0, w[1]); y0 = Math.min(y0, w[2]); x1 = Math.max(x1, w[3]); y1 = Math.max(y1, w[4]); if (A.times[j] != null) t0 = Math.min(t0, A.times[j]); }); return { li, x0: x0 * sx, y0: y0 * sy, x1: x1 * sx, y1: y1 * sy, t0 }; };
+    const viewOf = L => { const lw = Math.max(L.x1 - L.x0, iw * 0.62), s = Math.min(box.w * 0.92 / lw, base.s * 3.2); return { s, cx: Math.max(box.w / s / 2, Math.min(iw - box.w / s / 2, (L.x0 + L.x1) / 2)), cy: (L.y0 + L.y1) / 2, fy: focusY }; };
+    const L = lineOf(cur), now = viewOf(L);
+    let prevI = -1; for (let i = cur - 1; i >= 0; i--) if (W[i][5] !== L.li && A.times[i] != null) { prevI = i; break; }
+    const prev = prevI >= 0 ? viewOf(lineOf(prevI)) : base, k = crEase(Math.max(0, Math.min(1, (t - L.t0) / 0.55)));
+    const mix = (a, b) => a + (b - a) * k;
+    return { s: Math.exp(mix(Math.log(prev.s), Math.log(now.s))), cx: mix(prev.cx, now.cx), cy: mix(prev.cy, now.cy), fy: prev.fy == null ? mix(box.y + box.h / 2, focusY) : focusY };
+  }
+  // draw the post into a box. mode: "front" (you stand in front of it), "corner" (you're small in the corner), "only" (just the post)
+  function vmPost(c, F, it, box, ka, mode) {
+    const { t, s, L } = F, src = F.pic(it.id), [iw, ih] = vmSize(src);
+    c.save(); c.globalAlpha *= ka == null ? 1 : ka; vmClip(c, box);
+    if (!iw) { c.fillStyle = "#0B0F14"; c.fillRect(box.x, box.y, box.w, box.h); c.restore(); return; }
+    const bl = vmBlurOf(src, F.cache); if (bl) { vmCover(c, bl, box.x, box.y, box.w, box.h); c.fillStyle = "rgba(0,0,0,.55)"; c.fillRect(box.x, box.y, box.w, box.h); } else { c.fillStyle = "#0B0F14"; c.fillRect(box.x, box.y, box.w, box.h); }
+    const A = mode !== "front" && F.readWords ? vmPostAlign(it, F.readWords, s.showT) : null;
+    const focusY = box.y + box.h * (mode === "corner" ? (F.G.tall ? 0.3 : 0.38) : 0.45);
+    const V = vmPostView(it, A, t, box, iw, ih, focusY), fy = V.fy == null ? box.y + box.h / 2 : V.fy;
+    const x = box.x + box.w / 2 - V.cx * V.s, y = fy - V.cy * V.s;
+    c.save(); c.shadowColor = "rgba(0,0,0,.5)"; c.shadowBlur = 30; c.shadowOffsetY = 8; c.imageSmoothingQuality = "high"; c.drawImage(src, x, y, iw * V.s, ih * V.s); c.restore();
+    if (A) {   // the words you've read, marked like a highlighter pen; the word you're on fills in as you say it
+      const W = it.ocr.words, sx = iw / it.ocr.w * V.s, sy = ih / it.ocr.h * V.s, hl = F.st.capHi || L.acc || "#FFD54A";
+      c.save(); c.globalCompositeOperation = "multiply"; c.fillStyle = hl;
+      for (let i = 0; i < W.length; i++) {
+        const tm = A.times[i]; if (tm == null || tm > t) continue;
+        const nx = A.times[i + 1] != null && A.times[i + 1] > tm ? A.times[i + 1] : tm + 0.3, p = Math.min(1, (t - tm) / Math.max(0.12, Math.min(0.5, nx - tm)));
+        const w = W[i], hx = x + w[1] * sx, hy = y + w[2] * sy, hw = (w[3] - w[1]) * sx, hh = (w[4] - w[2]) * sy, pad = hh * 0.18;
+        crRR(c, hx - pad * 0.6, hy - pad, (hw + pad * 1.2) * p, hh + pad * 2, pad); c.fill();
+      }
+      c.restore();
+    }
+    c.restore();
+  }
+  // you, cut out of your room, standing in front of the post or small in its corner
+  function vmCutDraw(c, F, src, mode) {
+    const { G } = F, [sw, sh] = vmSize(src); if (!sw) return null;
+    let s, x, y;
+    if (mode === "front") { s = Math.max(G.W / sw, G.H * 0.8 / sh); x = (G.W - sw * s) / 2; y = G.H - sh * s; }
+    else { s = G.H * (G.tall ? 0.44 : 0.62) / sh; const w = sw * s; x = Math.min(G.W - w * 0.82, G.W * (G.tall ? 0.97 : 0.98) - w * 0.5 - w * 0.32); y = G.H - sh * s; }
+    c.save(); c.shadowColor = "rgba(0,0,0,.45)"; c.shadowBlur = 26; c.shadowOffsetY = 6;
+    vmDraw(c, src, x, y, sw * s, sh * s, F.s.bw, F.camMirror); c.restore();
+    return { x, y, w: sw * s, h: sh * s };
+  }
+  // add a post: its picture, then the words on it are found
+  function VMPostSheet({ onClose, onAdd }) {
+    const [f, setF] = useState(null), [url, setUrl] = useState(null), [p, setP] = useState(null), [ocr, setOcr] = useState(null), [err, setErr] = useState(""), [who, setWho] = useState("");
+    const ref = useRef(null);
+    async function pick(e) {
+      const file = e.target.files && e.target.files[0]; e.target.value = ""; if (!file) return;
+      setF(file); setUrl(URL.createObjectURL(file)); setOcr(null); setErr(""); setP(0);
+      try { const o = await vmOcr(file, setP); setOcr(o); setP(null); } catch (x) { setP(null); setOcr({ w: 1, h: 1, words: [] }); setErr("Couldn't read the words on it (check your internet). You can still use it: it shows behind you, just without the words lighting up."); }
+    }
+    return html`<div class="scrim" onClick=${e => { if (e.target === e.currentTarget) onClose(); }}>
+      <div class="sheet vmpost" role="dialog" aria-label="Read a post">
+        <h3 style="margin:0">📰 Read a post</h3>
+        <p class="help">A screenshot of a post, a statement or a page. It goes behind you; you can stay in front of it, go to the corner, or leave so only the post shows. When you read it out, the words light up on the post and it zooms along the lines.</p>
+        ${url ? html`<div class="vmpostprev"><img src=${url} alt="The post"/>${ocr && ocr.words.length ? html`<svg viewBox=${"0 0 " + ocr.w + " " + ocr.h} preserveAspectRatio="none">${ocr.words.map((w, i) => html`<rect key=${i} x=${w[1]} y=${w[2]} width=${w[3] - w[1]} height=${w[4] - w[2]}/>`)}</svg>` : null}</div>` : html`<button class="btn" onClick=${() => ref.current && ref.current.click()}>🖼 Pick the screenshot</button>`}
+        ${p != null ? html`<p class="help">🔎 Finding the words on it… ${Math.round(p * 100)}% <small>(the first time it downloads a small reader, about 5 MB)</small></p>` : null}
+        ${ocr && ocr.words.length ? html`<p class="help ok">✓ Found ${ocr.words.length} words. They light up as you read them.</p>` : null}
+        ${err ? html`<p class="help warn">${err}</p>` : null}
+        ${url ? html`<label class="vml">Who posted it (optional)<input value=${who} placeholder="e.g. The President" onInput=${e => setWho(e.target.value.slice(0, 50))}/></label>` : null}
+        <input ref=${ref} type="file" accept="image/*" style="display:none" onChange=${pick}/>
+        <div class="vmchips">${url ? html`<button class="btn quiet slim" onClick=${() => ref.current && ref.current.click()}>Another picture</button>` : null}
+          <button class="btn" disabled=${!f || p != null} onClick=${() => onAdd({ kind: "post", name: who || "Post", who, blob: f, ocr })}>Add</button>
+          <button class="btn quiet" onClick=${onClose}>Cancel</button></div>
+      </div>
+    </div>`;
+  }
   function VMPlaces({ onClose, onAdd }) {
     const [w, setW] = useState(VMW), [err, setErr] = useState(false), [q, setQ] = useState(""), [sel, setSel] = useState(null), [trip, setTrip] = useState(null);
     useEffect(() => { if (!w) vmWorld().then(setW).catch(() => setErr(true)); }, []);
@@ -12677,7 +13349,7 @@ notify pgrst, 'reload schema';
         case "top": cT(q.t); tp = { id: q.id || vmCid(), a: q.t, ref: q.ref }; break;
         case "topx": cT(q.t); break;
         case "bw": T.bws.push({ id: q.id || vmCid(), t: q.t, v: !!q.v }); break;
-        case "sfx": case "o": case "pt": T.pts.push(Object.assign({}, q, { id: q.id || vmCid() })); break;
+        case "sfx": case "o": case "pt": case "vbg": T.pts.push(Object.assign({}, q, { id: q.id || vmCid() })); break;
         default: T.other.push(q);
       }
     }
@@ -12757,11 +13429,11 @@ notify pgrst, 'reload schema';
     for (const c of L) { const l = out[out.length - 1]; if (l && c[0] <= l[1] + 0.05) l[1] = Math.max(l[1], c[1]); else out.push([r2e(c[0]), r2e(c[1])]); }
     return out;
   }
-  const vmItemIcon = it => (!it ? "❔" : it.kind === "vid" ? (it.screen ? "🖥" : "▶") : it.kind === "img" ? "🖼" : it.kind === "map" ? "🗺" : it.kind === "flag" ? "🏳" : it.kind === "trip" ? "✈" : it.kind === "read" ? "📜" : it.kind === "ban" ? "▬" : it.kind === "top" ? "🔝" : "Aa");
+  const vmItemIcon = it => (!it ? "❔" : it.kind === "post" ? "📰" : it.kind === "vid" ? (it.screen ? "🖥" : "▶") : it.kind === "img" ? "🖼" : it.kind === "map" ? "🗺" : it.kind === "flag" ? "🏳" : it.kind === "trip" ? "✈" : it.kind === "read" ? "📜" : it.kind === "ban" ? "▬" : it.kind === "top" ? "🔝" : it.kind === "tier" ? "🏆" : it.kind === "person" ? "👤" : "Aa");
   const vmItemName = it => (!it ? "(taken out)" : it.kind === "vid" ? it.name || "Clip" : it.kind === "img" ? it.name || "Picture" : it.kind === "trip" ? (it.stops || []).map(x => x.name).join(" → ") : it.name || it.text || "Words");
-  const vmItemDur = it => (it.kind === "vid" ? Math.max(2, Math.min(it.secs || 8, 20)) : it.kind === "trip" ? 0.9 + Math.max(1, (it.stops || []).length - 1) * VM_LEG + 2.5 : it.kind === "map" ? 6 : it.kind === "read" ? 8 : 4);
-  const VM_PTS = { sfx: q => (q.v === "boom" ? "💥" : q.v === "freeze" ? "🥶" : q.v === "zoom" ? "🔎" : "🎵"), o: q => (q.s === "circle" ? "⭕" : q.s === "arrow" ? "➡️" : q.s === "hl" ? "🖍" : "✏️"), pt: () => "👉" };
-  const vmPtName = q => (q.k === "sfx" ? (q.v === "boom" ? "Boom" : q.v === "freeze" ? "Freeze" : q.v === "zoom" ? "Zoom in" : "Your sound") : q.k === "pt" ? "Pointer" : q.s === "circle" ? "Circle" : q.s === "arrow" ? "Arrow" : q.s === "hl" ? "Highlight" : "Drawing");
+  const vmItemDur = it => (it.kind === "post" ? 12 : it.kind === "vid" ? Math.max(2, Math.min(it.secs || 8, 20)) : it.kind === "trip" ? 0.9 + Math.max(1, (it.stops || []).length - 1) * VM_LEG + 2.5 : it.kind === "map" ? 6 : it.kind === "read" ? 8 : it.kind === "tier" ? 30 : it.kind === "person" ? 7 : 4);
+  const VM_PTS = { sfx: q => (q.v === "boom" ? "💥" : q.v === "freeze" ? "🥶" : q.v === "zoom" ? "🔎" : "🎵"), o: q => (q.s === "circle" ? "⭕" : q.s === "arrow" ? "➡️" : q.s === "hl" ? "🖍" : "✏️"), pt: () => "👉", vbg: () => "🪄" };
+  const vmPtName = q => (q.k === "vbg" ? "Behind me: " + vmVbgName(q.v) : q.k === "sfx" ? (q.v === "boom" ? "Boom" : q.v === "freeze" ? "Freeze" : q.v === "zoom" ? "Zoom in" : "Your sound") : q.k === "pt" ? "Pointer" : q.s === "circle" ? "Circle" : q.s === "arrow" ? "Arrow" : q.s === "hl" ? "Highlight" : "Drawing");
   const VM_LAYC = { cam: "#3B7DD8", split: "#7A4FD0", pip: "#1F9E8A", thing: "#C2671B" };
   // pick what to show: anything already in the video, or something new
   function VMPick({ items, kinds, title, onPick, onClose, onAddFile, onAddText, onAddPlace }) {
@@ -12899,7 +13571,7 @@ notify pgrst, 'reload schema';
   const vmThumbAt = (S, t) => { if (!S || !S.list.length) return null; let i = Math.max(0, Math.min(S.list.length - 1, Math.round(t / S.step))); for (let k = 0; k < 4 && !S.list[i]; k++) i = Math.max(0, i - 1); return S.list[i] ? S.list[i].url : null; };
 
   /* ===== the editor: a big picture on top, a timeline you slide under a fixed line, tools along the bottom (like CapCut) ===== */
-  function VMTimeline({ take, items, camOn, st, lib, pl, onTake, onDirty, onDone, addFile, addText, addPlace, music, setMusic, titles, setTitles, sty }) {
+  function VMTimeline({ take, items, camOn, st, lib, pl, onTake, onDirty, onDone, addFile, addText, addPlace, music, setMusic, titles, setTitles, sty, behind }) {
     const P = useMemo(() => vmSeq(take), [take.seq, take.trim, take.cuts, take.secs]);
     const len = vmSeqLen(P), secs = take.secs;
     const [pps, setPps] = useState(() => Math.max(14, Math.min(70, 2600 / Math.max(10, len))));
@@ -13060,6 +13732,7 @@ notify pgrst, 'reload schema';
         ${tool("▬", "Strip", () => { if (!needRec()) setPick({ mode: "strip" }); })}
         ${tool("✂️", "Cut a part", () => { setCutA(now); setSel(null); })}
         ${tool("⏩", "No pauses", () => { const r = VMS.noPauses(P, lv.current, 0.6, 0.09); if (!r.n) { toast("No long pauses found."); return; } setP(r.P); toast("Took out " + r.n + " pauses (" + r.secs.toFixed(1) + "s). Undo (↶) if you want them back."); })}
+        ${camOn && behind ? tool("🪄", "Behind me", () => behind(tnow)) : null}
         ${camOn ? tool("⚫", "B&W", () => { if (needRec()) return; const on = !vmBwAt(T, tnow); setT(VME.bwRange(T, tnow, secs, on)); toast(on ? "Black & white from here." : "Colour from here."); }) : null}
         ${sty ? tool("💬", "Captions", () => togglePanel("caps"), { on: panel === "caps" }) : null}
         ${sty ? tool("🎬", "Opening", () => togglePanel("open"), { on: panel === "open" }) : null}`;
@@ -13071,12 +13744,14 @@ notify pgrst, 'reload schema';
           <small>Where</small>${ch([["high", "High"], ["mid", "Middle"], ["low", "Lower"]], "capPos")}
           <label class="ccslide">Size <b>${Math.round((S2.capSize || 1) * 100)}%</b><input type="range" min="0.6" max="1.6" step="0.05" value=${S2.capSize || 1} onChange=${e => set({ capSize: +e.target.value })}/></label>
           ${ch([["", "Auto case"], ["upper", "ALL CAPS"], ["as", "As said"]], "capCase")}
+          <small>Around the words</small>${ch([["", "Black outline"], ["shadow", "Soft shadow"], ["none", "Nothing"]], "capFx")}
           <div class="ccchips"><label class="ccchip">Words <input type="color" value=${S2.capText || "#FFFFFF"} onChange=${e => set({ capText: e.target.value })}/></label><label class="ccchip">Word being said <input type="color" value=${S2.capHi || st.acc || "#FFD54A"} onChange=${e => set({ capHi: e.target.value })}/></label></div>
           <small>Press play to see them. They're saved to My style, so every video gets them.</small></div>`; }
       if (panel === "open" && sty) { const S2 = sty.st, set = sty.set, sw = (k, label) => html`<button class=${"ccchip" + (S2[k] ? " on" : "")} onClick=${() => set({ [k]: !S2[k] })}>${S2[k] ? "✓ " : ""}${label}</button>`;
         sub = html`<div class="ccsub">
           <small>How the video starts and ends</small>
           <div class="ccchips">${sw("intro", "Opening: logo + title")}${sw("nameTag", "Name tag at the start")}${sw("outro", "Ending: follow @name")}${sw("bar", "Progress bar")}${sw("tagOn", "@name on every frame")}</div>
+          <div class="ccchips"><button class="ccchip" onClick=${sty.brand}>⭐ Logo on this video: which one, colour, where</button></div>
           <div class="ccchips"><button class=${"ccchip" + (sty.useHl ? " on" : "")} onClick=${sty.headlines}>📰 Headlines opening${sty.useHl ? " ✓" : ""}</button><button class="ccchip" onClick=${() => sty.more("open")}>🖼 Logo, opening sound, colours…</button></div>
           <small>Press play from the start to see it.</small></div>`; }
       if (panel === "lay") sub = html`<div class="ccsub"><div class="ccchips">${VM_LAYS.map(([k, ic, lbl]) => html`<button key=${k} class=${"ccchip" + (vmLayAt(T, tnow) === k ? " on" : "")} onClick=${() => { setT(VME.layFrom(T, tnow, k)); setPanel(null); }}>${ic} ${lbl}</button>`)}</div><small>From the white line onwards.</small></div>`;
@@ -13090,7 +13765,7 @@ notify pgrst, 'reload schema';
       if (Pk.mode === "strip") { toast("For a strip, pick “A headline strip” or “A big title at the top”."); return; }
       if (tnow == null) { toast("Added. Slide onto your recording and tap Overlay to show it."); return; }
       const b = Math.min(secs, tnow + vmItemDur(it)); if (b - tnow < 0.3) { toast("That's the very end. Slide back a little."); return; }
-      const N = VME.addShow(T, it, tnow, b, camOn, st.showLay); setT(N);
+      const N = VME.addShow(T, it, tnow, b, camOn, it.kind === "post" ? "pip" : st.showLay); setT(N);
       const nx = N.shows.find(x => x.ref === it.id && Math.abs(x.a - tnow) < 0.01); if (nx) setSel({ type: "show", id: nx.id });
       toast("Added over you. Slide to where it should stop and tap “Ends here”.");
     };
@@ -13207,7 +13882,14 @@ notify pgrst, 'reload schema';
     const [col, setCol] = useState(VM_COLS[0]);
     const [paused, setPaused] = useState(false);
     const [peek, setPeek] = useState(null);
-    const [sheet, setSheet] = useState(null);
+    const [sheet, setSheet] = useState(null), behindT = useRef(null);
+    function pickVbg(v, scope) {
+      if (mode === "rec") { add({ k: "vbg", v }); return; }
+      if (mode === "review" && proj.take && scope === "here" && behindT.current != null) { const q = { id: uid().slice(-7), t: Math.round(behindT.current * 100) / 100, k: "vbg", v }; setProj(p => ({ take: Object.assign({}, p.take, { cues: p.take.cues.filter(x => !(x.k === "vbg" && Math.abs(x.t - q.t) < 0.05)).concat(q).sort((a, b) => a.t - b.t) }) })); S.current.dirty = true; return; }
+      setProj(p => (p.take && mode === "review" ? { vbg: v, take: Object.assign({}, p.take, { cues: p.take.cues.filter(x => x.k !== "vbg") }) } : { vbg: v }));
+      try { localStorage.setItem("vm.vbg", JSON.stringify(v)); } catch (e) {}
+      S.current.dirty = true;
+    }
     const [edOn, setEdOn] = useState(!!(start.openEd && start.take));
     const afterAdd = useRef(null), styleFocus = useRef(null);
     // ---- a friend reacting with you ----
@@ -13231,13 +13913,16 @@ notify pgrst, 'reload schema';
         await warmMic(); if (!mic.current) throw new Error("mic");
         if (!vmAC) vmAC = new (window.AudioContext || window.webkitAudioContext)(); if (vmAC.state === "suspended") await vmAC.resume();
         const room = uid(), D = { room, recDest: vmAC.createMediaStreamDestination(), sendDest: vmAC.createMediaStreamDestination(), remote: null, remSrc: null };
-        const v = vref.current; if (v && !v.__src) { try { v.__src = vmAC.createMediaElementSource(v); v.__src.connect(vmAC.destination); } catch (e) {} } if (v && v.__src) v.__src.connect(D.sendDest);
+        // the clip's sound goes to your friend from a copy of it (taking the clip itself through the sound system can freeze it on phones)
+        const v = vref.current;
+        try { const cs = v && (v.captureStream ? v.captureStream() : v.mozCaptureStream ? v.mozCaptureStream() : null); if (cs) { D.clipSrcs = new Map(); const link = t => { if (t.kind !== "audio" || D.clipSrcs.has(t.id)) return; try { const n = vmAC.createMediaStreamSource(new MediaStream([t])); n.connect(D.sendDest); D.clipSrcs.set(t.id, n); } catch (e) {} }; cs.getAudioTracks().forEach(link); cs.addEventListener("addtrack", e => link(e.track)); D.clipCap = cs; } } catch (e) {}
         duoRef.current = D; voiceSrc();
         const vt = cvRef.current.captureStream(24).getVideoTracks()[0];
         D.send = new MediaStream([vt].concat(D.sendDest.stream.getAudioTracks()));
         setDuo({ room, link: vmDuoLink(room), phase: "waiting" }); setSheet("duo");
         stopRoll();   // the recorders restart with your friend's voice mixed in
         D.peer = await vmDuoPeer({ sb, room, role: "host", local: D.send,
+          maxBitrate: 1200000,
           onPhase: ph => setDuo(d => (d ? Object.assign({}, d, { phase: ph }) : d)),
           onRemote: st2 => {
             const g = gref.current;
@@ -13262,7 +13947,8 @@ notify pgrst, 'reload schema';
       const g = gref.current; if (g) g.srcObject = null;
       if (S.current.mode === "rec") guestSegEnd(); else stopRoll();
     }
-    useEffect(() => () => { if (duoRef.current) endDuo(); }, []);   // the editor waiting for something you're adding, to put it on the timeline   // the timeline editor
+    useEffect(() => () => { if (duoRef.current) endDuo(); }, []);
+    useEffect(() => { const k = start.startWith; if (!k || start.take) return; setProj({ startWith: null }); setTimeout(() => { if (k === "rank") setSheet("tier"); else if (k === "person") setSheet("person"); else if (k === "react") startDuo(); }, 400); }, []);   // the editor waiting for something you're adding, to put it on the timeline   // the timeline editor
     // the player: the finished video's own clock (pieces, speeds, reverse), driving the recording, the camera and the clips
     const plR = useRef({ u: 0, on: false, t0: 0, u0: 0 });
     const seqLenNow = () => { const tk2 = projRef.current.take; return tk2 ? vmSeqLen(vmSeq(tk2)) : 0; };
@@ -13346,7 +14032,8 @@ notify pgrst, 'reload schema';
     const clipItem = () => { const s = rec ? cur() : mode === "review" ? S.current.rs : null; const id = rec || mode === "review" ? s && s.show : peek; const it = id ? items[id] : null; return it && it.kind === "vid" ? it : null; };
     function loadClip(it, at) { const v = vref.current; if (!v) return; const u = vmUrl(it); if (v.dataset.id !== it.id) { v.dataset.id = it.id; delete v.dataset.woke; v.preload = "auto"; v.src = u; } try { v.currentTime = at || 0; } catch (e) {} }
     // ---- drawing, many times a second ----
-    Object.assign(S.current, { items, proj, mode, peek, L, G, st, col, camOn, ava, lib, pl: plR.current, plNow: plNowR, plPause: plPauseR });
+    for (const it of proj.items) if (it.entries) for (const e of it.entries) vmEntries.set(e.id, e);
+    Object.assign(S.current, { items, proj, mode, peek, L, G, st: vmStyleFor(st, proj), col, camOn, ava, lib, pl: plR.current, plNow: plNowR, plPause: plPauseR });
     // the presenter, and how loud you are (live while recording, from the recording afterwards)
     const avaRef = useRef(null);
     useEffect(() => {
@@ -13457,8 +14144,14 @@ notify pgrst, 'reload schema';
             if (gp.readyState >= 2 && gp.videoWidth) guestSrc = gp;
           } else if (gp && !gp.paused) gp.pause();
         }
+        // a post behind you: you, cut out of your room
+        let camCut = null;
+        { const itP = s.show ? R.items[s.show] : null; if (camSrc && !R.ava && !guestSrc && itP && itP.kind === "post" && (s.lay === "cam" || s.lay === "pip")) { const K2 = R.keyer2 || (R.keyer2 = vmKeyer()); K2.feed(camSrc, { k: "cut" }, false, 0, !!(R.counting || R.starting)); if (K2.ready) camCut = K2.cv; else if (K2.fail && !R.keyWarned) { R.keyWarned = true; toast("The cut-out couldn't start. Check your internet and open the video again."); } } }
+        // behind me: the room swapped for the background you picked (the recording itself keeps the real camera, so you can change it later)
+        { const vb = s.vbg !== undefined ? s.vbg : R.proj.vbg;
+          if (camSrc && !camCut && !R.ava && vmVbgOn(vb)) { const K = R.keyer || (R.keyer = vmKeyer()); K.feed(camSrc, vb, !!R.proj.mirror && facingNow !== "environment", R.mode === "review" ? t : now / 1000, !!(R.counting || R.starting)); if (K.ready) camSrc = K.cv; if (K.fail && !R.keyWarned) { R.keyWarned = true; toast("The background changer couldn't start. Check your internet and open the video again."); } } }
         if (R.ava && avaRef.current) { const P2 = avaRef.current.P, rv = R.mode === "review"; P2.pose(rv ? t : now / 1000, rv ? vmAvaLevel(R.avaLv, t) : liveLevel(), { acc: R.st.acc }); camSrc = { vmAva: P2, h: VM_WEAK ? 520 : 720 }; }
-        vmFrame(c, { G: G2, L: R.L, st: R.st, proj: R.proj, items: R.items, s, t, camFreeze: R.mode === "rec" ? freezeSnap.current : null, camFit: R.proj.camFit || "whole", camMirror: !!R.proj.mirror && facingNow !== "environment", tb: R.mode === "review" && tk ? R.u || 0 : R.mode === "rec" ? t : 99, cam: camSrc, camOn: R.mode === "review" ? !!(cam && tk && (tk.cam || R.ava)) && !R.vidPiece : cam, pic: id => vmPic(R.items[id]), clip: clipSrc, lite: VM_WEAK && R.mode === "rec", words, readWords: R.mode === "review" && tk ? tk.words : null, prog, out, guest: guestSrc });
+        vmFrame(c, { G: G2, L: R.L, st: R.st, proj: R.proj, items: R.items, s, t, camFreeze: R.mode === "rec" ? freezeSnap.current : null, camFit: R.proj.camFit || "whole", camMirror: !!R.proj.mirror && facingNow !== "environment", tb: R.mode === "review" && tk ? R.u || 0 : R.mode === "rec" ? t : 99, cam: camSrc, camOn: R.mode === "review" ? !!(cam && tk && (tk.cam || R.ava)) && !R.vidPiece : cam, pic: id => vmPic(R.items[id] || vmEntries.get(id)), clip: clipSrc, lite: VM_WEAK && R.mode === "rec", words, readWords: R.mode === "review" && tk ? tk.words : null, prog, out, guest: guestSrc, camCut });
         rects.current = out;
         if (R.mode === "review" && R.proj.titles && R.proj.titles.length) { c.setTransform(cv.width / G2.W, 0, 0, cv.height / G2.H, 0, 0); vmDrawTitles(c, G2, R.proj.titles, R.u || 0, R.st.acc || R.L.acc, cv.width / G2.W); }
         const d = drag.current;
@@ -13507,7 +14200,7 @@ notify pgrst, 'reload schema';
     function tapItem(it) {
       if (!rec) { if (it.live) return; setPeek(peek === it.id ? null : it.id); if (it.kind === "vid") loadClip(it, 0); return; }
       const s = cur();
-      if (it.kind === "read" && s.show !== it.id && !S.current.readTold) { S.current.readTold = true; toast("Read it out loud. When you stop, it listens to your voice and the words light up as you said them."); }
+      if ((it.kind === "read" || it.kind === "post") && s.show !== it.id && !S.current.readTold) { S.current.readTold = true; toast("Read it out loud. When you stop, it listens to your voice and the words light up as you said them."); }
       if (it.kind === "ban") { add(s.ban === it.id ? { k: "banx" } : { k: "ban", ref: it.id }); return; }
       if (it.kind === "top") { add(s.top === it.id ? { k: "topx" } : { k: "top", ref: it.id }); return; }
       if (s.show === it.id) { stopClip(); add({ k: "hide" }); if (camOn) setLay("cam"); return; }
@@ -13520,7 +14213,8 @@ notify pgrst, 'reload schema';
       if (it.kind === "vid" && it.bad) { toast("That clip can't play on this phone. Try another copy of it."); return; }
       if (it.kind === "vid") { const from = clipPos.current[it.id] || 0; add({ k: "show", ref: it.id, at: round2(from) }); loadClip(it, from); }
       else add({ k: "show", ref: it.id });
-      if (camOn && s.lay === "cam" && st.showLay !== "cam") setLay(st.showLay);
+      if (camOn && it.kind === "post" && camReal) { if (s.lay !== "pip") setLay("pip"); }   // a post: you step into its corner (tap Me to stand in front, Only it to leave)
+      else if (camOn && s.lay === "cam" && st.showLay !== "cam") setLay(st.showLay);
       if (it.kind === "vid" && !paused) playClip();
     }
     function playClip() {
@@ -13669,6 +14363,7 @@ notify pgrst, 'reload schema';
       setPeek(null); plPauseR();
       const v0 = vref.current; if (v0 && !v0.paused) v0.pause();
       setStarting(true); S.current.starting = true;
+      try { if (vmAC && vmAC.state === "suspended") vmAC.resume(); } catch (e) {}
       let step = "mic";
       const rolling = !!(r.current && (!camReal || camRec.current));
       if (!rolling) stopRoll();
@@ -13766,7 +14461,7 @@ notify pgrst, 'reload schema';
     useEffect(() => {
       if (mode !== "review" || !proj.take || proj.take.words) return;
       const tk = proj.take; if (S.current.readTried === tk.voice) return;
-      if (!(tk.cues || []).some(q => q.k === "show" && items[q.ref] && items[q.ref].kind === "read")) return;
+      if (!(tk.cues || []).some(q => q.k === "show" && items[q.ref] && (items[q.ref].kind === "read" || items[q.ref].kind === "post"))) return;
       S.current.readTried = tk.voice; toast("Listening to your reading, so the words light up…");
       vmTranscribe(voice()).then(words => { setProj(p => (p.take && p.take.voice === tk.voice ? { take: Object.assign({}, p.take, { words, wordsFor: p.clean && p.take.cleanBlob ? "clean" : "raw" }) } : {})); S.current.dirty = true; toast("Done: the words now light up as you read them. Press play."); })
         .catch(e => toast(e && e.code === "nokey" ? "The words light up once OPENAI_API_KEY is set in Netlify (the same key subtitles use)." : "Couldn't listen to the reading. Check the connection, then tap Subtitles to try again."));
@@ -13797,9 +14492,9 @@ notify pgrst, 'reload schema';
       if (jobBusy) { toast("Another video is being made. Wait for it to finish."); return; }
       const tk = projRef.current.take; if (!tk) return;
       plPauseR();
-      const style = vmStyle();
+      const style = vmStyleFor(vmStyle(), projRef.current);
       let words = null;
-      const needRead = (tk.cues || []).some(q => q.k === "show" && items[q.ref] && items[q.ref].kind === "read");
+      const needRead = (tk.cues || []).some(q => q.k === "show" && items[q.ref] && (items[q.ref].kind === "read" || items[q.ref].kind === "post"));
       if ((projRef.current.subs && style.caps !== "off") || needRead) {
         const want = projRef.current.clean && tk.cleanBlob ? "clean" : "raw";
         if (tk.words && (tk.wordsFor === want || tk.wordsFor === "edited")) words = tk.words;
@@ -13825,14 +14520,20 @@ notify pgrst, 'reload schema';
             : it.kind === "vid" ? html`${it.thumb ? html`<img src=${it.thumb} alt=""/>` : html`<span class="vmtxtin">▶</span>`}<span class="mbadge">${it.screen ? "🖥" : "▶"} ${fmtDur(it.secs || 0)}</span>${prep[it.id] != null ? html`<span class="mup">${Math.round(prep[it.id] * 100)}%</span>` : it.bad ? html`<span class="mup">!</span>` : null}`
             : it.kind === "map" || it.kind === "flag" || it.kind === "trip" ? html`${it.thumb ? html`<img src=${it.thumb} alt=""/>` : null}<span class="mbadge">${it.kind === "map" ? "🗺" : it.kind === "trip" ? "✈" : "🏳"} ${it.kind === "trip" ? (it.stops || []).length + " stops" : it.name}</span>`
             : it.kind === "img" ? html`<img src=${vmUrl(it)} alt=""/>`
+            : it.kind === "person" ? html`${it.blob ? html`<img src=${vmUrl(it)} alt=""/>` : null}<span class="mbadge">👤 ${it.name}</span>`
+            : it.kind === "post" ? html`${it.blob ? html`<img src=${vmUrl(it)} alt=""/>` : null}<span class="mbadge">📰 ${it.who || "Post"}</span>`
+            : it.kind === "tier" ? html`<span class="vmtxtin">🏆 ${it.name}<br/><small>${(it.entries || []).length} to rank</small></span>`
             : html`<span class="vmtxtin">${it.kind === "ban" ? "▬ " : it.kind === "top" ? "🔝 " : it.kind === "read" ? "📜 " : ""}${it.text}</span>`}
         </button>`;
       })}
       ${rec && vmRec.canScreen() && !scr.current ? html`<button class="mthumb madd" onClick=${shareScreen}><span>🖥</span><small>Share my screen</small></button>` : null}
       ${rec ? null : html`
         <button class="mthumb madd" onClick=${() => fileRef.current && fileRef.current.click()}><span>＋</span><small>Picture / clip</small></button>
+        <button class="mthumb madd" onClick=${() => setSheet("post")}><span>📰</span><small>Read a post</small></button>
         <button class="mthumb madd" onClick=${() => setSheet("text")}><span>Aa</span><small>Words</small></button>
         <button class="mthumb madd" onClick=${() => setSheet("place")}><span>🗺</span><small>Map / flag</small></button>
+        <button class="mthumb madd" onClick=${() => setSheet("tier")}><span>🏆</span><small>Tier list</small></button>
+        <button class="mthumb madd" onClick=${() => setSheet("person")}><span>👤</span><small>Person card</small></button>
         ${store.s.lessons && store.s.lessons.length ? html`<button class="mthumb madd" onClick=${() => setLessonPick(true)}><span>📚</span><small>A lesson's board</small></button>` : null}`}
       <input ref=${fileRef} type="file" accept="image/*,video/*" multiple style="display:none" onChange=${addFiles}/>
     </div>`;
@@ -13885,11 +14586,13 @@ notify pgrst, 'reload schema';
             ${camReal ? html`<button class=${"chip" + (proj.bw ? " on" : "")} onClick=${toggleBw}>⚫ Black & white</button>` : null}
             <button class=${"chip" + (duo ? " on" : "")} onClick=${startDuo}>👥 ${duo ? (duo.guest ? "Friend joined ✓" : "Waiting for your friend…") : "React with a friend"}</button>
             <button class="chip" onClick=${() => setStyling(true)}>🎨 My style</button>
+            <button class=${"chip" + (vmStyleFor(st, proj).logo ? " on" : "")} onClick=${() => setSheet("brand")}>⭐ Logo${vmStyleFor(st, proj).logo ? "" : ": none"}</button>
             <button class=${"chip" + (proj.useHl && (proj.headlines || []).some(h => h.text) ? " on" : "")} onClick=${() => setSheet("hl")}>📰 Headlines opening</button>
             <button class="chip" onClick=${() => setSheet("snd")}>🔊 Sounds</button>
           </div>
           ${!camReal ? html`<div class="vml">🧍 A presenter instead of you <small>a 3D character that moves while you talk</small><div class="vmchips"><button class=${"chip" + (!proj.avatar ? " on" : "")} onClick=${() => setProj({ avatar: null })}>None (just the board)</button>${VM_AVAS.map(([k, n]) => html`<button key=${k} class=${"chip" + (proj.avatar === k ? " on" : "")} onClick=${() => setProj({ avatar: k })}>${n}</button>`)}</div></div>` : null}
           ${camReal ? html`<div class="vmclipbar">
+            <button class=${"chip" + (vmVbgOn(proj.vbg) ? " on" : "")} onClick=${() => { behindT.current = null; setSheet("vbg"); }}>🪄 Behind me: ${vmVbgName(proj.vbg)}</button>
             <button class=${"chip" + (proj.mirror ? " on" : "")} onClick=${() => setProj(p => { try { localStorage.setItem("vm.mirror", p.mirror ? "0" : "1"); } catch (e) {} return { mirror: !p.mirror }; })}>↔ ${proj.mirror ? "Flipped (mirror)" : "Not flipped"}</button>
             <button class="chip" onClick=${() => setProj(p => ({ camFit: (p.camFit || "whole") === "whole" ? "fill" : "whole" }))}>${(proj.camFit || "whole") === "whole" ? "🔍 Whole camera picture" : "🔍 Filled (closer)"}</button>
           </div>
@@ -13911,8 +14614,12 @@ notify pgrst, 'reload schema';
           </div>` : null}
         ${rec ? html`
           ${proj.notes ? html`<div class="vmnotes">${proj.notes}</div>` : null}
+          ${s && s.show && items[s.show] && items[s.show].kind === "tier" ? (() => { const T2 = vmTierState(s, s.show), it = items[s.show], f = T2.f && !T2.p[T2.f.e] ? T2.f.e : null; return html`<div class="tierctl">
+            <div class="tierpick">${(it.entries || []).map(e => html`<button key=${e.id} class=${"tierthumb" + (f === e.id ? " on" : "") + (T2.p[e.id] ? " done" : "")} onClick=${() => add({ k: "tierf", ref: it.id, e: e.id })}>${e.blob ? html`<img src=${vmUrl(e)} alt=""/>` : html`<span>${e.name}</span>`}${T2.p[e.id] ? html`<b>${T2.p[e.id].v}</b>` : null}</button>`)}</div>
+            <div class="tierbtns">${VM_TIERS.map(([lab, col]) => html`<button key=${lab} style=${"background:" + col} disabled=${!f} onClick=${() => add({ k: "tier", ref: it.id, e: f, v: lab })}>${lab}</button>`)}<button class="tierundo" onClick=${() => { const last = Object.keys(T2.p).sort((a2, b2) => T2.p[b2].t - T2.p[a2].t)[0]; if (last) add({ k: "tierx", ref: it.id, e: last }); }}>↶</button></div>
+            <small>${f ? "Now tap its tier." : "Tap a picture to show it big, then tap its tier."}</small></div>`; })() : null}
           ${duo && duo.guest ? html`<div class="tools vmlays" role="toolbar" aria-label="Who's on screen">${[["both", "👥", "Both of us"], ["me", "🙂", "Only me"], ["friend", "🧑", "Only my friend"]].map(([k, ic, lbl]) => html`<button key=${k} class=${"tool" + ((s.duo || "both") === k ? " on" : "")} onClick=${() => add({ k: "duo", v: k })}><span>${ic}</span>${lbl}</button>`)}</div>` : null}
-          ${camOn ? html`<div class="tools vmlays" role="toolbar" aria-label="Layout">${VM_LAYS.map(([k, ic, lbl]) => html`<button key=${k} class=${"tool" + (s.lay === k ? " on" : "")} aria-pressed=${s.lay === k ? "true" : "false"} onClick=${() => setLay(k)}><span>${ic}</span>${lbl}</button>`)}<button class="tool" onClick=${flipCam}><span>🔄</span>Flip</button><button class=${"tool" + (s.bw ? " on" : "")} onClick=${toggleBw}><span>⚫</span>B&W</button></div>` : null}
+          ${camOn ? html`<div class="tools vmlays" role="toolbar" aria-label="Layout">${VM_LAYS.map(([k, ic, lbl]) => html`<button key=${k} class=${"tool" + (s.lay === k ? " on" : "")} aria-pressed=${s.lay === k ? "true" : "false"} onClick=${() => setLay(k)}><span>${ic}</span>${lbl}</button>`)}<button class="tool" onClick=${flipCam}><span>🔄</span>Flip</button>${camReal ? html`<button class=${"tool" + (vmVbgOn(s && s.vbg !== undefined ? s.vbg : proj.vbg) ? " on" : "")} onClick=${() => setSheet("vbg")}><span>🪄</span>Behind</button>` : null}<button class=${"tool" + (s.bw ? " on" : "")} onClick=${toggleBw}><span>⚫</span>B&W</button></div>` : null}
           ${tray}${clipBar}
           <div class="tools vmfx" role="toolbar" aria-label="Effects">${VM_FX.map(([k, ic, lbl]) => html`<button key=${k} class="tool" onClick=${() => fxTap(k)}><span>${ic}</span>${lbl}</button>`)}${lib.sounds.map(x => html`<button key=${x.id} class="tool" onClick=${() => fxTap("own:" + x.id)}><span>🎵</span>${x.name}</button>`)}${s.show && items[s.show] && items[s.show].kind !== "text" ? html`<button class=${"tool" + (hlOn ? " on" : "")} onClick=${() => setHlOn(!hlOn)}><span>🖍</span>Highlight</button>` : null}</div>
           ${hlOn ? html`<p class="help">Drag your finger along the lines as you read them: they turn yellow. Tap 🖍 again to stop.</p>` : null}
@@ -13931,7 +14638,8 @@ notify pgrst, 'reload schema';
             onTake=${x => { setProj(p => ({ take: Object.assign({}, p.take, x) })); S.current.dirty = true; }}
             music=${proj.music || null} setMusic=${m => { setProj({ music: m }); S.current.dirty = true; }} titles=${proj.titles || []} setTitles=${x => { setProj({ titles: x }); S.current.dirty = true; }}
             onDirty=${() => { S.current.dirty = true; }} onDone=${() => { plPauseR(); setEdOn(false); }}
-            sty=${{ st, set: patch => { const n = Object.assign({}, st, patch); vmSaveStyle(n); setSt(n); S.current.dirty = true; }, subs: !!proj.subs, setSubs: v => { setProj({ subs: v }); S.current.dirty = true; }, hasWords: !!tk.words, busy, getWords: () => { if (!proj.subs) setProj({ subs: true }); getSubs(); }, useHl: !!proj.useHl, headlines: () => setSheet("hl"), more: k => { styleFocus.current = k; setStyling(true); } }}
+            behind=${t2 => { behindT.current = t2; setSheet("vbg"); }}
+            sty=${{ st, set: patch => { const n = Object.assign({}, st, patch); vmSaveStyle(n); setSt(n); S.current.dirty = true; }, subs: !!proj.subs, setSubs: v => { setProj({ subs: v }); S.current.dirty = true; }, hasWords: !!tk.words, busy, getWords: () => { if (!proj.subs) setProj({ subs: true }); getSubs(); }, useHl: !!proj.useHl, headlines: () => setSheet("hl"), brand: () => setSheet("brand"), more: k => { styleFocus.current = k; setStyling(true); } }}
             addFile=${cb => { afterAdd.current = cb || null; fileRef2.current && fileRef2.current.click(); }} addText=${cb => { afterAdd.current = cb || null; setSheet("text"); }} addPlace=${cb => { afterAdd.current = cb || null; setSheet("place"); }}/>
           <input ref=${fileRef2} type="file" accept="image/*,video/*" multiple style="display:none" onChange=${addFiles}/>` : null}
         ${mode === "review" && tk && !edOn ? html`
@@ -13971,6 +14679,8 @@ notify pgrst, 'reload schema';
       ${sheet === "subs" && proj.take && proj.take.words ? html`<${VMSubsEdit} words=${proj.take.words} onSeek=${t2 => { const u2 = vmSeqOutOf(vmSeq(proj.take), t2); plSeekR(u2 == null ? 0 : u2); plPlayR(); }} onClose=${() => setSheet(null)} onSave=${w => { setProj(p => ({ take: Object.assign({}, p.take, { words: w, wordsFor: "edited" }) })); setSheet(null); toast("Subtitles corrected."); }}/>` : null}
       ${sheet === "place" ? html`<${VMPlaces} onClose=${() => { setSheet(null); afterAdd.current = null; }} onAdd=${it => { setSheet(null); const n = Object.assign({ id: uid() }, it); setProj(p => ({ items: p.items.concat(n) })); if (afterAdd.current) { const cb = afterAdd.current; afterAdd.current = null; setTimeout(() => cb(n), 60); } }}/>` : null}
       ${sheet === "hl" ? html`<${VMHeadlines} proj=${proj} onClose=${() => setSheet(null)} onSave=${p => { setProj(p); setSheet(null); }} onTry=${() => { setSheet(null); setTimeout(previewOpening, 50); }}/>` : null}
+      ${sheet === "brand" ? html`<${VMBrand} st=${st} proj=${proj} setProj=${x => { setProj(x); S.current.dirty = true; }} onClose=${() => setSheet(null)} onMore=${() => { setSheet(null); styleFocus.current = "open"; setStyling(true); }}/>` : null}
+      ${sheet === "vbg" ? html`<${VMBehind} value=${mode === "rec" && s && s.vbg !== undefined ? s.vbg : proj.vbg} review=${mode === "review"} hereT=${behindT.current} onClose=${() => setSheet(null)} onPick=${pickVbg}/>` : null}
       ${sheet === "snd" ? html`<${VMSounds} proj=${proj} setProj=${setProj} lib=${lib} setLib=${setLib} st=${st} onClose=${() => setSheet(null)}/>` : null}
       ${sheet === "duo" && duo ? html`<div class="scrim" onClick=${e => { if (e.target === e.currentTarget) setSheet(null); }}><div class="sheet" role="dialog" aria-label="React with a friend">
         <h3 style="margin:0">👥 React with a friend</h3>
@@ -13980,6 +14690,9 @@ notify pgrst, 'reload schema';
         <p class=${"duost " + (duo.guest ? "ok" : "")}>${duo.guest ? "✓ Your friend is in. Close this and press record." : duo.phase === "connecting" ? "Connecting to your friend…" : "Waiting for your friend to open the link…"}</p>
         <div class="vmchips"><button class="btn quiet slim" onClick=${() => setSheet(null)}>Close</button><button class="btn quiet slim danger" onClick=${() => { endDuo(); setSheet(null); }}>End the invite</button></div>
       </div></div>` : null}
+      ${sheet === "tier" ? html`<${VMTierSheet} onClose=${() => setSheet(null)} onAdd=${it => { setSheet(null); const n = Object.assign({ id: uid() }, it); setProj(p => ({ items: p.items.concat(n) })); toast("Added. Press record, tap the tier list to show it, then rank."); }}/>` : null}
+      ${sheet === "post" ? html`<${VMPostSheet} onClose=${() => setSheet(null)} onAdd=${it => { setSheet(null); const n = Object.assign({ id: uid() }, it); setProj(p => ({ items: p.items.concat(n) })); toast("Added. While recording: tap it, then Me (you in front), Corner, or Only it. Read it out loud; the words light up afterwards."); }}/>` : null}
+      ${sheet === "person" ? html`<${VMPersonSheet} onClose=${() => setSheet(null)} onAdd=${it => { setSheet(null); const n = Object.assign({ id: uid() }, it); setProj(p => ({ items: p.items.concat(n) })); }}/>` : null}
       ${sheet === "text" ? html`<${VMAddText} onClose=${() => { setSheet(null); afterAdd.current = null; }} onAdd=${it => { setSheet(null); const n = Object.assign({ id: uid() }, it); setProj(p => ({ items: p.items.concat(n) })); if (afterAdd.current) { const cb = afterAdd.current; afterAdd.current = null; setTimeout(() => cb(n), 60); } }}/>` : null}
       ${lessonPick ? html`<div class="scrim" onClick=${e => { if (e.target === e.currentTarget) setLessonPick(false); }}><div class="sheet" role="dialog" aria-label="Pick a lesson">
         <h3 style="margin:0">Which lesson's board?</h3>
@@ -14496,7 +15209,7 @@ notify pgrst, 'reload schema';
   window.__kfApi = { kfPress, kfStep, kfNew, kfSnd, kfAnn, annRec };
   window.__ink = { hitInk, inkGroup, straighten };
   window.__mux = { lessonVideo, fixVideo, loadMux, vidJob, awake, player, cleanVoice };
-  window.__ui = { LessonsList, PacksSheet, RulesGuide, LESSON_PACKS, crFrame, crSorted, stageAt0: stageAt, PushBell, SetupCheck, VidJobPill, html, render, store, Board, ExplainStudio, LiveTools, stageAt, buildSound, live, player, ClassroomPlayer, crAssets, CR_W, CR_H, TalkBoard, vidJob, VideoMaker, vmExport, vmDb, vmNew, vmAt, vmFrame, vmGeo, VM_LOOKS, vmStyle, vmSaveStyle, VMStyle, vmIntro, vmOutro, vmLook, vmElemSrc, vmPrepClip, vmWorld, vmTrack, vmUntrack, VME, vmKeep, vmSrcAt, thLib, VMThumbs, thInfo, tsMake, tsRender, tsLoadAll, tsExport, tsCutOut, tsLib, TS_TPLS };
+  window.__ui = { vmKeyDraw, vmSeg, vmVbgPaint, vmVbgLib, vmVbgPrep, vmKeyer, vmLogoPaint, vmLogoBg, vmLogo, LessonsList, PacksSheet, RulesGuide, LESSON_PACKS, crFrame, crSorted, stageAt0: stageAt, PushBell, SetupCheck, VidJobPill, html, render, store, Board, ExplainStudio, LiveTools, stageAt, buildSound, live, player, ClassroomPlayer, crAssets, CR_W, CR_H, TalkBoard, vidJob, VideoMaker, vmExport, vmDb, vmNew, vmAt, vmFrame, vmGeo, VM_LOOKS, vmStyle, vmSaveStyle, VMStyle, vmIntro, vmOutro, vmLook, vmElemSrc, vmPrepClip, vmWorld, vmTrack, vmUntrack, VME, vmKeep, vmSrcAt, thLib, VMThumbs, thInfo, tsMake, tsRender, tsLoadAll, tsExport, tsCutOut, tsLib, TS_TPLS };
   window.__lang = { viewOf, saveExpl, saveTileRec, uploadBlob, set: l => { REC_LANG = l; }, get: () => REC_LANG, store };
   root.innerHTML = "";
   const duoLink = readDuoLink();
