@@ -465,6 +465,7 @@ img{max-width:100%}
 .ytrow{display:flex;gap:10px;align-items:flex-start}.ytrow b{font-size:13px}
 .tscheck{border-radius:12px;padding:8px 12px;background:#fff4e0;color:#6b4300;font-size:14px}.tscheck p{margin:4px 0}.tscheck.ok{background:#e6f6ea;color:#1f5f2f}
 .tsclient{display:flex;flex-direction:column;gap:8px;padding:10px;border-radius:12px;background:var(--paper-2)}.tsdes{position:relative}.tscl{position:absolute;top:6px;left:6px;z-index:1;background:rgba(0,0,0,.7);color:#fff;font-size:11px;padding:2px 8px;border-radius:999px}
+.vmblurv{position:absolute;left:0;top:0;width:2px;height:2px;opacity:0;pointer-events:none}.vmblurstage{position:relative;display:flex;justify-content:center}.vmblurstage canvas{width:100%;max-height:52vh;object-fit:contain;border-radius:12px;background:#000;touch-action:none}.vmblurbusy{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;background:rgba(0,0,0,.65);color:#fff;font-weight:700;border-radius:12px;text-align:center;padding:16px}.vmblurbusy small{font-weight:400;opacity:.85}.vmblurtime{display:flex;align-items:center;gap:8px;margin-top:8px}.vmblurtime input{flex:1}.vmblurlist{display:flex;flex-direction:column;gap:6px;max-height:34vh;overflow:auto}.vmblurrow{padding:8px 10px;border-radius:12px;background:var(--paper-2);display:flex;flex-direction:column;gap:4px;cursor:pointer}.vmblurrow.on{outline:2px solid var(--acc,#E8590C)}.vmblurrow small{opacity:.75}
 .ccdot{display:inline-block;width:12px;height:12px;border-radius:50%;margin-right:5px;vertical-align:-1px;box-shadow:0 0 0 1px rgba(255,255,255,.5)}.vmlogoopts{display:flex;flex-direction:column;gap:8px;margin-top:6px}
 .vmic{font-size:24px;line-height:1}
 .help.warn{color:var(--rec)}
@@ -10429,8 +10430,9 @@ notify pgrst, 'reload schema';
     let R = box;
     const tr = st.trans, ka = tr === "cut" ? 1 : Math.min(1, 0.4 + k * 1.2);
     if (it.kind === "img" || it.kind === "vid") {
-      const src = it.kind === "img" ? F.pic(it.id) : F.clip, [sw, sh] = vmSize(src);
+      let src = it.kind === "img" ? F.pic(it.id) : F.clip; const [sw, sh] = vmSize(src);
       if (!sw) { c.fillStyle = "#0B0F14"; c.fillRect(box.x, box.y, box.w, box.h); c.restore(); return box; }
+      if (it.blurs && it.blurs.length && !(F.blurDone && it.kind === "img")) src = vmBlurApply(src, it, it.kind === "img" ? 0 : F.clipT != null ? F.clipT : src.tagName === "VIDEO" ? src.currentTime : 0, it.kind === "img", "it" + it.id);
       R = vmMediaRect(box, sw, sh, F.proj.fit);
       if (F.proj.fit !== "fill") {
         const b = F.lite ? null : vmBlurOf(src, it.kind === "img" ? F.cache : null);
@@ -11003,6 +11005,7 @@ notify pgrst, 'reload schema';
     for (const id of used) {
       const it = items[id]; if (!it || !it.blob) continue;
       if (it.kind === "img" || it.kind === "person" || it.kind === "read" || it.kind === "post") { try { pics[id] = await createImageBitmap(it.blob); } catch (e) {} }
+      if (it.kind === "img" && pics[id] && it.blurs && it.blurs.length) { const b0 = vmBlurApply(pics[id], it, 0, true, "exp" + id); const cp = document.createElement("canvas"); cp.width = b0.width; cp.height = b0.height; cp.getContext("2d").drawImage(b0, 0, 0); pics[id] = cp; }
       if (it.kind === "vid") {
         const k = { secs: it.secs || 0, sink: null, sound: null, still: new Map() };
         try { const S0 = await sinkOf(it.blob, hd ? 1080 : 720); const T0 = await tested(S0, it.blob); if (T0.S) { k.sink = S0.sink; k.first = S0.first; k.secs = (await S0.input.computeDuration()) || k.secs; } else k.E = T0.E; } catch (e) {}
@@ -11156,7 +11159,7 @@ notify pgrst, 'reload schema';
             let kb = null;
             if (p.kind === "img" && pics[p.src]) { const im = pics[p.src]; if (p.kb !== false) { const z = 1 + 0.1 * SA.lu / Math.max(0.5, SA.d), w = im.width, h = im.height; kbC.width = w; kbC.height = h; const kx = kbC.getContext("2d"); kx.imageSmoothingQuality = "high"; kx.drawImage(im, (w - w / z) / 2, (h - h / z) / 2, w / z, h / z, 0, 0, w, h); kb = kbC; } else kb = im; }
             const s0 = { show: it ? it.id : null, showT: -9, marks: [], pt: null, ban: null, banT: -9, play: null, lay: "thing", eff: "T", effT: -9, prev: null, vol: 1, bw: false, sfx: [] };
-            vmFrame(c, { G, L, st, proj, items, s: s0, t: 1000, tb: T - IN, cam: null, camOn: false, camFit: proj.camFit || "whole", pic: id => (id === p.src && kb ? kb : pics[id] || null), clip: frame, words: null, readWords: null, cache, prog: (T - IN) / body });
+            vmFrame(c, { blurDone: true, clipT: SA.t, G, L, st, proj, items, s: s0, t: 1000, tb: T - IN, cam: null, camOn: false, camFit: proj.camFit || "whole", pic: id => (id === p.src && kb ? kb : pics[id] || null), clip: frame, words: null, readWords: null, cache, prog: (T - IN) / body });
           };
         } else {
         const t = SA.t, s = vmAt(cues, t, camOn2), it = s.show ? items[s.show] : null, k = it && it.kind === "vid" ? clips[it.id] : null;
@@ -11206,10 +11209,11 @@ notify pgrst, 'reload schema';
             if (e2 && e2.sink) { const kk = f2.e + "@" + f2.t; if (tvKey !== kk) { await closeIt(tvIt); tvKey = kk; tvLast = null; tvIt = runTs(e2.sink, Math.max(0, t - f2.t) + (e2.first || 0), dir * sp / FPS, e2.first || 0, e2.secs + (e2.first || 0)); } const r3 = await tvIt.next(); if (!r3.done && r3.value) tvLast = r3.value.canvas; tierF = tvLast; }
             else if (e2 && e2.E) tierF = await e2.E.at(Math.min(Math.max(0, e2.secs - 0.05), Math.max(0, t - f2.t)));
           }
-          let camK = camF || camLast, camCut = null; const vbNow = s.vbg !== undefined ? s.vbg : proj.vbg, itP = s.show ? items[s.show] : null;
+          let camK = camF || camLast, camCut = null;
+          if (camK && take.blurs && take.blurs.length) camK = vmBlurApply(camK, take, t, false, "camx"); const vbNow = s.vbg !== undefined ? s.vbg : proj.vbg, itP = s.show ? items[s.show] : null;
           if (segX && camK && !gsg && itP && itP.kind === "post" && (s.lay === "cam" || s.lay === "pip")) { try { camCut = await vmTimeout(segX.run(camK, r => vmKeyDraw(r, cutCv, { k: "cut" }, false, t, true)), 15000); } catch (e) {} }
           if (segX && camK && camVis && !camCut && vmVbgOn(vbNow)) { try { camK = (await vmTimeout(segX.run(camK, r => vmKeyDraw(r, keyCv, vbNow, !!proj.mirror && (!segNow || segNow.facing !== "environment"), t, true)), 15000)) || camK; } catch (e) {} }
-          vmFrame(c, { G, L, st, proj, items, s, t, tb, readWords: allWords || words, cam: avaP ? (avaP.pose(t, vmAvaLevel(lv, t), { acc: st.acc }), { vmAva: avaP, h: hd ? 1080 : 720 }) : camK, camFreeze: frozen, camOn: camOn2, guest: gsg ? gF || gLast : null, camFit: proj.camFit || "whole", camMirror: !!proj.mirror && (!segNow || segNow.facing !== "environment"), pic: id => pics[id] || null, clip: frame, words, cache, prog: (T - IN) / body, camCut, tierClip: tierF });
+          vmFrame(c, { G, L, st, proj, items, s, t, tb, readWords: allWords || words, cam: avaP ? (avaP.pose(t, vmAvaLevel(lv, t), { acc: st.acc }), { vmAva: avaP, h: hd ? 1080 : 720 }) : camK, camFreeze: frozen, camOn: camOn2, guest: gsg ? gF || gLast : null, camFit: proj.camFit || "whole", camMirror: !!proj.mirror && (!segNow || segNow.facing !== "environment"), pic: id => pics[id] || null, clip: frame, words, cache, prog: (T - IN) / body, camCut, tierClip: tierF, blurDone: true, clipT: ct });
         };
       }
         }
@@ -13288,6 +13292,220 @@ notify pgrst, 'reload schema';
       </div>
     </div>`;
   }
+  /* ===================== Blur: faces, a person, a spot, or the whole picture =====================
+     For clips, pictures and your own recording. Faces are found once, ahead of time (on the phone), so playing and
+     making the video never slows down. A blur is kept with the clip itself, so it's there every time the clip shows. */
+  const VM_FD = "https://cdn.jsdelivr.net/npm/@mediapipe/face_detection@0.4.1646425229/";
+  let vmFdP = null;
+  function vmFd() {
+    if (vmFdP) return vmFdP;
+    vmFdP = (async () => {
+      if (!window.FaceDetection) await new Promise((res, rej) => { const sc = document.createElement("script"); sc.src = VM_FD + "face_detection.js"; sc.crossOrigin = "anonymous"; sc.onload = res; sc.onerror = () => rej(new Error("load")); document.head.appendChild(sc); });
+      const m = new window.FaceDetection({ locateFile: f => VM_FD + f });
+      m.setOptions({ model: "full", minDetectionConfidence: 0.42 });
+      let cb = null; m.onResults(r => { const f = cb; cb = null; if (f) f(r); });
+      await m.initialize();
+      let chain = Promise.resolve();
+      const run = img => { const p = chain.then(() => new Promise((res, rej) => { cb = r => res((r.detections || []).map(d => { const b = d.boundingBox || {}; return [+(b.xCenter - b.width / 2).toFixed(4), +(b.yCenter - b.height / 2).toFixed(4), +(+b.width).toFixed(4), +(+b.height).toFixed(4)]; })); m.send({ image: img }).catch(e => { cb = null; rej(e); }); })); chain = p.catch(() => {}); return p; };
+      return { run };
+    })();
+    vmFdP.catch(() => { vmFdP = null; });
+    return vmFdP;
+  }
+  const VM_FSTEP = 1 / 6;   // faces are looked for 6 times a second
+  // every face, all the way through: segs = [{ t, blob, kind: "vid"|"img" }], secs = how long it all is
+  async function vmFindFaces(segs, secs, onP) {
+    const fd = await vmFd(), out = [], cv = document.createElement("canvas"), x = cv.getContext("2d");
+    const one = async (im, t) => { const [w, h] = vmSize(im); if (!w) return; const k = Math.min(1, 640 / Math.max(w, h)); cv.width = Math.round(w * k); cv.height = Math.round(h * k); x.drawImage(im, 0, 0, cv.width, cv.height); out.push({ t: Math.round(t * 100) / 100, f: await fd.run(cv) }); };
+    let done = 0; const total = Math.max(1, segs.reduce((n, g, i) => n + (g.kind === "img" ? 1 : ((segs[i + 1] ? segs[i + 1].t : secs) - g.t) / VM_FSTEP), 0));
+    for (let i = 0; i < segs.length; i++) {
+      const g = segs[i], end = segs[i + 1] ? segs[i + 1].t : secs;
+      if (g.kind === "img") { const bm = await createImageBitmap(g.blob); await one(bm, 0); done++; if (onP) onP(done / total); continue; }
+      let ok = false;
+      try {   // fast: the phone's own video decoder, frame by frame
+        const MB = await loadMux(), input = new MB.Input({ source: new MB.BlobSource(g.blob), formats: MB.ALL_FORMATS }), vt = await input.getPrimaryVideoTrack();
+        if (vt && (!vt.canDecode || (await vt.canDecode()))) {
+          let first = 0; try { first = await vt.getFirstTimestamp(); } catch (e) {}
+          const sc = Math.min(1, 640 / Math.max(vt.displayWidth, vt.displayHeight)), sink = new MB.CanvasSink(vt, { width: Math.max(2, Math.round(vt.displayWidth * sc / 2) * 2), height: Math.max(2, Math.round(vt.displayHeight * sc / 2) * 2), fit: "fill" });
+          const ts = []; for (let u = 0; u < end - g.t; u += VM_FSTEP) ts.push(u);
+          let j = 0; for await (const fr of sink.canvasesAtTimestamps(ts.map(u => u + first))) { const u = ts[Math.min(ts.length - 1, j++)]; if (fr) await one(fr.canvas, g.t + u); done++; if (onP && done % 3 === 0) onP(Math.min(0.99, done / total)); }
+          ok = true;
+        }
+      } catch (e) { ok = false; }
+      if (!ok) {   // slower: play through it in a hidden video
+        const v = document.createElement("video"); v.muted = true; v.playsInline = true; v.src = URL.createObjectURL(g.blob);
+        await new Promise(r => { v.onloadeddata = r; v.onerror = r; });
+        for (let u = 0; u < end - g.t; u += VM_FSTEP) { await new Promise(r => { v.onseeked = r; v.currentTime = u; setTimeout(r, 1500); }); await one(v, g.t + u); done++; if (onP && done % 3 === 0) onP(Math.min(0.99, done / total)); }
+        URL.revokeObjectURL(v.src);
+      }
+    }
+    out.sort((a, b) => a.t - b.t);
+    if (onP) onP(1);
+    return { step: VM_FSTEP, frames: out };
+  }
+  // the faces near a moment (the ones just before and after too, so a quick turn of the head is never missed)
+  function vmFacesAt(F, t, still) {
+    if (!F || !F.frames || !F.frames.length) return [];
+    if (still) return F.frames[0].f;
+    const fr = F.frames; let lo = 0, hi = fr.length - 1; while (lo < hi) { const m = (lo + hi) >> 1; if (fr[m].t < t) lo = m + 1; else hi = m; }
+    const out = []; for (let i = Math.max(0, lo - 1); i <= Math.min(fr.length - 1, lo + 1); i++) if (Math.abs(fr[i].t - t) <= F.step * 1.6) out.push(...fr[i].f);
+    return out;
+  }
+  // follow one face through the clip, from where you tapped it
+  function vmTrackFace(F, t0, pt) {
+    if (!F || !F.frames) return null;
+    const fr = F.frames, near = (boxes, c, sz) => { let best = null, bd = Infinity; for (const b of boxes) { const cx = b[0] + b[2] / 2, cy = b[1] + b[3] / 2, d = Math.hypot(cx - c[0], cy - c[1]); if (d < bd && d < sz) { bd = d; best = b; } } return best; };
+    let i0 = 0; for (let i = 0; i < fr.length; i++) if (Math.abs(fr[i].t - t0) < Math.abs(fr[i0].t - t0)) i0 = i;
+    const start = near(fr[i0].f, pt, 0.25); if (!start) return null;
+    const track = [{ t: fr[i0].t, b: start }];
+    for (const dir of [1, -1]) {
+      let cur = start, lost = 0;
+      for (let i = i0 + dir; i >= 0 && i < fr.length; i += dir) {
+        const c = [cur[0] + cur[2] / 2, cur[1] + cur[3] / 2], b = near(fr[i].f, c, Math.max(0.08, cur[2] * 1.6));
+        if (b) { cur = b; lost = 0; track.push({ t: fr[i].t, b }); } else if ((lost += F.step) > 1.2) break; else track.push({ t: fr[i].t, b: cur });
+      }
+    }
+    return track.sort((a, b) => a.t - b.t);
+  }
+  const vmLerpBox = (A, B, k) => A.map((v, i) => v + (B[i] - v) * k);
+  function vmKeysAt(keys, t) {
+    if (!keys || !keys.length) return null; if (t <= keys[0].t) return keys[0].b; if (t >= keys[keys.length - 1].t) return keys[keys.length - 1].b;
+    for (let i = 1; i < keys.length; i++) if (keys[i].t >= t) { const a = keys[i - 1], b = keys[i]; return vmLerpBox(a.b, b.b, (t - a.t) / Math.max(1e-3, b.t - a.t)); }
+    return null;
+  }
+  // the body below a face: shoulders to feet
+  const vmBodyOf = b => { const w = b[2] * 3.4, x = b[0] + b[2] / 2 - w / 2, y = b[1] - b[3] * 0.45; return [x, y, w, Math.min(1.2 - y, b[3] * 9)]; };
+  // what gets blurred at time t. B: { blurs, faces }, still: a picture (time doesn't matter)
+  function vmBlurRegions(B, t, still) {
+    const out = [];
+    for (const b of (B && B.blurs) || []) {
+      if (b.off || (!still && (t < b.a - 0.04 || (b.b != null && t > b.b + 0.04)))) continue;
+      const st = b.style || "blur";
+      if (b.kind === "all") out.push({ all: true, st });
+      else if (b.kind === "faces") for (const f of vmFacesAt(B.faces, t, still)) out.push({ r: [f[0] - f[2] * 0.22, f[1] - f[3] * 0.35, f[2] * 1.44, f[3] * 1.6], st, round: true });
+      else if (b.kind === "track") { const f = vmKeysAt(b.track, t); if (f && (still || (t >= b.track[0].t - 0.3 && t <= b.track[b.track.length - 1].t + 0.3))) out.push({ r: b.body ? vmBodyOf(f) : [f[0] - f[2] * 0.22, f[1] - f[3] * 0.35, f[2] * 1.44, f[3] * 1.6], st, round: !b.body }); }
+      else if (b.kind === "box") { const f = vmKeysAt(b.keys, t); if (f) out.push({ r: f, st, round: !!b.round }); }
+    }
+    return out;
+  }
+  // the picture with its blurs (a new canvas; the clip itself is never changed)
+  const vmBlurCvs = new Map();
+  function vmBlurApply(src, B, t, still, key) {
+    if (!B || !B.blurs || !B.blurs.length) return src;
+    const R = vmBlurRegions(B, t, still); if (!R.length) return src;
+    const [iw, ih] = vmSize(src); if (!iw) return src;
+    const k = Math.min(1, 1280 / Math.max(iw, ih)), w = Math.round(iw * k), h = Math.round(ih * k);
+    let cv = vmBlurCvs.get(key || "x"); if (!cv) { cv = document.createElement("canvas"); vmBlurCvs.set(key || "x", cv); if (vmBlurCvs.size > 8) vmBlurCvs.delete(vmBlurCvs.keys().next().value); }
+    if (cv.width !== w || cv.height !== h) { cv.width = w; cv.height = h; }
+    const c = cv.getContext("2d"); c.globalCompositeOperation = "copy"; c.drawImage(src, 0, 0, w, h); c.globalCompositeOperation = "source-over";
+    const tiny = vmVbgTmp.bt || (vmVbgTmp.bt = document.createElement("canvas")), tx = tiny.getContext("2d");
+    for (const g of R) {
+      const r = g.all ? [0, 0, 1, 1] : g.r, x = Math.max(0, r[0] * w), y = Math.max(0, r[1] * h), x1 = Math.min(w, (r[0] + r[2]) * w), y1 = Math.min(h, (r[1] + r[3]) * h), rw = x1 - x, rh = y1 - y; if (rw < 2 || rh < 2) continue;
+      c.save();
+      if (!g.all) { c.beginPath(); if (g.round) c.ellipse(x + rw / 2, y + rh / 2, rw / 2, rh / 2, 0, 0, Math.PI * 2); else crRR(c, x, y, rw, rh, Math.min(rw, rh) * 0.12); c.clip(); }
+      if (g.st === "black") { c.fillStyle = "#000"; c.fillRect(x, y, rw, rh); }
+      else {
+        const n = g.st === "pixel" ? Math.max(4, Math.round(Math.max(rw, rh) / (g.all ? 40 : 22))) : Math.max(3, Math.round(Math.max(rw, rh) / (g.all ? 18 : 10)));
+        tiny.width = Math.max(2, Math.round(n * rw / Math.max(rw, rh))); tiny.height = Math.max(2, Math.round(n * rh / Math.max(rw, rh)));
+        tx.imageSmoothingEnabled = true; tx.drawImage(cv, x, y, rw, rh, 0, 0, tiny.width, tiny.height);
+        c.imageSmoothingEnabled = g.st !== "pixel"; c.imageSmoothingQuality = "high";
+        const pad = g.st === "pixel" ? 0 : Math.max(rw, rh) * 0.06; c.drawImage(tiny, x - pad, y - pad, rw + pad * 2, rh + pad * 2);
+        if (g.st !== "pixel") { c.fillStyle = "rgba(0,0,0,.08)"; c.fillRect(x, y, rw, rh); }
+      }
+      c.restore();
+    }
+    return cv;
+  }
+  const VM_BLUR_KINDS = { faces: ["🙂", "Every face"], track: ["🧍", "One person"], box: ["▭", "A spot"], all: ["⬛", "The whole picture"] };
+  // the blur editor: pick what to hide, and from when to when
+  function VMBlurSheet({ title, segs, secs, still, blurs0, faces0, onSave, onClose }) {
+    const [blurs, setBlurs] = useState(() => (blurs0 || []).map(b => Object.assign({}, b))), [faces, setFaces] = useState(faces0 || null), [t, setT] = useState(0), [play, setPlay] = useState(false);
+    const [busy, setBusy] = useState(null), [mode, setMode] = useState(null), [sel, setSel] = useState(null), [, tick] = useState(0);
+    const cvRef = useRef(null), vRef = useRef(null), imRef = useRef(null), segI = useRef(-1), drag = useRef(null), S = useRef({});
+    S.current = { blurs, faces, t, play, mode, sel };
+    const segAt = u => { let i = 0; for (let k = 0; k < segs.length; k++) if (segs[k].t <= u + 0.001) i = k; return i; };
+    // the picture: a video (or a photo), drawn with the blurs, with the outlines of what's blurred on top
+    useEffect(() => {
+      let raf = 0, alive = true;
+      if (still) createImageBitmap(segs[0].blob).then(b => { imRef.current = b; tick(n => n + 1); });
+      const draw = () => {
+        if (!alive) return; raf = requestAnimationFrame(draw);
+        const R = S.current, v = vRef.current, cv = cvRef.current; if (!cv) return;
+        let src = null, u = R.t;
+        if (still) src = imRef.current;
+        else if (v) {
+          const i = segAt(R.t); if (segI.current !== i) { segI.current = i; v.src = URL.createObjectURL(segs[i].blob); v.load(); }
+          if (R.play) { if (v.paused) v.play().catch(() => {}); u = segs[i].t + v.currentTime; if (u >= secs - 0.05 || v.ended) { setPlay(false); } else if (Math.abs(u - R.t) > 0.03) setT(u); }
+          else { if (!v.paused) v.pause(); const want = R.t - segs[i].t; if (Math.abs(v.currentTime - want) > 0.05 && !v.seeking) try { v.currentTime = want; } catch (e) {} }
+          if (v.readyState >= 2) src = v;
+        }
+        const [sw, sh] = vmSize(src); if (!sw) return;
+        const W = Math.round(cv.clientWidth * Math.min(2, window.devicePixelRatio || 1)), H = Math.round(W * sh / sw); if (!W) return;
+        if (cv.width !== W || cv.height !== H) { cv.width = W; cv.height = H; }
+        const c = cv.getContext("2d"); c.drawImage(vmBlurApply(src, { blurs: R.blurs, faces: R.faces }, u, still, "ed"), 0, 0, W, H);
+        // outlines: the one you're working on in your colour
+        for (const g of vmBlurRegions({ blurs: R.blurs.filter(b => b.id === R.sel), faces: R.faces }, u, still)) { if (g.all) continue; c.strokeStyle = "#FFD54A"; c.lineWidth = 3; c.setLineDash([10, 6]); c.strokeRect(g.r[0] * W, g.r[1] * H, g.r[2] * W, g.r[3] * H); c.setLineDash([]); }
+        const sb = R.blurs.find(b => b.id === R.sel && b.kind === "box"), bx = sb && vmKeysAt(sb.keys, u);
+        if (bx) { c.fillStyle = "#FFD54A"; c.beginPath(); c.arc((bx[0] + bx[2]) * W, (bx[1] + bx[3]) * H, 16, 0, 7); c.fill(); }
+        if (R.mode === "pick") for (const f of vmFacesAt(R.faces, u, still)) { c.strokeStyle = "#5AC8FF"; c.lineWidth = 4; c.strokeRect(f[0] * W, f[1] * H, f[2] * W, f[3] * H); }
+      };
+      raf = requestAnimationFrame(draw);
+      return () => { alive = false; cancelAnimationFrame(raf); const v = vRef.current; if (v) v.pause(); };
+    }, []);
+    const add = b => { const n = Object.assign({ id: uid().slice(-7), a: still ? 0 : Math.max(0, +t.toFixed(2)), b: null, style: "blur" }, b); setBlurs(l => l.concat(n)); setSel(n.id); return n; };
+    const upd = (id, o) => setBlurs(l => l.map(b => (b.id === id ? Object.assign({}, b, o) : b)));
+    async function needFaces() {
+      if (faces) return faces;
+      setBusy(0); setPlay(false);
+      try { const F = await vmFindFaces(segs.map(g => Object.assign({ kind: still ? "img" : "vid" }, g)), secs, p => setBusy(p)); setFaces(F); setBusy(null); return F; }
+      catch (e) { setBusy(null); toast("Couldn't look for faces just now (check your internet the first time). You can still blur a spot."); return null; }
+    }
+    async function addFaces() { const F = await needFaces(); if (!F) return; add({ kind: "faces" }); const n = F.frames.reduce((m, f) => Math.max(m, f.f.length), 0); toast(n ? "Every face is blurred, all the way through. Set where it starts and ends below." : "No faces were found in this one. Try “A spot” instead."); }
+    async function pickPerson() { const F = await needFaces(); if (!F) return; setMode("pick"); toast("Tap the person's face in the picture."); }
+    function canvasPt(e) { const r = cvRef.current.getBoundingClientRect(); return [(e.clientX - r.left) / r.width, (e.clientY - r.top) / r.height]; }
+    function down(e) {
+      const p = canvasPt(e), R = S.current;
+      if (R.mode === "pick") { const tr = vmTrackFace(R.faces, R.t, p); if (!tr) { toast("No face there. Tap right on a face (the blue boxes)."); return; } setMode(null); add({ kind: "track", track: tr.map(x => ({ t: x.t, b: x.b })), body: true, a: still ? 0 : Math.max(0, tr[0].t - 0.2), b: still ? null : tr[tr.length - 1].t + 0.2 }); return; }
+      const sb = R.blurs.find(b => b.id === R.sel && b.kind === "box"), bx = sb && vmKeysAt(sb.keys, R.t); if (!bx) return;
+      const corner = Math.hypot(p[0] - (bx[0] + bx[2]), p[1] - (bx[1] + bx[3])) < 0.07, inside = p[0] > bx[0] && p[0] < bx[0] + bx[2] && p[1] > bx[1] && p[1] < bx[1] + bx[3];
+      if (corner || inside) { drag.current = { id: sb.id, p0: p, b0: bx.slice(), corner }; e.currentTarget.setPointerCapture(e.pointerId); }
+    }
+    function move(e) {
+      const D = drag.current; if (!D) return; const p = canvasPt(e), dx = p[0] - D.p0[0], dy = p[1] - D.p0[1];
+      const b = D.corner ? [D.b0[0], D.b0[1], Math.max(0.04, D.b0[2] + dx), Math.max(0.04, D.b0[3] + dy)] : [D.b0[0] + dx, D.b0[1] + dy, D.b0[2], D.b0[3]];
+      const tt = still ? 0 : +S.current.t.toFixed(2);
+      setBlurs(l => l.map(x => { if (x.id !== D.id) return x; const keys = x.keys.filter(q => Math.abs(q.t - tt) > 0.08).concat({ t: tt, b }).sort((m, n) => m.t - n.t); return Object.assign({}, x, { keys }); }));
+    }
+    const sb = blurs.find(b => b.id === sel);
+    return html`<div class="full studio vmblur" role="dialog" aria-label="Blur">
+      <div class="fhead"><span>🫥 Blur · ${title}</span><button class="iconbtn" onClick=${onClose} aria-label="Close"><${Ic.x}/></button></div>
+      <div class="sbody">
+        <div class="vmblurstage"><canvas ref=${cvRef} onPointerDown=${down} onPointerMove=${move} onPointerUp=${() => { drag.current = null; }} onPointerCancel=${() => { drag.current = null; }}></canvas>${busy != null ? html`<div class="vmblurbusy">🔎 Finding the faces… ${Math.round(busy * 100)}%<small>The first time it downloads a small helper. After this, it plays without slowing down.</small></div>` : null}</div>
+        <video ref=${vRef} class="vmblurv" playsinline muted preload="auto"></video>
+        ${still ? null : html`<div class="vmblurtime"><button class="chip" onClick=${() => setPlay(!play)}>${play ? "⏸" : "▶"}</button><input type="range" min="0" max=${secs} step="0.04" value=${t} onInput=${e => { setPlay(false); setT(+e.target.value); }}/><span>${fmtDur(t)}</span></div>`}
+      </div>
+      <div class="sfoot">
+        ${mode === "pick" ? html`<p class="help">Tap the face of the person to blur (blue boxes). They're followed through the clip.</p><button class="btn quiet" onClick=${() => setMode(null)}>Cancel</button>` : html`
+        <div class="vbggrid">
+          <button class="vbgtile" onClick=${addFaces} disabled=${busy != null}><span>🙂</span>Every face</button>
+          <button class="vbgtile" onClick=${pickPerson} disabled=${busy != null}><span>🧍</span>One person</button>
+          <button class="vbgtile" onClick=${() => add({ kind: "box", keys: [{ t: still ? 0 : +t.toFixed(2), b: [0.35, 0.35, 0.3, 0.3] }] })}><span>▭</span>A spot</button>
+          <button class="vbgtile" onClick=${() => add({ kind: "all" })}><span>⬛</span>Whole picture</button>
+        </div>
+        ${blurs.length ? html`<div class="vmblurlist">${blurs.map(b => html`<div key=${b.id} class=${"vmblurrow" + (sel === b.id ? " on" : "")} onClick=${() => setSel(b.id)}>
+          <b>${VM_BLUR_KINDS[b.kind][0]} ${b.kind === "track" ? (b.body ? "One person (all of them)" : "One person's face") : VM_BLUR_KINDS[b.kind][1]}</b>
+          ${still ? null : html`<small>${fmtDur(b.a)} → ${b.b == null ? "the end" : fmtDur(b.b)}</small>`}
+          ${sel === b.id ? html`<div class="vmchips">
+            ${still ? null : html`<button class="chip" onClick=${e => { e.stopPropagation(); upd(b.id, { a: +t.toFixed(2) }); }}>⏮ Starts here</button><button class="chip" onClick=${e => { e.stopPropagation(); upd(b.id, { b: Math.max(b.a + 0.2, +t.toFixed(2)) }); }}>⏭ Ends here</button>`}
+            ${b.kind === "track" ? html`<button class="chip" onClick=${e => { e.stopPropagation(); upd(b.id, { body: !b.body }); }}>${b.body ? "Only the face" : "The whole person"}</button>` : null}
+            ${[["blur", "Blur"], ["pixel", "Squares"], ["black", "Black"]].map(([k2, l]) => html`<button key=${k2} class=${"chip" + ((b.style || "blur") === k2 ? " on" : "")} onClick=${e => { e.stopPropagation(); upd(b.id, { style: k2 }); }}>${l}</button>`)}
+            <button class="chip" onClick=${e => { e.stopPropagation(); setBlurs(l => l.filter(x => x.id !== b.id)); setSel(null); }}>🗑 Remove</button></div>
+            ${b.kind === "box" ? html`<p class="help">Drag the box to move it; drag the yellow dot to resize. ${still ? "" : "If it should follow something, move the video on, then move the box again: it glides between the places you set."}</p>` : null}` : null}
+        </div>`)}</div>` : html`<p class="help">Hide faces, a person, blood or anything that shouldn't be seen, so YouTube and TikTok don't take the video down. The clip itself isn't changed: you can take a blur away any time.</p>`}
+        <div class="srow"><button class="btn quiet" onClick=${onClose}>Cancel</button><button class="btn" onClick=${() => onSave(blurs, faces)}>✓ Done</button></div>`}
+      </div>
+    </div>`;
+  }
   // choose what's behind you
   function VMBehind({ value, onPick, onClose, review, hereT }) {
     const [k, setK] = useState(vmVbgOn(value) ? value.k : "off"), [w, setW] = useState(VMW), [q, setQ] = useState(""), [pics, setPics] = useState(null), [scope, setScope] = useState("all");
@@ -13795,7 +14013,7 @@ notify pgrst, 'reload schema';
   const vmThumbAt = (S, t) => { if (!S || !S.list.length) return null; let i = Math.max(0, Math.min(S.list.length - 1, Math.round(t / S.step))); for (let k = 0; k < 4 && !S.list[i]; k++) i = Math.max(0, i - 1); return S.list[i] ? S.list[i].url : null; };
 
   /* ===== the editor: a big picture on top, a timeline you slide under a fixed line, tools along the bottom (like CapCut) ===== */
-  function VMTimeline({ take, items, camOn, st, lib, pl, onTake, onDirty, onDone, addFile, addText, addPlace, music, setMusic, titles, setTitles, sty, behind }) {
+  function VMTimeline({ take, items, camOn, st, lib, pl, onTake, onDirty, onDone, addFile, addText, addPlace, music, setMusic, titles, setTitles, sty, behind, blurIt }) {
     const P = useMemo(() => vmSeq(take), [take.seq, take.trim, take.cuts, take.secs]);
     const len = vmSeqLen(P), secs = take.secs;
     const [pps, setPps] = useState(() => Math.max(14, Math.min(70, 2600 / Math.max(10, len))));
@@ -13957,6 +14175,14 @@ notify pgrst, 'reload schema';
         ${tool("✂️", "Cut a part", () => { setCutA(now); setSel(null); })}
         ${tool("⏩", "No pauses", () => { const r = VMS.noPauses(P, lv.current, 0.6, 0.09); if (!r.n) { toast("No long pauses found."); return; } setP(r.P); toast("Took out " + r.n + " pauses (" + r.secs.toFixed(1) + "s). Undo (↶) if you want them back."); })}
         ${camOn && behind ? tool("🪄", "Behind me", () => behind(tnow)) : null}
+        ${blurIt ? tool("🫥", "Blur", () => {
+          const ok = id => items[id] && (items[id].kind === "vid" || items[id].kind === "img"); let target = null;
+          if (sel && sel.type === "show") { const x = T.shows.find(y => y.id === sel.id); if (x && ok(x.ref)) target = { item: x.ref }; }
+          else if (sel && sel.type === "piece") { const p = P.find(q => q.id === sel.id); if (p && p.kind !== "rec" && ok(p.src)) target = { item: p.src }; }
+          if (!target) { const hp = here && here.p; if (hp && hp.kind !== "rec" && ok(hp.src)) target = { item: hp.src }; else { const sh = tnow != null ? T.shows.find(x => tnow >= x.a && tnow < x.b && ok(x.ref)) : null; target = sh ? { item: sh.ref } : camOn ? { take: true } : null; } }
+          if (!target) { toast("Move to a clip or a picture first (or tap one), then tap Blur."); return; }
+          blurIt(target);
+        }) : null}
         ${camOn ? tool("⚫", "B&W", () => { if (needRec()) return; const on = !vmBwAt(T, tnow); setT(VME.bwRange(T, tnow, secs, on)); toast(on ? "Black & white from here." : "Colour from here."); }) : null}
         ${sty ? tool("💬", "Captions", () => togglePanel("caps"), { on: panel === "caps" }) : null}
         ${sty ? tool("🎬", "Opening", () => togglePanel("open"), { on: panel === "open" }) : null}`;
@@ -14106,7 +14332,7 @@ notify pgrst, 'reload schema';
     const [col, setCol] = useState(VM_COLS[0]);
     const [paused, setPaused] = useState(false);
     const [peek, setPeek] = useState(null);
-    const [sheet, setSheet] = useState(null), behindT = useRef(null);
+    const [sheet, setSheet] = useState(null), behindT = useRef(null), [blurT, setBlurT] = useState(null);
     function pickVbg(v, scope) {
       if (mode === "rec") { add({ k: "vbg", v }); return; }
       if (mode === "review" && proj.take && scope === "here" && behindT.current != null) { const q = { id: uid().slice(-7), t: Math.round(behindT.current * 100) / 100, k: "vbg", v }; setProj(p => ({ take: Object.assign({}, p.take, { cues: p.take.cues.filter(x => !(x.k === "vbg" && Math.abs(x.t - q.t) < 0.05)).concat(q).sort((a, b) => a.t - b.t) }) })); S.current.dirty = true; return; }
@@ -14368,6 +14594,7 @@ notify pgrst, 'reload schema';
             if (gp.readyState >= 2 && gp.videoWidth) guestSrc = gp;
           } else if (gp && !gp.paused) gp.pause();
         }
+        if (camSrc && R.mode === "review" && tk && tk.blurs && tk.blurs.length) camSrc = vmBlurApply(camSrc, tk, t, false, "cam");
         // a video in a ranking, playing while it's up
         let tierClip = null;
         { const itT = s.show ? R.items[s.show] : null, tv = tvref.current;
@@ -14791,7 +15018,15 @@ notify pgrst, 'reload schema';
         onChange=${e => { const v = vref.current, it = clipItem(); if (v && it) { clipPos.current[it.id] = v.currentTime; if (rec) { add({ k: "stop", at: round2(v.currentTime) }); if (scrubWasOn.current) setTimeout(playClip, 30); } } scrubWasOn.current = false; }}/>
       ${rec ? volBar : html`<span class="vmvolrow"><button class="chip" onClick=${() => volLive(cvol > 0 ? 0 : 1)}>${cvol > 0 ? "🔊" : "🔇"}</button><input type="range" min="0" max="1" step="0.05" value=${cvol} aria-label="Clip sound" onInput=${e => volLive(+e.target.value)}/></span>`}
     </div>` : null;
-    if (styling) return html`<${VMStyle} focus=${styleFocus.current} onClose=${() => { setStyling(false); styleFocus.current = null; setSt(vmStyle()); S.current.dirty = true; }}/>`;
+    const blurSheet = (() => { if (!blurT) return null;
+      const tk2 = proj.take, it2 = blurT.item ? items[blurT.item] : null;
+      if (it2 && it2.blob) return html`<${VMBlurSheet} title=${it2.name || (it2.kind === "img" ? "Picture" : "Clip")} segs=${[{ t: 0, blob: it2.blob }]} secs=${it2.secs || 1} still=${it2.kind === "img"} blurs0=${it2.blurs} faces0=${it2.faces}
+        onClose=${() => setBlurT(null)} onSave=${(bl, fc) => { setProj(p => ({ items: p.items.map(x => (x.id === it2.id ? Object.assign({}, x, { blurs: bl, faces: fc || x.faces || null }) : x)) })); S.current.dirty = true; setBlurT(null); toast(bl.length ? "Blurred. It stays blurred every time this shows." : "Blur taken away."); }}/>`;
+      if (blurT.take && tk2 && tk2.cam) { const segs = tk2.camSegs && tk2.camSegs.length ? tk2.camSegs.map(g => ({ t: g.t, blob: g.blob })) : [{ t: 0, blob: tk2.voice }];
+        return html`<${VMBlurSheet} title=${tk2.imported ? "The video" : "Your recording"} segs=${segs} secs=${tk2.secs} still=${false} blurs0=${tk2.blurs} faces0=${tk2.faces}
+          onClose=${() => setBlurT(null)} onSave=${(bl, fc) => { setProj(p => ({ take: Object.assign({}, p.take, { blurs: bl, faces: fc || p.take.faces || null }) })); S.current.dirty = true; setBlurT(null); toast(bl.length ? "Blurred." : "Blur taken away."); }}/>`; }
+      return null; })();
+    const styleSheet = styling ? html`<${VMStyle} focus=${styleFocus.current} onClose=${() => { setStyling(false); styleFocus.current = null; setSt(vmStyle()); S.current.dirty = true; }}/>` : null;
     return html`<div class="full studio vm" role="dialog" aria-label="Make a video">
       <div class="fhead">
         <span>🎬 ${proj.title || "Untitled"} · ${VM_FMT[proj.fmt].name}${camOn ? " · 📷" : ""}</span>
@@ -14835,7 +15070,7 @@ notify pgrst, 'reload schema';
           <p class="help">Check the picture: hold up something with writing. If the writing looks backwards, tap ↔.</p>` : null}
           <p class="help">Add what you'll show, then press record and talk. While recording, tap a thing to show it, tap it again to come back to ${camOn ? "you" : "the title"}.${camOn ? " Switch layouts any time: Me, Split, Corner, Only it." : ""} Clips play while you talk, so you can react to them; wear earphones so their sound stays out of your microphone.${vmRec.canScreen() ? " On a computer you can also share your screen while recording (a YouTube tab, Instagram, anything) and react to it." : ""}</p>
           ${tray}${clipBar}
-          ${peek && items[peek] ? html`<button class="chip" onClick=${() => removeItem(items[peek])}>🗑 Take the selected one out</button>` : null}
+          ${peek && items[peek] ? html`<div class="vmchips">${(items[peek].kind === "vid" || items[peek].kind === "img") && items[peek].blob ? html`<button class=${"chip" + (items[peek].blurs && items[peek].blurs.length ? " on" : "")} onClick=${() => setBlurT({ item: peek })}>🫥 Blur faces or parts${items[peek].blurs && items[peek].blurs.length ? " ✓" : ""}</button>` : null}<button class="chip" onClick=${() => removeItem(items[peek])}>🗑 Take the selected one out</button></div>` : null}
           <div class="vmopts">
             <label>Pictures <select value=${proj.fit} onChange=${e => setProj({ fit: e.target.value })}><option value="fit">Show all of it</option><option value="fill">Fill their space</option></select></label>
             <label>Shape <select value=${proj.fmt} disabled=${!!tk} title=${tk ? "Recorded in this shape. Start a new video for the other shape." : ""} onChange=${e => setProj({ fmt: e.target.value })}>${Object.keys(VM_FMT).map(k => html`<option value=${k}>${VM_FMT[k].name} · ${VM_FMT[k].for}</option>`)}</select></label>
@@ -14876,6 +15111,7 @@ notify pgrst, 'reload schema';
             music=${proj.music || null} setMusic=${m => { setProj({ music: m }); S.current.dirty = true; }} titles=${proj.titles || []} setTitles=${x => { setProj({ titles: x }); S.current.dirty = true; }}
             onDirty=${() => { S.current.dirty = true; }} onDone=${() => { plPauseR(); setEdOn(false); }}
             behind=${t2 => { behindT.current = t2; setSheet("vbg"); }}
+            blurIt=${x => { plPauseR(); setBlurT(x); }}
             sty=${{ st, set: patch => { const n = Object.assign({}, st, patch); vmSaveStyle(n); setSt(n); S.current.dirty = true; }, subs: !!proj.subs, setSubs: v => { setProj({ subs: v }); S.current.dirty = true; }, hasWords: !!tk.words, busy, getWords: () => { if (!proj.subs) setProj({ subs: true }); getSubs(); }, useHl: !!proj.useHl, headlines: () => setSheet("hl"), brand: () => setSheet("brand"), more: k => { styleFocus.current = k; setStyling(true); } }}
             addFile=${cb => { afterAdd.current = cb || null; fileRef2.current && fileRef2.current.click(); }} addText=${cb => { afterAdd.current = cb || null; setSheet("text"); }} addPlace=${cb => { afterAdd.current = cb || null; setSheet("place"); }}/>
           <input ref=${fileRef2} type="file" accept="image/*,video/*" multiple style="display:none" onChange=${addFiles}/>` : null}
@@ -14916,6 +15152,8 @@ notify pgrst, 'reload schema';
       ${sheet === "subs" && proj.take && proj.take.words ? html`<${VMSubsEdit} words=${proj.take.words} onSeek=${t2 => { const u2 = vmSeqOutOf(vmSeq(proj.take), t2); plSeekR(u2 == null ? 0 : u2); plPlayR(); }} onClose=${() => setSheet(null)} onSave=${w => { setProj(p => ({ take: Object.assign({}, p.take, { words: w, wordsFor: "edited" }) })); setSheet(null); toast("Subtitles corrected."); }}/>` : null}
       ${sheet === "place" ? html`<${VMPlaces} onClose=${() => { setSheet(null); afterAdd.current = null; }} onAdd=${it => { setSheet(null); const n = Object.assign({ id: uid() }, it); setProj(p => ({ items: p.items.concat(n) })); if (afterAdd.current) { const cb = afterAdd.current; afterAdd.current = null; setTimeout(() => cb(n), 60); } }}/>` : null}
       ${sheet === "hl" ? html`<${VMHeadlines} proj=${proj} onClose=${() => setSheet(null)} onSave=${p => { setProj(p); setSheet(null); }} onTry=${() => { setSheet(null); setTimeout(previewOpening, 50); }}/>` : null}
+      ${blurSheet}
+      ${styleSheet}
       ${sheet === "brand" ? html`<${VMBrand} st=${st} proj=${proj} setProj=${x => { setProj(x); S.current.dirty = true; }} onClose=${() => setSheet(null)} onMore=${() => { setSheet(null); styleFocus.current = "open"; setStyling(true); }}/>` : null}
       ${sheet === "vbg" ? html`<${VMBehind} value=${mode === "rec" && s && s.vbg !== undefined ? s.vbg : proj.vbg} review=${mode === "review"} hereT=${behindT.current} onClose=${() => setSheet(null)} onPick=${pickVbg}/>` : null}
       ${sheet === "snd" ? html`<${VMSounds} proj=${proj} setProj=${setProj} lib=${lib} setLib=${setLib} st=${st} onClose=${() => setSheet(null)}/>` : null}
@@ -15446,7 +15684,7 @@ notify pgrst, 'reload schema';
   window.__kfApi = { kfPress, kfStep, kfNew, kfSnd, kfAnn, annRec };
   window.__ink = { hitInk, inkGroup, straighten };
   window.__mux = { lessonVideo, fixVideo, loadMux, vidJob, awake, player, cleanVoice };
-  window.__ui = { vmOcr, cleanVoice, vmKeyDraw, vmSeg, vmVbgPaint, vmVbgLib, vmVbgPrep, vmKeyer, vmLogoPaint, vmLogoBg, vmLogo, LessonsList, PacksSheet, RulesGuide, LESSON_PACKS, crFrame, crSorted, stageAt0: stageAt, PushBell, SetupCheck, VidJobPill, html, render, store, Board, ExplainStudio, LiveTools, stageAt, buildSound, live, player, ClassroomPlayer, crAssets, CR_W, CR_H, TalkBoard, vidJob, VideoMaker, vmExport, vmDb, vmNew, vmAt, vmFrame, vmGeo, VM_LOOKS, vmStyle, vmSaveStyle, VMStyle, vmIntro, vmOutro, vmLook, vmElemSrc, vmPrepClip, vmWorld, vmTrack, vmUntrack, VME, vmKeep, vmSrcAt, thLib, VMThumbs, thInfo, tsMake, tsRender, tsLoadAll, tsExport, tsCutOut, tsLib, TS_TPLS };
+  window.__ui = { VMBlurSheet, vmBlurApply, vmFindFaces, vmOcr, cleanVoice, vmKeyDraw, vmSeg, vmVbgPaint, vmVbgLib, vmVbgPrep, vmKeyer, vmLogoPaint, vmLogoBg, vmLogo, LessonsList, PacksSheet, RulesGuide, LESSON_PACKS, crFrame, crSorted, stageAt0: stageAt, PushBell, SetupCheck, VidJobPill, html, render, store, Board, ExplainStudio, LiveTools, stageAt, buildSound, live, player, ClassroomPlayer, crAssets, CR_W, CR_H, TalkBoard, vidJob, VideoMaker, vmExport, vmDb, vmNew, vmAt, vmFrame, vmGeo, VM_LOOKS, vmStyle, vmSaveStyle, VMStyle, vmIntro, vmOutro, vmLook, vmElemSrc, vmPrepClip, vmWorld, vmTrack, vmUntrack, VME, vmKeep, vmSrcAt, thLib, VMThumbs, thInfo, tsMake, tsRender, tsLoadAll, tsExport, tsCutOut, tsLib, TS_TPLS };
   window.__lang = { viewOf, saveExpl, saveTileRec, uploadBlob, set: l => { REC_LANG = l; }, get: () => REC_LANG, store };
   root.innerHTML = "";
   const duoLink = readDuoLink();
