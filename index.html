@@ -9964,10 +9964,10 @@ notify pgrst, 'reload schema';
     vmBox(I, mI, T, mw, mh, R); vmBox(P, mP, T, mw, mh, R); vmBox(II, II, T, mw, mh, R); vmBox(IP, IP, T, mw, mh, R);
     for (let j = 0; j < n; j++) { const va = II[j] - mI[j] * mI[j], cv = IP[j] - mI[j] * mP[j], a = cv / (va + eps); II[j] = a; IP[j] = mP[j] - a * mI[j]; }
     vmBox(II, II, T, mw, mh, R); vmBox(IP, IP, T, mw, mh, R);
-    for (let j = 0; j < n; j++) { const q = (II[j] * I[j] + IP[j]) * Math.min(1, mP[j] * 4), x = Math.max(0, Math.min(1, (q - 0.34) / 0.36)); P[j] = x * x * (3 - 2 * x); }
+    for (let j = 0; j < n; j++) { const q = (II[j] * I[j] + IP[j]) * Math.min(1, mP[j] * 4), x = Math.max(0, Math.min(1, (q - 0.24) / 0.4)); P[j] = x * x * (3 - 2 * x); }
     // no stray specks or thin slivers of the room: a bit has to belong to a solid part of you to stay
     vmBox(P, mI, T, mw, mh, Math.max(3, Math.round(mw / 160)));
-    for (let i = 0, j = 0; j < n; i += 4, j++) { const a = Math.min(P[j], mI[j] * 1.5); P[j] = a; d[i] = d[i + 1] = d[i + 2] = 255; d[i + 3] = Math.round(a * 255); }
+    for (let i = 0, j = 0; j < n; i += 4, j++) { const a = Math.min(P[j], mI[j] * 1.8); P[j] = a; d[i] = d[i + 1] = d[i + 2] = 255; d[i + 3] = Math.round(a * 255); }
     mx.putImageData(D, 0, 0);
     const c = out.getContext("2d", { willReadFrequently: !!fine }); c.save(); c.globalCompositeOperation = "copy"; c.imageSmoothingEnabled = true; c.imageSmoothingQuality = "high"; c.drawImage(mk, 0, 0, w, h);
     c.globalCompositeOperation = "source-in"; c.drawImage(img, 0, 0, w, h); c.restore();
@@ -10009,27 +10009,39 @@ notify pgrst, 'reload schema';
   // while you record and watch: no lag. The camera picture you see is always the newest one; only the outline is worked out
   // in the background (a small copy, a few times a second), and laid over the newest picture. The finished video is done the careful way.
   function vmKeyer() {
-    const K = { cv: document.createElement("canvas"), mk: document.createElement("canvas"), sm: document.createElement("canvas"), busy: false, ready: false, fail: false, key: "", cost: 30, doneAt: 0, has: false };
+    // every picture shown is cut out with ITS OWN outline (never an older one), so nothing opens up when you move.
+    // The phone does it all on its graphics chip: the picture is copied, a small copy goes to the model, and when its
+    // outline comes back the two are put together. The next picture starts straight away.
+    const mk = () => document.createElement("canvas");
+    const K = { cv: mk(), pend: mk(), m: mk(), sm: mk(), busy: false, ready: false, fail: false, key: "", cost: 30, doneAt: 0 };
     K.feed = (src, v, mirror, t, calm) => {
       const kk = JSON.stringify(v) + mirror; if (kk !== K.key) { K.key = kk; vmVbgPrep(v).catch(() => {}); }
-      const [iw, ih] = vmSize(src); if (!iw) return;
-      const now = performance.now();
-      if (!K.busy && !K.fail && !(K.has && (calm ? K.cost > 60 || now - K.doneAt < 250 : now - K.doneAt < Math.max(66, K.cost * 3)))) {
-        K.busy = true; const t0 = now, sw = 256, sh = Math.max(64, Math.round(256 * ih / iw));
-        if (K.sm.width !== sw || K.sm.height !== sh) { K.sm.width = sw; K.sm.height = sh; }
-        K.sm.getContext("2d").drawImage(src, 0, 0, sw, sh);   // a small copy is quicker for the phone to look at
-        vmSeg().then(seg => seg.run(K.sm, r => { vmMaskLite(r.segmentationMask, K.mk, sw, sh); K.has = true; }))
-          .catch(() => { K.fail = true; }).finally(() => { K.busy = false; K.doneAt = performance.now(); K.cost = K.cost * 0.7 + (K.doneAt - t0) * 0.3; });
-      }
-      if (!K.has) { K.ready = false; return; }
-      const k = Math.min(1, 960 / Math.max(iw, ih)), w = Math.round(iw * k), h = Math.round(ih * k), c = K.cv.getContext("2d");
-      if (K.cv.width !== w || K.cv.height !== h) { K.cv.width = w; K.cv.height = h; }
-      c.save(); c.globalCompositeOperation = "copy"; c.imageSmoothingEnabled = true; c.imageSmoothingQuality = "high"; c.drawImage(K.mk, 0, 0, w, h);
-      c.globalCompositeOperation = "source-in"; c.drawImage(src, 0, 0, w, h); c.restore();
-      if (v && v.k !== "cut") { c.save(); c.globalCompositeOperation = "destination-over"; vmVbgPaint(c, v, w, h, src, mirror, t); c.restore(); }
-      K.ready = true;
+      const [iw, ih] = vmSize(src); if (!iw || K.busy || K.fail) return;
+      if (calm && K.ready && K.cost > 60 && performance.now() - K.doneAt < 400) return;   // a slow phone: easy does it while the countdown starts the recording
+      K.busy = true; const t0 = performance.now();
+      const k = Math.min(1, 960 / Math.max(iw, ih)), w = Math.round(iw * k), h = Math.round(ih * k), sw = 256, sh = Math.max(64, Math.round(256 * ih / iw));
+      if (K.pend.width !== w || K.pend.height !== h) { K.pend.width = w; K.pend.height = h; }
+      if (K.sm.width !== sw || K.sm.height !== sh) { K.sm.width = sw; K.sm.height = sh; }
+      K.pend.getContext("2d").drawImage(src, 0, 0, w, h); K.sm.getContext("2d").drawImage(src, 0, 0, sw, sh);   // the same moment, big and small
+      vmSeg().then(seg => seg.run(K.sm, r => {
+        vmMaskFast(r.segmentationMask, K.m, w, h);
+        const c = K.cv.getContext("2d"); if (K.cv.width !== w || K.cv.height !== h) { K.cv.width = w; K.cv.height = h; }
+        c.save(); c.globalCompositeOperation = "copy"; c.drawImage(K.m, 0, 0); c.globalCompositeOperation = "source-in"; c.drawImage(K.pend, 0, 0); c.restore();
+        if (v && v.k !== "cut") { c.save(); c.globalCompositeOperation = "destination-over"; vmVbgPaint(c, v, w, h, K.pend, mirror, t); c.restore(); }
+        K.ready = true;
+      })).catch(() => { K.fail = true; }).finally(() => { K.busy = false; K.doneAt = performance.now(); K.cost = K.cost * 0.7 + (K.doneAt - t0) * 0.3; });
     };
     return K;
+  }
+  // the outline, made smooth and full (on the graphics chip: no waiting): softened a little, and filled out so the
+  // head, hair and shoulders keep their whole shape instead of being nibbled at the edges
+  function vmMaskFast(mask, out, w, h) {
+    if (out.width !== w || out.height !== h) { out.width = w; out.height = h; }
+    const x = out.getContext("2d"); x.imageSmoothingEnabled = true; x.imageSmoothingQuality = "high";
+    if (VM_FILTER) x.filter = "blur(" + Math.max(1, w / 400).toFixed(1) + "px)";
+    x.globalCompositeOperation = "copy"; x.drawImage(mask, 0, 0, w, h);
+    x.globalCompositeOperation = "source-over"; x.drawImage(mask, 0, 0, w, h);
+    x.filter = "none";
   }
   // a quick, smooth outline from the model's guess (for the live view)
   function vmMaskLite(mask, out, mw, mh) {
