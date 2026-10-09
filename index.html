@@ -9807,6 +9807,25 @@ notify pgrst, 'reload schema';
     VMW = { c50, c110, by50, countries: W.countries, byA2: new Map(W.countries.map(c => [c.a2, c])) };
     return VMW;
   }
+  // provinces, states and cities (loaded only when a map goes further than a country)
+  let VMM = null, vmMoreP = null;
+  function vmMore() {
+    if (VMM) return Promise.resolve(VMM);
+    if (!vmMoreP) { vmMoreP = new Promise((res, rej) => { if (window.VM_MORE) return res(); const sc = document.createElement("script"); sc.src = "worldmore.js"; sc.onload = () => res(); sc.onerror = () => rej(new Error("more")); document.head.appendChild(sc); }).then(vmMorePrep); vmMoreP.catch(() => { vmMoreP = null; }); }
+    return vmMoreP;
+  }
+  function vmMorePrep() {
+    if (VMM) return VMM;
+    const M = window.VM_MORE, q = M.q, prov = new Map(), cities = [], byA2 = new Map();
+    const ring = arr => { const a = new Float32Array(arr.length); let x = 0, y = 0, x0 = 1, y0 = 1, x1 = 0, y1 = 0, ar = 0; for (let i = 0; i < arr.length; i += 2) { x += arr[i]; y += arr[i + 1]; a[i] = x / q; a[i + 1] = y / q; x0 = Math.min(x0, a[i]); y0 = Math.min(y0, a[i + 1]); x1 = Math.max(x1, a[i]); y1 = Math.max(y1, a[i + 1]); if (i) ar += a[i - 2] * a[i + 1] - a[i] * a[i - 1]; } return { a, b: [x0, y0, x1, y1], ar: Math.abs(ar / 2) }; };
+    for (const a2 of Object.keys(M.prov)) prov.set(a2, M.prov[a2].map(([name, type, rings]) => { const P = rings.map(r => { const R = ring(r); return { rs: [R], b: R.b, ar: R.ar }; }); const b = P.reduce((m, p) => [Math.min(m[0], p.b[0]), Math.min(m[1], p.b[1]), Math.max(m[2], p.b[2]), Math.max(m[3], p.b[3])], [1, 1, 0, 0]); return { name, type, P, b }; }).sort((x, y) => x.name.localeCompare(y.name)));
+    for (const [name, a2, adm, pop, x, y] of M.cities) { const c2 = { name, a2, adm, pop, x: x / q, y: y / q }; cities.push(c2); if (!byA2.has(a2)) byA2.set(a2, []); byA2.get(a2).push(c2); }
+    window.VM_MORE = null;
+    VMM = { prov, cities, byA2 };
+    return VMM;
+  }
+  const vmCityBox = (x, y, r) => [x - (r || 0.0011), y - (r || 0.0011), x + (r || 0.0011), y + (r || 0.0011)];
+  const vmProvOf = it => (VMM && it.prov ? (VMM.prov.get(it.a2) || []).find(p => p.name === it.prov) || null : null);
   // the part of a country to zoom to: its main land, and whatever is close to it
   function vmFocus(ct) {
     if (ct._f) return ct._f;
@@ -10039,15 +10058,25 @@ notify pgrst, 'reload schema';
     const f = ctry ? vmFocus(ctry) : [0.45, 0.35, 0.55, 0.5], fx = (f[0] + f[2]) / 2, fy = (f[1] + f[3]) / 2;
     const sEnd = Math.max(0.004, (f[2] - f[0]) * 1.3, (f[3] - f[1]) * 1.45 * box.w / box.h), sStart = Math.min(1.05, Math.max(sEnd * 6, 0.9));
     const kz = crEase(Math.max(0, Math.min(1, (a - 0.35) / 2.3))), kc = crEase(Math.max(0, Math.min(1, (a - 0.2) / 1.6)));
-    let sc = Math.exp(Math.log(sStart) + (Math.log(sEnd) - Math.log(sStart)) * kz); sc *= 1 - 0.05 * Math.max(0, Math.min(1, (a - 2.7) / 6));
-    const cx = 0.5 + (fx - 0.5) * kc, cy = 0.45 + (fy - 0.45) * kc, k = box.w / sc;
+    // further in: a province or state, or a city (after the country)
+    const deep = !!(it.prov || it.city); if (deep && !VMM) vmMore().catch(() => {});
+    const pv = deep ? vmProvOf(it) : null, t2 = it.city ? vmCityBox(it.city.x, it.city.y) : pv ? pv.b : null;
+    const k2 = t2 ? crEase(Math.max(0, Math.min(1, (a - 2.9) / 1.9))) : 0;
+    let sc = Math.exp(Math.log(sStart) + (Math.log(sEnd) - Math.log(sStart)) * kz); sc *= 1 - 0.05 * Math.max(0, Math.min(1, (a - (t2 ? 6.5 : 2.7)) / 6));
+    let cx = 0.5 + (fx - 0.5) * kc, cy = 0.45 + (fy - 0.45) * kc;
+    if (t2 && k2 > 0) { const s2 = Math.max(0.0012, (t2[2] - t2[0]) * 1.35, (t2[3] - t2[1]) * 1.5 * box.w / box.h); sc = Math.exp(crLerp(Math.log(sc), Math.log(s2), k2)); cx = crLerp(cx, (t2[0] + t2[2]) / 2, k2); cy = crLerp(cy, (t2[1] + t2[3]) / 2, k2); }
+    const k = box.w / sc;
     const tf = { x: x => box.x + box.w / 2 + (x - cx) * k, y: y => box.y + box.h / 2 + (y - cy) * k };
     const vx0 = cx - sc / 2, vx1 = cx + sc / 2, vy0 = cy - sc * box.h / box.w / 2, vy1 = cy + sc * box.h / box.w / 2;
     const set = sc > 0.18 ? VMW.c110 : VMW.c50, min = 0.8;
     c.fillStyle = "#F1ECE1"; c.strokeStyle = "rgba(120,110,95,.55)"; c.lineWidth = G.tall ? 1.4 : 1.2; c.lineJoin = "round";
     for (const ct of set) { const b = ct.b; if (b[2] < vx0 || b[0] > vx1 || b[3] < vy0 || b[1] > vy1) continue; vmMapPath(c, ct, tf, min); c.fill(); c.stroke(); }
+    // close in: the country's provinces, drawn in detail with their borders
+    const provs = VMM && ctry && sc < 0.12 ? VMM.prov.get(it.a2) || [] : [];
+    if (provs.length) { c.save(); c.fillStyle = "#F1ECE1"; for (const p of provs) { const b = p.b; if (b[2] < vx0 || b[0] > vx1 || b[3] < vy0 || b[1] > vy1) continue; vmMapPath(c, p, tf, 0.6); c.fill(); }
+      c.strokeStyle = "rgba(120,110,95,.6)"; c.lineWidth = G.tall ? 1.6 : 1.3; c.setLineDash([7, 5]); for (const p of provs) { const b = p.b; if (b[2] < vx0 || b[0] > vx1 || b[3] < vy0 || b[1] > vy1) continue; vmMapPath(c, p, tf, 0.6); c.stroke(); } c.restore(); }
     if (ctry) {
-      const hk = crEase((a - 1.4) / 0.6);
+      const hk = crEase((a - 1.4) / 0.6) * (1 - 0.75 * k2);
       if (hk > 0) {
         c.save(); vmMapPath(c, ctry, tf, 0.5); c.clip();
         c.globalAlpha = hk; c.fillStyle = L.acc; c.globalAlpha = hk * 0.45; c.fillRect(box.x, box.y, box.w, box.h);
@@ -10057,8 +10086,33 @@ notify pgrst, 'reload schema';
         c.save(); c.globalAlpha = hk; vmMapPath(c, ctry, tf, 0.5); c.strokeStyle = vmInk(L.acc) === "#FFFFFF" ? "#1A1A1A" : "#FFFFFF"; c.lineWidth = 5; c.stroke(); c.strokeStyle = L.acc; c.lineWidth = 2.5; c.stroke(); c.restore();
       }
     }
+    if (pv && k2 > 0) {   // the province lights up
+      const pk = crEase((a - 3.6) / 0.6);
+      if (pk > 0) { c.save(); vmMapPath(c, pv, tf, 0.5); c.clip(); c.globalAlpha = pk * 0.5; c.fillStyle = L.acc; c.fillRect(box.x, box.y, box.w, box.h);
+        c.globalAlpha = pk * 0.9; c.strokeStyle = L.acc; c.lineWidth = 5; c.beginPath(); for (let d = -box.h; d < box.w + box.h; d += 16) { c.moveTo(box.x + d, box.y); c.lineTo(box.x + d - box.h, box.y + box.h); } c.stroke(); c.restore();
+        c.save(); c.globalAlpha = pk; vmMapPath(c, pv, tf, 0.5); c.strokeStyle = vmInk(L.acc) === "#FFFFFF" ? "#1A1A1A" : "#FFFFFF"; c.lineWidth = 5; c.stroke(); c.strokeStyle = L.acc; c.lineWidth = 2.5; c.stroke(); c.restore(); }
+    }
+    // towns around, as small dots with their names (the closer in, the more of them)
+    if (deep && VMM && k2 > 0.4) {
+      const tk = crEase((k2 - 0.4) / 0.4), list = VMM.byA2.get(it.a2) || [], fsz = G.tall ? 22 : 19, max = it.city ? 9 : 7; let n = 0;
+      c.save(); c.globalAlpha = tk; c.font = "700 " + fsz + "px Poppins, Andika, sans-serif"; c.textBaseline = "middle"; c.textAlign = "left";
+      for (const t of list) { if (n >= max) break; if (it.city && t.name === it.city.name) continue; if (t.x < vx0 || t.x > vx1 || t.y < vy0 || t.y > vy1) continue; const X = tf.x(t.x), Y = tf.y(t.y);
+        c.fillStyle = "#3A3A3A"; c.beginPath(); c.arc(X, Y, 5, 0, 7); c.fill(); c.lineWidth = 4; c.strokeStyle = "rgba(255,255,255,.9)"; c.strokeText(t.name, X + 9, Y); c.fillStyle = "#3A3A3A"; c.fillText(t.name, X + 9, Y); n++; }
+      c.restore();
+    }
+    // the city: a pin drops on it, with its name
+    if (it.city && k2 > 0.55) {
+      const dk = crEase((k2 - 0.55) / 0.35), X = tf.x(it.city.x), Y = tf.y(it.city.y), z = box.w / 720, h = 70 * z;
+      c.save(); c.globalAlpha = Math.min(1, dk * 1.4); c.translate(X, Y - (1 - dk) * 60 * z);
+      c.fillStyle = "rgba(0,0,0,.25)"; c.beginPath(); c.ellipse(0, (1 - dk) * 60 * z, 14 * z, 5 * z, 0, 0, 7); c.fill();
+      c.fillStyle = L.acc; c.strokeStyle = "#FFFFFF"; c.lineWidth = 4 * z; c.beginPath(); c.moveTo(0, 0); c.bezierCurveTo(-30 * z, -h * 0.55, -26 * z, -h, 0, -h); c.bezierCurveTo(26 * z, -h, 30 * z, -h * 0.55, 0, 0); c.fill(); c.stroke();
+      c.fillStyle = "#FFFFFF"; c.beginPath(); c.arc(0, -h * 0.68, 10 * z, 0, 7); c.fill();
+      const fs = (G.tall ? 34 : 30), nm = it.city.name; c.font = "800 " + fs + "px Poppins, Andika, sans-serif"; const tw = c.measureText(nm).width;
+      c.fillStyle = "rgba(0,0,0,.3)"; crRR(c, -tw / 2 - 18 + 3, 14 * z + 4, tw + 36, fs * 1.5, 12); c.fill(); c.fillStyle = "#FFFFFF"; crRR(c, -tw / 2 - 18, 14 * z, tw + 36, fs * 1.5, 12); c.fill();
+      c.fillStyle = "#14181C"; c.textAlign = "center"; c.textBaseline = "middle"; c.fillText(nm, 0, 14 * z + fs * 0.77); c.restore();
+    }
     // the flag, raised on a pole in the middle of the country
-    if (ctry && a > 2.2) { const H = box.h * (G.tall ? 0.17 : 0.27), x = tf.x(fx), y = tf.y(fy) + H * 0.35; vmPoleFlag(c, vmFlag(it.a2), x, y, H, H * 0.66, a, crEase(Math.min(1, (a - 2.2) / 0.9))); }
+    if (ctry && a > 2.2 && k2 < 0.3) { const H = box.h * (G.tall ? 0.17 : 0.27), x = tf.x(fx), y = tf.y(fy) + H * 0.35; c.save(); c.globalAlpha *= 1 - k2 / 0.3; vmPoleFlag(c, vmFlag(it.a2), x, y, H, H * 0.66, a, crEase(Math.min(1, (a - 2.2) / 0.9))); c.restore(); }
     // the flag and the name
     const lk = crEase((a - 1.9) / 0.5);
     if (lk > 0) {
@@ -10077,7 +10131,7 @@ notify pgrst, 'reload schema';
   // a journey: the line travels from country to country, the map following along
   const VM_LEG = 4.6, vmTripCache = new WeakMap();
   function vmTripPlan(it) {
-    const st = (it.stops || []).map(x => { const ct = VMW && x.n ? VMW.by50.get(x.n) : null, f = ct ? vmFocus(ct) : null; return f ? Object.assign({ ct, f, cx: (f[0] + f[2]) / 2, cy: (f[1] + f[3]) / 2 }, x) : null; }).filter(Boolean);
+    const st = (it.stops || []).map(x => { const ct = VMW && x.n ? VMW.by50.get(x.n) : null, f = x.city ? vmCityBox(x.city.x, x.city.y, 0.004) : ct ? vmFocus(ct) : null; return f ? Object.assign({ ct, f, cx: (f[0] + f[2]) / 2, cy: (f[1] + f[3]) / 2 }, x) : null; }).filter(Boolean);
     return st;
   }
   const vmFitView = (pts, box, pad) => { let x0 = 1e9, y0 = 1e9, x1 = -1e9, y1 = -1e9; for (const p of pts) { x0 = Math.min(x0, p[0]); y0 = Math.min(y0, p[1]); x1 = Math.max(x1, p[2]); y1 = Math.max(y1, p[3]); } const w = x1 - x0, h = y1 - y0; return { cx: (x0 + x1) / 2, cy: (y0 + y1) / 2, s: Math.max(0.01, w * pad, h * pad * box.w / box.h) }; };
@@ -10103,6 +10157,8 @@ notify pgrst, 'reload schema';
     const set = view.s > 0.18 ? VMW.c110 : VMW.c50;
     c.fillStyle = "#F1ECE1"; c.strokeStyle = "rgba(120,110,95,.55)"; c.lineWidth = G.tall ? 1.4 : 1.2; c.lineJoin = "round";
     for (const ct of set) { const b = ct.b; if (b[2] < vx0 || b[0] > vx1 || b[3] < vy0 || b[1] > vy1) continue; vmMapPath(c, ct, tf, 0.8); c.fill(); c.stroke(); }
+    // close in on cities: the provinces, in detail
+    if (S.some(x => x.city)) { if (!VMM) vmMore().catch(() => {}); else if (view.s < 0.12) { c.save(); const seen = new Set(); for (const x of S) { if (seen.has(x.a2)) continue; seen.add(x.a2); for (const p of VMM.prov.get(x.a2) || []) { const b = p.b; if (b[2] < vx0 || b[0] > vx1 || b[3] < vy0 || b[1] > vy1) continue; vmMapPath(c, p, tf, 0.6); c.fillStyle = "#F1ECE1"; c.fill(); c.strokeStyle = "rgba(120,110,95,.6)"; c.lineWidth = G.tall ? 1.6 : 1.3; c.setLineDash([7, 5]); c.stroke(); c.setLineDash([]); } } c.restore(); } }
     // countries reached so far light up
     const reached = leg < 0 ? 1 : Math.min(n, leg + 1 + (p >= 1 ? 1 : 0));
     for (let i = 0; i < reached; i++) { c.save(); vmMapPath(c, S[i].ct, tf, 0.5); c.globalAlpha = i === reached - 1 ? 0.55 : 0.35; c.fillStyle = L.acc; c.fill(); c.globalAlpha = 1; c.strokeStyle = L.acc; c.lineWidth = 2.5; c.stroke(); c.restore(); }
@@ -10998,6 +11054,7 @@ notify pgrst, 'reload schema';
     const used = new Set(cues.filter(q => q.k === "show").map(q => q.ref).concat(plan.hl ? plan.hl.map(h => h.ref).filter(Boolean) : []).concat(P.filter(p => p.kind !== "rec").map(p => p.src)));
     if ([...used].some(id => items[id] && (items[id].kind === "map" || items[id].kind === "flag" || items[id].kind === "trip"))) {
       await vmWorld();
+      if ([...used].some(id => items[id] && (items[id].prov || items[id].city || (items[id].stops || []).some(x => x.city)))) await vmMore().catch(() => {});
       for (const id of used) { const it = items[id]; if (!it) continue; for (const a2 of [it.a2].concat((it.stops || []).map(x => x.a2)).filter(Boolean)) { vmFlag(a2); const im = vmFlags.get(a2); if (im) { try { await im.decode(); } catch (e) {} } } }
     }
     const pics = {}, clips = {};
@@ -13674,8 +13731,11 @@ notify pgrst, 'reload schema';
     </div>`;
   }
   function VMPlaces({ onClose, onAdd }) {
-    const [w, setW] = useState(VMW), [err, setErr] = useState(false), [q, setQ] = useState(""), [sel, setSel] = useState(null), [trip, setTrip] = useState(null);
+    const [w, setW] = useState(VMW), [err, setErr] = useState(false), [q, setQ] = useState(""), [sel, setSel] = useState(null), [trip, setTrip] = useState(null), [m, setM] = useState(VMM), [deep, setDeep] = useState(null), [q2, setQ2] = useState("");
     useEffect(() => { if (!w) vmWorld().then(setW).catch(() => setErr(true)); }, []);
+    useEffect(() => { if ((sel || trip) && !m) vmMore().then(setM).catch(() => {}); }, [sel, trip]);
+    const cityHits = (a2, qq) => { if (!m) return []; const L2 = a2 ? m.byA2.get(a2) || [] : m.cities, nq = norm(qq || ""); const out = []; for (const c2 of L2) { if (nq && !norm(c2.name).includes(nq)) continue; out.push(c2); if (out.length >= (a2 ? 80 : 30)) break; } return out; };
+    const ctryOf = a2 => (w ? w.byA2.get(a2) : null);
     const norm = x => String(x).toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
     const list = w ? w.countries.filter(c => !q || norm(c.name).includes(norm(q)) || c.a2.toLowerCase() === norm(q)) : [];
     const flagUrl = c => "data:image/svg+xml;charset=utf-8," + encodeURIComponent(c.svg);
@@ -13683,17 +13743,25 @@ notify pgrst, 'reload schema';
       <div class="sheet vmplaces" role="dialog" aria-label="Map or flag">
         <h3 style="margin:0">🗺 A map or a flag</h3>
         ${err ? html`<p class="help">The map couldn't load. Check the connection and try again.</p>` : !w ? html`<p class="help">Loading the world map…</p>` : trip ? html`
-          <p class="help">✈ A journey. Tap countries in the order they were visited. The line travels from one to the next, about ${VM_LEG} seconds each.</p>
+          <p class="help">✈ A journey. Tap countries or cities (type a city's name) in the order they were visited. The line travels from one to the next, about ${VM_LEG} seconds each.</p>
           <div class="vmchips">${trip.map((c, i) => html`<span key=${i} class="vmsnd"><button class="chip">${i + 1}. ${c.name}</button><button class="chip" onClick=${() => setTrip(trip.filter((_, j) => j !== i))} aria-label="Remove">✕</button></span>`)}</div>
-          <input class="vmsearch" value=${q} onInput=${e => setQ(e.target.value)} placeholder="Add a country…"/>
-          <div class="vmclist short">${list.filter(c => c.n && w.by50.has(c.n)).slice(0, 60).map(c => html`<button key=${c.a2} class="vmcrow" onClick=${() => { setTrip(trip.concat(c)); setQ(""); }}><img src=${flagUrl(c)} alt="" loading="lazy"/><span>${c.name}</span></button>`)}</div>
-          <button class="btn" disabled=${trip.length < 2} onClick=${() => onAdd({ kind: "trip", name: trip.map(c => c.name).join(" → "), stops: trip.map(c => ({ a2: c.a2, n: c.n, name: c.name })), thumb: flagUrl(trip[0]) })}>Add the journey (${trip.length} stops)</button>
+          <input class="vmsearch" value=${q} onInput=${e => setQ(e.target.value)} placeholder="Add a country or a city…"/>
+          <div class="vmclist short">${list.filter(c => c.n && w.by50.has(c.n)).slice(0, 60).map(c => html`<button key=${c.a2} class="vmcrow" onClick=${() => { setTrip(trip.concat(c)); setQ(""); }}><img src=${flagUrl(c)} alt="" loading="lazy"/><span>${c.name}</span></button>`)}
+            ${q.trim().length >= 2 ? cityHits(null, q).filter(c2 => ctryOf(c2.a2) && ctryOf(c2.a2).n).slice(0, 20).map(c2 => { const ct = ctryOf(c2.a2); return html`<button key=${"c" + c2.name + c2.x} class="vmcrow" onClick=${() => { setTrip(trip.concat({ a2: ct.a2, n: ct.n, svg: ct.svg, name: c2.name, city: { name: c2.name, x: c2.x, y: c2.y } })); setQ(""); }}><img src=${flagUrl(ct)} alt="" loading="lazy"/><span>🏙 ${c2.name} <small>· ${ct.name}</small></span></button>`; }) : null}</div>
+          <button class="btn" disabled=${trip.length < 2} onClick=${() => onAdd({ kind: "trip", name: trip.map(c => c.name).join(" → "), stops: trip.map(c => Object.assign({ a2: c.a2, n: c.n, name: c.name }, c.city ? { city: c.city } : {})), thumb: flagUrl(trip[0]) })}>Add the journey (${trip.length} stops)</button>
           <button class="btn quiet" onClick=${() => setTrip(null)}>← Back</button>` : sel ? html`
           <div class="vmsel"><img src=${flagUrl(sel)} alt=""/><b>${sel.name}</b></div>
           <button class="btn" disabled=${!sel.n || !w.by50.has(sel.n)} onClick=${() => onAdd({ kind: "map", a2: sel.a2, n: sel.n, name: sel.name, thumb: flagUrl(sel) })}>🗺 A map that zooms into ${sel.name}</button>
           ${!sel.n || !w.by50.has(sel.n) ? html`<p class="help">This one is too small to show on the world map, but its flag works.</p>` : null}
           <button class="btn quiet" onClick=${() => onAdd({ kind: "flag", a2: sel.a2, n: sel.n, name: sel.name, thumb: flagUrl(sel) })}>🏳 Its flag, big</button>
-          <button class="btn quiet" onClick=${() => setSel(null)}>← Another country</button>` : html`
+          ${sel.n && w.by50.has(sel.n) ? html`<div class="vml">Zoom in further (after the country)
+            <div class="vmchips"><button class=${"chip" + (deep === "prov" ? " on" : "")} onClick=${() => { setDeep("prov"); setQ2(""); }}>📍 A province or state</button><button class=${"chip" + (deep === "city" ? " on" : "")} onClick=${() => { setDeep("city"); setQ2(""); }}>🏙 A city or town</button></div>
+            ${deep && !m ? html`<p class="help">Loading the provinces and cities… (once, about 2 MB)</p>` : null}
+            ${deep === "prov" && m ? html`<div class="vmclist short">${(m.prov.get(sel.a2) || []).map(pv => html`<button key=${pv.name} class="vmcrow" onClick=${() => onAdd({ kind: "map", a2: sel.a2, n: sel.n, name: pv.name + ", " + sel.name, prov: pv.name, thumb: flagUrl(sel) })}><span>📍 ${pv.name}${pv.type ? html` <small>· ${pv.type}</small>` : null}</span></button>`)}${(m.prov.get(sel.a2) || []).length ? null : html`<p class="help">No provinces for this one on the map.</p>`}</div>` : null}
+            ${deep === "city" && m ? html`<input class="vmsearch" value=${q2} onInput=${e => setQ2(e.target.value)} placeholder="Search a city in ${sel.name}…"/>
+              <div class="vmclist short">${cityHits(sel.a2, q2).map(c2 => html`<button key=${c2.name + c2.x} class="vmcrow" onClick=${() => onAdd({ kind: "map", a2: sel.a2, n: sel.n, name: c2.name + ", " + sel.name, city: { name: c2.name, x: c2.x, y: c2.y }, thumb: flagUrl(sel) })}><span>🏙 ${c2.name}${c2.adm ? html` <small>· ${c2.adm}</small>` : null}</span></button>`)}${cityHits(sel.a2, q2).length ? null : html`<p class="help">No city by that name on the map. Try the province instead.</p>`}</div>` : null}
+          </div>` : null}
+          <button class="btn quiet" onClick=${() => { setSel(null); setDeep(null); }}>← Another country</button>` : html`
           <button class="btn quiet" onClick=${() => { setTrip([]); setQ(""); }}>✈ A journey: from one country to the next</button>
           <input class="vmsearch" value=${q} onInput=${e => setQ(e.target.value)} placeholder="Search: Ethiopia, Zambia, Palestine…" autofocus/>
           <div class="vmclist">${list.slice(0, 120).map(c => html`<button key=${c.a2} class="vmcrow" onClick=${() => setSel(c)}><img src=${flagUrl(c)} alt="" loading="lazy"/><span>${c.name}</span></button>`)}</div>`}
@@ -13873,7 +13941,7 @@ notify pgrst, 'reload schema';
   }
   const vmItemIcon = it => (!it ? "❔" : it.kind === "post" ? "📰" : it.kind === "vid" ? (it.screen ? "🖥" : "▶") : it.kind === "img" ? "🖼" : it.kind === "map" ? "🗺" : it.kind === "flag" ? "🏳" : it.kind === "trip" ? "✈" : it.kind === "read" ? "📜" : it.kind === "ban" ? "▬" : it.kind === "top" ? "🔝" : it.kind === "tier" ? "🏆" : it.kind === "person" ? "👤" : "Aa");
   const vmItemName = it => (!it ? "(taken out)" : it.kind === "vid" ? it.name || "Clip" : it.kind === "img" ? it.name || "Picture" : it.kind === "trip" ? (it.stops || []).map(x => x.name).join(" → ") : it.name || it.text || "Words");
-  const vmItemDur = it => (it.kind === "post" ? 12 : it.kind === "vid" ? Math.max(2, Math.min(it.secs || 8, 20)) : it.kind === "trip" ? 0.9 + Math.max(1, (it.stops || []).length - 1) * VM_LEG + 2.5 : it.kind === "map" ? 6 : it.kind === "read" ? 8 : it.kind === "tier" ? 30 : it.kind === "person" ? 7 : 4);
+  const vmItemDur = it => (it.kind === "post" ? 12 : it.kind === "vid" ? Math.max(2, Math.min(it.secs || 8, 20)) : it.kind === "trip" ? 0.9 + Math.max(1, (it.stops || []).length - 1) * VM_LEG + 2.5 : it.kind === "map" ? (it.prov || it.city ? 8.5 : 6) : it.kind === "read" ? 8 : it.kind === "tier" ? 30 : it.kind === "person" ? 7 : 4);
   const VM_PTS = { sfx: q => (q.v === "boom" ? "💥" : q.v === "freeze" ? "🥶" : q.v === "zoom" ? "🔎" : "🎵"), o: q => (q.s === "circle" ? "⭕" : q.s === "arrow" ? "➡️" : q.s === "hl" ? "🖍" : "✏️"), pt: () => "👉", vbg: () => "🪄" };
   const vmPtName = q => (q.k === "vbg" ? "Behind me: " + vmVbgName(q.v) : q.k === "sfx" ? (q.v === "boom" ? "Boom" : q.v === "freeze" ? "Freeze" : q.v === "zoom" ? "Zoom in" : "Your sound") : q.k === "pt" ? "Pointer" : q.s === "circle" ? "Circle" : q.s === "arrow" ? "Arrow" : q.s === "hl" ? "Highlight" : "Drawing");
   const VM_LAYC = { cam: "#3B7DD8", split: "#7A4FD0", pip: "#1F9E8A", thing: "#C2671B" };
@@ -15684,7 +15752,7 @@ notify pgrst, 'reload schema';
   window.__kfApi = { kfPress, kfStep, kfNew, kfSnd, kfAnn, annRec };
   window.__ink = { hitInk, inkGroup, straighten };
   window.__mux = { lessonVideo, fixVideo, loadMux, vidJob, awake, player, cleanVoice };
-  window.__ui = { VMBlurSheet, vmBlurApply, vmFindFaces, vmOcr, cleanVoice, vmKeyDraw, vmSeg, vmVbgPaint, vmVbgLib, vmVbgPrep, vmKeyer, vmLogoPaint, vmLogoBg, vmLogo, LessonsList, PacksSheet, RulesGuide, LESSON_PACKS, crFrame, crSorted, stageAt0: stageAt, PushBell, SetupCheck, VidJobPill, html, render, store, Board, ExplainStudio, LiveTools, stageAt, buildSound, live, player, ClassroomPlayer, crAssets, CR_W, CR_H, TalkBoard, vidJob, VideoMaker, vmExport, vmDb, vmNew, vmAt, vmFrame, vmGeo, VM_LOOKS, vmStyle, vmSaveStyle, VMStyle, vmIntro, vmOutro, vmLook, vmElemSrc, vmPrepClip, vmWorld, vmTrack, vmUntrack, VME, vmKeep, vmSrcAt, thLib, VMThumbs, thInfo, tsMake, tsRender, tsLoadAll, tsExport, tsCutOut, tsLib, TS_TPLS };
+  window.__ui = { vmMore, VMBlurSheet, vmBlurApply, vmFindFaces, vmOcr, cleanVoice, vmKeyDraw, vmSeg, vmVbgPaint, vmVbgLib, vmVbgPrep, vmKeyer, vmLogoPaint, vmLogoBg, vmLogo, LessonsList, PacksSheet, RulesGuide, LESSON_PACKS, crFrame, crSorted, stageAt0: stageAt, PushBell, SetupCheck, VidJobPill, html, render, store, Board, ExplainStudio, LiveTools, stageAt, buildSound, live, player, ClassroomPlayer, crAssets, CR_W, CR_H, TalkBoard, vidJob, VideoMaker, vmExport, vmDb, vmNew, vmAt, vmFrame, vmGeo, VM_LOOKS, vmStyle, vmSaveStyle, VMStyle, vmIntro, vmOutro, vmLook, vmElemSrc, vmPrepClip, vmWorld, vmTrack, vmUntrack, VME, vmKeep, vmSrcAt, thLib, VMThumbs, thInfo, tsMake, tsRender, tsLoadAll, tsExport, tsCutOut, tsLib, TS_TPLS };
   window.__lang = { viewOf, saveExpl, saveTileRec, uploadBlob, set: l => { REC_LANG = l; }, get: () => REC_LANG, store };
   root.innerHTML = "";
   const duoLink = readDuoLink();
