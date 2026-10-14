@@ -471,7 +471,20 @@ img{max-width:100%}
 .vmpostlist{display:flex;flex-direction:column;gap:8px;max-height:44vh;overflow:auto}.vmpostrow{display:grid;grid-template-columns:22px 56px 1fr;grid-template-rows:auto auto;gap:2px 10px;align-items:center;padding:6px;border-radius:12px;background:var(--paper-2)}.vmpostrow .n{grid-row:1/3;font-weight:800;text-align:center}.vmpostrow img{grid-row:1/3;width:56px;height:56px;object-fit:cover;border-radius:8px}.vmpostrow .st{font-size:13px}.vmpostrow .ops{display:flex;gap:4px}.vmpostrow .ops .chip{padding:2px 10px;min-height:0}
 .vmover>.full{z-index:80}
 .autothumb{display:flex;flex-direction:column;gap:6px;align-items:center;width:100%;max-width:560px;background:var(--paper-2);border-radius:16px;padding:12px}.autothumb small{color:#667;text-align:center}.atrow{display:flex;align-items:center;gap:8px}.atimg{border-radius:10px;box-shadow:0 6px 18px rgba(0,0,0,.25);max-width:100%}
-.asklist{display:flex;flex-direction:column;gap:8px;max-height:46vh;overflow:auto}.askrow{display:flex;gap:10px;align-items:flex-start;background:var(--paper-2);border:2px solid transparent;border-radius:14px;padding:10px 12px;cursor:pointer}.askrow.on{border-color:var(--blue)}.askrow span{flex:1;font:600 15px/1.35 var(--font);color:var(--ink)}.askrow small{display:block;color:#889;font-weight:500;font-size:12px;margin-top:3px}.askrow input{margin-top:4px;width:20px;height:20px}
+.asklist{display:flex;flex-direction:column;gap:10px;max-height:52vh;overflow:auto}
+.rgsec{margin:8px 0;line-height:1.5}.rgsec b{display:block;font-size:13px;letter-spacing:.3px;color:var(--ink-3);margin-bottom:2px}.rgcheck{background:var(--paper-2);border-radius:12px;padding:10px 12px}
+.cutbox{display:flex;flex-direction:column;gap:8px;background:var(--paper-2);border-radius:14px;padding:12px}
+.vmstops{display:flex;flex-wrap:wrap;gap:6px}.vmstop{display:inline-flex;align-items:center;gap:8px;background:var(--blue);color:#fff;border-radius:99px;padding:6px 8px 6px 6px;font-weight:700;font-size:14px}.vmstop b{background:#fff;color:var(--blue);border-radius:50%;width:22px;height:22px;display:grid;place-items:center;font-size:12px}.vmstop button{border:0;background:rgba(255,255,255,.2);color:#fff;border-radius:50%;width:22px;height:22px;cursor:pointer}
+.vmveh{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}.vmvehb{display:flex;flex-direction:column;align-items:center;gap:2px;border:2px solid var(--line);background:#2A6CA8;border-radius:14px;padding:4px 4px 6px;color:#fff;cursor:pointer;font:inherit}.vmvehb.on{border-color:var(--blue);box-shadow:0 0 0 3px rgba(31,79,163,.25)}.vmvehb b{font-size:13px}.vmvehc{width:100%;max-width:90px;height:auto}.vmvehl{font-size:30px;line-height:54px}
+.askhead{display:flex;justify-content:space-between;align-items:center;gap:10px;width:100%;text-align:left;background:var(--paper-2);border:0;border-radius:12px;padding:12px 14px;font:inherit;color:var(--ink);cursor:pointer}.askhead b{font-weight:800}
+.asksetup{display:flex;flex-direction:column;gap:8px;padding:4px 2px 6px}
+.askth{display:inline-flex;align-items:center;gap:8px;border:2px solid var(--line);background:var(--card);border-radius:12px;padding:6px 10px 6px 6px;font:600 14px var(--font);color:var(--ink);cursor:pointer;position:relative}.askth.on{border-color:var(--blue)}.askth i{width:26px;height:26px;border-radius:8px;display:block;border:1px solid rgba(0,0,0,.12)}.askth input{position:absolute;inset:0;opacity:0;cursor:pointer}
+.askprev{border-radius:18px;padding:16px;display:flex;flex-direction:column;gap:10px;background:#1A2236;color:#F2F4F8}.askprev.th-black{background:#121212;color:#F5F1E6}.askprev.th-white{background:#FFFFFF;color:#15171B;border:1px solid #E5E5E5}.askprev.th-orange{background:#1A120B;color:#FFF4EA}.askprev.th-green{background:#0F1F18;color:#EEF8F2}
+.askprev b{font-size:20px;line-height:1.25}.askprev i{display:block;width:40px;height:4px;border-radius:4px;background:var(--acc)}.apwho{display:flex;align-items:center;gap:8px;font-size:13px;opacity:.75;font-weight:600}.apwho span{width:24px;height:24px;border-radius:50%;background:var(--acc);display:grid;place-items:center;font-weight:800;font-size:12px;color:#111}
+.apbox{border-radius:12px;padding:12px;font-size:14px;opacity:.6;background:rgba(127,127,127,.12)}.apsend{border-radius:12px;padding:11px;text-align:center;font-weight:700;background:var(--acc);color:#111}.th-white .apsend{color:#fff}
+.askmsg{background:var(--card);border:2px solid var(--line);border-radius:16px;padding:12px 14px;display:flex;flex-direction:column;gap:8px}.askmsg.on{border-color:var(--blue)}
+.amtop{display:flex;justify-content:space-between;align-items:center;font-size:12px;color:var(--ink-3);font-weight:600}.ambody{margin:0;font-size:17px;line-height:1.55;white-space:pre-wrap;overflow-wrap:anywhere;cursor:pointer}
+.ambot{display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap}.amheat{display:flex;gap:2px}.amheat button{border:0;background:none;font-size:20px;padding:2px;filter:grayscale(1);opacity:.35;cursor:pointer}.amheat button.on{filter:none;opacity:1}.askrow{display:flex;gap:10px;align-items:flex-start;background:var(--paper-2);border:2px solid transparent;border-radius:14px;padding:10px 12px;cursor:pointer}.askrow.on{border-color:var(--blue)}.askrow span{flex:1;font:600 15px/1.35 var(--font);color:var(--ink)}.askrow small{display:block;color:#889;font-weight:500;font-size:12px;margin-top:3px}.askrow input{margin-top:4px;width:20px;height:20px}
 .hwpage{display:flex;flex-direction:column;gap:14px;padding:12px 12px 24px}.hwinst{display:flex;align-items:center;gap:12px;background:var(--board);color:var(--chalk);border-radius:16px;padding:12px 14px}.hwinst .qtext{flex:1}.hwcard{border-radius:18px;padding:6px;border:3px solid transparent}.hwcard.on{border-color:var(--chalk-hi,#FFE27A)}.ansline.on{outline:3px solid #FFE27A;outline-offset:2px}.anstap{opacity:.45;font-size:.6em}.hwsend{align-self:center;min-width:240px;margin-top:6px}
 .vmpostnav{display:flex;align-items:center;gap:8px;flex-wrap:wrap;justify-content:center;margin:4px 0}.vmpostnav span{font-weight:700;font-size:14px}
 .ytfeed{border-radius:14px;padding:12px;display:flex;flex-direction:column;gap:12px;background:#fff;color:#0f0f0f;font-family:Roboto,Arial,sans-serif}.ytfeed.dk{background:#0f0f0f;color:#f1f1f1}
@@ -884,6 +897,7 @@ img{max-width:100%}
 .kf.land{padding:0}
 .kf.land .kfhead{position:absolute;top:6px;left:12px;right:12px;z-index:4}
 .kf.land .kftt{display:none}
+.kf.land .kftitle{position:absolute;left:50%;top:auto;bottom:-66px;transform:translateX(-50%);display:flex;gap:8px}
 .kf.land .kfarena{position:absolute;inset:0}
 .kf.land .kfpad{position:absolute;left:0;right:0;bottom:0;z-index:4;padding:0 20px 12px}
 .kf.land .kfb{background:rgba(16,28,22,.42)}
@@ -3086,7 +3100,7 @@ notify pgrst, 'reload schema';
   const crSorted = cues => (cues || []).filter(q => q.t >= 0).slice().sort((a, b) => a.t - b.t);
 
   // The lesson as students watch it: the board, playing in time with the voice. Tap a word to answer.
-  function ClassroomPlayer({ lesson, number, k, src, secs, cues, onTile, waiting, ix }) {
+  function ClassroomPlayer({ lesson, number, k, src, secs, cues, onTile, waiting, ix, noAuto }) {
     const pst = usePlayer();
     const capWords = useMemo(() => captionOf(cues), [cues]);
     const [cc, setCc] = useState(() => { try { return localStorage.getItem("rc.cc") !== "0"; } catch (e) { return true; } });
@@ -3137,7 +3151,7 @@ notify pgrst, 'reload schema';
     useEffect(() => {
       const check = () => {
         const side = window.innerWidth > window.innerHeight && window.innerHeight < 520;
-        if (side && isPlaying && !full) { setFull(true); try { const el = stageRef.current && stageRef.current.parentNode; if (el && el.requestFullscreen) el.requestFullscreen().catch(() => {}); } catch (e) {} }
+        if (side && isPlaying && !full && !noAuto) { setFull(true); try { const el = stageRef.current && stageRef.current.parentNode; if (el && el.requestFullscreen) el.requestFullscreen().catch(() => {}); } catch (e) {} }
       };
       check(); window.addEventListener("resize", check);
       return () => window.removeEventListener("resize", check);
@@ -4655,7 +4669,7 @@ notify pgrst, 'reload schema';
   // how the computer fights at each difficulty: how hard it hits, how fast it moves, how quickly it sees you coming,
   // how often it guards or steps back, how long it waits between attacks, and how often it hits back the moment it can
   const KD = () => ({
-    1: { dmg: 0.68, spd: 0.96, aggr: 0.8, block: 0.22, react: 0.2, dodge: 0.1, cd: 0.95, punish: 0.45, burst: 2 },
+    1: { dmg: 0.6, spd: 0.95, aggr: 0.75, block: 0.2, react: 0.22, dodge: 0.1, cd: 1.1, punish: 0.35, burst: 2 },
     2: { dmg: 0.95, spd: 1.05, aggr: 1.0, block: 0.42, react: 0.13, dodge: 0.18, cd: 0.6, punish: 0.75, burst: 3 },
     3: { dmg: 1.15, spd: 1.12, aggr: 1.25, block: 0.58, react: 0.09, dodge: 0.24, cd: 0.38, punish: 0.95, burst: 4 },
   })[CUR_DIFF];
@@ -4713,7 +4727,7 @@ notify pgrst, 'reload schema';
   }
   function kfFighter(x) { return { pT: KF_MOVES.p.total, kT: KF_MOVES.k.total, x, dir: 1, hp: 100, act: "idle", t: 0, hit: false, keys: { l: 0, r: 0, b: 0 } }; }
   function kfNew(level) {
-    return { f: [kfFighter(170), kfFighter(430)], S: 50, sup: false, time: 99, over: false, win: -1, fx: [], fxId: 0, reading: false, go: false, pw: 0,
+    return { f: [kfFighter(170), kfFighter(430)], S: 50, sup: false, time: 99, over: false, win: -1, fx: [], fxId: 0, reading: false, go: false, pw: 0, round: 1, wins: [0, 0], rEnd: null, clock: 0,
       look: [1, 0], slowT: 0, level: level || 0, pj: [], pjId: 0, cb: [[], []], cd: [0, 0], need: 0, finish: null, fatal: false, log: [] };
   }
   function kfMult(g, i) {
@@ -4744,8 +4758,8 @@ notify pgrst, 'reload schema';
   }
   function kfPress(g, i, move, snd) {
     const f = g.f[i];
-    if (g.go && !g.over && (f.act === "p" || f.act === "k") && (move === "p" || move === "k") && !(i === 0 && g.reading)) { f.buf = move; f.bufAge = 0; kfTap(g, i, move); return; }
-    if (!g.go || g.over || kfBusy(f) || (i === 0 && g.reading)) return;
+    if (g.go && !g.over && !g.rEnd && (f.act === "p" || f.act === "k") && (move === "p" || move === "k") && !(i === 0 && g.reading)) { f.buf = move; f.bufAge = 0; kfTap(g, i, move); return; }
+    if (!g.go || g.over || g.rEnd || kfBusy(f) || (i === 0 && g.reading)) return;
     kfTap(g, i, move);
     const seq = g.cb[i].map(e => e.k).slice(-3).join("");
     for (const name in KF_SPECIALS) {
@@ -4777,6 +4791,11 @@ notify pgrst, 'reload schema';
     a.whiff = false;
     let blocked = b.act === "block" && b.dir === -a.dir;
     let gbreak = false;
+    if (blocked && b.bs != null && g.clock - b.bs < 0.2) {   // a perfect block (a parry): no damage, and the attacker is left open
+      a.act = "hit"; a.t = -0.25; a.buf = null; b.guard = 0;
+      g.fx.push({ id: ++g.fxId, x: b.x - a.dir * 30, y: KF.GROUND - 150, big: true, blocked: true, parry: true }); if (g.fx.length > 6) g.fx.shift();
+      if (snd) snd("block"); return;
+    }
     if (blocked) {
       // a guard can't hold forever: about 3 blocked hits in a row and it breaks
       if (b.gtime != null && b.gtime - g.time > 1.6) b.guard = 0;
@@ -4784,7 +4803,7 @@ notify pgrst, 'reload schema';
       b.guard = (b.guard || 0) + (kind === "k" ? 1.5 : 1);
       if (b.guard >= 3) { blocked = false; gbreak = true; b.guard = 0; }
     }
-    const d = dmg * 0.26 * (blocked ? 0.2 : gbreak ? 1.3 : 1);   // fair: a fight takes 35 or more clean hits
+    const d = dmg * 0.13 * (blocked ? 0.2 : gbreak ? 1.3 : 1);   // fair: a round takes many clean hits, so it's won by skill, not luck
     kfHurt(g, b, d);
     if (!blocked && b.act !== "frozen") {
       // combo breaker: after 3 quick hits in a row you're knocked clear and can't be stunned for a moment, so nobody gets stuck
@@ -4823,6 +4842,17 @@ notify pgrst, 'reload schema';
       }
     }
     if (g.over) { for (const f of g.f) if (f.act === "ko") f.t += dt; g.wt = (g.wt || 0) + dt; return; }
+    g.clock = (g.clock || 0) + dt;
+    // between rounds: the knock-down plays out, then the next round starts with full health
+    if (g.rEnd) {
+      g.rEnd.t += dt; for (const f of g.f) if (f.act === "ko") f.t += dt;
+      if (g.rEnd.t > 2.8) {
+        g.round++; g.rEnd = null; g.time = 99; g.go = false; g.goT = 1.6; g.pj = []; g.fx = []; g.S = Math.max(g.S, 50);
+        g.f = [Object.assign(kfFighter(170), { combo: 0 }), Object.assign(kfFighter(430), { combo: 0 })];
+      }
+      return;
+    }
+    if (!g.go && g.goT != null) { g.goT -= dt; if (g.goT <= 0) { g.goT = null; g.go = true; if (snd) snd("go"); } return; }
     if (!g.finish) g.time = Math.max(0, g.time - dt);
     const L = g.cpu ? KF_LEVELS[Math.max(0, (g.level || 1) - 1)] : null;
     g.S = GAME_LEARN ? Math.max(0, g.S - (L ? L.drain : 2.2) * 0.22 * dt * (g.reading ? 0 : 1)) : Math.min(100, g.S + 5 * dt);   // relaxing: strength refills on its own
@@ -4859,7 +4889,7 @@ notify pgrst, 'reload schema';
           if (gap > 110) f.x += f.dir * Math.min(gap - 110, 1500 * dt);
           else {
             f.hit = true;
-            kfHurt(g, o, 18);
+            kfHurt(g, o, 14);
             if (o.act !== "dazed") { o.act = "hit"; o.t = 0; }
             o.x += f.dir * 90;
             g.fx.push({ id: ++g.fxId, x: o.x - f.dir * 40, y: KF.GROUND - 160, big: true, sup: true });
@@ -4887,7 +4917,7 @@ notify pgrst, 'reload schema';
       const dx = reading ? 0 : ((f.keys.r ? 1 : 0) - (f.keys.l ? 1 : 0)) * 210 * m.spd * dt * (blocking ? 0.35 : 1);
       f.x += dx;
       const act = reading ? "read" : blocking ? "block" : dx ? "walk" : "idle";
-      if (act !== f.act) { f.act = act; f.t = 0; } else f.t += dt;
+      if (act !== f.act) { if (act === "block") f.bs = g.clock; f.act = act; f.t = 0; } else f.t += dt;
     }
     // fireballs and ice blasts fly until they hit someone or leave the board
     for (const p of g.pj) {
@@ -4913,10 +4943,13 @@ notify pgrst, 'reload schema';
     const aDown = a.act === "ko" || a.hp <= 0, bDown = b.act === "ko";
     if (aDown || bDown || (g.time <= 0 && !g.finish)) {
       if (aDown && a.act !== "ko") { a.act = "ko"; a.t = 0; }
-      g.over = true; g.wt = 0;
-      g.win = bDown && !aDown ? 0 : aDown && !bDown ? 1 : a.hp === b.hp ? -1 : a.hp > b.hp ? 0 : 1;
+      const w = bDown && !aDown ? 0 : aDown && !bDown ? 1 : Math.abs(a.hp - b.hp) < 0.5 ? -1 : a.hp > b.hp ? 0 : 1;
+      if (w >= 0) g.wins[w]++;
       g.reading = false;
       if (snd) snd("ko");
+      // first to win two rounds wins the fight (a draw round counts for nobody; after five rounds, the most wins)
+      if (g.wins[0] >= 2 || g.wins[1] >= 2 || g.round >= 5) { g.over = true; g.wt = 0; g.win = g.wins[0] === g.wins[1] ? -1 : g.wins[0] > g.wins[1] ? 0 : 1; }
+      else g.rEnd = { t: 0, w, time: g.time <= 0 && !aDown && !bDown };
     }
   }
   // The computer opponent for practice: smarter and harder each level, and it eases off while he's reading.
@@ -4924,10 +4957,11 @@ notify pgrst, 'reload schema';
   // punishes a miss, and hits back the moment it recovers. Each level and difficulty makes it sharper.
   function kfCpu(g, dt, ai, snd) {
     const me = g.f[1], you = g.f[0], L = KF_LEVELS[Math.max(0, (g.level || 1) - 1)], D = KD();
-    if (!g.go || g.over) { me.keys = { l: 0, r: 0, b: 0 }; return; }
+    if (!g.go || g.over || g.rEnd) { me.keys = { l: 0, r: 0, b: 0 }; return; }
     const d = Math.abs(me.x - you.x), toward = you.x > me.x ? "r" : "l", away = toward === "r" ? "l" : "r";
     const calm = g.reading ? 0.35 : 1;
-    ai.cd = (ai.cd == null ? 0.8 : ai.cd) - dt * L.aggr * D.aggr;
+    const rage = CUR_DIFF > 1 && (me.hp < 30 || (g.wins && g.wins[0] > g.wins[1])) ? 1.25 : 1;   // losing (on Hard and Brutal): it fights harder
+    ai.cd = (ai.cd == null ? 0.8 : ai.cd) - dt * L.aggr * D.aggr * rage;
     ai.t = (ai.t || 0) - dt; ai.clk = (ai.clk || 0) + dt;
     // keep a combo going: queue the next strike while this one lands
     if ((me.act === "p" || me.act === "k") && (ai.burst || 0) > 0 && !me.buf && me.t > 0.04) { ai.burst--; kfPress(g, 1, ai.burst === 0 && d > 120 && Math.random() < 0.5 ? "k" : "p", snd); }
@@ -4978,18 +5012,18 @@ notify pgrst, 'reload schema';
     f: g.f.map(f => [Math.round(f.x), f.dir, Math.round(f.hp * 10) / 10, f.act, Math.round(f.t * 100) / 100, f.spell || "", f.mv || 0, Math.round((f.cs || 1) * 100) / 100, Math.round((f.rec || 0) * 10) / 10]),
     ob: (g.orbs || []).map(o => [o.id, Math.round(o.x)]),
     S: Math.round(g.S), sup: g.sup, time: Math.ceil(g.time), over: g.over, win: g.win, rd: g.reading, go: g.go, pw: g.pw, lk: g.look,
-    fx: g.fx.map(x => [x.id, Math.round(x.x), Math.round(x.y), x.big ? 1 : 0, x.blocked ? 1 : 0, x.sup ? 1 : 0, x.kind || ""]),
+    fx: g.fx.map(x => [x.id, Math.round(x.x), Math.round(x.y), x.big ? 1 : 0, x.blocked ? 1 : 0, x.sup ? 1 : 0, x.kind || "", x.parry ? 1 : 0]),
     pj: g.pj.map(p => [p.id, Math.round(p.x), p.kind, Math.sign(p.v)]),
-    fin: g.finish ? Math.round(g.finish.t * 10) / 10 : -1, fat: g.fatal ? 1 : 0, wt: Math.round((g.wt || 0) * 10) / 10, nd: g.need,
+    fin: g.finish ? Math.round(g.finish.t * 10) / 10 : -1, fat: g.fatal ? 1 : 0, wt: Math.round((g.wt || 0) * 10) / 10, nd: g.need, rd: g.round || 1, ws: g.wins || [0, 0], re: g.rEnd ? [Math.round(g.rEnd.t * 10) / 10, g.rEnd.w, g.rEnd.time ? 1 : 0] : null,
     lg: g.log.slice(-8).map(x => [x.text, x.ok ? 1 : 0]),
   });
   const kfUnpack = p => ({
     f: p.f.map(a => ({ x: a[0], dir: a[1], hp: a[2], act: a[3], t: a[4], spell: a[5], mv: a[6] || 0, cs: a[7] || 1, rec: a[8] || 0 })),
     orbs: (p.ob || []).map(a => ({ id: a[0], x: a[1] })),
     S: p.S, sup: p.sup, time: p.time, over: p.over, win: p.win, reading: p.rd, go: p.go, pw: p.pw, look: p.lk || [1, 0],
-    fx: p.fx.map(a => ({ id: a[0], x: a[1], y: a[2], big: !!a[3], blocked: !!a[4], sup: !!a[5], kind: a[6] })),
+    fx: p.fx.map(a => ({ id: a[0], x: a[1], y: a[2], big: !!a[3], blocked: !!a[4], sup: !!a[5], kind: a[6], parry: !!a[7] })),
     pj: (p.pj || []).map(a => ({ id: a[0], x: a[1], kind: a[2], v: a[3] })),
-    finish: p.fin >= 0 ? { t: p.fin } : null, fatal: !!p.fat, wt: p.wt || 0, need: 0, nRaw: p.nd || 0,
+    finish: p.fin >= 0 ? { t: p.fin } : null, fatal: !!p.fat, wt: p.wt || 0, need: 0, nRaw: p.nd || 0, round: p.rd || 1, wins: p.ws || [0, 0], rEnd: p.re ? { t: p.re[0], w: p.re[1], time: !!p.re[2] } : null,
     log: (p.lg || []).map(a => ({ text: a[0], ok: !!a[1] })),
   });
   let kfA = null;
@@ -5535,6 +5569,7 @@ notify pgrst, 'reload schema';
     }
     c.restore();
     const now = performance.now();
+    for (const x of g.fx) if (!fxSeen.has(x.id)) fxSeen.set(x.id, now);
     if (!o3d) {
     // hits
     for (const x of g.fx) {
@@ -5558,13 +5593,19 @@ notify pgrst, 'reload schema';
     c.textAlign = "left"; c.fillText(names[0], 24 * k, 70 * k);
     c.textAlign = "right"; c.fillText(names[1], W - 24 * k, 50 * k);
     c.textAlign = "center"; c.font = "700 " + 30 * k + "px Andika, sans-serif"; c.fillText(String(Math.ceil(g.time)), W / 2, 14 * k);
-    if (g.level) { c.font = "700 " + 13 * k + "px Andika, sans-serif"; c.fillStyle = "#FFE27A"; c.fillText("LEVEL " + g.level, W / 2, 48 * k); c.fillStyle = "#F1ECDC"; }
+    if (g.level) { c.font = "700 " + 13 * k + "px Andika, sans-serif"; c.fillStyle = "#FFE27A"; c.fillText("LEVEL " + g.level + " · ROUND " + (g.round || 1), W / 2, 48 * k); c.fillStyle = "#F1ECDC"; }
+    else if (g.round) { c.font = "700 " + 13 * k + "px Andika, sans-serif"; c.fillStyle = "#FFE27A"; c.fillText("ROUND " + g.round, W / 2, 48 * k); c.fillStyle = "#F1ECDC"; }
+    // rounds won: two dots under each bar
+    if (g.wins) for (let side = 0; side < 2; side++) for (let q = 0; q < 2; q++) { const cx = side === 0 ? 24 * k + bw - (q * 22 + 10) * k : W - 24 * k - bw + (q * 22 + 10) * k, cy = 76 * k; c.beginPath(); c.arc(cx, cy, 7 * k, 0, 7); c.fillStyle = g.wins[side] > q ? "#FFE27A" : "rgba(0,0,0,.35)"; c.fill(); c.lineWidth = 2 * k; c.strokeStyle = "rgba(241,236,220,.7)"; c.stroke(); }
     if (g.S >= 99.5) { c.font = "700 " + 16 * k + "px Andika, sans-serif"; c.fillStyle = "#FF9F43"; c.textAlign = "left"; c.fillText("SUPER", 24 * k + bw * 0.8 + 8 * k, 48 * k); }
     // banners
     c.textAlign = "center"; c.textBaseline = "middle";
     const banner = (txt, col) => { c.save(); c.font = "700 " + 74 * k + "px Andika, sans-serif"; { const tw = c.measureText(txt).width; if (tw > W * 0.92) c.font = "700 " + Math.floor(74 * k * W * 0.92 / tw) + "px Andika, sans-serif"; } c.fillStyle = col; c.shadowColor = "rgba(0,0,0,.5)"; c.shadowBlur = 12 * k; c.fillText(txt, W / 2, H * 0.42); c.restore(); };
+    const lastFx2 = g.fx.length ? g.fx[g.fx.length - 1] : null;
+    if (lastFx2 && lastFx2.parry && fxSeen.has(lastFx2.id)) { const age = (performance.now() - fxSeen.get(lastFx2.id)) / 1000; if (age < 0.8) { c.save(); c.globalAlpha = Math.min(1, (0.8 - age) / 0.3); c.font = "800 " + 34 * k + "px Andika, sans-serif"; c.textAlign = "center"; c.textBaseline = "middle"; c.lineWidth = 6 * k; c.strokeStyle = "#0B1F33"; c.strokeText("PARRY!", lastFx2.x * k, (lastFx2.y - 70 - age * 40) * k); c.fillStyle = "#9CC3F5"; c.fillText("PARRY!", lastFx2.x * k, (lastFx2.y - 70 - age * 40) * k); c.restore(); } }
     if (hold) {}
-    else if (!g.go) banner("FIGHT!", "#FFE27A");
+    else if (g.rEnd) banner(g.rEnd.t < 1.6 ? (g.rEnd.time ? "TIME" : "K.O.") : g.rEnd.w === 0 ? "ROUND TO YOU" : g.rEnd.w === 1 ? "ROUND TO THEM" : "DRAW ROUND", g.rEnd.t < 1.6 ? "#E8675F" : "#FFE27A");
+    else if (!g.go) banner(g.goT != null && g.goT > 0.7 ? ((g.round || 1) >= 3 && g.wins && g.wins[0] === 1 && g.wins[1] === 1 ? "FINAL ROUND" : "ROUND " + (g.round || 1)) : "FIGHT!", "#FFE27A");
     else if (g.over) banner(g.fatal ? "WORD POWER!" : g.time <= 0 && g.f[0].hp > 0 && g.f[1].hp > 0 ? "TIME" : "K.O.", g.fatal ? "#FFB347" : "#E8675F");
     else if (g.finish) { c.save(); c.globalAlpha = 0.65 + 0.35 * Math.sin(T * 8); banner("READ TO FINISH!", "#FFB347"); c.restore(); }
     if (g.need && now - g.need < 1200) { c.save(); c.globalAlpha = 1 - (now - g.need) / 1200; c.font = "700 " + 28 * k + "px Andika, sans-serif"; c.fillStyle = "#E8675F"; c.fillText("READ FOR POWER!", me.x * k, (KF.GROUND - 275) * k); c.restore(); }
@@ -6822,7 +6863,7 @@ notify pgrst, 'reload schema';
       let blocked = b.act === "block" && !back, gb = false;
       if (blocked) { if (g.T - b.gt > 1.6) b.guard = 0; b.gt = g.T; b.guard += mv === FRM.k ? 1.5 : 1; if (b.guard >= 3) { blocked = false; gb = true; b.guard = 0; } }
       const combo = (a.combo || 1) >= 3 ? 1.25 : 1;   // the third quick hit lands harder
-      const d = mv.dmg * 0.6 * mul * combo * (back ? (a.cpu ? 1.2 : 1.5) : 1) * (blocked ? 0.25 : gb ? 1.3 : 1);
+      const d = mv.dmg * 0.34 * mul * combo * (back ? (a.cpu ? 1.2 : 1.5) : 1) * (blocked ? 0.25 : gb ? 1.3 : 1);   // longer fights: won by skill, not a few lucky hits
       b.hp = Math.max(0, b.hp - d);
       if (!blocked) {
         const an = frAngTo(a, b);
@@ -7795,6 +7836,56 @@ notify pgrst, 'reload schema';
     const data = { lesson: lessonId, lang, explain: "explain" in patch ? patch.explain : cur.explain || null, explainSecs: "explainSecs" in patch ? patch.explainSecs : cur.explainSecs || 0, cues: "cues" in patch ? patch.cues : cur.cues || [], updatedAt: Date.now() };
     return docRef("explains/" + id).set(data);
   }
+  // recorded in the wrong language: move a lesson's (or every lesson's) explanation and word sounds to the right one
+  function langHas(from, lessonId) {
+    const s = store.s, L = lessonId ? s.lessons.filter(l => l.id === lessonId) : s.lessons;
+    const ex = L.filter(l => (from === "en" ? l.explain : (s.explains || []).some(e => e.lesson === l.id && e.lang === from && e.explain))).length;
+    const rc = s.recs.filter(r => (r.lang || "en") === from && (!lessonId || r.lesson === lessonId)).length;
+    return { ex, rc };
+  }
+  async function moveLangRecs(from, to, lessonId, onP) {
+    const s = store.s, L = lessonId ? s.lessons.filter(l => l.id === lessonId) : s.lessons, exOf = (lid, lg) => (lg === "en" ? (() => { const l = s.lessons.find(x => x.id === lid); return l && l.explain ? { explain: l.explain, explainSecs: l.explainSecs || 0, cues: l.cues || [] } : null; })() : (s.explains || []).find(e => e.lesson === lid && e.lang === lg && e.explain) || null);
+    const recs = s.recs.filter(r => (r.lang || "en") === from && (!lessonId || r.lesson === lessonId));
+    let done = 0; const total = L.length + recs.length, tick = () => onP && onP(++done / Math.max(1, total));
+    for (const l of L) {
+      const src = exOf(l.id, from); if (!src) { tick(); continue; }
+      const data = { explain: src.explain, explainSecs: src.explainSecs || 0, cues: src.cues || [] };
+      if (to === "en") await update("lessons/" + l.id, Object.assign({ updatedAt: Date.now() }, data));
+      else await retry(() => docRef("explains/" + l.id + "~" + to).set(Object.assign({ lesson: l.id, lang: to, updatedAt: Date.now() }, data)));
+      if (from === "en") await update("lessons/" + l.id, { explain: null, explainSecs: 0, cues: [] });
+      else await remove("explains/" + l.id + "~" + from);
+      tick();
+    }
+    for (const r of recs) {
+      const id = recKey(r.lesson, r.text, to), doc = { lesson: r.lesson, text: r.text, audio: r.audio, secs: r.secs || 0, at: r.at || Date.now() };
+      if (to !== "en") doc.lang = to;
+      if (id !== r.id) { await serial("recs/" + id, () => retry(() => docRef("recs/" + id).set(doc))); await remove("recs/" + r.id); }
+      tick();
+    }
+  }
+  function LangMove({ from, lessonId, lessonNo, onDone, onClose }) {
+    const [to, setTo] = useState(""), [busy, setBusy] = useState(null), [nm, setNm] = useState("");
+    const has = langHas(from, lessonId), tgt = to === "__new" ? nm.trim() : to, there = tgt ? langHas(tgt, lessonId) : { ex: 0, rc: 0 };
+    const opts = [...new Set(myLangs().concat(LANGS.map(x => x[0])))].filter(c => c !== from);
+    async function go() {
+      if (!tgt || busy) return;
+      if ((there.ex || there.rc) && !window.confirm(langName(tgt) + " already has " + there.ex + " explanation(s) and " + there.rc + " word sound(s)" + (lessonId ? " in this lesson" : "") + ". Where both have one, the moved one replaces it. Carry on?")) return;
+      if (to === "__new") { try { const Lx = JSON.parse(localStorage.getItem("rc.langs") || "[]"); if (!Lx.includes(tgt)) localStorage.setItem("rc.langs", JSON.stringify(Lx.concat(tgt))); } catch (x) {} }
+      setBusy(0);
+      try { await moveLangRecs(from, tgt, lessonId, v => setBusy(v)); toast("Moved to " + langName(tgt) + "."); onDone && onDone(tgt); }
+      catch (e) { toast(errText(e)); setBusy(null); }
+    }
+    return html`<div class="scrim" onClick=${e => { if (e.target === e.currentTarget && busy == null) onClose(); }}><div class="sheet" role="dialog" aria-label="Move to another language">
+      <h3 style="margin:0">🌐 Recorded in the wrong language?</h3>
+      <p class="help">${lessonId ? "Lesson " + lessonNo + " has" : "You have"} <b>${has.ex}</b> explanation${has.ex === 1 ? "" : "s"} and <b>${has.rc}</b> word sound${has.rc === 1 ? "" : "s"} saved as <b>${langName(from)}</b>. Move ${has.ex + has.rc === 1 ? "it" : "them"} to the right language. Nothing is recorded again and nothing is lost.</p>
+      <label class="tslbl" for="lmto">Move to</label>
+      <select id="lmto" value=${to} onChange=${e => setTo(e.target.value)}><option value="">Pick the right language…</option>${opts.map(c => html`<option value=${c}>${langName(c)}</option>`)}<option value="__new">Another language (type it)…</option></select>
+      ${to === "__new" ? html`<input value=${nm} maxlength="30" placeholder="Its name, for example Kaonde" onInput=${e => setNm(e.target.value)}/>` : null}
+      ${busy != null ? html`<p class="help">Moving… ${Math.round(busy * 100)}%</p>` : null}
+      <button class="btn" disabled=${!tgt || busy != null || !(has.ex + has.rc)} onClick=${go}>Move ${lessonId ? "this lesson's recordings" : "everything"} to ${tgt ? langName(tgt) : "…"}</button>
+      <button class="btn quiet" disabled=${busy != null} onClick=${onClose}>Close</button>
+    </div></div>`;
+  }
   async function saveTileRec(lessonId, text, out) {
     const asset = await uploadBlob(out.blob);
     const lang = REC_LANG, id = recKey(lessonId, text, lang);
@@ -8744,22 +8835,124 @@ notify pgrst, 'reload schema';
   }
 
   /* ================= spelling rules: a guide for the teacher ================= */
+  // The spelling rules, explained plainly: what each one does, how it sounds, and what the student does when reading.
+  // Sounds are written the simple way (say: "kaar"), so anyone can say them.
   const RULES = [
-    { t: "Sounds before names", r: "Every letter has a name (bee) and a sound (/b/). To read, he needs the sound. Teach the sound first; names can come later.", ex: "b = /b/ · m = /mmm/ · s = /sss/", x: "", say: "Keep sounds short: /b/, not \"buh\". Sounds like s, m, f, n can be stretched: sssss.", rule: "Read a letter by its SOUND, not its name.", les: ["s1-02"] },
-    { t: "Short vowels", r: "a e i o u each have a short sound. When a consonant closes the vowel in (cat, pen, sit, hot, cup), the vowel is short.", ex: "a apple · e egg · i ink · o on · u up", x: "", say: "\"When a consonant shuts the door after the vowel, the vowel says its short sound.\"", rule: "A vowel closed in by a consonant (cat, pen, sit, hot, cup) says its SHORT sound.", les: ["s1-03", "s1-07"] },
-    { t: "Why u can sound like \"a\"", r: "Short u is the sound \"uh\": cup, but, sun, mud. It is close to the \"a\" in many languages, which is why it can sound like an a. English short a is different: the a in cat.", ex: "uh: cup · but · sun · mud", x: "o also says \"uh\" in some common words: son, mother, love, come, some, money. u says \"oo\" in put, push, pull, full, bush. u says \"you\" in cute, music, student.", say: "\"Short u says uh, like when you're surprised: uh!\"", rule: "Short u says /uh/ (cup, sun) — not the 'oo' of our languages.", les: ["s1-11"] },
-    { t: "Long vowels: open syllables", r: "When a vowel ends a syllable (nothing closes it in), it usually says its name.", ex: "go · me · hi · be-gin · mu-sic · ro-bot", x: "", say: "\"Door open, the vowel says its name.\"", rule: "A vowel at the END of a syllable says its NAME: go, me, ba-by.", les: ["s2-13"] },
-    { t: "Magic e", r: "Vowel, consonant, then e at the end: the e makes no sound but makes the vowel say its name.", ex: "cap → cape · pin → pine · hop → hope · cut → cute", x: "Common words that break it: have, give, live, come, some, done, love, one.", say: "\"Magic e jumps over the letter and makes the vowel say its name.\"", rule: "Vowel + consonant + e at the end: the e is silent and the vowel says its NAME.", les: ["s2-03", "s2-04"] },
-    { t: "Soft c and soft g", r: "c says /s/ before e, i or y, and /k/ before everything else. g often says /j/ before e, i or y.", ex: "conceal: con (k) + ceal (s) · cent · city · cycle · cat · cut · gem · giant · gym", x: "Hard g stays in some common words: get, give, girl, gift, begin.", say: "\"Look at the letter after c. If it's e, i or y, c says /s/.\"", rule: "Before e, i or y: c says /s/ and g says /j/. Anywhere else: /k/ and /g/.", les: ["s2-09"] },
-    { t: "Two letters, one sound", r: "Some pairs of letters make one new sound.", ex: "sh ship · ch chip · th thin / this · ph phone (f) · wh when (w) · ck duck · ng sing · nk bank · qu queen (kw)", x: "ck comes right after a short vowel: duck, back, kick.", say: "\"These two are best friends: together they make one sound.\"", rule: "sh, ch, th, ph, wh, ck, ng: two letters, ONE sound. Read them together.", les: ["s2-01", "s2-02"] },
-    { t: "ch has three sounds", r: "Most words: /ch/ as in chip. Words that came from Greek: /k/. Words from French: /sh/. Spelling alone can't tell you which, so learn the common ones by sight.", ex: "chip · chair · character (k) · school (k) · Christmas (k) · chemist (k) · chef (sh) · machine (sh)", x: "", say: "\"ch usually says /ch/. A few words borrowed from other languages kept their own sound.\"", rule: "ch says /ch/. In a few borrowed words it says /k/ (school) or /sh/ (chef).", les: ["s2-17"] },
-    { t: "Vowel teams", r: "Two vowels together often make one sound. Teach each team on its own.", ex: "ai rain · ay day · ee see · ea eat · oa boat · ow snow · oo moon / book · ou out · ow cow · oi coin · oy boy · igh night · ie pie · ue blue · ew new", x: "ay, oy and ow usually come at the end of a word; ai, oi and ou in the middle. ea can also say \"e\": head, bread.", say: "\"These two vowels work as a team.\"", rule: "Two vowels side by side make ONE sound. Learn each team.", les: ["s2-05", "s2-06", "s2-07", "s2-15", "s2-16"] },
-    { t: "Bossy r", r: "An r after a vowel changes the vowel's sound.", ex: "ar car · or fork · er her · ir bird · ur turn · air hair · are care", x: "er, ir and ur all say the same sound. You learn which one by seeing the word.", say: "\"r is bossy: it changes the vowel in front of it.\"", rule: "An r after a vowel changes the vowel: ar, or, er, ir, ur.", les: ["s2-08"] },
-    { t: "The lazy vowel (schwa)", r: "In longer words, the vowel in the weak part often says a quiet \"uh\". This is the biggest reason English spelling seems random: you can't hear which vowel it is.", ex: "about · pencil · lemon · banana · doctor", x: "", say: "To spell it, say the word slowly the way it's written: lem-ON, pen-CIL.", rule: "In longer words the weak vowel says a quiet /uh/.", les: ["s2-19"] },
-    { t: "Silent letters", r: "Some letters are written but not said. Most of them were said hundreds of years ago.", ex: "kn knee · wr write · mb lamb · gh night · gn sign · h hour · t listen", x: "", say: "\"This letter is asleep: we write it, but we don't say it.\"", rule: "kn, wr, mb, gh: one letter is written but not said.", les: ["s2-18"] },
-    { t: "Endings", r: "-s says /s/ or /z/. -es comes after s, x, ch, sh. -ed has three sounds. Short vowel: double the last letter before -ing. Magic e: drop the e.", ex: "cats (s) · dogs (z) · boxes · jumped (t) · played (d) · wanted (id) · hop → hopping · hope → hoping", x: "", say: "\"-ed always means it already happened, whatever sound it makes.\"", rule: "-s says /s/ or /z/. -ed says /t/, /d/ or /id/. Short vowel: double before -ing. Magic e: drop the e.", les: ["s2-10", "s2-20"] },
-    { t: "y has three jobs", r: "At the start of a word, y is a consonant. At the end of a short word, it says \"eye\". At the end of a longer word, it says \"ee\".", ex: "yes · my · fly · happy · baby · gym (i)", x: "", say: "", rule: "y = /y/ at the start, 'eye' at the end of a short word, 'ee' at the end of a longer word.", les: ["s2-14"] },
-    { t: "Tricky words", r: "Some very common words don't follow the rules. Learn them by sight, two or three a week.", ex: "the · a · I · to · do · was · said · of · you · your · they · are · one · two · could · would · should · who · what · where · there · their · people", x: "", say: "Show him the part that's normal and the part that's tricky: in said, s and d are normal, ai is the tricky part.", rule: "Some very common words break the rules. Learn them by sight.", les: ["s2-11"] },
+    { t: "Sounds, not names", rule: "Read a letter by its SOUND, not its name.",
+      what: "Every letter has a name and a sound. The name of b is \"bee\". The sound of b is a short \"b\" (like the start of \"bat\"). We read with sounds, never with names.",
+      sound: "Say the sound short and clean: \"b\", not \"buh\". Some sounds can be stretched: sss, mmm, fff, nnn, lll.",
+      reading: "When he sees c-a-t he says the three sounds \"c-a-t\", not the names \"see-ay-tee\". Names spell; sounds read.",
+      ex: "b (say: b) · m (mmm) · s (sss) · t (t) · f (fff) · p (p)", x: "", say: "\"Every letter makes a sound. That sound is what we read.\"", check: "Point at m. Ask: what sound? (mmm, not \"em\")", les: ["s1-02"] },
+    { t: "Blending: sounds into a word", rule: "Say each sound, then push them together into one word.",
+      what: "Reading is joining sounds. He says the sounds one by one, then says them again faster and faster until they become the word.",
+      sound: "s-a-t → ssaat → sat. Stretch the sounds so there are no gaps (ssssaaaat), then say it quickly.",
+      reading: "Every new word: sound it out, then blend. Never guess from the first letter.",
+      ex: "s-a-t = sat · m-o-p = mop · c-u-p = cup · f-i-sh = fish", x: "", say: "\"Say the sounds, then say them fast: it's a word!\"", check: "Say \"p-i-g\" slowly. Ask him what word it is.", les: [] },
+    { t: "Short vowels", rule: "A vowel shut in by a consonant (cat, pen, sit, hot, cup) says its SHORT sound.",
+      what: "The vowels are a, e, i, o, u. Each one has a short sound. When a consonant comes after the vowel and closes it in, the vowel is short.",
+      sound: "a: \"a\" in apple (mouth open wide). e: \"e\" in egg. i: \"i\" in ink (quick, not \"ee\"). o: \"o\" in on. u: \"u\" in up (\"uh\").",
+      reading: "In short words like cat, pen, sit, hot, cup, read the vowel short. This is the first sound to try for any vowel.",
+      ex: "cat (kat) · pen · sit · hot · cup (kup)", x: "", say: "\"When a consonant shuts the door after the vowel, the vowel says its short sound.\"", check: "Show pin and pan. Ask him to read both and hear the difference.", les: ["s1-03", "s1-07"] },
+    { t: "Short u says \"uh\"", rule: "Short u says \"uh\" (cup, sun), not \"oo\".",
+      what: "In our languages u usually says \"oo\". In English, short u says \"uh\", the sound you make when you're surprised.",
+      sound: "\"uh\": open your mouth a little and say it quickly. cup = \"kuhp\", sun = \"suhn\", bus = \"buhs\".",
+      reading: "When he sees u closed in by a consonant (cup, but, sun), read \"uh\", not \"oo\".",
+      ex: "cup (kuhp) · but · sun · mud · bus", x: "o says \"uh\" in some common words: son, mother, love, come, some, money. u says \"oo\" in put, push, pull, full, bush. u says \"you\" in cute, music.", say: "\"Short u says uh, like when you're surprised: uh!\"", check: "Read bus. Did he say \"buhs\" or \"boos\"?", les: ["s1-11"] },
+    { t: "Two consonants side by side", rule: "In st, bl, tr, sp and the like, say BOTH sounds, quickly.",
+      what: "When two or three consonants stand together (a blend), each one still makes its own sound. They are just said fast, one after the other.",
+      sound: "st = s + t (stop). bl = b + l (black). tr = t + r (tree). spr = s + p + r (spring). No vowel sound in between: not \"sitop\".",
+      reading: "Read the blend as one quick start or end: st-op, la-mp. Don't add an \"i\" or \"u\" between the letters.",
+      ex: "stop · black · tree · frog · lamp · hand · spring", x: "Some pairs make ONE new sound instead (sh, ch, th): see \"Two letters, one sound\".", say: "\"Both letters talk, but quickly, holding hands.\"", check: "Read flag and fag aloud. Does he hear the l?", les: [] },
+    { t: "Two letters, one sound", rule: "sh, ch, th, ph, wh, ck, ng: two letters make ONE sound. Read them together.",
+      what: "Some pairs of letters work as one. They don't make their two sounds: they make one new sound.",
+      sound: "sh = \"sh\" (be quiet!) · ch = \"ch\" (chip) · th = put your tongue between your teeth (thin, this) · ph = \"f\" (phone) · wh = \"w\" (when) · ck = \"k\" (duck) · ng = the sound at the end of sing.",
+      reading: "Look for these pairs first and circle them. Read the pair as one sound, then blend: sh-i-p = ship.",
+      ex: "ship · chip · thin · this · phone (fone) · when · duck · sing", x: "", say: "\"These two are best friends: together they make one sound.\"", check: "Read shop. Does he say \"sh-o-p\" (3 sounds) or \"s-h-o-p\"?", les: ["s2-01", "s2-02"] },
+    { t: "c or k? ck or k?", rule: "Before a, o, u: write c. Before e, i, y: write k. Right after a short vowel at the end: ck.",
+      what: "c and k make the same \"k\" sound. Which one is written depends on the letter next to it.",
+      sound: "All say \"k\": cat, cot, cup, kid, keg, back.",
+      reading: "c, k and ck all read as \"k\" (unless c comes before e, i or y: see Soft c).",
+      ex: "cat · cot · cup · kid · kit · back · duck · milk (k after a consonant)", x: "", say: "\"ck comes straight after a short vowel: back, kick, duck.\"", check: "Which is right: duk or duck? (duck)", les: [] },
+    { t: "Double letters at the end: ff, ll, ss, zz", rule: "After a short vowel in a one-syllable word, f, l, s and z are doubled.",
+      what: "Short words ending in f, l, s or z after a short vowel usually double the last letter. The two letters make ONE sound.",
+      sound: "Say it once: bell = \"bel\", off = \"of\", miss = \"mis\".",
+      reading: "Read ff, ll, ss, zz as one sound.",
+      ex: "off · bell · hill · miss · kiss · buzz · fluff", x: "bus, yes, gas, if, of", say: "\"After a short vowel, f, l, s and z come in twos.\"", check: "Spell \"bel\" for him to fix: bell.", les: [] },
+    { t: "Long vowels: open syllables", rule: "A vowel at the END of a syllable says its NAME: go, me, ba-by.",
+      what: "The long sound of a vowel is its name: a = \"ay\", e = \"ee\", i = \"eye\", o = \"oh\", u = \"you\". When nothing comes after the vowel to close it in, it says its name.",
+      sound: "go = \"goh\", me = \"mee\", hi = \"high\", ba-by = \"bay-bee\", mu-sic = \"myoo-zik\".",
+      reading: "Split the word into parts. If a part ends with the vowel, read the vowel long.",
+      ex: "go · me · hi · be-gin · mu-sic · ro-bot · ti-ger", x: "", say: "\"Door open: the vowel says its name.\"", check: "Read ba-con. Is the a long (bay) or short (ba)?", les: ["s2-13"] },
+    { t: "Magic e", rule: "Vowel + consonant + e at the end: the e is silent and the vowel says its NAME.",
+      what: "An e at the end of a word is usually silent, but it has a job: it reaches back over one letter and makes the vowel say its name.",
+      sound: "cap = \"kap\" → cape = \"kayp\". pin → pine (\"pyne\"). hop → hope (\"hohp\"). cut → cute (\"kyoot\").",
+      reading: "See an e at the end? Don't say it. Look back over one letter: that vowel says its name.",
+      ex: "cap → cape · pin → pine · hop → hope · cut → cute · kit → kite", x: "Common words that break it: have, give, live, come, some, done, love, one.", say: "\"Magic e jumps over one letter and makes the vowel say its name.\"", check: "Read mad, then made. What did the e change?", les: ["s2-03", "s2-04"] },
+    { t: "Soft c and soft g", rule: "Before e, i or y: c says \"s\" and g says \"j\". Anywhere else: \"k\" and \"g\".",
+      what: "c and g each have a hard sound and a soft sound. The letter right after them decides which one.",
+      sound: "Hard c = \"k\" (cat). Soft c = \"s\" (city = \"sitee\"). Hard g = \"g\" (go). Soft g = \"j\" (gem = \"jem\", giant = \"jyant\").",
+      reading: "Look at the letter after c or g. If it's e, i or y, read it soft.",
+      ex: "cat · cut · cent (sent) · city · cycle · go · gum · gem (jem) · giant · gym (jim)", x: "Hard g stays in some common words: get, give, girl, gift, begin.", say: "\"Look at the letter after c. If it's e, i or y, c says s.\"", check: "Read cat, then city. Ask: why does c say k in one and s in the other?", les: ["s2-09"] },
+    { t: "ch has three sounds", rule: "ch says \"ch\". In a few borrowed words it says \"k\" (school) or \"sh\" (chef).",
+      what: "Most of the time ch says \"ch\" as in chip. Some words came into English from other languages and kept their own sound.",
+      sound: "\"ch\": chip, chair. \"k\": school (skool), character, Christmas, chemist. \"sh\": chef, machine (mashin).",
+      reading: "Try \"ch\" first. If it doesn't make a word he knows, try \"k\", then \"sh\".",
+      ex: "chip · chair · school (k) · Christmas (k) · chef (sh) · machine (sh)", x: "", say: "\"ch usually says ch. A few visitors from other languages kept their own sound.\"", check: "Read school. Did he try ch first and then k?", les: ["s2-17"] },
+    { t: "Vowel teams", rule: "Two vowels side by side make ONE sound. Usually the first one says its name.",
+      what: "When two vowels stand together, they work as a team and make one sound. Often the first says its name and the second is quiet.",
+      sound: "ai, ay = \"ay\" (rain, day) · ee, ea = \"ee\" (see, eat) · oa, ow = \"oh\" (boat, snow) · ie, igh = \"eye\" (pie, night) · ue, ew = \"oo\" (blue, new) · oo = \"oo\" (moon) or short (book) · ou, ow = \"ow\" as when hurt (out, cow) · oi, oy = \"oy\" (coin, boy).",
+      reading: "Spot the team, circle it, read it as one sound.",
+      ex: "rain · day · see · eat · boat · snow · night · blue · moon · book · out · cow · coin · boy", x: "ay, oy and ow usually come at the END of a word; ai, oi and ou in the middle. ea can also say \"e\": head, bread.", say: "\"When two vowels go walking, the first one does the talking.\"", check: "Read rain. Does he say \"ray-n\", one vowel sound?", les: ["s2-05", "s2-06", "s2-07", "s2-15", "s2-16"] },
+    { t: "Bossy r", rule: "An r after a vowel changes the vowel's sound: ar, or, er, ir, ur.",
+      what: "When r comes straight after a vowel, the vowel no longer says its short sound or its name. The two letters make a new sound together. In the English we speak (British English), the r itself is usually NOT pronounced: it just changes the vowel.",
+      sound: "ar = \"aah\" (car = \"kaah\", farm = \"faahm\"). or = \"aw\" (fork = \"fawk\", horse). er, ir and ur all say the same \"er\" sound, like when you're thinking \"errr…\" (her, bird = \"berd\", turn = \"tern\"). air = \"air\" (hair). are = \"air\" (care).",
+      reading: "Don't read the vowel and r separately (not \"ca-r\" with a short a). Read the pair as its own sound: car = \"kaah\".",
+      ex: "car (kaah) · farm · fork (fawk) · horse · her · bird (berd) · turn (tern) · hair · care", x: "er, ir and ur sound the same: you learn which one is written by seeing the word often (her, bird, turn). After w, or says \"er\": word, work, world.", say: "\"r is bossy: it changes the sound of the vowel in front of it.\"", check: "Read cat and cart. What did the r do to the a?", les: ["s2-08"] },
+    { t: "Breaking long words into parts", rule: "Each part (syllable) has ONE vowel sound. Split between two consonants: rab-bit, nap-kin.",
+      what: "Long words are short words joined together. Every part has one vowel sound. Read part by part, then join.",
+      sound: "rabbit = rab + bit. napkin = nap + kin. picnic = pic + nic. robot = ro + bot.",
+      reading: "Find the vowels. If two consonants stand between them, split between the consonants. If only one, try splitting before it (ro-bot) first.",
+      ex: "rab-bit · nap-kin · pic-nic · sun-set · ro-bot · ti-ger · pen-cil", x: "", say: "\"Clap the word: each clap is one part with one vowel.\"", check: "Clap \"basket\" with him. How many parts? (bas-ket: 2)", les: [] },
+    { t: "The lazy vowel (schwa)", rule: "In longer words the weak part's vowel often says a quiet \"uh\".",
+      what: "In words with two or more parts, one part is said strongly and the others are said weakly. The vowel in a weak part often becomes a quiet \"uh\", whatever letter it is.",
+      sound: "about = \"uh-BOWT\". pencil = \"PEN-sul\". lemon = \"LEM-un\". banana = \"buh-NAA-nuh\". doctor = \"DOK-tuh\".",
+      reading: "If a word doesn't sound right with full vowels, make the weak part a quick \"uh\" and say it again.",
+      ex: "about · pencil · lemon · banana · doctor · sofa", x: "", say: "To spell it, say it slowly the way it's written: lem-ON, pen-CIL.", check: "Read banana. Is only the middle a strong?", les: ["s2-19"] },
+    { t: "Silent letters", rule: "kn, wr, mb, gh, gn: one letter is written but not said.",
+      what: "Some letters are written but not said. Hundreds of years ago people did say them; the spelling stayed.",
+      sound: "kn = \"n\" (knee = \"nee\") · wr = \"r\" (write = \"rite\") · mb = \"m\" (lamb = \"lam\") · gh is silent (night = \"nite\") · gn = \"n\" (sign = \"sine\") · h in hour (\"our\") · t in listen (\"lisen\").",
+      reading: "Spot the pair, skip the silent letter, read the rest.",
+      ex: "knee · know · write · wrong · lamb · climb · night · sign · hour · listen", x: "", say: "\"This letter is asleep: we write it, but we don't say it.\"", check: "Read knee. Did he skip the k?", les: ["s2-18"] },
+    { t: "-tion and -sion say \"shun\"", rule: "At the end of a word, -tion and -sion say \"shun\" (or \"zhun\").",
+      what: "These endings are very common in longer words. The letters don't follow their usual sounds: the whole ending says \"shun\".",
+      sound: "station = \"stay-shun\", nation = \"nay-shun\", mission = \"mi-shun\". After a vowel, -sion can say \"zhun\": television = \"te-le-vi-zhun\".",
+      reading: "Cover the ending, read the first part, then add \"shun\".",
+      ex: "station · nation · action · mission · television (zhun)", x: "", say: "\"-tion is a shy ending: it says shun.\"", check: "Read action: ac + shun.", les: [] },
+    { t: "-le at the end", rule: "Consonant + le at the end says \"ul\": table, little.",
+      what: "When a word ends in a consonant and le, the e is silent and the ending says a quick \"ul\". It joins with the consonant before it to make the last part.",
+      sound: "table = \"tay-bul\". little = \"li-tul\". apple = \"a-pul\". candle = \"kan-dul\".",
+      reading: "Count back three letters from the end (ble, tle, dle): that's the last part. Read the rest first.",
+      ex: "table · little · apple · candle · purple · bottle", x: "", say: "\"le at the end says ul.\"", check: "Read bubble: bub + bul.", les: [] },
+    { t: "a before l or w says \"aw\"", rule: "In all, al, aw and au, a says \"aw\".",
+      what: "The letter a changes sound before l and in the teams aw and au.",
+      sound: "\"aw\" as in saw: all = \"awl\", ball = \"bawl\", talk = \"tawk\" (l silent), saw, paw, August.",
+      reading: "See all, al, aw or au? Read \"aw\".",
+      ex: "all · ball · call · talk · walk · saw · paw · draw · August", x: "In talk and walk the l is silent.", say: "\"a before l or w says aw, like when you see a baby: aww.\"", check: "Read ball, then bat. What changed?", les: [] },
+    { t: "Endings: -s, -es, -ed, -ing", rule: "-s says \"s\" or \"z\". -ed says \"t\", \"d\" or \"id\". Short vowel: double before -ing. Magic e: drop the e.",
+      what: "Endings change the meaning (more than one, it happened already, it's happening now). Their sound can change, but their spelling stays the same.",
+      sound: "-s: cats (s), dogs (z). -es after s, x, ch, sh: boxes (\"box-iz\"). -ed: jumped (\"jumpt\"), played (\"playd\"), wanted (\"want-id\").",
+      reading: "Cover the ending, read the word, then add the ending.",
+      ex: "cats (s) · dogs (z) · boxes · jumped (t) · played (d) · wanted (id) · hop → hopping · hope → hoping", x: "", say: "\"-ed always means it already happened, whatever sound it makes.\"", check: "Read jumped. Did he say \"jump-ed\" or \"jumpt\"?", les: ["s2-10", "s2-20"] },
+    { t: "y has three jobs", rule: "y = \"y\" at the start, \"eye\" at the end of a short word, \"ee\" at the end of a longer word.",
+      what: "y is a consonant at the start of a word, and acts as a vowel at the end.",
+      sound: "yes = \"yes\". my = \"my\", fly = \"fly\" (eye). happy = \"ha-pee\", baby = \"bay-bee\" (ee). In the middle it can say \"i\": gym = \"jim\".",
+      reading: "Where is the y? Start: \"y\". End of a one-part word: \"eye\". End of a longer word: \"ee\".",
+      ex: "yes · yellow · my · fly · cry · happy · baby · funny · gym", x: "", say: "\"y has three jobs: y, eye or ee. Where it sits tells you which.\"", check: "Read fly and funny. Same y sound? (no)", les: ["s2-14"] },
+    { t: "Tricky words", rule: "Some very common words break the rules. Learn them by sight.",
+      what: "A few very common words don't follow the rules (they're old words whose sounds changed). Learn them by sight, two or three a week, and read them often.",
+      sound: "the = \"thuh\" · was = \"woz\" · said = \"sed\" · of = \"ov\" · you · they = \"thay\" · one = \"wun\" · two = \"too\" · who = \"hoo\" · could = \"kood\".",
+      reading: "Read them as whole words. Most of the word still follows the rules: in said, s and d are normal; only ai is tricky.",
+      ex: "the · a · I · to · do · was · said · of · you · your · they · are · one · two · could · would · should · who · what · where · there · their · people", x: "", say: "Show him the part that's normal and the part that's tricky.", check: "Flash cards: can he read the, was, said without sounding them out?", les: ["s2-11"] },
   ];
   function RulesGuide({ onClose, s, onOpen }) {
     const [busy, setBusy] = useState(false);
@@ -8771,19 +8964,22 @@ notify pgrst, 'reload schema';
     return html`<div class="full sheetpage" role="dialog" aria-label="Spelling rules">
       <div class="fhead"><b class="rgtitle">📏 Spelling rules</b><button class="iconbtn" onClick=${onClose} aria-label="Close"><${Ic.x}/></button></div>
       <div class="sbody rg">
-        <p class="rgintro">The 15 rules of English reading, in teaching order. Each one has its own lesson in the course: tap <b>Teach this rule</b> to open it (it's added to your list if it isn't there yet).</p>
+        <p class="rgintro">The ${RULES.length} rules of English reading, in teaching order, explained simply: what each rule does, how it sounds, and what your student does when reading. Sounds are written the easy way (say: "kaah"). Where a rule has its own lesson in the course, tap <b>Teach this rule</b>.</p>
         ${RULES.map((r, i) => {
-          const L = PACK_ALL.find(l => l[0] === r.les[0]);
+          const L = r.les.length ? PACK_ALL.find(l => l[0] === r.les[0]) : null;
           return html`<details class="rgcard" key=${i}>
           <summary><span class="rgn">${i + 1}</span>${r.t}</summary>
           <div class="rgrule"><small>THE RULE</small>${r.rule}</div>
+          <p class="rgsec"><b>What it does</b>${r.what}</p>
+          <p class="rgsec"><b>🔊 How it sounds</b>${r.sound}</p>
+          <p class="rgsec"><b>📖 When reading</b>${r.reading}</p>
           <div class="rgex">${r.ex}</div>
           ${r.x ? html`<p class="rgx"><b>Breaks the rule:</b> ${r.x}</p>` : null}
-          <p class="rgwhy"><b>Why:</b> ${r.r}</p>
           <div class="rgsteps"><b>Teach it in 3 steps</b><ol>
-            <li>Write the rule's letters on the board and say the rule${r.say ? html`: <i>${r.say.replace(/^"|"$/g, "")}</i>` : "."}</li>
+            <li>Write the rule's letters on the board and say it to him: <i>${String(r.say || r.rule).replace(/^"|"$/g, "")}</i></li>
             <li>Read the examples with the stick, slowly, then a bit faster.</li>
-            <li>✋ Your turn: say one of the words — the student taps it and reads it back.</li></ol></div>
+            <li>✋ Your turn: say one of the words: he taps it and reads it back.</li></ol></div>
+          ${r.check ? html`<p class="rgsec rgcheck"><b>✅ Check he's got it</b>${r.check}</p>` : null}
           ${L ? html`<button class="btn slim" disabled=${busy} onClick=${() => teach(r)}>📘 Teach this rule: “${L[3]}”</button>` : null}
         </details>`; })}
       </div>
@@ -8973,7 +9169,7 @@ notify pgrst, 'reload schema';
     </section>`;
   }
   function LessonsList({ s, ix, onOpen, lang, onLang }) {
-    const [packs, setPacks] = useState(false);
+    const [packs, setPacks] = useState(false), [moveLang, setMoveLang] = useState(false);
     const [rules, setRules] = useState(false);
     async function add(reading) {
       const stage = reading ? 3 : s.lessons.length ? s.lessons[s.lessons.length - 1].stage || 1 : 1;
@@ -9044,7 +9240,9 @@ notify pgrst, 'reload schema';
           }
           onLang(v);
         }}>${[...new Set(myLangs().concat(lang || "en"))].map(c => html`<option value=${c}>${langName(c)}${langCount(c) ? " · " + langCount(c) + " recorded" : ""}</option>`)}<option value="__add">+ Add a language…</option></select>
-        <small>${(lang || "en") === "en" ? "Record your lessons in any language first. Then pick one of them for each student." : "You're recording in " + langName(lang) + ". Students you set to " + langName(lang) + " hear these. English stays as it is."}</small></div>` : null}
+        <small>${(lang || "en") === "en" ? "Record your lessons in any language first. Then pick one of them for each student." : "You're recording in " + langName(lang) + ". Students you set to " + langName(lang) + " hear these. English stays as it is."}</small>
+        ${(() => { const h = langHas(lang || "en"); return h.ex + h.rc ? html`<button class="linkbtn" onClick=${() => setMoveLang(true)}>🌐 Recorded these in the wrong language? Move them</button>` : null; })()}</div>` : null}
+      ${moveLang ? html`<${LangMove} from=${lang || "en"} onClose=${() => setMoveLang(false)} onDone=${tg => { setMoveLang(false); onLang && onLang(tg); }}/>` : null}
       ${packs ? html`<${PacksSheet} s=${s} onOpen=${onOpen} onClose=${() => setPacks(false)}/>` : null}
       ${rules ? html`<${RulesGuide} s=${s} onOpen=${onOpen} onClose=${() => setRules(false)}/>` : null}
     </section>`;
@@ -9117,7 +9315,7 @@ notify pgrst, 'reload schema';
   const PEN_COLS = ["#F1ECDC", "#FFE27A", "#FF9E9E", "#8FD0FF"];
   // a map, flag or journey from the video maker, as a still picture for the lesson board (how it looks once it has zoomed in)
   async function crMapPic(it) {
-    await vmWorld();
+    await vmWorld(); await vmWaterDb().catch(() => {});
     if (it.prov || it.city || it.kind === "trip") { try { await vmMore(); } catch (e) {} }
     const G = vmGeo("wide"), st = vmStyle(), L = vmLook(st), cv = document.createElement("canvas"); cv.width = G.W; cv.height = G.H;
     const c = cv.getContext("2d"), a = it.kind === "trip" ? 6 + 4 * Math.max(1, (it.stops || []).length) : 14;
@@ -9132,6 +9330,18 @@ notify pgrst, 'reload schema';
     const out = new Float32Array(n1 + p2.length); out.set(p1.subarray(0, Math.min(n1, p1.length)), 0); out.set(p2, n1);
     const blob = await vmEncAudio(out, sr);
     return { blob, secs: out.length / sr };
+  }
+  // a part taken out of a lesson recording (a mistake, a cough): the sound joins up smoothly where it was cut
+  async function crCutVoice(blob, a, b) {
+    const sr = 48000, pcm = await vmClipPcm(blob, sr), i0 = Math.max(0, Math.round(a * sr)), i1 = Math.min(pcm.length, Math.round(b * sr)), fade = Math.min(Math.round(0.02 * sr), i0, pcm.length - i1);
+    const out = new Float32Array(pcm.length - (i1 - i0)); out.set(pcm.subarray(0, i0), 0); out.set(pcm.subarray(i1), i0);
+    for (let k = 0; k < fade; k++) { const w = k / fade; out[i0 - fade + k] = pcm[i0 - fade + k] * (1 - w) + pcm[i1 - fade + k] * w; }
+    return { blob: await vmEncAudio(out, sr), secs: out.length / sr };
+  }
+  // what was drawn and shown during the cut part still happens (at the cut), and everything after moves up
+  function crCutCues(list, a, b) {
+    const d = b - a;
+    return list.filter(q => !(q.t >= a && q.t < b && (q.k === "w" || q.k === "vid"))).map(q => (q.t < a ? q : Object.assign({}, q, { t: round2(q.t < b ? a : q.t - d) })));
   }
   function ExplainStudio({ ix, lesson, number, onClose, talk }) {
     const pst = usePlayer();
@@ -9163,6 +9373,7 @@ notify pgrst, 'reload schema';
     const rec = mode === "rec";
     const baseT = useRef(0), prevTake = useRef(null);   // "record more": the new part carries on after what you already have
     const [mapOpen, setMapOpen] = useState(false), [joining, setJoining] = useState(false), [loadingOld, setLoadingOld] = useState(false);
+    const [cut, setCut] = useState(null);   // cutting out a mistake: { a, b } (seconds), or { busy }
     const nowT = () => (r.current ? baseT.current + r.current.at() : baseT.current);
     const elapsed = ms => round2(r.current ? baseT.current + r.current.at(ms) : baseT.current);
     const board = () => stageAt(fxOnly(cuesRef.current).sort((a, b) => a.t - b.t), 1e9);
@@ -9354,6 +9565,20 @@ notify pgrst, 'reload schema';
       <button class="mthumb madd" onClick=${() => setMapOpen(true)} aria-label="Add a map or flag"><span>🗺</span><small>Map / flag</small></button>
       <input ref=${fileRef} type="file" accept="image/*,video/*" style="display:none" onChange=${addMedia}/>
     </div>`;
+    const cutNow = () => { const a = player.key && player.key.indexOf("studio") === 0 ? player.a : null; return round2(a ? a.currentTime || 0 : 0); };
+    async function doCut() {
+      const { a, b } = cut; if (a == null || b == null || b <= a) return;
+      if (player.key && player.key.indexOf("studio") === 0) player.stop();
+      setCut({ busy: true });
+      try {
+        const nt = await crCutVoice(take.blob, a, b);
+        let nc = null; if (clean && clean.blob && !clean.old) { try { nc = await crCutVoice(clean.blob, a, b); } catch (e) {} }
+        setCues(crCutCues(cuesRef.current, a, b));
+        setTake({ blob: nt.blob, secs: nt.secs, url: URL.createObjectURL(nt.blob) });
+        if (nc) setClean({ blob: nc.blob, secs: nc.secs, url: URL.createObjectURL(nc.blob) });
+        setCut(null); toast("Cut out. Play it to check.");
+      } catch (e) { setCut(null); toast("Couldn't cut that part. Try again."); }
+    }
     async function addMap(it) {
       setMapOpen(false);
       try { const f = await crMapPic(it); await addMedia({ target: { files: [f], value: "" } }); toast(rec ? "Map added below. Tap it to show it on the board." : mode === "review" ? "Map added below. Play to the moment, then tap it." : "Map added. While recording, tap it to show it."); }
@@ -9379,7 +9604,7 @@ notify pgrst, 'reload schema';
       </div>
       <div class="sbody">
         ${mode === "review" || mode === "saving"
-          ? html`<${ClassroomPlayer} lesson=${lesson} number=${number} k=${"studio" + (useClean && clean && clean.url ? "c" : "")} src=${voice().url} secs=${voice().secs} cues=${cues} ix=${ix}/>`
+          ? html`<${ClassroomPlayer} lesson=${lesson} number=${number} k=${"studio" + (useClean && clean && clean.url ? "c" : "")} src=${voice().url} secs=${voice().secs} cues=${cues} ix=${ix} noAuto=${true}/>`
           : html`<div class="crwrap"><div class="crstage">
               <${BoardCanvas} lesson=${lesson} number=${number} cues=${cues} nowT=${nowT} tool=${rec ? tool : "stick"} penCol=${penCol} onTap=${onTap} onStroke=${onStroke}/>
               ${recClip ? html`<div class="crclip"><${BoardClip} c=${{ id: "rc" + recClip.t, a: recClip.m.a }} onEnd=${clipDone} label="Back to the board"/></div>` : null}
@@ -9421,6 +9646,12 @@ notify pgrst, 'reload schema';
           <p class="help">${joining ? "Joining the new part on…" : html`${fmtDur(take.secs)}: ${counts}. Play it to check, then ${talk ? "make the video" : "save"}. To add a picture, video or map at a moment: play to that moment, then tap it below.`}</p>
           ${mode === "review" ? tray : null}
           ${mode === "review" ? html`<button class="btn quiet" disabled=${joining} onClick=${() => start(true)}>🎙️ Record more on the end</button>` : null}
+          ${mode === "review" && !talk ? (!cut ? html`<button class="btn quiet" disabled=${joining} onClick=${() => { setCut({ a: null, b: null }); toast("Play to where the mistake starts, then tap “It starts here”."); }}>✂️ Cut out a mistake</button>`
+            : cut.busy ? html`<p class="help">Cutting it out…</p>`
+            : html`<div class="cutbox"><b>✂️ Cut out a mistake</b><span class="help">Play the lesson above, then mark where the mistake starts and ends.</span>
+                <div class="vmchips"><button class="btn slim quiet" onClick=${() => { const t = cutNow(); setCut(c2 => Object.assign({}, c2, { a: t, b: c2.b != null && c2.b > t ? c2.b : null })); }}>⟦ It starts here${cut.a != null ? " (" + fmtDur(cut.a) + ")" : ""}</button>
+                <button class="btn slim quiet" disabled=${cut.a == null} onClick=${() => { const t = cutNow(); if (t <= cut.a + 0.2) { toast("Play a little further, past the mistake."); return; } setCut(c2 => Object.assign({}, c2, { b: t })); }}>It ends here ⟧${cut.b != null ? " (" + fmtDur(cut.b) + ")" : ""}</button></div>
+                <div class="vmchips"><button class="btn slim" disabled=${cut.a == null || cut.b == null} onClick=${doCut}>✂️ Cut out ${cut.a != null && cut.b != null ? fmtDur(cut.b - cut.a) : "that part"}</button><button class="btn slim quiet" onClick=${() => setCut(null)}>Cancel</button></div></div>`) : null}
           <div class="revopts">
             ${clean && clean.old ? null : html`<button class=${"gamesw" + (useClean ? " on" : "")} onClick=${() => { if (player.key && player.key.indexOf("studio") === 0) player.stop(); setPref("rc.clean", !useClean, setUseClean); }} aria-pressed=${useClean ? "true" : "false"}><span class="knob"></span><span>Remove background noise<small>${!clean ? "" : clean.failed ? "Couldn't clean this one; the original is used." : clean.p != null ? "Cleaning… " + Math.round(clean.p * 100) + "%" : "Done. Play it to hear the difference."}</small></span></button>`}
             <button class=${"gamesw" + (subs ? " on" : "")} onClick=${() => setPref("rc.subs", !subs, setSubs)} aria-pressed=${subs ? "true" : "false"}><span class="knob"></span><span>Subtitles<small>Your words written along the bottom, as you say them</small></span></button>
@@ -10082,7 +10313,7 @@ notify pgrst, 'reload schema';
   const VM_WEAK = !!((navigator.deviceMemory && navigator.deviceMemory <= 4) || (navigator.hardwareConcurrency && navigator.hardwareConcurrency <= 4));
   const vmTimeout = (p, ms, code) => Promise.race([p, new Promise((_, rej) => setTimeout(() => rej({ code: code || "timeout" }), ms))]);
   // a clip from the phone: check it plays here; make big ones lighter (at most 1280 on the long side)
-  async function vmPrepClip(file, onP) {
+  async function vmPrepClip(file, onP, ctl) {
     const info = await new Promise(res => {
       const v = document.createElement("video"), u = URL.createObjectURL(file); let done = false;
       const fin = x => { if (done) return; done = true; try { v.removeAttribute("src"); v.load(); } catch (e) {} URL.revokeObjectURL(u); res(x); };
@@ -10099,6 +10330,7 @@ notify pgrst, 'reload schema';
     const conv = await MB.Conversion.init({ input, output, video: Object.assign({ bitrate: 1600000, forceTranscode: !info.ok }, big ? (wide ? { width: 1280 } : { height: 1280 }) : {}), audio: { bitrate: 128000 } });
     if (!conv.isValid) return { blob: null, info, bad: !info.ok };
     conv.onProgress = v => onP && onP(v);
+    if (ctl) { ctl.conv = conv; if (ctl.later) { try { await conv.cancel(); } catch (e) {} throw { code: "later" }; } }
     await conv.execute();
     const out = new Blob([output.target.buffer], { type: "video/mp4" });
     return { blob: out, info: Object.assign({}, info, { secs: (await input.computeDuration().catch(() => 0)) || info.secs }) };
@@ -10308,6 +10540,59 @@ notify pgrst, 'reload schema';
     vmSegP.catch(() => { vmSegP = null; });
     return vmSegP;
   }
+  // the careful cut-out: a video matting model (Robust Video Matting) that follows you from one picture to the next,
+  // so hands, arms and hair stay whole when you move fast or a light shines on you, and no room shows through.
+  // It runs on the phone's graphics chip; the model files (rvm.json, rvm.bin) sit next to the app.
+  const VM_TF = "https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@4.22.0/dist/tf.min.js";
+  let vmRecBusy = false;   // a recording (or its countdown) is going: nothing new and heavy starts now
+  let vmRvmP = null;
+  function vmRvm() {
+    if (vmRvmP) return vmRvmP;
+    vmRvmP = (async () => {
+      if (!window.tf) await new Promise((res, rej) => { const sc = document.createElement("script"); sc.src = VM_TF; sc.crossOrigin = "anonymous"; sc.onload = res; sc.onerror = () => rej(new Error("load")); document.head.appendChild(sc); });
+      const tf = window.tf;
+      const ok = await tf.setBackend("webgl").catch(() => false); if (!ok) throw new Error("nogl");
+      await tf.ready();
+      const model = await tf.loadGraphModel("rvm.json");
+      return { tf, model };
+    })();
+    vmRvmP.catch(() => { vmRvmP = null; });
+    return vmRvmP;
+  }
+  // one stream of pictures (the live view, or the finished video): it remembers the last pictures, which is what keeps the edges steady
+  function vmRvmStream(E, maxSide) {
+    const { tf, model } = E, cv = document.createElement("canvas"), mc = document.createElement("canvas");
+    let rec = null, size = "", chain = Promise.resolve(), lastT = -1;
+    const reset = () => { if (rec) rec.forEach(x => x.dispose()); rec = null; };
+    const once = async (img, draw, t) => {
+      const [iw, ih] = vmSize(img); if (!iw) throw new Error("noimg");
+      const k = Math.min(1, maxSide / Math.max(iw, ih)), w = Math.max(32, Math.round(iw * k / 16) * 16), h = Math.max(32, Math.round(ih * k / 16) * 16);
+      if (w + "x" + h !== size) { size = w + "x" + h; reset(); cv.width = w; cv.height = h; mc.width = w; mc.height = h; }
+      if (t != null && lastT >= 0 && (t < lastT - 0.01 || t - lastT > 1.5)) reset();   // a jump in time: start fresh
+      if (t != null) lastT = t;
+      cv.getContext("2d").drawImage(img, 0, 0, w, h);
+      if (!rec) rec = [0, 0, 0, 0].map(() => tf.scalar(0));
+      const src = tf.tidy(() => tf.browser.fromPixels(cv).toFloat().div(255).expandDims(0)), dr = tf.scalar(Math.min(1, 320 / Math.max(w, h)));
+      let out;
+      try { out = await model.executeAsync({ src, r1i: rec[0], r2i: rec[1], r3i: rec[2], r4i: rec[3], downsample_ratio: dr }, ["pha", "r1o", "r2o", "r3o", "r4o"]); }
+      finally { src.dispose(); dr.dispose(); }
+      rec.forEach(z => z.dispose()); rec = out.slice(1);
+      const a = await out[0].data(); out[0].dispose();
+      const mx = mc.getContext("2d"), D = mx.createImageData(w, h), d = D.data;
+      for (let i = 0, j = 0; j < a.length; i += 4, j++) { d[i] = d[i + 1] = d[i + 2] = 255; d[i + 3] = a[j] * 255; }
+      mx.putImageData(D, 0, 0);
+      return draw({ image: img, segmentationMask: mc, rvm: true });
+    };
+    // if this phone's graphics chip gives up part way, the simpler outline model carries on (the video is still made)
+    let fb = null;
+    const safe = async (img, draw, t) => { if (fb) return (await fb).run(img, draw); try { return await once(img, draw, t); } catch (e) { if (e && e.message === "noimg") throw e; fb = vmSeg(); reset(); return (await fb).run(img, draw); } };
+    return { rvm: true, run: (img, draw, t) => { const p = chain.then(() => safe(img, draw, t)); chain = p.catch(() => {}); return p; }, reset: () => { chain = chain.then(reset); }, close: () => { chain = chain.then(reset); } };
+  }
+  // the best cut-out this phone can do: the matting model, or the simpler outline model if the phone can't run it
+  async function vmMatte(maxSide) {
+    try { if (window.__noRvm) throw 0; const E = await vmTimeout(vmRvm(), 60000); return vmRvmStream(E, maxSide || 640); }
+    catch (e) { return vmSeg(); }
+  }
   const VM_VBGS = [["off", "🏪", "My real room"], ["blur", "🌫", "Blur it"], ["black", "⬛", "Black"], ["color", "🎨", "A colour"], ["paper", "📰", "Newspaper"], ["studio", "💡", "Studio"], ["flag", "🏳️", "A flag"], ["pic", "🖼", "My picture"]];
   const vmVbgOn = v => !!(v && v.k && v.k !== "off");
   const vmVbgName = v => (!vmVbgOn(v) ? "My real room" : v.k === "flag" && VMW && VMW.byA2.get(v.a2) ? VMW.byA2.get(v.a2).name + " flag" : (VM_VBGS.find(x => x[0] === v.k) || [0, 0, "Background"])[2]);
@@ -10405,6 +10690,9 @@ notify pgrst, 'reload schema';
     const D = mx.getImageData(0, 0, mw, mh), d = D.data, G = gx.getImageData(0, 0, mw, mh).data;
     const P = vmF32("P", n), I = vmF32("I", n), T = vmF32("T", n), mI = vmF32("mI", n), mP = vmF32("mP", n), II = vmF32("II", n), IP = vmF32("IP", n);
     for (let i = 0, j = 0; j < n; i += 4, j++) { P[j] = (d[i + 3] < 255 ? d[i + 3] : d[i]) / 255; I[j] = (0.299 * G[i] + 0.587 * G[i + 1] + 0.114 * G[i + 2]) / 255; II[j] = I[j] * I[j]; IP[j] = I[j] * P[j]; }
+    if (r.rvm) {   // the matting model's edge is already exact: only the faintest haze is cleared, nothing thin is cut off
+      for (let i = 0, j = 0; j < n; i += 4, j++) { const x = Math.max(0, Math.min(1, (P[j] - 0.05) / 0.85)); P[j] = x; d[i] = d[i + 1] = d[i + 2] = 255; d[i + 3] = Math.round(x * 255); }
+    } else {
     // the outline follows the real edges of you in the picture (hair, fingers, shoulders), not just the model's rough guess
     const R = Math.max(3, Math.round(mw / 80)), eps = 0.0025;
     vmBox(I, mI, T, mw, mh, R); vmBox(P, mP, T, mw, mh, R); vmBox(II, II, T, mw, mh, R); vmBox(IP, IP, T, mw, mh, R);
@@ -10414,6 +10702,7 @@ notify pgrst, 'reload schema';
     // no stray specks or thin slivers of the room: a bit has to belong to a solid part of you to stay
     vmBox(P, mI, T, mw, mh, Math.max(3, Math.round(mw / 160)));
     for (let i = 0, j = 0; j < n; i += 4, j++) { const a = Math.min(P[j], mI[j] * 1.8); P[j] = a; d[i] = d[i + 1] = d[i + 2] = 255; d[i + 3] = Math.round(a * 255); }
+    }
     mx.putImageData(D, 0, 0);
     const c = out.getContext("2d", { willReadFrequently: !!fine }); c.save(); c.globalCompositeOperation = "copy"; c.imageSmoothingEnabled = true; c.imageSmoothingQuality = "high"; c.drawImage(mk, 0, 0, w, h);
     c.globalCompositeOperation = "source-in"; c.drawImage(img, 0, 0, w, h); c.restore();
@@ -10467,19 +10756,28 @@ notify pgrst, 'reload schema';
       if (calm && K.ready && K.cost > 60 && now - K.doneAt < 400) return;   // a slow phone: easy does it while the countdown starts the recording
       // never let the cut-out take the whole phone: on a slower phone it rests between pictures, so the clip, your taps and
       // the recording stay smooth (the finished video is still cut out picture by picture, at full quality)
-      if (K.ready && K.cost > 34 && now - K.doneAt < K.cost * (K.cost > 70 ? 1.1 : 0.7)) return;
+      if (K.ready && K.cost > 34 && now - K.doneAt < K.cost * (K.cost > 70 ? 1.1 : 0.7) * (vmRecBusy && VM_WEAK ? 1.4 : 1)) return;
       K.busy = true; const t0 = now;
       const k = Math.min(1, (K.cost > 50 ? 640 : 960) / Math.max(iw, ih)), w = Math.round(iw * k), h = Math.round(ih * k), sw = 256, sh = Math.max(64, Math.round(256 * ih / iw));
       if (K.pend.width !== w || K.pend.height !== h) { K.pend.width = w; K.pend.height = h; }
       if (K.sm.width !== sw || K.sm.height !== sh) { K.sm.width = sw; K.sm.height = sh; }
       K.pend.getContext("2d").drawImage(src, 0, 0, w, h); K.sm.getContext("2d").drawImage(src, 0, 0, sw, sh);   // the same moment, big and small
-      vmSeg().then(seg => seg.run(K.sm, r => {
-        vmMaskFast(r.segmentationMask, K.m, w, h);
+      // the careful matting model when this phone can keep up with it (it loads in the background); the quick outline otherwise
+      if (!K.rvTried && !window.__noRvm) { K.rvTried = true; vmRvm().then(E => { K.rv = vmRvmStream(E, VM_WEAK ? 320 : 400); K.rn = 0; }).catch(() => {}); }
+      const useR = !!(K.rv && !K.rvSlow && (K.rn > 0 || !vmRecBusy));
+      const use = r => {   // (the quick model's results only live inside this call)
+        if (useR) {
+          const ms = performance.now() - t0; K.rcost = K.rn ? K.rcost * 0.7 + ms * 0.3 : ms; K.rn++;
+          if (K.rn > 4 && K.rcost > 140) { K.rvSlow = true; K.rv.close(); }   // too slow on this phone for the live view: the quick outline takes over (the finished video still uses the careful one)
+          const x = K.m.getContext("2d"); if (K.m.width !== w || K.m.height !== h) { K.m.width = w; K.m.height = h; }
+          x.imageSmoothingEnabled = true; x.imageSmoothingQuality = "high"; x.globalCompositeOperation = "copy"; x.drawImage(r.segmentationMask, 0, 0, w, h); x.globalCompositeOperation = "source-over";
+        } else vmMaskFast(r.segmentationMask, K.m, w, h);
         const c = K.cv.getContext("2d"); if (K.cv.width !== w || K.cv.height !== h) { K.cv.width = w; K.cv.height = h; }
         c.save(); c.globalCompositeOperation = "copy"; c.drawImage(K.m, 0, 0); c.globalCompositeOperation = "source-in"; c.drawImage(K.pend, 0, 0); c.restore();
         if (v && v.k !== "cut") { c.save(); c.globalCompositeOperation = "destination-over"; vmVbgPaint(c, v, w, h, K.pend, mirror, t); c.restore(); }
         K.ready = true;
-      })).catch(() => { K.fail = true; }).finally(() => { K.busy = false; K.doneAt = performance.now(); K.cost = K.cost * 0.7 + (K.doneAt - t0) * 0.3; });
+      };
+      (useR ? K.rv.run(K.pend, use, t) : vmSeg().then(seg => seg.run(K.sm, use))).catch(() => { if (useR) { K.rvSlow = true; return; } K.fail = true; }).finally(() => { K.busy = false; K.doneAt = performance.now(); K.cost = K.cost * 0.7 + (K.doneAt - t0) * 0.3; });
     };
     return K;
   }
@@ -10515,10 +10813,10 @@ notify pgrst, 'reload schema';
   function vmMap(c, F, it, box, a) {
     const { L, st, G } = F, ctry = VMW && it.n ? VMW.by50.get(it.n) : null;
     c.save(); vmClip(c, box);
-    const og = c.createLinearGradient(0, box.y, 0, box.y + box.h); og.addColorStop(0, "#7DB4D8"); og.addColorStop(1, "#4F8FBF"); c.fillStyle = og; c.fillRect(box.x, box.y, box.w, box.h);
+    vmOcean(c, box, a);
     if (!VMW) { vmWorld().catch(() => {}); c.restore(); return box; }
-    const rv = it.river ? vmRiverPts(it.river) : null, rb = rv ? vmBoxOf(rv) : null;
-    const f = it.water ? vmCityBox(it.water.x, it.water.y, it.water.r || 0.01) : rb ? [rb[0] - (rb[2] - rb[0]) * 0.15, rb[1] - (rb[3] - rb[1]) * 0.1, rb[2] + (rb[2] - rb[0]) * 0.15, rb[3] + (rb[3] - rb[1]) * 0.1] : ctry ? vmFocus(ctry) : [0.45, 0.35, 0.55, 0.5], fx = (f[0] + f[2]) / 2, fy = (f[1] + f[3]) / 2;
+    const rv = it.river ? vmRiverPts(it.river) : it.rlines || it.wpoly ? (it.rlines || it.wpoly).reduce((o, a) => { for (let i = 0; i < a.length; i += 2) o.push([a[i], a[i + 1]]); return o; }, []) : null, rb = rv ? vmBoxOf(rv) : null;
+    const f = it.water && !it.wpoly ? vmCityBox(it.water.x, it.water.y, it.water.r || 0.01) : rb ? [rb[0] - (rb[2] - rb[0]) * 0.15, rb[1] - (rb[3] - rb[1]) * 0.1, rb[2] + (rb[2] - rb[0]) * 0.15, rb[3] + (rb[3] - rb[1]) * 0.1] : ctry ? vmFocus(ctry) : [0.45, 0.35, 0.55, 0.5], fx = (f[0] + f[2]) / 2, fy = (f[1] + f[3]) / 2;
     const sEnd = Math.max(0.004, (f[2] - f[0]) * 1.3, (f[3] - f[1]) * 1.45 * box.w / box.h), sStart = Math.min(1.05, Math.max(sEnd * 6, 0.9));
     const kz = crEase(Math.max(0, Math.min(1, (a - 0.35) / 2.3))), kc = crEase(Math.max(0, Math.min(1, (a - 0.2) / 1.6)));
     // further in: a province or state, or a city (after the country)
@@ -10532,8 +10830,7 @@ notify pgrst, 'reload schema';
     const tf = { x: x => box.x + box.w / 2 + (x - cx) * k, y: y => box.y + box.h / 2 + (y - cy) * k };
     const vx0 = cx - sc / 2, vx1 = cx + sc / 2, vy0 = cy - sc * box.h / box.w / 2, vy1 = cy + sc * box.h / box.w / 2;
     const set = sc > 0.18 ? VMW.c110 : VMW.c50, min = 0.8;
-    c.fillStyle = "#F1ECE1"; c.strokeStyle = "rgba(120,110,95,.55)"; c.lineWidth = G.tall ? 1.4 : 1.2; c.lineJoin = "round";
-    for (const ct of set) { const b = ct.b; if (b[2] < vx0 || b[0] > vx1 || b[3] < vy0 || b[1] > vy1) continue; vmMapPath(c, ct, tf, min); c.fill(); c.stroke(); }
+    vmLand(c, set, tf, vx0, vx1, vy0, vy1, min, G, box, sc);
     // close in: the country's provinces, drawn in detail with their borders
     const provs = VMM && ctry && sc < 0.12 ? VMM.prov.get(it.a2) || [] : [];
     if (provs.length) { c.save(); c.fillStyle = "#F1ECE1"; for (const p of provs) { const b = p.b; if (b[2] < vx0 || b[0] > vx1 || b[3] < vy0 || b[1] > vy1) continue; vmMapPath(c, p, tf, 0.6); c.fill(); }
@@ -10574,7 +10871,7 @@ notify pgrst, 'reload schema';
       c.fillStyle = "rgba(0,0,0,.3)"; crRR(c, -tw / 2 - 18 + 3, 14 * z + 4, tw + 36, fs * 1.5, 12); c.fill(); c.fillStyle = "#FFFFFF"; crRR(c, -tw / 2 - 18, 14 * z, tw + 36, fs * 1.5, 12); c.fill();
       c.fillStyle = "#14181C"; c.textAlign = "center"; c.textBaseline = "middle"; c.fillText(nm, 0, 14 * z + fs * 0.77); c.restore();
     }
-    if (it.water || it.river) vmWaterMarks(c, F, it, tf, k, a, box);
+    if (it.water || it.river || it.rlines || it.wpoly) vmWaterMarks(c, F, it, tf, k, a, box);
     // the flag, raised on a pole in the middle of the country
     if (ctry && a > 2.2 && k2 < 0.3) { const H = box.h * (G.tall ? 0.17 : 0.27), x = tf.x(fx), y = tf.y(fy) + H * 0.35; c.save(); c.globalAlpha *= 1 - k2 / 0.3; vmPoleFlag(c, vmFlag(it.a2), x, y, H, H * 0.66, a, crEase(Math.min(1, (a - 2.2) / 0.9))); c.restore(); }
     // the flag and the name
@@ -10603,7 +10900,7 @@ notify pgrst, 'reload schema';
   function vmTrip(c, F, it, box, a) {
     const { L, st, G } = F;
     c.save(); vmClip(c, box);
-    const og = c.createLinearGradient(0, box.y, 0, box.y + box.h); og.addColorStop(0, "#7DB4D8"); og.addColorStop(1, "#4F8FBF"); c.fillStyle = og; c.fillRect(box.x, box.y, box.w, box.h);
+    vmOcean(c, box, a);
     if (!VMW) { vmWorld().catch(() => {}); c.restore(); return box; }
     let S = vmTripCache.get(it); if (!S) { S = vmTripPlan(it); vmTripCache.set(it, S); } if (!S.length) { c.restore(); return box; }
     const n = S.length, legs = Math.max(0, n - 1), T0 = 0.9, end = T0 + legs * VM_LEG;
@@ -10619,8 +10916,7 @@ notify pgrst, 'reload schema';
     const k = box.w / view.s, tf = { x: x => box.x + box.w / 2 + (x - view.cx) * k, y: y => box.y + box.h / 2 + (y - view.cy) * k };
     const vx0 = view.cx - view.s / 2, vx1 = view.cx + view.s / 2, vy0 = view.cy - view.s * box.h / box.w / 2, vy1 = view.cy + view.s * box.h / box.w / 2;
     const set = view.s > 0.18 ? VMW.c110 : VMW.c50;
-    c.fillStyle = "#F1ECE1"; c.strokeStyle = "rgba(120,110,95,.55)"; c.lineWidth = G.tall ? 1.4 : 1.2; c.lineJoin = "round";
-    for (const ct of set) { const b = ct.b; if (b[2] < vx0 || b[0] > vx1 || b[3] < vy0 || b[1] > vy1) continue; vmMapPath(c, ct, tf, 0.8); c.fill(); c.stroke(); }
+    vmLand(c, set, tf, vx0, vx1, vy0, vy1, 0.8, G, box, view.s);
     // close in on cities: the provinces, in detail
     if (S.some(x => x.city)) { if (!VMM) vmMore().catch(() => {}); else if (view.s < 0.12) { c.save(); const seen = new Set(); for (const x of S) { if (seen.has(x.a2)) continue; seen.add(x.a2); for (const p of VMM.prov.get(x.a2) || []) { const b = p.b; if (b[2] < vx0 || b[0] > vx1 || b[3] < vy0 || b[1] > vy1) continue; vmMapPath(c, p, tf, 0.6); c.fillStyle = "#F1ECE1"; c.fill(); c.strokeStyle = "rgba(120,110,95,.6)"; c.lineWidth = G.tall ? 1.6 : 1.3; c.setLineDash([7, 5]); c.stroke(); c.setLineDash([]); } } c.restore(); } }
     // countries reached so far light up
@@ -10701,6 +10997,73 @@ notify pgrst, 'reload schema';
     ganges: ["Ganges", [[78.9, 30.1], [78.2, 29.95], [80.3, 26.45], [81.85, 25.4], [83.0, 25.3], [85.1, 25.6], [87.3, 25.2], [88.1, 24.0], [89.7, 23.3], [90.5, 22.6]]],
   };
   const vmRiverPts = k => { const r = VM_RIVERS[k]; return r ? r[1].map(([lo, la]) => vmMerc(lo, la)) : null; };
+  // every named sea, gulf, strait, bay, lake and river in the world (Natural Earth), loaded the first time it's needed
+  let VMWD = null, vmWdP = null;
+  function vmWaterDb() {
+    if (VMWD) return Promise.resolve(VMWD);
+    if (!vmWdP) vmWdP = new Promise((res, rej) => {
+      if (window.VM_WATERDB) return res();
+      const sc = document.createElement("script"); sc.src = "worldwater.js"; sc.onload = () => res(); sc.onerror = () => { vmWdP = null; rej(new Error("water")); }; document.head.appendChild(sc);
+    }).then(() => {
+      const D = window.VM_WATERDB, mp = fl => { const o = new Float32Array(fl.length); for (let i = 0; i < fl.length; i += 2) { const q = vmMerc(fl[i], fl[i + 1]); o[i] = q[0]; o[i + 1] = q[1]; } return o; };
+      const bb = arrs => { let x0 = 1e9, y0 = 1e9, x1 = -1e9, y1 = -1e9; for (const a of arrs) for (let i = 0; i < a.length; i += 2) { if (a[i] < x0) x0 = a[i]; if (a[i] > x1) x1 = a[i]; if (a[i + 1] < y0) y0 = a[i + 1]; if (a[i + 1] > y1) y1 = a[i + 1]; } return [x0, y0, x1, y1]; };
+      const all = [];
+      const seas = D.seas.map(([name, cla, lon, lat, span, rank, polys]) => { const P = polys.map(mp), o = { t: "sea", cla, name, rank, span, P, b: bb(P), c: vmMerc(lon, lat) }; all.push(o); return o; });
+      const lakes = D.lakes.map(([name, lon, lat, span, rank, polys]) => { const P = polys.map(mp), o = { t: "lake", name, rank, span, P, b: bb(P), c: vmMerc(lon, lat) }; all.push(o); return o; });
+      const rivers = D.rivers.map(([name, rank, span, lines]) => { const P = lines.map(mp), o = { t: "river", name, rank, span, P, b: bb(P) }; o.c = [(o.b[0] + o.b[2]) / 2, (o.b[1] + o.b[3]) / 2]; all.push(o); return o; });
+      VMWD = { seas, lakes, rivers, all }; return VMWD;
+    });
+    return vmWdP;
+  }
+  // searching it: the best matches first (names that start with what you typed, then the bigger ones)
+  function vmWaterFind(qq, max) {
+    if (!VMWD) return [];
+    const norm = x => String(x).toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g, ""), nq = norm(qq || "").trim(); if (nq.length < 2) return [];
+    const out = [];
+    for (const o of VMWD.all) { const n = norm(o.name), i = n.indexOf(nq); if (i < 0) continue; out.push([o, (i === 0 || n[i - 1] === " " ? 0 : 1) * 100 + o.rank * 3 - Math.min(20, o.span)]); }
+    out.sort((a, b) => a[1] - b[1]); return out.slice(0, max || 40).map(x => x[0]);
+  }
+  const vmWaterIc = o => (o.t === "river" ? "〰" : o.t === "lake" ? "🏞" : "🌊");
+  const vmWaterKind = o => (o.t === "river" ? "river" : o.t === "lake" ? "lake" : o.cla === "strait" ? "strait" : o.cla === "gulf" ? "gulf" : o.cla === "bay" ? "bay" : o.cla === "ocean" ? "ocean" : o.cla === "channel" ? "channel" : "sea");
+  // a picked one, as something the video keeps (its own outline goes with it, so the finished video never needs the list)
+  function vmWaterItem(o) {
+    const r5 = a => Array.from(a, v => Math.round(v * 1e5) / 1e5);
+    if (o.t === "river") return { kind: "map", name: o.name, rlines: o.P.map(r5) };
+    if (!o.P.length) return { kind: "map", name: o.name, water: { name: o.name, x: o.c[0], y: o.c[1], r: Math.max(0.003, o.span / 360 * 0.6) } };
+    const r = Math.max(0.002, (o.b[2] - o.b[0]) * 0.5, (o.b[3] - o.b[1]) * 0.5);
+    return { kind: "map", name: o.name, wpoly: o.P.map(r5), water: { name: o.name, x: o.c[0], y: o.c[1], r } };
+  }
+  function vmFlatPath(c, a, tf, close) { if (a.length < 4) return; c.moveTo(tf.x(a[0]), tf.y(a[1])); for (let i = 2; i < a.length; i += 2) c.lineTo(tf.x(a[i]), tf.y(a[i + 1])); if (close) c.closePath(); }
+  // the sea: deep blue, with soft moving ripples
+  let vmWaveCv = null;
+  function vmWaves() {
+    if (vmWaveCv) return vmWaveCv;
+    const cv = document.createElement("canvas"); cv.width = cv.height = 256; const x = cv.getContext("2d");
+    let seed = 3; const rnd = () => ((seed = (seed * 16807) % 2147483647) / 2147483647);
+    x.strokeStyle = "rgba(255,255,255,.9)"; x.lineCap = "round";
+    for (let i = 0; i < 90; i++) { const px = rnd() * 256, py = rnd() * 256, w = 6 + rnd() * 14; x.lineWidth = 0.8 + rnd() * 1.1; x.globalAlpha = 0.25 + rnd() * 0.5; x.beginPath(); x.moveTo(px - w, py); x.quadraticCurveTo(px, py - w * 0.28, px + w, py); x.stroke(); }
+    return (vmWaveCv = cv);
+  }
+  function vmOcean(c, box, t) {
+    const g = c.createLinearGradient(box.x, box.y, box.x + box.w * 0.3, box.y + box.h); g.addColorStop(0, "#3C86C2"); g.addColorStop(0.6, "#2A6CA8"); g.addColorStop(1, "#1F5A91"); c.fillStyle = g; c.fillRect(box.x, box.y, box.w, box.h);
+    const W = vmWaves(), z = Math.max(0.6, box.w / 720), off = ((t || 0) * 10) % 256;
+    c.save(); c.beginPath(); c.rect(box.x, box.y, box.w, box.h); c.clip(); c.globalAlpha = 0.13; c.translate(box.x - off * z, box.y); c.scale(z, z); c.fillStyle = c.createPattern(W, "repeat"); c.fillRect(0, 0, box.w / z + 512, box.h / z + 256); c.restore();
+  }
+  // the land, with light shallow water along every coast, and the big lakes
+  function vmLand(c, set, tf, vx0, vx1, vy0, vy1, min, G, box, viewS) {
+    const z = box.w / 720, vis = set.filter(ct => { const b = ct.b; return !(b[2] < vx0 || b[0] > vx1 || b[3] < vy0 || b[1] > vy1); });
+    c.save(); c.lineJoin = "round";
+    c.strokeStyle = "rgba(120,195,232,.28)"; c.lineWidth = 22 * z; for (const ct of vis) { vmMapPath(c, ct, tf, min); c.stroke(); }
+    c.strokeStyle = "rgba(160,220,244,.45)"; c.lineWidth = 9 * z; for (const ct of vis) { vmMapPath(c, ct, tf, min); c.stroke(); }
+    c.restore();
+    c.fillStyle = "#EEE8DA"; c.strokeStyle = "rgba(120,110,95,.5)"; c.lineWidth = G.tall ? 1.4 : 1.2; c.lineJoin = "round";
+    for (const ct of vis) { vmMapPath(c, ct, tf, min); c.fill(); c.stroke(); }
+    if (!VMWD) { if (VMW) vmWaterDb().catch(() => {}); return; }
+    const k = box.w / (viewS || 1);
+    c.save(); c.fillStyle = "#3478B4"; c.strokeStyle = "rgba(20,70,120,.35)"; c.lineWidth = 1;
+    for (const L2 of VMWD.lakes) { const b = L2.b; if (b[2] < vx0 || b[0] > vx1 || b[3] < vy0 || b[1] > vy1) continue; if ((b[2] - b[0]) * k < 5 && (b[3] - b[1]) * k < 5) continue; c.beginPath(); for (const a of L2.P) vmFlatPath(c, a, tf, true); c.fill(); c.stroke(); }
+    c.restore();
+  }
   const vmBoxOf = pts => { let x0 = 1e9, y0 = 1e9, x1 = -1e9, y1 = -1e9; for (const [x, y] of pts) { x0 = Math.min(x0, x); y0 = Math.min(y0, y); x1 = Math.max(x1, x); y1 = Math.max(y1, y); } return [x0, y0, x1, y1]; };
   const VM_GROUPS = [["Southern Africa", ["ZA", "NA", "BW", "ZW", "ZM", "MZ", "MW", "AO", "LS", "SZ"]], ["SADC", ["AO", "BW", "KM", "CD", "SZ", "LS", "MG", "MW", "MU", "MZ", "NA", "SC", "ZA", "TZ", "ZM", "ZW"]],
     ["East Africa", ["KE", "UG", "TZ", "RW", "BI", "SS", "SO", "CD"]], ["West Africa", ["NG", "GH", "SN", "CI", "ML", "BF", "NE", "GN", "SL", "LR", "TG", "BJ", "GM", "GW", "MR", "CV"]], ["North Africa", ["EG", "LY", "TN", "DZ", "MA", "SD"]],
@@ -10712,7 +11075,7 @@ notify pgrst, 'reload schema';
   function vmGroupMap(c, F, it, box, a) {
     const { L, st, G } = F;
     c.save(); vmClip(c, box);
-    const og = c.createLinearGradient(0, box.y, 0, box.y + box.h); og.addColorStop(0, "#7DB4D8"); og.addColorStop(1, "#4F8FBF"); c.fillStyle = og; c.fillRect(box.x, box.y, box.w, box.h);
+    vmOcean(c, box, a);
     if (!VMW) { vmWorld().catch(() => {}); c.restore(); return box; }
     const mem = (it.a2s || []).map(a2 => { const cc = VMW.byA2.get(a2), ct = cc && cc.n ? VMW.by50.get(cc.n) : null; return ct ? { a2, ct, name: cc.name, f: vmFocus(ct) } : null; }).filter(x => x && x.f);
     if (!mem.length) { c.restore(); return box; }
@@ -10720,8 +11083,7 @@ notify pgrst, 'reload schema';
     const view = vmViewLerp(world, all, kz), k = box.w / view.s, tf = { x: x => box.x + box.w / 2 + (x - view.cx) * k, y: y => box.y + box.h / 2 + (y - view.cy) * k };
     const vx0 = view.cx - view.s / 2, vx1 = view.cx + view.s / 2, vy0 = view.cy - view.s * box.h / box.w / 2, vy1 = view.cy + view.s * box.h / box.w / 2;
     const set = view.s > 0.18 ? VMW.c110 : VMW.c50;
-    c.fillStyle = "#F1ECE1"; c.strokeStyle = "rgba(120,110,95,.55)"; c.lineWidth = G.tall ? 1.4 : 1.2; c.lineJoin = "round";
-    for (const ct of set) { const b = ct.b; if (b[2] < vx0 || b[0] > vx1 || b[3] < vy0 || b[1] > vy1) continue; vmMapPath(c, ct, tf, 0.8); c.fill(); c.stroke(); }
+    vmLand(c, set, tf, vx0, vx1, vy0, vy1, 0.8, G, box, view.s);
     const per = Math.min(0.22, 1.6 / mem.length);
     mem.forEach((m, i) => { const hk = crEase((a - 2.0 - i * per) / 0.4); if (hk <= 0) return; const col = it.multi ? VM_GROUP_COLS[i % VM_GROUP_COLS.length] : L.acc;
       c.save(); c.globalAlpha = hk * 0.82; vmMapPath(c, m.ct, tf, 0.5); c.fillStyle = col; c.fill(); c.globalAlpha = hk; c.strokeStyle = "#FFFFFF"; c.lineWidth = 2.2; c.stroke(); c.restore(); });
@@ -10741,6 +11103,17 @@ notify pgrst, 'reload schema';
   // a river drawn on the map as it flows, and a sea or strait marked with a soft ring
   function vmWaterMarks(c, F, it, tf, k, a, box) {
     const { G, L } = F;
+    if (it.wpoly) { const hk = crEase((a - 1.2) / 0.8); if (hk > 0) { c.save(); c.beginPath(); for (const p of it.wpoly) vmFlatPath(c, p, tf, true); c.globalAlpha = hk * 0.28; c.fillStyle = "#BFE6FF"; c.fill("evenodd"); c.globalAlpha = hk; c.lineJoin = "round"; c.strokeStyle = L.acc; c.lineWidth = 7 * box.w / 720; c.stroke(); c.strokeStyle = "#FFFFFF"; c.lineWidth = 2.2 * box.w / 720; c.stroke(); c.restore(); } }
+    if (it.rlines) {
+      const rk = Math.max(0, Math.min(1, (a - 1.0) / 2.6)), z = box.w / 720;
+      c.save(); c.lineCap = "round"; c.lineJoin = "round";
+      for (const [w, col] of [[(G.tall ? 11 : 9) * z, "rgba(255,255,255,.85)"], [(G.tall ? 6 : 5) * z, "#1E78D2"]]) { c.lineWidth = w; c.strokeStyle = col; c.beginPath();
+        for (const ln of it.rlines) { const n = ln.length / 2, upto = Math.max(1, Math.ceil(rk * (n - 1))); c.moveTo(tf.x(ln[0]), tf.y(ln[1])); for (let i = 1; i <= upto && i < n; i++) c.lineTo(tf.x(ln[i * 2]), tf.y(ln[i * 2 + 1])); }
+        c.stroke(); }
+      if (rk > 0.6) { const lg = it.rlines.reduce((m2, l) => (l.length > m2.length ? l : m2), it.rlines[0]), mi = Math.floor(lg.length / 4) * 2, X = tf.x(lg[mi]), Y = tf.y(lg[mi + 1]), fs = G.tall ? 30 : 26;
+        c.globalAlpha = crEase((rk - 0.6) / 0.3); c.font = "italic 800 " + fs + "px Poppins, Andika, sans-serif"; c.textAlign = "left"; c.textBaseline = "middle"; c.lineWidth = 6; c.strokeStyle = "rgba(255,255,255,.95)"; c.strokeText(it.name, X + 14, Y); c.fillStyle = "#145DA0"; c.fillText(it.name, X + 14, Y); }
+      c.restore();
+    }
     if (it.river) { const pts = vmRiverPts(it.river); if (pts) {
       const rk = Math.max(0, Math.min(1, (a - 1.0) / 2.6)), n = pts.length, upto = rk * (n - 1);
       c.save(); c.lineCap = "round"; c.lineJoin = "round";
@@ -10778,24 +11151,69 @@ notify pgrst, 'reload schema';
   // a gently rounded line through points (so a ship's course doesn't look like a zigzag)
   function vmSmooth(P) { if (P.length < 3) return P; const out = [P[0]]; for (let i = 1; i < P.length - 1; i++) { const a = P[i - 1], b = P[i], c2 = P[i + 1]; out.push([(a[0] + b[0] * 2) / 3, (a[1] + b[1] * 2) / 3], [(b[0] * 2 + c2[0]) / 3, (b[1] * 2 + c2[1]) / 3]); } out.push(P[P.length - 1]); return out; }
   // the traveller on a journey: a plane, a ship or a car (seen from above), pointing the way it goes
-  function vmVehicle(c, mode, x, y, ang, z, col) {
-    c.save(); c.translate(x, y); c.rotate(ang); c.scale(z, z); c.lineJoin = "round";
-    c.shadowColor = "rgba(0,0,0,.35)"; c.shadowBlur = 8; c.shadowOffsetY = 4;
+  // the plane, ship and car seen from above, drawn in detail once (sharp) and then just moved and turned
+  const vmVehSprites = new Map();
+  function vmShade(hex, k) { const n = parseInt(String(hex).slice(1), 16); let r = n >> 16, g = (n >> 8) & 255, b = n & 255; const f = v => Math.max(0, Math.min(255, Math.round(k < 0 ? v * (1 + k) : v + (255 - v) * k))); return "rgb(" + f(r) + "," + f(g) + "," + f(b) + ")"; }
+  function vmVehSprite(mode, col) {
+    const key = mode + col; if (vmVehSprites.has(key)) return vmVehSprites.get(key);
+    const S = 3, W = mode === "ship" ? 200 : mode === "plane" ? 140 : 70, H = mode === "ship" ? 80 : mode === "plane" ? 130 : 46, cv = document.createElement("canvas"); cv.width = W * S; cv.height = H * S;
+    const c = cv.getContext("2d"); c.scale(S, S); c.translate(W / 2, H / 2); c.lineJoin = "round"; c.lineCap = "round";
+    const lin = (x0, y0, x1, y1, stops) => { const g = c.createLinearGradient(x0, y0, x1, y1); stops.forEach(([o, cc]) => g.addColorStop(o, cc)); return g; };
     if (mode === "plane") {
-      c.fillStyle = "#FFFFFF"; c.strokeStyle = "#2B3440"; c.lineWidth = 2.5;
-      c.beginPath(); c.moveTo(44, 0); c.quadraticCurveTo(40, -6, 30, -6); c.lineTo(8, -6); c.lineTo(-6, -40); c.lineTo(-16, -40); c.lineTo(-6, -6); c.lineTo(-26, -6); c.lineTo(-34, -18); c.lineTo(-40, -18); c.lineTo(-36, 0);
-      c.lineTo(-40, 18); c.lineTo(-34, 18); c.lineTo(-26, 6); c.lineTo(-6, 6); c.lineTo(-16, 40); c.lineTo(-6, 40); c.lineTo(8, 6); c.lineTo(30, 6); c.quadraticCurveTo(40, 6, 44, 0); c.closePath(); c.fill(); c.shadowColor = "transparent"; c.stroke();
-      c.fillStyle = col; c.fillRect(-4, -36, 6, 6); c.fillRect(-4, 30, 6, 6); c.beginPath(); c.arc(32, 0, 3, 0, 7); c.fillStyle = "#2B3440"; c.fill();
+      // wings, swept back, with the engines under them
+      for (const sg of [-1, 1]) {
+        c.fillStyle = lin(0, 0, 0, 56 * sg, [[0, "#E6EBF0"], [1, "#B8C2CD"]]); c.strokeStyle = "rgba(60,70,85,.55)"; c.lineWidth = 0.8;
+        c.beginPath(); c.moveTo(14, 6 * sg); c.lineTo(-20, 58 * sg); c.lineTo(-29, 59 * sg); c.lineTo(-12, 6 * sg); c.closePath(); c.fill(); c.stroke();
+        c.fillStyle = col; c.beginPath(); c.moveTo(-20, 58 * sg); c.lineTo(-29, 59 * sg); c.lineTo(-30, 62 * sg); c.lineTo(-22, 61 * sg); c.closePath(); c.fill();
+        c.fillStyle = lin(0, 16 * sg, 0, 30 * sg, [[0, "#8A939E"], [0.5, "#C9D0D8"], [1, "#6D7682"]]); crRR(c, -5, (sg > 0 ? 18 : -30), 18, 12, 5); c.fill();
+        c.fillStyle = "#2B3138"; c.beginPath(); c.ellipse(13, 24 * sg, 1.6, 5, 0, 0, 7); c.fill();
+        c.fillStyle = lin(0, 0, 0, 22 * sg, [[0, "#E6EBF0"], [1, "#BCC5CF"]]); c.beginPath(); c.moveTo(-46, 4 * sg); c.lineTo(-60, 22 * sg); c.lineTo(-66, 22 * sg); c.lineTo(-58, 4 * sg); c.closePath(); c.fill(); c.stroke();
+      }
+      // the body: long, rounded, lit from above
+      c.fillStyle = lin(0, -8, 0, 8, [[0, "#B7C0CA"], [0.35, "#FFFFFF"], [0.6, "#F4F6F8"], [1, "#A9B3BE"]]);
+      c.beginPath(); c.moveTo(62, 0); c.bezierCurveTo(62, -6, 54, -8, 44, -8); c.lineTo(-48, -6.5); c.quadraticCurveTo(-66, -3, -68, 0); c.quadraticCurveTo(-66, 3, -48, 6.5); c.lineTo(44, 8); c.bezierCurveTo(54, 8, 62, 6, 62, 0); c.closePath(); c.fill();
+      c.strokeStyle = "rgba(60,70,85,.6)"; c.lineWidth = 0.9; c.stroke();
+      c.strokeStyle = col; c.lineWidth = 2.2; c.beginPath(); c.moveTo(40, 0); c.lineTo(-56, 0); c.stroke();   // your colour along the top
+      c.fillStyle = "#26303B"; c.beginPath(); c.moveTo(56, -3.2); c.quadraticCurveTo(60, 0, 56, 3.2); c.lineTo(52, 3); c.lineTo(52, -3); c.closePath(); c.fill();   // the cockpit glass
+      c.fillStyle = col; c.beginPath(); c.moveTo(-50, -1.6); c.lineTo(-68, -1); c.lineTo(-68, 1); c.lineTo(-50, 1.6); c.closePath(); c.fill();   // the tail fin
     } else if (mode === "ship") {
-      c.shadowColor = "transparent"; c.strokeStyle = "rgba(255,255,255,.75)"; c.lineWidth = 3; c.beginPath(); c.moveTo(-30, -10); c.lineTo(-80, -26); c.moveTo(-30, 10); c.lineTo(-80, 26); c.stroke();
-      c.shadowColor = "rgba(0,0,0,.35)"; c.fillStyle = "#2B3440"; c.beginPath(); c.moveTo(46, 0); c.quadraticCurveTo(30, -16, 0, -16); c.lineTo(-34, -15); c.lineTo(-34, 15); c.lineTo(0, 16); c.quadraticCurveTo(30, 16, 46, 0); c.fill();
-      c.shadowColor = "transparent"; const cols = [col, "#E4572E", "#17BEBB", "#FFFFFF"]; for (let i = 0; i < 4; i++) for (let j = 0; j < 2; j++) { c.fillStyle = cols[(i + j) % 4]; c.fillRect(-26 + i * 12, -11 + j * 11, 10, 9); }
-      c.fillStyle = "#FFFFFF"; c.fillRect(-36, -9, 8, 18);
+      // the wake: white water spreading out behind
+      const wg = c.createLinearGradient(-60, 0, -100, 0); wg.addColorStop(0, "rgba(255,255,255,.85)"); wg.addColorStop(1, "rgba(255,255,255,0)");
+      c.strokeStyle = wg; c.lineWidth = 3; for (const sg of [-1, 1]) { c.beginPath(); c.moveTo(-58, 13 * sg); c.quadraticCurveTo(-78, 22 * sg, -100, 36 * sg); c.stroke(); }
+      c.fillStyle = wg; c.beginPath(); c.moveTo(-58, -10); c.lineTo(-100, -18); c.lineTo(-100, 18); c.lineTo(-58, 10); c.closePath(); c.globalAlpha = 0.45; c.fill(); c.globalAlpha = 1;
+      c.strokeStyle = "rgba(255,255,255,.7)"; c.lineWidth = 2; for (const sg of [-1, 1]) { c.beginPath(); c.moveTo(70, 0); c.quadraticCurveTo(62, 14 * sg, 48, 18 * sg); c.stroke(); }   // the bow wave
+      // the hull
+      c.fillStyle = lin(0, -16, 0, 16, [[0, "#1B2A38"], [0.5, "#34495E"], [1, "#1B2A38"]]);
+      c.beginPath(); c.moveTo(72, 0); c.quadraticCurveTo(62, -14, 40, -15); c.lineTo(-56, -15); c.quadraticCurveTo(-62, -15, -62, -9); c.lineTo(-62, 9); c.quadraticCurveTo(-62, 15, -56, 15); c.lineTo(40, 15); c.quadraticCurveTo(62, 14, 72, 0); c.closePath(); c.fill();
+      c.fillStyle = "#7F8C99"; c.beginPath(); c.moveTo(66, 0); c.quadraticCurveTo(58, -11, 40, -12); c.lineTo(-54, -12); c.lineTo(-54, 12); c.lineTo(40, 12); c.quadraticCurveTo(58, 11, 66, 0); c.closePath(); c.fill();   // the deck
+      // the containers, stacked in rows
+      let seed = 11; const rnd = () => ((seed = (seed * 16807) % 2147483647) / 2147483647), cols = [col, "#C0392B", "#2471A3", "#E67E22", "#1E8449", "#7F8C8D", "#D4AC0D", "#884EA0"];
+      for (let x = -34; x < 44; x += 9) for (const y of [-11, -3.6, 3.8]) { const cc = cols[Math.floor(rnd() * cols.length)]; c.fillStyle = cc; c.fillRect(x, y, 8.2, 7.2); c.fillStyle = "rgba(255,255,255,.22)"; c.fillRect(x, y, 8.2, 1.5); c.fillStyle = "rgba(0,0,0,.18)"; c.fillRect(x, y + 5.8, 8.2, 1.4); }
+      // the bridge at the back, with its funnel
+      c.fillStyle = lin(-52, 0, -40, 0, [[0, "#DDE2E7"], [1, "#FFFFFF"]]); crRR(c, -52, -13, 13, 26, 2); c.fill();
+      c.fillStyle = "#2C3E50"; c.fillRect(-41.5, -11, 1.6, 22);
+      c.fillStyle = col; c.beginPath(); c.arc(-48, 0, 3.2, 0, 7); c.fill(); c.fillStyle = "#1B2631"; c.beginPath(); c.arc(-48, 0, 1.6, 0, 7); c.fill();
     } else {
-      c.fillStyle = col; c.strokeStyle = "#2B3440"; c.lineWidth = 2.5; crRR(c, -26, -14, 52, 28, 9); c.fill(); c.shadowColor = "transparent"; c.stroke();
-      c.fillStyle = "#2B3440"; crRR(c, 4, -11, 12, 22, 4); c.fill(); crRR(c, -18, -11, 9, 22, 3); c.fill();
-      c.fillStyle = "#FFF7C2"; c.fillRect(24, -12, 3, 6); c.fillRect(24, 6, 3, 6);
+      // a car: shiny paint in your colour, dark glass, lights
+      c.fillStyle = "rgba(0,0,0,.35)"; crRR(c, -24, -11, 50, 24, 9); c.fill();
+      c.fillStyle = "#1C1C1C"; for (const [wx, wy] of [[12, -11.5], [-14, -11.5], [12, 9.5], [-14, 9.5]]) crRR(c, wx, wy, 9, 2.2, 1), c.fill();
+      c.fillStyle = lin(0, -11, 0, 11, [[0, vmShade(col, -0.35)], [0.3, vmShade(col, 0.15)], [0.55, col], [1, vmShade(col, -0.4)]]); crRR(c, -24, -10.5, 48, 21, 8); c.fill();
+      c.strokeStyle = "rgba(0,0,0,.35)"; c.lineWidth = 0.7; c.stroke();
+      c.fillStyle = lin(6, 0, 14, 0, [[0, "#1D2733"], [1, "#3A4A5C"]]); c.beginPath(); c.moveTo(6, -8); c.lineTo(13, -6.5); c.quadraticCurveTo(15, 0, 13, 6.5); c.lineTo(6, 8); c.closePath(); c.fill();   // windscreen
+      c.fillStyle = "#1D2733"; c.beginPath(); c.moveTo(-12, -7.5); c.lineTo(-17, -6); c.quadraticCurveTo(-18.5, 0, -17, 6); c.lineTo(-12, 7.5); c.closePath(); c.fill();   // back window
+      c.fillStyle = vmShade(col, -0.12); crRR(c, -12, -7.6, 18, 15.2, 3); c.fill();   // the roof
+      c.fillStyle = "rgba(255,255,255,.35)"; c.beginPath(); c.moveTo(8, -6); c.lineTo(11, -5); c.lineTo(9, 2); c.lineTo(7, 2); c.closePath(); c.fill();   // a glint
+      c.fillStyle = "#FFF6C8"; crRR(c, 21, -8, 3, 4, 1); c.fill(); crRR(c, 21, 4, 3, 4, 1); c.fill();
+      c.fillStyle = "#D32F2F"; crRR(c, -24.5, -8, 2, 4, 1); c.fill(); crRR(c, -24.5, 4, 2, 4, 1); c.fill();
+      c.fillStyle = vmShade(col, -0.3); c.beginPath(); c.ellipse(5, -11.6, 2.4, 1.3, 0, 0, 7); c.fill(); c.beginPath(); c.ellipse(5, 11.6, 2.4, 1.3, 0, 0, 7); c.fill();   // mirrors
     }
+    const sp = { cv, W, H }; vmVehSprites.set(key, sp); return sp;
+  }
+  function vmVehicle(c, mode, x, y, ang, z, col) {
+    const sp = vmVehSprite(mode, /^#[0-9a-f]{6}$/i.test(col || "") ? col : "#FF7A00"), k = z * (mode === "plane" ? 0.9 : mode === "ship" ? 0.85 : 1.6);
+    c.save(); c.translate(x, y); c.rotate(ang); c.scale(k, k);
+    if (mode === "plane") { c.save(); c.globalAlpha = 0.22; c.filter = VM_FILTER ? "brightness(0) blur(2px)" : "none"; c.drawImage(sp.cv, -sp.W / 2 + 10, -sp.H / 2 + 16, sp.W * 0.92, sp.H * 0.92); c.restore(); }   // its shadow on the ground far below
+    c.drawImage(sp.cv, -sp.W / 2, -sp.H / 2, sp.W, sp.H);
     c.restore();
   }
   // a flag on a pole, blowing in the wind. (bx, by): the foot of the pole; rise 0..1: being raised
@@ -11113,13 +11531,30 @@ notify pgrst, 'reload schema';
   // Phones only lend the browser a picked file for a short while (gallery and Google Photos files especially). When several
   // are picked, the later ones can stop being readable before we get to them, and a clip can stop reading mid-play (it
   // freezes). So every picked file is copied in right away, all of them before any slow work starts.
+  // one piece of a picked file; the phone sometimes needs a moment before it hands it over
+  async function vmGrabPart(f, a, b) {
+    const waits = [0, 200, 400, 800, 1200, 2000];
+    for (let k = 0; k < waits.length; k++) { if (waits[k]) await sleep(waits[k]); try { return await f.slice(a, b).arrayBuffer(); } catch (e) { if (k === waits.length - 1) throw e; } }
+  }
+  // a big clip is copied straight onto the phone's storage for this app (not into memory), so even long videos come in
+  async function vmGrabDisk(f) {
+    const root = await navigator.storage.getDirectory(), dir = await root.getDirectoryHandle("grab", { create: true });
+    const name = uid() + "_" + String(f.name || "clip").replace(/[^\w.]/g, "_").slice(-40);
+    const fh = await dir.getFileHandle(name, { create: true }), w = await fh.createWritable();
+    try { const step = 8 << 20; for (let a = 0; a < f.size; a += step) await w.write(await vmGrabPart(f, a, Math.min(f.size, a + step))); await w.close(); }
+    catch (e) { try { await w.abort(); } catch (x) {} try { await dir.removeEntry(name); } catch (x) {} throw e; }
+    const d = await fh.getFile();
+    try { return new File([d], f.name || "file", { type: f.type || d.type || "", lastModified: f.lastModified }); } catch (e) { return d; }
+  }
+  // copies from earlier days are cleared away
+  async function vmGrabTidy() {
+    try { const root = await navigator.storage.getDirectory(), dir = await root.getDirectoryHandle("grab", { create: true }), old = Date.now() - 3 * 864e5;
+      for await (const [n, h] of dir.entries()) { try { const fl = await h.getFile(); if (fl.lastModified < old) await dir.removeEntry(n); } catch (e) {} } } catch (e) {}
+  }
   async function vmGrab(f) {
+    if (f.size > 30e6 && navigator.storage && navigator.storage.getDirectory) { try { return await vmGrabDisk(f); } catch (e) { /* fall back to memory */ } }
     const parts = [], step = 8 << 20;
-    for (let a = 0; a < f.size; a += step) {
-      let buf = null;
-      for (let k = 0; k < 3 && !buf; k++) { try { buf = await f.slice(a, Math.min(f.size, a + step)).arrayBuffer(); } catch (e) { if (k === 2) throw e; await sleep(150); } }
-      parts.push(buf);
-    }
+    for (let a = 0; a < f.size; a += step) parts.push(await vmGrabPart(f, a, Math.min(f.size, a + step)));
     const b = new Blob(parts, { type: f.type || "" });
     try { return new File([b], f.name || "file", { type: f.type || "", lastModified: f.lastModified }); } catch (e) { b.name = f.name; return b; }
   }
@@ -11128,7 +11563,7 @@ notify pgrst, 'reload schema';
     // small things all at once, big clips one after another
     await Promise.all(fs.map(async (f, i) => { if (f.size > 40e6) return; try { out[i] = await vmGrab(f); } catch (e) { bad.push(f.name || "a file"); } }));
     for (let i = 0; i < fs.length; i++) if (fs[i].size > 40e6) { try { out[i] = await vmGrab(fs[i]); } catch (e) { bad.push(fs[i].name || "a clip"); } }
-    if (bad.length) toast(bad.length === 1 ? "The phone wouldn't hand over one file (" + bad[0] + "). Pick it again." : "The phone wouldn't hand over " + bad.length + " files. Pick those again.");
+    if (bad.length) toast(bad.length === 1 ? "The phone wouldn't hand over " + bad[0] + ". Pick it again (if it keeps happening, save it to your phone's Downloads first, then pick it from there)." : "The phone wouldn't hand over " + bad.length + " files. Pick those again.");
     return out.filter(Boolean);
   }
   // a picture made small enough for the phone to hold many of them; the decoded copy is let go of straight away
@@ -11209,35 +11644,77 @@ notify pgrst, 'reload schema';
     </div></div>`;
   }
   // your audience's anonymous questions: the link to share, and what came in
+  // your question page: what it says, what people send, and how it looks. All of it is in the link you share.
+  const ASK_THEMES = [["midnight", "Midnight", "#1A2236", "#FF7A00"], ["black", "Black & gold", "#121212", "#D4AF37"], ["white", "Clean white", "#FFFFFF", "#15171B"], ["orange", "Orange", "#1A120B", "#FF7A00"], ["green", "Green", "#0F1F18", "#2EBD59"]];
+  const ASK_KINDS = [["question", "❓ Questions"], ["confession", "🤫 Confessions"], ["news", "📰 News"]];
+  const ASK_IDEAS = { question: ["Ask me anything", "What do you want me to talk about next?", "Ask me about business in Zambia"], confession: ["Tell me your deepest confession", "Confess something you've never told anyone", "What's your biggest secret?"], news: ["What's happening in your area?", "Send me news I should talk about", "What's the latest gossip?"] };
+  function askSet() { try { return Object.assign({ p: "", k: "question", t: "midnight", c: "", n: "" }, JSON.parse(localStorage.getItem("ask.set") || "{}")); } catch (e) { return { p: "", k: "question", t: "midnight", c: "", n: "" }; } }
+  function askHeat() { try { return JSON.parse(localStorage.getItem("ask.heat") || "{}") || {}; } catch (e) { return {}; } }
   function VMAsks({ handle, onClose, onAdd }) {
-    const [list, setList] = useState(null), [err, setErr] = useState(""), [tab, setTab] = useState("new"), [pick, setPick] = useState({});
-    const link = location.origin + location.pathname.replace(/[^/]*$/, "") + "ask.html" + (handle ? "?to=" + encodeURIComponent(handle) : "");
-    async function load() { if (!sb) { setErr("Sign in to the class first."); return; } const r = await sb.from("asks").select("*").order("created_at", { ascending: false }).limit(300); if (r.error) { setErr(/asks|relation|schema/i.test(r.error.message || "") ? "Do the one-time database update first (it's at the top of your home screen), then come back." : "Couldn't load them. Check the connection."); return; } setList(r.data || []); }
+    const [list, setList] = useState(null), [err, setErr] = useState(""), [tab, setTab] = useState("new"), [pick, setPick] = useState([]);
+    const [S, setS0] = useState(() => { const x = askSet(); if (!x.n) x.n = handle || ""; if (!x.p) x.p = ASK_IDEAS[x.k][0]; return x; });
+    const [setup, setSetup] = useState(() => !localStorage.getItem("ask.set")), [kindF, setKindF] = useState("all"), [sort, setSort] = useState("new"), [heat, setHeat0] = useState(askHeat);
+    const setS = p => setS0(o => { const n = Object.assign({}, o, p); try { localStorage.setItem("ask.set", JSON.stringify(n)); } catch (e) {} return n; });
+    const setHeat = (id, v) => setHeat0(o => { const n = Object.assign({}, o, { [id]: o[id] === v ? 0 : v }); try { localStorage.setItem("ask.heat", JSON.stringify(n)); } catch (e) {} return n; });
+    const cfgOut = { p: S.p.trim().slice(0, 120), k: S.k, t: S.t, c: S.c || undefined, n: S.n.trim().slice(0, 40) || undefined };
+    const link = location.origin + location.pathname.replace(/[^/]*$/, "") + "ask.html?s=" + b64url(JSON.stringify(cfgOut));
+    const theme = ASK_THEMES.find(x => x[0] === S.t) || ASK_THEMES[0], acc = S.c || theme[3];
+    async function load() { if (window.__asksDemo) { setList(window.__asksDemo); return; } if (!sb) { setErr("Sign in to the class first."); return; } const r = await sb.from("asks").select("*").order("created_at", { ascending: false }).limit(400); if (r.error) { setErr(/asks|relation|schema/i.test(r.error.message || "") ? "Do the one-time database update first (it's at the top of your home screen)." : "Couldn't load them. Check the connection."); return; } setList(r.data || []); }
     useEffect(() => { load(); }, []);
     async function copy() { try { await navigator.clipboard.writeText(link); toast("Link copied. Put it in your bio or a story."); } catch (e) { window.prompt("Copy your link:", link); } }
     async function ownSite() {
       try {
         let h = await (await fetch("ask.html", { cache: "no-store" })).text();
-        h = h.replace("<script>", "<script>window.ASK_API = " + JSON.stringify(location.origin + "/.netlify/functions/ask") + "; window.ASK_TO = " + JSON.stringify(handle || "") + ";<\/script>\n<script>");
+        h = h.replace("<script>", "<script>window.ASK_API = " + JSON.stringify(location.origin + "/.netlify/functions/ask") + "; window.ASK_CFG = " + JSON.stringify(cfgOut).replace(/</g, "\\u003c") + ";<\/script>\n<script>");
         const a = document.createElement("a"); a.href = URL.createObjectURL(new Blob([h], { type: "text/html" })); a.download = "index.html"; document.body.appendChild(a); a.click(); a.remove();
         toast("Saved “index.html”. Now open app.netlify.com/drop and drop that one file: you get your own address for questions.");
       } catch (e) { toast("Couldn't make the page. Check the connection."); }
     }
     const setUsed = async (ids, used) => { try { await sb.from("asks").update({ used }).in("id", ids); } catch (e) {} setList(l => l.map(x => (ids.includes(x.id) ? Object.assign({}, x, { used }) : x))); };
-    const del = async id => { if (!window.confirm("Delete this one for good?")) return; try { await sb.from("asks").delete().eq("id", id); } catch (e) {} setList(l => l.filter(x => x.id !== id)); };
-    const shown = (list || []).filter(x => (tab === "new" ? !x.used : x.used)), chosen = Object.keys(pick).filter(k => pick[k]);
+    const del = async id => { if (!window.confirm("Delete this one for good?")) return; try { await sb.from("asks").delete().eq("id", id); } catch (e) {} setList(l => l.filter(x => x.id !== id)); setPick(p => p.filter(x => x !== id)); };
+    let shown = (list || []).filter(x => (tab === "new" ? !x.used : x.used) && (kindF === "all" || x.kind === kindF));
+    if (sort === "heat") shown = shown.slice().sort((a, b) => (heat[b.id] || 0) - (heat[a.id] || 0));
     const kindIc = k => (k === "news" ? "📰" : k === "confession" ? "🤫" : "❓");
-    return html`<div class="scrim" onClick=${e => { if (e.target === e.currentTarget) onClose(); }}><div class="sheet" role="dialog" aria-label="Audience questions">
-      <h3 style="margin:0">📥 Your audience's questions</h3>
-      <p class="help">People send questions, news or confessions with no name and no account. Share this link (bio, story, video description):</p>
+    const toggle = id => setPick(p => (p.includes(id) ? p.filter(x => x !== id) : p.concat(id)));
+    function addThem() {
+      let ids = pick.slice(); if (sort === "heat") ids.sort((a, b) => (heat[b] || 0) - (heat[a] || 0));
+      const its = ids.map((id, i) => { const x = list.find(y => y.id === id); if (!x) return null; const label = x.kind === S.k && S.p.trim() ? S.p.trim() : x.kind === "confession" ? "Confession" : x.kind === "news" ? "Your news" : "Your question";
+        return { kind: "askq", text: x.body, akind: x.kind, prompt: label, heat: heat[id] || 0, rank: ids.length > 1 && sort === "heat" ? i + 1 : 0 }; }).filter(Boolean);
+      setUsed(ids, true); onAdd(its);
+    }
+    return html`<div class="scrim" onClick=${e => { if (e.target === e.currentTarget) onClose(); }}><div class="sheet asksheet" role="dialog" aria-label="Audience questions">
+      <h3 style="margin:0">📥 Questions and confessions</h3>
+      <button class=${"askhead" + (setup ? " on" : "")} onClick=${() => setSetup(!setup)}><span>✏️ Your page: <b>${S.p || "Ask me anything"}</b></span><span>${setup ? "▲" : "▼"}</span></button>
+      ${setup ? html`<div class="asksetup">
+        <span class="tslbl">What people send</span>
+        <div class="vmchips">${ASK_KINDS.map(([k, l]) => html`<button key=${k} class=${"chip" + (S.k === k ? " on" : "")} onClick=${() => setS({ k, p: ASK_IDEAS[S.k].includes(S.p) || !S.p ? ASK_IDEAS[k][0] : S.p })}>${l}</button>`)}</div>
+        <span class="tslbl">What your page says (only this; they can't change it)</span>
+        <input value=${S.p} maxlength="120" placeholder="e.g. Tell me your deepest confession" onInput=${e => setS({ p: e.target.value })}/>
+        <div class="vmchips">${ASK_IDEAS[S.k].map(x => html`<button key=${x} class="chip" onClick=${() => setS({ p: x })}>${x}</button>`)}</div>
+        <span class="tslbl">Your name on the page (optional)</span>
+        <input value=${S.n} maxlength="40" placeholder="e.g. @abubakrmbala" onInput=${e => setS({ n: e.target.value })}/>
+        <span class="tslbl">Look</span>
+        <div class="vmchips">${ASK_THEMES.map(([k, l, bg, ac]) => html`<button key=${k} class=${"askth" + (S.t === k ? " on" : "")} onClick=${() => setS({ t: k, c: "" })}><i style=${"background:" + bg + ";box-shadow:inset 0 -6px 0 " + ac}></i>${l}</button>`)}
+          <label class="askth"><i style=${"background:" + acc}></i>My colour<input type="color" value=${acc} onInput=${e => setS({ c: e.target.value })}/></label></div>
+        <div class=${"askprev th-" + S.t} style=${"--acc:" + acc}>
+          ${S.n ? html`<div class="apwho"><span>${S.n.replace(/^@/, "").charAt(0).toUpperCase()}</span>${S.n}</div>` : null}
+          <b>${S.p || "Ask me anything"}</b><i></i><div class="apbox">${S.k === "confession" ? "Your confession…" : S.k === "news" ? "What happened?" : "Your question…"}</div><div class="apsend">Send anonymously</div>
+        </div>
+      </div>` : null}
       <div class="vmchips"><input readonly value=${link} style="flex:1;min-width:0" onFocus=${e => e.target.select()}/><button class="chip" onClick=${copy}>Copy</button>${navigator.share ? html`<button class="chip" onClick=${() => navigator.share({ url: link }).catch(() => {})}>Share</button>` : null}</div>
-      <details><summary class="help" style="cursor:pointer">🔒 Want an address that doesn't show your class website?</summary><p class="help">Tap below to save your own copy of the question page, then drop that one file at <b>app.netlify.com/drop</b>. You get a separate address (you can rename it, e.g. ask-abubakr.netlify.app). Messages still arrive here.</p><button class="btn slim quiet" onClick=${ownSite}>⬇ Save my question page</button></details>
-      <div class="vmchips"><button class=${"chip" + (tab === "new" ? " on" : "")} onClick=${() => setTab("new")}>New${list ? " (" + list.filter(x => !x.used).length + ")" : ""}</button><button class=${"chip" + (tab === "used" ? " on" : "")} onClick=${() => setTab("used")}>Already answered</button><button class="chip" onClick=${load}>↻</button></div>
-      ${err ? html`<p class="err">${err}</p>` : !list ? html`<p class="help">Loading…</p>` : !shown.length ? html`<p class="help">${tab === "new" ? "Nothing new yet. Share your link!" : "None answered yet."}</p>` : html`<div class="asklist">${shown.map(x => html`<label key=${x.id} class=${"askrow" + (pick[x.id] ? " on" : "")}>
-        <input type="checkbox" checked=${!!pick[x.id]} onChange=${e => setPick(o => Object.assign({}, o, { [x.id]: e.target.checked }))}/>
-        <span><b>${kindIc(x.kind)}</b> ${x.body}<small>${new Date(x.created_at).toLocaleString()}</small></span>
-        <button class="chip" onClick=${e => { e.preventDefault(); del(x.id); }} aria-label="Delete">🗑</button></label>`)}</div>`}
-      <button class="btn" disabled=${!chosen.length} onClick=${async () => { const its = (list || []).filter(x => pick[x.id]).map(x => ({ kind: "askq", text: x.body, akind: x.kind })); await setUsed(chosen, true); onAdd(its); }}>＋ Add ${chosen.length || ""} to this video (Q&A)</button>
+      <details><summary class="help" style="cursor:pointer">🔒 Want an address that doesn't show your class website?</summary><p class="help">Tap below to save your own copy of this page (with what it says and its look), then drop that one file at <b>app.netlify.com/drop</b>. You get a separate address (you can rename it, e.g. ask-abubakr.netlify.app). Messages still come to you here. Make a new copy whenever you change your page.</p><button class="btn quiet slim" onClick=${ownSite}>⬇️ Save my page</button></details>
+      <div class="vmchips"><button class=${"chip" + (tab === "new" ? " on" : "")} onClick=${() => setTab("new")}>New${list ? " (" + list.filter(x => !x.used).length + ")" : ""}</button><button class=${"chip" + (tab === "used" ? " on" : "")} onClick=${() => setTab("used")}>Already used</button><button class="chip" onClick=${load}>↻</button></div>
+      <div class="vmchips"><button class=${"chip" + (kindF === "all" ? " on" : "")} onClick=${() => setKindF("all")}>All</button>${ASK_KINDS.map(([k, l]) => html`<button key=${k} class=${"chip" + (kindF === k ? " on" : "")} onClick=${() => setKindF(k)}>${l}</button>`)}
+        <button class=${"chip" + (sort === "heat" ? " on" : "")} onClick=${() => setSort(sort === "heat" ? "new" : "heat")}>${sort === "heat" ? "🔥 Ranked: worst first" : "🕒 Newest first"}</button></div>
+      ${err ? html`<p class="err">${err}</p>` : !list ? html`<p class="help">Loading…</p>` : !shown.length ? html`<p class="help">${tab === "new" ? "Nothing here yet. Share your link!" : "None used yet."}</p>` : html`<div class="asklist">${shown.map(x => { const on = pick.includes(x.id), n = pick.indexOf(x.id) + 1;
+        return html`<div key=${x.id} class=${"askmsg" + (on ? " on" : "")}>
+          <div class="amtop"><span>${kindIc(x.kind)} ${new Date(x.created_at).toLocaleString([], { day: "numeric", month: "short", hour: "2-digit", minute: "2-digit" })}</span><button class="chip slim" onClick=${() => del(x.id)} aria-label="Delete">🗑</button></div>
+          <p class="ambody" onClick=${() => toggle(x.id)}>${x.body}</p>
+          <div class="ambot"><span class="amheat" aria-label="How wild is it">${[1, 2, 3, 4, 5].map(v => html`<button key=${v} class=${(heat[x.id] || 0) >= v ? "on" : ""} onClick=${() => setHeat(x.id, v)} aria-label=${"Rate " + v}>🔥</button>`)}</span>
+            <button class=${"chip" + (on ? " on" : "")} onClick=${() => toggle(x.id)}>${on ? "✓ In the video" + (pick.length > 1 ? " · " + n : "") : "＋ Use it"}</button></div>
+        </div>`; })}</div>`}
+      <p class="help">Rate each one 🔥 to 🔥🔥🔥🔥🔥, then “Ranked” puts the wildest first. In the video each shows as a paragraph, and the words light up as you read it out.</p>
+      <button class="btn" disabled=${!pick.length} onClick=${addThem}>＋ Add ${pick.length || ""} to this video</button>
       <button class="btn quiet" onClick=${onClose}>Close</button>
     </div></div>`;
   }
@@ -11362,8 +11839,9 @@ notify pgrst, 'reload schema';
     const [sw, sh] = vmSize(src);
     if (sw) {
       const whole = F.camFit !== "fill" && !b.pip && Math.abs(sw / sh - b.w / b.h) > 0.08;
-      if (whole) { const bl = F.lite ? null : vmBlurOf(src, null); if (bl) { const bs = Math.max(b.w / bl.width, b.h / bl.height) * 1.1; c.drawImage(bl, b.x + b.w / 2 - bl.width * bs / 2, b.y + b.h / 2 - bl.height * bs / 2, bl.width * bs, bl.height * bs); c.fillStyle = "rgba(0,0,0,.35)"; c.fillRect(b.x, b.y, b.w, b.h); } }
-      const R0 = vmMediaRect(shape === "circle" ? { x: b.x + b.w / 2 - Math.min(b.w, b.h) / 2, y: b.y + b.h / 2 - Math.min(b.w, b.h) / 2, w: Math.min(b.w, b.h), h: Math.min(b.w, b.h) } : b, sw, sh, whole ? "fit" : "fill"), R = F.cropCam ? vmZoomRect(R0, F.crop) : R0;
+      if (F.camBg) { c.save(); c.translate(b.x, b.y); vmVbgPaint(c, F.camBg, b.w, b.h, null, false, F.t || 0, null); c.restore(); }   // the new background, edge to edge
+      else if (whole) { const bl = F.lite ? null : vmBlurOf(src, null); if (bl) { const bs = Math.max(b.w / bl.width, b.h / bl.height) * 1.1; c.drawImage(bl, b.x + b.w / 2 - bl.width * bs / 2, b.y + b.h / 2 - bl.height * bs / 2, bl.width * bs, bl.height * bs); c.fillStyle = "rgba(0,0,0,.35)"; c.fillRect(b.x, b.y, b.w, b.h); } }
+      const R0 = vmMediaRect(shape === "circle" ? { x: b.x + b.w / 2 - Math.min(b.w, b.h) / 2, y: b.y + b.h / 2 - Math.min(b.w, b.h) / 2, w: Math.min(b.w, b.h), h: Math.min(b.w, b.h) } : b, sw, sh, whole ? "fit" : "fill"), R1 = F.camBg && whole && shape !== "circle" ? Object.assign({}, R0, { y: b.y + b.h - R0.h }) : R0, R = F.cropCam ? vmZoomRect(R1, F.crop) : R1;   // over a new background you stand at the bottom of the picture, not floating in the middle
       { const enh = VM_FILTER && !F.gray && !F.lite && F.st.camLook !== "off"; if (enh) c.filter = F.st.camLook === "warm" ? "contrast(1.07) saturate(1.12) brightness(1.03) sepia(0.08)" : "contrast(1.06) saturate(1.1) brightness(1.02)";   // a touch of life: clearer, richer colour
         vmDraw(c, src, R.x, R.y, R.w, R.h, F.gray, F.camMirror); if (enh) c.filter = "none"; }
     }
@@ -11447,20 +11925,40 @@ notify pgrst, 'reload schema';
   }
   // ---- more kinds of video: fact check, this or that, quiz. Each moves on when you tap its button while recording ----
   // a question from your audience, like the "Ask me a question" sticker
-  function vmAskCard(c, F, it, box) {
-    const { G, L, st, t, s } = F, age = t - s.showT, k = crEase(Math.min(1, Math.max(0, age) / 0.4)), sc = 0.82 + 0.18 * k + 0.04 * Math.sin(Math.min(1, age / 0.5) * Math.PI);
-    c.save(); vmClip(c, box);
-    const bg = c.createLinearGradient(box.x, box.y, box.x + box.w, box.y + box.h); bg.addColorStop(0, "#833AB4"); bg.addColorStop(0.55, "#FD1D1D"); bg.addColorStop(1, "#FCB045"); c.fillStyle = bg; c.fillRect(box.x, box.y, box.w, box.h);
-    c.fillStyle = "rgba(0,0,0,.18)"; c.fillRect(box.x, box.y, box.w, box.h);
-    const cw = Math.min(box.w * 0.86, 820), pad = cw * 0.07, fs = Math.min(G.tall ? 58 : 50, cw * 0.075);
-    c.font = vmFont(st, fs, 800); const lines = vmWrapLines(c, it.text || "", cw - pad * 2).slice(0, 9), head = cw * 0.2, ch = head + pad * 1.2 + lines.length * fs * 1.28;
-    c.translate(box.x + box.w / 2, box.y + box.h / 2); c.scale(sc, sc); c.globalAlpha *= k;
-    c.shadowColor = "rgba(0,0,0,.35)"; c.shadowBlur = 40; c.shadowOffsetY = 14; c.fillStyle = "#FFFFFF"; crRR(c, -cw / 2, -ch / 2, cw, ch, cw * 0.07); c.fill(); c.shadowColor = "transparent";
-    const hg = c.createLinearGradient(-cw / 2, 0, cw / 2, 0); hg.addColorStop(0, "#833AB4"); hg.addColorStop(0.5, "#FD1D1D"); hg.addColorStop(1, "#FCB045");
-    c.save(); crRR(c, -cw / 2, -ch / 2, cw, ch, cw * 0.07); c.clip(); c.fillStyle = hg; c.fillRect(-cw / 2, -ch / 2, cw, head); c.restore();
-    const lab = it.akind === "news" ? "Send me your news" : it.akind === "confession" ? "Confess anything" : "Ask me anything";
-    c.fillStyle = "#FFFFFF"; c.textAlign = "center"; c.textBaseline = "middle"; c.font = "800 " + Math.round(head * 0.34) + "px Poppins, Andika, sans-serif"; c.fillText(lab, 0, -ch / 2 + head / 2);
-    c.fillStyle = "#111111"; c.font = vmFont(st, fs, 800); lines.forEach((l, i) => c.fillText(l, 0, -ch / 2 + head + pad * 0.6 + fs * 0.64 + i * fs * 1.28));
+  function vmAskCard(c, F, it, box0) {
+    const { G, L, st, t, s } = F, age = t - s.showT, k = crEase(Math.min(1, Math.max(0, age) / 0.4));
+    c.save(); vmClip(c, box0);
+    c.fillStyle = "#0C0F15"; c.fillRect(box0.x, box0.y, box0.w, box0.h);
+    // you in the corner: the card sits clear of you
+    const pip = F.camOn && s.eff === "pip" && box0.w >= G.W * 0.9, box = !pip ? box0 : G.tall ? { x: box0.x, y: box0.y + 450, w: box0.w, h: box0.h - 470 } : { x: box0.x, y: box0.y, w: box0.w - 370, h: box0.h };
+    const gl = c.createRadialGradient(box.x + box.w / 2, box.y + box.h * 0.3, 10, box.x + box.w / 2, box.y + box.h * 0.4, Math.max(box0.w, box0.h) * 0.8); gl.addColorStop(0, "rgba(255,255,255,.07)"); gl.addColorStop(1, "rgba(0,0,0,0)"); c.fillStyle = gl; c.fillRect(box0.x, box0.y, box0.w, box0.h);
+    const A = F.readWords ? vmReadAlign(it, F.readWords, s.showT) : { toks: String(it.text || "").split(/\s+/).filter(Boolean), times: [] };
+    const cw = Math.min(box.w * (G.tall ? 0.9 : 0.74), 1100), ip = Math.round(cw * 0.07), maxW = cw - ip * 2, head = Math.max(56, Math.round(cw * 0.12)), maxH = box.h * 0.82 - ip * 2 - head;
+    let fs = G.tall ? 56 : 48, lines;
+    for (; fs > 18; fs -= 2) {
+      c.font = vmFont(st, fs, 600); const sp = c.measureText(" ").width; lines = [[]]; let x = 0;
+      A.toks.forEach((w, i) => { const ww = c.measureText(w).width; if (x > 0 && x + ww > maxW) { lines.push([]); x = 0; } lines[lines.length - 1].push({ w, i, x, ww }); x += ww + sp; });
+      if (lines.length * fs * 1.42 <= maxH) break;
+    }
+    const lh = fs * 1.42, ch = head + lines.length * lh + ip * 1.6, cx = box.x + box.w / 2, cy = box.y + box.h / 2;
+    c.translate(cx, cy); c.scale(0.9 + 0.1 * k, 0.9 + 0.1 * k); c.globalAlpha *= k; c.translate(-cw / 2, -ch / 2);
+    c.shadowColor = "rgba(0,0,0,.5)"; c.shadowBlur = 40; c.shadowOffsetY = 14; c.fillStyle = "#161B25"; crRR(c, 0, 0, cw, ch, 26); c.fill(); c.shadowColor = "transparent";
+    c.strokeStyle = "rgba(255,255,255,.07)"; c.lineWidth = 2; crRR(c, 1, 1, cw - 2, ch - 2, 25); c.stroke();
+    // the top: what you asked people, with your colour
+    const ic = it.akind === "confession" ? "🤫" : it.akind === "news" ? "📰" : "❓", lab = it.prompt || (it.akind === "confession" ? "Confession" : it.akind === "news" ? "Your news" : "Your question");
+    c.fillStyle = L.acc; crRR(c, ip, ip * 0.7, 10, head * 0.62, 5); c.fill();
+    c.textBaseline = "middle"; c.textAlign = "left"; c.fillStyle = "#AEB6C4"; c.font = "700 " + Math.round(head * 0.34) + "px Poppins, Andika, sans-serif";
+    let lb = ic + "  " + lab; while (c.measureText(lb).width > cw - ip * 2 - 40 - (it.rank ? head : 0) && lb.length > 6) lb = lb.slice(0, -2) + "…";
+    c.fillText(lb, ip + 26, ip * 0.7 + head * 0.31);
+    if (it.rank) { c.fillStyle = L.acc; c.font = "900 " + Math.round(head * 0.5) + "px Anton, Poppins, sans-serif"; c.textAlign = "right"; c.fillText("#" + it.rank, cw - ip, ip * 0.7 + head * 0.31); c.textAlign = "left"; }
+    if (it.heat) { c.font = Math.round(head * 0.26) + "px sans-serif"; c.fillText("🔥".repeat(it.heat), ip + 26, ip * 0.7 + head * 0.78); }
+    // the words, lit up as you read them out
+    c.font = vmFont(st, fs, 600); const y0 = head + ip * 0.9 + lh / 2;
+    lines.forEach((ln, li) => ln.forEach(o => {
+      const tm = A.times[o.i], read = tm != null && tm <= t, now = read && (A.times[o.i + 1] == null || A.times[o.i + 1] > t), x = ip + o.x, y = y0 + li * lh;
+      if (read) { c.fillStyle = now ? L.acc : "rgba(255,255,255,.14)"; crRR(c, x - fs * 0.1, y - fs * 0.62, o.ww + fs * 0.2, fs * 1.24, fs * 0.18); c.fill(); }
+      c.fillStyle = now ? vmInk(L.acc) : "#F2F4F8"; c.fillText(o.w, x, y);
+    }));
     c.restore();
   }
   const vmStepOf = (F, it) => (F.s.steps && F.s.steps[it.id]) || { n: 0, t: -9 };
@@ -11732,6 +12230,7 @@ notify pgrst, 'reload schema';
     const r = { toks, times }; const cc = c0 || {}; cc[key] = r; vmReadCache.set(words, cc); return r;
   }
   function vmReadCard(c, F, it, box, ka) {
+    if (it.look === "paper" || it.look === "social") return vmReadLook(c, F, it, box, ka);
     const { G, st, t, s } = F;
     c.save(); c.globalAlpha *= ka;
     // where it came from (a screenshot, a post), dimmed behind the words
@@ -11758,6 +12257,54 @@ notify pgrst, 'reload schema';
       c.fillStyle = "#1A1A1A"; c.fillText(o.w, x, y);
     }));
     if (it.who) { c.font = vmFont(st, whoH * 0.7, 700); c.fillStyle = "#666"; c.fillText("— " + it.who, card.x + ip, card.y + card.h - ip / 2 - whoH / 2); }
+    c.restore();
+  }
+  // something to read out, as a newspaper page or a social post: big, clear words that light up as you say them
+  // you in the corner: what's being read sits clear of you
+  const vmClearPip = (F, box0) => { const { G, s } = F; if (!(F.camOn && s.eff === "pip" && box0.w >= G.W * 0.9)) return box0; return G.tall ? { x: box0.x, y: box0.y + 450, w: box0.w, h: box0.h - 470 } : { x: box0.x, y: box0.y, w: box0.w - 370, h: box0.h }; };
+  function vmReadLook(c, F, it, box0, ka) {
+    const { G, L, st, t, s } = F, paper = it.look === "paper", box = vmClearPip(F, box0);
+    c.save(); c.globalAlpha *= ka; vmClip(c, box0);
+    const src = it.blob ? F.pic(it.id) : null;
+    if (paper) { c.fillStyle = "#2B2620"; c.fillRect(box0.x, box0.y, box0.w, box0.h); } else { const g = c.createLinearGradient(box0.x, box0.y, box0.x, box0.y + box0.h); g.addColorStop(0, "#10141C"); g.addColorStop(1, "#06080C"); c.fillStyle = g; c.fillRect(box0.x, box0.y, box0.w, box0.h); }
+    if (src && !paper) { vmCover(c, src, box0.x, box0.y, box0.w, box0.h); c.fillStyle = "rgba(0,0,0,.6)"; c.fillRect(box0.x, box0.y, box0.w, box0.h); }
+    const A = F.readWords ? vmReadAlign(it, F.readWords, s.showT) : { toks: String(it.text || "").split(/\s+/).filter(Boolean), times: [] };
+    const cw = Math.min(box.w * (G.tall ? 0.92 : 0.7), 1100), ip = Math.round(cw * (paper ? 0.075 : 0.07));
+    const head = paper ? Math.round(cw * 0.2) : Math.round(cw * 0.15), maxW = cw - ip * 2, maxH = box.h * 0.86 - head - ip * 2;
+    const face = paper ? "Georgia, 'Times New Roman', serif" : "Poppins, Andika, sans-serif";
+    let fs = G.tall ? 54 : 46, lines;
+    for (; fs > 16; fs -= 2) {
+      c.font = (paper ? "700 " : "600 ") + fs + "px " + face; const sp = c.measureText(" ").width; lines = [[]]; let x = 0;
+      A.toks.forEach((w, i) => { const ww = c.measureText(w).width; if (x > 0 && x + ww > maxW) { lines.push([]); x = 0; } lines[lines.length - 1].push({ w, i, x, ww }); x += ww + sp; });
+      if (lines.length * fs * 1.38 <= maxH) break;
+    }
+    const lh = fs * 1.38, ch = head + lines.length * lh + ip * 1.7, card = { x: box.x + (box.w - cw) / 2, y: box.y + (box.h - ch) / 2, w: cw, h: ch };
+    c.shadowColor = "rgba(0,0,0,.45)"; c.shadowBlur = 34; c.shadowOffsetY = 12;
+    if (paper) {
+      const g = c.createLinearGradient(card.x, card.y, card.x + card.w, card.y + card.h); g.addColorStop(0, "#F3EEE2"); g.addColorStop(1, "#E4DCC9"); c.fillStyle = g; c.fillRect(card.x, card.y, card.w, card.h); c.shadowColor = "transparent";
+      // the masthead: where it's from, in big newspaper letters, between two rules
+      const mh = (it.who || "THE DAILY NEWS").toUpperCase(); c.fillStyle = "#151515"; c.textAlign = "center"; c.textBaseline = "middle";
+      let mf = head * 0.42; c.font = "900 " + mf + "px Georgia, 'Times New Roman', serif"; while (c.measureText(mh).width > maxW && mf > 14) { mf -= 2; c.font = "900 " + mf + "px Georgia, 'Times New Roman', serif"; }
+      c.fillText(mh, card.x + card.w / 2, card.y + ip * 0.55 + head * 0.36);
+      c.fillRect(card.x + ip, card.y + ip * 0.55 + head * 0.72, maxW, 3); c.fillRect(card.x + ip, card.y + ip * 0.55 + head * 0.72 + 6, maxW, 1.2);
+      if (src) { const sz = head * 0.5; c.save(); c.beginPath(); c.rect(card.x + ip, card.y + ip * 0.3, sz, sz); c.clip(); vmCover(c, src, card.x + ip, card.y + ip * 0.3, sz, sz); c.restore(); }
+    } else {
+      c.fillStyle = "#FFFFFF"; crRR(c, card.x, card.y, card.w, card.h, 26); c.fill(); c.shadowColor = "transparent";
+      // who posted it, like a real post
+      const av = head * 0.56, ax = card.x + ip, ay = card.y + ip * 0.6;
+      c.save(); c.beginPath(); c.arc(ax + av / 2, ay + av / 2, av / 2, 0, 7); c.clip(); if (src) vmCover(c, src, ax, ay, av, av); else { c.fillStyle = L.acc; c.fillRect(ax, ay, av, av); } c.restore();
+      if (!src) { c.fillStyle = vmInk(L.acc); c.font = "800 " + Math.round(av * 0.45) + "px Poppins, sans-serif"; c.textAlign = "center"; c.textBaseline = "middle"; c.fillText(String(it.who || "?").replace(/^@/, "").charAt(0).toUpperCase(), ax + av / 2, ay + av / 2); }
+      c.textAlign = "left"; c.textBaseline = "middle"; c.fillStyle = "#0F1419"; c.font = "800 " + Math.round(av * 0.4) + "px Poppins, sans-serif"; c.fillText(it.who || "Someone", ax + av + 18, ay + av * 0.32);
+      c.fillStyle = "#536471"; c.font = "500 " + Math.round(av * 0.3) + "px Poppins, sans-serif"; c.fillText("@" + String(it.who || "someone").replace(/^@/, "").replace(/\s+/g, "").toLowerCase().slice(0, 24) + " · 1h", ax + av + 18, ay + av * 0.74);
+    }
+    c.font = (paper ? "700 " : "600 ") + fs + "px " + face; c.textBaseline = "middle"; c.textAlign = "left";
+    const y0 = card.y + head + ip * 0.6 + lh / 2;
+    lines.forEach((ln, li) => ln.forEach(o => {
+      const tm = A.times[o.i], read = tm != null && tm <= t, now = read && (A.times[o.i + 1] == null || A.times[o.i + 1] > t), x = card.x + ip + o.x, y = y0 + li * lh;
+      if (now) { c.fillStyle = st.postHi || "#FFE14D"; crRR(c, x - fs * 0.1, y - fs * 0.62, o.ww + fs * 0.2, fs * 1.24, fs * 0.16); c.fill(); }
+      else if (read) { c.fillStyle = paper ? "rgba(255,214,0,.32)" : "rgba(255,214,0,.28)"; crRR(c, x - fs * 0.1, y - fs * 0.62, o.ww + fs * 0.2, fs * 1.24, fs * 0.16); c.fill(); }
+      c.fillStyle = paper ? "#141414" : "#0F1419"; c.fillText(o.w, x, y);
+    }));
     c.restore();
   }
   // the big title along the top: white letters with a thick black edge, as large as fits
@@ -11797,7 +12344,7 @@ notify pgrst, 'reload schema';
       }
     }
     if (hostB) { F.gray = s.bw || !!fx.freeze; vmCam(c, F, fx.freeze && F.camFreeze ? F.camFreeze : F.cam, hostB); F.gray = false; }
-    if (guestB) { const mir = F.camMirror; F.camMirror = false; F.gray = s.bw; vmCam(c, F, F.guest, guestB); F.gray = false; F.camMirror = mir;
+    if (guestB) { const mir = F.camMirror, cb = F.camBg; F.camMirror = false; F.camBg = null; F.gray = s.bw; vmCam(c, F, F.guest, guestB); F.gray = false; F.camMirror = mir; F.camBg = cb;
       if (hostB && !guestB.pip) { c.fillStyle = L.acc; if (guestB.y > hostB.y + 1) c.fillRect(guestB.x, guestB.y - 3, guestB.w, 6); else c.fillRect(guestB.x - 3, guestB.y, 6, guestB.h); } }
     if (s.eff === "split" && kB > 0.6) { const ln = vmSplitLine(G, st); c.fillStyle = L.acc; if (G.tall) c.fillRect(0, ln - 3, G.W, 6); else c.fillRect(ln - 3, 0, 6, G.H); }
     if (F.out) { F.out.thing = thingR && thingB && (thingB.a == null || thingB.a > 0.5) ? Object.assign({ box: thingB }, thingR) : null; F.out.cam = camB && (camB.a == null || camB.a > 0.5) ? camB : null; }
@@ -11822,7 +12369,7 @@ notify pgrst, 'reload schema';
       c.lineWidth = 5; c.strokeStyle = "rgba(0,0,0,.45)"; c.lineJoin = "round"; c.strokeText(st.handle, x, y); c.fillStyle = "rgba(255,255,255,.92)"; c.fillText(st.handle, x, y);
     }
     const postRead = !!(it && it.kind === "post" && it.ocr && it.ocr.words && it.ocr.words.length && F.readWords && (post ? s.lay !== "cam" : thingB));
-    if (F.words && !(it && it.kind === "read" && thingB) && !postRead) vmCaption(c, F, capY);   // a read-along card already lights up the words
+    if (F.words && !(it && (it.kind === "read" || it.kind === "askq") && thingB) && !postRead) vmCaption(c, F, capY);   // a read-along card already lights up the words
     if (F.prog != null && st.bar) { c.fillStyle = "rgba(255,255,255,.22)"; c.fillRect(0, 0, G.W, 8); c.fillStyle = L.acc; c.fillRect(0, 0, G.W * Math.max(0, Math.min(1, F.prog)), 8); }
   }
   // the short opening, and the "follow me" ending
@@ -12075,7 +12622,7 @@ notify pgrst, 'reload schema';
     const vbgs = [proj.vbg].concat(cues.filter(q => q.k === "vbg").map(q => q.v)).filter(vmVbgOn);
     let segX = null; const keyCv = document.createElement("canvas"), cutCv = document.createElement("canvas");
     const posts = cues.some(q => q.k === "show" && items[q.ref] && items[q.ref].kind === "post");
-    if (camOn && (vbgs.length || posts)) { try { segX = await vmTimeout(vmSeg(), 60000); for (const v of vbgs) await vmVbgPrep(v); } catch (e) { segX = null; } }
+    if (camOn && (vbgs.length || posts)) { try { segX = await vmMatte((proj.quality || "1080") === "1080" ? 768 : 640); for (const v of vbgs) await vmVbgPrep(v); } catch (e) { segX = null; } }
     const sinkOf = async (blob, max) => {
       const input = new MB.Input({ source: new MB.BlobSource(blob), formats: MB.ALL_FORMATS });
       const vt = await input.getPrimaryVideoTrack(); if (!vt) return null;
@@ -12103,7 +12650,7 @@ notify pgrst, 'reload schema';
     // the pictures and clips that get shown
     const used = new Set(cues.filter(q => q.k === "show" || q.k === "ban").map(q => q.ref).concat(plan.hl ? plan.hl.map(h => h.ref).filter(Boolean) : []).concat(P.filter(p => p.kind !== "rec").map(p => p.src)));
     if ([...used].some(id => items[id] && (items[id].kind === "map" || items[id].kind === "flag" || items[id].kind === "trip" || items[id].kind === "group"))) {
-      await vmWorld();
+      await vmWorld(); await vmWaterDb().catch(() => {});
       if ([...used].some(id => items[id] && (items[id].prov || items[id].city || (items[id].stops || []).some(x => x.city)))) await vmMore().catch(() => {});
       for (const id of used) { const it = items[id]; if (!it) continue; for (const a2 of [it.a2].concat((it.stops || []).map(x => x.a2), it.a2s || []).filter(Boolean)) { vmFlag(a2); const im = vmFlags.get(a2); if (im) { try { await im.decode(); } catch (e) {} } } }
     }
@@ -12337,9 +12884,13 @@ notify pgrst, 'reload schema';
           }
           let camK = camF || camLast, camCut = null;
           if (camK && take.blurs && take.blurs.length) camK = vmBlurApply(camK, take, t, false, "camx"); const vbNow = s.vbg !== undefined ? s.vbg : proj.vbg, itP = s.show ? items[s.show] : null;
-          if (segX && camK && !gsg && itP && itP.kind === "post" && (s.lay === "cam" || s.lay === "pip")) { try { camCut = await vmTimeout(segX.run(camK, r => vmKeyDraw(r, cutCv, { k: "cut" }, false, t, true)), 15000); } catch (e) {} }
-          if (segX && camK && camVis && !camCut && vmVbgOn(vbNow)) { try { camK = (await vmTimeout(segX.run(camK, r => vmKeyDraw(r, keyCv, vbNow, !!proj.mirror && (!segNow || segNow.facing !== "environment"), t, true)), 15000)) || camK; } catch (e) {} }
-          vmFrame(c, { crop: p.crop, cropCam: !!p.crop, G, L, st, proj, items, s, t, tb, readWords: allWords || words, cam: avaP ? (avaP.pose(t, vmAvaLevel(lv, t), { acc: st.acc }), { vmAva: avaP, h: hd ? 1080 : 720 }) : camK, camFreeze: frozen, camOn: camOn2, guest: gsg ? gF || gLast : null, camFit: proj.camFit || "whole", camMirror: !!proj.mirror && (!segNow || segNow.facing !== "environment"), pic: id => pics[id] || null, clip: frame, words, cache, prog: (T - IN) / body, camCut, tierClip: tierF, blurDone: true, clipT: ct });
+          if (segX && camK && !gsg && itP && itP.kind === "post" && (s.lay === "cam" || s.lay === "pip")) { try { camCut = await vmTimeout(segX.run(camK, r => vmKeyDraw(r, cutCv, { k: "cut" }, false, t, true), t), 15000); } catch (e) {} }
+          let camBgNow = null;
+          if (segX && camK && camVis && !camCut && vmVbgOn(vbNow)) {
+            const cutOnly = vbNow.k !== "blur";   // you are cut out on your own and laid over the background, which fills the whole picture
+            try { const kd = await vmTimeout(segX.run(camK, r => vmKeyDraw(r, keyCv, cutOnly ? { k: "cut" } : vbNow, !!proj.mirror && (!segNow || segNow.facing !== "environment"), t, true), t), 15000); if (kd) { camK = kd; if (cutOnly) camBgNow = vbNow; } } catch (e) {}
+          }
+          vmFrame(c, { crop: p.crop, cropCam: !!p.crop, G, L, st, proj, items, s, t, tb, readWords: allWords || words, cam: avaP ? (avaP.pose(t, vmAvaLevel(lv, t), { acc: st.acc }), { vmAva: avaP, h: hd ? 1080 : 720 }) : camK, camFreeze: frozen, camOn: camOn2, camBg: camBgNow, guest: gsg ? gF || gLast : null, camFit: proj.camFit || "whole", camMirror: !!proj.mirror && (!segNow || segNow.facing !== "environment"), pic: id => pics[id] || null, clip: frame, words, cache, prog: (T - IN) / body, camCut, tierClip: tierF, blurDone: true, clipT: ct });
         };
       }
         }
@@ -13164,7 +13715,7 @@ notify pgrst, 'reload schema';
           if (sub && sub.cut) img(sub, W * 0.74, H * 0.6, Math.min(W * 0.44, H * 0.86 / sub.ar), { fx: { shadow: { blur: 50, dist: 16, a: 0.55 }, adj: { c: 0.08, s: 0.1 } }, role: "subj" });
           else if (sub && sub !== BP) img(sub, W * 0.74, H * 0.5, W * 0.52, { crop: tsCoverCrop(sub, W * 0.52, H), fx: { adj: { c: 0.08, s: 0.1 } }, role: "subj" });
           face(W * 0.3, H * 1.03, H * 1.02, { shadow: { blur: 50, dist: 12, a: 0.45 }, adj: { c: 0.1, s: 0.12 }, blend: 0.35 });
-          words((((/\*([^*]+)\*/.exec(tsAccent(String(text).replace(/\*/g, ""))) || [])[1]) || String(text).split(/\s+/)[0] || "").toUpperCase(), W * 0.56, H * 0.66, W * 0.26, H * 0.17, WORD, { rot: -6 });
+          words((((/\*([^*]+)\*/.exec(tsAccent(String(text).replace(/\*/g, ""))) || [])[1]) || String(text).split(/\s+/)[0] || "").toUpperCase(), W * 0.55, H * 0.68, W * 0.34, H * 0.24, WORD, { rot: -6 });
           if (sub) arrow(W * 0.57, H * 0.46, W * 0.68, H * 0.33, -0.45, { col: "#E3262E", outline: "#FFFFFF", w: 24, style: "clean" });
           rect(W * 0.5, H * 0.5, W - 16, H - 16, { fill: null, stroke: "#B620E0", sw: 22, r: 18 });
         } else {
@@ -13185,7 +13736,7 @@ notify pgrst, 'reload schema';
           face(W * 0.72, H * 1.03, H * 0.92, { shadow: { blur: 40, dist: 12, a: 0.45 }, adj: { c: 0.08, s: 0.1 }, blend: 0.55 });
           words("ME", W * 0.12, H * 0.78, W * 0.16, H * 0.2, ME);
           arrow(W * 0.17, H * 0.62, W * 0.52, H * 0.38, -0.35, { col: "#FFD400", outline: "#000000", w: 26, style: "clean" });
-          if (String(text).trim()) words("“" + String(word3(text)).replace(/\*/g, "").toLowerCase() + "”", W * 0.44, H * 0.92, W * 0.5, H * 0.1, Q);
+          if (String(text).trim()) words("“" + String(word3(text)).replace(/\*/g, "").toLowerCase() + "”", W * 0.44, H * 0.9, W * 0.62, H * 0.14, Q);
         } else {
           if (sub && sub.cut) img(sub, W * 0.5, H * 0.32, Math.min(W * 0.8, H * 0.36 / sub.ar), { fx: { shadow: { blur: 40, dist: 14, a: 0.5 } }, role: "subj" });
           words("ME", W * 0.2, H * 0.56, W * 0.3, H * 0.08, ME);
@@ -13315,7 +13866,7 @@ notify pgrst, 'reload schema';
         if (!T) {
           const xw = X ? (X.cut ? Math.min(W * 0.5, H * 0.92 / X.ar) : W * 0.42) : 0;
           if (X) img(X, W * 0.72, X.cut ? H * 1.03 - xw * X.ar / 2 : H * 0.5, xw, Object.assign({ fx: lit("left", acc, { shadow: { blur: 60, dist: 10, a: 0.5 } }), role: X === F ? "face" : "subj" }, X.cut ? {} : { shape: "round" }));
-          words(tsLines(word3(text), 2), W * 0.25, H * 0.5, W * 0.36, H * 0.24, THIN, { align: "left" });
+          words(tsLines(word3(text), 2), W * 0.27, H * 0.5, W * 0.44, H * 0.34, THIN, { align: "left" });
           const lt = layers[layers.length - 1]; lt.x = W * 0.08 + tsTextBox(lt).w / 2;
           rect(W * 0.08 + 60, H * 0.5 + tsTextBox(lt).h / 2 + 22, 120, 8, { fill: acc, r: 4 });
         } else {
@@ -13390,8 +13941,8 @@ notify pgrst, 'reload schema';
       if (!T) {
         rect(W * 0.25, H * 0.5, W * 0.5, H, { fill: acc }); if (S) img(S, W * 0.75, H * 0.5, W * 0.5, { crop: tsCoverCrop(S, W * 0.5, H), role: "subj" }); else rect(W * 0.75, H * 0.5, W * 0.5, H, { fill: "#1D232C" });
         rect(W * 0.5, H * 0.5, 18, H, { fill: "#FFFFFF" });
-        face(W * 0.25, H * 1.03, H * 0.95, { shadow: { blur: 40, dist: 12, a: 0.45 }, blend: 0 });
-        words(tsLines(text, 2), W * 0.75, H * 0.16, W * 0.44, H * 0.22, PRO("anton"));
+        face(W * 0.25, H * 1.03, H * 0.95, { shadow: { blur: 40, dist: 12, a: 0.45 }, outline: { w: 7, col: "#FFFFFF" }, blend: 0 });
+        words(tsLines(text, 2), W * 0.75, H * 0.75, W * 0.46, H * 0.36, PRO("anton"));
       } else {
         rect(W * 0.5, H * 0.75, W, H * 0.5, { fill: acc }); if (S) img(S, W * 0.5, H * 0.25, W, { crop: tsCoverCrop(S, W, H * 0.5), role: "subj" }); else rect(W * 0.5, H * 0.25, W, H * 0.5, { fill: "#1D232C" });
         rect(W * 0.5, H * 0.5, W, 16, { fill: "#FFFFFF" }); face(W * 0.5, H * 1.01, H * 0.48, { blend: 0 }); words(tsLines(text, 2), W * 0.5, H * 0.08, W * 0.86, H * 0.09, PRO("anton"));
@@ -14158,8 +14709,13 @@ notify pgrst, 'reload schema';
   }
   const vmGuestUrls = new WeakMap();
   const vmGuestUrl = b => { let u = vmGuestUrls.get(b); if (!u) { u = URL.createObjectURL(b); vmGuestUrls.set(b, u); } return u; };
-  const vmDuoLink = room => location.origin + location.pathname + "#r=" + b64url(JSON.stringify({ u: cfg.url, k: cfg.key, r: room }));
-  function readDuoLink() { const m = /[#&?]r=([A-Za-z0-9_-]+)/.exec((location.hash || "") + "&" + (location.search || "")); if (!m) return null; try { const j = JSON.parse(unb64url(m[1])); return j && j.u && j.k && j.r ? j : null; } catch (e) { return null; } }
+  // a short link: your website and a room number (your friend's phone gets the rest from the website itself)
+  const vmDuoLink = room => location.origin + location.pathname + "#r=" + room;
+  function readDuoLink() {
+    const m = /[#&?]r=([A-Za-z0-9_-]+)/.exec((location.hash || "") + "&" + (location.search || "")); if (!m) return null;
+    try { const j = JSON.parse(unb64url(m[1])); if (j && j.u && j.k && j.r) return j; } catch (e) {}
+    return /^[A-Za-z0-9_-]{6,48}$/.test(m[1]) ? { r: m[1] } : null;
+  }
 
   // the friend's screen: what you're making (with them in it), themselves small in the corner
   function ReactGuest({ link }) {
@@ -14209,6 +14765,7 @@ notify pgrst, 'reload schema';
         local.current = await navigator.mediaDevices.getUserMedia({ video: { facingMode: facing || "user", width: { ideal: 960 }, height: { ideal: 720 }, frameRate: { ideal: 30, max: 30 } }, audio: { echoCancellation: true, noiseSuppression: true, autoGainControl: true } });
         if (me.current) { me.current.srcObject = local.current; me.current.play().catch(() => {}); }
         if (peer.current) peer.current.close();
+        if (!link.u) { const c0 = readCfg() || (await serverCfg()); if (!c0) throw { code: "cfg" }; link.u = c0.url; link.k = c0.key; }
         const sb2 = sb2r.current || (sb2r.current = window.supabase.createClient(link.u, link.k, { auth: { persistSession: false, autoRefreshToken: false, detectSessionInUrl: false } }));
         peer.current = await vmDuoPeer({ sb: sb2, room: link.r, role: "guest", local: local.current,
           onRemote: s => { const v = big.current; if (v) { v.srcObject = s; v.play().catch(() => {}); } },
@@ -14236,6 +14793,7 @@ notify pgrst, 'reload schema';
     </div>`;
   }
   function VideoMaker({ onClose }) {
+    useEffect(() => { setTimeout(vmGrabTidy, 4000); }, []);
     const [list, setList] = useState(null);
     const [open, setOpen] = useState(null);
     const [fresh, setFresh] = useState(false);
@@ -14324,7 +14882,7 @@ notify pgrst, 'reload schema';
     </div>`;
   }
   function VMAddText({ onClose, onAdd }) {
-    const [text, setText] = useState(""), [who, setWho] = useState(""), [pic, setPic] = useState(null), picRef = useRef(null);
+    const [text, setText] = useState(""), [who, setWho] = useState(""), [pic, setPic] = useState(null), picRef = useRef(null), [look, setLook] = useState("paper");
     return html`<div class="scrim" onClick=${e => { if (e.target === e.currentTarget) onClose(); }}>
       <div class="sheet" role="dialog" aria-label="Add words">
         <h3 style="margin:0">Words on the screen</h3>
@@ -14335,7 +14893,9 @@ notify pgrst, 'reload schema';
         <div class="vmreadbox"><b>📜 Something to read out</b> <small>a post, a statement, something someone said</small>
           <input value=${who} placeholder="Who said it / where it's from (optional)" onInput=${e => setWho(e.target.value.slice(0, 60))}/>
           <div class="vmchips"><button class="chip" onClick=${() => picRef.current && picRef.current.click()}>${pic ? "✓ Picture added" : "＋ A screenshot of where it's from (optional)"}</button><input ref=${picRef} type="file" accept="image/*" style="display:none" onChange=${e => { const f = e.target.files && e.target.files[0]; e.target.value = ""; if (f) setPic(f); }}/></div>
-          <button class="btn quiet" disabled=${!text.trim()} onClick=${() => onAdd(Object.assign({ kind: "read", text: text.trim(), who: who.trim() }, pic ? { blob: pic } : {}))}>Add it to read out</button></div>
+          <div class="vmchips">${[["paper", "📰 Newspaper page"], ["social", "💬 Social post"], ["card", "📜 Plain card"]].map(([k, l]) => html`<button key=${k} class=${"chip" + (look === k ? " on" : "")} onClick=${() => setLook(k)}>${l}</button>`)}</div>
+          <button class="btn quiet" disabled=${!text.trim()} onClick=${() => onAdd(Object.assign({ kind: "read", text: text.trim(), who: who.trim(), look }, pic ? { blob: pic } : {}))}>Add it to read out</button>
+          <small class="help">Paste the words of the post or article above. It shows big and clear, and each word lights up as you read it out.</small></div>
         <button class="btn quiet" onClick=${onClose}>Close</button>
       </div>
     </div>`;
@@ -14968,11 +15528,19 @@ notify pgrst, 'reload schema';
       </div>
     </div>`;
   }
+  function VMVehIcon({ mode }) {
+    const ref = useRef(null);
+    useEffect(() => { const cv = ref.current; if (!cv) return; const c = cv.getContext("2d"); c.clearRect(0, 0, cv.width, cv.height); vmVehicle(c, mode, cv.width / 2, cv.height / 2, -0.5, mode === "car" ? 0.95 : mode === "ship" ? 0.75 : 0.62, (vmStyle().acc) || "#FF7A00"); }, [mode]);
+    return html`<canvas ref=${ref} width="120" height="72" class="vmvehc" aria-hidden="true"></canvas>`;
+  }
   function VMPlaces({ onClose, onAdd }) {
     const [w, setW] = useState(VMW), [err, setErr] = useState(false), [q, setQ] = useState(""), [sel, setSel] = useState(null), [trip, setTrip] = useState(null), [m, setM] = useState(VMM), [deep, setDeep] = useState(null), [q2, setQ2] = useState("");
     const [grp, setGrp] = useState(null), [water, setWater] = useState(false), [mode, setMode] = useState("plane");   // a group of countries; seas, straits and rivers; how the journey travels
     const waterStop = ([name, lon, lat, r]) => { const [x, y] = vmMerc(lon, lat); return { a2: null, n: null, name, svg: null, city: { name, x, y, r: Math.min(0.01, r || 0.004) }, water: true }; };
     const waterHits = qq => { const nq = norm(qq || ""); return VM_WATER.filter(x => !nq || norm(x[0]).includes(nq)); };
+    const [wd, setWd] = useState(VMWD);
+    useEffect(() => { if ((water || trip) && !wd) vmWaterDb().then(setWd).catch(() => {}); }, [water, trip]);
+    const dbStop = o => ({ a2: null, n: null, name: o.name, svg: null, city: { name: o.name, x: o.c[0], y: o.c[1], r: Math.min(0.01, Math.max(0.002, (o.b[2] - o.b[0]) * 0.3)) }, water: true });
     useEffect(() => { if (!w) vmWorld().then(setW).catch(() => setErr(true)); }, []);
     useEffect(() => { if ((sel || trip) && !m) vmMore().then(setM).catch(() => {}); }, [sel, trip]);
     const cityHits = (a2, qq) => { if (!m) return []; const L2 = a2 ? m.byA2.get(a2) || [] : m.cities, nq = norm(qq || ""); const out = []; for (const c2 of L2) { if (nq && !norm(c2.name).includes(nq)) continue; out.push(c2); if (out.length >= (a2 ? 80 : 30)) break; } return out; };
@@ -14993,19 +15561,23 @@ notify pgrst, 'reload schema';
           <div class="vmchips"><button class=${"chip" + (!grp.multi ? " on" : "")} onClick=${() => setGrp(Object.assign({}, grp, { multi: false }))}>All in my colour</button><button class=${"chip" + (grp.multi ? " on" : "")} onClick=${() => setGrp(Object.assign({}, grp, { multi: true }))}>Each its own colour</button></div>
           <button class="btn" disabled=${!grp.a2s.length} onClick=${() => onAdd({ kind: "group", name: grp.name.trim() || "These countries", a2s: grp.a2s, multi: grp.multi })}>Add the group (${grp.a2s.length} countries)</button>
           <button class="btn quiet" onClick=${() => setGrp(null)}>← Back</button>` : water ? html`
-          <p class="help">The map flies there. A sea or strait gets a ring and its name; a river is drawn as it flows.</p>
-          <input class="vmsearch" value=${q} onInput=${e => setQ(e.target.value)} placeholder="Search: Hormuz, Red Sea, Zambezi…"/>
+          <p class="help">The map flies there. A sea, lake or strait lights up with its name; a river is drawn as it flows. Every named sea, lake and river in the world is here.</p>
+          <input class="vmsearch" value=${q} onInput=${e => setQ(e.target.value)} placeholder="Search: Lake Ontario, Red Sea, Zambezi…" autofocus/>
+          ${!wd ? html`<p class="help">Loading the world's seas, lakes and rivers… (once, under 1 MB)</p>` : null}
           <div class="vmclist short">
+            ${wd && q.trim().length >= 2 ? vmWaterFind(q, 40).map((o, i2) => html`<button key=${"d" + i2 + o.name} class="vmcrow" onClick=${() => onAdd(vmWaterItem(o))}><span>${vmWaterIc(o)} ${o.name} <small>· ${vmWaterKind(o)}</small></span></button>`) : null}
             ${Object.keys(VM_RIVERS).filter(k2 => !q || norm(VM_RIVERS[k2][0]).includes(norm(q))).map(k2 => html`<button key=${k2} class="vmcrow" onClick=${() => onAdd({ kind: "map", river: k2, name: VM_RIVERS[k2][0] })}><span>〰 ${VM_RIVERS[k2][0]}</span></button>`)}
             ${waterHits(q).map(x => { const [X, Y] = vmMerc(x[1], x[2]); return html`<button key=${x[0]} class="vmcrow" onClick=${() => onAdd({ kind: "map", name: x[0], water: { name: x[0], x: X, y: Y, r: x[3] } })}><span>🌊 ${x[0]}</span></button>`; })}
           </div>
           <button class="btn quiet" onClick=${() => setWater(false)}>← Back</button>` : trip ? html`
-          <p class="help">A journey. Tap countries, cities (type a city's name) or seas and straits, in order. It travels from one to the next, about ${VM_LEG} seconds each.</p>
-          <div class="vmchips">${[["plane", "✈ Plane"], ["ship", "🚢 Ship"], ["car", "🚗 Car"], ["line", "➤ Just a line"]].map(([k, l]) => html`<button key=${k} class=${"chip" + (mode === k ? " on" : "")} onClick=${() => setMode(k)}>${l}</button>`)}</div>
-          <div class="vmchips">${trip.map((c, i) => html`<span key=${i} class="vmsnd"><button class="chip">${i + 1}. ${c.name}</button><button class="chip" onClick=${() => setTrip(trip.filter((_, j) => j !== i))} aria-label="Remove">✕</button></span>`)}</div>
+          <p class="help"><b>1.</b> Choose how it travels. <b>2.</b> Add the places in order: countries, cities (type the name), seas or lakes. <b>3.</b> Tap “Add the journey”. It travels from one to the next, about ${VM_LEG} seconds each.</p>
+          <div class="vmveh">${[["plane", "Plane"], ["ship", "Ship"], ["car", "Car"], ["line", "Just a line"]].map(([k, l]) => html`<button key=${k} class=${"vmvehb" + (mode === k ? " on" : "")} onClick=${() => setMode(k)}>${k === "line" ? html`<span class="vmvehl">➤</span>` : html`<${VMVehIcon} mode=${k}/>`}<b>${l}</b></button>`)}</div>
+          ${trip.length ? null : html`<p class="help">Start with where it leaves from.</p>`}
+          <div class="vmstops">${trip.map((c, i) => html`<span key=${i} class="vmstop"><b>${i + 1}</b>${c.name}<button onClick=${() => setTrip(trip.filter((_, j) => j !== i))} aria-label="Remove">✕</button></span>`)}</div>
           <input class="vmsearch" value=${q} onInput=${e => setQ(e.target.value)} placeholder="Add a country or a city…"/>
           <div class="vmclist short">${list.filter(c => c.n && w.by50.has(c.n)).slice(0, 60).map(c => html`<button key=${c.a2} class="vmcrow" onClick=${() => { setTrip(trip.concat(c)); setQ(""); }}><img src=${flagUrl(c)} alt="" loading="lazy"/><span>${c.name}</span></button>`)}
             ${q.trim().length >= 2 ? waterHits(q).slice(0, 8).map(x => html`<button key=${"w" + x[0]} class="vmcrow" onClick=${() => { setTrip(trip.concat(waterStop(x))); setQ(""); }}><span>🌊 ${x[0]}</span></button>`) : null}
+            ${wd && q.trim().length >= 2 ? vmWaterFind(q, 8).filter(o => o.t !== "river").map((o, i2) => html`<button key=${"dw" + i2 + o.name} class="vmcrow" onClick=${() => { setTrip(trip.concat(dbStop(o))); setQ(""); }}><span>${vmWaterIc(o)} ${o.name} <small>· ${vmWaterKind(o)}</small></span></button>`) : null}
             ${q.trim().length >= 2 ? cityHits(null, q).filter(c2 => ctryOf(c2.a2) && ctryOf(c2.a2).n).slice(0, 20).map(c2 => { const ct = ctryOf(c2.a2); return html`<button key=${"c" + c2.name + c2.x} class="vmcrow" onClick=${() => { setTrip(trip.concat({ a2: ct.a2, n: ct.n, svg: ct.svg, name: c2.name, city: { name: c2.name, x: c2.x, y: c2.y } })); setQ(""); }}><img src=${flagUrl(ct)} alt="" loading="lazy"/><span>🏙 ${c2.name} <small>· ${ct.name}</small></span></button>`; }) : null}</div>
           <button class="btn" disabled=${trip.length < 2} onClick=${() => onAdd({ kind: "trip", mode, name: trip.map(c => c.name).join(" → "), stops: trip.map(c => Object.assign({ a2: c.a2, n: c.n, name: c.name }, c.city ? { city: c.city } : {})), thumb: trip.find(c => c.svg) ? flagUrl(trip.find(c => c.svg)) : null })}>Add the journey (${trip.length} stops)</button>
           <button class="btn quiet" onClick=${() => setTrip(null)}>← Back</button>` : sel ? html`
@@ -15013,6 +15585,7 @@ notify pgrst, 'reload schema';
           <button class="btn" disabled=${!sel.n || !w.by50.has(sel.n)} onClick=${() => onAdd({ kind: "map", a2: sel.a2, n: sel.n, name: sel.name, thumb: flagUrl(sel) })}>🗺 A map that zooms into ${sel.name}</button>
           ${!sel.n || !w.by50.has(sel.n) ? html`<p class="help">This one is too small to show on the world map, but its flag works.</p>` : null}
           <button class="btn quiet" onClick=${() => onAdd({ kind: "flag", a2: sel.a2, n: sel.n, name: sel.name, thumb: flagUrl(sel) })}>🏳 Its flag, big</button>
+          ${sel.n && w.by50.has(sel.n) ? html`<button class="btn quiet" onClick=${() => { setTrip([sel]); setSel(null); setDeep(null); setQ(""); }}>✈ A journey from ${sel.name} (by plane, ship or car)</button>` : null}
           ${sel.n && w.by50.has(sel.n) ? html`<div class="vml">Zoom in further (after the country)
             <div class="vmchips"><button class=${"chip" + (deep === "prov" ? " on" : "")} onClick=${() => { setDeep("prov"); setQ2(""); }}>📍 A province or state</button><button class=${"chip" + (deep === "city" ? " on" : "")} onClick=${() => { setDeep("city"); setQ2(""); }}>🏙 A city or town</button></div>
             ${deep && !m ? html`<p class="help">Loading the provinces and cities… (once, about 2 MB)</p>` : null}
@@ -15707,7 +16280,7 @@ notify pgrst, 'reload schema';
         const v = vref.current;
         try { const cs = v && (v.captureStream ? v.captureStream() : v.mozCaptureStream ? v.mozCaptureStream() : null); if (cs) { D.clipSrcs = new Map(); const link = t => { if (t.kind !== "audio" || D.clipSrcs.has(t.id)) return; try { const n = vmAC.createMediaStreamSource(new MediaStream([t])); n.connect(D.sendDest); D.clipSrcs.set(t.id, n); } catch (e) {} }; cs.getAudioTracks().forEach(link); cs.addEventListener("addtrack", e => link(e.track)); D.clipCap = cs; } } catch (e) {}
         duoRef.current = D; voiceSrc();
-        const vt = cvRef.current.captureStream(24).getVideoTracks()[0];
+        const vt = cvRef.current.captureStream(VM_WEAK ? 15 : 24).getVideoTracks()[0];   // what your friend sees of your screen (lighter on a weaker phone, so your clip keeps playing smoothly)
         D.send = new MediaStream([vt].concat(D.sendDest.stream.getAudioTracks()));
         setDuo({ room, link: vmDuoLink(room), phase: "waiting" }); setSheet("duo");
         stopRoll();   // the recorders restart with your friend's voice mixed in
@@ -15720,7 +16293,7 @@ notify pgrst, 'reload schema';
             if (D.remote === st2 && st2.getVideoTracks().length && st2.getAudioTracks().length && D.remSrc) return;
             D.remote = st2; if (g) { g.srcObject = st2; g.play().catch(() => {}); }
             if (st2.getAudioTracks().length && D.remStream !== st2) { try { if (D.remSrc) D.remSrc.disconnect(); } catch (e) {} D.remSrc = vmAC.createMediaStreamSource(st2); D.remSrc.connect(D.recDest); D.remStream = st2; }
-            if (st2.getVideoTracks().length) { if (r.current) { guestSegEnd(); guestSegStart(); } setDuo(d => (d ? Object.assign({}, d, { guest: true }) : d)); }
+            if (st2.getVideoTracks().length) { if (r.current) { guestSegEnd(); guestSegStart(); } setDuo(d => { if (d && !d.guest) { setTimeout(() => { setSheet(x => (x === "duo" ? null : x)); toast("👥 Your friend is in. Add your clip, press record, then tap the clip to play it."); }, 900); } return d ? Object.assign({}, d, { guest: true }) : d; }); }
           } });
         D.sharePeer = await vmDuoPeer({ sb, room: room + "s", role: "host", local: null,
           onRemote: st3 => {
@@ -15975,13 +16548,13 @@ notify pgrst, 'reload schema';
             } else if (!tv.paused) tv.pause();
           } else if (tv && !tv.paused) tv.pause(); }
         // a post behind you: you, cut out of your room
-        let camCut = null;
+        let camCut = null, camBgL = null;
         { const itP = s.show ? R.items[s.show] : null; if (camSrc && !R.ava && !guestSrc && itP && itP.kind === "post" && (s.lay === "cam" || s.lay === "pip")) { const K2 = R.keyer2 || (R.keyer2 = vmKeyer()); K2.feed(camSrc, { k: "cut" }, false, 0, !!(R.counting || R.starting)); if (K2.ready) camCut = K2.cv; else if (K2.fail && !R.keyWarned) { R.keyWarned = true; toast("The cut-out couldn't start. Check your internet and open the video again."); } } }
         // behind me: the room swapped for the background you picked (the recording itself keeps the real camera, so you can change it later)
         { const vb = s.vbg !== undefined ? s.vbg : R.proj.vbg;
-          if (camSrc && !camCut && !R.ava && vmVbgOn(vb)) { const K = R.keyer || (R.keyer = vmKeyer()); K.feed(camSrc, vb, !!R.proj.mirror && facingNow !== "environment", R.mode === "review" ? t : now / 1000, !!(R.counting || R.starting)); if (K.ready) camSrc = K.cv; if (K.fail && !R.keyWarned) { R.keyWarned = true; toast("The background changer couldn't start. Check your internet and open the video again."); } } }
+          if (camSrc && !camCut && !R.ava && vmVbgOn(vb)) { const K = R.keyer || (R.keyer = vmKeyer()), cutOnly = vb.k !== "blur"; if (cutOnly) { camBgL = vb; if (R.vbPrepKey !== JSON.stringify(vb)) { R.vbPrepKey = JSON.stringify(vb); vmVbgPrep(vb).catch(() => {}); } } K.feed(camSrc, cutOnly ? { k: "cut" } : vb, !!R.proj.mirror && facingNow !== "environment", R.mode === "review" ? t : now / 1000, !!(R.counting || R.starting)); if (K.ready) camSrc = K.cv; if (K.fail && !R.keyWarned) { R.keyWarned = true; toast("The background changer couldn't start. Check your internet and open the video again."); } } }
         if (R.ava && avaRef.current) { const P2 = avaRef.current.P, rv = R.mode === "review"; P2.pose(rv ? t : now / 1000, rv ? vmAvaLevel(R.avaLv, t) : liveLevel(), { acc: R.st.acc }); camSrc = { vmAva: P2, h: VM_WEAK ? 520 : 720 }; }
-        vmFrame(c, { crop: R.mode === "review" ? R.crop : null, cropCam: R.mode === "review" && !!R.crop && !R.vidPiece, cropThing: R.mode === "review" && !!R.crop && R.vidPiece, G: G2, L: R.L, st: R.st, proj: R.proj, items: R.items, s, t, camFreeze: R.mode === "rec" ? freezeSnap.current : null, camFit: R.proj.camFit || "whole", camMirror: !!R.proj.mirror && facingNow !== "environment", tb: R.mode === "review" && tk ? R.u || 0 : R.mode === "rec" ? t : 99, cam: camSrc, camOn: R.mode === "review" ? !!(cam && tk && (tk.cam || R.ava)) && !R.vidPiece : cam, pic: id => vmPic(R.items[id] || vmEntries.get(id)), clip: clipSrc, lite: VM_WEAK && R.mode === "rec", words, readWords: R.mode === "review" && tk ? tk.words : null, prog, out, guest: guestSrc, camCut, tierClip });
+        vmFrame(c, { crop: R.mode === "review" ? R.crop : null, cropCam: R.mode === "review" && !!R.crop && !R.vidPiece, cropThing: R.mode === "review" && !!R.crop && R.vidPiece, G: G2, L: R.L, st: R.st, proj: R.proj, items: R.items, s, t, camFreeze: R.mode === "rec" ? freezeSnap.current : null, camBg: R.ava ? null : camBgL, camFit: R.proj.camFit || "whole", camMirror: !!R.proj.mirror && facingNow !== "environment", tb: R.mode === "review" && tk ? R.u || 0 : R.mode === "rec" ? t : 99, cam: camSrc, camOn: R.mode === "review" ? !!(cam && tk && (tk.cam || R.ava)) && !R.vidPiece : cam, pic: id => vmPic(R.items[id] || vmEntries.get(id)), clip: clipSrc, lite: VM_WEAK && R.mode === "rec", words, readWords: R.mode === "review" && tk ? tk.words : null, prog, out, guest: guestSrc, camCut, tierClip });
         rects.current = out;
         if (R.mode === "review" && R.proj.titles && R.proj.titles.length) { c.setTransform(cv.width / G2.W, 0, 0, cv.height / G2.H, 0, 0); vmDrawTitles(c, G2, R.proj.titles, R.u || 0, R.st.acc || R.L.acc, cv.width / G2.W); }
         const d = drag.current;
@@ -16044,12 +16617,13 @@ notify pgrst, 'reload schema';
     };
     // ---- showing things, and switching layouts ----
     const clipPos = useRef({});
+    const prepCtl = useRef({}), stallRef = useRef(false);
     function setLay(v) { if (cur().lay !== v) add({ k: "lay", v }); }
     const liveAt = () => (scr.current ? round2(Math.max(0, nowT() - scr.current.startT)) : 0);
     function tapItem(it) {
       if (!rec) { if (it.live) return; setPeek(peek === it.id ? null : it.id); if (it.kind === "vid") loadClip(it, 0); return; }
       const s = cur();
-      if ((it.kind === "read" || it.kind === "post") && s.show !== it.id && !S.current.readTold) { S.current.readTold = true; toast("Read it out loud. When you stop, it listens to your voice and the words light up as you said them."); }
+      if ((it.kind === "read" || it.kind === "post" || it.kind === "askq") && s.show !== it.id && !S.current.readTold) { S.current.readTold = true; toast("Read it out loud. When you stop, it listens to your voice and the words light up as you said them."); }
       if (it.kind === "ban" || it.kind === "name") { add(s.ban === it.id && it.kind === "ban" ? { k: "banx" } : { k: "ban", ref: it.id }); if (it.kind === "name") { const id0 = it.id; setTimeout(() => { if (S.current.mode === "rec" && cur().ban === id0) add({ k: "banx" }); }, ((it.secs || 5) + 0.6) * 1000); } return; }
       if (it.kind === "top") { add(s.top === it.id ? { k: "topx" } : { k: "top", ref: it.id }); return; }
       if (s.show === it.id) { stopClip(); add({ k: "hide" }); if (camOn) setLay("cam"); return; }
@@ -16107,7 +16681,12 @@ notify pgrst, 'reload schema';
       const v = vref.current; if (!v) return;
       const end = () => { const it = clipItem(); if (it) clipPos.current[it.id] = 0; const s = cur(); if (rec && s.play && s.play.on) add({ k: "stop", at: round2(v.duration || (it && it.secs) || 0) }); setClipOn(false);
         if (rec && it && it.meme && s.show === it.id) { add({ k: "hide" }); const pv = memePrev.current; if (camOn) setLay(pv && pv.lay && pv.lay !== "thing" ? pv.lay : "cam"); memePrev.current = null; } };
-      v.addEventListener("ended", end); return () => v.removeEventListener("ended", end);
+      v.addEventListener("ended", end);
+      // the clip stalls for a moment (the phone is busy): the finished video pauses it there too, exactly as you saw it
+      const wait = () => { const s = cur(); if (rec && s.play && s.play.on && !v.ended) { add({ k: "stop", at: round2(v.currentTime) }); stallRef.current = true; } };
+      const goOn = () => { const s = cur(); if (rec && stallRef.current && s.play && !s.play.on) add({ k: "play", at: round2(v.currentTime) }); stallRef.current = false; };
+      v.addEventListener("waiting", wait); v.addEventListener("playing", goOn);
+      return () => { v.removeEventListener("ended", end); v.removeEventListener("waiting", wait); v.removeEventListener("playing", goOn); };
     });
     // the clip's sound: what you hear now, and how loud it is in the video from this moment on
     function volLive(v) { setCvol(v); if (vref.current) vref.current.volume = v; }
@@ -16194,9 +16773,11 @@ notify pgrst, 'reload schema';
     }
     // a clip is checked, and big ones are made lighter, in the background (they play smoother while you react)
     async function prepClip(id, f) {
+      if (vmRecBusy) { prepCtl.current[id] = { later: true, f }; return; }
       setPrep(p => Object.assign({}, p, { [id]: 0 }));
+      const ctl = prepCtl.current[id] = { f };
       try {
-        const r = await vmPrepClip(f, v => setPrep(p => (p[id] != null ? Object.assign({}, p, { [id]: v }) : p)));
+        const r = await vmPrepClip(f, v => setPrep(p => (p[id] != null ? Object.assign({}, p, { [id]: v }) : p)), ctl);
         if (r.blob) {
           const swap = () => {
             const u = vmUrls.get(id); vmUrls.delete(id); setTimeout(() => { if (u) URL.revokeObjectURL(u); }, 60000);
@@ -16205,9 +16786,12 @@ notify pgrst, 'reload schema';
           };
           swap.id = id; if (S.current.mode === "rec" && cur().show === id) pendingSwaps.current.push(swap); else swap();   // a clip on screen right now is swapped as soon as it is put away
         } else if (r.bad || !r.info.ok) { toast("This video can't play on this phone. Try another copy of it (for example, save it again from WhatsApp or the gallery)."); setProj(p => ({ items: p.items.map(x => (x.id === id ? Object.assign({}, x, { bad: true }) : x)) })); }
-      } catch (e) { /* keep the original */ }
+      } catch (e) { /* keep the original (or carry on after the recording) */ }
+      if (!ctl.later) delete prepCtl.current[id];
       setPrep(p => { const q = Object.assign({}, p); delete q[id]; return q; });
     }
+    // clips that were waiting for the recording to finish get made lighter now
+    function reprep() { for (const id in prepCtl.current) { const x = prepCtl.current[id]; if (x && x.later && !vmRecBusy) { delete prepCtl.current[id]; if (projRef.current.items.some(it => it.id === id && !it.light)) prepClip(id, x.f); } } }
     function vmDur(f) { return new Promise(res => { const v = document.createElement("video"), u = URL.createObjectURL(f); let done = false; const fin = x => { if (done) return; done = true; URL.revokeObjectURL(u); res(x); }; v.preload = "metadata"; v.onloadedmetadata = () => fin(isFinite(v.duration) ? v.duration : 0); v.onerror = () => fin(0); setTimeout(() => fin(0), 6000); v.src = u; }); }
     async function addLesson(i) {
       setLessonPick(false);
@@ -16219,11 +16803,12 @@ notify pgrst, 'reload schema';
     async function startRec() {
       if (starting || count) return;
       const busyPrep = Object.keys(prep).length;
-      if (busyPrep && !window.confirm("A clip is still getting ready (" + Math.round(Object.values(prep)[0] * 100) + "%). It plays smoothly once it's ready. Record now anyway?")) return;
+      if (busyPrep && !window.confirm("A clip is still being made lighter (" + Math.round(Object.values(prep)[0] * 100) + "%), so it plays smoothly. Record now anyway? (It finishes after you stop.)")) return;
       if (proj.take && !window.confirm("Record again? The recording you have now is replaced.")) return;
       setPeek(null); plPauseR();
       const v0 = vref.current; if (v0 && !v0.paused) v0.pause();
-      setStarting(true); S.current.starting = true;
+      setStarting(true); S.current.starting = true; vmRecBusy = true;
+      for (const id in prepCtl.current) { const x = prepCtl.current[id]; if (x && x.conv) { x.later = true; try { x.conv.cancel(); } catch (e) {} } }   // a clip still being made lighter waits until you stop (it would slow the recording down)
       try { if (vmAC && vmAC.state === "suspended") vmAC.resume(); } catch (e) {}
       let step = "mic";
       const rolling = !!(r.current && (!camReal || camRec.current));
@@ -16242,11 +16827,11 @@ notify pgrst, 'reload schema';
           : step === "cam" || (e && e.code === "camslow") ? "The camera didn't start. Close other apps that use it, or switch to faceless, then try again."
           : step === "mic" || (e && e.code === "micslow") ? "The microphone didn't start. Close other apps that use it, then try again."
           : "This phone couldn't start recording. Try again, or switch to faceless.");
-        S.current.starting = false; return;
+        S.current.starting = false; vmRecBusy = false; reprep(); return;
       }
       setStarting(false); S.current.starting = false;
       // 3 · 2 · 1, and the clock only starts once the camera picture is really moving; what came before is cut off
-      const go = await countIn(); if (go == null) return;
+      const go = await countIn(); if (go == null) { vmRecBusy = false; reprep(); return; }
       S.current.go = go; healthStart();
       if (duoRef.current && duoRef.current.share) { const sh = duoRef.current.share; setTimeout(() => liveShare(sh, true), 80); }
       clipPos.current = {}; setCues(proj.bw ? [{ id: uid().slice(-7), t: go, k: "bw", v: true }] : []); freezeSnap.current = null; setPaused(false); setClipOn(false); volLive(1); setMode("rec");
@@ -16256,11 +16841,11 @@ notify pgrst, 'reload schema';
       const v = cref.current, rvfc = !!(camReal && v && v.requestVideoFrameCallback);
       let frames = 0; const cnt = () => { frames++; if (S.current.counting && v.requestVideoFrameCallback) v.requestVideoFrameCallback(cnt); };
       S.current.counting = true; if (rvfc) v.requestVideoFrameCallback(cnt);
-      const moving = async () => { if (!rvfc) return true; const f0 = frames; await sleep(500); return frames - f0 >= 4; };
+      const moving = async () => { if (!rvfc) return true; const f0 = frames; await sleep(500); return frames - f0 >= 2; };
       try {
         for (let n = 3; n >= 1; n--) { setCount(n); beep(660, 0.12); await sleep(1000); if (!r.current) return null; }
         let waited = 0;
-        while (!(await moving()) && waited < 25000) { setCount("cam"); waited += 500; if (!r.current) return null; }
+        while (!(await moving()) && waited < 4000) { setCount("cam"); waited += 500; if (!r.current) return null; }
         beep(990, 0.3); setCount("go"); setTimeout(() => setCount(c => (c === "go" ? null : c)), 700);
         return round2(nowT());
       } finally { S.current.counting = false; }
@@ -16268,7 +16853,7 @@ notify pgrst, 'reload schema';
     function cancelCount() {
       const c = r.current; r.current = null; if (c) c.cancel();
       if (camRec.current) { camRec.current.cancel(); camRec.current = null; } camSegs.current = [];
-      setCount(null); setMode("ready");
+      setCount(null); setMode("ready"); vmRecBusy = false; reprep();
     }
     function pauseRec() {
       if (!r.current) return;
@@ -16311,6 +16896,7 @@ notify pgrst, 'reload schema';
       for (const g of guestSegs.current) { if (!g.out) continue; try { const o = await g.out; if (o.blob && o.blob.size) gsegs.push({ t: g.t, t1: g.t1 || null, blob: o.blob }); } catch (e) {} }
       guestSegs.current = [];
       if (!duoRef.current) { vmRec.close(mic.current); mic.current = null; } vmRec.close(stream.current); stream.current = null;
+      vmRecBusy = false; setTimeout(reprep, 1500);
       if (out.secs < 1) { setMode("ready"); toast("That was too short."); return; }
       const list = cuesRef.current.slice().sort((a, b) => a.t - b.t).map(q => Object.assign({}, q));
       setProj({ take: { voice: out.blob, cam: segs.length > 0, camSegs: segs, secs: round2(out.secs), cues: list, trim: [Math.min(round2(out.secs) - 0.5, Math.max(0, S.current.go || 0)), round2(out.secs)], words: null, cleanBlob: null, guestSegs: gsegs, health: S.current.health ? { main: S.current.health.main, cam: S.current.health.cam, weak: !!VM_WEAK, ua: navigator.userAgent.slice(0, 120) } : null } });
@@ -16330,7 +16916,7 @@ notify pgrst, 'reload schema';
     useEffect(() => {
       if (mode !== "review" || !proj.take || proj.take.words) return;
       const tk = proj.take; if (S.current.readTried === tk.voice) return;
-      if (!(tk.cues || []).some(q => q.k === "show" && items[q.ref] && (items[q.ref].kind === "read" || items[q.ref].kind === "post"))) return;
+      if (!(tk.cues || []).some(q => q.k === "show" && items[q.ref] && (items[q.ref].kind === "read" || items[q.ref].kind === "post" || items[q.ref].kind === "askq"))) return;
       S.current.readTried = tk.voice; toast("Listening to your reading, so the words light up…");
       vmTranscribe(voice()).then(words => { setProj(p => (p.take && p.take.voice === tk.voice ? { take: Object.assign({}, p.take, { words, wordsFor: p.clean && p.take.cleanBlob ? "clean" : "raw" }) } : {})); S.current.dirty = true; toast("Done: the words now light up as you read them. Press play."); })
         .catch(e => toast(e && e.code === "nokey" ? "The words light up once OPENAI_API_KEY is set in Netlify (the same key subtitles use)." : "Couldn't listen to the reading. Check the connection, then tap Subtitles to try again."));
@@ -16363,7 +16949,7 @@ notify pgrst, 'reload schema';
       plPauseR();
       const style = vmStyleFor(vmStyle(), projRef.current);
       let words = null;
-      const needRead = (tk.cues || []).some(q => q.k === "show" && items[q.ref] && (items[q.ref].kind === "read" || items[q.ref].kind === "post"));
+      const needRead = (tk.cues || []).some(q => q.k === "show" && items[q.ref] && (items[q.ref].kind === "read" || items[q.ref].kind === "post" || items[q.ref].kind === "askq"));
       if ((projRef.current.subs && style.caps !== "off") || needRead) {
         const want = projRef.current.clean && tk.cleanBlob ? "clean" : "raw";
         if (tk.words && (tk.wordsFor === want || tk.wordsFor === "edited")) words = tk.words;
@@ -16646,6 +17232,7 @@ notify pgrst, 'reload schema';
   }
   function LessonEditor({ s, ix, lesson, onBack, lang, onLang }) {
     const pst = usePlayer();
+    const [moveL, setMoveL] = useState(false);
     const idx = s.lessons.findIndex(l => l.id === lesson.id);
     const [title, setTitle] = useState(lesson.title || "");
     const [note, setNote] = useState(lesson.note || "");
@@ -16745,6 +17332,8 @@ notify pgrst, 'reload schema';
         <div class="card">
           <div class="lbl">Your explanation</div>
           ${onLang ? html`<${LangPick} lang=${lang} onLang=${onLang}/>` : null}
+          ${onLang && (() => { const h = langHas(lang || "en", lesson.id); return h.ex + h.rc; })() ? html`<button class="linkbtn" onClick=${() => setMoveL(true)}>🌐 This lesson was recorded in the wrong language? Move it</button>` : null}
+          ${moveL ? html`<${LangMove} from=${lang || "en"} lessonId=${lesson.id} lessonNo=${idx + 1} onClose=${() => setMoveL(false)} onDone=${tg => { setMoveL(false); onLang && onLang(tg); }}/>` : null}
           <p class="help">They play this while looking at the board. Record with the board so your stick points at each tile as you talk, and add Your turn moments so they have to answer. Speak in the language they're most comfortable with.</p>
           <${ExplainRecorder} lesson=${lesson} pst=${pst} onStudio=${() => { player.stop(); setStudio(true); }}/>
           ${lesson.explain ? html`<${LessonVideoBtn} lesson=${lesson} number=${idx + 1}/>` : null}
@@ -17114,9 +17703,9 @@ notify pgrst, 'reload schema';
   window.__kfApi = { kfCpu, kfTap, kfPress, kfStep, kfNew, kfSnd, kfAnn, annRec };
   window.__ink = { hitInk, inkGroup, straighten };
   window.__mux = { lessonVideo, fixVideo, loadMux, vidJob, awake, player, cleanVoice };
-  window.__RoomT = Room; window.__HwT = HwRunner; window.__FightT = Fight; window.__crx = { crMapPic, crJoinVoice };
-  window.__ui = { vmMore, loadMux, vmFindSwears, vmNoMusic, vmBleep, vmAvSync, vmLag, vmPcmOf, vmGrab, vmShrinkPic, VMBlurSheet, vmBlurApply, vmFindFaces, vmOcr, cleanVoice, vmKeyDraw, vmSeg, vmVbgPaint, vmVbgLib, vmVbgPrep, vmKeyer, vmLogoPaint, vmLogoBg, vmLogo, LessonsList, PacksSheet, RulesGuide, LESSON_PACKS, crFrame, crSorted, stageAt0: stageAt, PushBell, SetupCheck, VidJobPill, html, render, store, Board, ExplainStudio, LiveTools, stageAt, buildSound, live, player, ClassroomPlayer, crAssets, CR_W, CR_H, TalkBoard, vidJob, VideoMaker, vmExport, vmDb, vmNew, vmAt, vmFrame, vmGeo, VM_LOOKS, vmStyle, vmSaveStyle, VMStyle, vmIntro, vmOutro, vmLook, vmElemSrc, vmPrepClip, vmWorld, vmTrack, vmUntrack, VME, vmKeep, vmSrcAt, thLib, VMThumbs, thInfo, tsMake, tsRender, tsLoadAll, tsExport, tsCutOut, tsLib, TS_TPLS };
-  window.__lang = { viewOf, saveExpl, saveTileRec, uploadBlob, set: l => { REC_LANG = l; }, get: () => REC_LANG, store };
+  window.__AsksT = VMAsks; window.__PlacesT = VMPlaces; window.__RoomT = Room; window.__HwT = HwRunner; window.__FightT = Fight; window.__crx = { crMapPic, crJoinVoice, vmTrip, vmMap, vmWaterDb, vmWaterFind, vmWaterItem, vmVehicle };
+  window.__ui = { vmMatte, vmRvm, vmMore, loadMux, vmFindSwears, vmNoMusic, vmBleep, vmAvSync, vmLag, vmPcmOf, vmGrab, vmShrinkPic, VMBlurSheet, vmBlurApply, vmFindFaces, vmOcr, cleanVoice, vmKeyDraw, vmSeg, vmVbgPaint, vmVbgLib, vmVbgPrep, vmKeyer, vmLogoPaint, vmLogoBg, vmLogo, LessonsList, PacksSheet, RulesGuide, LESSON_PACKS, crFrame, crSorted, stageAt0: stageAt, PushBell, SetupCheck, VidJobPill, html, render, store, Board, ExplainStudio, LiveTools, stageAt, buildSound, live, player, ClassroomPlayer, crAssets, CR_W, CR_H, TalkBoard, vidJob, VideoMaker, vmExport, vmDb, vmNew, vmAt, vmFrame, vmGeo, VM_LOOKS, vmStyle, vmSaveStyle, VMStyle, vmIntro, vmOutro, vmLook, vmElemSrc, vmPrepClip, vmWorld, vmTrack, vmUntrack, VME, vmKeep, vmSrcAt, thLib, VMThumbs, thInfo, tsMake, tsRender, tsLoadAll, tsExport, tsCutOut, tsLib, TS_TPLS };
+  window.__lang = { moveLangRecs, langHas, viewOf, saveExpl, saveTileRec, uploadBlob, set: l => { REC_LANG = l; }, get: () => REC_LANG, store };
   root.innerHTML = "";
   const duoLink = readDuoLink();
   if (duoLink) render(html`<${ReactGuest} link=${duoLink}/>`, root);

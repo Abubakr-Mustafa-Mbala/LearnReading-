@@ -4,62 +4,81 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="robots" content="noindex">
-<title>Ask me anything</title>
+<title>Send anonymously</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700;800&display=swap" rel="stylesheet">
 <style>
-  :root { --a: #833AB4; --b: #FD1D1D; --c: #FCB045; }
+  :root { --bg: #0E1320; --bg2: #151C2E; --card: #1A2236; --ink: #F2F4F8; --soft: #A7B0C2; --line: rgba(255,255,255,.08); --field: rgba(255,255,255,.06); --acc: #FF7A00; --accInk: #111; }
   * { box-sizing: border-box; }
   html, body { margin: 0; min-height: 100%; }
-  body { font-family: Poppins, system-ui, sans-serif; background: linear-gradient(160deg, var(--a), var(--b) 55%, var(--c)); color: #111; display: flex; align-items: center; justify-content: center; padding: 24px 16px calc(24px + env(safe-area-inset-bottom)); min-height: 100vh; min-height: 100dvh; }
-  .card { width: 100%; max-width: 440px; background: #fff; border-radius: 28px; box-shadow: 0 20px 60px rgba(0,0,0,.25); overflow: hidden; }
-  .top { padding: 22px 22px 18px; text-align: center; background: linear-gradient(90deg, var(--a), var(--b), var(--c)); color: #fff; }
-  .top h1 { margin: 0; font-size: 22px; font-weight: 800; letter-spacing: .2px; }
-  .top p { margin: 6px 0 0; font-size: 14px; opacity: .92; font-weight: 500; }
-  .body { padding: 20px 20px 22px; display: flex; flex-direction: column; gap: 14px; }
-  .kinds { display: flex; gap: 8px; flex-wrap: wrap; justify-content: center; }
-  .kinds button { font: 700 14px Poppins, sans-serif; border: 2px solid #E5E7EB; background: #fff; color: #374151; border-radius: 999px; padding: 8px 14px; cursor: pointer; }
-  .kinds button.on { border-color: transparent; background: #111; color: #fff; }
-  textarea { width: 100%; min-height: 130px; border: 0; background: #F3F4F6; border-radius: 18px; padding: 16px; font: 600 18px/1.4 Poppins, sans-serif; color: #111; resize: vertical; outline: none; }
-  textarea:focus { box-shadow: 0 0 0 3px rgba(131,58,180,.35); }
-  .send { font: 800 17px Poppins, sans-serif; border: 0; border-radius: 16px; padding: 15px; color: #fff; background: linear-gradient(90deg, var(--a), var(--b)); cursor: pointer; }
-  .send:disabled { opacity: .45; cursor: default; }
-  .note { margin: 0; text-align: center; font-size: 13px; color: #6B7280; font-weight: 500; }
-  .count { text-align: right; font-size: 12px; color: #9CA3AF; margin-top: -8px; }
-  .done { text-align: center; padding: 34px 22px; }
-  .done b { display: block; font-size: 44px; }
-  .done h2 { margin: 8px 0 6px; font-size: 22px; }
-  .done p { margin: 0 0 18px; color: #4B5563; }
-  .again { font: 700 15px Poppins, sans-serif; border: 2px solid #111; background: #fff; border-radius: 14px; padding: 11px 18px; cursor: pointer; }
+  body { font-family: Poppins, system-ui, sans-serif; background: radial-gradient(120% 80% at 50% 0%, var(--bg2), var(--bg) 70%); color: var(--ink); display: flex; align-items: center; justify-content: center; padding: 24px 16px calc(24px + env(safe-area-inset-bottom)); min-height: 100vh; min-height: 100dvh; }
+  .card { width: 100%; max-width: 460px; background: var(--card); border: 1px solid var(--line); border-radius: 24px; box-shadow: 0 24px 70px rgba(0,0,0,.35); overflow: hidden; }
+  .top { padding: 24px 22px 6px; }
+  .who { display: flex; align-items: center; gap: 10px; color: var(--soft); font-size: 14px; font-weight: 600; }
+  .av { width: 34px; height: 34px; border-radius: 50%; background: var(--acc); color: var(--accInk); display: grid; place-items: center; font-weight: 800; font-size: 15px; flex: 0 0 auto; }
+  h1 { margin: 16px 0 0; font-size: 27px; line-height: 1.25; font-weight: 800; letter-spacing: -.2px; overflow-wrap: anywhere; }
+  .bar { width: 46px; height: 4px; border-radius: 4px; background: var(--acc); margin-top: 14px; }
+  form { padding: 18px 22px 22px; display: flex; flex-direction: column; gap: 12px; }
+  textarea { width: 100%; min-height: 150px; border: 1px solid var(--line); background: var(--field); border-radius: 16px; padding: 15px; font: 500 17px/1.5 Poppins, sans-serif; color: var(--ink); resize: vertical; outline: none; }
+  textarea::placeholder { color: var(--soft); opacity: .8; }
+  textarea:focus { border-color: var(--acc); box-shadow: 0 0 0 3px color-mix(in srgb, var(--acc) 25%, transparent); }
+  .count { text-align: right; font-size: 12px; color: var(--soft); margin-top: -6px; }
+  .send { font: 700 17px Poppins, sans-serif; border: 0; border-radius: 14px; padding: 15px; color: var(--accInk); background: var(--acc); cursor: pointer; }
+  .send:disabled { opacity: .4; cursor: default; }
+  .note { margin: 2px 0 0; text-align: center; font-size: 13px; color: var(--soft); }
+  .done { text-align: center; padding: 40px 24px 34px; }
+  .done .tick { width: 64px; height: 64px; margin: 0 auto; border-radius: 50%; background: var(--acc); color: var(--accInk); display: grid; place-items: center; font-size: 30px; font-weight: 800; }
+  .done h2 { margin: 16px 0 6px; font-size: 22px; }
+  .done p { margin: 0 0 20px; color: var(--soft); }
+  .again { font: 700 15px Poppins, sans-serif; border: 1px solid var(--line); background: var(--field); color: var(--ink); border-radius: 12px; padding: 11px 18px; cursor: pointer; }
   .hp { position: absolute; left: -5000px; width: 1px; height: 1px; opacity: 0; }
-  .err { color: #B91C1C; text-align: center; font-weight: 600; margin: 0; font-size: 14px; }
+  .err { color: #FF6B6B; text-align: center; font-weight: 600; margin: 0; font-size: 14px; }
 </style>
 </head>
 <body>
 <main class="card" id="card">
-  <div class="top"><h1 id="title">Ask me anything</h1><p id="sub">Send a question, news or a confession. Nobody sees who you are.</p></div>
-  <form class="body" id="f">
-    <div class="kinds" role="group" aria-label="What are you sending">
-      <button type="button" class="on" data-k="question">❓ Question</button>
-      <button type="button" data-k="news">📰 News</button>
-      <button type="button" data-k="confession">🤫 Confession</button>
-    </div>
+  <div class="top">
+    <div class="who" id="who" hidden><span class="av" id="av"></span><span id="nm"></span></div>
+    <h1 id="title">Ask me anything</h1>
+    <div class="bar"></div>
+  </div>
+  <form id="f">
     <textarea id="t" maxlength="600" placeholder="Type here…" aria-label="Your message"></textarea>
     <div class="count" id="n">0 / 600</div>
     <input class="hp" id="hp" tabindex="-1" autocomplete="off" aria-hidden="true">
     <p class="err" id="e" hidden></p>
     <button class="send" id="s" type="submit" disabled>Send anonymously</button>
-    <p class="note">No name, no account, no sign-up. Only the message is sent.</p>
+    <p class="note">No name, no account. Only your message is sent.</p>
   </form>
 </main>
 <script>
 (function () {
-  // where messages go: this site's helper, or the address written into your own copy of this page
+  // what this page says and how it looks: set by the person who shared the link (in their app), never by the visitor
+  var THEMES = {
+    midnight: { bg: "#0E1320", bg2: "#18213A", card: "#1A2236", ink: "#F2F4F8", soft: "#A7B0C2", line: "rgba(255,255,255,.08)", field: "rgba(255,255,255,.06)", acc: "#FF7A00" },
+    black: { bg: "#070707", bg2: "#1A1712", card: "#121212", ink: "#F5F1E6", soft: "#B3AC9C", line: "rgba(212,175,55,.18)", field: "rgba(255,255,255,.05)", acc: "#D4AF37" },
+    white: { bg: "#EFEDE8", bg2: "#FAF9F6", card: "#FFFFFF", ink: "#15171B", soft: "#6B7280", line: "rgba(0,0,0,.08)", field: "#F4F4F2", acc: "#15171B" },
+    orange: { bg: "#120B05", bg2: "#2A1607", card: "#1A120B", ink: "#FFF4EA", soft: "#C9AE97", line: "rgba(255,122,0,.18)", field: "rgba(255,255,255,.05)", acc: "#FF7A00" },
+    green: { bg: "#06120D", bg2: "#0E2A1E", card: "#0F1F18", ink: "#EEF8F2", soft: "#9DB8AA", line: "rgba(255,255,255,.08)", field: "rgba(255,255,255,.05)", acc: "#2EBD59" },
+  };
+  var KINDS = { question: "question", confession: "confession", news: "news" };
+  function b64(s) { try { s = s.replace(/-/g, "+").replace(/_/g, "/"); while (s.length % 4) s += "="; return decodeURIComponent(escape(atob(s))); } catch (e) { return ""; } }
+  var q = new URLSearchParams(location.search), set = {};
+  try { set = window.ASK_CFG || JSON.parse(b64(q.get("s") || "") || "{}") || {}; } catch (e) { set = {}; }
+  var name = String(set.n || window.ASK_TO || q.get("to") || "").slice(0, 40);
+  var prompt = String(set.p || (name ? "Ask " + name + " anything" : "Ask me anything")).slice(0, 120);
+  var kind = KINDS[set.k] || "question";
+  var th = Object.assign({}, THEMES[set.t] || THEMES.midnight);
+  if (/^#[0-9a-fA-F]{6}$/.test(set.c || "")) th.acc = set.c;
+  var hex = th.acc.replace("#", ""), r = parseInt(hex.slice(0, 2), 16), g = parseInt(hex.slice(2, 4), 16), b = parseInt(hex.slice(4, 6), 16);
+  th.accInk = (r * 299 + g * 587 + b * 114) / 1000 > 150 ? "#111111" : "#FFFFFF";
+  var root = document.documentElement.style;
+  Object.keys(th).forEach(function (k) { root.setProperty("--" + k, th[k]); });
+  document.getElementById("title").textContent = prompt; document.title = prompt;
+  if (name) { document.getElementById("who").hidden = false; document.getElementById("nm").textContent = name; document.getElementById("av").textContent = name.replace(/^@/, "").charAt(0).toUpperCase(); }
   var API = window.ASK_API || "/.netlify/functions/ask";
-  var q = new URLSearchParams(location.search), to = window.ASK_TO || q.get("to") || "";
-  if (to) { document.getElementById("title").textContent = "Ask " + to + " anything"; document.title = "Ask " + to + " anything"; }
-  var kind = "question", t = document.getElementById("t"), s = document.getElementById("s"), n = document.getElementById("n"), e = document.getElementById("e");
-  document.querySelectorAll(".kinds button").forEach(function (b) { b.onclick = function () { document.querySelectorAll(".kinds button").forEach(function (x) { x.classList.remove("on"); }); b.classList.add("on"); kind = b.dataset.k; t.placeholder = kind === "news" ? "What happened?" : kind === "confession" ? "Your confession…" : "Your question…"; }; });
+  var t = document.getElementById("t"), s = document.getElementById("s"), n = document.getElementById("n"), e = document.getElementById("e");
+  t.placeholder = kind === "confession" ? "Your confession…" : kind === "news" ? "What happened?" : "Your question…";
   t.oninput = function () { n.textContent = t.value.length + " / 600"; s.disabled = t.value.trim().length < 2; };
   document.getElementById("f").onsubmit = function (ev) {
     ev.preventDefault(); if (t.value.trim().length < 2) return;
@@ -67,7 +86,7 @@
     fetch(API, { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify({ text: t.value, kind: kind, hp: document.getElementById("hp").value }) })
       .then(function (r) { if (!r.ok) throw new Error("x"); return r.json(); })
       .then(function () {
-        document.getElementById("card").innerHTML = '<div class="done"><b>💌</b><h2>Sent!</h2><p>It went with no name attached. Watch out for the video.</p><button class="again" onclick="location.reload()">Send another</button></div>';
+        document.getElementById("card").innerHTML = '<div class="done"><div class="tick">✓</div><h2>Sent</h2><p>It went with no name attached.</p><button class="again" onclick="location.reload()">Send another</button></div>';
       })
       .catch(function () { e.textContent = "It didn't send. Check your connection and try again."; e.hidden = false; s.disabled = false; s.textContent = "Send anonymously"; });
   };
