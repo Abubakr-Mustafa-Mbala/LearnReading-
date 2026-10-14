@@ -473,6 +473,8 @@ img{max-width:100%}
 .autothumb{display:flex;flex-direction:column;gap:6px;align-items:center;width:100%;max-width:560px;background:var(--paper-2);border-radius:16px;padding:12px}.autothumb small{color:#667;text-align:center}.atrow{display:flex;align-items:center;gap:8px}.atimg{border-radius:10px;box-shadow:0 6px 18px rgba(0,0,0,.25);max-width:100%}
 .asklist{display:flex;flex-direction:column;gap:10px;max-height:52vh;overflow:auto}
 .rgsec{margin:8px 0;line-height:1.5}.rgsec b{display:block;font-size:13px;letter-spacing:.3px;color:var(--ink-3);margin-bottom:2px}.rgcheck{background:var(--paper-2);border-radius:12px;padding:10px 12px}
+.vmkeynote{position:absolute;left:8px;right:8px;bottom:8px;z-index:4;background:rgba(10,14,20,.72);color:#fff;font-size:12px;font-weight:600;line-height:1.3;border-radius:10px;padding:6px 9px;pointer-events:none;text-align:center}
+.keybox{display:flex;flex-direction:column;gap:8px;background:var(--paper-2);border-radius:14px;padding:12px}.keysw{width:34px;height:34px;border-radius:10px;border:2px solid #fff;box-shadow:0 0 0 1px rgba(0,0,0,.2)}.keyshot{width:100%;border-radius:12px;cursor:pointer}
 .cutbox{display:flex;flex-direction:column;gap:8px;background:var(--paper-2);border-radius:14px;padding:12px}
 .vmstops{display:flex;flex-wrap:wrap;gap:6px}.vmstop{display:inline-flex;align-items:center;gap:8px;background:var(--blue);color:#fff;border-radius:99px;padding:6px 8px 6px 6px;font-weight:700;font-size:14px}.vmstop b{background:#fff;color:var(--blue);border-radius:50%;width:22px;height:22px;display:grid;place-items:center;font-size:12px}.vmstop button{border:0;background:rgba(255,255,255,.2);color:#fff;border-radius:50%;width:22px;height:22px;cursor:pointer}
 .vmveh{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}.vmvehb{display:flex;flex-direction:column;align-items:center;gap:2px;border:2px solid var(--line);background:#2A6CA8;border-radius:14px;padding:4px 4px 6px;color:#fff;cursor:pointer;font:inherit}.vmvehb.on{border-color:var(--blue);box-shadow:0 0 0 3px rgba(31,79,163,.25)}.vmvehb b{font-size:13px}.vmvehc{width:100%;max-width:90px;height:auto}.vmvehl{font-size:30px;line-height:54px}
@@ -10588,6 +10590,69 @@ notify pgrst, 'reload schema';
     const safe = async (img, draw, t) => { if (fb) return (await fb).run(img, draw); try { return await once(img, draw, t); } catch (e) { if (e && e.message === "noimg") throw e; fb = vmSeg(); reset(); return (await fb).run(img, draw); } };
     return { rvm: true, run: (img, draw, t) => { const p = chain.then(() => safe(img, draw, t)); chain = p.catch(() => {}); return p; }, reset: () => { chain = chain.then(reset); }, close: () => { chain = chain.then(reset); } };
   }
+  // A real green screen: a plain green (or blue) cloth behind you. Every picture is keyed on the graphics chip in a moment:
+  // the cloth's colour becomes see-through, its green glow is taken off your edges, and nothing else is guessed. Smooth and exact.
+  const VM_KEYCOL = "#1FAA4A";
+  function vmHexRgb(h) { const n = parseInt(String(h || VM_KEYCOL).slice(1), 16); return [(n >> 16) / 255, ((n >> 8) & 255) / 255, (n & 255) / 255]; }
+  let vmCK = null;
+  function vmChroma() {
+    if (vmCK) return vmCK.ok ? vmCK : null;
+    const cv = document.createElement("canvas"); cv.width = cv.height = 2;
+    const gl = cv.getContext("webgl", { premultipliedAlpha: false, preserveDrawingBuffer: true, alpha: true, antialias: false });
+    if (!gl) { vmCK = { ok: false }; return null; }
+    const sh = (type, src) => { const o = gl.createShader(type); gl.shaderSource(o, src); gl.compileShader(o); return o; };
+    const pr = gl.createProgram();
+    gl.attachShader(pr, sh(gl.VERTEX_SHADER, "attribute vec2 p;varying vec2 v;void main(){v=vec2(p.x*.5+.5,.5-p.y*.5);gl_Position=vec4(p,0.,1.);}"));
+    gl.attachShader(pr, sh(gl.FRAGMENT_SHADER, [
+      "precision mediump float;varying vec2 v;uniform sampler2D t;uniform vec2 key;uniform float sim,smo,spl;uniform vec2 px;",
+      "vec2 cbcr(vec3 c){return vec2(-.168736*c.r-.331264*c.g+.5*c.b,.5*c.r-.418688*c.g-.081312*c.b);}",
+      "float m(vec2 o){vec3 c=texture2D(t,v+o*px).rgb;return distance(cbcr(c),key)-sim;}",
+      "void main(){vec4 c=texture2D(t,v);",
+      // a little smoothing of the mask from the pixels around: no speckles, soft clean edges
+      "float d=(m(vec2(0.))*4.+m(vec2(1.,0.))+m(vec2(-1.,0.))+m(vec2(0.,1.))+m(vec2(0.,-1.)))/8.;",
+      "float a=pow(clamp(d/smo,0.,1.),1.5);",
+      "float sp=pow(clamp((distance(cbcr(c.rgb),key)-sim)/spl,0.,1.),1.5);float l=dot(c.rgb,vec3(.2126,.7152,.0722));vec3 rgb=mix(vec3(l),c.rgb,sp);",
+      "gl_FragColor=vec4(rgb,a);}"].join("")));
+    gl.linkProgram(pr); if (!gl.getProgramParameter(pr, gl.LINK_STATUS)) { vmCK = { ok: false }; return null; }
+    gl.useProgram(pr);
+    const buf = gl.createBuffer(); gl.bindBuffer(gl.ARRAY_BUFFER, buf); gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1, -1, 1, -1, -1, 1, 1, 1]), gl.STATIC_DRAW);
+    const loc = gl.getAttribLocation(pr, "p"); gl.enableVertexAttribArray(loc); gl.vertexAttribPointer(loc, 2, gl.FLOAT, false, 0, 0);
+    const tex = gl.createTexture(); gl.bindTexture(gl.TEXTURE_2D, tex);
+    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR); gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.LINEAR);
+    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE); gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
+    const U = n => gl.getUniformLocation(pr, n), uKey = U("key"), uSim = U("sim"), uSmo = U("smo"), uSpl = U("spl"), uPx = U("px");
+    const out = document.createElement("canvas");
+    // run(picture, cloth colour, strength 0..1) -> you on your own (see-through where the cloth was), the size of the picture (max 1280)
+    const run = (src, col, str) => {
+      const [iw, ih] = vmSize(src); if (!iw) return null;
+      const k = Math.min(1, 1280 / Math.max(iw, ih)), w = Math.round(iw * k), h = Math.round(ih * k);
+      if (cv.width !== w || cv.height !== h) { cv.width = w; cv.height = h; }
+      gl.viewport(0, 0, w, h);
+      try { gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, src); } catch (e) { return null; }
+      const [r, g, b] = vmHexRgb(col), st = str == null ? 0.5 : str;
+      gl.uniform2f(uKey, -0.168736 * r - 0.331264 * g + 0.5 * b, 0.5 * r - 0.418688 * g - 0.081312 * b);
+      gl.uniform1f(uSim, 0.06 + st * 0.14); gl.uniform1f(uSmo, 0.06); gl.uniform1f(uSpl, 0.12); gl.uniform2f(uPx, 1 / w, 1 / h);
+      gl.clearColor(0, 0, 0, 0); gl.clear(gl.COLOR_BUFFER_BIT); gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
+      if (out.width !== w || out.height !== h) { out.width = w; out.height = h; }
+      const x = out.getContext("2d"); x.globalCompositeOperation = "copy"; x.drawImage(cv, 0, 0); x.globalCompositeOperation = "source-over";
+      return out;
+    };
+    vmCK = { ok: true, run }; return vmCK;
+  }
+  // the cloth's colour, read off the camera picture: the most common strong colour around the edges of the picture
+  function vmClothColour(src) {
+    const [iw, ih] = vmSize(src); if (!iw) return null;
+    const cv = document.createElement("canvas"); cv.width = 64; cv.height = Math.max(8, Math.round(64 * ih / iw)); const x = cv.getContext("2d", { willReadFrequently: true }); x.drawImage(src, 0, 0, cv.width, cv.height);
+    const d = x.getImageData(0, 0, cv.width, cv.height).data, W = cv.width, H = cv.height, bins = new Map();
+    for (let y = 0; y < H; y++) for (let xx = 0; xx < W; xx++) {
+      if (xx > W * 0.2 && xx < W * 0.8 && y > H * 0.25) continue;   // the edges and the top: where the cloth shows
+      const i = (y * W + xx) * 4, r = d[i], g = d[i + 1], b = d[i + 2], mx = Math.max(r, g, b), mn = Math.min(r, g, b); if (mx - mn < 40) continue;
+      const k = ((r >> 5) << 6) | ((g >> 5) << 3) | (b >> 5), e = bins.get(k) || [0, 0, 0, 0]; e[0]++; e[1] += r; e[2] += g; e[3] += b; bins.set(k, e);
+    }
+    let best = null; for (const e of bins.values()) if (!best || e[0] > best[0]) best = e;
+    if (!best || best[0] < 6) return null;
+    const h2 = v => Math.round(v / best[0]).toString(16).padStart(2, "0"); return "#" + h2(best[1]) + h2(best[2]) + h2(best[3]);
+  }
   // the best cut-out this phone can do: the matting model, or the simpler outline model if the phone can't run it
   async function vmMatte(maxSide) {
     try { if (window.__noRvm) throw 0; const E = await vmTimeout(vmRvm(), 60000); return vmRvmStream(E, maxSide || 640); }
@@ -12483,7 +12548,8 @@ notify pgrst, 'reload schema';
     if (!vmPics.has(it.id)) { const im = new Image(); im.src = vmUrl(it); vmPics.set(it.id, im); }
     const im = vmPics.get(it.id); return im.complete && im.naturalWidth ? im : null;
   }
-  const vmNew = (fmt, title, cam) => ({ id: uid(), title: title || "", fmt: fmt || "tall", cam: !!cam, vbg: (() => { try { return JSON.parse(localStorage.getItem("vm.vbg") || "null"); } catch (e) { return null; } })(), facing: "user", fit: "fit", notes: "", clipVol: 0.7, subs: true, clean: false, mirror: (() => { try { return localStorage.getItem("vm.mirror") !== "0"; } catch (e) { return true; } })(), camFit: "whole", items: [], take: null, createdAt: Date.now(), updatedAt: Date.now() });
+  const vmKeyPrefs = () => { try { return JSON.parse(localStorage.getItem("vm.key") || "{}") || {}; } catch (e) { return {}; } };
+  const vmNew = (fmt, title, cam) => ({ id: uid(), title: title || "", fmt: fmt || "tall", cam: !!cam, keyMode: vmKeyPrefs().mode || "auto", keyCol: vmKeyPrefs().col || VM_KEYCOL, keyStr: vmKeyPrefs().str == null ? 0.5 : vmKeyPrefs().str, vbg: (() => { try { return JSON.parse(localStorage.getItem("vm.vbg") || "null"); } catch (e) { return null; } })(), facing: "user", fit: "fit", notes: "", clipVol: 0.7, subs: true, clean: false, mirror: (() => { try { return localStorage.getItem("vm.mirror") !== "0"; } catch (e) { return true; } })(), camFit: "whole", items: [], take: null, createdAt: Date.now(), updatedAt: Date.now() });
   // a lesson's board as a picture, to show in a promo
   async function vmLessonPic(lesson, number) {
     const cv = document.createElement("canvas"); cv.width = CR_W; cv.height = CR_H;
@@ -12622,7 +12688,8 @@ notify pgrst, 'reload schema';
     const vbgs = [proj.vbg].concat(cues.filter(q => q.k === "vbg").map(q => q.v)).filter(vmVbgOn);
     let segX = null; const keyCv = document.createElement("canvas"), cutCv = document.createElement("canvas");
     const posts = cues.some(q => q.k === "show" && items[q.ref] && items[q.ref].kind === "post");
-    if (camOn && (vbgs.length || posts)) { try { segX = await vmMatte((proj.quality || "1080") === "1080" ? 768 : 640); for (const v of vbgs) await vmVbgPrep(v); } catch (e) { segX = null; } }
+    if (camOn && (vbgs.length || posts) && proj.keyMode !== "cloth") { try { segX = await vmMatte((proj.quality || "1080") === "1080" ? 768 : 640); for (const v of vbgs) await vmVbgPrep(v); } catch (e) { segX = null; } }
+    else if (camOn && vbgs.length) { for (const v of vbgs) await vmVbgPrep(v).catch(() => {}); }
     const sinkOf = async (blob, max) => {
       const input = new MB.Input({ source: new MB.BlobSource(blob), formats: MB.ALL_FORMATS });
       const vt = await input.getPrimaryVideoTrack(); if (!vt) return null;
@@ -12884,9 +12951,12 @@ notify pgrst, 'reload schema';
           }
           let camK = camF || camLast, camCut = null;
           if (camK && take.blurs && take.blurs.length) camK = vmBlurApply(camK, take, t, false, "camx"); const vbNow = s.vbg !== undefined ? s.vbg : proj.vbg, itP = s.show ? items[s.show] : null;
-          if (segX && camK && !gsg && itP && itP.kind === "post" && (s.lay === "cam" || s.lay === "pip")) { try { camCut = await vmTimeout(segX.run(camK, r => vmKeyDraw(r, cutCv, { k: "cut" }, false, t, true), t), 15000); } catch (e) {} }
+          const clothK = proj.keyMode === "cloth" ? vmChroma() : null;
+          if (clothK && camK && !gsg && itP && itP.kind === "post" && (s.lay === "cam" || s.lay === "pip")) { const kc = clothK.run(camK, proj.keyCol || VM_KEYCOL, proj.keyStr); if (kc) { cutCv.width = kc.width; cutCv.height = kc.height; cutCv.getContext("2d").drawImage(kc, 0, 0); camCut = cutCv; } }
+          else if (segX && camK && !gsg && itP && itP.kind === "post" && (s.lay === "cam" || s.lay === "pip")) { try { camCut = await vmTimeout(segX.run(camK, r => vmKeyDraw(r, cutCv, { k: "cut" }, false, t, true), t), 15000); } catch (e) {} }
           let camBgNow = null;
-          if (segX && camK && camVis && !camCut && vmVbgOn(vbNow)) {
+          if (clothK && camK && camVis && !camCut && vmVbgOn(vbNow)) { const kc = clothK.run(camK, proj.keyCol || VM_KEYCOL, proj.keyStr); if (kc) { keyCv.width = kc.width; keyCv.height = kc.height; const kx = keyCv.getContext("2d"); kx.clearRect(0, 0, kc.width, kc.height); kx.drawImage(kc, 0, 0); camK = keyCv; camBgNow = vbNow.k === "blur" ? { k: "studio" } : vbNow; } }
+          else if (segX && camK && camVis && !camCut && vmVbgOn(vbNow)) {
             const cutOnly = vbNow.k !== "blur";   // you are cut out on your own and laid over the background, which fills the whole picture
             try { const kd = await vmTimeout(segX.run(camK, r => vmKeyDraw(r, keyCv, cutOnly ? { k: "cut" } : vbNow, !!proj.mirror && (!segNow || segNow.facing !== "environment"), t, true), t), 15000); if (kd) { camK = kd; if (cutOnly) camBgNow = vbNow; } } catch (e) {}
           }
@@ -15336,10 +15406,25 @@ notify pgrst, 'reload schema';
     </div>`;
   }
   // choose what's behind you
-  function VMBehind({ value, onPick, onClose, review, hereT }) {
+  function VMBehind({ value, onPick, onClose, review, hereT, keyMode, keyCol, keyStr, onKey, camEl }) {
+    const [shot, setShot] = useState(null);
+    const frame = () => { const v = camEl && camEl(); return v && v.videoWidth ? v : null; };
+    function findCloth() { const v = frame(); if (!v) { toast("Turn your camera on first."); return; } const col = vmClothColour(v); if (!col) { toast("Couldn't see a cloth. Stand in front of it with the cloth showing at the sides and top."); return; } onKey({ keyCol: col }); toast("Got your cloth's colour."); }
+    async function seeOne() {
+      const v = frame(); if (!v || !vmVbgOn(value)) { toast(!v ? "Turn your camera on first." : "Pick a background first."); return; }
+      setShot("busy");
+      try {
+        const fr = document.createElement("canvas"); fr.width = v.videoWidth; fr.height = v.videoHeight; fr.getContext("2d").drawImage(v, 0, 0);
+        await vmVbgPrep(value); const seg = await vmMatte(640), cut = document.createElement("canvas");
+        await seg.run(fr, r => vmKeyDraw(r, cut, { k: "cut" }, false, 0, true), 0); if (seg.close) seg.close();
+        const o = document.createElement("canvas"); o.width = cut.width; o.height = cut.height; const x = o.getContext("2d");
+        vmVbgPaint(x, value.k === "blur" ? { k: "studio" } : value, o.width, o.height, fr, false, 0, null); x.drawImage(cut, 0, 0);
+        setShot(o.toDataURL("image/jpeg", 0.85));
+      } catch (e) { setShot(null); toast("Couldn't make the picture. Check your internet (the first time it downloads a helper)."); }
+    }
     const [k, setK] = useState(vmVbgOn(value) ? value.k : "off"), [w, setW] = useState(VMW), [q, setQ] = useState(""), [pics, setPics] = useState(null), [scope, setScope] = useState("all");
     const fileRef = useRef(null);
-    useEffect(() => { vmVbgLib.list().then(l => setPics(l.map(x => ({ id: x.id, url: URL.createObjectURL(x.blob) })))).catch(() => setPics([])); vmSeg().catch(() => {}); }, []);
+    useEffect(() => { vmVbgLib.list().then(l => setPics(l.map(x => ({ id: x.id, url: URL.createObjectURL(x.blob) })))).catch(() => setPics([])); }, []);
     useEffect(() => { if (k === "flag" && !w) vmWorld().then(setW).catch(() => {}); }, [k]);
     const pick = v => onPick(v, scope);
     const norm = x => String(x).toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g, "");
@@ -15349,7 +15434,17 @@ notify pgrst, 'reload schema';
     return html`<div class="scrim" onClick=${e => { if (e.target === e.currentTarget) onClose(); }}>
       <div class="sheet vmbehind" role="dialog" aria-label="Behind me">
         <h3 style="margin:0">🪄 Behind me</h3>
-        <p class="help">Takes away the room behind you, like a green screen, and puts something else there. Works best with light in front of you and your whole head and shoulders in the picture.</p>
+        <span class="tslbl">How is your room taken away?</span>
+        <div class="vmfmts"><button class=${"vmfmt" + (keyMode === "cloth" ? " on" : "")} onClick=${() => onKey({ keyMode: "cloth" })}><b>🟩 Green cloth behind me</b><small>Perfect edges, nothing of your room shows, and the phone stays fast. You see it live.</small></button>
+          <button class=${"vmfmt" + (keyMode !== "cloth" ? " on" : "")} onClick=${() => onKey({ keyMode: "auto" })}><b>🤖 No cloth</b><small>The phone works it out. To keep the phone fast, your room shows while you record and is swapped when the video is made.</small></button></div>
+        ${keyMode === "cloth" ? html`<div class="keybox">
+            <p class="help"><b>Set up once:</b> hang a plain bright green cloth (or sheet, or paper) behind you, flat with no folds. Light it evenly (no shadows on it), stand about a metre in front of it, and don't wear green.</p>
+            <div class="vmchips"><span class="keysw" style=${"background:" + (keyCol || VM_KEYCOL)}></span><button class="btn slim" onClick=${findCloth}>🎯 Find my cloth's colour</button><label class="vmcolor">or pick<input type="color" value=${keyCol || VM_KEYCOL} onInput=${e => onKey({ keyCol: e.target.value })}/></label></div>
+            <label class="vmvol">Strength: <b>${Math.round((keyStr == null ? 0.5 : keyStr) * 100)}%</b><input type="range" min="0" max="1" step="0.05" value=${keyStr == null ? 0.5 : keyStr} onInput=${e => onKey({ keyStr: +e.target.value })}/></label>
+            <p class="help">Bits of the cloth still showing? Move Strength up. Bits of you disappearing (green clothes, edges)? Move it down.</p></div>`
+          : html`<p class="help">The finished video uses the careful cut-out, picture by picture. For edges that are always perfect, use a green cloth.</p>
+            <button class="btn slim quiet" disabled=${shot === "busy"} onClick=${seeOne}>${shot === "busy" ? "Making the picture…" : "🔍 See one picture of how it will look"}</button>
+            ${shot && shot !== "busy" ? html`<img class="keyshot" src=${shot} alt="How it will look" onClick=${() => setShot(null)}/>` : null}`}
         ${review ? html`<div class="vmchips"><button class=${"chip" + (scope === "all" ? " on" : "")} onClick=${() => setScope("all")}>The whole video</button>${hereT != null ? html`<button class=${"chip" + (scope === "here" ? " on" : "")} onClick=${() => setScope("here")}>From the white line on</button>` : null}</div>` : null}
         <div class="vbggrid">${VM_VBGS.map(([kk, ic, lbl]) => html`<button key=${kk} class=${"vbgtile" + (k === kk ? " on" : "")} onClick=${() => { setK(kk); if (kk === "off" || kk === "blur" || kk === "black" || kk === "paper" || kk === "studio") pick(kk === "off" ? null : { k: kk }); }}><span>${ic}</span>${lbl}</button>`)}</div>
         ${k === "color" ? html`<div class="vmchips">${cols.map(c => html`<button key=${c} class=${"swatch big" + (value && value.k === "color" && value.c === c ? " on" : "")} style=${"background:" + c} onClick=${() => pick({ k: "color", c })} aria-label="Colour"></button>`)}<label class="vmcolor"><input type="color" value=${(value && value.c) || "#1E6BFF"} onChange=${e => pick({ k: "color", c: e.target.value })}/>Any colour</label></div>` : null}
@@ -15360,7 +15455,7 @@ notify pgrst, 'reload schema';
           <input ref=${fileRef} type="file" accept="image/*" style="display:none" onChange=${addPic}/>` : null}
         ${k === "flag" ? (!w ? html`<p class="help">Loading the flags…</p>` : html`<input class="vmsearch" value=${q} onInput=${e => setQ(e.target.value)} placeholder="Search: Zambia, Palestine…"/>
           <div class="vmclist short">${w.countries.filter(c => !q || norm(c.name).includes(norm(q))).slice(0, 80).map(c => html`<button key=${c.a2} class=${"vmcrow" + (value && value.a2 === c.a2 ? " on" : "")} onClick=${() => pick({ k: "flag", a2: c.a2 })}><img src=${flagUrl(c)} alt="" loading="lazy"/><span>${c.name}</span></button>`)}</div>`) : null}
-        <p class="help">The first time, it downloads a small helper (about 6 MB). Your recording keeps the real camera, so you can change or remove the background later in the editor.</p>
+        <p class="help">Your recording keeps the real camera, so you can change or remove the background later in the editor.</p>
         <button class="btn" onClick=${onClose}>Done</button>
       </div>
     </div>`;
@@ -16549,10 +16644,13 @@ notify pgrst, 'reload schema';
           } else if (tv && !tv.paused) tv.pause(); }
         // a post behind you: you, cut out of your room
         let camCut = null, camBgL = null;
-        { const itP = s.show ? R.items[s.show] : null; if (camSrc && !R.ava && !guestSrc && itP && itP.kind === "post" && (s.lay === "cam" || s.lay === "pip")) { const K2 = R.keyer2 || (R.keyer2 = vmKeyer()); K2.feed(camSrc, { k: "cut" }, false, 0, !!(R.counting || R.starting)); if (K2.ready) camCut = K2.cv; else if (K2.fail && !R.keyWarned) { R.keyWarned = true; toast("The cut-out couldn't start. Check your internet and open the video again."); } } }
+        { const itP = s.show ? R.items[s.show] : null; if (camSrc && !R.ava && !guestSrc && itP && itP.kind === "post" && (s.lay === "cam" || s.lay === "pip") && R.proj.keyMode === "cloth") { const CK = vmChroma(), kc = CK && CK.run(camSrc, R.proj.keyCol || VM_KEYCOL, R.proj.keyStr); if (kc) { const cc = R.cutCopy || (R.cutCopy = document.createElement("canvas")); if (cc.width !== kc.width || cc.height !== kc.height) { cc.width = kc.width; cc.height = kc.height; } const cx2 = cc.getContext("2d"); cx2.clearRect(0, 0, cc.width, cc.height); cx2.drawImage(kc, 0, 0); camCut = cc; } }
+          else if (false && camSrc && !R.ava && !guestSrc && itP && itP.kind === "post" && (s.lay === "cam" || s.lay === "pip")) { const K2 = R.keyer2 || (R.keyer2 = vmKeyer()); K2.feed(camSrc, { k: "cut" }, false, 0, !!(R.counting || R.starting)); if (K2.ready) camCut = K2.cv; else if (K2.fail && !R.keyWarned) { R.keyWarned = true; toast("The cut-out couldn't start. Check your internet and open the video again."); } } }
         // behind me: the room swapped for the background you picked (the recording itself keeps the real camera, so you can change it later)
-        { const vb = s.vbg !== undefined ? s.vbg : R.proj.vbg;
-          if (camSrc && !camCut && !R.ava && vmVbgOn(vb)) { const K = R.keyer || (R.keyer = vmKeyer()), cutOnly = vb.k !== "blur"; if (cutOnly) { camBgL = vb; if (R.vbPrepKey !== JSON.stringify(vb)) { R.vbPrepKey = JSON.stringify(vb); vmVbgPrep(vb).catch(() => {}); } } K.feed(camSrc, cutOnly ? { k: "cut" } : vb, !!R.proj.mirror && facingNow !== "environment", R.mode === "review" ? t : now / 1000, !!(R.counting || R.starting)); if (K.ready) camSrc = K.cv; if (K.fail && !R.keyWarned) { R.keyWarned = true; toast("The background changer couldn't start. Check your internet and open the video again."); } } }
+        { const vb = s.vbg !== undefined ? s.vbg : R.proj.vbg, cloth = R.proj.keyMode === "cloth";
+          if (camSrc && !camCut && !R.ava && vmVbgOn(vb) && cloth) { const CK = vmChroma(), kc = CK && CK.run(camSrc, R.proj.keyCol || VM_KEYCOL, R.proj.keyStr); if (kc) { if (now - (R.ckT || 0) > 2500) { R.ckT = now; const q = R.ckQ || (R.ckQ = document.createElement("canvas")); q.width = q.height = 24; const qx = q.getContext("2d", { willReadFrequently: true }); qx.clearRect(0, 0, 24, 24); qx.drawImage(kc, 0, 0, 24, 24); const dd = qx.getImageData(0, 0, 24, 24).data; let on = 0; for (let i = 3; i < dd.length; i += 4) if (dd[i] > 128) on++; if (on < 12 && !R.ckWarned) { R.ckWarned = true; toast("Can't see a green cloth behind you. Hang it up, then tap 🪄 Behind me → Find my cloth's colour. (No cloth? Choose 🤖 No cloth there.)"); } }
+            camSrc = kc; camBgL = vb.k === "blur" ? { k: "studio" } : vb; if (R.vbPrepKey !== JSON.stringify(vb)) { R.vbPrepKey = JSON.stringify(vb); vmVbgPrep(vb).catch(() => {}); } } }
+          else if (false && camSrc && !camCut && !R.ava && vmVbgOn(vb)) { const K = R.keyer || (R.keyer = vmKeyer()), cutOnly = vb.k !== "blur"; if (cutOnly) { camBgL = vb; if (R.vbPrepKey !== JSON.stringify(vb)) { R.vbPrepKey = JSON.stringify(vb); vmVbgPrep(vb).catch(() => {}); } } K.feed(camSrc, cutOnly ? { k: "cut" } : vb, !!R.proj.mirror && facingNow !== "environment", R.mode === "review" ? t : now / 1000, !!(R.counting || R.starting)); if (K.ready) camSrc = K.cv; if (K.fail && !R.keyWarned) { R.keyWarned = true; toast("The background changer couldn't start. Check your internet and open the video again."); } } }
         if (R.ava && avaRef.current) { const P2 = avaRef.current.P, rv = R.mode === "review"; P2.pose(rv ? t : now / 1000, rv ? vmAvaLevel(R.avaLv, t) : liveLevel(), { acc: R.st.acc }); camSrc = { vmAva: P2, h: VM_WEAK ? 520 : 720 }; }
         vmFrame(c, { crop: R.mode === "review" ? R.crop : null, cropCam: R.mode === "review" && !!R.crop && !R.vidPiece, cropThing: R.mode === "review" && !!R.crop && R.vidPiece, G: G2, L: R.L, st: R.st, proj: R.proj, items: R.items, s, t, camFreeze: R.mode === "rec" ? freezeSnap.current : null, camBg: R.ava ? null : camBgL, camFit: R.proj.camFit || "whole", camMirror: !!R.proj.mirror && facingNow !== "environment", tb: R.mode === "review" && tk ? R.u || 0 : R.mode === "rec" ? t : 99, cam: camSrc, camOn: R.mode === "review" ? !!(cam && tk && (tk.cam || R.ava)) && !R.vidPiece : cam, pic: id => vmPic(R.items[id] || vmEntries.get(id)), clip: clipSrc, lite: VM_WEAK && R.mode === "rec", words, readWords: R.mode === "review" && tk ? tk.words : null, prog, out, guest: guestSrc, camCut, tierClip });
         rects.current = out;
@@ -17047,6 +17145,7 @@ notify pgrst, 'reload schema';
           <canvas ref=${cvRef} class=${"vmcv " + proj.fmt + (rec ? (drawOn ? " rec" : " recnd") : "")} onPointerDown=${down} onPointerMove=${move} onPointerUp=${up} onPointerCancel=${() => { drag.current = null; }} aria-label="The video"></canvas>
           ${rec && paused ? html`<div class="pausedtag">⏸ Paused</div>` : null}
           ${rec && !count ? html`<div class="vmrectag"><span class="recdot"></span>${fmtDur(nowT() - (S.current.go || 0))}</div>` : null}
+          ${camReal && vmVbgOn(proj.vbg) && proj.keyMode !== "cloth" && !count ? html`<div class="vmkeynote">🪄 Your room shows here. It's swapped for your background when the video is made.</div>` : null}
           ${count ? html`<div class=${"vmcount" + (count === "go" ? " go" : "")} role="status">${count === "go" ? html`<b>● REC</b><small>Recording — go!</small>` : count === "cam" ? html`<b class="sm">⏳</b><small>Waiting for the camera picture to move…<br/>The recording starts the moment it does.</small><button class="btn slim quiet" onClick=${cancelCount}>Cancel</button>` : html`<b>${count}</b><small>Get ready… recording starts at 0</small><button class="btn slim quiet" onClick=${cancelCount}>Cancel</button>`}</div>` : null}
           ${mode === "review" && !plR.current.on ? html`<button class="crplay" onClick=${() => playReview()} aria-label="Play"><${Ic.play} size=${34}/></button>` : null}
         </div>
@@ -17066,7 +17165,7 @@ notify pgrst, 'reload schema';
             <button class="chip" onClick=${() => setSheet("snd")}>🔊 Sounds</button>
           </div>
           ${camReal ? html`<div class="vmclipbar">
-            <button class=${"chip" + (vmVbgOn(proj.vbg) ? " on" : "")} onClick=${() => { behindT.current = null; setSheet("vbg"); }}>🪄 Behind me: ${vmVbgName(proj.vbg)}</button>
+            <button class=${"chip" + (vmVbgOn(proj.vbg) ? " on" : "")} onClick=${() => { behindT.current = null; setSheet("vbg"); }}>🪄 Behind me: ${vmVbgName(proj.vbg)}${vmVbgOn(proj.vbg) && proj.keyMode === "cloth" ? " · 🟩 cloth" : ""}</button>
             <button class=${"chip" + (proj.mirror ? " on" : "")} onClick=${() => setProj(p => { try { localStorage.setItem("vm.mirror", p.mirror ? "0" : "1"); } catch (e) {} return { mirror: !p.mirror }; })}>↔ ${proj.mirror ? "Flipped (mirror)" : "Not flipped"}</button>
             <button class="chip" onClick=${() => setProj(p => ({ camFit: (p.camFit || "whole") === "whole" ? "fill" : "whole" }))}>${(proj.camFit || "whole") === "whole" ? "🔍 Whole camera picture" : "🔍 Filled (closer)"}</button>
           </div>
@@ -17164,7 +17263,8 @@ notify pgrst, 'reload schema';
       ${blurSheet}
       ${styleSheet}
       ${sheet === "brand" ? html`<${VMBrand} st=${st} proj=${proj} setProj=${x => { setProj(x); S.current.dirty = true; }} onClose=${() => setSheet(null)} onMore=${() => { setSheet(null); styleFocus.current = "open"; setStyling(true); }}/>` : null}
-      ${sheet === "vbg" ? html`<${VMBehind} value=${mode === "rec" && s && s.vbg !== undefined ? s.vbg : proj.vbg} review=${mode === "review"} hereT=${behindT.current} onClose=${() => setSheet(null)} onPick=${pickVbg}/>` : null}
+      ${sheet === "vbg" ? html`<${VMBehind} value=${mode === "rec" && s && s.vbg !== undefined ? s.vbg : proj.vbg} review=${mode === "review"} hereT=${behindT.current} keyMode=${proj.keyMode || "auto"} keyCol=${proj.keyCol} keyStr=${proj.keyStr} camEl=${() => cref.current}
+        onKey=${pt => { setProj(pt); S.current.dirty = true; try { const o = vmKeyPrefs(); if (pt.keyMode) o.mode = pt.keyMode; if (pt.keyCol) o.col = pt.keyCol; if (pt.keyStr != null) o.str = pt.keyStr; localStorage.setItem("vm.key", JSON.stringify(o)); } catch (e) {} }} onClose=${() => setSheet(null)} onPick=${pickVbg}/>` : null}
       ${sheet === "snd" ? html`<${VMSounds} proj=${proj} setProj=${setProj} lib=${lib} setLib=${setLib} st=${st} onClose=${() => setSheet(null)}/>` : null}
       ${sheet === "duo" && duo ? html`<div class="scrim" onClick=${e => { if (e.target === e.currentTarget) setSheet(null); }}><div class="sheet" role="dialog" aria-label="React with a friend">
         <h3 style="margin:0">👥 React with a friend</h3>
@@ -17703,7 +17803,7 @@ notify pgrst, 'reload schema';
   window.__kfApi = { kfCpu, kfTap, kfPress, kfStep, kfNew, kfSnd, kfAnn, annRec };
   window.__ink = { hitInk, inkGroup, straighten };
   window.__mux = { lessonVideo, fixVideo, loadMux, vidJob, awake, player, cleanVoice };
-  window.__AsksT = VMAsks; window.__PlacesT = VMPlaces; window.__RoomT = Room; window.__HwT = HwRunner; window.__FightT = Fight; window.__crx = { crMapPic, crJoinVoice, vmTrip, vmMap, vmWaterDb, vmWaterFind, vmWaterItem, vmVehicle };
+  window.__AsksT = VMAsks; window.__PlacesT = VMPlaces; window.__RoomT = Room; window.__HwT = HwRunner; window.__FightT = Fight; window.__crx = { vmChroma, vmClothColour, crMapPic, crJoinVoice, vmTrip, vmMap, vmWaterDb, vmWaterFind, vmWaterItem, vmVehicle };
   window.__ui = { vmMatte, vmRvm, vmMore, loadMux, vmFindSwears, vmNoMusic, vmBleep, vmAvSync, vmLag, vmPcmOf, vmGrab, vmShrinkPic, VMBlurSheet, vmBlurApply, vmFindFaces, vmOcr, cleanVoice, vmKeyDraw, vmSeg, vmVbgPaint, vmVbgLib, vmVbgPrep, vmKeyer, vmLogoPaint, vmLogoBg, vmLogo, LessonsList, PacksSheet, RulesGuide, LESSON_PACKS, crFrame, crSorted, stageAt0: stageAt, PushBell, SetupCheck, VidJobPill, html, render, store, Board, ExplainStudio, LiveTools, stageAt, buildSound, live, player, ClassroomPlayer, crAssets, CR_W, CR_H, TalkBoard, vidJob, VideoMaker, vmExport, vmDb, vmNew, vmAt, vmFrame, vmGeo, VM_LOOKS, vmStyle, vmSaveStyle, VMStyle, vmIntro, vmOutro, vmLook, vmElemSrc, vmPrepClip, vmWorld, vmTrack, vmUntrack, VME, vmKeep, vmSrcAt, thLib, VMThumbs, thInfo, tsMake, tsRender, tsLoadAll, tsExport, tsCutOut, tsLib, TS_TPLS };
   window.__lang = { moveLangRecs, langHas, viewOf, saveExpl, saveTileRec, uploadBlob, set: l => { REC_LANG = l; }, get: () => REC_LANG, store };
   root.innerHTML = "";
