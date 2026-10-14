@@ -479,6 +479,10 @@ img{max-width:100%}
 .armatch{display:grid;grid-template-columns:1fr 1fr;gap:8px}.armatch>div{display:flex;flex-direction:column;gap:6px}.armatch .arqopt{font-family:Amiri,var(--font);font-size:19px}
 .arorder{display:flex;flex-wrap:wrap;gap:6px;min-height:52px;padding:6px;border:1.5px dashed var(--line);border-radius:12px;margin:4px 0}.arorder.pool{border-style:solid;background:var(--paper-2)}.arorder .arqopt{width:auto;font-family:Amiri,var(--font);font-size:21px;padding:6px 12px}
 .qtext.arq{font-family:Amiri,var(--font);font-size:clamp(22px,6vw,30px);line-height:1.8;white-space:pre-wrap}.artype{font-family:Amiri,var(--font);font-size:22px;margin-bottom:6px}
+.classpick{gap:12px}.classcard{display:flex;flex-direction:column;align-items:flex-start;gap:4px;width:100%;border:0;border-radius:18px;padding:18px 18px 16px;text-align:left;cursor:pointer;color:#fff;font:inherit;box-shadow:var(--lift)}
+.classcard.read{background:linear-gradient(135deg,#1F4FA3,#2C6BD1)}.classcard.ar{background:linear-gradient(135deg,#0E5237,#16704C)}.classcard.studio{background:linear-gradient(135deg,#3A2A55,#5B3F86)}
+.classcard .cname{font-size:21px;font-weight:700;display:flex;align-items:center;gap:8px}.classcard small{opacity:.9;font-size:13.5px}.classcard .cmeta{opacity:.75;font-size:12px}.classcard .count{background:#fff;color:#C3352D}
+.clsh{flex:1}
 .lact{margin:8px 12px;background:#F4F7F5;border-radius:14px;padding:8px 10px}.lacthead{display:flex;align-items:center;gap:8px;width:100%;border:0;background:none;padding:2px 0;text-align:left;font:inherit;color:inherit;cursor:pointer}.lacthead>span{flex:1;font-size:14px;line-height:1.35}.lacthead small{display:block;color:#667;font-size:12px}
 .actbar{position:relative;height:8px;border-radius:5px;background:#DDE3E0;margin:6px 0 2px;overflow:hidden}.actbar i{position:absolute;top:0;bottom:0;background:#2EBD59;border-radius:5px}
 .actlist{margin-top:6px;display:flex;flex-direction:column;gap:8px}.actrow{background:#fff;border-radius:10px;padding:7px 9px;font-size:13px}.actrow b{display:block;font-weight:700}.actrow small{display:block;color:#556;margin-top:2px}.actrow small.t{color:#8a6d00}
@@ -599,11 +603,20 @@ img{max-width:100%}
 .full.studio.vm .sfoot>*{flex-shrink:0}
 /* recording or checking a lesson on a computer or a phone on its side: the board fills the height on the left, the tools in a column on the right */
 @media (min-aspect-ratio:5/4) and (min-width:640px){
-.full.studio.lessonstudio{display:grid;grid-template-columns:minmax(0,1fr) clamp(260px,30vw,460px);grid-template-rows:auto minmax(0,1fr);padding-top:calc(4px + env(safe-area-inset-top,0px))}
+.full.studio.lessonstudio{display:grid;grid-template-columns:minmax(0,1fr) clamp(200px,27vw,440px);grid-template-rows:auto minmax(0,1fr);padding-top:calc(4px + env(safe-area-inset-top,0px))}
 .full.studio.lessonstudio>.fhead{grid-column:1/-1;min-height:40px}
 .full.studio.lessonstudio>.sbody{grid-column:1;grid-row:2;display:flex;align-items:center;justify-content:center;overflow:hidden;padding:0 8px 8px}
 .full.studio.lessonstudio>.sbody>.crwrap{margin:0;width:100%}
-.full.studio.lessonstudio>.sbody .crstage{max-width:none;width:min(100%,calc((100vh - 64px) * 16 / 9));width:min(100%,calc((100dvh - 64px) * 16 / 9));margin:0 auto}
+.full.studio.lessonstudio>.sbody .crstage{max-width:none;width:min(100%,calc((100vh - 56px) * 16 / 9));width:min(100%,calc((100dvh - 56px) * 16 / 9));margin:0 auto}
+.full.studio.lessonstudio .sboard{flex-direction:row;align-items:center;width:100%;height:100%;gap:6px}
+.full.studio.lessonstudio .sboard>.crwrap{flex:1 1 auto;min-width:0;margin:0}
+.full.studio.lessonstudio .btools{flex-direction:column;flex:0 0 62px;width:62px;max-height:100%;overflow-y:auto;overflow-x:hidden;padding:2px 0}
+.full.studio.lessonstudio .btools .tool{width:60px;min-width:0;flex:0 0 auto;padding:5px 2px;font-size:10px}
+.full.studio.lessonstudio>.sfoot{gap:8px}
+.full.studio.lessonstudio>.sfoot>.recrow{order:-2}
+.full.studio.lessonstudio>.sfoot>.stoprow{order:-1;position:static;box-shadow:none;padding:2px 0 4px;gap:8px}
+.full.studio.lessonstudio>.sfoot>.stoprow .big{width:56px;height:56px}
+.full.studio.lessonstudio .pgbar{gap:6px}.full.studio.lessonstudio .pgbar .chip,.full.studio.lessonstudio .pgbar .btn{padding:6px 10px;min-height:0}
 .full.studio.lessonstudio>.sfoot{grid-column:2;grid-row:2;border-top:0;border-left:1px solid var(--line);overflow:auto;padding:8px 12px 14px;align-items:stretch}
 .full.studio.lessonstudio>.sfoot .help{max-width:none;font-size:13px}
 }
@@ -1287,6 +1300,64 @@ a.btn{text-decoration:none}
 /* dark mode: every light panel turns dark too, so its words stay readable */
 :root[data-theme="dark"] .lact,:root[data-theme="dark"] .actrow,:root[data-theme="dark"] .devlist li,:root[data-theme="dark"] .qs,:root[data-theme="dark"] .howcard,:root[data-theme="dark"] .cstage,:root[data-theme="dark"] .rgcard,:root[data-theme="dark"] .coursebtn,:root[data-theme="dark"] .addlist,:root[data-theme="dark"] .anncard,:root[data-theme="dark"] .gamesw,:root[data-theme="dark"] .langpick select,:root[data-theme="dark"] #slang,:root[data-theme="dark"] .tierent,:root[data-theme="dark"] .duolink{background:var(--card);color:var(--ink);border-color:var(--line)}:root[data-theme="dark"] .actrow{background:var(--paper-2)}:root[data-theme="dark"] .lact{background:var(--card)}:root[data-theme="dark"] .testbar,:root[data-theme="dark"] .testtag,:root[data-theme="dark"] .vmhealth,:root[data-theme="dark"] .pgnote,:root[data-theme="dark"] .help.langoff,:root[data-theme="dark"] .tscheck{background:#3A3220;color:#F3E6C4}:root[data-theme="dark"] .vmhealth.ok,:root[data-theme="dark"] .vidready{background:#173326;color:#D6F2E1;border-color:#2D5A43}:root[data-theme="dark"] .vmmaking,:root[data-theme="dark"] .pushcard{background:var(--blue-soft);color:var(--ink);border-color:var(--line)}:root[data-theme="dark"] .rgsteps,:root[data-theme="dark"] .mchip,:root[data-theme="dark"] .cadd{background:var(--paper-2);color:var(--ink)}:root[data-theme="dark"] .actrow small,:root[data-theme="dark"] .devlist small,:root[data-theme="dark"] .lacthead small{color:var(--ink-3)}:root[data-theme="dark"] .testtag{color:#F3E6C4}:root[data-theme="dark"] .gamesw{color:var(--ink-2)}
 @media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .lact,:root:not([data-theme="light"]) .actrow,:root:not([data-theme="light"]) .devlist li,:root:not([data-theme="light"]) .qs,:root:not([data-theme="light"]) .howcard,:root:not([data-theme="light"]) .cstage,:root:not([data-theme="light"]) .rgcard,:root:not([data-theme="light"]) .coursebtn,:root:not([data-theme="light"]) .addlist,:root:not([data-theme="light"]) .anncard,:root:not([data-theme="light"]) .gamesw,:root:not([data-theme="light"]) .langpick select,:root:not([data-theme="light"]) #slang,:root:not([data-theme="light"]) .tierent,:root:not([data-theme="light"]) .duolink{background:var(--card);color:var(--ink);border-color:var(--line)}:root:not([data-theme="light"]) .actrow{background:var(--paper-2)}:root:not([data-theme="light"]) .lact{background:var(--card)}:root:not([data-theme="light"]) .testbar,:root:not([data-theme="light"]) .testtag,:root:not([data-theme="light"]) .vmhealth,:root:not([data-theme="light"]) .pgnote,:root:not([data-theme="light"]) .help.langoff,:root:not([data-theme="light"]) .tscheck{background:#3A3220;color:#F3E6C4}:root:not([data-theme="light"]) .vmhealth.ok,:root:not([data-theme="light"]) .vidready{background:#173326;color:#D6F2E1;border-color:#2D5A43}:root:not([data-theme="light"]) .vmmaking,:root:not([data-theme="light"]) .pushcard{background:var(--blue-soft);color:var(--ink);border-color:var(--line)}:root:not([data-theme="light"]) .rgsteps,:root:not([data-theme="light"]) .mchip,:root:not([data-theme="light"]) .cadd{background:var(--paper-2);color:var(--ink)}:root:not([data-theme="light"]) .actrow small,:root:not([data-theme="light"]) .devlist small,:root:not([data-theme="light"]) .lacthead small{color:var(--ink-3)}:root:not([data-theme="light"]) .testtag{color:#F3E6C4}:root:not([data-theme="light"]) .gamesw{color:var(--ink-2)}}
+
+/* recording: the board as big as the phone allows, the tools in one line beside it, the script and Stop under it */
+.sboard{display:flex;flex-direction:column;gap:6px}
+.full.studio.lessonstudio .crstage{max-width:none}
+@media not all and (min-aspect-ratio:5/4) and (min-width:640px){
+.full.studio.lessonstudio>.sbody{flex:0 0 auto;overflow:visible}
+.full.studio.lessonstudio>.sbody .sboard>.crwrap{margin:4px 4px 0}
+.full.studio.lessonstudio>.sfoot{flex:1 1 auto;min-height:0;overflow:auto;padding-bottom:0}
+.full.studio.lessonstudio>.sfoot>*{flex-shrink:0}
+}
+.btools{display:flex;flex-wrap:nowrap;gap:5px;overflow-x:auto;padding:0 6px;scrollbar-width:none}
+.btools::-webkit-scrollbar{display:none}
+.btools .tool{flex:0 0 auto;min-width:58px}
+.stoprow{position:sticky;bottom:0;background:var(--paper);padding:8px 0 calc(10px + env(safe-area-inset-bottom,0px));z-index:3;box-shadow:0 -8px 14px -10px rgba(0,0,0,.2)}
+.stoprow .btn.on{background:var(--blue-soft);color:var(--blue)}
+.helpbox{background:var(--card);border-radius:14px;padding:10px 12px;box-shadow:var(--lift);display:flex;flex-direction:column;gap:8px;align-items:center;width:100%}
+.helpbox .help{max-width:none!important;text-align:left!important;font-size:13.5px}
+.fhead .iconbtn.on{background:var(--blue-soft);color:var(--blue)}
+details.script{width:100%;background:#FFF8E1;color:#3b3220;border-radius:12px;padding:6px 10px;font-size:13.5px;line-height:1.45}
+details.script summary{display:flex;gap:8px;align-items:baseline;cursor:pointer;list-style:none;overflow:hidden;white-space:nowrap}
+details.script summary::-webkit-details-marker{display:none}
+details.script summary b{flex:0 0 auto;font-family:Amiri,var(--font);font-size:17px}
+details.script summary span{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;opacity:.8}
+details.script summary::after{content:"▾";flex:0 0 auto;opacity:.6}
+details.script[open] summary::after{content:"▴"}
+details.script>div{white-space:pre-wrap;margin-top:6px;max-height:30vh;overflow:auto}
+.arkeys{position:fixed;inset:auto 0 0 0;z-index:95;background:var(--paper);border-radius:18px 18px 0 0;box-shadow:0 -10px 30px rgba(0,0,0,.25);padding:10px 8px calc(10px + env(safe-area-inset-bottom,0px));display:flex;flex-direction:column;gap:6px;max-width:760px;margin:0 auto}
+.arkeys .kout{font:700 40px/1.6 Amiri,serif;text-align:center;min-height:68px;background:var(--card);border-radius:12px;padding:0 10px;direction:rtl;color:var(--ink);overflow-x:auto;white-space:nowrap}
+.arkeys .krow{display:flex;gap:4px;justify-content:center;direction:rtl}
+.arkeys .k{flex:1 1 0;max-width:52px;min-width:0;height:46px;border-radius:9px;border:1px solid var(--line);background:var(--card);color:var(--ink);font:700 24px Amiri,serif;padding:0}
+.arkeys .k.h{font-size:30px;background:#FFF8E1;color:#3b3220}
+.arkeys .k.wide{max-width:none;flex:3 1 0;font:700 14px var(--font)}
+.arkeys .kbar{display:flex;gap:8px;justify-content:center;flex-wrap:wrap}
+
+/* the Arabic lesson: summary, my notes, practice, vocabulary */
+.arextras{margin:8px 12px;background:var(--card);border-radius:14px;padding:8px 10px;box-shadow:var(--lift);color:var(--ink);display:flex;flex-direction:column;gap:6px}
+.arsum{background:#FFF8E1;color:#3b3220;border-radius:12px;padding:10px 12px;font-size:15px;line-height:1.55;white-space:pre-wrap}
+.arsum b{display:block;font-size:12px;letter-spacing:.04em;text-transform:uppercase;opacity:.7;margin-bottom:2px}
+.arpractise{flex-direction:column;gap:2px}.arpractise small{font-weight:500;opacity:.85;font-size:12px}
+.arnotebook{width:100%;box-sizing:border-box;border:1px solid var(--line);border-radius:12px;padding:10px;font:16px/1.6 Amiri,var(--font);background:var(--paper);color:var(--ink);white-space:pre-wrap;min-height:60px}
+.arpq{font:700 30px/1.9 Amiri,serif;text-align:center;padding:14px 8px;background:var(--card);border-radius:14px;box-shadow:var(--lift);color:var(--ink)}
+.arblank{display:inline-block;min-width:3em;border-bottom:3px dashed var(--blue);margin:0 .2em;color:var(--blue)}.arblank.ok{border-color:#2E9E5B;color:#2E9E5B}.arblank.no{border-color:#C62828;color:#C62828}
+.okt{color:#2E9E5B;font-weight:700}.not{color:#C62828;font-weight:700}
+.arins{width:100%;border:1.5px dashed var(--line);background:none;color:var(--ink-3);border-radius:12px;padding:8px;font:600 13px var(--font);margin:6px 0}
+.arins:active{background:var(--blue-soft);color:var(--blue)}
+.kindgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:8px}
+.kindbtn{display:flex;flex-direction:column;align-items:flex-start;gap:2px;border:1px solid var(--line);background:var(--card);color:var(--ink);border-radius:12px;padding:10px;text-align:left}
+.kindbtn span{font-size:22px}.kindbtn b{font-size:14px}.kindbtn small{font-size:11.5px;color:var(--ink-3)}
+.arpeekcv{display:block;width:100%;aspect-ratio:16/9;border-radius:10px;background:#22392D}
+.arpicprev{max-width:100%;max-height:240px;border-radius:10px;align-self:center}
+.arwlist.ed2 .arwrow{gap:6px}.arwpic{width:52px;height:52px;flex:0 0 52px;border-radius:10px;border:1px solid var(--line);background:var(--paper-2);padding:0;overflow:hidden;font-size:12px;color:var(--ink-3)}
+.arwpic img{width:100%;height:100%;object-fit:cover;display:block}
+.arwtx{flex:1;min-width:0;display:flex;flex-direction:column;gap:2px}.arwtx .arin{padding:4px 8px;font-size:13px}
+.arin.arshort{max-width:9em}
+.iconbtn.recw{color:#fff;background:#C62828;border-radius:50%}
+.artable{background:var(--card);border-radius:12px;padding:10px;box-shadow:var(--lift);overflow-x:auto}.artable small{display:block;color:var(--ink-3);font-size:12px;margin-bottom:6px}
+.artable table{border-collapse:collapse;width:100%;font:600 18px/1.6 Amiri,serif}.artable th,.artable td{border:1px solid var(--line);padding:4px 8px;text-align:center}.artable th{background:#FFF8E1;color:#3b3220}
+.arboardv{margin:8px 12px 4px}
 </style>
 </head>
 <body>
@@ -1614,19 +1685,21 @@ create policy "class reads arabic lessons" on public.ar_lessons for select to au
 drop policy if exists "teacher writes arabic lessons" on public.ar_lessons;
 create policy "teacher writes arabic lessons" on public.ar_lessons for all to authenticated using (public.is_teacher()) with check (public.is_teacher());
 grant select, insert, update, delete on public.ar_lessons to authenticated;
--- the Fusha lesson bank: the ones you've put away
-create table if not exists public.ar_bank (id text primary key, hidden boolean not null default false, updated_at timestamptz not null default now());
-alter table public.ar_bank enable row level security;
-drop policy if exists "teacher bank" on public.ar_bank;
-create policy "teacher bank" on public.ar_bank for all to authenticated using (public.is_teacher()) with check (public.is_teacher());
-grant select, insert, update, delete on public.ar_bank to authenticated;
--- words each student has practised: learned once they get it right on two different days
+alter table public.ar_lessons add column if not exists summary text not null default '';
+-- each student's own notebook, one page per lesson: they write it, you can read it
+create table if not exists public.ar_notes (
+  user_id text not null, lesson_id text not null, body text not null default '', updated_at timestamptz not null default now(), primary key (user_id, lesson_id));
+alter table public.ar_notes enable row level security;
+drop policy if exists "own notebook" on public.ar_notes;
+create policy "own notebook" on public.ar_notes for all to authenticated using (user_id = public.ar_me() or public.is_teacher()) with check (user_id = public.ar_me());
+grant select, insert, update, delete on public.ar_notes to authenticated;
+-- words each student has got right: in your exercises and tests (and the lesson practice)
 create table if not exists public.ar_words (
   user_id text not null, word text not null, ok int not null default 0, bad int not null default 0,
   last_ok date, learned_at timestamptz, updated_at timestamptz not null default now(), primary key (user_id, word));
 alter table public.ar_words enable row level security;
 drop policy if exists "own words" on public.ar_words;
-create policy "own words" on public.ar_words for all to authenticated using (user_id = public.ar_me() or public.is_teacher()) with check (user_id = public.ar_me());
+create policy "own words" on public.ar_words for all to authenticated using (user_id = public.ar_me() or public.is_teacher()) with check (user_id = public.ar_me() or public.is_teacher());
 grant select, insert, update, delete on public.ar_words to authenticated;
 do $$
 begin
@@ -2242,19 +2315,21 @@ create policy "class reads arabic lessons" on public.ar_lessons for select to au
 drop policy if exists "teacher writes arabic lessons" on public.ar_lessons;
 create policy "teacher writes arabic lessons" on public.ar_lessons for all to authenticated using (public.is_teacher()) with check (public.is_teacher());
 grant select, insert, update, delete on public.ar_lessons to authenticated;
--- the Fusha lesson bank: the ones you've put away
-create table if not exists public.ar_bank (id text primary key, hidden boolean not null default false, updated_at timestamptz not null default now());
-alter table public.ar_bank enable row level security;
-drop policy if exists "teacher bank" on public.ar_bank;
-create policy "teacher bank" on public.ar_bank for all to authenticated using (public.is_teacher()) with check (public.is_teacher());
-grant select, insert, update, delete on public.ar_bank to authenticated;
--- words each student has practised: learned once they get it right on two different days
+alter table public.ar_lessons add column if not exists summary text not null default '';
+-- each student's own notebook, one page per lesson: they write it, you can read it
+create table if not exists public.ar_notes (
+  user_id text not null, lesson_id text not null, body text not null default '', updated_at timestamptz not null default now(), primary key (user_id, lesson_id));
+alter table public.ar_notes enable row level security;
+drop policy if exists "own notebook" on public.ar_notes;
+create policy "own notebook" on public.ar_notes for all to authenticated using (user_id = public.ar_me() or public.is_teacher()) with check (user_id = public.ar_me());
+grant select, insert, update, delete on public.ar_notes to authenticated;
+-- words each student has got right: in your exercises and tests (and the lesson practice)
 create table if not exists public.ar_words (
   user_id text not null, word text not null, ok int not null default 0, bad int not null default 0,
   last_ok date, learned_at timestamptz, updated_at timestamptz not null default now(), primary key (user_id, word));
 alter table public.ar_words enable row level security;
 drop policy if exists "own words" on public.ar_words;
-create policy "own words" on public.ar_words for all to authenticated using (user_id = public.ar_me() or public.is_teacher()) with check (user_id = public.ar_me());
+create policy "own words" on public.ar_words for all to authenticated using (user_id = public.ar_me() or public.is_teacher()) with check (user_id = public.ar_me() or public.is_teacher());
 grant select, insert, update, delete on public.ar_words to authenticated;
 do $$
 begin
@@ -2467,7 +2542,7 @@ notify pgrst, 'reload schema';
     recs: { lesson: "lesson", text: "tile", audio: "audio", secs: "secs", lang: "lang" },
     students: { name: "name", color: "color", unlocked: "unlocked", invite: "invite", lang: "lang", games: "games", course: "course" },
     explains: { lesson: "lesson", lang: "lang", explain: "explain", explainSecs: "explain_secs", cues: "cues", updatedAt: "updated_at" },
-    ar_lessons: { order: "ord", title: "title", pages: "pages", words: "words", src: "src", explain: "explain", explainSecs: "explain_secs", cues: "cues", updatedAt: "updated_at" },
+    ar_lessons: { order: "ord", title: "title", summary: "summary", pages: "pages", words: "words", src: "src", explain: "explain", explainSecs: "explain_secs", cues: "cues", updatedAt: "updated_at" },
     live: { lesson: "lesson", mode: "mode", startedAt: "started_at", updatedAt: "updated_at" },
     msgs: { student: "student", lesson: "lesson", from: "sender", kind: "kind", asset: "media", secs: "secs", text: "body", hw: "hw", point: "point", next: "next", seen: "seen", cid: "cid" },
   };
@@ -2489,7 +2564,7 @@ notify pgrst, 'reload schema';
     explains: r => ({ id: r.id, lesson: r.lesson, lang: r.lang, explain: r.explain, explainSecs: r.explain_secs || 0, cues: Array.isArray(r.cues) ? r.cues : [], updatedAt: ms(r.updated_at) }),
     live: r => ({ id: r.id, lesson: r.lesson, mode: r.mode, startedAt: ms(r.started_at), updatedAt: ms(r.updated_at) }),
     msgs: r => ({ id: r.id, student: r.student, lesson: r.lesson, from: r.sender, kind: r.kind, asset: r.media, secs: r.secs, text: r.body, hw: r.hw, point: r.point || [], next: r.next, seen: r.seen, cid: r.cid, at: ms(r.created_at), test: !!r.test }),
-    ar_lessons: r => ({ id: r.id, order: r.ord || 0, title: r.title, pages: Array.isArray(r.pages) ? r.pages : [], words: Array.isArray(r.words) ? r.words : [], src: r.src || [], explain: r.explain, explainSecs: r.explain_secs || 0, cues: Array.isArray(r.cues) ? r.cues : [], updatedAt: ms(r.updated_at) }),
+    ar_lessons: r => ({ id: r.id, order: r.ord || 0, title: r.title, summary: r.summary || "", pages: Array.isArray(r.pages) ? r.pages : [], words: Array.isArray(r.words) ? r.words : [], src: r.src || [], explain: r.explain, explainSecs: r.explain_secs || 0, cues: Array.isArray(r.cues) ? r.cues : [], updatedAt: ms(r.updated_at) }),
     views: r => ({ id: r.id, student: r.student, lesson: r.lesson, kind: r.kind, ref: r.ref, test: !!r.test, openedAt: ms(r.opened_at), updatedAt: ms(r.updated_at), secs: r.secs || 0, dur: r.dur || 0, watched: Array.isArray(r.watched) ? r.watched : [], jumps: Array.isArray(r.jumps) ? r.jumps : [] }),
   };
   const SORTS = {
@@ -2921,23 +2996,28 @@ notify pgrst, 'reload schema';
 
   /* ================= a livelier board: circles, underlines, chalk drawing, a word built from the board, pictures, clips =================
      Everything the teacher does is a cue with a time, so it replays with the voice: on the student's phone and in the saved video. */
-  const FX_KINDS = ["o", "ox", "sa", "sx", "img", "imgx", "vid", "rm", "pg"];
+  const FX_KINDS = ["o", "ox", "sa", "sx", "img", "imgx", "vid", "rm", "pg", "hd", "zm", "zmx", "rv"];
   function stageAt(cues, now) {
-    let marks = [], strip = [], img = null, page = 0;
+    let marks = [], strip = [], img = null, page = 0, hide = [], zm = null, zmo = null, rv = null;
     for (const c of cues || []) {
       if (c.t > now) break;
-      if (c.k === "pg") { marks = []; strip = []; img = null; page = c.v || 0; continue; }   // the next concept: a fresh board
+      if (c.k === "pg") { marks = []; strip = []; img = null; page = c.v || 0; hide = []; zm = null; zmo = null; rv = null; continue; }   // the next concept: a fresh board
+      if (c.k === "hd") { hide.push(c); continue; }   // a word rubbed off the board
+      if (c.k === "zm") { zm = c; zmo = null; continue; }   // a word brought to the middle
+      if (c.k === "zmx") { if (zm) zmo = { r: zm.r, c: zm.c, t: c.t }; zm = null; continue; }   // and put back
+      if (c.k === "rv") { rv = c; continue; }   // the answers shown
       if (c.k === "o") { marks.push(c); if (marks.length > 12) marks.shift(); }
       else if (c.k === "ox") marks = [];
       else if (c.k === "sa") { strip.push(c); if (strip.length > 16) strip.shift(); }
       else if (c.k === "sx") strip = [];
       else if (c.k === "img") img = c;
       else if (c.k === "imgx") img = null;
-      else if (c.k === "rm") { marks = marks.filter(x => x.id !== c.ref); strip = strip.filter(x => x.id !== c.ref); if (img && img.id === c.ref) img = null; }
+      else if (c.k === "rm") { marks = marks.filter(x => x.id !== c.ref); strip = strip.filter(x => x.id !== c.ref); if (img && img.id === c.ref) img = null; hide = hide.filter(x => x.id !== c.ref); if (zm && zm.id === c.ref) zm = null; if (rv && rv.id === c.ref) rv = null; }
     }
-    return { marks, strip, img, page };
+    const hd = {}; for (const h of hide) hd[h.r + "-" + h.c] = h;
+    return { marks, strip, img, page, hide: hd, hideList: hide, zm, zmo, rv };
   }
-  const stageSig = s => (s ? s.marks.map(c => c.id).join(",") + "|" + s.strip.map(c => c.id).join(",") + "|" + (s.img ? s.img.id : "") + "|" + (s.page || 0) : "");
+  const stageSig = s => (s ? s.marks.map(c => c.id).join(",") + "|" + s.strip.map(c => c.id).join(",") + "|" + (s.img ? s.img.id : "") + "|" + (s.page || 0) + "|" + (s.hideList || []).map(c => c.id).join(",") + "|" + (s.zm ? s.zm.id : "") + "|" + (s.rv ? s.rv.id : "") : "");
   const hasStrip = cues => (cues || []).some(c => c.k === "sa");
   const fxOnly = cues => (cues || []).filter(c => c.t >= 0 && FX_KINDS.includes(c.k));
   const hashN = str => { let h = 7; for (const ch of String(str || "")) h = (h * 31 + ch.charCodeAt(0)) % 1000; return h / 1000; };
@@ -3051,7 +3131,7 @@ notify pgrst, 'reload schema';
     crRR(c, x, y, w, h, 4); c.fillStyle = g; c.fill();
     c.fillStyle = "#F4EEDF"; c.fillRect(x + w - 10, y + 4, 8, h - 8);
     if (band) { c.fillStyle = band; c.fillRect(x + 14, y + 3, 4, h - 6); c.fillRect(x + w - 26, y + 3, 4, h - 6); }
-    if (label) { c.fillStyle = "#F4E7C8"; c.font = "600 " + Math.round(h * 0.46) + "px Andika, sans-serif"; c.textAlign = "center"; c.textBaseline = "middle"; c.fillText(label, x + w / 2 - 6, y + h / 2 + 1); }
+    if (label) { const ar = /[\u0600-\u06FF]/.test(label); c.fillStyle = "#F4E7C8"; c.font = (ar ? "700 " + Math.round(h * 0.6) + "px Amiri, serif" : "600 " + Math.round(h * 0.46) + "px Andika, sans-serif"); c.direction = ar ? "rtl" : "ltr"; c.textAlign = "center"; c.textBaseline = "middle"; c.fillText(label, x + w / 2 - 6, y + h / 2 + 1); c.direction = "ltr"; }
   }
   function crLeaf(c, x, y, len, ang, col) {
     c.save(); c.translate(x, y); c.rotate(ang);
@@ -3078,20 +3158,36 @@ notify pgrst, 'reload schema';
     c.fillStyle = "#6E4526"; crRR(c, B.x + 10, B.y + B.h - 16, B.w - 20, 16, 4); c.fill(); c.fillStyle = "rgba(255,255,255,.12)"; c.fillRect(B.x + 10, B.y + B.h - 16, B.w - 20, 3);
     // the lesson, written small in the corner
     c.fillStyle = "rgba(241,236,220,.6)"; c.textAlign = "left"; c.textBaseline = "alphabetic";
+    if (lesson.rtl && lesson.pages) {   // an Arabic lesson: its name on the right, the concept's name under it, the lesson number on the left
+      const nm = lesson.head != null ? lesson.head : lesson.title || "", sub = lesson.pageTitle || "";
+      c.textAlign = "right"; c.direction = "rtl"; c.fillStyle = "rgba(241,236,220,.7)";
+      let fs = 34; c.font = "700 " + fs + "px Amiri, serif"; while (fs > 16 && c.measureText(nm).width > 760) { fs -= 2; c.font = "700 " + fs + "px Amiri, serif"; }
+      c.fillText(nm, B.x + B.w - 40, B.y + 50);
+      if (sub) { const w0 = c.measureText(nm).width, x1 = B.x + B.w - 40 - (nm ? w0 + 34 : 0); c.font = "700 28px Amiri, serif"; const sw = c.measureText(sub).width; if (x1 - sw > B.x + 230) { c.fillStyle = "rgba(255,226,122,.9)"; c.fillText(sub, x1, B.y + 50); } }
+      c.direction = "ltr"; c.textAlign = "left";
+      if (number) { c.fillStyle = "rgba(241,236,220,.45)"; c.font = "700 26px Amiri, serif"; c.direction = "rtl"; c.fillText("الدَّرْسُ " + String(number).replace(/\d/g, d => "٠١٢٣٤٥٦٧٨٩"[d]), B.x + 40, B.y + 50); c.direction = "ltr"; }
+      return cv;
+    }
     const title = lesson.head != null ? lesson.head : lesson.talk ? lesson.title || "" : "Lesson " + number + (lesson.title ? "  ·  " + lesson.title : "");
     crFit(c, title, 700, 30, 700); c.fillText(title, B.x + 40, B.y + 52);
     c.strokeStyle = "rgba(241,236,220,.35)"; c.lineWidth = 2; c.beginPath(); c.moveTo(B.x + 40, B.y + 60); c.lineTo(B.x + 40 + Math.min(700, c.measureText(title).width), B.y + 60); c.stroke();
     return cv;
   }
   // the desk along the bottom, and what's on it (the plant, the globe and the clock move, so they're drawn each time)
-  function crFront() {
+  function crFront(rtl) {
     const cv = document.createElement("canvas"); cv.width = CR_W; cv.height = CR_H;
     const c = cv.getContext("2d"), D = CR_DESK;
     let g = c.createLinearGradient(0, D, 0, CR_H); g.addColorStop(0, "#C98A4B"); g.addColorStop(0.15, "#B27238"); g.addColorStop(1, "#8A5226"); c.fillStyle = g; c.fillRect(0, D, CR_W, CR_H - D);
     c.fillStyle = "#DDA25F"; c.fillRect(0, D, CR_W, 4);
     c.strokeStyle = "rgba(90,50,20,.18)"; c.lineWidth = 1.5; for (let i = 0; i < 7; i++) { c.beginPath(); c.moveTo(0, D + 14 + i * 11); c.bezierCurveTo(300, D + 9 + i * 11, 900, D + 19 + i * 11, CR_W, D + 12 + i * 11); c.stroke(); }
-    crBook(c, 18, D - 2, 210, 30, "#2F6B4A", "#E0B062", "Spelling");
-    crBook(c, 26, D - 30, 196, 28, "#2C4E7E", "#E0B062", "Reading");
+    if (rtl) {   // the Arabic class: its own books
+      crBook(c, 14, D - 2, 220, 32, "#6B2E2E", "#E0B062", "النَّحْوُ");
+      crBook(c, 22, D - 32, 204, 30, "#2F6B4A", "#E0B062", "الصَّرْفُ");
+      crBook(c, 30, D - 60, 188, 28, "#2C4E7E", "#E0B062", "المُعْجَمُ");
+    } else {
+      crBook(c, 18, D - 2, 210, 30, "#2F6B4A", "#E0B062", "Spelling");
+      crBook(c, 26, D - 30, 196, 28, "#2C4E7E", "#E0B062", "Reading");
+    }
     const px = 250, pw = 52, ph = 54;
     for (let i = 0; i < 4; i++) { const cols = ["#F4F1E8", "#FFE27A", "#9FD3FF", "#FFB3B3"]; c.save(); c.translate(px + 12 + i * 10, D - ph + 6); c.rotate(-0.16 + i * 0.1); c.fillStyle = cols[i]; crRR(c, -3, -30, 6, 34, 3); c.fill(); c.restore(); }
     g = c.createLinearGradient(px, 0, px + pw, 0); g.addColorStop(0, "#9A6A3B"); g.addColorStop(0.5, "#C08A52"); g.addColorStop(1, "#8A5A32"); c.fillStyle = g; crRR(c, px, D - ph + 4, pw, ph, 6); c.fill();
@@ -3222,11 +3318,17 @@ notify pgrst, 'reload schema';
   function crFrame(c, F) {
     const lay = F.lay, t = F.t, st = F.stage;
     c.drawImage(F.room, 0, 0);
+    if (lay.ar) crArUnder(c, F, lay, st, t);
     const sk = crStick(F.list, t, lay, F.lead || 0);
     const pb = sk && sk.cue && sk.cue.r != null ? lay.at[sk.cue.r + "-" + sk.cue.c] : null;
     if (pb) { const k = crEase((t - sk.cue.t) / 0.25); c.fillStyle = "rgba(244,211,107," + (0.1 * k).toFixed(2) + ")"; crRR(c, pb.x - 12, pb.y - 8, pb.w + 24, pb.h + 16, 20); c.fill(); c.fillStyle = "rgba(244,211,107," + (0.18 * k).toFixed(2) + ")"; crRR(c, pb.x - 4, pb.y, pb.w + 8, pb.h, 14); c.fill(); c.strokeStyle = "rgba(244,211,107," + (0.9 * k).toFixed(2) + ")"; c.lineWidth = 3; crRR(c, pb.x - 4, pb.y, pb.w + 8, pb.h, 14); c.stroke(); }
     c.font = "600 " + lay.size + "px " + (lay.font || "Andika, sans-serif"); c.textAlign = "center"; c.textBaseline = "middle";
-    for (const it of lay.items) { c.fillStyle = it === pb ? "#FFFFFF" : pb ? "rgba(241,236,220,.6)" : "rgba(241,236,220,.95)"; c.fillText(it.text, it.x + it.w / 2, it.y + it.h / 2 + 2); }
+    for (const it of lay.items) {
+      if (st.hide && st.hide[it.r + "-" + it.c]) continue;   // rubbed off
+      if (it.fs) { c.font = "600 " + it.fs + "px " + (it.ar ? CR_AR : CR_LAT); c.direction = it.ar ? "rtl" : "ltr"; }
+      c.fillStyle = it === pb ? "#FFFFFF" : pb ? "rgba(241,236,220,.6)" : it.col || "rgba(241,236,220,.95)"; c.fillText(it.text, it.x + it.w / 2, it.y + it.h / 2 + (it.ar ? 0 : 2));
+    }
+    c.direction = "ltr";
     c.shadowBlur = 0;
     // chalk marks: circles and lines on words go under a picture; marks made anywhere else (on a picture too) go on top
     const drawMarks = onWords => { for (const q of st.marks) { if ((q.r != null) !== onWords) continue;
@@ -3252,7 +3354,13 @@ notify pgrst, 'reload schema';
     }
     drawMarks(false);
     // the word being built, along the bottom of the board
-    if (st.strip.length && !(st.img && F.pic)) {
+    if (st.strip.length && !(st.img && F.pic) && lay.ar) {   // Arabic: the letters join up as they come, right to left
+      const by = crStripY() - 6, text = st.strip.map(q => (q.wd || q.r != null ? " " + q.ch + " " : q.ch)).join("").replace(/\s+/g, " ").trim(), fs = crArFit(c, text, 1000, 120, 30, 700);
+      c.font = "700 " + fs + "px " + CR_AR; const tot = c.measureText(text).width;
+      c.fillStyle = "rgba(244,211,107,.1)"; c.strokeStyle = "#FFE27A"; c.lineWidth = 3.5; crRR(c, CR_W / 2 - tot / 2 - 30, by - fs * 0.78, tot + 60, fs * 1.5, 16); c.fill(); c.stroke();
+      const last = st.strip[st.strip.length - 1], k = crEase((t - last.t) / 0.4);
+      c.save(); c.direction = "rtl"; c.textAlign = "center"; c.textBaseline = "middle"; c.fillStyle = "#FFF6D0"; c.globalAlpha = 0.6 + 0.4 * k; c.fillText(text, CR_W / 2, by); c.restore();
+    } else if (st.strip.length && !(st.img && F.pic)) {
       const by = crStripY(), fs = Math.min(80, crFit(c, st.strip.map(q => q.ch).join("  "), 900, 80, 700));
       c.font = "700 " + fs + "px Andika, sans-serif";
       const ws = st.strip.map(q => c.measureText(q.ch).width), gap = fs * 0.35, tot = ws.reduce((a, b) => a + b, 0) + gap * (ws.length - 1);
@@ -3266,6 +3374,7 @@ notify pgrst, 'reload schema';
         c.save(); c.translate(cx, cy); c.scale(sc, sc); c.fillStyle = "#FFF6D0"; c.textAlign = "center"; c.textBaseline = "middle"; c.fillText(q.ch, 0, 2); c.restore();
       });
     }
+    if (lay.ar) { crArOver(c, F, lay, st, t); crArZoom(c, lay, st, t); }
     // a clip, shown on the board like a screen
     if (F.clip) {
       const B = CR_BOARD; c.fillStyle = "#101418"; c.fillRect(B.x + 14, B.y + 14, B.w - 28, B.h - 30);
@@ -3282,11 +3391,179 @@ notify pgrst, 'reload schema';
     // the desk, the things that move, then the stick in front of it all
     c.drawImage(F.front, 0, 0);
     crLiving(c, F.wall);
-    if (sk) crDrawStick(c, sk.tip);
+    if (sk && !st.zm) crDrawStick(c, sk.tip);
     if (F.caption) crCaption(c, F.caption, t);
   }
   // which tile (or which spot on the board) is under a point of the picture
   function crHit(lay, x, y) { return lay.items.find(q => x >= q.x - 6 && x <= q.x + q.w + 6 && y >= q.y - 4 && y <= q.y + q.h + 4) || null; }
+
+  /* ---------- an Arabic board: the words big and filling the board, whatever the concept is ----------
+     A concept is one board: text (lines of Arabic), words (with their pictures), match, fill (a blank to fill),
+     choose (a question and its answers), table (a conjugation table, say) or pic (a page of a book, a photo). */
+  const CR_AR = "Amiri, 'Noto Naskh Arabic', serif", CR_LAT = "Andika, sans-serif";
+  const crIsAr = s => /[؀-ۿ]/.test(String(s || ""));
+  const crArArea = stripOn => ({ x: CR_BOARD.x + 36, y: CR_BOARD.y + 76, w: CR_BOARD.w - 72, h: CR_BOARD.h - 76 - (stripOn ? 150 : 74) });
+  const crNoTash = s => String(s || "").replace(/[ً-ْٰ]/g, "");
+  const crNoEmoji = s => String(s || "").replace(/[\u{1F000}-\u{1FAFF}\u{2600}-\u{27BF}\u{FE0F}\u{200D}]/gu, "").replace(/\s{2,}/g, " ").trim();
+  function crArFit(c, text, maxW, maxS, minS, weight) {
+    const f = crIsAr(text) ? CR_AR : CR_LAT;
+    let lo = minS || 18, hi = Math.max(lo, Math.floor(maxS));
+    c.font = (weight || 600) + " " + hi + "px " + f; if (c.measureText(text).width <= maxW) return hi;
+    while (hi - lo > 1) { const m = (lo + hi) >> 1; c.font = (weight || 600) + " " + m + "px " + f; if (c.measureText(text).width <= maxW) lo = m; else hi = m; }
+    return lo;
+  }
+  const crShuf = (list, seed) => { const a = list.slice(); let h = 7; for (const ch of String(seed)) h = (h * 31 + ch.charCodeAt(0)) >>> 0; for (let i = a.length - 1; i > 0; i--) { h = (h * 1103515245 + 12345) >>> 0; const j = h % (i + 1); [a[i], a[j]] = [a[j], a[i]]; } return a; };
+  // what a concept is, whatever way it was saved
+  function arPg(p) { return p == null ? { kind: "text", board: "" } : typeof p === "string" ? { kind: "text", board: p } : Object.assign({ kind: "text" }, p); }
+  // lines of words, as big as the board allows; each line centred; a long line wraps only when it must
+  function crArLines(c, lines, A, maxS) {
+    const rows = lines.map(l => l.split(/\s+/).filter(Boolean)).filter(r => r.length);
+    let best = null;
+    for (let size = maxS || 170; size >= 26; size -= 4) {
+      c.font = "600 " + size + "px " + CR_AR;
+      const lineH = size * 1.72, gap = size * 0.34, pad = size * 0.1, out = [];
+      let y = 0, ok = true;
+      for (let r = 0; r < rows.length; r++) {
+        let line = [], x = 0;
+        const flush = () => { const used = x - gap; line.forEach(it => { it.lineW = used; it.lx = it.x; }); line = []; };
+        for (let ci = 0; ci < rows[r].length; ci++) {
+          const text = rows[r][ci], tw = c.measureText(text).width + pad * 2;
+          if (tw > A.w) ok = false;
+          if (x > 0 && x + tw > A.w) { if (size > 64) ok = false; flush(); x = 0; y += lineH; }
+          const it = { r, c: ci, t: { t: text }, text, x, w: tw, h: lineH * 0.86, line: y, fs: size, ar: crIsAr(text) };
+          out.push(it); line.push(it); x += tw + gap;
+        }
+        flush(); y += lineH;
+      }
+      best = { size, lineH, items: out, total: y };
+      if (ok && y <= A.h) break;
+    }
+    if (!best) return { size: 60, lineH: 100, items: [] };
+    const offY = Math.max(0, (A.h - best.total) / 2);
+    best.items.forEach(it => { const left = A.x + (A.w - it.lineW) / 2; it.x = left + it.lineW - it.lx - it.w; it.y = A.y + offY + it.line + best.lineH * 0.07; });   // from the right
+    return best;
+  }
+  function crLayoutAr(page, lesson, stripOn) {
+    const c = document.createElement("canvas").getContext("2d"), A = crArArea(stripOn), p = arPg(page), items = [], lines = [];
+    const tx = s => (lesson.noTash ? crNoTash(s) : String(s || ""));
+    let size = 80, reveal = null, bg = null;
+    const box = (it, x, y, w, h) => Object.assign(it, { x, y, w, h });
+    if (p.kind === "words") {
+      const W = (p.words || []).map(a => (lesson.words || []).find(w => w.ar === a) || { ar: a }).slice(0, 8);
+      const n = W.length || 1, cols = n <= 3 ? n : n === 4 ? 2 : n <= 6 ? 3 : 4, rows = Math.ceil(n / cols), cw = A.w / cols, ch = A.h / rows, pics = W.some(w => w.img);
+      const picH = pics ? ch * 0.56 : 0;
+      size = Math.min(...W.map(w => crArFit(c, tx(w.ar), cw * 0.86, Math.min(170, (ch - picH) * 0.56), 30)), 170);
+      W.forEach((w, i) => {
+        const col = i % cols, row = Math.floor(i / cols), inRow = Math.min(cols, n - row * cols), x0 = A.x + (A.w - inRow * cw) / 2 + (inRow - 1 - col) * cw, y0 = A.y + row * ch;
+        c.font = "600 " + size + "px " + CR_AR; const tw = c.measureText(tx(w.ar)).width + size * 0.3;
+        const it = box({ r: 0, c: i, t: { t: w.ar }, text: tx(w.ar), fs: size, ar: true }, x0 + (cw - tw) / 2, y0 + picH + (ch - picH - size * 1.5) / 2, tw, size * 1.5);
+        if (w.img) it.pic = { a: w.img, x: x0 + cw * 0.12, y: y0 + ch * 0.06, w: cw * 0.76, h: picH - ch * 0.08 };
+        items.push(it);
+      });
+    } else if (p.kind === "match") {
+      const P = (p.pairs || []).filter(x => x && (x[0] || x[1])).slice(0, 6), n = P.length || 1, rh = A.h / n, colW = A.w * 0.43;
+      const right = P.map(x => x[0]), left = crShuf(P.map(x => x[1]), (p.title || "") + right.join(""));
+      size = Math.min(...right.concat(left).map(s => crArFit(c, tx(s), colW * 0.86, Math.min(110, rh * 0.6), 24)), 110);
+      const mk = (s, r, i, x) => { const h = Math.min(rh * 0.8, size * 1.7); return box({ r, c: i, t: { t: s }, text: tx(s), fs: size, ar: crIsAr(s), box: true }, x, A.y + i * rh + (rh - h) / 2, colW, h); };
+      right.forEach((s, i) => items.push(mk(s, 0, i, A.x + A.w - colW)));
+      left.forEach((s, i) => items.push(mk(s, 1, i, A.x)));
+      reveal = { lines: P.map((x, i) => { const a = items[i], b = items[right.length + left.indexOf(x[1])]; return b ? [a.x - 6, a.y + a.h / 2, b.x + b.w + 6, b.y + b.h / 2] : null; }).filter(Boolean) };
+    } else if (p.kind === "fill") {
+      const R = (p.rows || []).filter(x => x && x.q).slice(0, 4), n = R.length || 1, rh = A.h / n;
+      const parts = R.map(x => { const m = String(x.q).split(/_{2,}/); return { pre: tx(m[0] || "").trim(), post: tx(m.slice(1).join(" ") || "").trim(), a: tx(x.a || "") }; });
+      const lineOf = (q, s) => { c.font = "600 " + s + "px " + CR_AR; const bw = Math.max(c.measureText(q.a).width + s * 0.5, s * 1.8); return c.measureText(q.pre).width + c.measureText(q.post).width + bw + s * 0.9; };
+      size = 130; while (size > 26 && (parts.some(q => lineOf(q, size) > A.w) || size * 1.8 > rh)) size -= 3;
+      parts.forEach((q, i) => {
+        c.font = "600 " + size + "px " + CR_AR;
+        const wPre = q.pre ? c.measureText(q.pre).width + size * 0.2 : 0, wPost = q.post ? c.measureText(q.post).width + size * 0.2 : 0, bw = Math.max(c.measureText(q.a).width + size * 0.5, size * 1.8), gap = size * 0.25;
+        const tot = wPre + bw + wPost + gap * ((q.pre ? 1 : 0) + (q.post ? 1 : 0)), h = size * 1.6, y = A.y + i * rh + (rh - h) / 2;
+        let x = A.x + (A.w + tot) / 2;   // from the right
+        if (q.pre) { x -= wPre; items.push(box({ r: i, c: 0, t: { t: q.pre }, text: q.pre, fs: size, ar: true }, x, y, wPre, h)); x -= gap; }
+        x -= bw; items.push(box({ r: i, c: 1, t: { t: "___" }, text: "", fs: size, ar: true, blank: q.a }, x, y, bw, h)); x -= gap;
+        if (q.post) { x -= wPost; items.push(box({ r: i, c: 2, t: { t: q.post }, text: q.post, fs: size, ar: true }, x, y, wPost, h)); }
+      });
+    } else if (p.kind === "choose") {
+      const q = tx(p.q || ""), opts = (p.opts || []).filter(Boolean).slice(0, 4), qa = { x: A.x, y: A.y, w: A.w, h: A.h * 0.46 };
+      const top = crArLines(c, [q], qa, 120); top.items.forEach(it => { it.r = 0; items.push(it); });
+      const per = opts.length <= 2 ? opts.length || 1 : 2, rowsN = Math.ceil(opts.length / per), oh = (A.h * 0.52) / Math.max(1, rowsN), ow = (A.w - 30 * (per - 1)) / per;
+      size = Math.min(...opts.map(o => crArFit(c, tx(o), ow * 0.84, Math.min(96, oh * 0.55), 24)), 96);
+      opts.forEach((o, i) => {
+        const col = i % per, row = Math.floor(i / per), h = Math.min(oh * 0.82, size * 1.7);
+        const it = box({ r: 1, c: i, t: { t: o }, text: tx(o), fs: size, ar: crIsAr(o), box: true }, A.x + A.w - (col + 1) * ow - col * 30, A.y + A.h * 0.48 + row * oh + (oh - h) / 2, ow, h);
+        if (crNoTash(o) === crNoTash(p.a)) reveal = { pick: it };
+        items.push(it);
+      });
+      size = top.size;
+    } else if (p.kind === "table") {
+      const T = p.table || { head: [], rows: [] }, all = [T.head || []].concat(T.rows || []).filter(r => r && r.length), nc = Math.max(1, ...all.map(r => r.length)), nr = all.length || 1;
+      const tw = A.w, th = Math.min(A.h, nr * 150), x0 = A.x, y0 = A.y + (A.h - th) / 2, cw = tw / nc, rh = th / nr;
+      size = Math.min(...all.flatMap(r => r.map(s => crArFit(c, tx(s), cw * 0.88, Math.min(84, rh * 0.56), 18))), 84);
+      all.forEach((r, ri) => r.forEach((s, ci) => { if (!String(s || "").trim()) return; items.push(box({ r: ri, c: ci, t: { t: s }, text: tx(s), fs: size, ar: crIsAr(s), col: ri === 0 && T.head && T.head.length ? "#FFE27A" : null }, x0 + tw - (ci + 1) * cw, y0 + ri * rh, cw, rh)); }));
+      for (let i = 0; i <= nr; i++) lines.push([x0, y0 + i * rh, x0 + tw, y0 + i * rh]);
+      for (let i = 0; i <= nc; i++) lines.push([x0 + i * cw, y0, x0 + i * cw, y0 + th]);
+    } else if (p.kind === "pic") {
+      bg = p.pic ? { a: p.pic } : null;
+    } else {
+      const L = crArLines(c, String(p.board || "").split(/\n/).map(l => tx(crNoEmoji(l)).trim()).filter(Boolean), A, 170);
+      size = L.size; items.push(...L.items);
+    }
+    const lay = { size, lineH: size * 1.8, items, font: CR_AR, rtl: true, ar: true, lines, reveal, bg, kind: p.kind };
+    lay.at = {}; items.forEach(it => { lay.at[it.r + "-" + it.c] = it; });
+    return lay;
+  }
+  const crArCache = new WeakMap(), crArStr = new Map();
+  // Amiri has to be in before the board is measured, or the words come out the wrong size
+  let crArFontOk = false;
+  function crArFontReady() {
+    if (crArFontOk) return true;
+    try { if (!document.fonts || (document.fonts.check("700 40px Amiri") && document.fonts.check("400 40px Amiri"))) { crArFontOk = true; return true; } document.fonts.load("700 40px Amiri"); document.fonts.load("400 40px Amiri"); } catch (e) { crArFontOk = true; }
+    return false;
+  }
+  function crAssetsAr(lesson, number, stripOn, page) {
+    const P = lesson.pages || [], raw = P[Math.max(0, Math.min(P.length - 1, page || 0))], pg = arPg(raw);
+    const imgs = pg.kind === "words" ? (pg.words || []).map(a => ((lesson.words || []).find(w => w.ar === a) || {}).img || "").join(",") : "";
+    const k2 = [number, lesson.title, !!stripOn, imgs, !!lesson.noTash, lesson.head, crArFontReady()].join("|");
+    let m; if (raw && typeof raw === "object") { m = crArCache.get(raw); if (!m) { m = new Map(); crArCache.set(raw, m); } } else { const sk = String(raw || ""); m = crArStr.get(sk); if (!m) { if (crArStr.size > 40) crArStr.clear(); m = new Map(); crArStr.set(sk, m); } }
+    if (!m.has(k2)) m.set(k2, { room: crRoom(Object.assign({}, lesson, { pageTitle: pg.title || "" }), number), lay: crLayoutAr(pg, lesson, !!stripOn) });
+    if (!crFrontAr) crFrontAr = crFront(true);
+    return Object.assign({ front: crFrontAr }, m.get(k2));
+  }
+  let crFrontAr = null;
+  // what's drawn only on an Arabic board: the table's lines, a page's picture, word pictures, boxes, blanks, answers
+  function crArUnder(c, F, lay, st, t) {
+    if (lay.bg) {
+      const im = crPic(lay.bg.a), B = CR_BOARD;
+      if (im) { const mw = B.w - 120, mh = B.h - 110, s = Math.min(mw / im.width, mh / im.height), w = im.width * s, h = im.height * s, x = B.x + B.w / 2 - w / 2, y = B.y + 62 + (mh - h) / 2;
+        c.fillStyle = "rgba(0,0,0,.3)"; c.fillRect(x - 4, y + 6, w + 16, h + 14); c.fillStyle = "#FBF7EC"; c.fillRect(x - 10, y - 10, w + 20, h + 20); c.drawImage(im, x, y, w, h); }
+    }
+    if (lay.lines.length) { c.strokeStyle = "rgba(241,236,220,.45)"; c.lineWidth = 2.5; c.beginPath(); for (const L of lay.lines) { c.moveTo(L[0], L[1]); c.lineTo(L[2], L[3]); } c.stroke(); }
+    for (const it of lay.items) {
+      if (it.pic) { const im = crPic(it.pic.a), R = it.pic; if (im) { const s = Math.min(R.w / im.width, R.h / im.height), w = im.width * s, h = im.height * s; c.fillStyle = "#FBF7EC"; crRR(c, R.x + (R.w - w) / 2 - 6, R.y + (R.h - h) / 2 - 6, w + 12, h + 12, 8); c.fill(); c.drawImage(im, R.x + (R.w - w) / 2, R.y + (R.h - h) / 2, w, h); } }
+      if (it.box && !(st.hide && st.hide[it.r + "-" + it.c])) { c.strokeStyle = "rgba(241,236,220,.5)"; c.lineWidth = 2.5; crRR(c, it.x, it.y, it.w, it.h, 16); c.stroke(); }
+      if (it.blank != null) { c.strokeStyle = "rgba(241,236,220,.75)"; c.lineWidth = 3; c.setLineDash([12, 10]); c.beginPath(); c.moveTo(it.x, it.y + it.h * 0.86); c.lineTo(it.x + it.w, it.y + it.h * 0.86); c.stroke(); c.setLineDash([]); }
+    }
+  }
+  function crArOver(c, F, lay, st, t) {
+    if (st.rv && lay.reveal) {
+      const k = crEase((t - st.rv.t) / 0.5);
+      if (lay.reveal.lines) for (const L of lay.reveal.lines) crDrawPath(c, [[L[0], L[1]], [L[2], L[3]]], k, "#FFE27A", 5);
+      if (lay.reveal.pick) { const b = lay.reveal.pick; c.save(); c.globalAlpha = k; c.strokeStyle = "#7FE08A"; c.lineWidth = 7; crRR(c, b.x - 6, b.y - 6, b.w + 12, b.h + 12, 20); c.stroke(); c.restore(); }
+    }
+    if (st.rv) for (const it of lay.items) if (it.blank) { c.save(); c.globalAlpha = crEase((t - st.rv.t) / 0.4); c.fillStyle = "#FFE27A"; c.font = "700 " + it.fs + "px " + CR_AR; c.direction = "rtl"; c.textAlign = "center"; c.textBaseline = "middle"; c.fillText(it.blank, it.x + it.w / 2, it.y + it.h / 2); c.restore(); }
+  }
+  // a word brought to the middle of the board for everyone to see, then put back
+  function crArZoom(c, lay, st, t) {
+    const z = st.zm || st.zmo; if (!z) return;
+    const it = lay.at[z.r + "-" + z.c]; if (!it || !it.text) return;
+    let k = crEase((t - z.t) / 0.4); if (!st.zm) { k = 1 - crEase((t - z.t) / 0.35); if (k <= 0) return; }
+    const B = CR_BOARD, cx = B.x + B.w / 2, cy = B.y + B.h / 2 + 10, font = it.ar ? CR_AR : CR_LAT;
+    c.save(); c.fillStyle = "rgba(15,28,21," + (0.72 * k).toFixed(2) + ")"; c.fillRect(B.x + 14, B.y + 14, B.w - 28, B.h - 30);
+    const big = crArFit(c, it.text, B.w - 160, it.pic ? 190 : 300, 40, 700), fs = crLerp(it.fs || lay.size, big, k);
+    let ty = crLerp(it.y + it.h / 2, it.pic ? cy + 120 : cy, k);
+    if (it.pic) { const im = crPic(it.pic.a); if (im) { const mh = crLerp(it.pic.h, 300, k), s = mh / im.height, w = im.width * s, x = crLerp(it.pic.x + it.pic.w / 2, cx, k) - w / 2, y = crLerp(it.pic.y, B.y + 40, k); c.globalAlpha = Math.min(1, k * 1.5); c.fillStyle = "#FBF7EC"; c.fillRect(x - 8, y - 8, w + 16, mh + 16); c.drawImage(im, x, y, w, mh); c.globalAlpha = 1; } }
+    c.font = "700 " + fs + "px " + font; c.direction = it.ar ? "rtl" : "ltr"; c.textAlign = "center"; c.textBaseline = "middle"; c.fillStyle = "#FFF6D0";
+    c.shadowColor = "rgba(0,0,0,.35)"; c.shadowBlur = 12; c.fillText(it.text, crLerp(it.x + it.w / 2, cx, k), ty); c.restore();
+  }
 
   // ---- background noise out of a recording (runs on the phone, in the background so nothing freezes) ----
   let cleanP = null;
@@ -3564,6 +3841,7 @@ notify pgrst, 'reload schema';
     const near = P => { let m = 1e9; for (let i = 1; i < (P || []).length; i++) { const a = P[i - 1], b = P[i], vx = b[0] - a[0], vy = b[1] - a[1], L = vx * vx + vy * vy || 1, k = Math.max(0, Math.min(1, ((x - a[0]) * vx + (y - a[1]) * vy) / L)); m = Math.min(m, Math.hypot(x - a[0] - k * vx, y - a[1] - k * vy)); } return m; };
     const marks = st.marks.slice().reverse();
     for (const q of marks) if (near(crMarkPath(q, lay)) < 30) return q;
+    if (st.strip.length && lay.ar && Math.abs(y - crStripY()) < 70) return st.strip[st.strip.length - 1];   // Arabic: the last letter comes off
     if (st.strip.length && Math.abs(y - crStripY()) < 60) {
       const c = document.createElement("canvas").getContext("2d"), fs = Math.min(80, crFit(c, st.strip.map(q => q.ch).join("  "), 900, 80, 700));
       c.font = "700 " + fs + "px Andika, sans-serif";
@@ -3580,6 +3858,7 @@ notify pgrst, 'reload schema';
   // a lesson in concepts: the board of concept n
   function pageBoard(lesson, n) { const P = lesson.pages || [], p = P[Math.max(0, Math.min(P.length - 1, n || 0))]; return p == null ? lesson.board || "" : typeof p === "string" ? p : p.board || ""; }
   function crAssets(lesson, number, stripOn, page) {
+    if (lesson.rtl && lesson.pages) return crAssetsAr(lesson, number, stripOn, page);   // an Arabic lesson: its own board
     if (lesson.pages) lesson = Object.assign({}, lesson, { board: pageBoard(lesson, page) });   // a lesson in concepts: this concept's board
     const key = [lesson.id, lesson.board, lesson.title, lesson.head, lesson.stage, number, !!stripOn, !!lesson.rtl].join("|");
     if (!crCache.has(key)) { if (crCache.size > 24) crCache.clear(); crCache.set(key, { room: crRoom(lesson, number), lay: crLayout(lesson, !!stripOn) }); }
@@ -3595,7 +3874,7 @@ notify pgrst, 'reload schema';
   const crSorted = cues => (cues || []).filter(q => q.t >= 0).slice().sort((a, b) => a.t - b.t);
 
   // The lesson as students watch it: the board, playing in time with the voice. Tap a word to answer.
-  function ClassroomPlayer({ lesson, number, k, src, secs, cues, onTile, waiting, ix, noAuto }) {
+  function ClassroomPlayer({ lesson, number, k, src, secs, cues, onTile, waiting, ix, noAuto, page }) {
     const pst = usePlayer();
     const capWords = useMemo(() => captionOf(cues), [cues]);
     const [cc, setCc] = useState(() => { try { return localStorage.getItem("rc.cc") !== "0"; } catch (e) { return true; } });
@@ -3608,7 +3887,7 @@ notify pgrst, 'reload schema';
     const stripOn = hasStrip(list);
     const A = useMemo(() => crAssets(lesson, number, stripOn), [lesson.id, lesson.board, lesson.title, lesson.stage, number, stripOn]);
     const prevRef = useRef(-1), S = useRef({}), pageRef = useRef(0);
-    S.current = { list, fx, A, waiting, cap: cc ? capWords : null };
+    S.current = { list, fx, A, waiting, cap: cc ? capWords : null, page };
     useEffect(() => {
       const cv = cvRef.current; if (!cv) return;
       const c = cv.getContext("2d");
@@ -3623,7 +3902,8 @@ notify pgrst, 'reload schema';
         const t = mine ? a.currentTime || 0 : -50, playing = mine && !a.paused;
         const prev = prevRef.current; prevRef.current = t;
         if (playing && prev >= 0 && t > prev && t - prev < 1.5) for (const q of R.fx) if (q.k === "vid" && q.t > prev && q.t <= t) { a.pause(); setClip(q); break; }
-        const st = stageAt(R.fx, t), A2 = lesson.pages ? crAssets(lesson, number, stripOn, st.page) : R.A; pageRef.current = st.page || 0;
+        const st = stageAt(R.fx, t); if (!mine && R.page != null) st.page = R.page;   // not playing: the concept they picked
+        const A2 = lesson.pages ? crAssets(lesson, number, stripOn, st.page) : R.A; pageRef.current = st.page || 0;
         c.setTransform(cv.width / CR_W, 0, 0, cv.height / CR_H, 0, 0);
         crFrame(c, { room: A2.room, front: A2.front, lay: A2.lay, lesson, t, wall: now / 1000, stage: st, list: R.list, lead: 0.3, turnCue: crTurnAt(R.list, t), waiting: R.waiting, pic: st.img ? crPic(st.img.a) : null, caption: R.cap });
       };
@@ -3721,6 +4001,45 @@ notify pgrst, 'reload schema';
     return html`<canvas class="crcv rec" ref=${cvRef} onPointerDown=${down} onPointerMove=${move} onPointerUp=${up} onPointerCancel=${() => { pen.current = null; }} aria-label="The board"></canvas>`;
   }
 
+  // An Arabic lesson's board in the room (before it's recorded, and in a live class): the concept you're on, big; tap a word to hear the teacher say it
+  function ArBoardView({ lesson, number, page, stage, point, onTile, onPen, penCol }) {
+    const cvRef = useRef(null), S = useRef({}), pen = useRef(null);
+    S.current = { page, stage, point, penCol };
+    useEffect(() => {
+      const cv = cvRef.current; if (!cv) return;
+      const c = cv.getContext("2d"); let raf = 0, last = 0, size = 0;
+      const tick = now => {
+        raf = requestAnimationFrame(tick);
+        if (now - last < 90 || document.hidden) return; last = now;
+        const R = S.current, w = Math.round(cv.clientWidth * Math.min(2, window.devicePixelRatio || 1));
+        if (w && w !== size) { size = w; cv.width = w; cv.height = Math.round(w * 9 / 16); }
+        if (!size) return;
+        const st = R.stage ? Object.assign({}, R.stage, { page: R.page }) : stageAt([], 0), A = crAssets(lesson, number, !!(st.strip && st.strip.length), R.page);
+        const list = R.point && R.point.r != null ? [{ t: 1e9 - 1, k: "p", r: R.point.r, c: R.point.c }] : [];
+        c.setTransform(cv.width / CR_W, 0, 0, cv.height / CR_H, 0, 0);
+        crFrame(c, { room: A.room, front: A.front, lay: A.lay, lesson, t: 1e9, wall: now / 1000, stage: st, list, lead: 0 });
+        const p = pen.current;
+        if (p && p.P.length > 1) { c.strokeStyle = markCol({ s: "pen", col: R.penCol }); c.lineWidth = 5; c.lineCap = "round"; c.beginPath(); p.P.forEach((q, i) => (i ? c.lineTo(q[0], q[1]) : c.moveTo(q[0], q[1]))); c.stroke(); }
+      };
+      raf = requestAnimationFrame(tick);
+      return () => cancelAnimationFrame(raf);
+    }, [lesson.id, lesson.pages, number]);
+    const at = e => { const r = cvRef.current.getBoundingClientRect(); return [(e.clientX - r.left) / r.width * CR_W, (e.clientY - r.top) / r.height * CR_H]; };
+    const lay = () => crAssets(lesson, number, false, S.current.page).lay;
+    const down = e => { if (!onPen) return; e.preventDefault(); try { e.currentTarget.setPointerCapture(e.pointerId); } catch (x) {} pen.current = { id: e.pointerId, at: Date.now(), P: [at(e)] }; };
+    const move = e => { const p = pen.current; if (!p || p.id !== e.pointerId) return; const q = at(e), l = p.P[p.P.length - 1]; if (Math.hypot(q[0] - l[0], q[1] - l[1]) >= 4) p.P.push(q); };
+    const up = e => {
+      const p = pen.current; pen.current = null;
+      if (p && p.P.length > 1) { const it = crHit(lay(), p.P[0][0], p.P[0][1]) || lay().items[0]; if (it) onPen({ r: it.r, c: it.c, pts: p.P.reduce((o, q) => o.concat(round2((q[0] - it.x) / it.w), round2((q[1] - it.y) / it.h)), []), dur: (Date.now() - p.at) / 1000 }); return; }
+    };
+    function tap(e) {
+      if (onPen) return;
+      const [x, y] = at(e), it = crHit(lay(), x, y); if (!it || !onTile) return;
+      const w = (lesson.words || []).find(v => arBare(v.ar) === arBare(it.t.t) || arBare(v.ar) === arBare(it.text));
+      onTile(it.t, w && w.snd ? { rec: { audio: w.snd } } : null, it.r, it.c);
+    }
+    return html`<div class="crwrap arboardv"><div class="crstage"><canvas class=${"crcv" + (onPen ? " rec" : "")} ref=${cvRef} onClick=${tap} onPointerDown=${down} onPointerMove=${move} onPointerUp=${up} onPointerCancel=${() => { pen.current = null; }} aria-label="The board"></canvas></div></div>`;
+  }
   // A clip on the board: plays with its own sound. If the phone won't start it by itself, a big Play button.
   function BoardClip({ c, onEnd, label }) {
     const ref = useRef(null);
@@ -4325,11 +4644,13 @@ notify pgrst, 'reload schema';
   }
   function hasAnswer(a) { return !!(a && ((a.text && a.text.trim()) || (a.strokes && a.strokes.length) || a.blob || a.audio || a.choice != null || (a.pairs && Object.keys(a.pairs).length) || (a.order && a.order.length))); }
   // questions that mark themselves: choose the answer, match the pairs, put the words in order
+  const arNoTashItem = it => Object.assign({}, it, { text: crNoTash(it.text), options: it.options ? it.options.map(crNoTash) : it.options, pairs: it.pairs ? it.pairs.map(p => [crNoTash(p[0]), crNoTash(p[1])]) : it.pairs, answer: it.answer != null ? crNoTash(it.answer) : it.answer });
   function autoMark(it, a) {
     if (!it || !a) return null;
     if (it.kind === "mcq") return a.choice == null ? null : arBare(a.choice) === arBare(it.answer);
     if (it.kind === "match") return a.pairs ? (it.pairs || []).every(p => a.pairs[p[0]] === p[1]) : null;
     if (it.kind === "order") return a.order && a.order.length ? arBare(a.order.join(" ")) === arBare(it.answer) : null;
+    if (it.kind === "fill") { const v = a.choice != null ? a.choice : a.text; return v == null || !String(v).trim() ? null : arBare(v) === arBare(it.answer); }
     return null;
   }
   async function sendRow(data) {
@@ -4522,12 +4843,12 @@ notify pgrst, 'reload schema';
     const [type, setType] = useState(ar ? "homework" : "spelling");
     const blank = t => ({ id: uid(), text: "", mode: t === "spelling" ? "write" : "type", rec: null });
     const [items, setItems] = useState(() => (ar ? [] : [blank("spelling")]));
-    const [note, setNote] = useState(""), [picker, setPicker] = useState(null);
+    const [note, setNote] = useState(""), [picker, setPicker] = useState(null), [noTash, setNoTash] = useState(false);
     const [intro, setIntro] = useState(null);
     const [busy, setBusy] = useState(false);
     const upd = (id, patch) => setItems(xs => xs.map(x => (x.id === id ? Object.assign({}, x, patch) : x)));
     const okItem = x => (x.kind === "mcq" ? x.text.trim() && (x.options || []).filter(o => o.trim()).length >= 2 && (x.options || []).includes(x.answer) && x.answer.trim()
-      : x.kind === "match" ? (x.pairs || []).filter(p => p[0].trim() && p[1].trim()).length >= 2 : x.kind === "order" ? String(x.answer || "").trim().split(/\s+/).length >= 2 : x.text.trim() || x.rec);
+      : x.kind === "match" ? (x.pairs || []).filter(p => p[0].trim() && p[1].trim()).length >= 2 : x.kind === "fill" ? /_{2,}/.test(x.text) && String(x.answer || "").trim() && (!(x.options || []).length || (x.options || []).some(o => arBare(o) === arBare(x.answer))) : x.kind === "order" ? String(x.answer || "").trim().split(/\s+/).length >= 2 : x.text.trim() || x.rec);
     const ready = items.length > 0 && items.every(okItem) && (type !== "spelling" || items.every(x => x.rec));
     const who = student.name || "your student";
     async function send() {
@@ -4541,10 +4862,11 @@ notify pgrst, 'reload schema';
           if (x.kind === "mcq") Object.assign(o, { kind: "mcq", options: x.options.map(t => t.trim()).filter(Boolean), answer: x.answer.trim() });
           if (x.kind === "match") Object.assign(o, { kind: "match", pairs: x.pairs.filter(p => p[0].trim() && p[1].trim()).map(p => [p[0].trim(), p[1].trim()]) });
           if (x.kind === "order") Object.assign(o, { kind: "order", answer: String(x.answer).trim().replace(/\s+/g, " ") });
+          if (x.kind === "fill") Object.assign(o, { kind: "fill", answer: String(x.answer).trim(), options: (x.options || []).map(t => t.trim()).filter(Boolean) });
           out.push(o);
         }
         const introPath = intro ? await uploadBlob(intro.blob) : null;
-        await sendRow({ student: student.id, lesson: lesson.id, from: "teacher", kind: "hw", hw: true, asset: introPath, secs: intro ? round1(intro.secs) : 0, text: JSON.stringify(Object.assign({ v: 1, type, items: out }, ar ? { ar: true, note: note.trim() } : {})) });
+        await sendRow({ student: student.id, lesson: lesson.id, from: "teacher", kind: "hw", hw: true, asset: introPath, secs: intro ? round1(intro.secs) : 0, text: JSON.stringify(Object.assign({ v: 1, type, items: out }, ar ? { ar: true, note: note.trim(), noTash } : {})) });
         toast(EX_TYPES[type] + " sent to " + who + ".");
         onClose();
       } catch (e) { toast(errText(e)); setBusy(false); }
@@ -4562,6 +4884,7 @@ notify pgrst, 'reload schema';
         <div class="field"><span class="lbl">Instructions for the whole exercise (optional)</span>
           <${RecClip} value=${intro} onChange=${setIntro} pst=${pst} label="Record instructions"/>
           ${ar ? html`<textarea class="arnote" dir="auto" rows="2" placeholder="Or write them: e.g. تَرْجِمْ هَذِهِ الْآيَاتِ" value=${note} onInput=${e => setNote(e.target.value)}></textarea>` : null}</div>
+        ${ar ? html`<button class=${"gamesw" + (noTash ? " on" : "")} onClick=${() => setNoTash(!noTash)} aria-pressed=${noTash ? "true" : "false"}><span class="knob"></span><span>Without tashkeel<small>${noTash ? "They see the Arabic with no harakat: a real reading test." : "They see the Arabic with its harakat."}</small></span></button>` : null}
         ${items.map((x, i) => x.kind ? html`<${ArQEdit} key=${x.id} x=${x} i=${i} upd=${o => upd(x.id, o)} del=${() => setItems(xs => xs.filter(y => y.id !== x.id))}/>` : html`<div class="card qcard" key=${x.id}>
           <div class="qhead"><b>${spell ? "Word" : "Question"} ${i + 1}</b>${items.length > 1 ? html`<button class="iconbtn" onClick=${() => setItems(xs => xs.filter(y => y.id !== x.id))} aria-label="Remove"><${Ic.trash} size=${18}/></button>` : null}</div>
           <${RecClip} value=${x.rec} onChange=${v => upd(x.id, { rec: v })} pst=${pst} label=${spell ? "Record the word" : "Record the question"}/>
@@ -4574,6 +4897,7 @@ notify pgrst, 'reload schema';
             <button class="btn sec" onClick=${() => setItems(xs => xs.concat(blank(type)))}><${Ic.plus} size=${18}/>They write or say it</button>
             <button class="btn sec" onClick=${() => setItems(xs => xs.concat({ id: uid(), kind: "mcq", text: "", options: ["", "", "", ""], answer: "", mode: "type", rec: null }))}>Choose the answer</button>
             <button class="btn sec" onClick=${() => setItems(xs => xs.concat({ id: uid(), kind: "match", text: "صِلْ كُلَّ كَلِمَةٍ بِمَعْنَاهَا", pairs: [["", ""], ["", ""], ["", ""]], mode: "type", rec: null }))}>Match the pairs</button>
+            <button class="btn sec" onClick=${() => setItems(xs => xs.concat({ id: uid(), kind: "fill", text: "", answer: "", options: [], mode: "type", rec: null }))}>Fill the blank</button>
             <button class="btn sec" onClick=${() => setItems(xs => xs.concat({ id: uid(), kind: "order", text: "", answer: "", mode: "type", rec: null }))}>Put the words in order</button>
             <button class="btn sec" onClick=${() => setPicker("bank")}>📚 From the lesson bank</button>
             <button class="btn sec" onClick=${() => setPicker("ayat")}>📖 Ayat from the Mushaf</button>
@@ -4689,7 +5013,8 @@ notify pgrst, 'reload schema';
   // The student does an exercise, one question at a time. Answers are kept on the phone until sent.
   function HwRunner({ hw, msgs, student, ix, lessons, preview, onClose }) {
     const pst = usePlayer();
-    const d = hwData(hw), items = d.items || [], spelling = d.type === "spelling", arx = !!d.ar;
+    const d = hwData(hw), spelling = d.type === "spelling", arx = !!d.ar;
+    const items = useMemo(() => (d.noTash ? (d.items || []).map(arNoTashItem) : d.items || []), [hw.id]);   // "without tashkeel": no harakat anywhere they read
     const ans = preview ? null : answersFor(hw.id, msgs);
     const mk = ans ? marksFor(ans.id, msgs) : null;
     const sc = scoreOf(mk);
@@ -4786,7 +5111,7 @@ notify pgrst, 'reload schema';
   // The teacher marks answers in red pen. Typed spellings are pre-marked; handwriting and speech are up to you.
   function HwReview({ ans, msgs, onClose }) {
     const pst = usePlayer();
-    const ad = hwData(ans), hw = msgs.find(m => m.id === ad.hw), d = hwData(hw), items = d.items || [];
+    const ad = hwData(ans), hw = msgs.find(m => m.id === ad.hw), d = hwData(hw), items = d.noTash ? (d.items || []).map(arNoTashItem) : d.items || [];   // as they saw it
     const answers = ad.answers || [];
     const prev = marksFor(ans.id, msgs);
     const auto = k => {
@@ -4803,6 +5128,13 @@ notify pgrst, 'reload schema';
       setBusy(true);
       try {
         await sendRow({ student: ans.student, lesson: ans.lesson, from: "teacher", kind: "hwmark", text: JSON.stringify({ v: 1, ans: ans.id, marks }) });
+        if (d.ar) {   // the Arabic class: the words in what they got right are learned
+          const L = (store.s.ar_lessons || []).find(l => l.id === ans.lesson), W = L ? L.words || [] : [], res = [];
+          items.forEach((it, k) => { if (marks[k] == null) return; const a = answers[k] || {};
+            if (it.kind === "match") (it.pairs || []).forEach(p => arWordsIn(p[0], W).forEach(word => res.push({ word, ok: marks[k] === true && (!a.pairs || a.pairs[p[0]] === p[1]) })));
+            else arWordsIn([it.text, it.answer, a.choice, a.text].filter(Boolean).join(" "), W).forEach(word => res.push({ word, ok: marks[k] === true })); });
+          if (res.length) await arMarkWords((ans.test ? "test-" : "") + ans.student, res);
+        }
         toast("Marks sent.");
         onClose();
       } catch (e) { toast(errText(e)); setBusy(false); }
@@ -8775,7 +9107,7 @@ notify pgrst, 'reload schema';
       const left = el.offsetLeft - rail.clientWidth / 2 + el.clientWidth / 2;
       try { rail.scrollTo({ left, behavior: "smooth" }); } catch (e) { rail.scrollLeft = left; }
     }, [vIdx, lessons.length]);
-    return html`<nav class="rail" ref=${ref} aria-label="Lessons">${bell ? html`<${PushBell} studentId=${bell} rail=${true}/>` : null}${onBook ? html`<button class="railbook railw" onClick=${onBook} aria-label="My exercise book"><${Ic.book} size=${20}/><span>Book</span></button>` : null}${onMushaf ? html`<button class="railbook railw" onClick=${onMushaf} aria-label="The Mushaf"><span class="railic">📖</span><span>Mushaf</span></button>` : null}${onWords ? html`<button class="railbook railw" onClick=${onWords} aria-label="Words"><span class="railic">📗</span><span>Words</span></button>` : null}${!teacher ? html`<${ThemeBtn} rail=${true}/>` : null}${onFight ? html`<button class="railbook railfight railw" onClick=${onFight} aria-label="Games">🎮<span>Game</span></button>` : null}${onBook || onFight ? html`<span class="raillbl">Lessons</span>` : null}${lessons.map((l, i) => {
+    return html`<nav class="rail" ref=${ref} aria-label="Lessons">${bell ? html`<${PushBell} studentId=${bell} rail=${true}/>` : null}${onBook ? html`<button class="railbook railw" onClick=${onBook} aria-label="My exercise book"><${Ic.book} size=${20}/><span>Book</span></button>` : null}${onMushaf ? html`<button class="railbook railw" onClick=${onMushaf} aria-label="The Mushaf"><span class="railic">📖</span><span>Mushaf</span></button>` : null}${onWords ? html`<button class="railbook railw" onClick=${onWords} aria-label="Vocabulary"><span class="railic">📗</span><span>Vocabulary</span></button>` : null}${!teacher ? html`<${ThemeBtn} rail=${true}/>` : null}${onFight ? html`<button class="railbook railfight railw" onClick=${onFight} aria-label="Games">🎮<span>Game</span></button>` : null}${onBook || onFight ? html`<span class="raillbl">Lessons</span>` : null}${lessons.map((l, i) => {
       const state = i < uIdx ? "done" : i === uIdx ? "cur" : "locked";
       const can = teacher || i <= uIdx;
       return html`<button key=${l.id} class=${"dot " + state + (i === vIdx ? " view" : "") + (teacher && i === vIdx ? " tview" : "")} disabled=${!can} onClick=${() => onPick(l.id)} aria-label=${"Lesson " + (i + 1)} aria-current=${i === vIdx ? "true" : null}>
@@ -9257,7 +9589,7 @@ notify pgrst, 'reload schema';
     const goPage = p => {
       if (p < 0 || p >= nPages) return;
       if (teacher && L.on) { live.setPage(p); return; }
-      if (following && pgTimes[p] != null && player.a) { player.a.currentTime = pgTimes[p] + 0.05; return; }
+      if ((following || (ar && pst.key === "explain:" + lid)) && pgTimes[p] != null && player.a) { player.a.currentTime = pgTimes[p] + 0.05; setPgSel(p); return; }   // in the explanation: go to where you explained it
       setPgSel(p);
     };
     const pageNow = ar ? (lesson.pages || [])[pgNow] || {} : null;
@@ -9293,7 +9625,7 @@ notify pgrst, 'reload schema';
           : html`<button class="btn sec" onClick=${makeCurrent}>Make lesson ${vIdx + 1} the current one</button>`}
         <button class="btn quiet" onClick=${() => setHwEdit(true)}><${Ic.book} size=${18}/>Exercise</button>
         ${!L.on ? html`<button class="btn golive" onClick=${startClass}><${Ic.phone} size=${18}/>Start class</button>` : null}
-        ${L.on && live.sid === student.id ? html`<button class="btn quiet" onClick=${() => setFight("host")}>🥊 Fight</button><button class="btn quiet" onClick=${() => setArena("host")}>🏟️ Arena</button>` : null}
+        ${L.on && live.sid === student.id && !ar ? html`<button class="btn quiet" onClick=${() => setFight("host")}>🥊 Fight</button><button class="btn quiet" onClick=${() => setArena("host")}>🏟️ Arena</button>` : null}
         <span class="tl">${lesson.title}</span>
       </div>` : null}
       ${teacher ? html`<${LessonActivity} s=${s} student=${student} lesson=${lesson}/>` : null}
@@ -9301,16 +9633,21 @@ notify pgrst, 'reload schema';
       ${teacher && L.on ? html`<${ClassPanel} s=${s} who=${who} lessonTitle=${lesson.title} lessonNo=${vIdx + 1} studentId=${student.id}/>` : null}
       ${teacher && L.on && L.mode !== "write" ? html`<${LiveTools} lesson=${lesson} tool=${ltool} setTool=${setLtool} pen=${lpen} setPen=${setLpen} stage=${liveStage}/>` : null}
       ${turn && !teacher ? html`<div class="turnbar" role="status"><span class="tbh">✋</span><div><b>Your turn!</b><span>${turn.cue.tile ? "Say the answer out loud, then tap it on the board." + (turn.tries >= 2 ? " Look — it's glowing." : "") : "Say it out loud: read it, or answer the teacher's question. Then tap ▶ Continue."}</span></div>${turn.cue.tile ? null : html`<button class="btn slim" onClick=${resume}>▶ Continue</button>`}</div>` : null}
+      ${ar && showClass && nPages > 1 ? html`<div class="pgbar arpg"><button class="chip" disabled=${pgNow <= 0} onClick=${() => goPage(pgNow - 1)} aria-label="The concept before">‹</button><b><span dir="auto">${pageNow.title || "Concept " + (pgNow + 1)}</span><small dir="ltr">${pgNow + 1} of ${nPages}${following ? " · follows the explanation" : ""}</small></b><button class="chip" disabled=${pgNow >= nPages - 1} onClick=${() => goPage(pgNow + 1)} aria-label="The next concept">›</button></div>` : null}
       ${showClass ? html`<${ClassroomPlayer} lesson=${lesson} number=${vIdx + 1} k=${"explain:" + lid} src=${srcFor(lesson.explain)} secs=${lesson.explainSecs} cues=${lesson.cues || []} ix=${ix}
-        onTile=${onTile} waiting=${!!turn} cheer=${flash && flash.ok ? flash : null}/>` : null}
+        onTile=${onTile} waiting=${!!turn} cheer=${flash && flash.ok ? flash : null} page=${ar ? pgNow : null}/>` : null}
       ${L.on && L.mode === "write"
         ? html`<${WriteBoard} canWrite=${teacher || L.holder === "student"} teacher=${teacher} holder=${L.holder} name=${who} ix=${ix} lessons=${lessons}/>`
+        : ar && showClass ? null
+        : ar ? html`${nPages > 1 ? html`<div class="pgbar arpg"><button class="chip" disabled=${pgNow <= 0} onClick=${() => goPage(pgNow - 1)} aria-label="The concept before">‹</button><b><span dir="auto">${pageNow.title || "Concept " + (pgNow + 1)}</span><small dir="ltr">${pgNow + 1} of ${nPages}</small></b><button class="chip" disabled=${pgNow >= nPages - 1} onClick=${() => goPage(pgNow + 1)} aria-label="The next concept">›</button></div>` : null}
+          <${ArBoardView} lesson=${lesson} number=${vIdx + 1} page=${pgNow} stage=${liveStage} point=${livePoint} onTile=${onTile} penCol=${lpen}
+            onPen=${teacher && L.on && ltool === "pen" ? d => live.fx({ k: "o", s: "pen", col: lpen, r: d.r, c: d.c, pts: d.pts, dur: round2(d.dur) }) : null}/>`
         : html`${ar && nPages > 1 ? html`<div class="pgbar arpg"><button class="chip" disabled=${pgNow <= 0} onClick=${() => goPage(pgNow - 1)} aria-label="The concept before">‹</button><b><span dir="auto">${pageNow.title || "Concept " + (pgNow + 1)}</span><small dir="ltr">${pgNow + 1} of ${nPages}${following ? " · follows the explanation" : ""}</small></b><button class="chip" disabled=${pgNow >= nPages - 1} onClick=${() => goPage(pgNow + 1)} aria-label="The next concept">›</button></div>` : null}<${Board} lesson=${boardLesson} number=${vIdx + 1} ix=${ix} tkey=${tkey} onTile=${onTile} points=${points}
         cue=${(showClass ? null : explCue) || livePoint} mark=${liveMark} turn=${!!turn && !showClass} flash=${flash} hint=${hint} follow=${!showClass && !!explCue && pst.playing}
         stage=${(showClass ? null : explFx.stage) || liveStage} clip=${(showClass ? null : explFx.clip) || (L.on && L.clip) || null} onClipEnd=${explFx.clip && !showClass ? explFx.endClip : () => live.set({ clip: null })} strip=${!showClass && hasStrip(lesson.cues)}
         onPen=${teacher && L.on && ltool === "pen" ? d => live.fx({ k: "o", s: "pen", col: lpen, r: d.r, c: d.c, pts: d.pts, dur: round2(d.dur) }) : null} penCol=${lpen}
         voice=${!showClass && lesson.explain && pst.key === "explain:" + lid ? { src: srcFor(lesson.explain), secs: lesson.explainSecs, k: "explain:" + lid } : null}/>`}
-      ${ar ? html`<${ArNotes} lesson=${lesson} page=${pgNow} onPage=${goPage}/><${ArWords} s=${s} lesson=${lesson} student=${student} teacher=${teacher}/>` : null}
+      ${ar ? html`<${ArLessonExtras} s=${s} lesson=${lesson} student=${student} teacher=${teacher}/>` : null}
       <section class="book" aria-label="Messages">
         <div class="thread">${nodes}</div>
         <div class="end" ref=${endRef}></div>
@@ -9322,7 +9659,7 @@ notify pgrst, 'reload schema';
       ${lightbox ? html`<div class="lb" role="dialog" aria-label="Photo" onClick=${() => setLightbox(null)}><div class="imgwrap"><img src=${lightbox} alt="Photo"/></div></div>` : null}
       ${editing ? html`<${StudentSheet} student=${student} onClose=${() => setEditing(false)} onDeleted=${() => { setEditing(false); onBack && onBack(); }}/>` : null}
       ${hwEdit ? html`<${HwEditor} lesson=${lesson} number=${vIdx + 1} student=${student} ar=${ar} onClose=${() => setHwEdit(false)}/>` : null}
-      ${arOpen === "mushaf" ? html`<${Mushaf} onClose=${() => setArOpen(null)}/>` : arOpen === "words" ? html`<${ArVocab} s=${s} student=${student} onClose=${() => setArOpen(null)}/>` : null}
+      ${arOpen === "mushaf" ? html`<${Mushaf} onClose=${() => setArOpen(null)}/>` : arOpen === "words" ? html`<${ArVocab} s=${s} student=${student} lessons=${lessons.slice(0, uIdx + 1)} onClose=${() => setArOpen(null)}/>` : null}
       ${arena ? html`<${ArenaLive} role=${arena} s=${s} student=${student} lessons=${lessons} ix=${ix} uIdx=${uIdx} onClose=${() => setArena(null)}/>` : null}
       ${fight === "hub" ? html`<${GameHub} student=${student} lessons=${lessons} ix=${ix} uIdx=${uIdx} onClose=${() => setFight(null)}/>` : fight ? html`<${Fight} key=${fight} mode=${fight} student=${student} lessons=${lessons} ix=${ix} uIdx=${uIdx} onClose=${() => setFight(null)}/>` : null}
       ${hwRun ? html`<${HwRunner} key=${hwRun.hw.id} hw=${hwRun.hw} msgs=${mine} student=${student} ix=${ix} lessons=${lessons} preview=${!!hwRun.preview} onClose=${() => setHwRun(null)}/>` : null}
@@ -9988,6 +10325,9 @@ notify pgrst, 'reload schema';
 
   const STUDIO_TOOLS = [["stick", "👉", "Point"], ["circle", "⭕", "Circle"], ["under", "〰️", "Underline"], ["pen", "✏️", "Draw"], ["word", "🔤", "Word"], ["erase", "🧽", "Rub out"]];
   const PEN_COLS = ["#F1ECDC", "#FFE27A", "#FF9E9E", "#8FD0FF"];
+  const AR_TOOLS = [["stick", "👉", "Point"], ["zoom", "🔍", "Bring up"], ["circle", "⭕", "Circle"], ["under", "〰️", "Underline"], ["pen", "✏️", "Draw"], ["word", "✍️", "Write"], ["erase", "🧽", "Rub out"]];
+  // an Arabic word, a letter at a time: each letter with its harakat
+  const arChunks = w => { const out = []; for (const ch of String(w || "")) { if (/[\u064B-\u0652\u0670\u0640]/.test(ch) && out.length) out[out.length - 1] += ch; else out.push(ch); } return out; };
   // a map, flag or journey from the video maker, as a still picture for the lesson board (how it looks once it has zoomed in)
   async function crMapPic(it) {
     await vmWorld(); await vmWaterDb().catch(() => {});
@@ -10018,6 +10358,21 @@ notify pgrst, 'reload schema';
     const d = b - a;
     return list.filter(q => !(q.t >= a && q.t < b && (q.k === "w" || q.k === "vid"))).map(q => (q.t < a ? q : Object.assign({}, q, { t: round2(q.t < b ? a : q.t - d) })));
   }
+  // an Arabic keyboard on the screen: every letter and haraka, no suggestions, nothing changed behind your back
+  function ArKeys({ onClose, onDone, init, label }) {
+    const [v, setV] = useState(init || "");
+    const R = ["ض ص ث ق ف غ ع ه خ ح ج د", "ش س ي ب ل ا ت ن م ك ط ذ", "ئ ء ؤ ر ى ة و ز ظ أ إ آ"].map(r => r.split(" ")), H = ["\u064E", "\u064B", "\u064F", "\u064C", "\u0650", "\u064D", "\u0652", "\u0651", "\u0670"];
+    const k = ch => setV(x => x + ch);
+    return html`<div class="scrim" onClick=${e => { if (e.target === e.currentTarget) onClose(); }}><div class="arkeys" role="dialog" aria-label="Arabic keyboard">
+      <div class="kout" aria-live="polite">${v || "\u00a0"}</div>
+      ${R.map((r, i) => html`<div class="krow" key=${i}>${r.map(ch => html`<button key=${ch} class="k" onClick=${() => k(ch)}>${ch}</button>`)}</div>`)}
+      <div class="krow">${H.map(h => html`<button key=${h} class="k h" onClick=${() => k(h)} aria-label="Haraka">${"\u0640" + h}</button>`)}</div>
+      <div class="krow"><button class="k wide" onClick=${() => setV(x => Array.from(x).slice(0, -1).join(""))}>⌫ Delete</button><button class="k wide" onClick=${() => k(" ")}>Space</button><button class="k" onClick=${() => k("ـ")}>ـ</button></div>
+      <div class="kbar"><button class="btn quiet slim" onClick=${onClose}>Cancel</button>
+        ${label ? html`<button class="btn slim" disabled=${!v.trim()} onClick=${() => onDone(v)}>${label}</button>`
+          : html`<button class="btn sec slim" disabled=${!v.trim()} onClick=${() => onDone(v, false)}>Letter by letter</button><button class="btn slim" disabled=${!v.trim()} onClick=${() => onDone(v, true)}>Show it whole</button>`}</div>
+    </div></div>`;
+  }
   function ExplainStudio({ ix, lesson, number, onClose, talk, onSave }) {
     const pst = usePlayer();
     const [mode, setMode] = useState("ready");
@@ -10037,7 +10392,16 @@ notify pgrst, 'reload schema';
     const uploads = useRef(new Map());              // pictures still going up: their stand-in name -> the real one
     const [clean, setClean] = useState(null);       // the same recording with the background noise taken out
     const [useClean, setUseClean] = useState(() => { try { return localStorage.getItem("rc.clean") !== "0"; } catch (e) { return true; } });
-    const [subs, setSubs] = useState(() => { try { return localStorage.getItem("rc.subs") !== "0"; } catch (e) { return true; } });
+    const [subs, setSubs] = useState(() => { if (lesson.rtl) return false; try { return localStorage.getItem("rc.subs") !== "0"; } catch (e) { return true; } });   // the Arabic class: no machine subtitles
+    const arL = !!(lesson.rtl && lesson.pages), TOOLS = arL ? AR_TOOLS : STUDIO_TOOLS;
+    const [helpOpen, setHelpOpen] = useState(() => { try { return localStorage.getItem("rc.studiohelp") !== "1"; } catch (e) { return true; } });   // the instructions: once, then only when asked
+    const helpDone = () => { setHelpOpen(false); try { localStorage.setItem("rc.studiohelp", "1"); } catch (e) {} };
+    const [keys, setKeys] = useState(false);   // the Arabic keyboard, for writing a word on the board
+    const studioRef = useRef(null);
+    const pickTool = k => setTool(k === tool && k !== "stick" ? "stick" : k);   // tap the tool you're on again: back to pointing
+    async function bigger() {
+      try { const el = studioRef.current; if (el && el.requestFullscreen && !document.fullscreenElement) await el.requestFullscreen(); else if (document.fullscreenElement) { await document.exitFullscreen(); return; } if (screen.orientation && screen.orientation.lock) await screen.orientation.lock("landscape"); } catch (e) { toast("Turn your phone on its side for a bigger board."); }
+    }
     const setPref = (k, v, f) => { f(v); try { localStorage.setItem(k, v ? "1" : "0"); } catch (e) {} };
     const r = useRef(null), st = useRef(null), fileRef = useRef(null);
     const setCues = list => { cuesRef.current = list; setCuesState(list); };
@@ -10060,6 +10424,7 @@ notify pgrst, 'reload schema';
         if (more === true && take) { prevTake.current = take; baseT.current = take.secs; }
         else { prevTake.current = null; baseT.current = 0; setCues([]); }
         armRef.current = null; setArming(null); setSpell(null); setPaused(false); setMode("rec");
+        if (helpOpen) helpDone();   // read once: it stays out of the way from now on (? brings it back)
       } catch (e) {
         toast("The microphone isn't available here. Use a recording file instead.");
         onClose();
@@ -10072,10 +10437,18 @@ notify pgrst, 'reload schema';
       if (!rec) { if (it) { const snd = soundFor(ix, lesson.id, it.t.t); if (snd) tilePlayer.play("tile:" + lesson.id + ":" + it.t.t, srcFor(snd.rec.audio)); } return; }
       if (armRef.current != null) { if (it) { add({ t: armRef.current, k: "w", tile: it.t.t, r: it.r, c: it.c }); armRef.current = null; setArming(null); } return; }
       const t = elapsed();
+      if (tool === "zoom") {   // bring a word to the middle; tap again to put it back
+        const b = board();
+        if (b.zm) { add({ t, k: "zmx" }); return; }
+        if (it) add({ t, k: "zm", r: it.r, c: it.c }); else toast("Tap a word to bring it to the middle.");
+        return;
+      }
       if (tool === "erase") {   // rub out just the thing under your finger
         const b = board(), pic = b.img ? crPic(b.img.a) : null, A = crAssets(lesson, number, hasStrip(cuesRef.current) || tool === "word", b.page);
         const hit = crPickAt(b, A.lay, x, y, pic);
-        if (hit) add({ t, k: "rm", ref: hit.id }); else toast("Tap right on the mark, letter or picture to rub it out.");
+        if (hit) { add({ t, k: "rm", ref: hit.id }); return; }
+        if (arL && it) { const h = b.hide[it.r + "-" + it.c]; add(h ? { t, k: "rm", ref: h.id } : { t, k: "hd", r: it.r, c: it.c }); return; }   // a word off the board (rub the same place again and it's back)
+        toast("Tap right on the mark, letter or picture to rub it out.");
         return;
       }
       if (tool === "circle" || tool === "under") {
@@ -10085,13 +10458,13 @@ notify pgrst, 'reload schema';
         add(it ? { t, k: "o", s: tool, r: it.r, c: it.c } : { t, k: "o", s: tool, x: Math.round(x), y: Math.round(y) });
         return;
       }
-      if (tool === "word") { if (it) add({ t, k: "sa", ch: it.t.t, r: it.r, c: it.c }); return; }
+      if (tool === "word") { if (it) add(arL ? { t, k: "sa", ch: it.t.t, wd: 1, r: it.r, c: it.c } : { t, k: "sa", ch: it.t.t, r: it.r, c: it.c }); return; }
       add(it ? { t, k: "p", tile: it.t.t, r: it.r, c: it.c } : { t, k: "pf", x: Math.round(x), y: Math.round(y) });
     }
     function onStroke(d) { if (rec) add({ t: elapsed(d.at), k: "o", s: "pen", col: penCol, P: d.P.reduce((o, q) => o.concat(Math.round(q[0]), Math.round(q[1])), []), dur: round2(Math.min(3, d.dur)) }); }
     // take back the last thing put on the board
     function undo() {
-      const b = board(), all = b.marks.concat(b.strip, b.img ? [b.img] : []).sort((p, q) => p.t - q.t);
+      const b = board(), all = b.marks.concat(b.strip, b.img ? [b.img] : [], b.hideList || [], b.zm ? [b.zm] : [], b.rv ? [b.rv] : []).sort((p, q) => p.t - q.t);
       const last = all[all.length - 1];
       if (!last) { toast("Nothing to take back."); return; }
       add({ t: elapsed(), k: "rm", ref: last.id });
@@ -10107,9 +10480,11 @@ notify pgrst, 'reload schema';
       if (b.marks.length) add({ t, k: "ox" });
       if (b.strip.length) add({ t, k: "sx" });
       if (b.img) add({ t, k: "imgx" });
+      if (b.zm) add({ t, k: "zmx" });
       setSpell(null);
     }
     function typeWord() {
+      if (arL) { setKeys(true); return; }   // Arabic: our own keyboard, with the harakat and no suggestions
       const w = (window.prompt("Type the word. Then tap “Next letter” as you say each letter, and it appears on the board.") || "").trim().slice(0, 16);
       if (!w) return;
       if (board().strip.length) add({ t: elapsed(), k: "sx" });
@@ -10117,9 +10492,17 @@ notify pgrst, 'reload schema';
     }
     function nextLetter() {
       if (!spell) return;
-      add({ t: elapsed(), k: "sa", ch: spell.w[spell.n] });
-      setSpell(spell.n + 1 >= spell.w.length ? null : { w: spell.w, n: spell.n + 1 });
+      const L = spell.ar ? arChunks(spell.w) : spell.w;
+      add({ t: elapsed(), k: "sa", ch: L[spell.n] });
+      setSpell(spell.n + 1 >= L.length ? null : { w: spell.w, n: spell.n + 1, ar: spell.ar });
     }
+    function arWrite(w, whole) {
+      setKeys(false); w = String(w || "").trim(); if (!w) return;
+      if (board().strip.length) add({ t: elapsed(), k: "sx" });
+      if (whole) { add({ t: elapsed(), k: "sa", ch: w, wd: 1 }); setSpell(null); }
+      else setSpell({ w, n: 0, ar: true });
+    }
+    function showAnswers() { const b = board(); if (b.rv) add({ t: elapsed(), k: "rm", ref: b.rv.id }); else add({ t: elapsed(), k: "rv" }); }
     function showMedia(m) {
       if (!m.a) return;
       if (mode === "review") {   // after recording: it goes in at the moment the lesson is at now
@@ -10232,11 +10615,14 @@ notify pgrst, 'reload schema';
     }
     const on = pst.key === "studio";
     const shownImg = rec ? board().img : null;
-    const pageNote = pg => { const p = (lesson.pages || [])[pg], n = p && typeof p === "object" ? p.say || p.note : lesson.notes && lesson.notes[pg]; return n || (p && p.title) ? html`<div class="pgnote">${p && p.title ? html`<b dir="auto">${p.title}</b>` : null}${n ? html`<span dir="auto">💬 ${n}</span>` : null}</div>` : null; };
+    // what you'll say for this concept: only you see it; one line until you open it
+    const pageNote = pg => { const p = arPg((lesson.pages || [])[pg]), n = p.say || p.note || (lesson.notes && lesson.notes[pg]) || ""; if (!n && !p.title) return null;
+      return html`<details class="script" key=${"sc" + pg}><summary><b dir="auto">${p.title || "Concept " + (pg + 1)}</b>${n ? html`<span dir="auto">${String(n).split(/\n/)[0]}</span>` : null}</summary>${n ? html`<div dir="auto">${n}</div>` : null}</details>`; };
+    const curPg = rec && lesson.pages ? arPg(lesson.pages[board().page || 0]) : null, canReveal = arL && curPg && ["match", "fill", "choose"].includes(curPg.kind), revealed = canReveal && !!board().rv;
     const pageBar = lesson.pages && rec ? (() => { const pg = board().page || 0, N = lesson.pages.length; return html`<div class="pgbar">
       <button class="chip" disabled=${pg <= 0} onClick=${() => add({ t: elapsed(), k: "pg", v: pg - 1 })}>${lesson.rtl ? "▶" : "◀"} Back</button>
       <b>Concept ${pg + 1} of ${N}</b>
-      <button class="btn slim" disabled=${pg >= N - 1} onClick=${() => add({ t: elapsed(), k: "pg", v: pg + 1 })}>Next concept ${lesson.rtl ? "◀" : "▶"}</button></div>${pageNote(pg)}`; })() : null;
+      <button class="btn slim" disabled=${pg >= N - 1} onClick=${() => add({ t: elapsed(), k: "pg", v: pg + 1 })}>Next ${lesson.rtl ? "◀" : "▶"}</button></div>${pageNote(pg)}`; })() : null;
     const tray = html`<div class="mtray" aria-label="Pictures and videos">
       ${media.map(m => html`<button key=${m.a} class=${"mthumb" + (shownImg && shownImg.a === m.a ? " on" : "")} onClick=${() => showMedia(m)} aria-label=${m.type === "vid" ? "Play this video" : "Show this picture"}>
         ${m.type === "vid" ? html`<video src=${srcFor(m.a) + "#t=0.5"} preload="metadata" muted playsinline></video><span class="mbadge">▶ ${fmtDur(m.secs || 0)}</span>` : html`<img src=${srcFor(m.a)} alt=""/>`}
@@ -10278,12 +10664,18 @@ notify pgrst, 'reload schema';
       setLoadingOld(false);
     }
     const counts = cueCount(cues);
-    return html`<div class="full studio lessonstudio" role="dialog" aria-label="Record the explanation">
+    const helpText = arL
+      ? html`<p class="help">This is the board your students see. Press record and talk them through it, concept by concept. <b>👉 Point</b> at a word. <b>🔍 Bring up</b> a word to the middle of the board (tap again to put it back). <b>⭕ Circle</b>, <b>〰️ Underline</b> or <b>✏️ Draw</b>. <b>✍️ Write</b> a word with the Arabic keyboard, or tap words on the board to join them. <b>🧽 Rub out</b> a mark, or a word on the board (rub the same place again and it's back). On a practice board, <b>✔ Answers</b> shows the answers once you've solved it together. Tap the tool you're on again to go back to pointing.</p>`
+      : html`<p class="help">This is the board your students will see. Press record and talk them through it. While recording: <b>👉 Point</b> at a word (or anywhere, even on a picture), <b>⭕ Circle</b> or <b>〰️ Underline</b> it (tap it again to take it off), <b>✏️ Draw</b> with your finger, <b>🔤 Make a word</b> by tapping its letters. <b>🧽 Rub out</b> one thing by tapping it, <b>↶ Undo</b> takes back the last thing. <b>⏸ Pause</b> any time, for example to add a picture. <b>✋ Your turn</b> makes students answer: ask a question, tap Your turn, then tap the right answer — the lesson stops for them until they tap it. Tap the tool you're on again to go back to pointing.</p>`;
+    return html`<div class=${"full studio lessonstudio" + (arL ? " arstudio" : "")} ref=${studioRef} role="dialog" aria-label="Record the explanation">
       <div class="fhead">
         <span>${talk ? "🎙️ " + (lesson.title || "Free board") : "Lesson " + number + ": " + lesson.title}</span>
+        <button class=${"iconbtn" + (helpOpen ? " on" : "")} onClick=${() => (helpOpen ? helpDone() : setHelpOpen(true))} aria-label="How it works" title="How it works">?</button>
+        ${mode === "review" || mode === "saving" ? null : html`<button class="iconbtn" onClick=${bigger} aria-label="Bigger board" title="Bigger board (turns the phone sideways)">⛶</button>`}
         <button class="iconbtn" onClick=${onClose} aria-label="Close"><${Ic.x}/></button>
       </div>
       <div class="sbody">
+        <div class=${"sboard" + (rec ? " rec" : "")}>
         ${mode === "review" || mode === "saving"
           ? html`<${ClassroomPlayer} lesson=${lesson} number=${number} k=${"studio" + (useClean && clean && clean.url ? "c" : "")} src=${voice().url} secs=${voice().secs} cues=${cues} ix=${ix} noAuto=${true}/>`
           : html`<div class="crwrap"><div class="crstage">
@@ -10292,37 +10684,38 @@ notify pgrst, 'reload schema';
               ${peek && peek.type === "vid" ? html`<div class="crclip"><${BoardClip} c=${{ id: "pk" + peek.a, a: peek.a }} onEnd=${() => setPeek(null)}/></div>` : null}
               ${rec && paused && !recClip ? html`<div class="pausedtag">⏸ Paused</div>` : null}
             </div></div>`}
+        ${rec ? html`<div class="btools" role="toolbar" aria-label="Tools">
+            ${TOOLS.map(([k, ic, lbl]) => html`<button key=${k} class=${"tool" + (tool === k ? " on" : "")} aria-pressed=${tool === k ? "true" : "false"} onClick=${() => pickTool(k)}><span>${ic}</span>${lbl}</button>`)}
+            <button class="tool" onClick=${undo}><span>↶</span>Undo</button>
+            <button class="tool" onClick=${wipe}><span>🧹</span>Wipe all</button>
+            ${canReveal ? html`<button class=${"tool" + (revealed ? " on" : "")} onClick=${showAnswers}><span>✔</span>Answers</button>` : null}
+          </div>` : null}
+        </div>
         ${peek && peek.type === "img" ? html`<div class="peek" onClick=${() => setPeek(null)}><img src=${srcFor(peek.a)} alt="Picture"/><small>Tap to close</small></div>` : null}
         ${mapOpen ? html`<${VMPlaces} onClose=${() => setMapOpen(false)} onAdd=${addMap}/>` : null}
+        ${keys ? html`<${ArKeys} onClose=${() => setKeys(false)} onDone=${arWrite}/>` : null}
       </div>
       <div class="sfoot">
+        ${helpOpen && (mode === "ready" || rec) ? html`<div class="helpbox">${helpText}<button class="btn slim" onClick=${helpDone}>Got it</button></div>` : null}
         ${mode === "ready" ? html`
-          <p class="help">This is the board your students will see. Press record and talk them through it. While recording: <b>👉 Point</b> at a word (or anywhere, even on a picture), <b>⭕ Circle</b> or <b>〰️ Underline</b> it (tap it again to take it off), <b>✏️ Draw</b> with your finger, <b>🔤 Make a word</b> by tapping its letters. <b>🧽 Rub out</b> one thing by tapping it, <b>↶ Undo</b> takes back the last thing. <b>⏸ Pause</b> any time, for example to add a picture. <b>✋ Your turn</b> makes students answer: ask a question, tap Your turn, then tap the right answer — the lesson stops for them until they tap it.</p>
+          ${lesson.pages ? html`<p class="help">${lesson.pages.length} concepts. Tap <b>Next</b> as you go; what you planned to say shows under the board, one line until you open it.</p>${pageNote(0)}` : null}
           ${tray}
-          ${lesson.pages ? html`<p class="help">This lesson goes <b>concept by concept</b>: ${lesson.pages.length} boards. While recording, tap <b>Next concept</b> to move to the next board. What to say for each one shows under it.</p>${pageNote(0)}` : null}
           ${!talk && lesson.explain ? html`<button class="btn quiet" disabled=${loadingOld} onClick=${editOld}>${loadingOld ? "Opening…" : "✏️ Change the lesson you saved (add pictures, maps or more talking)"}</button>` : null}
           <button class="big red" onClick=${start} aria-label="Start recording"><${Ic.mic} size=${30}/></button>` : null}
         ${rec ? html`
-          <div class="srow"><span class="recind">${paused ? html`<span class="pausedot"></span>` : html`<span class="recdot"></span>`}${recClip ? "Paused for the video" : paused ? "Paused · " + fmtDur(nowT()) : fmtDur(nowT())}</span><span class="help">${counts}</span></div>
+          <div class="srow recrow"><span class="recind">${paused ? html`<span class="pausedot"></span>` : html`<span class="recdot"></span>`}${recClip ? "Paused for the video" : paused ? "Paused · " + fmtDur(nowT()) : fmtDur(nowT())}</span><span class="help">${counts}</span></div>
           ${arming != null ? html`<p class="armnote"><b>Your turn is set.</b> Ask your question out loud now (for example “Which one says /b/?”), then <b>tap the right answer on the board</b>. When students watch, the lesson stops here until they tap that answer (after two wrong taps it glows to help them). Nothing to tap — you just want them to read or repeat aloud? <button class="linkbtn" onClick=${noAnswer}>They just say it</button> (the lesson waits until they tap Continue).</p>` : null}
           ${pageBar}
-          <div class="tools" role="toolbar" aria-label="Tools">
-            ${STUDIO_TOOLS.map(([k, ic, lbl]) => html`<button key=${k} class=${"tool" + (tool === k ? " on" : "")} aria-pressed=${tool === k ? "true" : "false"} onClick=${() => setTool(k)}><span>${ic}</span>${lbl}</button>`)}
-          </div>
-          <div class="tools">
-            <button class="tool" onClick=${undo}><span>↶</span>Undo</button>
-            <button class="tool" onClick=${wipe}><span>🧽</span>Wipe all</button>
-            <button class=${"tool" + (paused ? " on" : "")} onClick=${pauseRec}><span>${paused ? "▶" : "⏸"}</span>${paused ? "Resume" : "Pause"}</button>
-          </div>
-          ${tool === "pen" ? html`<div class="subbar">${PEN_COLS.map(c => html`<button key=${c} class=${"swatch" + (penCol === c ? " on" : "")} style=${"background:" + c} onClick=${() => setPenCol(c)} aria-label="Chalk colour"></button>`)}<span class="help">Draw on the board with your finger.</span></div>` : null}
+          ${tool === "pen" ? html`<div class="subbar">${PEN_COLS.map(c => html`<button key=${c} class=${"swatch" + (penCol === c ? " on" : "")} style=${"background:" + c} onClick=${() => setPenCol(c)} aria-label="Chalk colour"></button>`)}<span class="help">Draw with your finger. Tap ✏️ again to point.</span></div>` : null}
           ${tool === "word" ? html`<div class="subbar">
-            ${spell ? html`<button class="btn" onClick=${nextLetter}>Next letter: “${spell.w[spell.n]}”</button><span class="help">${spell.w.slice(0, spell.n)}<u>${spell.w[spell.n]}</u>${spell.w.slice(spell.n + 1)}</span>`
-              : html`<span class="help">Tap letters on the board: they join into a word at the bottom. Or</span><button class="chip" onClick=${typeWord}>⌨️ Spell a new word</button>`}
-            <button class="chip" onClick=${() => { add({ t: elapsed(), k: "sx" }); setSpell(null); }}>Clear the word</button>
+            ${spell ? html`<button class="btn" onClick=${nextLetter}>Next letter: “${(spell.ar ? arChunks(spell.w) : spell.w)[spell.n]}”</button><span class=${"help" + (spell.ar ? " arabic" : "")} dir="auto">${spell.ar ? arChunks(spell.w).slice(spell.n).join("") : html`${spell.w.slice(0, spell.n)}<u>${spell.w[spell.n]}</u>${spell.w.slice(spell.n + 1)}`}</span>`
+              : html`<span class="help">${arL ? "Tap words on the board to join them at the bottom. Or" : "Tap letters on the board: they join into a word at the bottom. Or"}</span><button class="chip" onClick=${typeWord}>⌨️ ${arL ? "Write a word" : "Spell a new word"}</button>`}
+            <button class="chip" onClick=${() => { add({ t: elapsed(), k: "sx" }); setSpell(null); }}>Clear it</button>
           </div>` : null}
           ${tray}
-          <div class="srow">
+          <div class="srow stoprow">
             <button class="btn quiet" disabled=${arming != null} onClick=${yourTurn}><${Ic.hand} size=${20}/>Your turn</button>
+            <button class=${"btn quiet" + (paused ? " on" : "")} onClick=${pauseRec}>${paused ? "▶ Resume" : "⏸ Pause"}</button>
             <button class="big red" onClick=${stop} aria-label="Stop recording"><${Ic.stop} size=${28}/></button>
           </div>` : null}
         ${mode === "review" || mode === "saving" ? html`
@@ -10337,7 +10730,7 @@ notify pgrst, 'reload schema';
                 <div class="vmchips"><button class="btn slim" disabled=${cut.a == null || cut.b == null} onClick=${doCut}>✂️ Cut out ${cut.a != null && cut.b != null ? fmtDur(cut.b - cut.a) : "that part"}</button><button class="btn slim quiet" onClick=${() => setCut(null)}>Cancel</button></div></div>`) : null}
           <div class="revopts">
             ${clean && clean.old ? null : html`<button class=${"gamesw" + (useClean ? " on" : "")} onClick=${() => { if (player.key && player.key.indexOf("studio") === 0) player.stop(); setPref("rc.clean", !useClean, setUseClean); }} aria-pressed=${useClean ? "true" : "false"}><span class="knob"></span><span>Remove background noise<small>${!clean ? "" : clean.failed ? "Couldn't clean this one; the original is used." : clean.p != null ? "Cleaning… " + Math.round(clean.p * 100) + "%" : "Done. Play it to hear the difference."}</small></span></button>`}
-            <button class=${"gamesw" + (subs ? " on" : "")} onClick=${() => setPref("rc.subs", !subs, setSubs)} aria-pressed=${subs ? "true" : "false"}><span class="knob"></span><span>Subtitles<small>Your words written along the bottom, as you say them</small></span></button>
+            ${lesson.rtl ? null : html`<button class=${"gamesw" + (subs ? " on" : "")} onClick=${() => setPref("rc.subs", !subs, setSubs)} aria-pressed=${subs ? "true" : "false"}><span class="knob"></span><span>Subtitles<small>Your words written along the bottom, as you say them</small></span></button>`}
           </div>
           <div class="srow">
             <button class="btn quiet" disabled=${mode === "saving"} onClick=${discard}>Discard</button>
@@ -10506,6 +10899,7 @@ notify pgrst, 'reload schema';
   /* ================= a recorded lesson as a video: the board, the stick, the voice ================= */
   async function lessonVideo(lesson, number, onProgress) {
     // drawn in 1280×720 steps, written out at full HD (1920×1080) so it fills a TV
+    if (lesson.rtl) { try { await Promise.all(["400 40px Amiri", "700 40px Amiri"].map(f => document.fonts.load(f))); } catch (e) {} }   // the Arabic font, before anything is drawn
     const W = 1280, H = 720, OUT_W = 1920, OUT_H = 1080, cv = document.createElement("canvas"); cv.width = OUT_W; cv.height = OUT_H;
     const c = cv.getContext("2d"); c.setTransform(OUT_W / W, 0, 0, OUT_H / H, 0, 0);
     const rows = parseBoard(lesson.board, lesson.stage === 3), cues = (lesson.cues || []).filter(q => q.t >= 0).sort((a, b) => a.t - b.t);
@@ -10734,7 +11128,7 @@ notify pgrst, 'reload schema';
     set(v) { this.st = v; this.subs.forEach(f => f(v)); },
     start(lesson, number) {
       const slug = String(lesson.title || "video").toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "").slice(0, 40) || "video";
-      return this.run({ lid: lesson.id, number, label: lesson.talk ? "“" + (lesson.title || "free board") + "”" : "lesson " + number + " video", name: (lesson.talk ? slug : "lesson-" + number) + ".mp4",
+      return this.run({ course: lesson.rtl ? "ar" : lesson.talk ? "studio" : "read", lid: lesson.id, number, label: lesson.talk ? "“" + (lesson.title || "free board") + "”" : "lesson " + number + " video", name: (lesson.talk ? slug : "lesson-" + number) + ".mp4",
         title: lesson.talk ? "🎙️ " + (lesson.title || "Free board video") : "Lesson " + number + " video" + (lesson.title ? ": " + lesson.title : ""), lessonNo: number,
         srt: captionOf(lesson.cues) ? makeSrt(captionOf(lesson.cues)) : null, done: lesson.talk ? "Your video is ready." : "Lesson " + number + " video is ready." },
         onP => lessonVideo(lesson, number, onP));
@@ -10765,7 +11159,7 @@ notify pgrst, 'reload schema';
         const name = info.name.replace(/\.\w+$/, "") + (blob.type.includes("mp4") ? ".mp4" : ".webm");
         try {
           const id = uid();
-          await classRec.put("recs", { id, startedAt: Date.now(), title: info.title, lessonNo: info.lessonNo || null, srt: info.srt || null, student: null, part: 1, mime: blob.type, status: "done", fixed: true, size: blob.size, secs: Math.round(blob.secs || 0) });
+          await classRec.put("recs", { id, course: info.course || (info.lid && String(info.lid).indexOf("vm-") === 0 ? "studio" : undefined), startedAt: Date.now(), title: info.title, lessonNo: info.lessonNo || null, srt: info.srt || null, student: null, part: 1, mime: blob.type, status: "done", fixed: true, size: blob.size, secs: Math.round(blob.secs || 0) });
           await classRec.put("chunks", { rec: id, seq: 0, blob });
         } catch (e) {}
         window.__lastVideo = { size: blob.size, type: blob.type }; window.__lastVideoBlob = blob;
@@ -18417,14 +18811,14 @@ notify pgrst, 'reload schema';
     const ext = String(r.mime || "").indexOf("mp4") >= 0 ? "mp4" : "webm";
     return "reading-class-" + d.getFullYear() + "-" + pad(d.getMonth() + 1) + "-" + pad(d.getDate()) + (r.lessonNo ? "-lesson-" + r.lessonNo : "") + (r.part > 1 ? "-part-" + r.part : "") + "." + ext;
   }
-  function Recordings() {
-    const R = useRec();
+  function Recordings({ course }) {
+    const R = useRec(), stS = useStore().students;
     const [talk, setTalk] = useState(false);
     const [maker, setMaker] = useState(false);
     const [list, setList] = useState(null);
     const [arm, setArm] = useState(null);
     const [busy, setBusy] = useState(null);
-    const load = () => classRec.all("recs").then(l => setList(l.sort((a, b) => b.startedAt - a.startedAt))).catch(() => setList([]));
+    const load = () => classRec.all("recs").then(l => setList(l.filter(r => !course || recCourse(r, store.s.students) === course).sort((a, b) => b.startedAt - a.startedAt))).catch(() => setList([]));
     useEffect(() => { load(); const t = setInterval(load, 3000); return () => clearInterval(t); }, []);
     useEffect(() => { if (!arm) return; const t = setTimeout(() => setArm(null), 3500); return () => clearTimeout(t); }, [arm]);
     const cache = useRef(new Map());
@@ -18472,12 +18866,12 @@ notify pgrst, 'reload schema';
     }
     const mb = n => (n / 1048576).toFixed(n > 10485760 ? 0 : 1) + " MB";
     return html`<section class="list">
-      <button class="btn talkbtn" onClick=${() => setMaker(true)}>🎬 Video maker: YouTube, TikTok, Reels, Shorts</button>
-      <button class="btn quiet talkbtn" onClick=${() => setTalk(true)}>🎙️ Talk about anything (a free board)</button>
+      ${course === "studio" || !course ? html`<button class="btn talkbtn" onClick=${() => setMaker(true)}>🎬 Video maker: YouTube, TikTok, Reels, Shorts</button>
+      <button class="btn quiet talkbtn" onClick=${() => setTalk(true)}>🎙️ Talk about anything (a free board)</button>` : null}
       ${maker ? html`<${VideoMaker} onClose=${() => { setMaker(false); load(); }}/>` : null}
       ${talk ? html`<${TalkBoard} onClose=${() => setTalk(false)}/>` : null}
       ${list === null ? html`<div class="empty"><p>Loading…</p></div>`
-        : !list.length ? html`<div class="empty"><p>No recordings yet. During a class, tap Record.</p></div>`
+        : !list.length ? html`<div class="empty"><p>${course === "studio" ? "Nothing made yet. Your videos from the video maker and the free board come here." : "No recordings yet. During a class, tap Record; your lesson videos for YouTube come here too."}</p></div>`
         : list.map(r => {
           const now = R.on && classRec.id === r.id;
           const note = now ? "Recording now" : r.status === "interrupted" ? "Stopped early, still usable" : "";
@@ -18516,7 +18910,27 @@ notify pgrst, 'reload schema';
     </div>`;
   }
 
+  // which class a recording belongs to: the reading class, the Arabic class, or your own studio (video maker, free board)
+  function recCourse(r, students) {
+    if (r.course) return r.course;
+    if (r.student) { const st = students.find(x => x.id === r.student); return st && st.course === "ar" ? "ar" : "read"; }
+    if (r.lessonNo) return "read";
+    return "studio";
+  }
+  const CLASSES = [{ k: "read", name: "Reading class", sub: "Reading and spelling, letter by letter" }, { k: "ar", name: "Arabic class", sub: "اَلْعَرَبِيَّةُ · lessons, vocabulary, the Mushaf" }];
+  // the first thing you see: choose a class (each has its own students, lessons and recordings), or your studio
+  function ClassPicker({ s, onPick }) {
+    const unread = k => s.msgs.filter(m => m.from === "student" && !m.seen && !m.test && (k === "ar" ? arKey(m) : !arKey(m))).length;
+    const count = k => s.students.filter(x => (k === "ar" ? isAr(x) : !isAr(x))).length;
+    return html`<section class="list classpick">
+      ${CLASSES.map(c => html`<button key=${c.k} class=${"classcard " + c.k} onClick=${() => onPick(c.k)}>
+        <span class="cname">${c.name}${unread(c.k) ? html`<span class="count">${unread(c.k)}</span>` : null}</span><small>${c.sub}</small><small class="cmeta">${count(c.k)} student${count(c.k) === 1 ? "" : "s"}</small></button>`)}
+      <button class="classcard studio" onClick=${() => onPick("studio")}><span class="cname">Your studio</span><small>Video maker, thumbnails, free board: your YouTube, TikTok and Reels</small></button>
+    </section>`;
+  }
   function Teacher({ s, ix }) {
+    const [cls, setClsS] = useState(() => { try { return localStorage.getItem("rc.class") || null; } catch (e) { return null; } });
+    const setCls = k => { setClsS(k); setTab("students"); try { if (k) localStorage.setItem("rc.class", k); else localStorage.removeItem("rc.class"); } catch (e) {} };
     const [tab, setTab] = useState("students");
     const [setupOpen, setSetupOpen] = useState(false);
     const [openStudent, setOpenStudent] = useState(null);
@@ -18527,7 +18941,7 @@ notify pgrst, 'reload schema';
     const [arOpen, setArOpen] = useState(null);   // "course", or an Arabic student's id
     const L = useLive();
     const resumed = useRef(false);
-    useEffect(() => { window.scrollTo(0, 0); }, [tab, openStudent, openLesson]);
+    useEffect(() => { window.scrollTo(0, 0); }, [tab, openStudent, openLesson, cls]);
     useEffect(() => { classRec.recover(); }, []);
     useEffect(() => {
       if (resumed.current || !s.hasLive) return;
@@ -18555,19 +18969,28 @@ notify pgrst, 'reload schema';
       if (l) body = html`<${LessonEditor} key=${l.id + tLang} s=${v.s} ix=${v.ix} lesson=${l} lang=${tLang} onLang=${x => { setTLang(x); try { localStorage.setItem("rc.tlang", x); } catch (e) {} }} onBack=${() => setOpenLesson(null)}/>`;
     }
     if (!body) {
-      const unreadTotal = s.msgs.filter(m => m.from === "student" && !m.seen && !m.test && !arKey(m)).length, arUnread = s.msgs.filter(m => m.from === "student" && !m.seen && !m.test && arKey(m)).length;
+      const unread = s.msgs.filter(m => m.from === "student" && !m.seen && !m.test && (cls === "ar" ? arKey(m) : !arKey(m))).length;
       const tabBtn = (id, label, dot) => html`<button role="tab" aria-selected=${tab === id ? "true" : "false"} class=${tab === id ? "on" : ""} onClick=${() => setTab(id)}>${label}${dot ? html`<span class="segdot" aria-label="New messages"></span>` : null}</button>`;
+      const C = CLASSES.find(c => c.k === cls);
+      const tools = html`<${ThemeBtn}/><${PushBell}/><button class="iconbtn setupbtn" onClick=${() => setSetupOpen(true)} aria-label="Website setup check" title="Website setup check">⚙️</button>`;
       body = html`<div class="page">
         <header class="top">
-          <div class="toprow"><h1>Reading class</h1><${ThemeBtn}/><${PushBell}/><button class="iconbtn setupbtn" onClick=${() => setSetupOpen(true)} aria-label="Website setup check" title="Website setup check">⚙️</button></div>
-          <div class="seg" role="tablist">${tabBtn("students", "Students", unreadTotal)}${tabBtn("arabic", "Arabic", arUnread)}${tabBtn("lessons", "Lessons")}${tabBtn("recordings", "Recordings")}</div>
+          ${!cls ? html`<div class="toprow"><h1>Your classes</h1>${tools}</div>`
+            : html`<div class="toprow"><button class="iconbtn" onClick=${() => setCls(null)} aria-label="All classes"><${Ic.back}/></button><h1 class="clsh">${C ? C.name : "Your studio"}</h1>${tools}</div>
+              ${cls === "studio" ? null : html`<div class="seg" role="tablist">${tabBtn("students", "Students", unread)}${tabBtn("lessons", "Lessons")}${cls === "ar" ? tabBtn("library", "Library") : null}${tabBtn("recordings", "Recordings")}</div>`}`}
         </header>
         ${s.needsUpdate ? html`<${UpdateBanner}/>` : null}
         ${setupOpen ? html`<${SetupCheck} onClose=${() => setSetupOpen(false)}/>` : null}
-        ${tab === "students" ? html`<${Questions} s=${Object.assign({}, s, { students: s.students.filter(x => !isAr(x)) })} onOpen=${(id, f) => { setFresh(false); setFocus(f); setOpenStudent(id); }}/><${StudentsList} s=${s} onOpen=${(id, isNew) => { setFresh(!!isNew); setFocus(null); setOpenStudent(id); }}/>`
-          : tab === "arabic" ? html`<${ArabicTab} s=${s} onStudent=${(id, fresh, focus) => setArOpen({ student: id, fresh, focus })} onLesson=${id => setArOpen({ lesson: id })}/>`
+        ${!cls ? html`<${ClassPicker} s=${s} onPick=${setCls}/>`
+          : cls === "studio" ? html`<${Recordings} course="studio"/>`
+          : cls === "ar" ? ((s.schemaVer || 0) < 11 ? html`<section class="list"><div class="empty"><p>Run the one-time database update first (the box above). Then your Arabic class opens here.</p></div></section>`
+            : tab === "students" ? html`<${ArStudents} s=${s} onStudent=${(id, fresh, focus) => setArOpen({ student: id, fresh, focus })}/>`
+            : tab === "lessons" ? html`<${ArLessons} s=${s} onOpen=${id => setArOpen({ lesson: id })}/>`
+            : tab === "library" ? html`<${ArTools} s=${s}/>`
+            : html`<${Recordings} course="ar"/>`)
+          : tab === "students" ? html`<${Questions} s=${Object.assign({}, s, { students: s.students.filter(x => !isAr(x)) })} onOpen=${(id, f) => { setFresh(false); setFocus(f); setOpenStudent(id); }}/><${StudentsList} s=${s} onOpen=${(id, isNew) => { setFresh(!!isNew); setFocus(null); setOpenStudent(id); }}/>`
           : tab === "lessons" ? (() => { const v = viewOf(s, tLang); REC_LANG = tLang; return html`<${LessonsList} s=${v.s} ix=${v.ix} onOpen=${setOpenLesson} lang=${tLang} onLang=${l => { setTLang(l); try { localStorage.setItem("rc.tlang", l); } catch (e) {} }}/>`; })()
-          : html`<${Recordings}/>`}
+          : html`<${Recordings} course="read"/>`}
         ${float ? html`<div class="floatspace"></div>` : null}
       </div>`;
     }
@@ -18598,111 +19021,263 @@ notify pgrst, 'reload schema';
     }
     return { s: AR_V.s, ix: AR_V.ix };
   }
-  // say an Arabic word with the phone's own voice (until you've recorded it)
-  function arSay(text) {
-    try { const sy = window.speechSynthesis; if (!sy) return; sy.cancel(); const u = new SpeechSynthesisUtterance(String(text).replace(/[^؀-ۿ\s؟،.!]/g, "")); u.lang = "ar-SA"; u.rate = 0.8; const v = (sy.getVoices() || []).find(x => /^ar/i.test(x.lang)); if (v) u.voice = v; sy.speak(u); } catch (e) {}
-  }
-  // a bank lesson's teaching, as concepts: the Arabic of each step on the board; what it says, as the notes
+  // a bank lesson as concepts, the way you teach: its words on a few boards, matching them together, the rule in a few boards, its table, then practice
+  const AR_KIND_NAMES = { text: "Text", words: "Words", match: "Match", fill: "Fill the blank", choose: "Choose", table: "Table", pic: "Picture" };
   function arConceptsFrom(bl) {
-    const out = [], clean = l => l.split(/\s=\s/)[0].replace(/\([^)]*\)/g, "").replace(/[A-Za-z][A-Za-z'’,;:!?\-\s]*/g, " ").replace(/\s{2,}/g, " ").trim();
-    for (const t of bl.teach || []) {
-      const lines = String(t.show || "").split(/\n/).map(clean).filter(l => /[؀-ۿ]/.test(l));
-      if (!lines.length) continue;
-      out.push({ title: "", board: lines.slice(0, 8).join("\n"), note: [t.say, String(t.show || "").trim()].filter(Boolean).join("\n\n"), say: t.say || "" });
+    const out = [], bare = x => arBare(crNoEmoji(x));
+    const clean = l => crNoEmoji(l.split(/\s=\s/)[0].replace(/\([^)]*\)/g, "").replace(/[A-Za-z][A-Za-z'’,;:!?\-\s]*/g, " ").replace(/\s{2,}/g, " ").trim());
+    const V = (bl.vocab || []).filter(v => v.ar).slice(0, 15);
+    if (V.length) {
+      const nb = Math.ceil(V.length / 6), per = Math.ceil(V.length / nb);
+      for (let i = 0; i < V.length; i += per) { const g = V.slice(i, i + per); out.push({ kind: "words", title: "اَلْكَلِمَاتُ", words: g.map(v => v.ar), say: g.map(v => v.ar + " — " + v.en).join("\n") }); }
+      const M = V.filter(v => v.en).slice(0, 5);
+      if (M.length >= 3) out.push({ kind: "match", title: "صِلْ", pairs: M.map(v => [v.ar, String(v.en).replace(/\s*\(.*?\)\s*/g, " ").trim()]), say: "Match each word to its meaning together. Draw the lines, then show the answers." });
     }
-    if (!out.length && bl.examples.length) out.push({ title: "", board: bl.examples.slice(0, 6).join("\n"), note: "", say: "" });
+    // the rule: its Arabic, a few lines to a board; what Fusha says to explain it becomes your script
+    const seen = new Set(); let cur = null;
+    for (const t of bl.teach || []) {
+      const lines = String(t.show || "").split(/\n/).map(clean).filter(l => /[؀-ۿ]/.test(l) && !seen.has(bare(l)));
+      lines.forEach(l => seen.add(bare(l)));
+      if (!lines.length) { if (cur && t.say) cur.say += "\n" + t.say; continue; }
+      const nRule = out.filter(x => x.lines).length;
+      if (!cur || (cur.lines.length + lines.length > 4 && nRule < 5)) { cur = { lines: [], say: "", more: [] }; out.push(cur); }
+      if (cur.lines.length + lines.length > 4 && cur.lines.length) cur.more.push(...lines); else cur.lines.push(...lines);   // a few boards for the rule; the rest of its examples stay in your script
+      if (t.say) cur.say += (cur.say ? "\n" : "") + t.say;
+    }
+    out.forEach(x => { if (x.more && x.more.length) x.say += "\n\nMore examples (add a board if you want them): " + x.more.join(" · "); });
+    for (let i = 0; i < out.length; i++) if (out[i].lines) out[i] = { kind: "text", title: bl.ruleName && !out.slice(0, i).some(x => x.kind === "text") ? bl.ruleName : "", board: out[i].lines.join("\n"), say: out[i].say };
+    if (bl.table && bl.table.rows && bl.table.rows.length) out.push({ kind: "table", title: bl.table.title || "", table: { head: (bl.table.head || []).map(crNoEmoji), rows: bl.table.rows.slice(0, 7).map(r => r.map(crNoEmoji)) }, say: "" });
+    const D = bl.drills || [];
+    const fills = D.filter(d => d.t === "complete" && /_{2,}/.test(d.q || "")).slice(0, 3);
+    if (fills.length) out.push({ kind: "fill", title: "أَكْمِلْ", rows: fills.map(d => ({ q: crNoEmoji(d.q), a: crNoEmoji(d.a) })), say: fills.map(d => d.why || "").filter(Boolean).join("\n") });
+    D.filter(d => d.t === "mcq" && d.q && (d.options || []).length >= 2).slice(0, 2).forEach(d => out.push({ kind: "choose", title: "اِخْتَرْ", q: crNoEmoji(d.q), opts: d.options.map(crNoEmoji), a: crNoEmoji(d.a), say: d.why || "" }));
+    if (!out.length && (bl.examples || []).length) out.push({ kind: "text", title: "", board: bl.examples.slice(0, 5).map(clean).join("\n"), say: "" });
     return out;
   }
+  // its short summary for students: what the lesson is about, in a line or two (you change it)
+  const arSummaryFrom = bls => (bls || []).map(b => b.title + (b.ruleName && b.ruleName !== b.title ? " — " + b.ruleName : "") + (b.subtitle ? ": " + b.subtitle : "")).join("\n");
+  const arIntro = bls => ({ kind: "text", title: "مُقَدِّمَةٌ", board: (bls || []).map(b => b.title).join("\n"), say: (bls || []).map(b => b.subtitle).filter(Boolean).join("\n") });
   // a new lesson from one or more bank lessons (in the order you picked them), or blank
   async function arNewLesson(s, bls, title) {
     const pages = [], words = [], seen = new Set();
+    if (bls && bls.length) pages.push(arIntro(bls));
     for (const bl of bls || []) { pages.push(...arConceptsFrom(bl)); for (const v of bl.vocab) if (!seen.has(v.ar)) { seen.add(v.ar); words.push({ ar: v.ar, en: v.en }); } }
     const ord = Math.max(0, ...(s.ar_lessons || []).map(l => l.order || 0)) + 1;
     const ref = rt.db.collection("ar_lessons").doc("a" + newId());
-    await ref.set({ order: ord, title: title || (bls && bls.length ? bls.map(b => b.title).join(" · ") : "New lesson"), pages: pages.length ? pages : [{ title: "", board: "", note: "" }], words, src: (bls || []).map(b => b.id), cues: [], updatedAt: Date.now() });
+    await ref.set({ order: ord, title: title || (bls && bls.length ? bls.map(b => b.title).join(" · ") : "New lesson"), summary: arSummaryFrom(bls), pages: pages.length ? pages : [{ kind: "text", title: "", board: "", say: "" }], words, src: (bls || []).map(b => b.id), cues: [], updatedAt: Date.now() });
     return ref.id;
   }
 
-  // ---- the lesson bank: Fusha's lessons, to build yours from. The ones you've used say "Explained"; put away what you're done with.
-  function ArBank({ s, onClose, onMade }) {
+  // ---- the lesson bank: Fusha's lessons, to build yours from, in any order. The ones you've used say which of your lessons they're in.
+  function ArBank({ s, onClose, onMade, onAdd }) {
     const { b, err } = useArBank();
-    const [hidden, setHidden] = useState(null), [pick, setPick] = useState([]), [open, setOpen] = useState(null), [showHidden, setShowHidden] = useState(false), [busy, setBusy] = useState(false), [peek, setPeek] = useState(null);
-    useEffect(() => { q(sb.from("ar_bank").select("*")).then(d => setHidden(new Set((d || []).filter(r => r.hidden).map(r => r.id))), () => setHidden(new Set())); }, []);
-    const used = useMemo(() => { const m = {}; (s.ar_lessons || []).forEach((l, i) => (l.src || []).forEach(id => { (m[id] = m[id] || []).push(i + 1); })); return m; }, [s.ar_lessons]);
-    async function hide(id, v) { setHidden(h => { const n = new Set(h); if (v) n.add(id); else n.delete(id); return n; }); try { await q(sb.from("ar_bank").upsert({ id, hidden: v, updated_at: new Date().toISOString() })); } catch (e) { toast(errText(e)); } }
-    async function make() { setBusy(true); try { const bls = pick.map(id => b.lessons.find(l => l.id === id)).filter(Boolean); const id = await arNewLesson(s, bls); toast("Lesson made. Change anything you like, then record it."); onMade(id); } catch (e) { toast(errText(e)); setBusy(false); } }
+    const [pick, setPick] = useState([]), [open, setOpen] = useState(null), [busy, setBusy] = useState(false), [peek, setPeek] = useState(null), [qy, setQy] = useState("");
+    const used = useMemo(() => { const m = {}; (s.ar_lessons || []).slice().sort((a, c) => (a.order || 0) - (c.order || 0)).forEach((l, i) => (l.src || []).forEach(id => { (m[id] = m[id] || []).push(i + 1); })); return m; }, [s.ar_lessons]);
+    async function make() {
+      const bls = pick.map(id => b.lessons.find(l => l.id === id)).filter(Boolean);
+      if (onAdd) { onAdd(bls); return; }
+      setBusy(true); try { const id = await arNewLesson(s, bls); toast("Lesson made. Change anything you like, then record it."); onMade(id); } catch (e) { toast(errText(e)); setBusy(false); }
+    }
     const toggle = id => setPick(p => (p.includes(id) ? p.filter(x => x !== id) : p.concat(id)));
+    const k = arBare(qy.trim()), lo = qy.trim().toLowerCase();
+    const match = l => !qy.trim() || arBare(l.title).includes(k) || String(l.n) === qy.trim() || (l.ruleName && arBare(l.ruleName).includes(k)) || String(l.unitEn || "").toLowerCase().includes(lo);
+    const row = l => html`<div key=${l.id} class=${"bankrow" + (pick.includes(l.id) ? " on" : "")}>
+      <button class="bankpick" onClick=${() => toggle(l.id)} aria-pressed=${pick.includes(l.id) ? "true" : "false"}>${pick.includes(l.id) ? html`<b>${pick.indexOf(l.id) + 1}</b>` : ""}</button>
+      <button class="bankmain" onClick=${() => setPeek(l)}><span class="arabic">${l.title}</span><small>Fusha ${l.n} · ${l.vocab.length} words · ${l.drills.length} exercises</small></button>
+      ${used[l.id] ? html`<span class="banktag">Used in your lesson ${used[l.id].join(", ")}</span>` : null}</div>`;
     return html`<div class="full sheetpage" role="dialog" aria-label="Lesson bank">
-      <div class="fhead"><span>📚 Lesson bank</span><button class="iconbtn" onClick=${onClose} aria-label="Close"><${Ic.x}/></button></div>
+      <div class="fhead"><span>📚 Lesson bank${onAdd ? " · add to this lesson" : ""}</span><button class="iconbtn" onClick=${onClose} aria-label="Close"><${Ic.x}/></button></div>
       <div class="sbody"><div class="ed">
-        <p class="help">The Fusha lessons. Tick one, or several to teach together (say 10 and 30), then make them into one lesson of yours. Its boards, notes and words come in, and you change anything. Lessons you've used show <b>Explained</b>.</p>
-        ${err ? html`<p class="help">The bank didn't load. Check your connection.</p>` : !b || !hidden ? html`<p class="help c">Loading the bank…</p>` : b.units.map(u => {
-          const ls = u.lessons.map(id => b.lessons.find(l => l.id === id)).filter(l => l && (showHidden || !hidden.has(l.id)));
-          if (!ls.length) return null;
-          return html`<div key=${u.id} class="bankunit"><button class="bankuh" onClick=${() => setOpen(open === u.id ? null : u.id)}><span class="arabic">${u.ar}</span><small>${u.n}. ${u.en} · ${ls.length}</small><${Ic.down} size=${18}/></button>
-            ${open === u.id ? ls.map(l => html`<div key=${l.id} class=${"bankrow" + (pick.includes(l.id) ? " on" : "")}>
-              <button class="bankpick" onClick=${() => toggle(l.id)} aria-pressed=${pick.includes(l.id) ? "true" : "false"}>${pick.includes(l.id) ? html`<b>${pick.indexOf(l.id) + 1}</b>` : ""}</button>
-              <button class="bankmain" onClick=${() => setPeek(l)}><span class="arabic">${l.title}</span><small>Fusha ${l.n} · ${l.teach.length} steps · ${l.vocab.length} words · ${l.drills.length} exercises</small></button>
-              ${used[l.id] ? html`<span class="banktag">Explained · yours ${used[l.id].join(", ")}</span>` : null}
-              <button class="chip" onClick=${() => hide(l.id, !hidden.has(l.id))}>${hidden.has(l.id) ? "Bring back" : "Put away"}</button></div>`) : null}</div>`;
-        })}
-        ${hidden && hidden.size ? html`<button class="linkbtn" onClick=${() => setShowHidden(!showHidden)}>${showHidden ? "Hide the ones put away" : "Show the ones put away (" + hidden.size + ")"}</button>` : null}
+        <p class="help">${onAdd ? "Tick the bank lessons to add. Their boards go where you tapped ＋, and their words join this lesson's words." : html`Tick one, or several to teach together (say 10 and 30): they become one lesson of yours, in the order you tick them. Lessons you've used say <b>Used in your lesson …</b>.`}</p>
+        <input class="arin" dir="auto" placeholder="Find a lesson: its name, or its number" value=${qy} onInput=${e => setQy(e.target.value)}/>
+        ${err ? html`<p class="help">The bank didn't load. Check your connection.</p>` : !b ? html`<p class="help c">Loading the bank…</p>`
+          : qy.trim() ? b.lessons.filter(match).map(row)
+          : b.units.map(u => {
+            const ls = u.lessons.map(id => b.lessons.find(l => l.id === id)).filter(Boolean);
+            if (!ls.length) return null;
+            const nUsed = ls.filter(l => used[l.id]).length;
+            return html`<div key=${u.id} class="bankunit"><button class="bankuh" onClick=${() => setOpen(open === u.id ? null : u.id)}><span class="arabic">${u.ar}</span><small>${u.n}. ${u.en} · ${ls.length} lessons${nUsed ? " · " + nUsed + " used" : ""}</small><${Ic.down} size=${18}/></button>
+              ${open === u.id ? ls.map(row) : null}</div>`;
+          })}
       </div></div>
-      ${pick.length ? html`<div class="bankbar"><span>${pick.length} picked</span><button class="btn" disabled=${busy} onClick=${make}>${busy ? "Making it…" : pick.length > 1 ? "Make one lesson from these " + pick.length : "Make it a lesson"}</button></div>` : null}
+      ${pick.length ? html`<div class="bankbar"><span>${pick.length} picked</span><button class="btn" disabled=${busy} onClick=${make}>${busy ? "Making it…" : onAdd ? "Add " + (pick.length > 1 ? "these " + pick.length : "it") + " to the lesson" : pick.length > 1 ? "Make one lesson from these " + pick.length : "Make it a lesson"}</button></div>` : null}
       ${peek ? html`<div class="scrim" onClick=${e => { if (e.target === e.currentTarget) setPeek(null); }}><div class="sheet" role="dialog" aria-label="Bank lesson">
-        <h3 class="arabic" dir="rtl" style="margin:0">${peek.title}</h3><p class="help">Fusha lesson ${peek.n}${peek.ruleName ? html` · <span dir="rtl">${peek.ruleName}</span>` : null}</p>
-        <div class="bankpeek">${arConceptsFrom(peek).slice(0, 40).map((c, i) => html`<div key=${i} class="bankstep"><div class="arabic" dir="rtl">${c.board}</div><small dir="auto">${c.say}</small></div>`)}</div>
+        <h3 class="arabic" dir="rtl" style="margin:0">${peek.title}</h3><p class="help">Fusha lesson ${peek.n}${peek.ruleName ? html` · <span dir="rtl">${peek.ruleName}</span>` : null}${used[peek.id] ? " · used in your lesson " + used[peek.id].join(", ") : ""}</p>
+        <div class="bankpeek">${arConceptsFrom(peek).map((c, i) => html`<div key=${i} class="bankstep"><small>${i + 1}. ${AR_KIND_NAMES[c.kind]}${c.title ? " · " : ""}<span dir="rtl">${c.title}</span></small><div class="arabic" dir="rtl">${c.kind === "words" ? c.words.join(" · ") : c.kind === "match" ? c.pairs.map(p => p[0]).join(" · ") : c.kind === "fill" ? c.rows.map(r => r.q).join("\n") : c.kind === "choose" ? c.q : c.kind === "table" ? (c.table.head || []).join(" | ") : c.board}</div></div>`)}</div>
         <button class="btn" onClick=${() => { if (!pick.includes(peek.id)) toggle(peek.id); setPeek(null); }}>${pick.includes(peek.id) ? "Picked ✓" : "Pick this one"}</button>
       </div></div>` : null}
     </div>`;
   }
 
-  // ---- one of your Arabic lessons: its concepts (board + notes), the words to learn, your recording, its video
+  // ---- one concept's board, small, exactly as students will see it
+  function ArBoardPeek({ lesson, page, number }) {
+    const ref = useRef(null);
+    useEffect(() => {
+      const cv = ref.current; if (!cv) return;
+      let n = 0, raf = 0;
+      const draw = () => {   // again a few times while the fonts and pictures arrive
+        const w = Math.round(cv.clientWidth * Math.min(2, window.devicePixelRatio || 1)); if (!w) return;
+        cv.width = w; cv.height = Math.round(w * 9 / 16); const c = cv.getContext("2d");
+        const A = crAssets(lesson, number, false, page);
+        c.setTransform(cv.width / CR_W, 0, 0, cv.height / CR_H, 0, 0);
+        crFrame(c, { room: A.room, front: A.front, lay: A.lay, lesson, t: 1e9, wall: 0, stage: stageAt([], 0), list: [], lead: 0 });
+        if (++n < 6) raf = setTimeout(draw, 400);
+      };
+      draw(); return () => clearTimeout(raf);
+    }, [lesson, page]);
+    return html`<canvas class="arpeekcv" ref=${ref} aria-label="How the board looks"></canvas>`;
+  }
+  // what's on one concept's board, to change: depends on the kind of board it is
+  function ArPageEdit({ p, up, words, onPic }) {
+    const K = p.kind || "text";
+    if (K === "words") {
+      const sel = p.words || [];
+      return html`<p class="help">Tap the words to put on this board (up to 8; 4 to 6 look best). Their pictures show with them.</p>
+        <div class="arwordchips">${words.map(w => html`<button key=${w.ar} class=${"arwchip add" + (sel.includes(w.ar) ? " on" : "")} onClick=${() => up({ words: sel.includes(w.ar) ? sel.filter(x => x !== w.ar) : sel.concat(w.ar).slice(0, 8) })}>${w.img ? html`<img class="arwimg" src=${srcFor(w.img)} alt=""/>` : null}<b class="arabic">${w.ar}</b></button>`)}</div>
+        ${!words.length ? html`<p class="help">Add words to the lesson first (further down).</p>` : null}`;
+    }
+    if (K === "match") {
+      const P = p.pairs || [];
+      return html`<p class="help">Arabic on the right; its match (a meaning, a plural, an opposite…) on the left. The left side gets mixed up on the board.</p>
+        ${P.map((x, k) => html`<div key=${k} class="arqopte"><input class="arin" dir="rtl" value=${x[0]} placeholder="كَلِمَةٌ" onInput=${e => up({ pairs: P.map((y, j) => (j === k ? [e.target.value, y[1]] : y)) })}/><span>↔</span><input class="arin" dir="auto" value=${x[1]} placeholder="its match" onInput=${e => up({ pairs: P.map((y, j) => (j === k ? [y[0], e.target.value] : y)) })}/><button class="iconbtn" onClick=${() => up({ pairs: P.filter((_, j) => j !== k) })} aria-label="Remove">✕</button></div>`)}
+        <div class="row2">${P.length < 6 ? html`<button class="chip" onClick=${() => up({ pairs: P.concat([["", ""]]) })}>＋ A pair</button>` : null}${words.some(w => w.en) ? html`<button class="chip" onClick=${() => up({ pairs: words.filter(w => w.en).slice(0, 5).map(w => [w.ar, w.en]) })}>Use the lesson's words</button>` : null}</div>`;
+    }
+    if (K === "fill") {
+      const R = p.rows || [];
+      return html`<p class="help">Write the sentence with ___ where the gap is, and what goes in it. You fill it in together; <b>✔ Answers</b> shows it on the board.</p>
+        ${R.map((x, k) => html`<div key=${k} class="arqopte"><input class="arin" dir="rtl" value=${x.q} placeholder="هَذَا ___ كَبِيرٌ" onInput=${e => up({ rows: R.map((y, j) => (j === k ? Object.assign({}, y, { q: e.target.value }) : y)) })}/><input class="arin arshort" dir="rtl" value=${x.a} placeholder="بَيْتٌ" onInput=${e => up({ rows: R.map((y, j) => (j === k ? Object.assign({}, y, { a: e.target.value }) : y)) })}/><button class="iconbtn" onClick=${() => up({ rows: R.filter((_, j) => j !== k) })} aria-label="Remove">✕</button></div>`)}
+        ${R.length < 4 ? html`<button class="chip" onClick=${() => up({ rows: R.concat({ q: "", a: "" }) })}>＋ A sentence</button>` : null}`;
+    }
+    if (K === "choose") {
+      const O = p.opts && p.opts.length ? p.opts : ["", "", ""];
+      return html`<input class="arin" dir="auto" placeholder="The question" value=${p.q || ""} onInput=${e => up({ q: e.target.value })}/>
+        <p class="help">Its answers: tick the right one.</p>
+        ${O.map((o, k) => html`<div key=${k} class="arqopte"><button class=${"bankpick" + (p.a && p.a === o && o ? " on" : "")} onClick=${() => up({ a: o })} aria-label="This is the right answer">${p.a && p.a === o && o ? "✓" : ""}</button><input class="arin" dir="auto" value=${o} placeholder=${"Answer " + (k + 1)} onInput=${e => { const v = e.target.value; up({ opts: O.map((y, j) => (j === k ? v : y)), a: p.a === o ? v : p.a }); }}/></div>`)}
+        ${O.length < 4 ? html`<button class="chip" onClick=${() => up({ opts: O.concat("") })}>＋ An answer</button>` : null}`;
+    }
+    if (K === "table") {
+      const T = p.table || { head: [], rows: [] }, txt = [T.head || []].concat(T.rows || []).map(r => r.join(" | ")).join("\n");
+      return html`<p class="help">One line per row, the boxes split with | . The first line is the heading (it shows in yellow).</p>
+        <textarea dir="rtl" class="arboardin" rows=${Math.max(4, txt.split("\n").length + 1)} placeholder=${"اَلضَّمِيرُ | اَلْمَاضِي | اَلْمُضَارِعُ\nهُوَ | كَتَبَ | يَكْتُبُ"} value=${txt} onInput=${e => { const L = e.target.value.split("\n").map(l => l.split("|").map(x => x.trim())); up({ table: { head: L[0] || [], rows: L.slice(1).filter(r => r.some(Boolean)) } }); }}></textarea>`;
+    }
+    if (K === "pic") return html`<p class="help">A page of a book, a photo, anything to read or explain. It fills the board; point and draw on it while you record.</p>
+      ${p.pic ? html`<img class="arpicprev" src=${srcFor(p.pic)} alt="The picture on this board"/>` : null}
+      <button class="btn sec" onClick=${onPic}>${p.pic ? "Change the picture" : "📷 Choose the picture"}</button>`;
+    return html`<textarea dir="rtl" class="arboardin" rows=${Math.max(3, String(p.board || "").split("\n").length + 1)} placeholder="اُكْتُبْ هُنَا… (each line is a line on the board)" value=${p.board || ""} onInput=${e => up({ board: e.target.value })}></textarea>`;
+  }
+
+  // ---- one of your Arabic lessons: its concepts (the boards you'll record), its summary, the words to learn, your recording, its video
   function ArLessonEditor({ s, lesson, number, onBack }) {
-    const [title, setTitle] = useState(lesson.title || ""), [pages, setPages] = useState(() => (lesson.pages || []).map(p => Object.assign({ title: "", board: "", note: "" }, typeof p === "string" ? { board: p } : p)));
-    const [words, setWords] = useState(lesson.words || []), [dirty, setDirty] = useState(false), [busy, setBusy] = useState(false), [studio, setStudio] = useState(false), [wq, setWq] = useState(""), [own, setOwn] = useState({ ar: "", en: "" }), [thumb, setThumb] = useState(false), [arm, setArm] = useState(false);
+    const norm = P => (P || []).map(p => { const o = arPg(p); if (o.say == null) o.say = o.note || ""; delete o.note; return o; });
+    const [title, setTitle] = useState(lesson.title || ""), [summary, setSummary] = useState(lesson.summary || ""), [pages, setPages] = useState(() => norm(lesson.pages)), [words, setWords] = useState(lesson.words || []), [src, setSrc] = useState(lesson.src || []);
+    const [dirty, setDirty] = useState(false), [busy, setBusy] = useState(false), [studio, setStudio] = useState(false), [wq, setWq] = useState(""), [own, setOwn] = useState({ ar: "", en: "" }), [thumb, setThumb] = useState(false), [arm, setArm] = useState(false);
+    const [ins, setIns] = useState(null), [bankAt, setBankAt] = useState(null), [ayatAt, setAyatAt] = useState(null), [peekPg, setPeekPg] = useState(null), [seeW, setSeeW] = useState(null), [recW, setRecW] = useState(null), [canUndo, setCanUndo] = useState(false);
     const { b } = useArBank();
-    const set = fn => { fn(); setDirty(true); };
-    const upP = (i, o) => set(() => setPages(P => P.map((p, k) => (k === i ? Object.assign({}, p, o) : p))));
+    // undo: what it all was before each change (typing in one box counts as one change)
+    const cur = useRef(null); cur.current = { title, summary, pages, words, src };
+    const hist = useRef([]), lastK = useRef({ k: null, at: 0 });
+    const set = (fn, key) => { const now = Date.now(); if (!(key && lastK.current.k === key && now - lastK.current.at < 2000)) { hist.current.push(cur.current); if (hist.current.length > 80) hist.current.shift(); setCanUndo(true); } lastK.current = { k: key || null, at: now }; fn(); setDirty(true); };
+    function undo() { const h = hist.current.pop(); if (!h) return; setTitle(h.title); setSummary(h.summary); setPages(h.pages); setWords(h.words); setSrc(h.src); setDirty(true); lastK.current = { k: null, at: 0 }; setCanUndo(hist.current.length > 0); toast("Undone."); }
+    const upP = (i, o, key) => set(() => setPages(P => P.map((p, k) => (k === i ? Object.assign({}, p, o) : p))), key);
     const moveP = (i, d) => set(() => setPages(P => { const n = P.slice(), j = i + d; if (j < 0 || j >= n.length) return P; [n[i], n[j]] = [n[j], n[i]]; return n; }));
-    async function save(quiet) { setBusy(true); try { await update("ar_lessons/" + lesson.id, { title: title.trim() || "Lesson", pages, words, updatedAt: Date.now() }); setDirty(false); if (!quiet) toast("Saved."); } catch (e) { toast(errText(e)); } setBusy(false); }
+    const insertAt = (at, list) => set(() => setPages(P => P.slice(0, at).concat(list, P.slice(at))));
+    async function save(quiet) { setBusy(true); try { await update("ar_lessons/" + lesson.id, { title: title.trim() || "Lesson", summary, pages, words, src, updatedAt: Date.now() }); setDirty(false); if (!quiet) toast("Saved."); } catch (e) { toast(errText(e)); } setBusy(false); }
     async function back() { if (dirty) await save(true); onBack(); }
     async function del() { if (!arm) { setArm(true); setTimeout(() => setArm(false), 3500); return; } try { await remove("ar_lessons/" + lesson.id); if (lesson.explain && rt.assets) rt.assets.delete(lesson.explain).catch(() => {}); onBack(); } catch (e) { toast(errText(e)); } }
-    const srcWords = useMemo(() => { if (!b) return []; const out = []; for (const id of lesson.src || []) { const bl = b.lessons.find(l => l.id === id); if (bl) out.push(...bl.vocab); } return out; }, [b, lesson.src]);
+    const srcWords = useMemo(() => { if (!b) return []; const out = []; for (const id of src || []) { const bl = b.lessons.find(l => l.id === id); if (bl) out.push(...bl.vocab); } return out; }, [b, src]);
     const found = useMemo(() => { const t = wq.trim(); if (!b || !t) return []; const k = arBare(t), lo = t.toLowerCase(), all = []; for (const g of b.words) for (const w of g.words) all.push(w); for (const l of b.lessons) for (const w of l.vocab) all.push(w);
       const seen = new Set(); return all.filter(w => (/[؀-ۿ]/.test(t) ? arBare(w.ar).includes(k) : String(w.en).toLowerCase().includes(lo)) && !seen.has(w.ar) && seen.add(w.ar)).slice(0, 30); }, [wq, b]);
     const has = w => words.some(x => x.ar === w.ar);
-    const picRef = useRef(null), picW = useRef(null);
-    const picFor = w => { picW.current = w.ar; if (picRef.current) picRef.current.click(); };
-    async function onPic(e) { const f = e.target.files && e.target.files[0]; e.target.value = ""; if (!f || !picW.current) return; const ar = picW.current; try { toast("Adding the picture…"); const small = await vmShrinkPic(f).catch(() => f); const id = await uploadBlob(small); set(() => setWords(W => W.map(x => (x.ar === ar ? Object.assign({}, x, { img: id }) : x)))); toast("Picture added. Tap Save."); } catch (er) { toast(errText(er)); } }
     const addW = w => { if (!has(w)) set(() => setWords(W => W.concat({ ar: w.ar, en: w.en || "" }))); };
-    const L = arLessonView(Object.assign({}, lesson, { title, pages }));
-    async function saveRec(patch) { await update("ar_lessons/" + lesson.id, { title: title.trim() || "Lesson", pages, words, explain: patch.explain, explainSecs: patch.explainSecs, cues: patch.cues, updatedAt: Date.now() }); setDirty(false); if (lesson.explain && lesson.explain !== patch.explain && rt.assets) rt.assets.delete(lesson.explain).catch(() => {}); }
+    const setW = (ar, o) => set(() => setWords(W => W.map(x => (x.ar === ar ? Object.assign({}, x, o) : x))));
+    // pictures: for a word, or a board that is a picture
+    const picRef = useRef(null), picFor = useRef(null);
+    const choosePic = target => { picFor.current = target; if (picRef.current) picRef.current.click(); };
+    async function onPic(e) {
+      const f = e.target.files && e.target.files[0]; e.target.value = ""; const tg = picFor.current; if (!f || !tg) return;
+      try { toast("Adding the picture…"); const small = await (tg.page != null ? shrinkImage(f) : vmShrinkPic(f)).catch(() => f); const id = await uploadBlob(small);
+        if (tg.page != null) upP(tg.page, { pic: id }); else setW(tg.word, { img: id });
+        toast("Picture in. Tap Save when you're done."); } catch (er) { toast(errText(er)); }
+    }
+    // your voice for a word: tap, say it, tap again
+    const recRef = useRef(null), stRef = useRef(null);
+    useEffect(() => () => { if (recRef.current) recRef.current.cancel(); recorder.close(stRef.current); }, []);
+    async function recWord(w) {
+      if (recRef.current) {
+        const r = recRef.current; recRef.current = null; const ar = recW; setRecW(null);
+        const out = await r.stop(); if (out.secs < 0.3 || !out.blob.size) { toast("That was too short. Try again."); return; }
+        try { const id = await uploadBlob(out.blob); setW(ar, { snd: id }); toast("Your voice is on “" + ar + "”. Tap Save."); } catch (e) { toast(errText(e)); }
+        return;
+      }
+      player.stop();
+      try { if (!stRef.current) stRef.current = await recorder.open(); recRef.current = recorder.start(stRef.current); setRecW(w.ar); } catch (e) { toast("The microphone isn't available here."); }
+    }
+    function addKind(at, kind) {
+      setIns(null);
+      if (kind === "bank") { setBankAt(at); return; }
+      if (kind === "ayat") { setAyatAt(at); return; }
+      const base = { kind, title: "", say: "" };
+      const fresh = kind === "words" ? { words: words.slice(0, 6).map(w => w.ar) } : kind === "match" ? { pairs: words.filter(w => w.en).slice(0, 4).map(w => [w.ar, w.en]).concat(words.some(w => w.en) ? [] : [["", ""], ["", ""], ["", ""]]) }
+        : kind === "fill" ? { rows: [{ q: "", a: "" }] } : kind === "choose" ? { q: "", opts: ["", "", ""], a: "" } : kind === "table" ? { table: { head: [], rows: [] } } : kind === "pic" ? { pic: null } : { board: "" };
+      insertAt(at, [Object.assign(base, fresh)]);
+      if (kind === "pic") setTimeout(() => choosePic({ page: at }), 50);
+    }
+    function addBank(bls) {
+      const at = bankAt; setBankAt(null); if (!bls.length) return;
+      const list = []; bls.forEach(bl => list.push(...arConceptsFrom(bl)));
+      set(() => {
+        setPages(P => P.slice(0, at).concat(list, P.slice(at)));
+        setSrc(S => S.concat(bls.map(x => x.id).filter(id => !S.includes(id))));
+        setWords(W => { const n = W.slice(); bls.forEach(bl => bl.vocab.forEach(v => { if (!n.some(x => x.ar === v.ar)) n.push({ ar: v.ar, en: v.en }); })); return n; });
+        if (!summary.trim()) setSummary(arSummaryFrom(bls));
+      });
+      toast(list.length + " boards added. Undo takes them out again.");
+    }
+    function addAyat(x) {
+      const at = ayatAt; setAyatAt(null);
+      insertAt(at, x.boards.map((bd, k) => ({ kind: "text", title: k ? "" : x.title, board: bd, say: "" })));
+    }
+    const L = arLessonView(Object.assign({}, lesson, { title, pages, words, summary }));
+    async function saveRec(patch) { await update("ar_lessons/" + lesson.id, { title: title.trim() || "Lesson", summary, pages, words, src, explain: patch.explain, explainSecs: patch.explainSecs, cues: patch.cues, updatedAt: Date.now() }); setDirty(false); if (lesson.explain && lesson.explain !== patch.explain && rt.assets) rt.assets.delete(lesson.explain).catch(() => {}); }
     const recorded = !!lesson.explain;
+    const plus = at => html`<button class="arins" onClick=${() => setIns(at)} aria-label="Add a board here">＋ ${at === 0 ? "Add a concept at the top (an introduction…)" : "Add a concept here"}</button>`;
+    const KINDS = [["text", "📝", "Text", "Lines of Arabic"], ["words", "🖼", "Words", "Big, with their pictures"], ["match", "↔", "Match", "Solve it together"], ["fill", "▁", "Fill the blank", "Sentences with a gap"], ["choose", "☑", "Choose", "A question and its answers"], ["table", "▦", "Table", "Conjugation and the like"], ["pic", "📷", "Picture", "A book page or a photo"], ["ayat", "📖", "Ayat", "From the Mushaf, or a whole page"], ["bank", "📚", "From the bank", "Another Fusha lesson's boards"]];
     return html`<div class="page">
       <header class="rhead"><button class="iconbtn" onClick=${back} aria-label="Back"><${Ic.back}/></button>
         <div class="rtitle"><b>Arabic lesson ${number}</b><small>${recorded ? "Recorded · " + fmtDur(lesson.explainSecs || 0) : "Not recorded yet"}</small></div>
+        <button class="iconbtn" disabled=${!canUndo} onClick=${undo} aria-label="Undo" title="Undo">↶</button>
         <button class="btn slim" disabled=${!dirty || busy} onClick=${() => save()}>${busy ? "Saving…" : dirty ? "Save" : "Saved ✓"}</button></header>
       <div class="ed">
-        <div class="field"><label for="artitle">Title (Arabic or English)</label><input id="artitle" dir="auto" class="arin" value=${title} onInput=${e => set(() => setTitle(e.target.value))}/></div>
-        <div class="field"><span class="lbl">The board, concept by concept</span>
-          <p class="help">Each concept is one board. Write the Arabic as it should appear (each line is a line on the board). Notes are what students read afterwards to revise.</p>
-          ${pages.map((p, i) => html`<div class="card arpage" key=${i}>
-            <div class="qhead"><b>Concept ${i + 1}</b><span class="arpgops"><button class="iconbtn" disabled=${i === 0} onClick=${() => moveP(i, -1)} aria-label="Earlier">↑</button><button class="iconbtn" disabled=${i === pages.length - 1} onClick=${() => moveP(i, 1)} aria-label="Later">↓</button>${pages.length > 1 ? html`<button class="iconbtn" onClick=${() => set(() => setPages(P => P.filter((_, k) => k !== i)))} aria-label="Remove"><${Ic.trash} size=${18}/></button>` : null}</span></div>
-            <input dir="auto" class="arin" placeholder="Its name (optional), e.g. هَذَا وَهَذِهِ" value=${p.title} onInput=${e => upP(i, { title: e.target.value })}/>
-            <textarea dir="rtl" class="arboardin" rows=${Math.max(3, String(p.board || "").split("\n").length + 1)} placeholder="اُكْتُبْ هُنَا…" value=${p.board} onInput=${e => upP(i, { board: e.target.value })}></textarea>
-            <details open=${!!p.note}><summary>Notes for students${p.note ? "" : " (optional)"}</summary><textarea dir="auto" rows="4" class="arnote" value=${p.note} onInput=${e => upP(i, { note: e.target.value })}></textarea></details>
-          </div>`)}
-          <button class="btn sec" onClick=${() => set(() => setPages(P => P.concat({ title: "", board: "", note: "" })))}><${Ic.plus} size=${18}/>Add a concept</button>
+        <div class="field"><label for="artitle">Title (Arabic or English)</label><input id="artitle" dir="auto" class="arin" value=${title} onInput=${e => set(() => setTitle(e.target.value), "title")}/></div>
+        <div class="field"><label for="arsum">Summary for students</label><textarea id="arsum" dir="auto" rows="3" class="arnote" placeholder="Two or three lines: what this lesson teaches. Students read this under the board." value=${summary} onInput=${e => set(() => setSummary(e.target.value), "summary")}></textarea></div>
+        <div class="field"><span class="lbl">The concepts, in the order you'll teach them (${pages.length})</span>
+          <p class="help">Each concept is one board. Tap 👁 to see it as students will. What you'll say is only for you: it shows while you record.</p>
+          ${plus(0)}
+          ${pages.map((p, i) => html`<div key=${i}><div class="card arpage">
+            <div class="qhead"><b>${i + 1} · ${AR_KIND_NAMES[p.kind] || "Text"}</b><span class="arpgops">
+              <button class=${"iconbtn" + (peekPg === i ? " on" : "")} onClick=${() => setPeekPg(peekPg === i ? null : i)} aria-label="See the board">👁</button>
+              <button class="iconbtn" disabled=${i === 0} onClick=${() => moveP(i, -1)} aria-label="Earlier">↑</button><button class="iconbtn" disabled=${i === pages.length - 1} onClick=${() => moveP(i, 1)} aria-label="Later">↓</button>
+              ${pages.length > 1 ? html`<button class="iconbtn" onClick=${() => set(() => setPages(P => P.filter((_, k) => k !== i)))} aria-label="Remove"><${Ic.trash} size=${18}/></button>` : null}</span></div>
+            ${peekPg === i ? html`<${ArBoardPeek} lesson=${L} page=${i} number=${number}/>` : null}
+            <input dir="auto" class="arin" placeholder="Its name on the board (optional), e.g. هَذَا وَهَذِهِ" value=${p.title || ""} onInput=${e => upP(i, { title: e.target.value }, "t" + i)}/>
+            <${ArPageEdit} p=${p} words=${words} up=${o => upP(i, o, "p" + i + Object.keys(o).join())} onPic=${() => choosePic({ page: i })}/>
+            <details open=${!!p.say}><summary>What you'll say (only you see this)</summary><textarea dir="auto" rows="3" class="arnote" value=${p.say || ""} onInput=${e => upP(i, { say: e.target.value }, "s" + i)}></textarea></details>
+          </div>${plus(i + 1)}</div>`)}
         </div>
         <div class="field"><span class="lbl">🎙️ Your explanation</span>
-          <p class="help">${recorded ? "Recorded. Students watch it in this lesson; the numbers under it are the concepts you've recorded." : "Record yourself explaining it on the board, concept by concept: point, circle, underline and draw. Tap Next concept as you go."} Changed the boards after recording? Record it again so the pointer lands on the right words.</p>
+          <p class="help">${recorded ? "Recorded. Students watch it in this lesson." : "Record yourself explaining it on the board, board by board: point, bring a word up, circle, write, solve the practice boards with them."} Changed the boards after recording? Record it again so the pointer lands on the right words.</p>
           <button class="btn" onClick=${async () => { if (dirty) await save(true); player.stop(); setStudio(true); }}>🎙️ ${recorded ? "Record it again (or change it)" : "Record this lesson on the board"}</button>
           ${recorded ? html`<div class="row2"><button class="btn sec" onClick=${() => { const v = vidJob.st; if (v && v.p != null) { toast("A video is already being made."); return; } vidJob.start(Object.assign({}, L, { title: title || L.title }), number); toast("Making the video. It'll be in Recordings, ready for YouTube."); }}>🎬 Make the YouTube video</button><button class="btn sec" onClick=${() => setThumb(true)}>🖼 Thumbnail</button></div>` : null}
         </div>
         <div class="field"><span class="lbl">📗 Words to learn in this lesson (${words.length})</span>
-          <p class="help">Your students must learn these. They practise them in the lesson, and you see who has learned them.</p>
-          <div class="arwordchips">${words.map(w => html`<span key=${w.ar} class="arwchip">${w.img ? html`<img class="arwimg" src=${srcFor(w.img)} alt=""/>` : null}<b class="arabic">${w.ar}</b><small>${w.en}</small><button onClick=${() => picFor(w)} aria-label="Add a picture" title="A picture for this word">🖼</button><button onClick=${() => set(() => setWords(W => W.filter(x => x.ar !== w.ar)))} aria-label="Remove">✕</button></span>`)}</div>
+          <p class="help">Give each word a picture and your voice: students hear only you. A word counts as learned when they get it right in your exercises, tests or the lesson's practice.</p>
+          <div class="arwlist ed2">${words.map(w => html`<div key=${w.ar} class="arwrow">
+            ${w.img ? html`<button class="arwpic" onClick=${() => setSeeW(w.ar)} aria-label="See the picture"><img src=${srcFor(w.img)} alt=""/></button>` : html`<button class="arwpic none" onClick=${() => choosePic({ word: w.ar })} aria-label="Add a picture">＋🖼</button>`}
+            <span class="arwtx"><b class="arabic arw">${w.ar}</b><input class="arin arshort" dir="auto" value=${w.en || ""} placeholder="meaning" onInput=${e => setW(w.ar, { en: e.target.value })}/></span>
+            ${w.snd ? html`<button class="iconbtn" onClick=${() => tilePlayer.play("w:" + w.ar, srcFor(w.snd))} aria-label="Hear your voice"><${Ic.speaker} size=${20}/></button>` : null}
+            <button class=${"iconbtn" + (recW === w.ar ? " recw" : "")} disabled=${recW && recW !== w.ar} onClick=${() => recWord(w)} aria-label=${recW === w.ar ? "Stop" : w.snd ? "Record it again" : "Record your voice"}>${recW === w.ar ? "■" : "🎙"}</button>
+            <button class="iconbtn" onClick=${() => set(() => setWords(W => W.filter(x => x.ar !== w.ar)))} aria-label="Remove the word">✕</button></div>`)}</div>
+          ${recW ? html`<p class="armnote">🔴 Say “${recW}”, then tap ■.</p>` : null}
           <input ref=${picRef} type="file" accept="image/*" style="display:none" onChange=${onPic}/>
           ${srcWords.filter(w => !has(w)).length ? html`<details><summary>From the bank lessons (${srcWords.filter(w => !has(w)).length} not added)</summary><div class="arwordchips">${srcWords.filter(w => !has(w)).map(w => html`<button key=${w.ar} class="arwchip add" onClick=${() => addW(w)}><b class="arabic">${w.ar}</b><small>${w.en}</small></button>`)}</div></details>` : null}
           <input class="arin" dir="auto" placeholder="Find a word in the word bank (Arabic or English)" value=${wq} onInput=${e => setWq(e.target.value)}/>
@@ -18712,8 +19287,16 @@ notify pgrst, 'reload schema';
         </div>
         <button class=${"btn danger" + (arm ? " arm" : "")} onClick=${del}>${arm ? "Tap again to delete this lesson" : "Delete this lesson"}</button>
       </div>
+      ${ins != null ? html`<div class="scrim" onClick=${e => { if (e.target === e.currentTarget) setIns(null); }}><div class="sheet" role="dialog" aria-label="Add a board">
+        <h3 style="margin:0">Add a concept ${ins === 0 ? "at the top" : "after concept " + ins}</h3>
+        <div class="kindgrid">${KINDS.map(([k, ic, nm, sub]) => html`<button key=${k} class="kindbtn" onClick=${() => addKind(ins, k)}><span>${ic}</span><b>${nm}</b><small>${sub}</small></button>`)}</div>
+      </div></div>` : null}
+      ${seeW ? (() => { const w = words.find(x => x.ar === seeW); return w ? html`<div class="peek" onClick=${e => { if (e.target === e.currentTarget) setSeeW(null); }}><img src=${srcFor(w.img)} alt=${w.ar}/><b class="arabic" style="font-size:34px">${w.ar}</b>
+        <div class="row2"><button class="btn sec" onClick=${() => { setSeeW(null); choosePic({ word: w.ar }); }}>Change the picture</button><button class="btn quiet" onClick=${() => { setW(w.ar, { img: null }); setSeeW(null); }}>Remove it</button><button class="btn" onClick=${() => setSeeW(null)}>Done</button></div></div>` : null; })() : null}
+      ${bankAt != null ? html`<${ArBank} s=${s} onClose=${() => setBankAt(null)} onAdd=${addBank}/>` : null}
+      ${ayatAt != null ? html`<${ArAyatPick} boards=${true} onClose=${() => setAyatAt(null)} onAdd=${addAyat}/>` : null}
       ${studio ? html`<${ExplainStudio} ix=${AR_IX()} lesson=${L} number=${number} onSave=${saveRec} onClose=${() => setStudio(false)}/>` : null}
-      ${thumb ? html`<${VMThumbs} onClose=${() => setThumb(false)} lesson=${{ n: number, les: Object.assign({}, L, { title: title || L.title, board: L.pages.map(p => p.board).join("\n") }), ar: true }}/>` : null}
+      ${thumb ? html`<${VMThumbs} onClose=${() => setThumb(false)} lesson=${{ n: number, les: Object.assign({}, L, { title: title || L.title, board: L.pages.map(p => p.board || (p.words || []).join(" ") || p.q || "").join("\n") }), ar: true }}/>` : null}
     </div>`;
   }
   let AR_IX_ = null; const AR_IX = () => AR_IX_ || (AR_IX_ = buildSound([], []));
@@ -18753,106 +19336,146 @@ notify pgrst, 'reload schema';
     </section>`;
   }
 
-  // ---- the Arabic tab: your students, what's waiting, your lessons
-  function ArabicTab({ s, onStudent, onLesson }) {
-    const [sub, setSub] = useState(() => { try { return localStorage.getItem("rc.artab") || "students"; } catch (e) { return "students"; } });
-    const pickSub = k => { setSub(k); try { localStorage.setItem("rc.artab", k); } catch (e) {} };
-    if ((s.schemaVer || 0) < 11) return html`<section class="list"><div class="empty"><p>Run the one-time database update first (the box above). Then your Arabic class opens here.</p></div></section>`;
+  // ---- the Arabic class: its students (and what's waiting)
+  function ArStudents({ s, onStudent }) {
     const v = arView(s).s, studs = s.students.filter(isAr);
     async function add() {
       const ref = rt.db.collection("students").doc();
       try { await ref.set({ name: "New Arabic student", color: COLORS[s.students.length % COLORS.length], unlocked: v.lessons[0] ? v.lessons[0].id : null, course: "ar", createdAt: Date.now() }); onStudent(ref.id, true); } catch (e) { toast(errText(e)); }
     }
-    return html`<div>
-      <div class="segsmall arsub">${[["students", "Students"], ["lessons", "Lessons"], ["words", "Words & Mushaf"]].map(([k, l]) => html`<button key=${k} class=${sub === k ? "on" : ""} onClick=${() => pickSub(k)}>${l}</button>`)}</div>
-      ${sub === "lessons" ? html`<${ArLessons} s=${s} onOpen=${onLesson}/>`
-        : sub === "words" ? html`<${ArTools} s=${s}/>`
-        : html`<${Questions} s=${v} onOpen=${(id, f) => onStudent(id, false, f)}/><section class="list">
+    return html`<div><${Questions} s=${v} onOpen=${(id, f) => onStudent(id, false, f)}/><section class="list">
         ${studs.length ? studs.map(st => { const f = v.lessons.findIndex(l => l.id === st.unlocked), i = f >= 0 ? f : 0, l = v.lessons[i], vw = (s.views || []).filter(x => x.student === st.id && !x.test).pop();
           return html`<button class="row" key=${st.id} onClick=${() => onStudent(st.id)}>
             <span class="av" style=${"background:" + (st.color || COLORS[0])}>${initial(st.name)}</span>
             <span class="rowmain"><b>${st.name || "Student"}</b><small dir="auto">${l ? "Lesson " + (i + 1) + ": " + l.title : "No lessons yet"}</small>${vw ? html`<small class="seen">👀 ${fmtWhen(vw.updatedAt || vw.openedAt)}</small>` : null}</span></button>`; })
           : html`<div class="empty"><p>No Arabic students yet. Add one, then send them their join link (tap them, then the pencil).</p></div>`}
         <button class="btn sec" onClick=${add}><${Ic.plus} size=${20}/>Add an Arabic student</button>
-        <div class="note"><b>Your Arabic class</b><p>Arabic students only see their Arabic lessons, the Mushaf and the words; your reading students never see any of it. Make lessons on the Lessons tab, record them on the board, and pass each student on when they're ready.</p></div>
-      </section>`}
-    </div>`;
+        <div class="note"><b>Your Arabic class</b><p>Arabic students only see this class: their lessons, the Mushaf and the vocabulary. Make lessons on the Lessons tab, record them on the board, and pass each student on when they're ready.</p></div>
+      </section></div>`;
   }
   function ArTools({ s }) {
     const [o, setO] = useState(null);
     return html`<section class="list">
       <button class="row" onClick=${() => setO("mushaf")}><span class="av arav">📖</span><span class="rowmain"><b>The Mushaf</b><small>What your students read: the Quran page by page, with recitation and bookmarks</small></span></button>
-      <button class="row" onClick=${() => setO("words")}><span class="av arav">📗</span><span class="rowmain"><b>Words and dictionary</b><small>The whole word bank by theme, and a search with Lisan al-Arab</small></span></button>
-      ${o === "mushaf" ? html`<${Mushaf} onClose=${() => setO(null)}/>` : o === "words" ? html`<${ArVocab} s=${s} onClose=${() => setO(null)}/>` : null}
+      <button class="row" onClick=${() => setO("words")}><span class="av arav">📗</span><span class="rowmain"><b>Vocabulary and dictionary</b><small>The word bank by theme, your lessons' tables, and a search with Lisan al-Arab</small></span></button>
+      ${o === "mushaf" ? html`<${Mushaf} onClose=${() => setO(null)}/>` : o === "words" ? html`<${ArVocab} s=${s} lessons=${arView(s).s.lessons} onClose=${() => setO(null)}/>` : null}
     </section>`;
   }
 
-  // ---- the words of a lesson, to learn: hear each one, then a quick check. Learned = right on two different days.
+  // ---- the words each student has learned: a word is learned when they get it right in your exercises, tests or the lesson's practice
   async function arWordsOf(who) { try { return (await q(sb.from("ar_words").select("*").eq("user_id", who))) || []; } catch (e) { return []; } }
-  async function arMark(who, word, ok, prev) {
-    const today = new Date().toISOString().slice(0, 10), p = prev || { ok: 0, bad: 0 };
-    const row = { user_id: who, word, ok: (p.ok || 0) + (ok ? 1 : 0), bad: (p.bad || 0) + (ok ? 0 : 1), last_ok: ok ? today : p.last_ok || null, learned_at: p.learned_at || (ok && p.last_ok && p.last_ok !== today ? new Date().toISOString() : null), updated_at: new Date().toISOString() };
-    try { await q(sb.from("ar_words").upsert(row)); } catch (e) {}
-    return row;
+  const arDir = t => ((String(t).match(/[\u0600-\u06FF]/g) || []).length > (String(t).match(/[A-Za-z]/g) || []).length ? "rtl" : "ltr");   // a line that's mostly English reads left to right
+  // which of these words a question is about (with or without harakat, with or without its الـ)
+  function arWordsIn(text, words) {
+    const toks = new Set(arBare(text).split(/[\s،,.؟?!:;()«»"'\-—|/]+/).filter(Boolean)), all = " " + [...toks].join(" ") + " ";
+    return (words || []).filter(w => { const b = arBare(w.ar); if (!b) return false; if (b.includes(" ")) return all.includes(" " + b + " "); const nb = b.replace(/^ال/, ""); return toks.has(b) || toks.has(nb) || toks.has("ال" + nb); }).map(w => w.ar);
   }
-  function ArWords({ s, lesson, student, teacher }) {
-    const W = lesson.words || [], who = arMe(s, student);
-    const [rows, setRows] = useState(null), [quiz, setQuiz] = useState(null), [open, setOpen] = useState(false);
-    useEffect(() => { let a = true; arWordsOf(who).then(r => a && setRows(new Map(r.map(x => [x.word, x])))); return () => { a = false; }; }, [who, lesson.id]);
-    if (!W.length) return null;
+  // results in: [{ word, ok }]; each word's row goes up by one, and a right answer makes it learned
+  async function arMarkWords(who, results) {
+    if (!who || !results.length) return [];
+    const prev = new Map((await arWordsOf(who)).map(r => [r.word, r])), now = new Date().toISOString(), today = now.slice(0, 10), rows = new Map();
+    for (const { word, ok } of results) {
+      const p = rows.get(word) || prev.get(word) || { ok: 0, bad: 0 };
+      rows.set(word, { user_id: who, word, ok: (p.ok || 0) + (ok ? 1 : 0), bad: (p.bad || 0) + (ok ? 0 : 1), last_ok: ok ? today : p.last_ok || null, learned_at: p.learned_at || (ok ? now : null), updated_at: now });
+    }
+    const list = [...rows.values()];
+    try { await q(sb.from("ar_words").upsert(list)); } catch (e) {}
+    try { window.dispatchEvent(new Event("arwords")); } catch (e) {}   // what's on screen catches up
+    return list;
+  }
+  // the lesson's practice: the boards you solved together (match, fill, choose) and its words, for them to do by themselves
+  function arPracticeOf(lesson) {
+    const out = [], W = lesson.words || [];
+    const M = W.filter(w => w.en).slice(0, 6);
+    if (M.length >= 3) out.push({ id: lesson.id + "w", kind: "match", text: "صِلْ كُلَّ كَلِمَةٍ بِمَعْنَاهَا", pairs: M.map(w => [w.ar, w.en]) });
+    (lesson.pages || []).map(arPg).forEach((p, i) => {
+      if (p.kind === "match" && (p.pairs || []).filter(x => x[0] && x[1]).length >= 2) out.push({ id: lesson.id + "m" + i, kind: "match", text: p.title || "صِلْ", pairs: p.pairs.filter(x => x[0] && x[1]) });
+      if (p.kind === "choose" && p.q && (p.opts || []).filter(Boolean).length >= 2 && p.a) out.push({ id: lesson.id + "c" + i, kind: "mcq", text: p.q, options: p.opts.filter(Boolean), answer: p.a });
+      if (p.kind === "fill") { const R = (p.rows || []).filter(r => r.q && r.a), A = [...new Set(R.map(r => r.a))]; R.forEach((r, k) => out.push({ id: lesson.id + "f" + i + "_" + k, kind: "fill", text: r.q, answer: r.a, options: A.length >= 2 ? A : [] })); }
+    });
+    return out;
+  }
+  // under the board of an Arabic lesson: its short summary, my notebook, the practice, the words
+  function ArLessonExtras({ s, lesson, student, teacher }) {
+    const who = arMe(s, student), W = lesson.words || [];
+    const [rows, setRows] = useState(null), [open, setOpen] = useState(null), [practise, setPractise] = useState(false);
+    const [note, setNote] = useState(null), saveT = useRef(null), [saved, setSaved] = useState(true);
+    useEffect(() => { let a = true; const load = () => arWordsOf(who).then(r => a && setRows(new Map(r.map(x => [x.word, x])))); load(); window.addEventListener("arwords", load); return () => { a = false; window.removeEventListener("arwords", load); }; }, [who, lesson.id]);
+    useEffect(() => { let a = true; setNote(null); q(sb.from("ar_notes").select("*").eq("user_id", who).eq("lesson_id", lesson.id)).then(d => a && setNote(((d || [])[0] || {}).body || ""), () => a && setNote("")); return () => { a = false; }; }, [who, lesson.id]);
+    useEffect(() => () => clearTimeout(saveT.current), []);
+    const writeNote = v => { setNote(v); setSaved(false); clearTimeout(saveT.current); saveT.current = setTimeout(async () => { try { await q(sb.from("ar_notes").upsert({ user_id: who, lesson_id: lesson.id, body: v, updated_at: new Date().toISOString() })); setSaved(true); } catch (e) { toast(errText(e, "Your notes didn't save. Check your connection.")); } }, 800); };
+    const P = useMemo(() => arPracticeOf(lesson), [lesson]);
     const learned = rows ? W.filter(w => rows.get(w.ar) && rows.get(w.ar).learned_at).length : 0;
-    return html`<section class="arwords">
-      <button class="lacthead" onClick=${() => setOpen(!open)}><span>📗 ${teacher ? (student.name || "They") + " learned " + learned + " of " + W.length + " words" : "Words to learn: " + learned + " of " + W.length}<small>${teacher ? "Right on two different days counts as learned." : "Hear each word, then check yourself."}</small></span><${Ic.down} size=${18}/></button>
-      ${open ? html`<div class="arwlist">${W.map(w => { const r = rows && rows.get(w.ar); return html`<div key=${w.ar} class=${"arwrow" + (r && r.learned_at ? " ok" : "")}>
-          <button class="iconbtn" onClick=${() => arSay(w.ar)} aria-label="Hear it"><${Ic.speaker} size=${20}/></button>
-          ${w.img ? html`<img class="arwimg" src=${srcFor(w.img)} alt=""/>` : null}<span class="arabic arw">${w.ar}</span><small>${w.en}</small>${r && r.learned_at ? html`<span class="mk ok"><${Ic.tick} size=${16} sw=${3}/></span>` : r ? html`<small class="arwn">${r.ok}✓ ${r.bad}✗</small>` : null}</div>`; })}</div>
-        ${!teacher ? html`<button class="btn" onClick=${() => setQuiz(true)}>Check myself on these words</button>` : null}` : null}
-      ${quiz ? html`<${ArQuiz} words=${W} who=${who} rows=${rows || new Map()} onRow=${r => setRows(m => { const n = new Map(m || []); n.set(r.word, r); return n; })} onClose=${() => setQuiz(null)}/>` : null}
+    const tog = k => setOpen(open === k ? null : k);
+    return html`<section class="arextras">
+      ${lesson.summary ? html`<div class="arsum"><b>Summary</b>${String(lesson.summary).split("\n").map((ln, k) => html`<div key=${k} dir=${arDir(ln)}>${ln}</div>`)}</div>` : null}
+      ${!teacher && P.length ? html`<button class="btn arpractise" onClick=${() => setPractise(true)}>🧩 Practise this lesson<small>${P.length} exercises · your answers are marked straight away</small></button>` : null}
+      <button class="lacthead" onClick=${() => tog("notes")}><span>✏️ ${teacher ? (student.name || "Their") + "'s notes" : "My notes"}<small>${teacher ? (note ? "What they wrote for this lesson" : "Nothing written yet") : "Write what you want to remember. Your teacher can read it."}</small></span><${Ic.down} size=${18}/></button>
+      ${open === "notes" ? (note == null ? html`<p class="help c">Opening…</p>` : teacher ? html`<div class="arnotebook ro" dir="auto">${note || "—"}</div>`
+        : html`<textarea class="arnotebook" dir="auto" rows="6" placeholder="اُكْتُبْ مُلَاحَظَاتِكَ… (Arabic or English)" value=${note} onInput=${e => writeNote(e.target.value)}></textarea><small class="help">${saved ? "Saved" : "Saving…"}</small>`) : null}
+      ${W.length ? html`<button class="lacthead" onClick=${() => tog("words")}><span>📗 ${teacher ? (student.name || "They") + " learned " + learned + " of " + W.length + " words" : "Vocabulary: " + learned + " of " + W.length + " learned"}<small>${teacher ? "Learned = right in your exercises, tests or the practice." : "Tap ▶ to hear your teacher say it."}</small></span><${Ic.down} size=${18}/></button>
+        ${open === "words" ? html`<div class="arwlist">${W.map(w => { const r = rows && rows.get(w.ar); return html`<div key=${w.ar} class=${"arwrow" + (r && r.learned_at ? " ok" : "")}>
+          ${w.img ? html`<img class="arwimg" src=${srcFor(w.img)} alt=""/>` : null}<span class="arabic arw">${w.ar}</span><small>${w.en}</small>
+          ${w.snd ? html`<button class="iconbtn" onClick=${() => tilePlayer.play("w:" + w.ar, srcFor(w.snd))} aria-label="Hear it"><${Ic.play} size=${18}/></button>` : null}
+          ${r && r.learned_at ? html`<span class="mk ok"><${Ic.tick} size=${16} sw=${3}/></span>` : teacher && r ? html`<small class="arwn">${r.ok}✓ ${r.bad}✗</small>` : null}</div>`; })}</div>` : null}` : null}
+      ${practise ? html`<${ArPractice} lesson=${lesson} items=${P} who=${who} onClose=${() => setPractise(false)} onRows=${list => setRows(m => { const n = new Map(m || []); list.forEach(r => n.set(r.word, r)); return n; })}/>` : null}
     </section>`;
   }
-  // see a word, choose its meaning (or the reverse); every answer is kept
-  function ArQuiz({ words, who, rows, onRow, onClose, title }) {
-    const [list] = useState(() => words.slice().sort(() => Math.random() - 0.5).slice(0, 20));
-    const [i, setI] = useState(0), [picked, setPicked] = useState(null), [right, setRight] = useState(0);
-    const w = list[i];
-    const opts = useMemo(() => { if (!w) return []; const pool = words.filter(x => x.ar !== w.ar && x.en && x.en !== w.en).sort(() => Math.random() - 0.5).slice(0, 3); return pool.concat(w).sort(() => Math.random() - 0.5); }, [i]);
-    useEffect(() => { if (w) arSay(w.ar); }, [i]);
-    if (!w) return html`<div class="full sheetpage"><div class="fhead"><span>${title || "Words"}</span><button class="iconbtn" onClick=${onClose} aria-label="Close"><${Ic.x}/></button></div><div class="sbody"><div class="ed c"><div class="bigscore">${right}/${list.length}</div><p class="help c">Words you get right on two different days count as learned.</p><button class="btn" onClick=${onClose}>Done</button></div></div></div>`;
-    async function choose(o) { if (picked) return; setPicked(o); const ok = o.ar === w.ar; if (ok) setRight(n => n + 1); chime(ok); const r = await arMark(who, w.ar, ok, rows.get(w.ar)); onRow(r); }
-    return html`<div class="full sheetpage" role="dialog" aria-label="Check your words">
-      <div class="fhead"><span>${title || "Words"} · ${i + 1} of ${list.length}</span><button class="iconbtn" onClick=${onClose} aria-label="Close"><${Ic.x}/></button></div>
+  // the practice, one exercise at a time, marked as soon as they check it
+  function ArPractice({ lesson, items, who, onClose, onRows }) {
+    const [i, setI] = useState(0), [a, setA] = useState({}), [mark, setMark] = useState(null), [right, setRight] = useState(0), res = useRef([]);
+    const it = items[i];
+    async function finish() { const r = res.current; res.current = []; if (!r.length) return; const list = await arMarkWords(who, r); onRows(list); }
+    useEffect(() => () => { finish(); }, []);   // closed early: what they answered still counts
+    function check() {
+      const ok = !!autoMark(it, a); setMark(ok); if (ok) setRight(n => n + 1); chime(ok);
+      const W = lesson.words || [];
+      if (it.kind === "match") (it.pairs || []).forEach(p => arWordsIn(p[0], W).forEach(word => res.current.push({ word, ok: (a.pairs || {})[p[0]] === p[1] })));
+      else arWordsIn(it.text + " " + it.answer, W).forEach(word => res.current.push({ word, ok }));
+    }
+    function next() { setA({}); setMark(null); if (i + 1 >= items.length) finish(); setI(i + 1); }
+    const can = it && (it.kind === "match" ? Object.keys(a.pairs || {}).length >= (it.pairs || []).length : a.choice != null || (a.text && a.text.trim()));
+    return html`<div class="full sheetpage" role="dialog" aria-label="Practise this lesson">
+      <div class="fhead"><span>🧩 Practice${it ? " · " + (i + 1) + " of " + items.length : ""}</span><button class="iconbtn" onClick=${onClose} aria-label="Close"><${Ic.x}/></button></div>
       <div class="sbody"><div class="ed">
-        <div class="arqcard">${w.img ? html`<img class="arqimg" src=${srcFor(w.img)} alt=""/>` : null}<button class="iconbtn" onClick=${() => arSay(w.ar)} aria-label="Hear it again"><${Ic.speaker} size=${24}/></button><div class="arabic arqw" dir="rtl">${w.ar}</div></div>
-        <p class="help c">What does it mean?</p>
-        ${opts.map(o => html`<button key=${o.ar} class=${"arqopt" + (picked ? (o.ar === w.ar ? " ok" : o === picked ? " no" : "") : "")} onClick=${() => choose(o)}>${o.en || "—"}</button>`)}
-        ${picked ? html`<button class="btn" onClick=${() => { setPicked(null); setI(i + 1); }}>${i + 1 < list.length ? "Next" : "See my score"}</button>` : null}
+        ${!it ? html`<div class="c"><div class="bigscore">${right}/${items.length}</div><p class="help c">The words you got right count as learned. Your teacher sees them.</p><button class="btn" onClick=${onClose}>Done</button></div>`
+          : html`<div class="arpq" dir="rtl">${it.kind === "fill" ? String(it.text).split(/_{2,}/).map((x, k, all) => html`${x}${k < all.length - 1 ? html`<span class=${"arblank" + (mark != null ? (mark ? " ok" : " no") : "")}>${a.choice || a.text || " "}</span>` : null}`) : it.text}</div>
+            <${ArQAnswer} key=${it.id} it=${it} a=${a} done=${mark != null} set=${o => setA(x => Object.assign({}, x, o))} mark=${mark} show=${mark === false}/>
+            ${mark == null ? html`<button class="btn" disabled=${!can} onClick=${check}>Check</button>`
+              : html`<p class=${"help c " + (mark ? "okt" : "not")}>${mark ? "Right!" : "Not quite. Look at the right answer above."}</p><button class="btn" onClick=${next}>${i + 1 < items.length ? "Next" : "See my score"}</button>`}`}
       </div></div>
     </div>`;
   }
 
-  // ---- all the words (the Fusha word bank, by theme) and the dictionary: learn as many as you like
-  function ArVocab({ s, onClose, student }) {
+  // ---- all the words (the Fusha word bank, by theme), the dictionary, and the tables from your lessons
+  function ArVocab({ s, onClose, student, lessons }) {
     const { b, err } = useArBank();
-    const [qy, setQy] = useState(""), [theme, setTheme] = useState(null), [quiz, setQuiz] = useState(null), [rows, setRows] = useState(new Map());
+    const [qy, setQy] = useState(""), [theme, setTheme] = useState(null), [rows, setRows] = useState(new Map()), [tab, setTab] = useState("words");
     const who = student ? arMe(s, student) : null;
     useEffect(() => { if (who) arWordsOf(who).then(r => setRows(new Map(r.map(x => [x.word, x])))); }, [who]);
+    const mine = useMemo(() => { const m = new Map(); (lessons || s.ar_lessons || []).forEach(l => (l.words || []).forEach(w => { if (!m.has(w.ar)) m.set(w.ar, w); })); return m; }, [lessons, s.ar_lessons]);
+    const tables = useMemo(() => { const out = []; (lessons || []).forEach((l, li) => (l.pages || []).map(arPg).forEach(p => { if (p.kind === "table" && p.table && (p.table.rows || []).length) out.push({ l, li, p }); })); return out; }, [lessons]);
     const all = useMemo(() => { if (!b) return []; const m = new Map(); for (const g of b.words) for (const w of g.words) if (!m.has(w.ar)) m.set(w.ar, Object.assign({ theme: g.theme }, w)); for (const l of b.lessons) for (const w of l.vocab) if (!m.has(w.ar)) m.set(w.ar, Object.assign({ theme: "" }, w)); return [...m.values()]; }, [b]);
     const found = useMemo(() => { const t = qy.trim(); if (!t) return []; const k = arBare(t), lo = t.toLowerCase(), ar = /[؀-ۿ]/.test(t); return all.filter(w => (ar ? arBare(w.ar).includes(k) : String(w.en).toLowerCase().includes(lo))).sort((a, c) => (ar ? arBare(a.ar).length - arBare(c.ar).length : String(a.en).length - String(c.en).length)).slice(0, 40); }, [qy, all]);
     const lisan = w => "https://tafsir.app/lisan/" + encodeURIComponent(arBare(w).replace(/^ال/, "").replace(/\s+/g, ""));
-    const row = w => { const r = rows.get(w.ar); return html`<div key=${w.ar} class=${"arwrow" + (r && r.learned_at ? " ok" : "")}>
-      <button class="iconbtn" onClick=${() => arSay(w.ar)} aria-label="Hear it"><${Ic.speaker} size=${20}/></button><span class="arabic arw">${w.ar}</span><small>${w.en}${w.pl ? html` · <span dir="rtl">ج: ${w.pl}</span>` : null}</small>
+    const row = w => { const r = rows.get(w.ar), my = mine.get(w.ar); return html`<div key=${w.ar} class=${"arwrow" + (r && r.learned_at ? " ok" : "")}>
+      ${my && my.img ? html`<img class="arwimg" src=${srcFor(my.img)} alt=""/>` : null}<span class="arabic arw">${w.ar}</span><small>${w.en}${w.pl ? html` · <span dir="rtl">ج: ${w.pl}</span>` : null}</small>
+      ${my && my.snd ? html`<button class="iconbtn" onClick=${() => tilePlayer.play("w:" + w.ar, srcFor(my.snd))} aria-label="Hear your teacher say it"><${Ic.play} size=${18}/></button>` : null}
       <a class="chip" href=${lisan(w.ar)} target="_blank" rel="noopener" title="Lisan al-Arab">لسان</a>${r && r.learned_at ? html`<span class="mk ok"><${Ic.tick} size=${16} sw=${3}/></span>` : null}</div>`; };
     const g = theme != null && b ? b.words[theme] : null;
-    return html`<div class="full sheetpage" role="dialog" aria-label="Words">
-      <div class="fhead"><span>📗 Words</span><button class="iconbtn" onClick=${() => (g ? setTheme(null) : onClose())} aria-label="Back"><${g ? Ic.back : Ic.x}/></button></div>
+    return html`<div class="full sheetpage" role="dialog" aria-label="Vocabulary">
+      <div class="fhead"><span>📗 Vocabulary</span><button class="iconbtn" onClick=${() => (g ? setTheme(null) : onClose())} aria-label="Back"><${g ? Ic.back : Ic.x}/></button></div>
       <div class="sbody"><div class="ed">
-        <input class="arin" dir="auto" placeholder="Search: كِتَاب or book" value=${qy} onInput=${e => setQy(e.target.value)}/>
+        ${tables.length && !g ? html`<div class="seg" role="tablist"><button role="tab" class=${tab === "words" ? "on" : ""} onClick=${() => setTab("words")}>Words</button><button role="tab" class=${tab === "tables" ? "on" : ""} onClick=${() => setTab("tables")}>Tables (${tables.length})</button></div>` : null}
+        ${tab === "tables" && !g ? tables.map((x, k) => html`<div key=${k} class="artable"><b dir="auto">${x.p.title || x.l.title}</b><small>Lesson ${x.li + 1}</small>
+            <table dir="rtl"><thead><tr>${(x.p.table.head || []).map((h, j) => html`<th key=${j}>${h}</th>`)}</tr></thead><tbody>${x.p.table.rows.map((r, j) => html`<tr key=${j}>${r.map((c, m) => html`<td key=${m} dir="auto">${c}</td>`)}</tr>`)}</tbody></table></div>`)
+        : html`<input class="arin" dir="auto" placeholder="Search: كِتَاب or book" value=${qy} onInput=${e => setQy(e.target.value)}/>
         ${err ? html`<p class="help">The words didn't load. Check your connection.</p>` : !b ? html`<p class="help c">Loading…</p>`
           : qy.trim() ? html`${found.map(row)}${!found.length ? html`<p class="help">Not in the word bank. <a href=${lisan(qy)} target="_blank" rel="noopener">Look it up in Lisan al-Arab →</a></p>` : null}<p class="help"><small>Lisan al-Arab opens the full classical entry. For al-Qamus, as-Sihah and the others: <a href="https://www.baheth.info/" target="_blank" rel="noopener">al-Baheth</a>.</small></p>`
-          : g ? html`<h3 class="arabic" dir="rtl" style="margin:4px 0">${g.theme}</h3><p class="help">${g.themeEn} · ${g.words.length} words</p>${who ? html`<button class="btn" onClick=${() => setQuiz(g)}>Check myself on these</button>` : null}${g.words.map(row)}`
-          : html`<p class="help">${all.length} words in ${b.words.length} themes. Learn as many as you like.</p>${b.words.map((t, i) => html`<button key=${i} class="row" onClick=${() => setTheme(i)}><span class="rowmain"><b class="arabic" dir="rtl">${t.theme}</b><small>${t.themeEn} · ${t.words.length} words${who ? " · " + t.words.filter(w => rows.get(w.ar) && rows.get(w.ar).learned_at).length + " learned" : ""}</small></span></button>`)}`}
+          : g ? html`<h3 class="arabic" dir="rtl" style="margin:4px 0">${g.theme}</h3><p class="help">${g.themeEn} · ${g.words.length} words</p>${g.words.map(row)}`
+          : html`${mine.size && who ? html`<button class="row" onClick=${() => setQy("")}><span class="rowmain"><b>Your lessons' words</b><small>${mine.size} words · ${[...mine.keys()].filter(k => rows.get(k) && rows.get(k).learned_at).length} learned</small></span></button><div class="arwlist">${[...mine.values()].map(row)}</div>` : null}
+            <p class="help">The word bank: ${all.length} words in ${b.words.length} themes.</p>${b.words.map((t, i) => html`<button key=${i} class="row" onClick=${() => setTheme(i)}><span class="rowmain"><b class="arabic" dir="rtl">${t.theme}</b><small>${t.themeEn} · ${t.words.length} words${who ? " · " + t.words.filter(w => rows.get(w.ar) && rows.get(w.ar).learned_at).length + " learned" : ""}</small></span></button>`)}`}`}
       </div></div>
-      ${quiz ? html`<${ArQuiz} words=${quiz.words} who=${who} rows=${rows} title=${quiz.themeEn || "Words"} onRow=${r => setRows(m => { const n = new Map(m); n.set(r.word, r); return n; })} onClose=${() => setQuiz(null)}/>` : null}
     </div>`;
   }
 
@@ -18912,29 +19535,19 @@ notify pgrst, 'reload schema';
       </div>
     </div>`;
   }
-  // ---- the notes of an Arabic lesson: every concept, to read again; the one on the board is open
-  function ArNotes({ lesson, page, onPage }) {
-    const P = (lesson.pages || []).filter(p => p && (p.note || p.title));
-    const [open, setOpen] = useState(false);
-    if (!P.length) return null;
-    return html`<section class="arnotes">
-      <button class="lacthead" onClick=${() => setOpen(!open)}><span>📒 Notes<small>Read each concept again, any time.</small></span><${Ic.down} size=${18}/></button>
-      ${open ? (lesson.pages || []).map((p, i) => (p && (p.note || p.title) ? html`<div key=${i} class=${"arnote1" + (i === page ? " on" : "")}>
-          <button class="arnoteh" onClick=${() => onPage(i)}><b dir="auto">${i + 1}. ${p.title || "Concept " + (i + 1)}</b><small>Show it on the board</small></button>
-          ${p.board ? html`<div class="arabic arnoteb" dir="rtl">${p.board}</div>` : null}
-          ${p.note ? html`<div class="arnotet" dir="auto">${p.note}</div>` : null}</div>` : null)) : null}
-    </section>`;
-  }
 
   // ---- Arabic exercise questions: writing one, and answering one
   function ArQEdit({ x, i, upd, del }) {
-    const label = x.kind === "mcq" ? "Choose the answer" : x.kind === "match" ? "Match the pairs" : "Put the words in order";
+    const label = x.kind === "mcq" ? "Choose the answer" : x.kind === "match" ? "Match the pairs" : x.kind === "fill" ? "Fill the blank" : "Put the words in order";
     return html`<div class="card qcard">
       <div class="qhead"><b>Question ${i + 1} · ${label}</b><button class="iconbtn" onClick=${del} aria-label="Remove"><${Ic.trash} size=${18}/></button></div>
-      <input class="arin" dir="auto" placeholder=${x.kind === "order" ? "What it means, or the task (optional)" : "The question"} value=${x.text} onInput=${e => upd({ text: e.target.value })}/>
+      <input class="arin" dir="auto" placeholder=${x.kind === "order" ? "What it means, or the task (optional)" : x.kind === "fill" ? "The sentence, with ___ for the gap" : "The question"} value=${x.text} onInput=${e => upd({ text: e.target.value })}/>
       ${x.kind === "mcq" ? html`<p class="help">Tick the right answer.</p>${x.options.map((o, k) => html`<div key=${k} class="arqopte"><button class=${"bankpick" + (x.answer && x.answer === o ? " on" : "")} onClick=${() => upd({ answer: o })} aria-label="This is the right answer">${x.answer && x.answer === o ? "✓" : ""}</button><input class="arin" dir="auto" value=${o} placeholder=${"Answer " + (k + 1)} onInput=${e => { const v = e.target.value, wasRight = x.answer === o; upd({ options: x.options.map((y, j) => (j === k ? v : y)), answer: wasRight ? v : x.answer }); }}/></div>`)}`
         : x.kind === "match" ? html`${x.pairs.map((p, k) => html`<div key=${k} class="arqopte"><input class="arin" dir="auto" value=${p[0]} placeholder="كَلِمَةٌ" onInput=${e => upd({ pairs: x.pairs.map((y, j) => (j === k ? [e.target.value, y[1]] : y)) })}/><span>↔</span><input class="arin" dir="auto" value=${p[1]} placeholder="its match" onInput=${e => upd({ pairs: x.pairs.map((y, j) => (j === k ? [y[0], e.target.value] : y)) })}/></div>`)}
           <button class="chip" onClick=${() => upd({ pairs: x.pairs.concat([["", ""]]) })}>＋ Another pair</button>`
+        : x.kind === "fill" ? html`<p class="help">Write ___ where the gap is (in the question above), and what goes in it. Add choices if you want them to pick; leave them empty and they write it.</p>
+          <input class="arin" dir="rtl" placeholder="What goes in the gap" value=${x.answer} onInput=${e => upd({ answer: e.target.value })}/>
+          <input class="arin" dir="rtl" placeholder="Choices (optional), split with ،  e.g. بَيْتٌ، قَلَمٌ، بَابٌ" value=${(x.options || []).join("، ")} onInput=${e => upd({ options: e.target.value.split(/[،,]/).map(t => t.trim()).filter(Boolean) })}/>`
         : html`<textarea class="arin" dir="rtl" rows="2" placeholder="The sentence, in the right order" value=${x.answer} onInput=${e => upd({ answer: e.target.value })}></textarea><p class="help">They get its words mixed up and put them back in order.</p>`}
     </div>`;
   }
@@ -18953,6 +19566,12 @@ notify pgrst, 'reload schema';
         ${!done ? html`<p class="help">Tap a word on the left, then its match on the right.</p>` : null}
         ${show ? html`<p class="help">Right: ${(it.pairs || []).map(p => p[0] + " → " + p[1]).join(" · ")}</p>` : null}`;
     }
+    if (it.kind === "fill") {   // a gap in a sentence: pick what goes in it, or write it
+      const opts = arShuffle(it.options || [], it.id), v = a.choice != null ? a.choice : a.text;
+      return html`${opts.length ? html`<div class="arqopts">${opts.map(o => html`<button key=${o} disabled=${done} class=${"arqopt" + (a.choice === o ? (mark === false || (show && arBare(o) !== arBare(it.answer)) ? " no" : mark === true || (show && arBare(o) === arBare(it.answer)) ? " ok" : " pick") : show && arBare(o) === arBare(it.answer) ? " right" : "")} dir="auto" onClick=${() => set({ choice: o })}>${o}</button>`)}</div>`
+        : html`<input class="arin artype" dir="rtl" readOnly=${done} value=${a.text || ""} placeholder="اُكْتُبِ الْكَلِمَةَ" onInput=${e => set({ text: e.target.value })}/>`}
+        ${show ? html`<p class="help" dir="rtl">${String(it.text || "").replace(/_{2,}/, it.answer)}</p>` : null}`;
+    }
     if (it.kind === "order") {
       const words = String(it.answer || "").split(/\s+/).filter(Boolean), pool = arShuffle(words.map((w, k) => k), it.id), O = a.order || [], usedK = a.orderK || [];
       return html`<div class="arorder" dir="rtl">${O.length ? O.map((w, k) => html`<button key=${k} disabled=${done} class="arqopt pick" onClick=${() => set({ order: O.filter((_, j) => j !== k), orderK: usedK.filter((_, j) => j !== k) })}>${w}</button>`) : html`<span class="help">Tap the words in order</span>`}</div>
@@ -18967,7 +19586,8 @@ notify pgrst, 'reload schema';
     const [bl, setBl] = useState(null), [pick, setPick] = useState({});
     const first = (lesson.src || []);
     const ls = b ? first.map(id => b.lessons.find(l => l.id === id)).filter(Boolean).concat(b.lessons.filter(l => !first.includes(l.id))) : [];
-    const conv = d => (d.t === "mcq" || d.t === "complete" ? { id: uid(), kind: "mcq", text: d.q, options: (d.options || []).slice(), answer: d.a, mode: "type", rec: null }
+    const conv = d => (d.t === "complete" && /_{2,}/.test(d.q || "") ? { id: uid(), kind: "fill", text: crNoEmoji(d.q), options: (d.options || []).map(crNoEmoji), answer: crNoEmoji(d.a), mode: "type", rec: null }
+      : d.t === "mcq" || d.t === "complete" ? { id: uid(), kind: "mcq", text: crNoEmoji(d.q), options: (d.options || []).map(crNoEmoji), answer: crNoEmoji(d.a), mode: "type", rec: null }
       : d.t === "match" ? { id: uid(), kind: "match", text: d.q || "", pairs: (d.pairs || []).map(p => [p[0], p[1]]), mode: "type", rec: null }
       : d.t === "assemble" ? { id: uid(), kind: "order", text: d.q || "", answer: d.a || (d.chips || []).join(" "), mode: "type", rec: null } : null);
     const L = bl ? b.lessons.find(l => l.id === bl) : null, D = L ? L.drills.filter(d => conv(d)) : [];
@@ -18980,20 +19600,32 @@ notify pgrst, 'reload schema';
       ${L && Object.values(pick).some(Boolean) ? html`<div class="bankbar"><span>${Object.values(pick).filter(Boolean).length} picked</span><button class="btn" onClick=${() => onAdd(D.filter((_, k) => pick[k]).map(conv))}>Add them</button></div>` : null}
     </div>`;
   }
-  // a few ayat for them to work on (translate them, find the grammar…)
-  function ArAyatPick({ onClose, onAdd }) {
-    const [Q, setQ] = useState(null), [su, setSu] = useState(1), [a, setA] = useState(1), [z, setZ] = useState(3);
+  // ayat from the Mushaf: a few of them, or a whole page (for an exercise to translate, or boards to read in a lesson)
+  function ArAyatPick({ onClose, onAdd, boards }) {
+    const [Q, setQ] = useState(null), [su, setSu] = useState(1), [a, setA] = useState(1), [z, setZ] = useState(3), [mode, setMode] = useState("ayat"), [pg, setPg] = useState(1);
     useEffect(() => { quranData().then(setQ, () => toast("The Mushaf didn't load. Check your connection.")); }, []);
     const S = Q ? Q.surahs[su - 1] : null, n = S ? S.ayahs.length : 1, from = Math.min(a, n), to = Math.max(from, Math.min(z, n));
-    const text = S ? S.ayahs.slice(from - 1, to).map(x => x.t + " ﴿" + arNum(x.n) + "﴾").join(" ") : "";
+    const list = !Q ? [] : mode === "page" ? (Q.pages[pg - 1] || []).map(x => Object.assign({ name: Q.surahs[x.s - 1].name }, x)) : S.ayahs.slice(from - 1, to).map(x => Object.assign({ s: su, name: S.name }, x));
+    const one = x => (x.n === 1 && x.s !== 1 && x.s !== 9 ? noBasmala(x.t) : x.t) + " ﴿" + arNum(x.n) + "﴾";
+    const text = list.map(one).join(" ");
+    const label = !list.length ? "" : mode === "page" ? "صَفْحَةُ " + arNum(pg) + " · " + list[0].name : "﴿" + S.name + " " + arNum(from) + (to > from ? "–" + arNum(to) : "") + "﴾";
+    function add() {
+      if (!boards) { onAdd({ id: uid(), text: label + "  " + text, mode: "type", rec: null }); return; }
+      const out = []; let cur = "";   // a few ayat to a board, so the words stay big
+      for (const x of list) { const t = one(x); if (cur && arBare(cur + " " + t).length > 120) { out.push(cur); cur = t; } else cur = cur ? cur + " " + t : t; }
+      if (cur) out.push(cur);
+      onAdd({ title: label, boards: out });
+    }
     return html`<div class="scrim" onClick=${e => { if (e.target === e.currentTarget) onClose(); }}><div class="sheet" role="dialog" aria-label="Ayat from the Mushaf">
-      <h3 style="margin:0">📖 Ayat from the Mushaf</h3>
+      <h3 style="margin:0">📖 From the Mushaf</h3>
+      <div class="seg" role="tablist"><button role="tab" class=${mode === "ayat" ? "on" : ""} aria-selected=${mode === "ayat" ? "true" : "false"} onClick=${() => setMode("ayat")}>Some ayat</button><button role="tab" class=${mode === "page" ? "on" : ""} aria-selected=${mode === "page" ? "true" : "false"} onClick=${() => setMode("page")}>A whole page</button></div>
       ${!Q ? html`<p class="help c">Opening the Mushaf…</p>` : html`
-        <select class="arin" value=${su} onChange=${e => { setSu(+e.target.value); setA(1); setZ(3); }}>${Q.surahs.map(x => html`<option key=${x.n} value=${x.n}>${x.n}. ${x.name} (${x.en})</option>`)}</select>
-        <div class="row2"><label class="vml">From ayah <input class="arin" type="number" min="1" max=${n} value=${from} onInput=${e => setA(+e.target.value || 1)}/></label><label class="vml">To ayah <input class="arin" type="number" min="1" max=${n} value=${to} onInput=${e => setZ(+e.target.value || 1)}/></label></div>
+        ${mode === "page" ? html`<label class="vml">Page (1 to ${Q.pages.length}) <input class="arin" type="number" min="1" max=${Q.pages.length} value=${pg} onInput=${e => setPg(Math.max(1, Math.min(Q.pages.length, +e.target.value || 1)))}/></label>`
+          : html`<select class="arin" value=${su} onChange=${e => { setSu(+e.target.value); setA(1); setZ(3); }}>${Q.surahs.map(x => html`<option key=${x.n} value=${x.n}>${x.n}. ${x.name} (${x.en})</option>`)}</select>
+          <div class="row2"><label class="vml">From ayah <input class="arin" type="number" min="1" max=${n} value=${from} onInput=${e => setA(+e.target.value || 1)}/></label><label class="vml">To ayah <input class="arin" type="number" min="1" max=${n} value=${to} onInput=${e => setZ(+e.target.value || 1)}/></label></div>`}
         <div class="mpage"><div class="mtext" dir="rtl">${text}</div></div>
-        <p class="help">They see these ayat and answer by writing, typing or speaking. Say what to do in the instructions (for example: translate them).</p>
-        <button class="btn" onClick=${() => onAdd({ id: uid(), text: "﴿" + S.name + " " + arNum(from) + (to > from ? "–" + arNum(to) : "") + "﴾  " + text, mode: "type", rec: null })}>Add these ayat</button>`}
+        <p class="help">${boards ? "They go on the board a few ayat at a time, big enough to read. Explain or translate them with your students." : "They see these and answer by writing, typing or speaking. Say what to do in the instructions (for example: translate them)."}</p>
+        <button class="btn" disabled=${!list.length} onClick=${add}>${boards ? "Put them on the boards" : mode === "page" ? "Add this page" : "Add these ayat"}</button>`}
     </div></div>`;
   }
 
