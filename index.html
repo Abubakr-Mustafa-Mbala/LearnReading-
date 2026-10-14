@@ -427,6 +427,12 @@ img{max-width:100%}
 .vmfmt.on{border-color:var(--blue);background:var(--blue-soft);color:var(--blue)}
 .vmfmt .vmshape{margin-bottom:4px}
 .vmlock{pointer-events:none;opacity:.45}
+.lact{margin:8px 12px;background:#F4F7F5;border-radius:14px;padding:8px 10px}.lacthead{display:flex;align-items:center;gap:8px;width:100%;border:0;background:none;padding:2px 0;text-align:left;font:inherit;color:inherit;cursor:pointer}.lacthead>span{flex:1;font-size:14px;line-height:1.35}.lacthead small{display:block;color:#667;font-size:12px}
+.actbar{position:relative;height:8px;border-radius:5px;background:#DDE3E0;margin:6px 0 2px;overflow:hidden}.actbar i{position:absolute;top:0;bottom:0;background:#2EBD59;border-radius:5px}
+.actlist{margin-top:6px;display:flex;flex-direction:column;gap:8px}.actrow{background:#fff;border-radius:10px;padding:7px 9px;font-size:13px}.actrow b{display:block;font-weight:700}.actrow small{display:block;color:#556;margin-top:2px}.actrow small.t{color:#8a6d00}
+.testbar{margin:8px 12px;background:#FFF6D6;border-radius:12px;padding:8px 10px;font-size:13px;font-weight:600}.testtag{align-self:center;font-size:11px;color:#8a6d00;background:#FFF6D6;border-radius:8px;padding:2px 8px;margin:4px auto}
+.devlist{list-style:none;margin:0 0 8px;padding:0;display:flex;flex-direction:column;gap:6px}.devlist li{display:flex;align-items:center;gap:8px;background:#F4F6F8;border-radius:10px;padding:7px 9px}.devlist li>span{flex:1;font-size:13px}.devlist small{display:block;color:#667;font-size:11px}
+.rowmain small.seen{color:#2E7D5B}
 .vmhealth{background:#FFF4E5;border-radius:10px;padding:8px 10px;margin:6px 0}.vmhealth.ok{background:#E9F7EE}.vmhealth small{display:block;color:#888;font-size:11px;margin-top:2px}
 .duog{position:fixed;inset:0;background:#000;color:#fff;display:flex;align-items:center;justify-content:center;font-family:var(--font)}
 .duobig{width:100%;height:100%;object-fit:contain;background:#000}
@@ -473,7 +479,12 @@ img{max-width:100%}
 .autothumb{display:flex;flex-direction:column;gap:6px;align-items:center;width:100%;max-width:560px;background:var(--paper-2);border-radius:16px;padding:12px}.autothumb small{color:#667;text-align:center}.atrow{display:flex;align-items:center;gap:8px}.atimg{border-radius:10px;box-shadow:0 6px 18px rgba(0,0,0,.25);max-width:100%}
 .asklist{display:flex;flex-direction:column;gap:10px;max-height:52vh;overflow:auto}
 .rgsec{margin:8px 0;line-height:1.5}.rgsec b{display:block;font-size:13px;letter-spacing:.3px;color:var(--ink-3);margin-bottom:2px}.rgcheck{background:var(--paper-2);border-radius:12px;padding:10px 12px}
-.vmkeynote{position:absolute;left:8px;right:8px;bottom:8px;z-index:4;background:rgba(10,14,20,.72);color:#fff;font-size:12px;font-weight:600;line-height:1.3;border-radius:10px;padding:6px 9px;pointer-events:none;text-align:center}
+.vmkeynote{position:absolute;left:8px;top:8px;max-width:calc(100% - 16px);z-index:4;background:rgba(10,14,20,.72);color:#fff;font-family:inherit;font-size:12px;font-weight:600;line-height:1.3;border:0;border-radius:10px;padding:6px 9px;text-align:left;cursor:pointer}.vmkeynote b{margin-left:6px;opacity:.8}
+.vmwait{position:absolute;inset:0;z-index:3;display:flex;align-items:center;justify-content:center;gap:8px;color:#fff;font-weight:600;font-size:14px;background:rgba(8,10,14,.55);pointer-events:none}
+.vmbgchip{position:absolute;left:8px;right:8px;top:8px;z-index:4;display:flex;align-items:center;gap:8px;flex-wrap:wrap;background:rgba(10,14,20,.78);color:#fff;font-size:12px;font-weight:600;line-height:1.3;border-radius:12px;padding:7px 9px}.vmbgchip .chip{margin-left:auto;padding:5px 10px;font-size:12px}
+.vmbgshot{position:absolute;inset:0;z-index:6;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;background:rgba(5,7,10,.88);color:#fff;font-weight:600;font-size:13px;cursor:pointer;padding:10px}.vmbgshot img{max-width:100%;max-height:calc(100% - 34px);object-fit:contain;border-radius:10px}
+.vmreadpane{position:fixed;left:0;right:0;top:0;height:56vh;height:56dvh;z-index:40;box-shadow:0 6px 20px rgba(0,0,0,.35);overflow:auto;background:#0B0F14;-webkit-overflow-scrolling:touch;touch-action:pan-x pan-y pinch-zoom}.vmreadpane img{display:block;width:100%;height:auto}.vmreadpane .chip{position:sticky;bottom:8px;left:8px;margin:8px;background:rgba(10,14,20,.85);color:#fff}
+.vmmaking{display:flex;flex-wrap:wrap;align-items:center;gap:6px;background:#EEF4FF;border-radius:10px;padding:8px 10px;margin:6px 0}.vmmaking small{flex-basis:100%;color:#667}
 .keybox{display:flex;flex-direction:column;gap:8px;background:var(--paper-2);border-radius:14px;padding:12px}.keysw{width:34px;height:34px;border-radius:10px;border:2px solid #fff;box-shadow:0 0 0 1px rgba(0,0,0,.2)}.keyshot{width:100%;border-radius:12px;cursor:pointer}
 .cutbox{display:flex;flex-direction:column;gap:8px;background:var(--paper-2);border-radius:14px;padding:12px}
 .vmstops{display:flex;flex-wrap:wrap;gap:6px}.vmstop{display:inline-flex;align-items:center;gap:8px;background:var(--blue);color:#fff;border-radius:99px;padding:6px 8px 6px 6px;font-weight:700;font-size:14px}.vmstop b{background:#fff;color:var(--blue);border-radius:50%;width:22px;height:22px;display:grid;place-items:center;font-size:12px}.vmstop button{border:0;background:rgba(255,255,255,.2);color:#fff;border-radius:50%;width:22px;height:22px;cursor:pointer}
@@ -1364,7 +1375,160 @@ create policy "teacher deletes asks" on public.asks for delete to authenticated 
 grant insert on public.asks to anon;
 grant select, insert, update, delete on public.asks to authenticated;
 
-create or replace function public.schema_version() returns int language sql immutable as $$ select 9 $$;
+-- Version 10: what each student did (opened a lesson, how much they heard, where they skipped, when they came back,
+-- homework and games), and your own test phone kept out of it: nothing it does counts, and it never notifies you.
+alter table public.devices add column if not exists test boolean not null default false;
+alter table public.devices add column if not exists label text not null default '';
+alter table public.devices add column if not exists seen_at timestamptz not null default now();
+create table if not exists public.test_invites (
+  student text primary key references public.students(id) on delete cascade,
+  code text not null unique default replace(gen_random_uuid()::text, '-', '')
+);
+alter table public.test_invites enable row level security;
+drop policy if exists "teacher test links" on public.test_invites;
+create policy "teacher test links" on public.test_invites for all to authenticated using (public.is_teacher()) with check (public.is_teacher());
+grant select, insert, update, delete on public.test_invites to authenticated;
+create or replace function public.test_link(sid text) returns text
+language plpgsql security definer set search_path = public as $$
+declare c text;
+begin
+  if not public.is_teacher() then raise exception 'teacher only'; end if;
+  insert into public.test_invites (student) values (sid) on conflict (student) do nothing;
+  select code into c from public.test_invites where student = sid;
+  return c;
+end
+$$;
+revoke all on function public.test_link(text) from public;
+grant execute on function public.test_link(text) to authenticated;
+create or replace function public.my_test() returns boolean
+language sql stable security definer set search_path = public as $$
+  select coalesce((select test from public.devices where user_id = auth.uid()), false)
+$$;
+grant execute on function public.my_test() to authenticated;
+create or replace function public.whoami() returns json
+language sql stable security definer set search_path = public as $$
+  select json_build_object('teacher', public.is_teacher(), 'student', public.my_student(), 'test', public.my_test())
+$$;
+create or replace function public.claim_invite(code text) returns text
+language plpgsql security definer set search_path = public as $$
+declare
+  sid text;
+  is_test boolean := false;
+begin
+  if auth.uid() is null then
+    raise exception 'not signed in';
+  end if;
+  select id into sid from public.students where invite = code;
+  if sid is null then
+    select student into sid from public.test_invites t where t.code = claim_invite.code;
+    is_test := sid is not null;
+  end if;
+  if sid is null then
+    raise exception 'invalid invite';
+  end if;
+  insert into public.devices (user_id, student, test) values (auth.uid(), sid, is_test)
+  on conflict (user_id) do update set student = excluded.student, test = excluded.test, created_at = now();
+  return sid;
+end
+$$;
+create or replace function public.reset_invite(sid text) returns text
+language plpgsql security definer set search_path = public as $$
+declare
+  code text := replace(gen_random_uuid()::text, '-', '');
+begin
+  if not public.is_teacher() then
+    raise exception 'teacher only';
+  end if;
+  update public.students set invite = code where id = sid;
+  delete from public.devices where student = sid and not test;   -- your own test phone stays in
+  return code;
+end
+$$;
+-- a phone says what it is (for your list of phones on a link) and when it was last used
+create or replace function public.device_hello(p_label text) returns void
+language sql security definer set search_path = public as $$
+  update public.devices set label = left(coalesce(p_label, ''), 80), seen_at = now() where user_id = auth.uid();
+$$;
+revoke all on function public.device_hello(text) from public;
+grant execute on function public.device_hello(text) to authenticated;
+create table if not exists public.views (
+  id text primary key,
+  student text not null references public.students(id) on delete cascade,
+  lesson text not null,
+  kind text not null default 'lesson' check (kind in ('lesson', 'hw', 'game')),
+  ref text,
+  dev uuid not null default auth.uid(),
+  test boolean not null default false,
+  opened_at timestamptz not null default now(),
+  updated_at timestamptz not null default now(),
+  secs real not null default 0,
+  dur real not null default 0,
+  watched jsonb not null default '[]'::jsonb,
+  jumps jsonb not null default '[]'::jsonb
+);
+create index if not exists views_student_idx on public.views (student, opened_at desc);
+alter table public.views enable row level security;
+drop policy if exists "read views" on public.views;
+create policy "read views" on public.views for select to authenticated using (public.is_teacher() or dev = auth.uid());
+drop policy if exists "student logs views" on public.views;
+create policy "student logs views" on public.views for insert to authenticated with check (student = public.my_student() and dev = auth.uid());
+drop policy if exists "student updates views" on public.views;
+create policy "student updates views" on public.views for update to authenticated using (dev = auth.uid()) with check (student = public.my_student() and dev = auth.uid());
+drop policy if exists "teacher deletes views" on public.views;
+create policy "teacher deletes views" on public.views for delete to authenticated using (public.is_teacher());
+grant select, insert, update, delete on public.views to authenticated;
+create or replace function public.views_mark() returns trigger
+language plpgsql security definer set search_path = public as $$
+begin
+  new.test := coalesce((select test from public.devices where user_id = new.dev), false);
+  new.updated_at := now();
+  if tg_op = 'UPDATE' then new.opened_at := old.opened_at; end if;
+  return new;
+end
+$$;
+drop trigger if exists views_mark on public.views;
+create trigger views_mark before insert or update on public.views for each row execute function public.views_mark();
+-- messages from your test phone (questions, homework) are marked too
+alter table public.msgs add column if not exists dev uuid default auth.uid();
+alter table public.msgs add column if not exists test boolean not null default false;
+create or replace function public.msgs_mark() returns trigger
+language plpgsql security definer set search_path = public as $$
+begin
+  new.dev := auth.uid();
+  new.test := new.sender = 'student' and coalesce((select test from public.devices where user_id = auth.uid()), false);
+  return new;
+end
+$$;
+drop trigger if exists msgs_mark on public.msgs;
+create trigger msgs_mark before insert on public.msgs for each row execute function public.msgs_mark();
+-- you switch a phone to "my test phone" (or back): what it already did follows
+create or replace function public.devices_test_follow() returns trigger
+language plpgsql security definer set search_path = public as $$
+begin
+  if new.test is distinct from old.test then
+    update public.views set test = new.test where dev = new.user_id;
+    update public.msgs set test = new.test where dev = new.user_id and sender = 'student';
+  end if;
+  return new;
+end
+$$;
+drop trigger if exists devices_test_follow on public.devices;
+create trigger devices_test_follow after update on public.devices for each row execute function public.devices_test_follow();
+-- notifications: a test phone never buzzes you
+create or replace function public.push_targets(p_to text, p_student text)
+returns table (endpoint text, p256dh text, auth text) language sql stable security definer set search_path = public as $$
+  select s.endpoint, s.p256dh, s.auth from public.push_subs s
+  where (p_to = 'teacher' and public.my_student() is not null and not public.my_test() and s.student is null)
+     or (p_to = 'student' and public.is_teacher() and s.student = p_student);
+$$;
+do $$
+begin
+  alter publication supabase_realtime add table public.views;
+exception when duplicate_object or undefined_object then null;
+end
+$$;
+
+create or replace function public.schema_version() returns int language sql immutable as $$ select 10 $$;
 grant execute on function public.schema_version() to anon, authenticated;
 notify pgrst, 'reload schema';
 </script>
@@ -1787,7 +1951,160 @@ create policy "teacher deletes asks" on public.asks for delete to authenticated 
 grant insert on public.asks to anon;
 grant select, insert, update, delete on public.asks to authenticated;
 
-create or replace function public.schema_version() returns int language sql immutable as $$ select 9 $$;
+-- Version 10: what each student did (opened a lesson, how much they heard, where they skipped, when they came back,
+-- homework and games), and your own test phone kept out of it: nothing it does counts, and it never notifies you.
+alter table public.devices add column if not exists test boolean not null default false;
+alter table public.devices add column if not exists label text not null default '';
+alter table public.devices add column if not exists seen_at timestamptz not null default now();
+create table if not exists public.test_invites (
+  student text primary key references public.students(id) on delete cascade,
+  code text not null unique default replace(gen_random_uuid()::text, '-', '')
+);
+alter table public.test_invites enable row level security;
+drop policy if exists "teacher test links" on public.test_invites;
+create policy "teacher test links" on public.test_invites for all to authenticated using (public.is_teacher()) with check (public.is_teacher());
+grant select, insert, update, delete on public.test_invites to authenticated;
+create or replace function public.test_link(sid text) returns text
+language plpgsql security definer set search_path = public as $$
+declare c text;
+begin
+  if not public.is_teacher() then raise exception 'teacher only'; end if;
+  insert into public.test_invites (student) values (sid) on conflict (student) do nothing;
+  select code into c from public.test_invites where student = sid;
+  return c;
+end
+$$;
+revoke all on function public.test_link(text) from public;
+grant execute on function public.test_link(text) to authenticated;
+create or replace function public.my_test() returns boolean
+language sql stable security definer set search_path = public as $$
+  select coalesce((select test from public.devices where user_id = auth.uid()), false)
+$$;
+grant execute on function public.my_test() to authenticated;
+create or replace function public.whoami() returns json
+language sql stable security definer set search_path = public as $$
+  select json_build_object('teacher', public.is_teacher(), 'student', public.my_student(), 'test', public.my_test())
+$$;
+create or replace function public.claim_invite(code text) returns text
+language plpgsql security definer set search_path = public as $$
+declare
+  sid text;
+  is_test boolean := false;
+begin
+  if auth.uid() is null then
+    raise exception 'not signed in';
+  end if;
+  select id into sid from public.students where invite = code;
+  if sid is null then
+    select student into sid from public.test_invites t where t.code = claim_invite.code;
+    is_test := sid is not null;
+  end if;
+  if sid is null then
+    raise exception 'invalid invite';
+  end if;
+  insert into public.devices (user_id, student, test) values (auth.uid(), sid, is_test)
+  on conflict (user_id) do update set student = excluded.student, test = excluded.test, created_at = now();
+  return sid;
+end
+$$;
+create or replace function public.reset_invite(sid text) returns text
+language plpgsql security definer set search_path = public as $$
+declare
+  code text := replace(gen_random_uuid()::text, '-', '');
+begin
+  if not public.is_teacher() then
+    raise exception 'teacher only';
+  end if;
+  update public.students set invite = code where id = sid;
+  delete from public.devices where student = sid and not test;   -- your own test phone stays in
+  return code;
+end
+$$;
+-- a phone says what it is (for your list of phones on a link) and when it was last used
+create or replace function public.device_hello(p_label text) returns void
+language sql security definer set search_path = public as $$
+  update public.devices set label = left(coalesce(p_label, ''), 80), seen_at = now() where user_id = auth.uid();
+$$;
+revoke all on function public.device_hello(text) from public;
+grant execute on function public.device_hello(text) to authenticated;
+create table if not exists public.views (
+  id text primary key,
+  student text not null references public.students(id) on delete cascade,
+  lesson text not null,
+  kind text not null default 'lesson' check (kind in ('lesson', 'hw', 'game')),
+  ref text,
+  dev uuid not null default auth.uid(),
+  test boolean not null default false,
+  opened_at timestamptz not null default now(),
+  updated_at timestamptz not null default now(),
+  secs real not null default 0,
+  dur real not null default 0,
+  watched jsonb not null default '[]'::jsonb,
+  jumps jsonb not null default '[]'::jsonb
+);
+create index if not exists views_student_idx on public.views (student, opened_at desc);
+alter table public.views enable row level security;
+drop policy if exists "read views" on public.views;
+create policy "read views" on public.views for select to authenticated using (public.is_teacher() or dev = auth.uid());
+drop policy if exists "student logs views" on public.views;
+create policy "student logs views" on public.views for insert to authenticated with check (student = public.my_student() and dev = auth.uid());
+drop policy if exists "student updates views" on public.views;
+create policy "student updates views" on public.views for update to authenticated using (dev = auth.uid()) with check (student = public.my_student() and dev = auth.uid());
+drop policy if exists "teacher deletes views" on public.views;
+create policy "teacher deletes views" on public.views for delete to authenticated using (public.is_teacher());
+grant select, insert, update, delete on public.views to authenticated;
+create or replace function public.views_mark() returns trigger
+language plpgsql security definer set search_path = public as $$
+begin
+  new.test := coalesce((select test from public.devices where user_id = new.dev), false);
+  new.updated_at := now();
+  if tg_op = 'UPDATE' then new.opened_at := old.opened_at; end if;
+  return new;
+end
+$$;
+drop trigger if exists views_mark on public.views;
+create trigger views_mark before insert or update on public.views for each row execute function public.views_mark();
+-- messages from your test phone (questions, homework) are marked too
+alter table public.msgs add column if not exists dev uuid default auth.uid();
+alter table public.msgs add column if not exists test boolean not null default false;
+create or replace function public.msgs_mark() returns trigger
+language plpgsql security definer set search_path = public as $$
+begin
+  new.dev := auth.uid();
+  new.test := new.sender = 'student' and coalesce((select test from public.devices where user_id = auth.uid()), false);
+  return new;
+end
+$$;
+drop trigger if exists msgs_mark on public.msgs;
+create trigger msgs_mark before insert on public.msgs for each row execute function public.msgs_mark();
+-- you switch a phone to "my test phone" (or back): what it already did follows
+create or replace function public.devices_test_follow() returns trigger
+language plpgsql security definer set search_path = public as $$
+begin
+  if new.test is distinct from old.test then
+    update public.views set test = new.test where dev = new.user_id;
+    update public.msgs set test = new.test where dev = new.user_id and sender = 'student';
+  end if;
+  return new;
+end
+$$;
+drop trigger if exists devices_test_follow on public.devices;
+create trigger devices_test_follow after update on public.devices for each row execute function public.devices_test_follow();
+-- notifications: a test phone never buzzes you
+create or replace function public.push_targets(p_to text, p_student text)
+returns table (endpoint text, p256dh text, auth text) language sql stable security definer set search_path = public as $$
+  select s.endpoint, s.p256dh, s.auth from public.push_subs s
+  where (p_to = 'teacher' and public.my_student() is not null and not public.my_test() and s.student is null)
+     or (p_to = 'student' and public.is_teacher() and s.student = p_student);
+$$;
+do $$
+begin
+  alter publication supabase_realtime add table public.views;
+exception when duplicate_object or undefined_object then null;
+end
+$$;
+
+create or replace function public.schema_version() returns int language sql immutable as $$ select 10 $$;
 grant execute on function public.schema_version() to anon, authenticated;
 notify pgrst, 'reload schema';
 </script>
@@ -1925,7 +2242,7 @@ notify pgrst, 'reload schema';
 
   /* ================= store ================= */
   const store = {
-    s: { phase: "loading", isOwner: false, canSend: false, lessons: [], recs: [], explains: [], students: [], msgs: [], sid: null, toast: null, email: "", hint: "", err: "", wantTeacher: false, fresh: false, needsUpdate: false, live: [], hasLive: false },
+    s: { phase: "loading", isOwner: false, canSend: false, lessons: [], recs: [], explains: [], students: [], msgs: [], views: [], testPhone: false, sid: null, toast: null, email: "", hint: "", err: "", wantTeacher: false, fresh: false, needsUpdate: false, live: [], hasLive: false },
     subs: new Set(),
     set(patch) { this.s = Object.assign({}, this.s, patch); this.subs.forEach(f => f(this.s)); },
   };
@@ -2010,7 +2327,8 @@ notify pgrst, 'reload schema';
     students: r => ({ id: r.id, name: r.name, color: r.color, unlocked: r.unlocked, invite: r.invite, lang: r.lang || "en", games: !!r.games, createdAt: ms(r.created_at) }),
     explains: r => ({ id: r.id, lesson: r.lesson, lang: r.lang, explain: r.explain, explainSecs: r.explain_secs || 0, cues: Array.isArray(r.cues) ? r.cues : [], updatedAt: ms(r.updated_at) }),
     live: r => ({ id: r.id, lesson: r.lesson, mode: r.mode, startedAt: ms(r.started_at), updatedAt: ms(r.updated_at) }),
-    msgs: r => ({ id: r.id, student: r.student, lesson: r.lesson, from: r.sender, kind: r.kind, asset: r.media, secs: r.secs, text: r.body, hw: r.hw, point: r.point || [], next: r.next, seen: r.seen, cid: r.cid, at: ms(r.created_at) }),
+    msgs: r => ({ id: r.id, student: r.student, lesson: r.lesson, from: r.sender, kind: r.kind, asset: r.media, secs: r.secs, text: r.body, hw: r.hw, point: r.point || [], next: r.next, seen: r.seen, cid: r.cid, at: ms(r.created_at), test: !!r.test }),
+    views: r => ({ id: r.id, student: r.student, lesson: r.lesson, kind: r.kind, ref: r.ref, test: !!r.test, openedAt: ms(r.opened_at), updatedAt: ms(r.updated_at), secs: r.secs || 0, dur: r.dur || 0, watched: Array.isArray(r.watched) ? r.watched : [], jumps: Array.isArray(r.jumps) ? r.jumps : [] }),
   };
   const SORTS = {
     lessons: list => list.sort(lessonSort),
@@ -2019,6 +2337,7 @@ notify pgrst, 'reload schema';
     students: list => list.sort((a, b) => (a.createdAt || 0) - (b.createdAt || 0)),
     msgs: list => list.sort((a, b) => (a.at || 0) - (b.at || 0)),
     live: list => list,
+    views: list => list.sort((a, b) => (a.openedAt || 0) - (b.openedAt || 0)),
   };
   function putLocal(table, rowsIn) {
     if (!rowsIn || !rowsIn.length) return;
@@ -2105,13 +2424,14 @@ notify pgrst, 'reload schema';
     return out;
   }
   async function loadAll() {
-    const [L, R, S, M, LV, EX] = await Promise.all([
+    const [L, R, S, M, LV, EX, VW] = await Promise.all([
       fetchAll("lessons", b => b.order("id")),
       fetchAll("recs", b => b.order("id")),
       fetchAll("students", b => b.order("created_at")),
       q(sb.from("msgs").select("*").order("created_at", { ascending: false }).limit(1000)),
       store.s.hasLive ? q(sb.from("live").select("*")).catch(() => []) : Promise.resolve([]),
       store.s.hasExpl ? q(sb.from("explains").select("*")).catch(() => []) : Promise.resolve([]),
+      store.s.isOwner && (store.s.schemaVer || 0) >= 10 ? q(sb.from("views").select("*").order("opened_at", { ascending: false }).limit(3000)).catch(() => []) : Promise.resolve([]),
     ]);
     store.set({
       lessons: L.map(FROM.lessons).sort(lessonSort),
@@ -2120,6 +2440,7 @@ notify pgrst, 'reload schema';
       students: SORTS.students(S.map(FROM.students)),
       msgs: (M || []).map(FROM.msgs).reverse(),
       live: (LV || []).map(FROM.live),
+      views: SORTS.views((VW || []).map(FROM.views)),
     });
   }
   let channel = null, subscribedOnce = false, reloadTimer = null, visHooked = false;
@@ -2131,7 +2452,7 @@ notify pgrst, 'reload schema';
     if (channel) { try { sb.removeChannel(channel); } catch (e) {} }
     subscribedOnce = false;
     channel = sb.channel("class-room");
-    for (const t of ["lessons", "recs", "students", "msgs"].concat(store.s.hasLive ? ["live"] : [], store.s.hasExpl ? ["explains"] : [])) {
+    for (const t of ["lessons", "recs", "students", "msgs"].concat(store.s.hasLive ? ["live"] : [], store.s.hasExpl ? ["explains"] : [], store.s.isOwner && (store.s.schemaVer || 0) >= 10 ? ["views"] : [])) {
       channel.on("postgres_changes", { event: "*", schema: "public", table: t }, p => {
         if (p.eventType === "DELETE") { if (p.old && p.old.id) dropLocal(t, p.old.id); return; }
         if (!p.new || !p.new.id) return;
@@ -2217,7 +2538,7 @@ notify pgrst, 'reload schema';
       store.set({ phase: anonUser ? "nolink" : "notteacher", email: session.user.email || "" });
       return;
     }
-    store.set({ isOwner: !!who.teacher, sid: who.teacher ? null : who.student, canSend: true, email: session.user.email || "" });
+    store.set({ isOwner: !!who.teacher, sid: who.teacher ? null : who.student, testPhone: !who.teacher && !!who.test, canSend: true, email: session.user.email || "" });
     let hasLive = false, hasCues = true;
     try { const a = await sb.from("live").select("id").limit(1); hasLive = !a.error; } catch (e) {}
     if (who.teacher) { try { const pr = await sb.from("lessons").select("cues").limit(1); hasCues = !pr.error; } catch (e) {} }
@@ -2225,10 +2546,11 @@ notify pgrst, 'reload schema';
     try { const v = await sb.rpc("schema_version"); ver = v.error ? 0 : Number(v.data) || 0; } catch (e) {}   // every phone: students need it for notifications
     let hasExpl = false;
     try { const x = await sb.from("explains").select("id").limit(1); hasExpl = !x.error; } catch (e) {}
-    store.set({ hasLive, hasExpl, schemaVer: ver, needsUpdate: !!who.teacher && (!hasLive || !hasCues || ver < 9) });
+    store.set({ hasLive, hasExpl, schemaVer: ver, needsUpdate: !!who.teacher && (!hasLive || !hasCues || ver < 10) });
     await loadAll();
     subscribe();
     store.set({ phase: "ready" });
+    if (!who.teacher && ver >= 10) sb.rpc("device_hello", { p_label: devLabel() }).then(() => {}, () => {});
   }
   async function teacherAuth(email, password, create) {
     const r = create
@@ -3859,10 +4181,73 @@ notify pgrst, 'reload schema';
       await fetch("/.netlify/functions/push", { method: "POST", headers: { "content-type": "application/json", authorization: "Bearer " + tok }, body: JSON.stringify(b) });
     } catch (e) {}
   }
+  // what kind of phone this is, for the teacher's list of phones on a link ("Android · Chrome")
+  function devLabel() {
+    const u = navigator.userAgent || "", md = (u.match(/Android [\d.]+; ([^;)]+)/) || [])[1];
+    const os = /iPhone/.test(u) ? "iPhone" : /iPad/.test(u) ? "iPad" : /Android/.test(u) ? (md && md.trim().length > 2 ? md.trim() : "Android phone") : /Windows/.test(u) ? "Windows computer" : /Mac/.test(u) ? "Mac" : "Phone";
+    const br = /SamsungBrowser/.test(u) ? "Samsung Internet" : /CriOS|Chrome/.test(u) ? "Chrome" : /Firefox|FxiOS/.test(u) ? "Firefox" : /Safari/.test(u) ? "Safari" : "";
+    return (os + (br ? " · " + br : "")).slice(0, 80);
+  }
+  // seconds of a lesson heard: [from, to] pieces, joined up when they touch
+  function watchAdd(R, a, b) {
+    if (!(b > a)) return R; R.push([a, b]); R.sort((x, y) => x[0] - y[0]);
+    const o = []; for (const r of R) { const l = o[o.length - 1]; if (l && r[0] <= l[1] + 1.2) l[1] = Math.max(l[1], r[1]); else o.push([r[0], r[1]]); }
+    R.length = 0; R.push(...o); return R;
+  }
+  const watchSum = R => R.reduce((n, r) => n + Math.max(0, r[1] - r[0]), 0);
+  /* What a student did, kept for the teacher: when they opened a lesson, which parts they heard, where they skipped ahead
+     or went back, when they came back to revise, and their homework and games. One record each time they open something.
+     The teacher's own test phone is marked by the database, so it never counts and never notifies. */
+  const watch = {
+    live: new Set(), timer: null, q: Promise.resolve(), hooked: false,
+    on() { return !!(sb && !store.s.isOwner && store.s.sid && (store.s.schemaVer || 0) >= 10); },
+    start(kind, lesson, ref) {
+      if (!this.on()) return { stop() {} };
+      if (!this.hooked) { this.hooked = true; const all = () => { for (const c of this.live) { this.step(c); this.save(c); } }; document.addEventListener("visibilitychange", () => { if (document.visibilityState === "hidden") all(); }); window.addEventListener("pagehide", all); }
+      const lt = (store.s.lessons || []).find(l => l.id === lesson) || {}, now = Date.now();
+      const c = { id: uid(), kind, lesson: lesson || "", ref: ref || null, secs: 0, dur: kind === "lesson" ? lt.explainSecs || 0 : 0, ranges: [], jumps: [], pos: null, at: now, seen: now, saved: 0, ch: true, was: false };
+      this.live.add(c); if (!this.timer) this.timer = setInterval(() => this.tick(), 1000);
+      this.save(c);
+      if (kind === "lesson") this.tell(lesson);
+      return { stop: () => { if (!this.live.has(c)) return; this.step(c); this.save(c); this.live.delete(c); if (!this.live.size) { clearInterval(this.timer); this.timer = null; } } };
+    },
+    tick() { const now = Date.now(); for (const c of this.live) { this.step(c, now); if (c.ch && now - c.saved > 10000) this.save(c); } },
+    step(c, now) {
+      now = now || Date.now();
+      if (document.visibilityState === "visible") { c.secs += Math.min(2, Math.max(0, (now - c.seen) / 1000)); c.ch = true; }
+      c.seen = now;
+      if (c.kind !== "lesson") return;
+      const a = player.a, mine = !!(a && player.key === "explain:" + c.lesson);
+      if (!mine) { c.pos = null; c.was = false; return; }
+      if (a.duration && isFinite(a.duration)) c.dur = a.duration;
+      const t = a.currentTime || 0, playing = !a.paused && !a.ended;
+      if (c.pos != null) {
+        const d = t - c.pos, el = (now - c.at) / 1000 * (a.playbackRate || 1);
+        if (c.was && d >= -0.05 && d <= el + 2) { if (d > 0.05) { watchAdd(c.ranges, c.pos, t); c.ch = true; } }
+        else if (Math.abs(d) >= 3) { c.jumps.push([round1(c.pos), round1(t), now]); if (c.jumps.length > 80) c.jumps.shift(); c.ch = true; }
+      }
+      c.pos = t; c.at = now; c.was = playing;
+    },
+    save(c) {
+      if (!this.on()) return;
+      const row = { id: c.id, student: store.s.sid, lesson: c.lesson, kind: c.kind, ref: c.ref, secs: Math.round(c.secs), dur: round1(c.dur), watched: c.ranges.map(r => [round1(r[0]), round1(r[1])]), jumps: c.jumps.slice() };
+      c.ch = false; c.saved = Date.now();
+      this.q = this.q.then(async () => { const r = await sb.from("views").upsert(row); if (r && r.error) c.ch = true; }).catch(() => { c.ch = true; });
+    },
+    // the teacher hears about it once (not every time the page reloads); a test phone never buzzes
+    tell(lesson) {
+      try {
+        if (store.s.testPhone) return; const k = "rc.told." + lesson, last = +(localStorage.getItem(k) || 0); if (Date.now() - last < 6 * 3600e3) return; localStorage.setItem(k, String(Date.now()));
+        const li = store.s.lessons.findIndex(l => l.id === lesson), st = store.s.students.find(x => x.id === store.s.sid);
+        pushSend({ to: "teacher", title: (st ? st.name : "Your student") + " opened lesson " + (li + 1), body: "Open the app to see how much of it they listen to.", tag: "open-" + store.s.sid });
+      } catch (e) {}
+    },
+  };
   // A question (or homework) from a student buzzes the teacher; the teacher's answer buzzes that student.
   function pushAbout(m) {
     try {
       if (!m || (store.s.schemaVer || 0) < 5) return;
+      if (m.from === "student" && store.s.testPhone) return;   // the teacher's own test phone: no buzz
       const li = store.s.lessons.findIndex(l => l.id === m.lesson), ln = li >= 0 ? "Lesson " + (li + 1) : "";
       if (m.from === "student" && ["voice", "photo", "text", "hwans"].includes(m.kind)) {
         const st = store.s.students.find(x => x.id === m.student);
@@ -8509,6 +8894,11 @@ notify pgrst, 'reload schema';
     const [ltool, setLtool] = useState("stick");
     const [lpen, setLpen] = useState("#F1ECDC");
     useEffect(() => { player.stop(); tilePlayer.stop(); setTurn(null); setFlash(null); window.scrollTo(0, 0); }, [lid]);
+    // what the student does is kept for the teacher (the lesson open, homework open, a game open)
+    useEffect(() => { if (teacher || !lid) return; const h = watch.start("lesson", lid); return () => h.stop(); }, [lid, teacher]);
+    useEffect(() => { if (teacher || !hwRun || hwRun.preview) return; const h = watch.start("hw", hwRun.hw.lesson || lid, hwRun.hw.id); return () => h.stop(); }, [hwRun && hwRun.hw.id, teacher]);
+    const gameOn = !!(fight || arena);
+    useEffect(() => { if (teacher || !gameOn) return; const h = watch.start("game", lid, String(fight || arena)); return () => h.stop(); }, [gameOn, teacher]);
     useEffect(() => { if (!flash) return; const t = setTimeout(() => setFlash(null), 800); return () => clearTimeout(t); }, [flash]);
     // live class
     useEffect(() => {
@@ -8645,6 +9035,7 @@ notify pgrst, 'reload schema';
     for (const m of thread) {
       const dk = dayKey(m.at);
       if (dk !== lastDay) { nodes.push(html`<div class="day" key=${"d" + dk}>${fmtDay(m.at)}</div>`); lastDay = dk; }
+      if (teacher && m.test) nodes.push(html`<div class="testtag" key=${"tt" + m.id}>🧪 From your test phone</div>`);
       nodes.push(html`<${Msg} key=${m.cid || m.id} m=${m} role=${role} teacher=${teacher} pst=${pst} lessons=${lessons}
         onGoto=${id => setViewId(id)} onRetry=${() => deliver(m)} onDel=${() => delMsg(m)} onPhoto=${setLightbox}
         msgs=${mine} onHw=${openHw} onAns=${openAns}/>`);
@@ -8686,6 +9077,8 @@ notify pgrst, 'reload schema';
         ${L.on && live.sid === student.id ? html`<button class="btn quiet" onClick=${() => setFight("host")}>🥊 Fight</button><button class="btn quiet" onClick=${() => setArena("host")}>🏟️ Arena</button>` : null}
         <span class="tl">${lesson.title}</span>
       </div>` : null}
+      ${teacher ? html`<${LessonActivity} s=${s} student=${student} lesson=${lesson}/>` : null}
+      ${!teacher && s.testPhone ? html`<div class="testbar">🧪 Your test phone: nothing done here counts as ${student.name || "the student"}'s, and it never notifies you.</div>` : null}
       ${teacher && L.on ? html`<${ClassPanel} s=${s} who=${who} lessonTitle=${lesson.title} lessonNo=${vIdx + 1} studentId=${student.id}/>` : null}
       ${teacher && L.on && L.mode !== "write" ? html`<${LiveTools} lesson=${lesson} tool=${ltool} setTool=${setLtool} pen=${lpen} setPen=${setLpen} stage=${liveStage}/>` : null}
       ${turn && !teacher ? html`<div class="turnbar" role="status"><span class="tbh">✋</span><div><b>Your turn!</b><span>${turn.cue.tile ? "Say the answer out loud, then tap it on the board." + (turn.tries >= 2 ? " Look — it's glowing." : "") : "Say it out loud: read it, or answer the teacher's question. Then tap ▶ Continue."}</span></div>${turn.cue.tile ? null : html`<button class="btn slim" onClick=${resume}>▶ Continue</button>`}</div>` : null}
@@ -8718,6 +9111,53 @@ notify pgrst, 'reload schema';
   }
 
   /* ================= teacher screens ================= */
+  const fmtSpent = n => (n < 60 ? Math.max(1, Math.round(n)) + " s" : Math.round(n / 60) + " min");
+  // one lesson, for one student: opened when, how much they heard (the green parts), where they skipped, when they came back
+  function LessonActivity({ s, student, lesson }) {
+    const [open, setOpen] = useState(false), [showTest, setShowTest] = useState(false);
+    if ((s.schemaVer || 0) < 10) return null;
+    const all = (s.views || []).filter(v => v.student === student.id && v.lesson === lesson.id), testN = all.filter(v => v.test).length;
+    const V = all.filter(v => showTest || !v.test), les = V.filter(v => v.kind === "lesson"), hws = V.filter(v => v.kind === "hw"), games = V.filter(v => v.kind === "game");
+    const sent = s.msgs.filter(m => m.student === student.id && m.lesson === lesson.id && m.kind === "hwans" && (showTest || !m.test));
+    const dur = Math.max(lesson.explainSecs || 0, ...les.map(v => v.dur || 0)), U = [];
+    for (const v of les) for (const r of v.watched) watchAdd(U, r[0], r[1]);
+    const heard = Math.min(dur || 1e9, watchSum(U)), pct = dur ? Math.min(100, Math.round(heard / dur * 100)) : 0;
+    const skips = les.reduce((n, v) => n + v.jumps.filter(j => j[1] > j[0] + 5).length, 0), last = V.reduce((m, v) => Math.max(m, v.updatedAt || v.openedAt || 0), 0);
+    const bar = R => html`<div class="actbar">${dur ? R.map((r, i) => html`<i key=${i} style=${"left:" + (r[0] / dur * 100).toFixed(2) + "%;width:" + (Math.max(0.6, (r[1] - r[0]) / dur * 100)).toFixed(2) + "%"}></i>`) : null}</div>`;
+    const when = t => fmtDay(t) + " " + fmtClock(t);
+    const events = [].concat(
+      les.map((v, i) => ({ t: v.openedAt, n: html`<div class="actrow"><b>${i === 0 ? "📖 First time" : "🔁 Came back"} · ${when(v.openedAt)}</b><small>Open ${fmtSpent(v.secs)}${v.watched.length ? " · heard " + v.watched.map(r => fmtDur(r[0]) + "–" + fmtDur(r[1])).join(", ") : " · didn't press play"}</small>
+        ${v.jumps.length ? html`<small>${v.jumps.slice(0, 8).map(j => (j[1] > j[0] ? "⏩ skipped " + fmtDur(j[0]) + " → " + fmtDur(j[1]) : "⏪ went back " + fmtDur(j[0]) + " → " + fmtDur(j[1]))).join(" · ")}</small>` : null}${v.watched.length && dur ? bar(v.watched) : null}${v.test ? html`<small class="t">🧪 your test phone</small>` : null}</div>` })),
+      hws.map(v => ({ t: v.openedAt, n: html`<div class="actrow"><b>📝 Opened the homework · ${when(v.openedAt)}</b><small>For ${fmtSpent(v.secs)}${v.test ? " · 🧪 your test phone" : ""}</small></div>` })),
+      sent.map(m => ({ t: m.at, n: html`<div class="actrow"><b>✅ Sent the homework · ${when(m.at)}</b></div>` })),
+      games.map(v => ({ t: v.openedAt, n: html`<div class="actrow"><b>🥊 Played a game · ${when(v.openedAt)}</b><small>For ${fmtSpent(v.secs)}${v.test ? " · 🧪 your test phone" : ""}</small></div>` }))
+    ).sort((a, b) => b.t - a.t);
+    return html`<section class="lact" aria-label="What they did">
+      <button class="lacthead" onClick=${() => setOpen(!open)} aria-expanded=${open ? "true" : "false"}>
+        <span>${les.length ? html`👀 Opened ${les.length === 1 ? "once" : les.length + " times"} · heard <b>${pct}%</b>${dur ? " (" + fmtDur(heard) + " of " + fmtDur(dur) + ")" : ""}${skips ? " · ⏩ skipped ahead " + (skips === 1 ? "once" : skips + " times") : ""}` : "👀 Hasn't opened this lesson yet"}<small>${last ? "Last seen " + fmtWhen(last) : ""}${hws.length || sent.length ? " · 📝 homework " + (sent.length ? "sent" : "opened") : ""}</small></span>
+        <${Ic.down} size=${18}/></button>
+      ${les.length && dur ? bar(U) : null}
+      ${open ? html`<div class="actlist">${events.length ? events.map(e => e.n) : html`<p class="help">Nothing yet.</p>`}
+        <p class="help"><small>Green is what they listened to. Skips show when they jumped ahead with the slider.</small></p></div>` : null}
+      ${testN ? html`<button class="linkbtn" onClick=${() => setShowTest(!showTest)}>${showTest ? "Hide my test phone's visits" : "🧪 Show my test phone's visits (" + testN + ")"}</button>` : null}
+    </section>`;
+  }
+  // the phones on a student's link, and your own test phone (it opens as them, but nothing it does counts)
+  function StudentPhones({ student }) {
+    const [devs, setDevs] = useState(null), [code, setCode] = useState(null), [copied, setCopied] = useState(false);
+    const load = () => q(sb.from("devices").select("user_id,test,label,created_at,seen_at").eq("student", student.id)).then(d => setDevs(d || [])).catch(() => setDevs([]));
+    useEffect(() => { load(); }, [student.id]);
+    async function setTest(d, v) { try { await q(sb.from("devices").update({ test: v }).eq("user_id", d.user_id)); load(); toast(v ? "Marked as your test phone. What it did before no longer counts." : "That phone counts as " + (student.name || "the student") + "'s again."); } catch (e) { toast(errText(e)); } }
+    async function testLink() { try { const c = code || (await q(sb.rpc("test_link", { sid: student.id }))); setCode(c); const l = joinLink(c); try { await navigator.clipboard.writeText(l); setCopied(true); } catch (e) { setCopied(false); } } catch (e) { toast(errText(e)); } }
+    return html`<div class="field"><span class="lbl">Phones on this link</span>
+      ${devs == null ? html`<p class="help">Loading…</p>` : !devs.length ? html`<p class="help">No phone has opened the link yet.</p>` : html`<ul class="devlist">${devs.map(d => html`<li key=${d.user_id}>
+        <span>${d.test ? "🧪" : "📱"} <b>${d.label || "A phone"}</b><small>Joined ${fmtDay(ms(d.created_at))} · last used ${fmtWhen(ms(d.seen_at || d.created_at))}</small></span>
+        <button class=${"btn slim" + (d.test ? "" : " quiet")} onClick=${() => setTest(d, !d.test)}>${d.test ? "My test phone ✓" : "This is my test phone"}</button></li>`)}</ul>`}
+      <p class="help">Checking how things look for ${student.name || "your student"}? Open this link on your own second phone instead: it opens as them, but nothing it does counts, and it never notifies you.</p>
+      <button class="btn sec" onClick=${testLink}>${copied ? html`<${Ic.tick} size=${18}/>Test link copied` : "🧪 Copy my test-phone link"}</button>
+      ${code && !copied ? html`<input class="vmsearch" readonly value=${joinLink(code)} onFocus=${e => e.target.select()}/>` : null}
+    </div>`;
+  }
   function StudentSheet({ student, onClose, onDeleted }) {
     const [name, setName] = useState(student.name || "");
     const [arm, setArm] = useState(false), [armReset, setArmReset] = useState(false), [copied, setCopied] = useState(false);
@@ -8753,6 +9193,7 @@ notify pgrst, 'reload schema';
           </div>
           <button class=${"btn danger" + (armReset ? " arm" : "")} onClick=${resetLink}>${armReset ? "Tap again: the old link stops working" : "Make a new link"}</button>
         </div>
+        ${(store.s.schemaVer || 0) >= 10 ? html`<${StudentPhones} student=${student}/>` : null}
         <div class="field"><label for="sname">Name</label>
           <input id="sname" value=${name} onInput=${e => setName(e.target.value)} onBlur=${saveName} autocomplete="off"/></div>
         <div class="field"><label for="slang">Language</label>
@@ -8786,7 +9227,7 @@ notify pgrst, 'reload schema';
     for (const list of Object.values(byThread)) {
       const lastTeacher = Math.max(0, ...list.filter(m => m.from === "teacher").map(m => m.at || 0));
       // a question stays here until you've opened it (two blue ticks); homework stays until it's marked
-      for (const m of list) if (m.from === "student" && (m.at || 0) > lastTeacher && (m.kind === "hwans" ? !marksFor(m.id, s.msgs) : ["voice", "photo", "text"].includes(m.kind) && !m.seen)) waiting.push(m);
+      for (const m of list) if (m.from === "student" && !m.test && (m.at || 0) > lastTeacher && (m.kind === "hwans" ? !marksFor(m.id, s.msgs) : ["voice", "photo", "text"].includes(m.kind) && !m.seen)) waiting.push(m);
     }
     waiting.sort((a, b) => (b.at || 0) - (a.at || 0));
     if (!waiting.length) return null;
@@ -8807,6 +9248,7 @@ notify pgrst, 'reload schema';
   function StudentsList({ s, onOpen }) {
     const unread = {}, last = {};
     for (const m of s.msgs) {
+      if (m.test) continue;
       if (m.from === "student" && !m.seen) unread[m.student] = (unread[m.student] || 0) + 1;
       if (!last[m.student] || m.at > last[m.student]) last[m.student] = m.at;
     }
@@ -8822,7 +9264,7 @@ notify pgrst, 'reload schema';
         const f = s.lessons.findIndex(l => l.id === st.unlocked), i = f >= 0 ? f : 0, l = s.lessons[i];
         return html`<button class="row" key=${st.id} onClick=${() => onOpen(st.id)}>
           <span class="av" style=${"background:" + (st.color || COLORS[0])}>${initial(st.name)}</span>
-          <span class="rowmain"><b>${st.name || "Student"}</b><small>${l ? "Lesson " + (i + 1) + ": " + (l.title || "Untitled") : "No lessons yet"}</small></span>
+          <span class="rowmain"><b>${st.name || "Student"}</b><small>${l ? "Lesson " + (i + 1) + ": " + (l.title || "Untitled") : "No lessons yet"}</small>${(() => { const v = (s.views || []).filter(x => x.student === st.id && !x.test).pop(); if (!v) return null; const li = s.lessons.findIndex(x => x.id === v.lesson); return html`<small class="seen">👀 ${v.kind === "game" ? "Played a game" : v.kind === "hw" ? "Opened homework" : "Opened lesson " + (li + 1)} · ${fmtWhen(v.updatedAt || v.openedAt)}</small>`; })()}</span>
           ${unread[st.id] ? html`<span class="count" aria-label=${unread[st.id] + " new"}>${unread[st.id]}</span>` : last[st.id] ? html`<span class="when">${fmtWhen(last[st.id])}</span>` : null}
         </button>`;
       }) : html`<div class="empty"><p>No students yet. Add one, then send them their join link.</p></div>`}
@@ -10061,13 +10503,14 @@ notify pgrst, 'reload schema';
     // make a video (any kind), keep it in Recordings, and tell everyone listening how it's going
     async run(info, make) {
       if (this.st && this.st.p != null) return;
-      this.set(Object.assign({}, info, { p: 0 }));
+      this.set(Object.assign({}, info, { p: 0, t0: Date.now() }));
       awake.on("video");
       let away = document.visibilityState !== "visible"; const seen = () => { if (document.visibilityState !== "visible") away = true; else awake.sync(); };
       document.addEventListener("visibilitychange", seen);
       const visible = () => new Promise(r => { if (document.visibilityState === "visible") return r(); const f = () => { if (document.visibilityState === "visible") { document.removeEventListener("visibilitychange", f); r(); } }; document.addEventListener("visibilitychange", f); });
       try {
-        const onP = v => { if (this.st && this.st.p != null && (v === 1 || v - this.st.p >= 0.01 || v < this.st.p - 0.02)) this.set(Object.assign({}, this.st, { p: v, paused: false })); };
+        const onP = v => { if (this.st && this.st.p != null && (v === 1 || v - this.st.p >= 0.01 || v < this.st.p - 0.02)) { const o = { p: v, paused: false }; if (!this.st.tp || v < this.st.tp.p) o.tp = { t: Date.now(), p: v }; this.set(Object.assign({}, this.st, o)); } };
+        onP.note = n => { if (this.st && this.st.p != null && this.st.note !== n) this.set(Object.assign({}, this.st, { note: n || null, tp: null })); };
         let blob = null;
         for (let tries = 0; ; tries++) {
           try { blob = await make(onP); break; }
@@ -10104,11 +10547,16 @@ notify pgrst, 'reload schema';
     useEffect(() => { vidJob.subs.add(set); return () => { vidJob.subs.delete(set); }; }, []);
     return st;
   }
+  // about how long is left, from how fast it has gone so far
+  function vidEta(j) {
+    if (!j || j.p == null || j.paused || !j.tp) return ""; const dp = j.p - j.tp.p, dt = (Date.now() - j.tp.t) / 1000; if (dp < 0.03 || dt < 4) return "";
+    const left = dt / dp * (1 - j.p); return left < 50 ? "less than a minute left" : "about " + Math.round(left / 60) + " min left";
+  }
   // a small strip on every screen while a video is being made
   function VidJobPill() {
     const j = useVidJob();
     if (!j || j.p == null) return null;
-    return html`<div class="vidpill" role="status">🎬 ${j.paused ? "Paused at " + Math.round(j.p * 100) + "% while the app was away. It carries on by itself now you're back." : "Making " + (j.label || "the video") + "… " + Math.round(j.p * 100) + "% · it's saved as it goes, so leaving the app won't lose it"}</div>`;
+    return html`<div class="vidpill" role="status">🎬 ${j.paused ? "Paused at " + Math.round(j.p * 100) + "% while the app was away. It carries on by itself now you're back." : "Making " + (j.label || "the video") + "… " + Math.round(j.p * 100) + "%" + (vidEta(j) ? " · " + vidEta(j) : "") + " · it's saved as it goes, so leaving the app won't lose it"}</div>`;
   }
   function saveText(name, text) { const a = document.createElement("a"); a.href = URL.createObjectURL(new Blob([text], { type: "text/plain" })); a.download = name; document.body.appendChild(a); a.click(); a.remove(); }
   // A board for anything at all: a product, an announcement, a short talk. Record, and it becomes a video.
@@ -10562,16 +11010,17 @@ notify pgrst, 'reload schema';
     return vmRvmP;
   }
   // one stream of pictures (the live view, or the finished video): it remembers the last pictures, which is what keeps the edges steady
-  function vmRvmStream(E, maxSide) {
+  function vmRvmStream(E, maxSide, half) {
     const { tf, model } = E, cv = document.createElement("canvas"), mc = document.createElement("canvas");
-    let rec = null, size = "", chain = Promise.resolve(), lastT = -1;
+    let rec = null, size = "", chain = Promise.resolve(), lastT = -1, nRun = 0, haveMask = false;
     const reset = () => { if (rec) rec.forEach(x => x.dispose()); rec = null; };
     const once = async (img, draw, t) => {
       const [iw, ih] = vmSize(img); if (!iw) throw new Error("noimg");
       const k = Math.min(1, maxSide / Math.max(iw, ih)), w = Math.max(32, Math.round(iw * k / 16) * 16), h = Math.max(32, Math.round(ih * k / 16) * 16);
       if (w + "x" + h !== size) { size = w + "x" + h; reset(); cv.width = w; cv.height = h; mc.width = w; mc.height = h; }
-      if (t != null && lastT >= 0 && (t < lastT - 0.01 || t - lastT > 1.5)) reset();   // a jump in time: start fresh
+      if (t != null && lastT >= 0 && (t < lastT - 0.01 || t - lastT > 1.5)) { reset(); haveMask = false; }   // a jump in time: start fresh
       if (t != null) lastT = t;
+      if (half && haveMask && (nRun++ & 1)) return draw({ image: img, segmentationMask: mc, rvm: true });
       cv.getContext("2d").drawImage(img, 0, 0, w, h);
       if (!rec) rec = [0, 0, 0, 0].map(() => tf.scalar(0));
       const src = tf.tidy(() => tf.browser.fromPixels(cv).toFloat().div(255).expandDims(0)), dr = tf.scalar(Math.min(1, 320 / Math.max(w, h)));
@@ -10582,7 +11031,7 @@ notify pgrst, 'reload schema';
       const a = await out[0].data(); out[0].dispose();
       const mx = mc.getContext("2d"), D = mx.createImageData(w, h), d = D.data;
       for (let i = 0, j = 0; j < a.length; i += 4, j++) { d[i] = d[i + 1] = d[i + 2] = 255; d[i + 3] = a[j] * 255; }
-      mx.putImageData(D, 0, 0);
+      mx.putImageData(D, 0, 0); haveMask = true;
       return draw({ image: img, segmentationMask: mc, rvm: true });
     };
     // if this phone's graphics chip gives up part way, the simpler outline model carries on (the video is still made)
@@ -10654,8 +11103,8 @@ notify pgrst, 'reload schema';
     const h2 = v => Math.round(v / best[0]).toString(16).padStart(2, "0"); return "#" + h2(best[1]) + h2(best[2]) + h2(best[3]);
   }
   // the best cut-out this phone can do: the matting model, or the simpler outline model if the phone can't run it
-  async function vmMatte(maxSide) {
-    try { if (window.__noRvm) throw 0; const E = await vmTimeout(vmRvm(), 60000); return vmRvmStream(E, maxSide || 640); }
+  async function vmMatte(maxSide, half) {
+    try { if (window.__noRvm) throw 0; const E = await vmTimeout(vmRvm(), 60000); return vmRvmStream(E, maxSide || 640, !!half); }
     catch (e) { return vmSeg(); }
   }
   const VM_VBGS = [["off", "🏪", "My real room"], ["blur", "🌫", "Blur it"], ["black", "⬛", "Black"], ["color", "🎨", "A colour"], ["paper", "📰", "Newspaper"], ["studio", "💡", "Studio"], ["flag", "🏳️", "A flag"], ["pic", "🖼", "My picture"]];
@@ -12688,7 +13137,8 @@ notify pgrst, 'reload schema';
     const vbgs = [proj.vbg].concat(cues.filter(q => q.k === "vbg").map(q => q.v)).filter(vmVbgOn);
     let segX = null; const keyCv = document.createElement("canvas"), cutCv = document.createElement("canvas");
     const posts = cues.some(q => q.k === "show" && items[q.ref] && items[q.ref].kind === "post");
-    if (camOn && (vbgs.length || posts) && proj.keyMode !== "cloth") { try { segX = await vmMatte((proj.quality || "1080") === "1080" ? 768 : 640); for (const v of vbgs) await vmVbgPrep(v); } catch (e) { segX = null; } }
+    const note = n => { if (onProgress && onProgress.note) onProgress.note(n); };
+    if (camOn && (vbgs.length || posts) && proj.keyMode !== "cloth") { note("Getting the background helper ready (the first time it downloads it)…"); try { segX = await vmMatte(VM_WEAK ? 512 : (proj.quality || "1080") === "1080" ? 768 : 640, VM_WEAK); for (const v of vbgs) await vmVbgPrep(v); } catch (e) { segX = null; } note(segX ? (vbgs.length ? "Putting your background in, picture by picture…" : "Cutting you out for the posts, picture by picture…") : null); }
     else if (camOn && vbgs.length) { for (const v of vbgs) await vmVbgPrep(v).catch(() => {}); }
     const sinkOf = async (blob, max) => {
       const input = new MB.Input({ source: new MB.BlobSource(blob), formats: MB.ALL_FORMATS });
@@ -14551,6 +15001,24 @@ notify pgrst, 'reload schema';
   // your thumbnail, made the moment you finish recording: your face (from your saved photos, or from the recording itself),
   // what you showed, and the title. Swipe through a few designs; save one, or open the studio to change anything.
   const VM_AUTO_TPLS = ["reaction", "sticker", "dylan", "zoomin", "neon", "omar", "split2"];
+  // which designs suit this video best (news posts, a map, a clip you react to, a ranking…), first; then the rest.
+  // Two videos of the same kind still start on different designs.
+  function vmThumbOrder(proj) {
+    const its = proj.items || [], has = k => its.some(x => x.kind === k), title = String(proj.title || ""), pref = [];
+    if (/\d/.test(title)) pref.push("bignum");
+    if (has("post") || has("fact") || has("askq")) pref.push("breaking", "label", "doc", "dylan");
+    if (has("vs")) pref.push("split2", "beforeafter");
+    if (has("map") || has("trip") || has("flag") || has("group")) pref.push("doc", "zoomin", "inscene");
+    if (has("tier") || has("top")) pref.push("bignum", "sticker");
+    if (its.some(x => x.kind === "vid" && x.blob && !x.meme)) pref.push("reaction", "rwj", "inscene", "omar");
+    if (has("img") || has("person")) pref.push("zoomin", "dylan", "label");
+    if (has("read") || has("board")) pref.push("bigword", "calm", "minimal");
+    if (!pref.length) pref.push("reaction", "bigword", "neon", "sticker");
+    const all = Object.keys(TS_TPLS).filter(k => k !== "product" && (k !== "beforeafter" || has("vs")));
+    let h = 7; for (const ch of String(proj.id || "") + title) h = (h * 31 + ch.charCodeAt(0)) >>> 0;
+    const P0 = [...new Set(pref)].filter(k => all.includes(k)), rest = all.filter(k => !P0.includes(k)), a = P0.length ? h % P0.length : 0, b = rest.length ? (h >>> 5) % rest.length : 0;
+    return P0.slice(a).concat(P0.slice(0, a), rest.slice(b), rest.slice(0, b));
+  }
   function VMAutoThumb({ proj, st, onOpen }) {
     const [A, setA] = useState(null), [i, setI] = useState(0), [busy, setBusy] = useState("Making your thumbnail…");
     const tk = proj.take, tall = proj.fmt === "tall";
@@ -14571,12 +15039,13 @@ notify pgrst, 'reload schema';
       })();
       return () => { alive = false; };
     }, [tk && tk.voice]);
-    const doc = useMemo(() => (A ? tsMake(VM_AUTO_TPLS[i % VM_AUTO_TPLS.length], { tall, face: A.face, subj: A.subj || A.bgPhoto, bgPhoto: A.bgPhoto, text: (proj.title || "WATCH THIS").toUpperCase(), acc: st.acc || "#FF7A00", logo: A.logo }) : null), [A, i, proj.title, tall]);
+    const ORD = useMemo(() => vmThumbOrder(proj), [proj.id, proj.title]);
+    const doc = useMemo(() => (A ? tsMake(ORD[i % ORD.length], { tall, face: A.face, subj: A.subj || A.bgPhoto, bgPhoto: A.bgPhoto, text: (proj.title || "WATCH THIS").toUpperCase(), acc: st.acc || "#FF7A00", logo: A.logo }) : null), [A, i, proj.title, tall, ORD]);
     async function save() { if (!doc) return; setBusy("Saving…"); try { const b = await tsExport(doc, 1.95e6); tsLib.put(doc).catch(() => {}); const a = document.createElement("a"); a.href = URL.createObjectURL(b); a.download = (String(proj.title || "thumbnail").toLowerCase().replace(/[^a-z0-9]+/g, "-").slice(0, 40) || "thumbnail") + ".jpg"; document.body.appendChild(a); a.click(); a.remove(); toast("Thumbnail saved. It's also in your thumbnail designs."); } catch (e) { toast("Couldn't save it. Try again."); } setBusy(""); }
     return html`<div class="autothumb">
       <b>🖼 Your thumbnail is ready</b>
-      ${!doc ? html`<p class="help">${busy}</p>` : html`<div class="atrow"><button class="chip" onClick=${() => setI(x => (x + VM_AUTO_TPLS.length - 1) % VM_AUTO_TPLS.length)} aria-label="Previous design">◀</button><${TSPreview} doc=${doc} w=${tall ? 150 : 260} cls="atimg"/><button class="chip" onClick=${() => setI(x => x + 1)} aria-label="Next design">▶</button></div>
-        <small>${(TS_TPLS[doc.tpl] || {}).name || ""} · ${(i % VM_AUTO_TPLS.length) + 1} of ${VM_AUTO_TPLS.length}${A && !A.face ? " · tip: add a photo of yourself in Thumbnails for the best ones" : ""}</small>
+      ${!doc ? html`<p class="help">${busy}</p>` : html`<div class="atrow"><button class="chip" onClick=${() => setI(x => (x + ORD.length - 1) % ORD.length)} aria-label="Previous design">◀</button><${TSPreview} doc=${doc} w=${tall ? 150 : 260} cls="atimg"/><button class="chip" onClick=${() => setI(x => x + 1)} aria-label="Next design">▶</button></div>
+        <small>${(TS_TPLS[doc.tpl] || {}).name || ""} · ${(i % ORD.length) + 1} of ${ORD.length}${A && !A.face ? " · tip: add a photo of yourself in Thumbnails for the best ones" : ""}</small>
         <div class="vmchips c"><button class="btn slim" disabled=${!!busy} onClick=${save}>⬇ Save this thumbnail</button><button class="btn slim quiet" onClick=${() => onOpen(A && A.subj ? A.subj.blob : null)}>✏️ Change it</button></div>`}
     </div>`;
   }
@@ -15406,6 +15875,18 @@ notify pgrst, 'reload schema';
     </div>`;
   }
   // choose what's behind you
+  // one picture of you on the background you picked, cut out carefully (the same way the finished video does it)
+  async function vmSeeBg(v, value, mirror) {
+    const [vw, vh] = vmSize(v); if (!vw) throw new Error("noimg");
+    const fr = document.createElement("canvas"); fr.width = vw; fr.height = vh; const fx = fr.getContext("2d");
+    if (mirror) { fx.translate(vw, 0); fx.scale(-1, 1); } fx.drawImage(v, 0, 0);
+    await vmVbgPrep(value); const seg = await vmMatte(640), cut = document.createElement("canvas");
+    await seg.run(fr, r => vmKeyDraw(r, cut, { k: "cut" }, false, 0, true), 0); if (seg.close) seg.close();
+    const o = document.createElement("canvas"); o.width = cut.width; o.height = cut.height; const x = o.getContext("2d");
+    vmVbgPaint(x, value.k === "blur" ? { k: "studio" } : value, o.width, o.height, fr, false, 0, null); x.drawImage(cut, 0, 0);
+    return o.toDataURL("image/jpeg", 0.85);
+  }
+  const vmBgUsed = p => !!(p && (vmVbgOn(p.vbg) || (p.take && (p.take.cues || []).some(q => q.k === "vbg" && vmVbgOn(q.v)))));
   function VMBehind({ value, onPick, onClose, review, hereT, keyMode, keyCol, keyStr, onKey, camEl }) {
     const [shot, setShot] = useState(null);
     const frame = () => { const v = camEl && camEl(); return v && v.videoWidth ? v : null; };
@@ -15413,14 +15894,7 @@ notify pgrst, 'reload schema';
     async function seeOne() {
       const v = frame(); if (!v || !vmVbgOn(value)) { toast(!v ? "Turn your camera on first." : "Pick a background first."); return; }
       setShot("busy");
-      try {
-        const fr = document.createElement("canvas"); fr.width = v.videoWidth; fr.height = v.videoHeight; fr.getContext("2d").drawImage(v, 0, 0);
-        await vmVbgPrep(value); const seg = await vmMatte(640), cut = document.createElement("canvas");
-        await seg.run(fr, r => vmKeyDraw(r, cut, { k: "cut" }, false, 0, true), 0); if (seg.close) seg.close();
-        const o = document.createElement("canvas"); o.width = cut.width; o.height = cut.height; const x = o.getContext("2d");
-        vmVbgPaint(x, value.k === "blur" ? { k: "studio" } : value, o.width, o.height, fr, false, 0, null); x.drawImage(cut, 0, 0);
-        setShot(o.toDataURL("image/jpeg", 0.85));
-      } catch (e) { setShot(null); toast("Couldn't make the picture. Check your internet (the first time it downloads a helper)."); }
+      try { setShot(await vmSeeBg(v, value)); } catch (e) { setShot(null); toast("Couldn't make the picture. Check your internet (the first time it downloads a helper)."); }
     }
     const [k, setK] = useState(vmVbgOn(value) ? value.k : "off"), [w, setW] = useState(VMW), [q, setQ] = useState(""), [pics, setPics] = useState(null), [scope, setScope] = useState("all");
     const fileRef = useRef(null);
@@ -15476,14 +15950,36 @@ notify pgrst, 'reload schema';
   }
   // find every word on the picture and where it sits (on the phone; nothing is sent anywhere)
   async function vmOcr(blob, onProg) {
-    const bm = await createImageBitmap(blob), k = Math.min(2, Math.max(1, 1400 / bm.width)), cv = document.createElement("canvas");
+    const bm = await createImageBitmap(blob), k = Math.min(3, Math.max(1, 2000 / bm.width)), cv = document.createElement("canvas");
     cv.width = Math.round(bm.width * k); cv.height = Math.round(bm.height * k); cv.getContext("2d").drawImage(bm, 0, 0, cv.width, cv.height);
-    vmTessLog = m => { if (onProg && m && m.status === "recognizing text") onProg(m.progress || 0); };
+    vmOcrPrep(cv);
+    const job = vmOcrQ.then(async () => {
+      vmTessLog = m => { if (onProg && m && m.status === "recognizing text") onProg(Math.max(0, Math.min(0.99, m.progress || 0))); };
+      try {
+        const w = await vmTess(), { data } = await w.recognize(cv), out = [];
+        (data.lines || []).forEach((ln, li) => (ln.words || []).forEach(wd => {
+          const t = String(wd.text || "").trim(), cf = wd.confidence || 0; if (!t) return;
+          if (cf < 20 || (cf < 45 && !/[A-Za-z0-9\u00C0-\u024F\u0600-\u06FF]{2,}/.test(t))) return;   // junk, not a word
+          const b = wd.bbox; out.push([t, b.x0 / k, b.y0 / k, b.x1 / k, b.y1 / k, li]);
+        }));
+        return { w: bm.width, h: bm.height, words: out };
+      } finally { vmTessLog = null; }
+    });
+    vmOcrQ = job.catch(() => {});
+    return job;
+  }
+  let vmOcrQ = Promise.resolve();
+  // make the words easy for the reader: grey, dark letters on light (a dark-mode post is turned round), and the contrast stretched
+  function vmOcrPrep(cv) {
     try {
-      const w = await vmTess(), { data } = await w.recognize(cv), out = [];
-      (data.lines || []).forEach((ln, li) => (ln.words || []).forEach(wd => { const t = String(wd.text || "").trim(); if (!t || (wd.confidence || 0) < 35) return; const b = wd.bbox; out.push([t, b.x0 / k, b.y0 / k, b.x1 / k, b.y1 / k, li]); }));
-      return { w: bm.width, h: bm.height, words: out };
-    } finally { vmTessLog = null; }
+      const x = cv.getContext("2d", { willReadFrequently: true }), D = x.getImageData(0, 0, cv.width, cv.height), d = D.data, H = new Uint32Array(256);
+      for (let i = 0; i < d.length; i += 4) { const l = (d[i] * 77 + d[i + 1] * 150 + d[i + 2] * 29) >> 8; d[i] = l; H[l]++; }
+      const n = d.length / 4; let acc = 0, lo = 0, hi = 255, med = 128;
+      for (let v = 0; v < 256; v++) { acc += H[v]; if (acc < n * 0.01) lo = v; if (acc < n * 0.5) med = v; if (acc < n * 0.99) hi = v; }
+      const inv = med < 110, sc = 255 / Math.max(30, hi - lo);
+      for (let i = 0; i < d.length; i += 4) { let l = Math.max(0, Math.min(255, (d[i] - lo) * sc)); if (inv) l = 255 - l; d[i] = d[i + 1] = d[i + 2] = l; }
+      x.putImageData(D, 0, 0);
+    } catch (e) {}
   }
   // which word you were saying when, matched to your voice
   function vmPostAlign(it, words, t0) {
@@ -15600,9 +16096,9 @@ notify pgrst, 'reload schema';
     async function pick(e) {
       const raw = [...(e.target.files || [])].filter(f => /^image\//.test(f.type)); e.target.value = ""; if (!raw.length) return;
       const files = await vmGrabAll(raw); if (!files.length) return;
-      const add = files.map(f => ({ id: uid(), f, url: URL.createObjectURL(f), p: 0, ocr: null, err: false }));
+      const add = files.map(f => ({ id: uid(), f, url: URL.createObjectURL(f), p: -1, ocr: null, err: false }));
       setList(L => L.concat(add));
-      for (const x of add) { try { const o = await vmOcr(x.f, v => upd(x.id, { p: v })); upd(x.id, { ocr: o, p: null }); } catch (er) { upd(x.id, { ocr: { w: 1, h: 1, words: [] }, p: null, err: true }); } }
+      for (const x of add) vmOcr(x.f, v => upd(x.id, { p: v })).then(o => upd(x.id, { ocr: o, p: null })).catch(() => upd(x.id, { ocr: { w: 1, h: 1, words: [] }, p: null, err: true }));
     }
     const move = (i, d) => setList(L => { const n = L.slice(), j = i + d; if (j < 0 || j >= n.length) return L; [n[i], n[j]] = [n[j], n[i]]; return n; });
     return html`<div class="scrim" onClick=${e => { if (e.target === e.currentTarget) onClose(); }}>
@@ -15611,7 +16107,7 @@ notify pgrst, 'reload schema';
         <p class="help">Screenshots of posts, statements or pages; pick one or several. Each goes behind you; you can stay in front of it, go to the corner, or leave so only the post shows. While recording, tap ▶ Next post to go to the next one. When you read out loud, the words light up and it follows along the lines.</p>
         ${list.length ? html`<div class="vmpostlist">${list.map((x, i) => html`<div key=${x.id} class="vmpostrow">
             <span class="n">${i + 1}</span><img src=${x.url} alt=""/>
-            <span class="st">${x.p != null ? "🔎 Reading the words… " + Math.round(x.p * 100) + "%" : x.err ? "⚠️ Couldn't read the words (it still shows, without lighting up)" : "✓ " + x.ocr.words.length + " words"}</span>
+            <span class="st">${x.p === -1 ? "⏳ Waiting its turn…" : x.p != null ? "🔎 Reading the words… " + Math.min(100, Math.round(x.p * 100)) + "%" : x.err ? "⚠️ Couldn't read the words (it still shows, without lighting up)" : "✓ " + x.ocr.words.length + " words"}</span>
             <span class="ops"><button class="chip" onClick=${() => move(i, -1)} disabled=${i === 0} aria-label="Earlier">↑</button><button class="chip" onClick=${() => move(i, 1)} disabled=${i === list.length - 1} aria-label="Later">↓</button><button class="chip" onClick=${() => setList(L => L.filter(y => y.id !== x.id))} aria-label="Remove">✕</button></span>
           </div>`)}</div>` : null}
         <button class=${"btn" + (list.length ? " quiet" : "")} onClick=${() => ref.current && ref.current.click()}>🖼 ${list.length ? "Add more screenshots" : "Pick the screenshots"}</button>
@@ -16326,6 +16822,7 @@ notify pgrst, 'reload schema';
     const setProj = p => { const v = Object.assign({}, projRef.current, typeof p === "function" ? p(projRef.current) : p, { updatedAt: Date.now() }); projRef.current = v; setProjS(v); clearTimeout(saveT.current); saveT.current = setTimeout(() => vmDb.put(projRef.current).catch(() => toast("Couldn't keep the video on this phone. Is it full?")), 500); };
     const [st, setSt] = useState(vmStyle);
     const [styling, setStyling] = useState(false);
+    const [keyNote, setKeyNote] = useState(true), [bgShot, setBgShot] = useState(null), [thumbAsk, setThumbAsk] = useState(false), [readPane, setReadPane] = useState(true), waitRef = useRef(null);
     const [mode, setMode] = useState(start.take ? "review" : "ready");
     const [, setTick] = useState(0);
     const [cues, setCuesS] = useState([]); const cuesRef = useRef([]);
@@ -16420,6 +16917,7 @@ notify pgrst, 'reload schema';
     const plPlayR = () => { const q = plR.current; let u = plNowR(); if (u >= seqLenNow() - 0.05) u = 0; q.u = u; q.u0 = u; q.t0 = performance.now(); q.on = true; S.current.lastRt = null; setTick(x => x + 1); };
     const plApi = { now: plNowR, seek: plSeekR, playing: () => plR.current.on, pause: plPauseR, play: plPlayR, toggle: () => (plR.current.on ? plPauseR() : plPlayR()) };
     const camSnap = useRef({ cv: null, at: 0 });   // your last good camera picture, so it never goes blank
+    useEffect(() => { setKeyNote(true); const i = setTimeout(() => setKeyNote(false), 6000); return () => clearTimeout(i); }, [mode, JSON.stringify(proj.vbg || null), proj.keyMode]);
     const [lessonPick, setLessonPick] = useState(false);
     const [clean, setClean] = useState(null);
     const [busy, setBusy] = useState(false);
@@ -16546,7 +17044,7 @@ notify pgrst, 'reload schema';
         if (now - last < (S.current.mode === "rec" && VM_WEAK ? 60 : 33) || document.hidden) return;
         const R0 = S.current; if (R0.mode === "review" && !R0.op && !R0.pl.on && now - last < 250 && !R0.dirty) return;
         last = now; R0.dirty = false;
-        const R = S.current, G2 = R.G, w = Math.round(cv.clientWidth * Math.min(R.mode === "rec" ? (VM_WEAK ? 1 : 1.5) : 2, window.devicePixelRatio || 1));
+        const R = S.current, G2 = R.G, w = Math.round(cv.clientWidth * Math.min(R.mode === "rec" ? (R.postOn ? 2 : VM_WEAK ? 1 : 1.5) : 2, window.devicePixelRatio || 1));
         if (!w) return;
         const h = Math.round(w * G2.H / G2.W); if (cv.width !== w || cv.height !== h) { cv.width = w; cv.height = h; }
         let s, t, words = null, prog = null;
@@ -16567,7 +17065,7 @@ notify pgrst, 'reload schema';
           }
           R.op = null; if (vref.current) { vref.current.pause(); vref.current.muted = false; }
         }
-        if (R.mode === "rec") { t = nowT(); s = vmAt(cuesRef.current, t, cam); }
+        R.postOn = false; if (R.mode === "rec") { t = nowT(); s = vmAt(cuesRef.current, t, cam); R.postOn = !!(s.show && R.items[s.show] && R.items[s.show].kind === "post"); }
         else if (R.mode === "review" && tk) {
           const P = vmSeq(tk), len = vmSeqLen(P), q = R.pl; let u = R.plNow();
           if (q.on && u >= len - 0.01) { R.plPause(); u = len; }
@@ -16629,6 +17127,7 @@ notify pgrst, 'reload schema';
             if (gp.readyState >= 2 && gp.videoWidth) guestSrc = gp;
           } else if (gp && !gp.paused) gp.pause();
         }
+        { const wl = waitRef.current; if (wl) { const dsp = R.mode === "review" && tk && tk.cam && cam && !R.vidPiece && !R.ava && !camSrc ? "" : "none"; if (wl.style.display !== dsp) wl.style.display = dsp; } }
         if (camSrc && R.mode === "review" && tk && tk.blurs && tk.blurs.length) camSrc = vmBlurApply(camSrc, tk, t, false, "cam");
         // a video in a ranking, playing while it's up
         let tierClip = null;
@@ -17038,6 +17537,13 @@ notify pgrst, 'reload schema';
       setBusy(false);
     }
     function playReview(from) { if (from != null) plSeekR(from); plApi.toggle(); }
+    async function seeBg() {
+      plPauseR(); const v = cref.current, rs = S.current.rs;
+      let vb = rs && rs.vbg !== undefined ? rs.vbg : proj.vbg; if (!vmVbgOn(vb)) vb = proj.vbg; if (!vmVbgOn(vb)) { const q = (proj.take.cues || []).find(q2 => q2.k === "vbg" && vmVbgOn(q2.v)); vb = q ? q.v : null; }
+      if (!vb) return; if (!v || !v.videoWidth || v.readyState < 2) { toast("Wait a moment for your recording to show, then try again."); return; }
+      setBgShot("busy");
+      try { setBgShot(await vmSeeBg(v, vb, !!proj.mirror)); } catch (e) { setBgShot(null); toast("Couldn't make the picture. Check your internet (the first time it downloads a helper)."); }
+    }
     useEffect(() => { setTick(x => x + 1); }, [mode, voiceUrl]);
     useEffect(() => { if (mode !== "review") return; const i = setInterval(() => { if (plR.current.on) setTick(x => x + 1); }, 250); return () => { clearInterval(i); plPauseR(); }; }, [mode]);
     const j = useVidJob(), jobMine = j && j.lid === "vm-" + proj.id, jobBusy = j && j.p != null;
@@ -17145,7 +17651,11 @@ notify pgrst, 'reload schema';
           <canvas ref=${cvRef} class=${"vmcv " + proj.fmt + (rec ? (drawOn ? " rec" : " recnd") : "")} onPointerDown=${down} onPointerMove=${move} onPointerUp=${up} onPointerCancel=${() => { drag.current = null; }} aria-label="The video"></canvas>
           ${rec && paused ? html`<div class="pausedtag">⏸ Paused</div>` : null}
           ${rec && !count ? html`<div class="vmrectag"><span class="recdot"></span>${fmtDur(nowT() - (S.current.go || 0))}</div>` : null}
-          ${camReal && vmVbgOn(proj.vbg) && proj.keyMode !== "cloth" && !count ? html`<div class="vmkeynote">🪄 Your room shows here. It's swapped for your background when the video is made.</div>` : null}
+          ${keyNote && mode === "ready" && camReal && vmVbgOn(proj.vbg) && proj.keyMode !== "cloth" && !count ? html`<button class="vmkeynote" onClick=${() => setKeyNote(false)}>🪄 Your room shows while you record. Your background goes in when the video is made. <b aria-label="Close">✕</b></button>` : null}
+          <div ref=${waitRef} class="vmwait" style="display:none" role="status"><span class="spin"></span>Loading your recording…</div>
+          ${mode === "review" && tk && tk.cam && !edOn && proj.keyMode !== "cloth" && vmBgUsed(proj) && !ready ? html`<div class="vmbgchip">🪄 Your background goes in when you tap <b>Make the video</b>.<button class="chip" onClick=${seeBg}>👀 See it now</button></div>` : null}
+          ${bgShot ? html`<div class="vmbgshot" onClick=${() => setBgShot(null)}>${bgShot === "busy" ? html`<span><span class="spin"></span> Making the picture… (the first time it downloads a helper)</span>` : html`<img src=${bgShot} alt="How it will look"/><small>This is how you'll look in the video. Tap to close.</small>`}</div>` : null}
+          ${rec && readPane && s && s.show && items[s.show] && items[s.show].kind === "post" && !hlOn && !drawOn ? html`<div class="vmreadpane"><img src=${vmUrl(items[s.show])} alt="The post"/><button class="chip" onClick=${() => setReadPane(false)}>👁 See the video instead</button></div>` : null}
           ${count ? html`<div class=${"vmcount" + (count === "go" ? " go" : "")} role="status">${count === "go" ? html`<b>● REC</b><small>Recording — go!</small>` : count === "cam" ? html`<b class="sm">⏳</b><small>Waiting for the camera picture to move…<br/>The recording starts the moment it does.</small><button class="btn slim quiet" onClick=${cancelCount}>Cancel</button>` : html`<b>${count}</b><small>Get ready… recording starts at 0</small><button class="btn slim quiet" onClick=${cancelCount}>Cancel</button>`}</div>` : null}
           ${mode === "review" && !plR.current.on ? html`<button class="crplay" onClick=${() => playReview()} aria-label="Play"><${Ic.play} size=${34}/></button>` : null}
         </div>
@@ -17196,7 +17706,7 @@ notify pgrst, 'reload schema';
           ${s && s.show && items[s.show] && /^(fact|vs|quiz)$/.test(items[s.show].kind) ? (() => { const b = items[s.show], n = ((s.steps || {})[b.id] || { n: 0 }).n, st2 = v => add({ k: "step", ref: b.id, v });
             return html`<div class="vmpostnav">${b.kind === "fact" ? html`<button class="btn slim" disabled=${n > 0} onClick=${() => st2(1)}>Stamp the verdict: ${(VM_VERDICTS[b.verdict] || VM_VERDICTS["false"])[0]}</button>` : b.kind === "quiz" ? html`<button class="btn slim" disabled=${n > 0} onClick=${() => st2(1)}>Reveal the answer</button>` : html`<button class=${"btn slim" + (n === 1 ? "" : " quiet")} onClick=${() => st2(1)}>◀ ${(b.entries[0] || {}).name || "This one"} wins</button><button class=${"btn slim" + (n === 2 ? "" : " quiet")} onClick=${() => st2(2)}>${(b.entries[1] || {}).name || "That one"} wins ▶</button>`}${n > 0 ? html`<button class="chip" onClick=${() => st2(0)}>↶</button>` : null}</div>`; })() : null}
           ${s && s.show && items[s.show] && items[s.show].kind === "board" ? (() => { const b = items[s.show], N = (b.points || []).length, n = Math.min(N, ((s.steps || {})[b.id] || { n: 0 }).n); return html`<div class="vmpostnav"><span>🧑‍🏫 Point ${n} of ${N}</span><button class="chip" disabled=${n <= 0} onClick=${() => add({ k: "step", ref: b.id, v: n - 1 })}>◀ Back</button><button class="btn slim" disabled=${n >= N} onClick=${() => add({ k: "step", ref: b.id, v: n + 1 })}>Next point ▶</button></div>`; })() : null}
-          ${s && s.show && items[s.show] && items[s.show].kind === "post" ? (() => { const posts = proj.items.filter(x => x.kind === "post"), k = posts.findIndex(x => x.id === s.show), nx = posts[k + 1]; return html`<div class="vmpostnav"><span>📰 Post ${k + 1} of ${posts.length}</span>${k > 0 ? html`<button class="chip" onClick=${() => tapItem(posts[k - 1])}>◀ Back</button>` : null}${nx ? html`<button class="btn slim" onClick=${() => tapItem(nx)}>Next post ▶</button>` : html`<button class="chip" onClick=${() => tapItem(items[s.show])}>Done with posts</button>`}</div>`; })() : null}
+          ${s && s.show && items[s.show] && items[s.show].kind === "post" ? (() => { const posts = proj.items.filter(x => x.kind === "post"), k = posts.findIndex(x => x.id === s.show), nx = posts[k + 1]; return html`<div class="vmpostnav"><span>📰 Post ${k + 1} of ${posts.length}</span>${!readPane ? html`<button class="chip" onClick=${() => setReadPane(true)}>📖 Read it big</button>` : null}${k > 0 ? html`<button class="chip" onClick=${() => tapItem(posts[k - 1])}>◀ Back</button>` : null}${nx ? html`<button class="btn slim" onClick=${() => tapItem(nx)}>Next post ▶</button>` : html`<button class="chip" onClick=${() => tapItem(items[s.show])}>Done with posts</button>`}</div>`; })() : null}
           ${duo && duo.guest ? html`<div class="tools vmlays" role="toolbar" aria-label="Who's on screen">${[["both", "👥", "Both of us"], ["me", "🙂", "Only me"], ["friend", "🧑", "Only my friend"]].map(([k, ic, lbl]) => html`<button key=${k} class=${"tool" + ((s.duo || "both") === k ? " on" : "")} onClick=${() => add({ k: "duo", v: k })}><span>${ic}</span>${lbl}</button>`)}</div>` : null}
           ${camOn ? html`<div class="tools vmlays" role="toolbar" aria-label="Layout">${VM_LAYS.map(([k, ic, lbl]) => html`<button key=${k} class=${"tool" + (s.lay === k ? " on" : "")} aria-pressed=${s.lay === k ? "true" : "false"} onClick=${() => setLay(k)}><span>${ic}</span>${lbl}</button>`)}<button class="tool" onClick=${flipCam}><span>🔄</span>Flip</button>${camReal ? html`<button class=${"tool" + (vmVbgOn(s && s.vbg !== undefined ? s.vbg : proj.vbg) ? " on" : "")} onClick=${() => setSheet("vbg")}><span>🪄</span>Behind</button>` : null}<button class=${"tool" + (s.bw ? " on" : "")} onClick=${toggleBw}><span>⚫</span>B&W</button></div>` : null}
           ${tray}${clipBar}
@@ -17223,7 +17733,7 @@ notify pgrst, 'reload schema';
             addFile=${cb => { afterAdd.current = cb || null; fileRef2.current && fileRef2.current.click(); }} addText=${cb => { afterAdd.current = cb || null; setSheet("text"); }} addMore=${(k, cb) => { afterAdd.current = cb || null; if (k === "meme") { afterAdd.current = cb || null; memeRef.current && memeRef.current.click(); } else setSheet(k); }} addPlace=${cb => { afterAdd.current = cb || null; setSheet("place"); }}/>
           <input ref=${fileRef2} type="file" accept="image/*,video/*" multiple style="display:none" onChange=${addFiles}/>` : null}
         ${mode === "review" && tk && !edOn ? html`
-          ${tk.health ? (() => { const H = tk.health, m = H.main || [], c2 = H.cam || [], worst = Math.max(0, ...m.map(x => x[1]), ...c2.map(x => x[1])) / 1000; return m.length || c2.length ? html`<p class="help vmhealth">🔎 Recording check: ${m.length ? "the screen stopped " + m.length + "×" : ""}${m.length && c2.length ? ", " : ""}${c2.length ? "the camera picture stopped " + c2.length + "×" : ""} (longest ${worst.toFixed(1)}s, first at ${fmtDur((m[0] || c2[0])[0])}). If you noticed it, screenshot this and send it to me. <small>${m.slice(0, 6).map(x => x[0] + "s:" + x[1]).join(" ")} | ${c2.slice(0, 6).map(x => x[0] + "s:" + x[1]).join(" ")}</small></p>` : html`<p class="help vmhealth ok">🔎 Recording check: smooth all the way ✓</p>`; })() : null}
+          ${tk.health ? (() => { const H = tk.health, m = H.main || [], c2 = H.cam || [], worst = Math.max(0, ...m.map(x => x[1]), ...c2.map(x => x[1])) / 1000; return (m.length || c2.length) && worst >= 0.6 ? html`<p class="help vmhealth">🔎 Recording check: the phone was busy for a moment ${m.length + c2.length === 1 ? "once" : (m.length + c2.length) + " times"} (longest ${worst.toFixed(1)} s, first at ${fmtDur((m[0] || c2[0])[0])}). Your voice is fine. Nothing to send or do: just play it back, and if a part looks jumpy, close other apps and record that part again.</p>` : html`<p class="help vmhealth ok">🔎 Recording check: smooth ✓</p>`; })() : null}
           <button class="btn vmedbtn" onClick=${() => { plPauseR(); setEdOn(true); }}>✂️ Edit the video: clips, speed, cuts, titles, music…</button>
           <div class="vmplay">
             <button class="crbtn dark" onClick=${() => playReview()} aria-label=${plR.current.on ? "Pause" : "Play"}>${plR.current.on ? html`<${Ic.pause} size=${18}/>` : html`<${Ic.play} size=${18}/>`}</button>
@@ -17242,7 +17752,7 @@ notify pgrst, 'reload schema';
             <div class="vmclipbar"><button class="chip" onClick=${() => setStyling(true)}>🎨 My style</button><button class="chip" onClick=${previewOpening}>▶ Try the opening</button><button class="chip" onClick=${() => setSheet("hl")}>📰 Headlines</button><button class="chip" onClick=${() => setSheet("snd")}>🔊 Sounds</button></div>
             ${st.intro || st.outro || proj.useHl ? html`<p class="help">The opening and the ending are added when the video is made.</p>` : null}
           </div>
-          ${proj.take && proj.take.secs > 1.5 ? html`<${VMAutoThumb} key=${"at" + proj.id} proj=${proj} st=${vmStyleFor(st, proj)} onOpen=${subj => setThumbOpen({ title: proj.title || "", subj })}/>` : null}
+          ${proj.take && proj.take.secs > 1.5 ? (ready || thumbAsk ? html`<${VMAutoThumb} key=${"at" + proj.id} proj=${proj} st=${vmStyleFor(st, proj)} onOpen=${subj => setThumbOpen({ title: proj.title || "", subj })}/>` : html`<div class="autothumb"><button class="btn slim quiet" onClick=${() => setThumbAsk(true)}>🖼 Make my thumbnail</button><small>It's also made by itself once your video is ready.</small></div>`) : null}
           ${ready ? html`<div class="vidready">
             <b>✅ Video ready (${fmtDur(ready.blob.secs || 0)})</b>
             <small>${proj.fmt === "tall" ? "1080×1920, for TikTok, Reels and Shorts." : "Full HD, for YouTube."} It's also in your Recordings tab.</small>
@@ -17252,6 +17762,7 @@ notify pgrst, 'reload schema';
             </div>
             ${ready.srt ? html`<button class="btn quiet" onClick=${() => saveText(ready.name.replace(/\.\w+$/, "") + ".srt", ready.srt)}>Subtitles file for YouTube (.srt)</button>` : null}
           </div>` : null}
+          ${jobMine && jobBusy ? html`<p class="help vmmaking"><span class="spin"></span> ${j.paused ? "Paused while the app was away; it carries on now." : (j.note || "Making your video…") + " " + Math.round(j.p * 100) + "%" + (vidEta(j) ? " · " + vidEta(j) : "")}<small>Keep the app open. You can watch the other tabs meanwhile.</small></p>` : null}
           <div class="srow">
             <button class="btn quiet" onClick=${() => { plPauseR(); setMode("ready"); }}>Add things / record again</button>
             <button class="btn" disabled=${busy || (jobMine && jobBusy) || (proj.clean && clean && clean.p != null)} onClick=${make}>${jobMine && jobBusy ? (j.paused ? "Paused at " : "Making it… ") + Math.round(j.p * 100) + "%" : busy ? "Writing subtitles…" : proj.clean && clean && clean.p != null ? "Cleaning…" : ready ? "Make it again" : "Make the video"}</button>
