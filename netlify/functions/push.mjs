@@ -43,10 +43,10 @@ export default async (req) => {
   if (!/^Bearer \S+/.test(auth)) return json({ error: "sign in" }, 401);
   let b = {};
   try { b = await req.json(); } catch (e) { return json({ error: "bad body" }, 400); }
-  const to = b.to === "student" ? "student" : "teacher";
+  const to = b.to === "student" ? "student" : b.to === "class" ? "class" : "teacher";
   const msg = JSON.stringify({ title: String(b.title || "Reading class").slice(0, 80), body: String(b.body || "").slice(0, 160), url: String(b.url || "./").slice(0, 300), tag: String(b.tag || "rc").slice(0, 60) });
   // the database decides who this person may notify
-  const r = await fetch(url + "/rest/v1/rpc/push_targets", { method: "POST", headers: { apikey: key, authorization: auth, "content-type": "application/json" }, body: JSON.stringify({ p_to: to, p_student: b.student || null }) });
+  const r = await fetch(url + "/rest/v1/rpc/push_targets", { method: "POST", headers: { apikey: key, authorization: auth, "content-type": "application/json" }, body: JSON.stringify({ p_to: to, p_student: (to === "class" ? b.course : b.student) || null }) });
   if (!r.ok) return json({ error: "not allowed" }, 403);
   const subs = await r.json();
   let sent = 0;

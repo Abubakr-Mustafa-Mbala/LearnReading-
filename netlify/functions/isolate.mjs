@@ -13,6 +13,9 @@ export default async (req) => {
   if (!/^Bearer \S+/.test(auth) || !url || !anon) return json({ error: "sign in" }, 401);
   const who = await fetch(url + "/auth/v1/user", { headers: { apikey: anon, authorization: auth } }).catch(() => null);
   if (!who || !who.ok) return json({ error: "sign in" }, 401);
+  // paid tools are yours alone: academies' teachers and students can't spend your keys
+  const w = await fetch(url + "/rest/v1/rpc/whoami", { method: "POST", headers: { apikey: anon, authorization: auth, "content-type": "application/json" }, body: "{}" }).then(r => (r.ok ? r.json() : null)).catch(() => null);
+  if (!w || !(w.owner === true || (w.owner === undefined && w.teacher === true))) return json({ error: "owner only" }, 403);
   let b = {};
   try { b = await req.json(); } catch (e) { return json({ error: "bad body" }, 400); }
   if (!b.audio || b.audio.length > 5500000) return json({ error: "no audio" }, 400);
