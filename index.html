@@ -1358,10 +1358,95 @@ details.script>div{white-space:pre-wrap;margin-top:6px;max-height:30vh;overflow:
 .artable{background:var(--card);border-radius:12px;padding:10px;box-shadow:var(--lift);overflow-x:auto}.artable small{display:block;color:var(--ink-3);font-size:12px;margin-bottom:6px}
 .artable table{border-collapse:collapse;width:100%;font:600 18px/1.6 Amiri,serif}.artable th,.artable td{border:1px solid var(--line);padding:4px 8px;text-align:center}.artable th{background:#FFF8E1;color:#3b3220}
 .arboardv{margin:8px 12px 4px}
+
+.crfloat{position:absolute;right:8px;top:8px;z-index:4;border:0;border-radius:999px;padding:8px 14px;background:rgba(232,89,12,.95);color:#fff;font:800 14px var(--font);box-shadow:0 4px 14px rgba(0,0,0,.35)}
+
+.crzoom{position:absolute;right:8px;bottom:8px;z-index:3;width:40px;height:40px;border-radius:50%;border:0;background:rgba(0,0,0,.55);color:#fff;font:800 15px var(--font);display:grid;place-items:center}
+.crbtn.on{background:#E8590C}
+
+.arbig{display:flex;align-items:center;gap:8px;flex-wrap:wrap;background:#FFF3E0;color:#7A3E00;border-radius:10px;padding:6px 10px;font-size:13px}
+.arbig .chip{background:#E8590C;color:#fff;border:0}
+
+/* books */
+.bookrow{align-items:flex-start}.bookcover{width:56px;height:76px;flex:0 0 56px;border-radius:6px;border:1px solid var(--line);background:#fff;padding:0;overflow:hidden;display:grid;place-items:center;font-size:26px}
+.bookcover img{width:100%;height:100%;object-fit:cover;display:block}
+.bookops{display:flex;flex-wrap:wrap;gap:6px;margin-top:6px;align-items:center}.gamesw.slim{padding:4px 8px;font-size:12px}.chip.danger{background:var(--red);color:#fff}
+.bookbusy{background:var(--card);border-radius:14px;padding:12px;box-shadow:var(--lift);display:flex;flex-direction:column;gap:6px}
+.full.bookread{background:#2a2a2a;color:#fff;display:flex;flex-direction:column}.bookread .fhead{color:#fff}.bookread .fhead .iconbtn{color:#fff;text-decoration:none;display:grid;place-items:center}
+.bookpage{flex:1;min-height:0;overflow:hidden;position:relative;display:flex;align-items:flex-start;justify-content:center;touch-action:pan-y}
+.bookpage img{max-width:100%;max-height:100%;object-fit:contain;background:#fff;user-select:none;-webkit-user-drag:none;box-shadow:0 6px 24px rgba(0,0,0,.5)}
+.booknav{display:flex;align-items:center;justify-content:center;gap:8px;padding:8px 10px calc(10px + env(safe-area-inset-bottom,0px));background:#1d1d1d}.booknav .linkbtn{color:#fff}.bookjump{width:5em}
+.pagegrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(90px,1fr));gap:8px}
+.pagebtn{position:relative;border:2px solid var(--line);border-radius:8px;padding:0;background:#fff;overflow:hidden;aspect-ratio:3/4}.pagebtn img{width:100%;height:100%;object-fit:cover;display:block}
+.pagebtn span{position:absolute;left:4px;bottom:4px;background:rgba(0,0,0,.6);color:#fff;border-radius:6px;padding:1px 6px;font-size:12px;font-weight:700}.pagebtn.on{border-color:var(--blue);box-shadow:0 0 0 3px var(--blue-soft)}
+.harabar{display:flex;gap:4px;flex-wrap:wrap;direction:rtl}.harabar button{min-width:38px;height:38px;border-radius:9px;border:1px solid var(--line);background:#FFF8E1;color:#3b3220;font:700 24px Amiri,serif;padding:0}
+
+/* the demo screen */
+.demoscreen{position:fixed;inset:0;background:#0f1218;color:#fff;display:flex;flex-direction:column;overflow:hidden;font-family:var(--font)}
+.demotips{background:#1d2430;padding:8px 14px;font-size:13px;line-height:1.5;display:flex;flex-wrap:wrap;gap:6px;align-items:center}.demotips kbd{background:#333b48;border-radius:4px;padding:0 5px;font-size:12px}
+.demobtns{display:flex;gap:6px;margin-left:auto}.demobtns button,.demoshow{border:0;border-radius:999px;background:#2f6bff;color:#fff;padding:5px 12px;font:700 12px var(--font)}.demoshow{position:fixed;top:8px;right:8px;z-index:3;width:30px;height:30px;padding:0;opacity:.5}
+.demorow{flex:1;display:flex;align-items:center;justify-content:center;gap:5vw}
+.demoside{display:flex;flex-direction:column;align-items:center;gap:8px}.demolabel{font:800 26px Poppins,var(--font);letter-spacing:.02em}.demoside:first-child .demolabel{color:#FFB74D}.demoside:last-child .demolabel{color:#4FC3F7}
+.demophone{border-radius:34px;background:#000;box-shadow:0 0 0 10px #000,0 0 0 12px #333,0 20px 60px rgba(0,0,0,.6);overflow:hidden;position:relative}
+.demophone iframe{width:390px;height:844px;border:0;transform-origin:0 0;position:absolute;left:0;top:0;background:#fff}
+.sbscv{width:100%;aspect-ratio:16/9;border-radius:10px;background:#0b0e13}
+
+/* ---------- a computer: the whole screen, not a phone in the middle ---------- */
+.rtop,.rs1,.rmain,.rs2{display:contents}
+@media (min-width:1100px) and (min-height:560px){
+  body{font-size:17px}
+  .page{max-width:min(1200px,94vw)}
+  .page>.top{padding:18px 24px 14px}
+  .list{display:grid;grid-template-columns:repeat(auto-fill,minmax(420px,1fr));align-items:start;padding:20px 24px 60px;gap:10px}
+  .list>:not(.row):not(.classcard){grid-column:1/-1}
+  .list.classpick{grid-template-columns:repeat(3,1fr)}.list.classpick>*{grid-column:auto}.classcard{min-height:150px;justify-content:flex-end}.classcard .cname{font-size:24px}
+  .ed{max-width:960px;margin:0 auto;padding:16px 24px 80px}
+  .full.sheetpage .sbody>.ed,.full.sheetpage .sbody>.list{max-width:1000px;margin:0 auto}
+  .full.sheetpage .sbody>.list{max-width:1200px}
+  .room{max-width:min(1500px,97vw);display:grid;grid-template-columns:minmax(0,1fr) clamp(360px,30vw,460px);grid-template-areas:"top top" "main s1" "main s2";grid-template-rows:auto auto 1fr;column-gap:18px;align-items:start}
+  .room>.rtop{display:block;grid-area:top}
+  .room>.rmain{display:block;grid-area:main;position:sticky;top:8px;align-self:start;min-width:0}
+  .room>.rs1{display:block;grid-area:s1;min-width:0}
+  .room>.rs2{display:block;grid-area:s2;min-width:0;padding-bottom:110px}
+  .room .rmain .crwrap:not(.full) .crstage{max-width:calc((100vh - 150px) * 16 / 9);margin:0 auto}
+  .room .rmain .crwrap{margin:6px 0 10px}
+  .room .rmain .boardwrap{margin:6px 0 16px}
+  .room .rs2 .book{min-height:0}
+  .room .bar{left:auto;right:max(1.5vw,calc((100vw - 1500px) / 2));width:clamp(360px,30vw,460px);border-radius:16px 16px 0 0;border-left:1px solid var(--line);border-right:1px solid var(--line)}
+  .room .bar .bar-in{max-width:none}
+  .room .tact{flex-wrap:wrap}
+}
+
+/* the tournament */
+.qtile.tour{background:linear-gradient(135deg,rgba(255,215,106,.32),rgba(232,89,12,.28))}.qtile b small{display:block;font-size:13px;font-weight:500;opacity:.85;margin-top:2px}
+.frbar{position:relative}.frbar em{position:absolute;top:0;bottom:0;background:rgba(255,255,255,.38);transition:width .15s}
+.frname{font:800 13px var(--font);color:#F1ECDC;text-shadow:0 1px 4px rgba(0,0,0,.7);text-align:right}
+.frbench{position:absolute;left:50%;transform:translateX(-50%);top:calc(48px + env(safe-area-inset-top,0px));z-index:2;display:flex;gap:6px;background:rgba(0,0,0,.35);border-radius:14px;padding:4px 8px}
+.frbench.big{position:static;transform:none;margin:8px auto}
+.frseat{display:flex;flex-direction:column;align-items:center;gap:1px;min-width:38px;color:#F1ECDC}
+.frseat i{width:26px;height:26px;border-radius:50%;border:2px solid #fff;display:grid;place-items:center;font:800 13px var(--font);font-style:normal;color:#fff}
+.frseat small{font-size:9px;opacity:.85}.frseat b{font-size:12px;line-height:1}.frseat.beat{opacity:.5}.frseat.beat i{filter:grayscale(1)}.frseat.now i{box-shadow:0 0 0 3px #FFD76A}
+.frbench.big .frseat i{width:44px;height:44px;font-size:20px}.frbench.big .frseat small{font-size:12px}
+.frcrown{align-items:center;text-align:center}.crown{font-size:84px;animation:crownup 1.2s ease-out}@keyframes crownup{from{transform:translateY(40px) scale(.4);opacity:0}to{transform:none;opacity:1}}
+.frendb.static{position:static}
+
+.classcard.games{background:linear-gradient(135deg,#7A2E12,#C2410C)}
+
+.crstage,.bookpage{-webkit-user-select:none;user-select:none}
+
+/* your own thumbnail style */
+.mystyle{display:flex;align-items:center;gap:12px;background:linear-gradient(135deg,#2a1708,#120b05);color:#fff;border-radius:16px;padding:12px 14px;box-shadow:0 0 0 2px #FF7A00 inset}
+.mystyle span{flex:1;display:flex;flex-direction:column;gap:2px}.mystyle small{opacity:.8;font-size:12.5px}.mystyle.set{background:linear-gradient(135deg,#0f2a1c,#08130d);box-shadow:0 0 0 2px #22C55E inset}
+.stylepick{gap:22px}.stylecard{display:flex;flex-direction:column;gap:8px;align-items:center;background:var(--card);border-radius:16px;padding:12px;box-shadow:var(--lift)}
+.stylecard.on{box-shadow:0 0 0 3px #22C55E,var(--lift)}.stylecard .tsgcv{max-width:100%;border-radius:10px}.stylemeta{text-align:center;display:flex;flex-direction:column;gap:2px}.stylemeta b{font-size:18px}.stylemeta small{color:var(--ink-3)}
 </style>
 </head>
 <body>
 <div id="app"><div class="center"><div class="loader" aria-label="Loading"><i></i><i></i><i></i></div></div></div>
+<script>
+// the demo screen: the student's side keeps its own sign-in, so it opens as the student (your test phone), not as you
+(function () { try { if (new URLSearchParams(location.search).get("demo") !== "student") return; var real = window.localStorage, P = "demo:"; var st = { getItem: function (k) { return real.getItem(P + k); }, setItem: function (k, v) { real.setItem(P + k, String(v)); }, removeItem: function (k) { real.removeItem(P + k); }, clear: function () {}, key: function () { return null; }, get length() { return 0; } }; Object.defineProperty(window, "localStorage", { value: st, configurable: true }); } catch (e) {} })();
+</script>
 <script src="https://cdn.jsdelivr.net/npm/preact@10.24.3/dist/preact.min.umd.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/preact@10.24.3/hooks/dist/hooks.umd.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/htm@3.1.1/dist/htm.umd.js"></script>
@@ -1708,7 +1793,32 @@ exception when duplicate_object or undefined_object then null;
 end
 $$;
 
-create or replace function public.schema_version() returns int language sql immutable as $$ select 11 $$;
+-- books: a real book, its pages exactly as printed (and the PDF to download), to teach from and for students to read
+create table if not exists public.books (
+  id text primary key default 'b' || replace(gen_random_uuid()::text, '-', ''),
+  course text not null default 'ar',
+  ord real not null default 0,
+  title text not null default 'Book',
+  pages jsonb not null default '[]'::jsonb,
+  file text,
+  shared boolean not null default false,
+  updated_at timestamptz not null default now()
+);
+alter table public.books enable row level security;
+drop policy if exists "class reads shared books" on public.books;
+create policy "class reads shared books" on public.books for select to authenticated using (
+  public.is_teacher() or (shared and public.is_member() and course = coalesce((select st.course from public.students st where st.id = public.my_student()), 'read')));
+drop policy if exists "teacher writes books" on public.books;
+create policy "teacher writes books" on public.books for all to authenticated using (public.is_teacher()) with check (public.is_teacher());
+grant select, insert, update, delete on public.books to authenticated;
+do $$
+begin
+  alter publication supabase_realtime add table public.books;
+exception when duplicate_object or undefined_object then null;
+end
+$$;
+
+create or replace function public.schema_version() returns int language sql immutable as $$ select 12 $$;
 grant execute on function public.schema_version() to anon, authenticated;
 notify pgrst, 'reload schema';
 </script>
@@ -2338,7 +2448,32 @@ exception when duplicate_object or undefined_object then null;
 end
 $$;
 
-create or replace function public.schema_version() returns int language sql immutable as $$ select 11 $$;
+-- books: a real book, its pages exactly as printed (and the PDF to download), to teach from and for students to read
+create table if not exists public.books (
+  id text primary key default 'b' || replace(gen_random_uuid()::text, '-', ''),
+  course text not null default 'ar',
+  ord real not null default 0,
+  title text not null default 'Book',
+  pages jsonb not null default '[]'::jsonb,
+  file text,
+  shared boolean not null default false,
+  updated_at timestamptz not null default now()
+);
+alter table public.books enable row level security;
+drop policy if exists "class reads shared books" on public.books;
+create policy "class reads shared books" on public.books for select to authenticated using (
+  public.is_teacher() or (shared and public.is_member() and course = coalesce((select st.course from public.students st where st.id = public.my_student()), 'read')));
+drop policy if exists "teacher writes books" on public.books;
+create policy "teacher writes books" on public.books for all to authenticated using (public.is_teacher()) with check (public.is_teacher());
+grant select, insert, update, delete on public.books to authenticated;
+do $$
+begin
+  alter publication supabase_realtime add table public.books;
+exception when duplicate_object or undefined_object then null;
+end
+$$;
+
+create or replace function public.schema_version() returns int language sql immutable as $$ select 12 $$;
 grant execute on function public.schema_version() to anon, authenticated;
 notify pgrst, 'reload schema';
 </script>
@@ -2477,7 +2612,7 @@ notify pgrst, 'reload schema';
 
   /* ================= store ================= */
   const store = {
-    s: { phase: "loading", isOwner: false, canSend: false, lessons: [], recs: [], explains: [], students: [], msgs: [], views: [], ar_lessons: [], testPhone: false, sid: null, toast: null, email: "", hint: "", err: "", wantTeacher: false, fresh: false, needsUpdate: false, live: [], hasLive: false },
+    s: { phase: "loading", isOwner: false, canSend: false, lessons: [], recs: [], explains: [], students: [], msgs: [], views: [], ar_lessons: [], books: [], testPhone: false, sid: null, toast: null, email: "", hint: "", err: "", wantTeacher: false, fresh: false, needsUpdate: false, live: [], hasLive: false },
     subs: new Set(),
     set(patch) { this.s = Object.assign({}, this.s, patch); this.subs.forEach(f => f(this.s)); },
   };
@@ -2542,6 +2677,7 @@ notify pgrst, 'reload schema';
     recs: { lesson: "lesson", text: "tile", audio: "audio", secs: "secs", lang: "lang" },
     students: { name: "name", color: "color", unlocked: "unlocked", invite: "invite", lang: "lang", games: "games", course: "course" },
     explains: { lesson: "lesson", lang: "lang", explain: "explain", explainSecs: "explain_secs", cues: "cues", updatedAt: "updated_at" },
+    books: { course: "course", order: "ord", title: "title", pages: "pages", file: "file", shared: "shared", updatedAt: "updated_at" },
     ar_lessons: { order: "ord", title: "title", summary: "summary", pages: "pages", words: "words", src: "src", explain: "explain", explainSecs: "explain_secs", cues: "cues", updatedAt: "updated_at" },
     live: { lesson: "lesson", mode: "mode", startedAt: "started_at", updatedAt: "updated_at" },
     msgs: { student: "student", lesson: "lesson", from: "sender", kind: "kind", asset: "media", secs: "secs", text: "body", hw: "hw", point: "point", next: "next", seen: "seen", cid: "cid" },
@@ -2564,6 +2700,7 @@ notify pgrst, 'reload schema';
     explains: r => ({ id: r.id, lesson: r.lesson, lang: r.lang, explain: r.explain, explainSecs: r.explain_secs || 0, cues: Array.isArray(r.cues) ? r.cues : [], updatedAt: ms(r.updated_at) }),
     live: r => ({ id: r.id, lesson: r.lesson, mode: r.mode, startedAt: ms(r.started_at), updatedAt: ms(r.updated_at) }),
     msgs: r => ({ id: r.id, student: r.student, lesson: r.lesson, from: r.sender, kind: r.kind, asset: r.media, secs: r.secs, text: r.body, hw: r.hw, point: r.point || [], next: r.next, seen: r.seen, cid: r.cid, at: ms(r.created_at), test: !!r.test }),
+    books: r => ({ id: r.id, course: r.course || "ar", order: r.ord || 0, title: r.title, pages: Array.isArray(r.pages) ? r.pages : [], file: r.file || null, shared: !!r.shared, updatedAt: ms(r.updated_at) }),
     ar_lessons: r => ({ id: r.id, order: r.ord || 0, title: r.title, summary: r.summary || "", pages: Array.isArray(r.pages) ? r.pages : [], words: Array.isArray(r.words) ? r.words : [], src: r.src || [], explain: r.explain, explainSecs: r.explain_secs || 0, cues: Array.isArray(r.cues) ? r.cues : [], updatedAt: ms(r.updated_at) }),
     views: r => ({ id: r.id, student: r.student, lesson: r.lesson, kind: r.kind, ref: r.ref, test: !!r.test, openedAt: ms(r.opened_at), updatedAt: ms(r.updated_at), secs: r.secs || 0, dur: r.dur || 0, watched: Array.isArray(r.watched) ? r.watched : [], jumps: Array.isArray(r.jumps) ? r.jumps : [] }),
   };
@@ -2576,6 +2713,7 @@ notify pgrst, 'reload schema';
     live: list => list,
     views: list => list.sort((a, b) => (a.openedAt || 0) - (b.openedAt || 0)),
     ar_lessons: list => list.sort((a, b) => (a.order || 0) - (b.order || 0)),
+    books: list => list.sort((a, b) => (a.order || 0) - (b.order || 0)),
   };
   function putLocal(table, rowsIn) {
     if (!rowsIn || !rowsIn.length) return;
@@ -2623,7 +2761,7 @@ notify pgrst, 'reload schema';
     assets: {
       async upload(blob, opts) {
         const type = (opts && opts.type) || blob.type;
-        const ext = type === "video/mp4" ? "mp4" : type === "video/quicktime" ? "mov" : type.indexOf("webm") >= 0 ? "webm" : type.indexOf("mp4") >= 0 ? "m4a" : type === "image/png" ? "png" : type === "image/webp" ? "webp" : type === "image/gif" ? "gif" : "jpg";
+        const ext = type === "video/mp4" ? "mp4" : type === "video/quicktime" ? "mov" : type.indexOf("webm") >= 0 ? "webm" : type.indexOf("mp4") >= 0 ? "m4a" : type === "image/png" ? "png" : type === "image/webp" ? "webp" : type === "image/gif" ? "gif" : type === "application/pdf" ? "pdf" : "jpg";
         const path = new Date().toISOString().slice(0, 7) + "/" + newId() + "." + ext;
         await q(sb.storage.from("class").upload(path, blob, { contentType: type, cacheControl: "31536000", upsert: false }));
         return { id: path };
@@ -2662,7 +2800,7 @@ notify pgrst, 'reload schema';
     return out;
   }
   async function loadAll() {
-    const [L, R, S, M, LV, EX, VW, AL] = await Promise.all([
+    const [L, R, S, M, LV, EX, VW, AL, BK] = await Promise.all([
       fetchAll("lessons", b => b.order("id")),
       fetchAll("recs", b => b.order("id")),
       fetchAll("students", b => b.order("created_at")),
@@ -2671,6 +2809,7 @@ notify pgrst, 'reload schema';
       store.s.hasExpl ? q(sb.from("explains").select("*")).catch(() => []) : Promise.resolve([]),
       store.s.isOwner && (store.s.schemaVer || 0) >= 10 ? q(sb.from("views").select("*").order("opened_at", { ascending: false }).limit(3000)).catch(() => []) : Promise.resolve([]),
       (store.s.schemaVer || 0) >= 11 ? q(sb.from("ar_lessons").select("*")).catch(() => []) : Promise.resolve([]),
+      (store.s.schemaVer || 0) >= 12 ? q(sb.from("books").select("*")).catch(() => []) : Promise.resolve([]),
     ]);
     store.set({
       lessons: L.map(FROM.lessons).sort(lessonSort),
@@ -2681,6 +2820,7 @@ notify pgrst, 'reload schema';
       live: (LV || []).map(FROM.live),
       views: SORTS.views((VW || []).map(FROM.views)),
       ar_lessons: SORTS.ar_lessons((AL || []).map(FROM.ar_lessons)),
+      books: SORTS.books((BK || []).map(FROM.books)),
     });
   }
   let channel = null, subscribedOnce = false, reloadTimer = null, visHooked = false;
@@ -2692,7 +2832,7 @@ notify pgrst, 'reload schema';
     if (channel) { try { sb.removeChannel(channel); } catch (e) {} }
     subscribedOnce = false;
     channel = sb.channel("class-room");
-    for (const t of ["lessons", "recs", "students", "msgs"].concat(store.s.hasLive ? ["live"] : [], store.s.hasExpl ? ["explains"] : [], store.s.isOwner && (store.s.schemaVer || 0) >= 10 ? ["views"] : [], (store.s.schemaVer || 0) >= 11 ? ["ar_lessons"] : [])) {
+    for (const t of ["lessons", "recs", "students", "msgs"].concat(store.s.hasLive ? ["live"] : [], store.s.hasExpl ? ["explains"] : [], store.s.isOwner && (store.s.schemaVer || 0) >= 10 ? ["views"] : [], (store.s.schemaVer || 0) >= 11 ? ["ar_lessons"] : [], (store.s.schemaVer || 0) >= 12 ? ["books"] : [])) {
       channel.on("postgres_changes", { event: "*", schema: "public", table: t }, p => {
         if (p.eventType === "DELETE") { if (p.old && p.old.id) dropLocal(t, p.old.id); return; }
         if (!p.new || !p.new.id) return;
@@ -2786,7 +2926,7 @@ notify pgrst, 'reload schema';
     try { const v = await sb.rpc("schema_version"); ver = v.error ? 0 : Number(v.data) || 0; } catch (e) {}   // every phone: students need it for notifications
     let hasExpl = false;
     try { const x = await sb.from("explains").select("id").limit(1); hasExpl = !x.error; } catch (e) {}
-    store.set({ hasLive, hasExpl, schemaVer: ver, needsUpdate: !!who.teacher && (!hasLive || !hasCues || ver < 11) });
+    store.set({ hasLive, hasExpl, schemaVer: ver, needsUpdate: !!who.teacher && (!hasLive || !hasCues || ver < 12) });
     await loadAll();
     subscribe();
     store.set({ phase: "ready" });
@@ -2996,12 +3136,13 @@ notify pgrst, 'reload schema';
 
   /* ================= a livelier board: circles, underlines, chalk drawing, a word built from the board, pictures, clips =================
      Everything the teacher does is a cue with a time, so it replays with the voice: on the student's phone and in the saved video. */
-  const FX_KINDS = ["o", "ox", "sa", "sx", "img", "imgx", "vid", "rm", "pg", "hd", "zm", "zmx", "rv"];
+  const FX_KINDS = ["o", "ox", "sa", "sx", "img", "imgx", "vid", "rm", "pg", "hd", "zm", "zmx", "rv", "cam", "camx"];
   function stageAt(cues, now) {
-    let marks = [], strip = [], img = null, page = 0, hide = [], zm = null, zmo = null, rv = null;
+    let marks = [], strip = [], img = null, page = 0, hide = [], zm = null, zmo = null, rv = null, cam = null;
     for (const c of cues || []) {
       if (c.t > now) break;
-      if (c.k === "pg") { marks = []; strip = []; img = null; page = c.v || 0; hide = []; zm = null; zmo = null; rv = null; continue; }   // the next concept: a fresh board
+      if (c.k === "pg") { marks = []; strip = []; img = null; page = c.v || 0; hide = []; zm = null; zmo = null; rv = null; cam = null; continue; }
+      if (c.k === "cam" || c.k === "camx") { const from = cam ? crCamNow(cam, c.t) : null; cam = c.k === "cam" ? { id: c.id, x: c.x, y: c.y, s: c.s || 2, t: c.t, from } : { id: c.id, x: CR_W / 2, y: CR_H / 2, s: 1, t: c.t, from }; continue; }   // the camera: closer to part of the board, or back out   // the next concept: a fresh board
       if (c.k === "hd") { hide.push(c); continue; }   // a word rubbed off the board
       if (c.k === "zm") { zm = c; zmo = null; continue; }   // a word brought to the middle
       if (c.k === "zmx") { if (zm) zmo = { r: zm.r, c: zm.c, t: c.t }; zm = null; continue; }   // and put back
@@ -3012,10 +3153,10 @@ notify pgrst, 'reload schema';
       else if (c.k === "sx") strip = [];
       else if (c.k === "img") img = c;
       else if (c.k === "imgx") img = null;
-      else if (c.k === "rm") { marks = marks.filter(x => x.id !== c.ref); strip = strip.filter(x => x.id !== c.ref); if (img && img.id === c.ref) img = null; hide = hide.filter(x => x.id !== c.ref); if (zm && zm.id === c.ref) zm = null; if (rv && rv.id === c.ref) rv = null; }
+      else if (c.k === "rm") { marks = marks.filter(x => x.id !== c.ref); strip = strip.filter(x => x.id !== c.ref); if (img && img.id === c.ref) img = null; hide = hide.filter(x => x.id !== c.ref); if (zm && zm.id === c.ref) zm = null; if (rv && rv.id === c.ref) rv = null; if (cam && cam.id === c.ref) cam = null; }
     }
     const hd = {}; for (const h of hide) hd[h.r + "-" + h.c] = h;
-    return { marks, strip, img, page, hide: hd, hideList: hide, zm, zmo, rv };
+    return { marks, strip, img, page, hide: hd, hideList: hide, zm, zmo, rv, cam };
   }
   const stageSig = s => (s ? s.marks.map(c => c.id).join(",") + "|" + s.strip.map(c => c.id).join(",") + "|" + (s.img ? s.img.id : "") + "|" + (s.page || 0) + "|" + (s.hideList || []).map(c => c.id).join(",") + "|" + (s.zm ? s.zm.id : "") + "|" + (s.rv ? s.rv.id : "") : "");
   const hasStrip = cues => (cues || []).some(c => c.k === "sa");
@@ -3317,6 +3458,8 @@ notify pgrst, 'reload schema';
   // F: { room, front, lay, lesson, t, wall, stage, list (all cues, sorted), lead, turnCue, waiting, pic, clip, clipFrame, stripOn, live }
   function crFrame(c, F) {
     const lay = F.lay, t = F.t, st = F.stage;
+    const cm = st.cam ? crCamNow(st.cam, t) : null, camOn = !!(cm && cm.s > 1.001);
+    if (camOn) { c.save(); c.translate(CR_W / 2, CR_H / 2); c.scale(cm.s, cm.s); c.translate(-cm.x, -cm.y); }   // the camera in close on part of the board
     c.drawImage(F.room, 0, 0);
     if (lay.ar) crArUnder(c, F, lay, st, t);
     const sk = crStick(F.list, t, lay, F.lead || 0);
@@ -3334,7 +3477,7 @@ notify pgrst, 'reload schema';
     const drawMarks = onWords => { for (const q of st.marks) { if ((q.r != null) !== onWords) continue;
       const P = crMarkPath(q, lay); if (!P) continue;
       const col = markCol(q), pr = (t - q.t) / markDur(q);
-      crDrawPath(c, P, pr, col, q.s === "pen" ? 5 : 6);
+      crDrawPath(c, P, pr, q.hl ? CR_HL : col, q.hl ? 26 : q.s === "pen" ? 5 : 6);
       if (q.s === "circle" && pr > 1) {
         const b = crSpot(q, lay), k = Math.min(1, (pr - 1) * 3), cx = b.x + b.w / 2, top = b.y - Math.max(6, b.h * 0.12);
         crDrawPath(c, [[cx + b.w * 0.35, top - 4], [cx + b.w * 0.42, top - 22]], k, col, 4.5);
@@ -3375,6 +3518,11 @@ notify pgrst, 'reload schema';
       });
     }
     if (lay.ar) { crArOver(c, F, lay, st, t); crArZoom(c, lay, st, t); }
+    // the desk, the things that move, then the stick in front of it all
+    c.drawImage(F.front, 0, 0);
+    crLiving(c, F.wall);
+    if (sk && !st.zm) crDrawStick(c, sk.tip);
+    if (camOn) c.restore();
     // a clip, shown on the board like a screen
     if (F.clip) {
       const B = CR_BOARD; c.fillStyle = "#101418"; c.fillRect(B.x + 14, B.y + 14, B.w - 28, B.h - 30);
@@ -3388,18 +3536,23 @@ notify pgrst, 'reload schema';
       if (F.waiting) { const sub = F.turnCue.tile ? "Say it, then tap the answer" : "Say it, then tap ▶ Continue"; c.font = "600 24px Andika, sans-serif"; const sw = c.measureText(sub).width + 36; c.fillStyle = "rgba(0,0,0,.55)"; crRR(c, x0 + w - sw, y0 + 70, sw, 40, 20); c.fill(); c.fillStyle = "#FFE7C2"; c.fillText(sub, x0 + w - sw / 2, y0 + 91); }
       c.restore();
     }
-    // the desk, the things that move, then the stick in front of it all
-    c.drawImage(F.front, 0, 0);
-    crLiving(c, F.wall);
-    if (sk && !st.zm) crDrawStick(c, sk.tip);
     if (F.caption) crCaption(c, F.caption, t);
   }
   // which tile (or which spot on the board) is under a point of the picture
+  // the camera at time t: in close (x, y = the middle of what's seen, s = how close), gliding from where it was
+  function crCamNow(cam, t) {
+    const f = cam.from || { x: CR_W / 2, y: CR_H / 2, s: 1 }, k = crEase((t - cam.t) / 0.55);
+    const s = crLerp(f.s, cam.s, k), hw = CR_W / (2 * s), hh = CR_H / (2 * s);
+    return { s, x: Math.max(hw, Math.min(CR_W - hw, crLerp(f.x, cam.x, k))), y: Math.max(hh, Math.min(CR_H - hh, crLerp(f.y, cam.y, k))) };
+  }
+  // a point on the screen, back to where it is on the board (when the camera is in close)
+  const crUncam = (cm, x, y) => (cm && cm.s > 1.001 ? [cm.x + (x - CR_W / 2) / cm.s, cm.y + (y - CR_H / 2) / cm.s] : [x, y]);
   function crHit(lay, x, y) { return lay.items.find(q => x >= q.x - 6 && x <= q.x + q.w + 6 && y >= q.y - 4 && y <= q.y + q.h + 4) || null; }
 
   /* ---------- an Arabic board: the words big and filling the board, whatever the concept is ----------
      A concept is one board: text (lines of Arabic), words (with their pictures), match, fill (a blank to fill),
      choose (a question and its answers), table (a conjugation table, say) or pic (a page of a book, a photo). */
+  const CR_HL = "rgba(255,226,122,.42)";   // the highlighter
   const CR_AR = "Amiri, 'Noto Naskh Arabic', serif", CR_LAT = "Andika, sans-serif";
   const crIsAr = s => /[؀-ۿ]/.test(String(s || ""));
   const crArArea = stripOn => ({ x: CR_BOARD.x + 36, y: CR_BOARD.y + 76, w: CR_BOARD.w - 72, h: CR_BOARD.h - 76 - (stripOn ? 150 : 74) });
@@ -3419,9 +3572,9 @@ notify pgrst, 'reload schema';
   function crArLines(c, lines, A, maxS) {
     const rows = lines.map(l => l.split(/\s+/).filter(Boolean)).filter(r => r.length);
     let best = null;
-    for (let size = maxS || 170; size >= 26; size -= 4) {
+    for (let size = maxS || 190; size >= 26; size -= 4) {
       c.font = "600 " + size + "px " + CR_AR;
-      const lineH = size * 1.72, gap = size * 0.34, pad = size * 0.1, out = [];
+      const lineH = size * 1.62, gap = size * 0.34, pad = size * 0.1, out = [];
       let y = 0, ok = true;
       for (let r = 0; r < rows.length; r++) {
         let line = [], x = 0;
@@ -3463,8 +3616,8 @@ notify pgrst, 'reload schema';
     } else if (p.kind === "match") {
       const P = (p.pairs || []).filter(x => x && (x[0] || x[1])).slice(0, 6), n = P.length || 1, rh = A.h / n, colW = A.w * 0.43;
       const right = P.map(x => x[0]), left = crShuf(P.map(x => x[1]), (p.title || "") + right.join(""));
-      size = Math.min(...right.concat(left).map(s => crArFit(c, tx(s), colW * 0.86, Math.min(110, rh * 0.6), 24)), 110);
-      const mk = (s, r, i, x) => { const h = Math.min(rh * 0.8, size * 1.7); return box({ r, c: i, t: { t: s }, text: tx(s), fs: size, ar: crIsAr(s), box: true }, x, A.y + i * rh + (rh - h) / 2, colW, h); };
+      size = Math.min(...right.concat(left).map(s => crArFit(c, tx(s), colW * 0.88, Math.min(130, rh * 0.66), 24)), 130);
+      const mk = (s, r, i, x) => { const h = Math.min(rh * 0.88, size * 1.6); return box({ r, c: i, t: { t: s }, text: tx(s), fs: size, ar: crIsAr(s), box: true }, x, A.y + i * rh + (rh - h) / 2, colW, h); };
       right.forEach((s, i) => items.push(mk(s, 0, i, A.x + A.w - colW)));
       left.forEach((s, i) => items.push(mk(s, 1, i, A.x)));
       reveal = { lines: P.map((x, i) => { const a = items[i], b = items[right.length + left.indexOf(x[1])]; return b ? [a.x - 6, a.y + a.h / 2, b.x + b.w + 6, b.y + b.h / 2] : null; }).filter(Boolean) };
@@ -3504,7 +3657,7 @@ notify pgrst, 'reload schema';
     } else if (p.kind === "pic") {
       bg = p.pic ? { a: p.pic } : null;
     } else {
-      const L = crArLines(c, String(p.board || "").split(/\n/).map(l => tx(crNoEmoji(l)).trim()).filter(Boolean), A, 170);
+      const L = crArLines(c, String(p.board || "").split(/\n/).map(l => tx(crNoEmoji(l)).trim()).filter(Boolean), A, 190);
       size = L.size; items.push(...L.items);
     }
     const lay = { size, lineH: size * 1.8, items, font: CR_AR, rtl: true, ar: true, lines, reveal, bg, kind: p.kind };
@@ -3533,7 +3686,7 @@ notify pgrst, 'reload schema';
   function crArUnder(c, F, lay, st, t) {
     if (lay.bg) {
       const im = crPic(lay.bg.a), B = CR_BOARD;
-      if (im) { const mw = B.w - 120, mh = B.h - 110, s = Math.min(mw / im.width, mh / im.height), w = im.width * s, h = im.height * s, x = B.x + B.w / 2 - w / 2, y = B.y + 62 + (mh - h) / 2;
+      if (im) { const mw = B.w - 80, mh = B.h - 56, s = Math.min(mw / im.width, mh / im.height), w = im.width * s, h = im.height * s, x = B.x + B.w / 2 - w / 2, y = B.y + 24 + (mh - h) / 2;
         c.fillStyle = "rgba(0,0,0,.3)"; c.fillRect(x - 4, y + 6, w + 16, h + 14); c.fillStyle = "#FBF7EC"; c.fillRect(x - 10, y - 10, w + 20, h + 20); c.drawImage(im, x, y, w, h); }
     }
     if (lay.lines.length) { c.strokeStyle = "rgba(241,236,220,.45)"; c.lineWidth = 2.5; c.beginPath(); for (const L of lay.lines) { c.moveTo(L[0], L[1]); c.lineTo(L[2], L[3]); } c.stroke(); }
@@ -3873,6 +4026,28 @@ notify pgrst, 'reload schema';
   function crTurnAt(cues, t) { let w = null; for (const q of cues) { if (q.t > t) break; if (q.k === "w") w = q; } return w; }
   const crSorted = cues => (cues || []).filter(q => q.t >= 0).slice().sort((a, b) => a.t - b.t);
 
+  // you look closer at the board yourself: two fingers to zoom, or 🔍; drag to look around (only on your phone, nothing changes for anyone else)
+  function useViewZoom() {
+    const [v, setV] = useState({ z: 1, x: 0, y: 0 }), V = useRef(v); V.current = v;
+    const box = useRef(null), P = useRef(new Map()), G = useRef(null), moved = useRef(0);
+    const fit = (z, x, y) => { const el = box.current, w = el ? el.clientWidth : 0, h = el ? el.clientHeight : 0; z = Math.max(1, Math.min(4, z)); return { z, x: Math.min(0, Math.max(w - w * z, x)), y: Math.min(0, Math.max(h - h * z, y)) }; };
+    const zoomTo = (z, cx, cy) => { const o = V.current, k = Math.max(1, Math.min(4, z)) / o.z; setV(fit(z, cx - (cx - o.x) * k, cy - (cy - o.y) * k)); };
+    const rel = e => { const r = box.current.getBoundingClientRect(); return [e.clientX - r.left, e.clientY - r.top]; };
+    const end = e => { P.current.delete(e.pointerId); if (P.current.size === 1) { const q = [...P.current.values()][0]; G.current = { p: q, v: V.current }; } else if (!P.current.size) G.current = null; };
+    const on = {
+      onPointerDown: e => { if (!box.current) return; P.current.set(e.pointerId, rel(e)); if (P.current.size === 2) { const [a, b] = [...P.current.values()]; G.current = { d: Math.hypot(a[0] - b[0], a[1] - b[1]) || 1, v: V.current }; } else if (P.current.size === 1) G.current = { p: rel(e), v: V.current }; },
+      onPointerMove: e => {
+        if (!P.current.has(e.pointerId)) return; P.current.set(e.pointerId, rel(e)); const g = G.current; if (!g) return;
+        if (P.current.size >= 2 && g.d) { const [a, b] = [...P.current.values()], d = Math.hypot(a[0] - b[0], a[1] - b[1]), cx = (a[0] + b[0]) / 2, cy = (a[1] + b[1]) / 2, z = Math.max(1, Math.min(4, g.v.z * d / g.d)), k = z / g.v.z; setV(fit(z, cx - (cx - g.v.x) * k, cy - (cy - g.v.y) * k)); moved.current = Date.now(); }
+        else if (g.p && V.current.z > 1) { const q = rel(e), dx = q[0] - g.p[0], dy = q[1] - g.p[1]; if (Math.hypot(dx, dy) > 6 || Date.now() - moved.current < 300) { setV(fit(g.v.z, g.v.x + dx, g.v.y + dy)); moved.current = Date.now(); } }
+      },
+      onPointerUp: end, onPointerCancel: end,
+    };
+    const W = () => (box.current ? [box.current.clientWidth / 2, box.current.clientHeight / 2] : [0, 0]);
+    return { v, box, on, justMoved: () => Date.now() - moved.current < 300,
+      style: v.z > 1 ? "transform:translate(" + v.x + "px," + v.y + "px) scale(" + v.z + ");transform-origin:0 0;touch-action:none" : "touch-action:pan-y",
+      toggle: () => (V.current.z > 1 ? setV({ z: 1, x: 0, y: 0 }) : zoomTo(2, ...W())), reset: () => setV({ z: 1, x: 0, y: 0 }) };
+  }
   // The lesson as students watch it: the board, playing in time with the voice. Tap a word to answer.
   function ClassroomPlayer({ lesson, number, k, src, secs, cues, onTile, waiting, ix, noAuto, page }) {
     const pst = usePlayer();
@@ -3886,8 +4061,9 @@ notify pgrst, 'reload schema';
     const fx = useMemo(() => fxOnly(list), [list]);
     const stripOn = hasStrip(list);
     const A = useMemo(() => crAssets(lesson, number, stripOn), [lesson.id, lesson.board, lesson.title, lesson.stage, number, stripOn]);
-    const prevRef = useRef(-1), S = useRef({}), pageRef = useRef(0);
-    S.current = { list, fx, A, waiting, cap: cc ? capWords : null, page };
+    const prevRef = useRef(-1), S = useRef({}), pageRef = useRef(0), camRef = useRef(null), vz = useViewZoom();
+    S.current = { list, fx, A, waiting, cap: cc ? capWords : null, page, z: vz.v.z };
+    useEffect(() => { if (rot || full) vz.reset(); }, [rot, full]);
     useEffect(() => {
       const cv = cvRef.current; if (!cv) return;
       const c = cv.getContext("2d");
@@ -3896,14 +4072,14 @@ notify pgrst, 'reload schema';
         raf = requestAnimationFrame(tick);
         if (now - last < 33 || document.hidden) return; last = now;
         const R = S.current, a = player.a, mine = a && player.key === k;
-        const w = Math.round(cv.clientWidth * Math.min(2, window.devicePixelRatio || 1));
+        const w = Math.min(3600, Math.round(cv.clientWidth * Math.min(2, window.devicePixelRatio || 1) * Math.min(2.5, R.z || 1)));   // sharp when zoomed in
         if (w && w !== size) { size = w; cv.width = w; cv.height = Math.round(w * 9 / 16); }
         if (!size) return;
         const t = mine ? a.currentTime || 0 : -50, playing = mine && !a.paused;
         const prev = prevRef.current; prevRef.current = t;
         if (playing && prev >= 0 && t > prev && t - prev < 1.5) for (const q of R.fx) if (q.k === "vid" && q.t > prev && q.t <= t) { a.pause(); setClip(q); break; }
         const st = stageAt(R.fx, t); if (!mine && R.page != null) st.page = R.page;   // not playing: the concept they picked
-        const A2 = lesson.pages ? crAssets(lesson, number, stripOn, st.page) : R.A; pageRef.current = st.page || 0;
+        const A2 = lesson.pages ? crAssets(lesson, number, stripOn, st.page) : R.A; pageRef.current = st.page || 0; camRef.current = st.cam ? crCamNow(st.cam, t) : null;
         c.setTransform(cv.width / CR_W, 0, 0, cv.height / CR_H, 0, 0);
         crFrame(c, { room: A2.room, front: A2.front, lay: A2.lay, lesson, t, wall: now / 1000, stage: st, list: R.list, lead: 0.3, turnCue: crTurnAt(R.list, t), waiting: R.waiting, pic: st.img ? crPic(st.img.a) : null, caption: R.cap });
       };
@@ -3933,11 +4109,12 @@ notify pgrst, 'reload schema';
     }, [isPlaying, full]);
     useEffect(() => { const f = () => { if (!document.fullscreenElement) setFull(false); }; document.addEventListener("fullscreenchange", f); return () => document.removeEventListener("fullscreenchange", f); }, []);
     function tap(e) {
-      const cv = cvRef.current; if (!cv) return;
+      const cv = cvRef.current; if (!cv || vz.justMoved()) return;
       const r = cv.getBoundingClientRect();
       let x, y;
       if (rot) { x = (e.clientY - r.top) / r.height * CR_W; y = (r.right - e.clientX) / r.width * CR_H; }
       else { x = (e.clientX - r.left) / r.width * CR_W; y = (e.clientY - r.top) / r.height * CR_H; }
+      [x, y] = crUncam(camRef.current, x, y);
       const it = crHit((lesson.pages ? crAssets(lesson, number, stripOn, pageRef.current) : A).lay, x, y);
       const mine = player.key === k && player.a;
       if (it && onTile && (waiting || !mine || player.a.paused)) { onTile(it.t, ix ? soundFor(ix, lesson.id, it.t.t) : null, it.r, it.c); return; }
@@ -3946,8 +4123,8 @@ notify pgrst, 'reload schema';
     const mine = pst.key === k, playing = mine && pst.playing, cur = mine ? pst.cur : 0, dur = (mine && pst.dur) || secs || 0;
     const fullStyle = full ? (() => { const W = window.innerWidth, H = window.innerHeight, sw = rot ? H : W, sh = rot ? W : H, w = Math.min(sw, sh * 16 / 9); return "width:" + w + "px;" + (rot ? "transform:translate(-50%,-50%) rotate(90deg);" : "transform:translate(-50%,-50%);"); })() : "";
     return html`<div class=${"crwrap" + (full ? " full" : "")}>
-      <div class="crstage" ref=${stageRef} style=${fullStyle}>
-        <canvas class="crcv" ref=${cvRef} onClick=${tap} aria-label=${"Lesson " + number + " on the board"}></canvas>
+      <div class="crstage" ref=${el => { stageRef.current = el; vz.box.current = el; }} style=${fullStyle}>
+        <canvas class="crcv" ref=${cvRef} onClick=${tap} style=${rot ? "" : vz.style} ...${rot ? {} : vz.on} aria-label=${"Lesson " + number + " on the board"}></canvas>
         ${!playing && !waiting && !clip ? html`<button class="crplay" onClick=${() => src && player.play(k, src)} aria-label=${mine && cur > 0 ? "Carry on" : "Play the lesson"}><${Ic.play} size=${34}/></button>` : null}
         ${clip ? html`<div class="crclip"><${BoardClip} c=${clip} onEnd=${() => { setClip(null); if (player.key === k && player.a) player.a.play().catch(() => {}); }}/></div>` : null}
         <div class="crbar">
@@ -3955,6 +4132,7 @@ notify pgrst, 'reload schema';
           <span class="crtime">${fmtDur(cur)} / ${fmtDur(dur)}</span>
           <input class="crseek" type="range" min="0" max=${Math.max(1, dur)} step="0.1" value=${cur} aria-label="Where in the lesson"
             onInput=${e => { const v = +e.target.value; if (player.key !== k) { player.play(k, src); setTimeout(() => { if (player.a) player.a.currentTime = v; }, 60); } else if (player.a) player.a.currentTime = v; }}/>
+          ${!rot ? html`<button class=${"crbtn" + (vz.v.z > 1 ? " on" : "")} onClick=${vz.toggle} aria-label=${vz.v.z > 1 ? "Back to the whole board" : "Look closer"} title="Look closer (or pinch with two fingers)">${vz.v.z > 1 ? "1×" : "🔍"}</button>` : null}
           ${capWords ? html`<button class=${"crbtn cc" + (cc ? " on" : "")} onClick=${() => { const v = !cc; setCc(v); try { localStorage.setItem("rc.cc", v ? "1" : "0"); } catch (e) {} }} aria-label=${cc ? "Hide subtitles" : "Show subtitles"}>CC</button>` : null}
           <button class="crbtn" onClick=${full ? exitFull : goFull} aria-label=${full ? "Leave full screen" : "Full screen"}>${full ? "✕" : "⛶"}</button>
         </div>
@@ -3982,16 +4160,19 @@ notify pgrst, 'reload schema';
         if (w && w !== size) { size = w; cv.width = w; cv.height = Math.round(w * 9 / 16); }
         if (!size) return;
         const t = R.nowT(), st = stageAt(R.fx, t + 0.001), A2 = lesson.pages ? crAssets(lesson, number, stripOn, st.page) : R.A; pageRef.current = st.page || 0;
+        const cm = st.cam ? crCamNow(st.cam, t) : null; camRef.current = cm;
         c.setTransform(cv.width / CR_W, 0, 0, cv.height / CR_H, 0, 0);
         crFrame(c, { room: A2.room, front: A2.front, lay: A2.lay, lesson, t, wall: now / 1000, stage: st, list: R.list, lead: 0, turnCue: crTurnAt(R.list, t), pic: st.img ? crPic(st.img.a) : null });
         const p = pen.current;
-        if (p && p.drawing && p.P.length > 1) { c.strokeStyle = markCol({ s: "pen", col: R.penCol }); c.lineWidth = 5; c.lineCap = "round"; c.lineJoin = "round"; c.beginPath(); p.P.forEach((q, i) => (i ? c.lineTo(q[0], q[1]) : c.moveTo(q[0], q[1]))); c.stroke(); }
+        if (cm && cm.s > 1.001) { c.translate(CR_W / 2, CR_H / 2); c.scale(cm.s, cm.s); c.translate(-cm.x, -cm.y); }   // the line you're drawing, where it lands on the board
+        if (p && p.drawing && p.P.length > 1) { const hl = R.tool === "hl"; c.strokeStyle = hl ? CR_HL : markCol({ s: "pen", col: R.penCol }); c.lineWidth = hl ? 26 : 5; c.lineCap = "round"; c.lineJoin = "round"; c.beginPath(); p.P.forEach((q, i) => (i ? c.lineTo(q[0], q[1]) : c.moveTo(q[0], q[1]))); c.stroke(); }
       };
       raf = requestAnimationFrame(tick);
       return () => cancelAnimationFrame(raf);
     }, [lesson.id]);
-    const at = e => { const r = cvRef.current.getBoundingClientRect(); return [(e.clientX - r.left) / r.width * CR_W, (e.clientY - r.top) / r.height * CR_H]; };
-    const down = e => { e.preventDefault(); try { e.currentTarget.setPointerCapture(e.pointerId); } catch (x) {} pen.current = { id: e.pointerId, at: Date.now(), P: [at(e)], drawing: S.current.tool === "pen" }; };
+    const camRef = useRef(null);
+    const at = e => { const r = cvRef.current.getBoundingClientRect(); return crUncam(camRef.current, (e.clientX - r.left) / r.width * CR_W, (e.clientY - r.top) / r.height * CR_H); };
+    const down = e => { e.preventDefault(); try { e.currentTarget.setPointerCapture(e.pointerId); } catch (x) {} pen.current = { id: e.pointerId, at: Date.now(), P: [at(e)], drawing: S.current.tool === "pen" || S.current.tool === "hl" }; };
     const move = e => { const p = pen.current; if (!p || p.id !== e.pointerId || !p.drawing) return; const q = at(e), l = p.P[p.P.length - 1]; if (Math.hypot(q[0] - l[0], q[1] - l[1]) >= 4) p.P.push(q); };
     const up = e => {
       const p = pen.current; if (!p || p.id !== e.pointerId) return; pen.current = null;
@@ -4003,15 +4184,15 @@ notify pgrst, 'reload schema';
 
   // An Arabic lesson's board in the room (before it's recorded, and in a live class): the concept you're on, big; tap a word to hear the teacher say it
   function ArBoardView({ lesson, number, page, stage, point, onTile, onPen, penCol }) {
-    const cvRef = useRef(null), S = useRef({}), pen = useRef(null);
-    S.current = { page, stage, point, penCol };
+    const cvRef = useRef(null), S = useRef({}), pen = useRef(null), vz = useViewZoom();
+    S.current = { page, stage, point, penCol, z: vz.v.z };
     useEffect(() => {
       const cv = cvRef.current; if (!cv) return;
       const c = cv.getContext("2d"); let raf = 0, last = 0, size = 0;
       const tick = now => {
         raf = requestAnimationFrame(tick);
         if (now - last < 90 || document.hidden) return; last = now;
-        const R = S.current, w = Math.round(cv.clientWidth * Math.min(2, window.devicePixelRatio || 1));
+        const R = S.current, w = Math.min(3600, Math.round(cv.clientWidth * Math.min(2, window.devicePixelRatio || 1) * Math.min(2.5, R.z || 1)));
         if (w && w !== size) { size = w; cv.width = w; cv.height = Math.round(w * 9 / 16); }
         if (!size) return;
         const st = R.stage ? Object.assign({}, R.stage, { page: R.page }) : stageAt([], 0), A = crAssets(lesson, number, !!(st.strip && st.strip.length), R.page);
@@ -4026,19 +4207,21 @@ notify pgrst, 'reload schema';
     }, [lesson.id, lesson.pages, number]);
     const at = e => { const r = cvRef.current.getBoundingClientRect(); return [(e.clientX - r.left) / r.width * CR_W, (e.clientY - r.top) / r.height * CR_H]; };
     const lay = () => crAssets(lesson, number, false, S.current.page).lay;
-    const down = e => { if (!onPen) return; e.preventDefault(); try { e.currentTarget.setPointerCapture(e.pointerId); } catch (x) {} pen.current = { id: e.pointerId, at: Date.now(), P: [at(e)] }; };
-    const move = e => { const p = pen.current; if (!p || p.id !== e.pointerId) return; const q = at(e), l = p.P[p.P.length - 1]; if (Math.hypot(q[0] - l[0], q[1] - l[1]) >= 4) p.P.push(q); };
+    const down = e => { if (!onPen) { vz.on.onPointerDown(e); return; } e.preventDefault(); try { e.currentTarget.setPointerCapture(e.pointerId); } catch (x) {} pen.current = { id: e.pointerId, at: Date.now(), P: [at(e)] }; };
+    const move = e => { if (!onPen) { vz.on.onPointerMove(e); return; } const p = pen.current; if (!p || p.id !== e.pointerId) return; const q = at(e), l = p.P[p.P.length - 1]; if (Math.hypot(q[0] - l[0], q[1] - l[1]) >= 4) p.P.push(q); };
     const up = e => {
+      if (!onPen) { vz.on.onPointerUp(e); return; }
       const p = pen.current; pen.current = null;
       if (p && p.P.length > 1) { const it = crHit(lay(), p.P[0][0], p.P[0][1]) || lay().items[0]; if (it) onPen({ r: it.r, c: it.c, pts: p.P.reduce((o, q) => o.concat(round2((q[0] - it.x) / it.w), round2((q[1] - it.y) / it.h)), []), dur: (Date.now() - p.at) / 1000 }); return; }
     };
     function tap(e) {
-      if (onPen) return;
+      if (onPen || vz.justMoved()) return;
       const [x, y] = at(e), it = crHit(lay(), x, y); if (!it || !onTile) return;
       const w = (lesson.words || []).find(v => arBare(v.ar) === arBare(it.t.t) || arBare(v.ar) === arBare(it.text));
       onTile(it.t, w && w.snd ? { rec: { audio: w.snd } } : null, it.r, it.c);
     }
-    return html`<div class="crwrap arboardv"><div class="crstage"><canvas class=${"crcv" + (onPen ? " rec" : "")} ref=${cvRef} onClick=${tap} onPointerDown=${down} onPointerMove=${move} onPointerUp=${up} onPointerCancel=${() => { pen.current = null; }} aria-label="The board"></canvas></div></div>`;
+    return html`<div class="crwrap arboardv"><div class="crstage" ref=${vz.box}><canvas class=${"crcv" + (onPen ? " rec" : "")} style=${onPen ? "" : vz.style} ref=${cvRef} onClick=${tap} onPointerDown=${down} onPointerMove=${move} onPointerUp=${up} onPointerCancel=${e => { pen.current = null; vz.on.onPointerCancel(e); }} aria-label="The board"></canvas>
+      <button class="crzoom" onClick=${vz.toggle} aria-label=${vz.v.z > 1 ? "Back to the whole board" : "Look closer"} title="Look closer (or pinch with two fingers)">${vz.v.z > 1 ? "1×" : "🔍"}</button></div></div>`;
   }
   // A clip on the board: plays with its own sound. If the phone won't start it by itself, a big Play button.
   function BoardClip({ c, onEnd, label }) {
@@ -5727,7 +5910,9 @@ notify pgrst, 'reload schema';
       b.guard = (b.guard || 0) + (kind === "k" ? 1.5 : 1);
       if (b.guard >= 3) { blocked = false; gbreak = true; b.guard = 0; }
     }
-    const d = dmg * 0.13 * (blocked ? 0.2 : gbreak ? 1.3 : 1);   // fair: a round takes many clean hits, so it's won by skill, not luck
+    let rep = 1;   // the same move over and over works less each time
+    if (i === 0) { a.reps = (a.reps || []).filter(t => g.clock - t.t < 4); const same = a.reps.filter(t => t.k === kind).length; a.reps.push({ k: kind, t: g.clock }); rep = Math.max(0.5, 1 - 0.08 * Math.max(0, same - 2)); }
+    const d = dmg * 0.105 * rep * (blocked ? 0.2 : gbreak ? 1.3 : 1);   // fair: a round takes many clean hits, so it's won by skill, not luck
     kfHurt(g, b, d);
     if (!blocked && b.act !== "frozen") {
       // combo breaker: after 3 quick hits in a row you're knocked clear and can't be stunned for a moment, so nobody gets stuck
@@ -7732,11 +7917,13 @@ notify pgrst, 'reload schema';
   const FR_R = 6;
   const frAngTo = (a, b) => Math.atan2(b.x - a.x, b.z - a.z);
   const frDiff = (a, b) => Math.atan2(Math.sin(a - b), Math.cos(a - b));
-  function frFighter(team, x, z, ang, cpu) { return { pT: FRM.p.total, kT: FRM.k.total, team, x, z, y: 0, ang, hp: 100, act: "idle", t: 0, hit: false, keys: { mx: 0, mz: 0, b: 0 }, guard: 0, gt: -9, cd: 0.8 + Math.random(), cpu, spd: 0, side: Math.random() < 0.5 ? -1 : 1, blockT: 0 }; }
-  function frNew(nOpp, lv, diff) {
-    const f = [Object.assign(frFighter(0, 0, 3, Math.PI, false), { human: true, S: 50 })];
-    for (let i = 0; i < nOpp; i++) f.push(frFighter(1, nOpp === 1 ? 0 : (i ? 1.6 : -1.6), -3, 0, true));
-    return { f, S: 50, over: false, winTeam: -1, fx: [], fxId: 0, reading: false, slowT: 0, wt: 0, T: 0, go: 1.4, lv: lv || 1, diff: diff || 2, cpuDmg: FR_DIFF[diff || 2].dmg * (nOpp > 1 ? 0.6 : 1), tok: 1, tokT: 0 };
+  function frFighter(team, x, z, ang, cpu) { return { pT: FRM.p.total, kT: FRM.k.total, team, x, z, y: 0, ang, hp: 100, max: 100, rec: 0, calm: 0, act: "idle", t: 0, hit: false, keys: { mx: 0, mz: 0, b: 0 }, guard: 0, gt: -9, cd: 0.8 + Math.random(), cpu, spd: 0, side: Math.random() < 0.5 ? -1 : 1, blockT: 0 }; }
+  // o (a tournament bout): { hp: the opponent's health, skill: 0..1, dmg: how hard it hits, me: your health carried over }
+  function frNew(nOpp, lv, diff, o) {
+    o = o || {};
+    const f = [Object.assign(frFighter(0, 0, 3, Math.PI, false), { human: true, S: 50 }, o.me != null ? { hp: o.me } : {})];
+    for (let i = 0; i < nOpp; i++) f.push(Object.assign(frFighter(1, nOpp === 1 ? 0 : (i ? 1.6 : -1.6), -3, 0, true), o.hp ? { hp: o.hp, max: o.hp } : {}, o.skill != null ? { skill: o.skill } : {}));
+    return { f, S: 50, over: false, winTeam: -1, fx: [], fxId: 0, reading: false, slowT: 0, wt: 0, T: 0, go: 1.4, lv: lv || 1, diff: diff || 2, cpuDmg: FR_DIFF[diff || 2].dmg * (nOpp > 1 ? 0.6 : 1) * (o.dmg || 1), tok: 1, tokT: 0 };
   }
   function frClamp(f) { const d = Math.hypot(f.x, f.z); if (d > FR_R) { f.x *= FR_R / d; f.z *= FR_R / d; } }
   function frNearest(g, f, maxD, cone) {
@@ -7776,19 +7963,27 @@ notify pgrst, 'reload schema';
   }
   // A strike lands only if someone is really in reach and in front; from behind it hurts more and can't be blocked.
   function frHit(g, a, mv, snd) {
-    const mul = a.human ? 0.7 + 0.95 * (a.S || 0) / 100 : g.cpuDmg;
+    const mul = a.human ? (GAME_LEARN ? 0.7 + 0.95 * (a.S || 0) / 100 : 1) : g.cpuDmg * ((a.rageT || 0) > g.T ? 1.25 : 1);
     const ts = g.f.filter(b => b !== a && b.team !== a.team && b.act !== "ko" && b.act !== "roll" && b.act !== "read")
       .map(b => [b, Math.hypot(b.x - a.x, b.z - a.z)])
       .filter(([b, d]) => d < mv.reach + 0.35 && Math.abs(frDiff(frAngTo(a, b), a.ang)) < mv.cone)
       .sort((x, y) => x[1] - y[1]);
     if (!ts.length) { if (snd) snd("whiff"); return; }
     for (const [b] of (mv === FRM.k ? ts : ts.slice(0, 1))) {
-      const back = Math.abs(frDiff(frAngTo(b, a), b.ang)) > 2.0;
+      let back = Math.abs(frDiff(frAngTo(b, a), b.ang)) > 2.0;
       let blocked = b.act === "block" && !back, gb = false;
+      // a fighter who keeps getting hit from behind learns: it spins round and takes the next one on its guard, then hits back
+      if (back && b.cpu && (b.backHits || 0) >= 2 && !["hit", "dazed", "p", "k", "roll", "jump"].includes(b.act) && Math.random() < 0.3 + 0.55 * (b.skill != null ? b.skill : 0.6)) { b.ang = frAngTo(b, a); back = false; blocked = true; b.act = "block"; b.t = 0; b.blockT = 0.25; b.cd = 0; b.backHits = 0; }
       if (blocked) { if (g.T - b.gt > 1.6) b.guard = 0; b.gt = g.T; b.guard += mv === FRM.k ? 1.5 : 1; if (b.guard >= 3) { blocked = false; gb = true; b.guard = 0; } }
       const combo = (a.combo || 1) >= 3 ? 1.25 : 1;   // the third quick hit lands harder
-      const d = mv.dmg * 0.34 * mul * combo * (back ? (a.cpu ? 1.2 : 1.5) : 1) * (blocked ? 0.25 : gb ? 1.3 : 1);   // longer fights: won by skill, not a few lucky hits
+      // the same trick again and again (the same hit from the same side) works less each time
+      let rep = 1;
+      if (!a.cpu) { const sig = (back ? "b" : "f") + (mv === FRM.k ? "k" : "p"); a.reps = (a.reps || []).filter(r => g.T - r.t < 4); const same = a.reps.filter(r => r.s === sig).length; a.reps.push({ s: sig, t: g.T }); rep = Math.max(0.45, 1 - 0.09 * Math.max(0, same - 2)); }
+      const d = mv.dmg * 0.34 * mul * combo * (back ? (a.cpu ? 1.2 : 1.3) : 1) * (blocked ? 0.25 : gb ? 1.3 : 1) * rep * 0.8;   // longer fights: won by skill, not a few lucky hits
       b.hp = Math.max(0, b.hp - d);
+      if (b.hp > 0) b.rec = Math.min((b.max || 100) - b.hp, (b.rec || 0) + d * 0.5);   // part of every hit is bruising: it comes back if you stop getting hit
+      b.calm = 0;
+      if (back && b.cpu) { b.backHits = (b.backHits || 0) + 1; }
       if (!blocked) {
         const an = frAngTo(a, b);
         // combo breaker: after 3 quick hits the defender is knocked clear and can't be stunned for a moment
@@ -7829,6 +8024,9 @@ notify pgrst, 'reload schema';
     for (const f of g.f) {
       f.t += dt; f.spd = 0;
       if (f.act === "ko") continue;
+      // not being hit for a moment: the bruising heals (faster while you guard or roll out of the way)
+      f.calm = (f.calm || 0) + dt;
+      if (f.calm > 2.2 && (f.rec || 0) > 0 && g.go <= 0) { const h = Math.min(f.rec, (f.act === "block" || f.act === "roll" || f.flee ? 6 : 4) * dt); f.hp = Math.min(f.max || 100, f.hp + h); f.rec -= h; }
       if (f.act === "read") { if (f.t >= 12) f.act = "idle"; continue; }
       const mv = FRM[f.act];
       if (mv) {
@@ -7858,6 +8056,8 @@ notify pgrst, 'reload schema';
         const run = m > 0.85, sp = run ? 5.0 : 2.6 * Math.max(0.5, m / 0.85);
         f.x += mx / m * sp * dt; f.z += mz / m * sp * dt; f.ang = Math.atan2(mx, mz); f.spd = sp; f.act = run ? "run" : "walk";
       } else f.act = "idle";
+      // the computer keeps its eyes on you while it moves (it only turns its back when it's getting away)
+      if (f.cpu && !f.flee) { const t = frNearest(g, f, 7); if (t) { const want = frAngTo(f, t), turn = (5 + 9 * (f.skill != null ? f.skill : FR_DIFF[g.diff || 2].skill)) * dt; f.ang += Math.max(-turn, Math.min(turn, frDiff(want, f.ang))); } }
       frClamp(f);
     }
     for (let i = 0; i < g.f.length; i++) for (let j = i + 1; j < g.f.length; j++) {
@@ -7868,13 +8068,15 @@ notify pgrst, 'reload schema';
     const alive = t => g.f.some(f => f.team === t && f.act !== "ko");
     if (!alive(0) || !alive(1)) { g.over = true; g.winTeam = alive(0) ? 0 : 1; g.wt = 0; }
   }
-  // The computer: chases, circles, strikes, blocks; a second opponent tries to get behind him.
-  // How tough the computer is: Normal, Hard (the default) or Brutal.
+  // The computer: a real fighter. It keeps facing you, guards and rolls when it sees you coming, throws mixed combos,
+  // punishes a miss, gets out of corners, and when it's hurt it backs off to get its breath back, then comes back harder.
+  // It notices what you keep doing (the same hit, from behind) and stops falling for it.
   const FR_DIFF = {
-    1: { react: 0.35, block: 0.35, dodge: 0.1, burst: 1, cd: 1.0, flank: 0.15, punish: 0.3, orbs: 0, dmg: 0.5, turn: 3.6 },
-    2: { react: 0.16, block: 0.6, dodge: 0.3, burst: 3, cd: 0.5, flank: 0.45, punish: 0.8, orbs: 0.5, dmg: 1.1, turn: 3.0 },
-    3: { react: 0.1, block: 0.8, dodge: 0.42, burst: 4, cd: 0.34, flank: 0.75, punish: 1, orbs: 0.9, dmg: 1.4, turn: 2.4 },
+    1: { react: 0.32, block: 0.4, dodge: 0.14, burst: 2, cd: 0.95, flank: 0.2, punish: 0.4, orbs: 0, dmg: 0.6, turn: 3.6, skill: 0.3 },
+    2: { react: 0.15, block: 0.62, dodge: 0.3, burst: 4, cd: 0.5, flank: 0.45, punish: 0.85, orbs: 0.5, dmg: 1.1, turn: 3.0, skill: 0.65 },
+    3: { react: 0.09, block: 0.8, dodge: 0.42, burst: 5, cd: 0.32, flank: 0.75, punish: 1, orbs: 0.9, dmg: 1.4, turn: 2.4, skill: 0.92 },
   };
+  const FR_PLANS = [["p", "p", "k"], ["p", "k"], ["p", "p", "p", "k"], ["k", "p", "p"], ["p", "p"], ["k", "k"], ["p", "k", "p", "k"]];
   function frCpu(g, dt) {
     if (g.over || g.go > 0) return;
     const P = FR_DIFF[g.diff || 2];
@@ -7884,61 +8086,96 @@ notify pgrst, 'reload schema';
     if (cpus.length > 1 && (!cpus.includes(g.tok) || g.tokT <= 0)) { const k = cpus.indexOf(g.tok); g.tok = cpus[(k + 1) % cpus.length]; g.tokT = P.turn * (0.8 + Math.random() * 0.4); }
     g.f.forEach((f, i) => {
       if (!f.cpu || f.act === "ko") return;
-      f.cd -= dt;
+      const sk = f.skill != null ? f.skill : P.skill, max = f.max || 100, rage = (f.rageT || 0) > g.T;
+      f.cd -= dt * (rage ? 1.5 : 1);
       const tgt = frNearest(g, f, 99);
       if (!tgt) { f.keys = { mx: 0, mz: 0, b: 0 }; return; }
-      const d = Math.hypot(tgt.x - f.x, tgt.z - f.z), toMe = frDiff(frAngTo(tgt, f), tgt.ang);
-      // keep a combo going: queue the next strike while this one lands
-      if ((f.act === "p" || f.act === "k") && (f.burst || 0) > 1 && !f.buf && f.t > 0.05) { f.burst--; frPress(g, i, f.burst === 1 && Math.random() < 0.4 ? "k" : "p"); }
+      const d = Math.hypot(tgt.x - f.x, tgt.z - f.z), toMe = frDiff(frAngTo(tgt, f), tgt.ang), faceOff = Math.abs(frDiff(frAngTo(f, tgt), f.ang));
+      const strike = (n, first) => { const plan = FR_PLANS[Math.floor(Math.random() * FR_PLANS.length)].slice(0, Math.max(1, n)); f.plan = plan.slice(1); f.burst = plan.length; f.keys = { mx: 0, mz: 0, b: 0 }; f.ang = frAngTo(f, tgt); frPress(g, i, first || plan[0]); f.cd = P.cd * (0.6 + Math.random() * 0.8) * (rage ? 0.6 : 1); };
+      const nHits = () => Math.max(1, Math.min(5, Math.round(1 + Math.random() * (P.burst - 1) * (0.5 + sk))));
+      // keep a combo going: the next strike of the plan, queued while this one lands
+      if ((f.act === "p" || f.act === "k") && (f.burst || 0) > 1 && !f.buf && f.t > 0.05) { f.burst--; frPress(g, i, (f.plan && f.plan.shift()) || "p"); }
       if (["p", "k", "hit", "dazed", "roll", "jump"].includes(f.act)) return;
       // a block that's being hammered: drop it and roll away before the guard breaks
-      if (f.blockT > 0 && (f.guard || 0) >= 2) { f.blockT = 0; const a = frAngTo(tgt, f) + (Math.random() < 0.5 ? 1.4 : -1.4); f.keys = { mx: Math.sin(a), mz: Math.cos(a), b: 0 }; frPress(g, i, "roll"); f.cd = 0; return; }
-      if (f.blockT > 0) { f.blockT -= dt; if (f.blockT <= 0) f.keys = { mx: 0, mz: 0, b: 0 }; return; }
-      if (f.act === "idle" && f.wasRoll) { f.wasRoll = false; f.cd = 0; }   // straight out of a roll: counter
-      // he swings at me: react after a human-like delay, then block, roll aside or back off
+      if (f.blockT > 0 && (f.guard || 0) >= 2) { f.blockT = 0; const a = frAngTo(tgt, f) + (Math.random() < 0.5 ? 1.4 : -1.4); f.keys = { mx: Math.sin(a), mz: Math.cos(a), b: 0 }; frPress(g, i, "roll"); f.wasRoll = true; return; }
+      if (f.blockT > 0) { f.blockT -= dt; f.ang = frAngTo(f, tgt); if (f.blockT <= 0) { f.keys = { mx: 0, mz: 0, b: 0 }; if (d < 1.4 && Math.random() < 0.4 + 0.5 * sk) strike(nHits()); } return; }   // out of a guard: hit back
+      if (f.act === "idle" && f.wasRoll) { f.wasRoll = false; f.cd = Math.min(f.cd, 0.05); }   // straight out of a roll: counter
+      // he got round the back of me: spin round and hit him, or roll out
+      if (faceOff > 1.7 && d < 1.9) {
+        if (Math.random() < (0.35 + 0.6 * sk) * dt * 9) {
+          f.ang = frAngTo(f, tgt);
+          if ((f.backHits || 0) >= 2 || Math.random() < 0.35) { const a = frAngTo(tgt, f) + (Math.random() < 0.5 ? 1.2 : -1.2); f.keys = { mx: Math.sin(a), mz: Math.cos(a), b: 0 }; frPress(g, i, "roll"); f.wasRoll = true; f.backHits = 0; }
+          else if (d < 1.45) strike(2, "k");
+          return;
+        }
+      }
+      // he swings at me: react after a human-like delay (sharper fighters see it sooner), then guard, roll aside or step out
       const swinging = (tgt.act === "p" || tgt.act === "k") && d < 1.9 && Math.abs(toMe) < 1.0;
       if (swinging && f.seen !== tgt.mv) {
-        f.seen = tgt.mv; f.reactAt = g.T + P.react * (0.7 + Math.random() * 0.6); f.reactTo = tgt.mv;
-        f.swings = (f.swings || []).filter(t => g.T - t < 1.5).concat(g.T);   // is he just mashing?
+        f.seen = tgt.mv; f.reactAt = g.T + P.react * (1.3 - 0.6 * sk) * (0.7 + Math.random() * 0.6); f.reactTo = tgt.mv;
+        f.swings = (f.swings || []).filter(t => g.T - t < 2).concat(g.T);
       }
       if (swinging && f.reactTo === tgt.mv && f.reactAt && g.T >= f.reactAt) {
         f.reactAt = 0;
-        const r = Math.random(), hurt = f.hp < 35 ? 0.15 : 0, spam = (f.swings || []).length >= 3 && P.burst > 1;
-        if (spam && r < 0.75) { const side = Math.random() < 0.5 ? 1 : -1, a = frAngTo(tgt, f) + side * 1.5; f.keys = { mx: Math.sin(a), mz: Math.cos(a), b: 0 }; frPress(g, i, "roll"); f.wasRoll = true; f.swings = []; return; }
-        if (r < P.block + hurt) { f.keys = { mx: 0, mz: 0, b: 1 }; f.blockT = 0.35 + Math.random() * 0.25; return; }
-        if (r < P.block + hurt + P.dodge) { const side = Math.random() < 0.5 ? 1 : -1, a = frAngTo(tgt, f) + side * 1.3; f.keys = { mx: Math.sin(a), mz: Math.cos(a), b: 0 }; frPress(g, i, "roll"); return; }
+        const r = Math.random(), hurt = f.hp < max * 0.35 ? 0.15 : 0, spam = (f.swings || []).length >= 3;
+        const bl = P.block * (0.6 + 0.5 * sk) + hurt + (spam ? 0.2 : 0), dg = P.dodge * (0.6 + 0.6 * sk) + (spam ? 0.15 : 0);
+        if (spam && r < 0.5 + 0.3 * sk) { const side = Math.random() < 0.5 ? 1 : -1, a = frAngTo(tgt, f) + side * 1.5; f.keys = { mx: Math.sin(a), mz: Math.cos(a), b: 0 }; frPress(g, i, "roll"); f.wasRoll = true; f.swings = []; return; }
+        if (r < bl) { f.keys = { mx: 0, mz: 0, b: 1 }; f.blockT = 0.3 + Math.random() * 0.3; return; }
+        if (r < bl + dg) { const side = Math.random() < 0.5 ? 1 : -1, a = frAngTo(tgt, f) + side * 1.3; f.keys = { mx: Math.sin(a), mz: Math.cos(a), b: 0 }; frPress(g, i, "roll"); f.wasRoll = true; return; }
       }
-      // he missed and is still recovering: punish with a combo
+      // hurt: back off and get its breath back (the bruising comes back while it isn't hit), then come back harder
+      if (f.hp < max * (0.28 + 0.12 * sk) && (f.rec || 0) > 4 && f.mode !== "recover" && !((f.recoverCd || 0) > g.T) && Math.random() < 0.5 + 0.5 * sk) { f.mode = "recover"; f.modeT = g.T + 2.5 + 3 * Math.random(); f.side = Math.random() < 0.5 ? 1 : -1; }
+      if (f.mode === "recover") {
+        if (g.T > f.modeT || (f.rec || 0) <= 1) { f.mode = null; f.flee = false; f.recoverCd = g.T + 9; f.rageT = g.T + 6; f.cd = 0; }   // back in, harder and faster
+        else {
+          if (d < 1.6) {
+            f.flee = false;
+            if (swinging || Math.random() < 0.5) { f.keys = { mx: 0, mz: 0, b: 1 }; f.blockT = 0.35; return; }
+            if (Math.random() < dt * 3) { const a = frAngTo(tgt, f) + f.side * 1.5; f.keys = { mx: Math.sin(a), mz: Math.cos(a), b: 0 }; frPress(g, i, "roll"); return; }
+          }
+          const r = Math.hypot(f.x, f.z), a = frAngTo(tgt, f) + (r > FR_R - 1.3 ? f.side * 1.5 : f.side * 0.35);
+          f.keys = { mx: Math.sin(a) * 0.95, mz: Math.cos(a) * 0.95, b: 0 }; f.flee = true; return;
+        }
+      }
+      f.flee = false;
+      // pinned at the edge with him close: get out to the side
+      if (Math.hypot(f.x, f.z) > FR_R - 0.8 && d < 1.6 && Math.random() < dt * (2 + 3 * sk)) { const a = Math.atan2(-f.x, -f.z) + f.side * 0.8; f.keys = { mx: Math.sin(a), mz: Math.cos(a), b: 0 }; frPress(g, i, "roll"); f.wasRoll = true; return; }
+      // he missed and is still pulling back: punish with a combo
       const whiffed = (tgt.act === "p" || tgt.act === "k") && tgt.hit && tgt.t > 0.18;
-      // not my turn: hang back at the edge of reach, step around him, wait
+      // not my turn (two of us): hang back at the edge of reach, step around him, wait
       if (cpus.length > 1 && f.team === 1 && g.tok !== i && tgt.human) {
         f.ang = frAngTo(f, tgt);
-        if (d < 1.3 && whiffed && Math.random() < dt * 2) { frPress(g, i, "p"); f.cd = P.cd; return; }   // a cheap shot, now and then
+        if (d < 1.3 && whiffed && Math.random() < dt * 2) { frPress(g, i, "p"); f.cd = P.cd; return; }
         const want = 2.4, r = (d - want) / Math.max(d, 0.01), dx = tgt.x - f.x, dz = tgt.z - f.z;
         if (Math.random() < dt * 0.6) f.side = -f.side;
         f.keys = { mx: dx * r * 1.2 + Math.cos(f.ang) * f.side * 0.35, mz: dz * r * 1.2 - Math.sin(f.ang) * f.side * 0.35, b: 0 };
         const m = Math.hypot(f.keys.mx, f.keys.mz); if (m > 0.8) { f.keys.mx *= 0.8 / m; f.keys.mz *= 0.8 / m; }
         return;
       }
-      if (d < 1.35) {
+      if (d < 1.4) {
         f.ang = frAngTo(f, tgt);
-        const go = f.cd <= 0 || (whiffed && Math.random() < P.punish) || (tgt.act === "read") || (tgt.hp < 25 && Math.random() < 0.6);
-        if (go) { f.keys = { mx: 0, mz: 0, b: 0 }; f.burst = P.burst > 1 ? 2 + Math.floor(Math.random() * (P.burst - 1)) : 1; frPress(g, i, d > 1.1 && Math.random() < 0.5 ? "k" : "p"); f.cd = P.cd * (0.7 + Math.random() * 0.7) * (f.hp < 30 ? 1.4 : 1); return; }
+        if (whiffed && Math.random() < P.punish * (0.6 + 0.5 * sk)) { strike(nHits() + 1); return; }
+        const go = f.cd <= 0 || tgt.act === "read" || (tgt.hp < 25 && Math.random() < 0.6) || (rage && Math.random() < 0.5);
+        if (go) {
+          // a feint now and then: a step back to make him swing at air, then straight back in
+          if (sk > 0.5 && Math.random() < 0.18 * sk) { f.feintT = g.T + 0.35; const a = frAngTo(tgt, f); f.keys = { mx: Math.sin(a) * 0.9, mz: Math.cos(a) * 0.9, b: 0 }; f.cd = 0.4; return; }
+          strike(nHits(), d > 1.15 ? "k" : null); return;
+        }
         // circle him, and get round the back while he blocks
         if (Math.random() < dt * 1.2) f.side = -f.side;
         const behind = tgt.act === "block" ? 0.9 : 0.45;
         f.keys = { mx: Math.cos(f.ang) * f.side * behind, mz: -Math.sin(f.ang) * f.side * behind, b: 0 };
         return;
       }
+      if ((f.feintT || 0) > g.T) return;
       // a word orb close by: race him for it
       if (P.orbs && g.orbs && g.orbs.length) {
         const o = g.orbs.reduce((a, b) => (Math.hypot(b.x - f.x, b.z - f.z) < Math.hypot(a.x - f.x, a.z - f.z) ? b : a));
         if (Math.hypot(o.x - f.x, o.z - f.z) < 3.5 && Math.random() < P.orbs) { const dx = o.x - f.x, dz = o.z - f.z, dd = Math.hypot(dx, dz) || 1; f.keys = { mx: dx / dd, mz: dz / dd, b: 0 }; return; }
       }
-      if (f.hp < 25 && Math.random() < dt * 0.4) { frPress(g, i, "roll"); return; }
-      // close in; harder opponents come at him from the side or behind
+      // close in; sharper fighters come at him from the side or behind
       let gx = tgt.x, gz = tgt.z;
-      if (i === 2 || Math.random() < P.flank * dt * 3 || f.flankT > g.T) {
+      if (i === 2 || Math.random() < P.flank * (0.5 + sk) * dt * 3 || f.flankT > g.T) {
         if (!(f.flankT > g.T)) f.flankT = g.T + 1.2;
         gx = tgt.x - Math.sin(tgt.ang) * 1.1; gz = tgt.z - Math.cos(tgt.ang) * 1.1;
       }
@@ -7961,7 +8198,22 @@ notify pgrst, 'reload schema';
     const up = e => { if (st.current.id !== e.pointerId) return; st.current.id = null; set(0, 0); };
     return html`<div class="frstick" onPointerDown=${down} onPointerMove=${move} onPointerUp=${up} onPointerCancel=${up} aria-label="Move"><div class="frknob" ref=${knob}></div></div>`;
   }
-  function Arena({ student, lessons, ix, uIdx, onClose }) {
+  // The tournament: every other fighter, one after another, each one tougher; the last can be your teacher. Win them all and you're crowned.
+  const FR_TOUR = [{ hp: 130, sk: -0.12, dmg: 0.9 }, { hp: 155, sk: -0.02, dmg: 1.0 }, { hp: 180, sk: 0.08, dmg: 1.1 }, { hp: 205, sk: 0.16, dmg: 1.2 }];
+  const FR_BOSS = { hp: 250, sk: 1, dmg: 1.3 };
+  function frTourNew(me, boss) { const order = KF_CHARS.map((_, i) => i).filter(i => i !== me); for (let i = order.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [order[i], order[j]] = [order[j], order[i]]; } return { order, i: 0, boss: !!boss, me: 100, done: false }; }
+  const frTourLen = t => t.order.length + (t.boss ? 1 : 0);
+  function frTourBout(t) {
+    const boss = t.boss && t.i === t.order.length, st = boss ? FR_BOSS : FR_TOUR[Math.min(FR_TOUR.length - 1, t.i)], base = FR_DIFF[gDiff()].skill;
+    return { boss, look: boss ? t.order[t.order.length - 1] : t.order[t.i], name: boss ? "Teacher" : KF_CHARS[t.order[t.i]].name, o: { hp: st.hp, skill: boss ? 1 : Math.max(0.15, Math.min(1, base + st.sk)), dmg: st.dmg, me: t.me } };
+  }
+  // the bench: everyone waiting their turn on a chair, the ones you've beaten crossed out
+  function FrBench({ t, big }) {
+    const n = frTourLen(t);
+    return html`<div class=${"frbench" + (big ? " big" : "")}>${Array.from({ length: n }, (_, k) => { const boss = t.boss && k === t.order.length, c = KF_CHARS[boss ? t.order[t.order.length - 1] : t.order[k]], st = k < t.i ? "beat" : k === t.i ? "now" : "wait";
+      return html`<span key=${k} class=${"frseat " + st} title=${boss ? "Teacher" : c.name}><i style=${"background:" + (c.top || c.gi || c.shorts || "#555") + ";border-color:" + (c.stripe || c.gloves || "#fff")}>${boss ? "🧑‍🏫" : c.name[0]}</i><small>${boss ? "Teacher" : c.name}</small><b>${st === "beat" ? "✓" : st === "now" ? "🥊" : "🪑"}</b></span>`; })}</div>`;
+  }
+  function Arena({ student, lessons, ix, uIdx, onClose, tourStart }) {
     annSet(ix, lessons);
     const glRef = useRef(null), gRef = useRef(null), keysRef = useRef({ mx: 0, mz: 0, b: 0 }), poolRef = useRef(null), recentRef = useRef([]), chRef = useRef(null);
     const [n, setN] = useState(null);
@@ -7970,14 +8222,18 @@ notify pgrst, 'reload schema';
     const [load, setLoad] = useState("loading");
     const [ch, setCh] = useState(null); chRef.current = ch;
     const me = (() => { try { const v = parseInt(localStorage.getItem("rc.kf.me") || "", 10); return isNaN(v) ? 1 : v % KF_CHARS.length; } catch (e) { return 1; } })();
+    const [tour, setTour] = useState(null), [boss, setBoss] = useState(true), [paid, setPaid] = useState(null);
+    const tourRef = useRef(null); tourRef.current = tour;
+    useEffect(() => { if (tourStart) { setTour(frTourNew(me, tourStart === "boss")); setN(1); } }, []);
     useEffect(() => {
       if (!n) return;
       poolRef.current = qPool(lessons, uIdx, ix);
-      const g = frNew(n, 1, gDiff()); gRef.current = g; window.__fr = gRef; window.__frApi = { frPress, frHit, FRM, frStep, frNew, frCpu };
-      const gl = glRef.current, chars = [KF_CHARS[me], KF_CHARS[(me + 2) % KF_CHARS.length], KF_CHARS[(me + 3) % KF_CHARS.length]].slice(0, n + 1);
+      const T = tourRef.current, bout = T ? frTourBout(T) : null;
+      const g = bout ? frNew(1, T.i + 1, gDiff(), bout.o) : frNew(n, 1, gDiff()); gRef.current = g; window.__fr = gRef; window.__frApi = { frPress, frHit, FRM, frStep, frNew, frCpu };
+      const gl = glRef.current, chars = bout ? [KF_CHARS[me], KF_CHARS[bout.look]] : [KF_CHARS[me], KF_CHARS[(me + 2) % KF_CHARS.length], KF_CHARS[(me + 3) % KF_CHARS.length]].slice(0, n + 1);
       let view = null, dead = false, raf = 0, last = performance.now(), uiT = 0, lw = 0, lh = 0;
       setLoad(v => (v === "ready" ? v : "loading"));
-      load3D().then(G => G.createArena(gl)).then(async v => { if (dead) { v.dispose(); return; } await v.setChars(chars); if (dead) { v.dispose(); return; } view = v; lw = 0; setLoad("ready"); }).catch(() => { if (!dead) setLoad("failed"); });
+      load3D().then(G => G.createArena(gl)).then(async v => { if (dead) { v.dispose(); return; } await v.setChars(chars); if (bout && v.setLabels) v.setLabels(["You", bout.name]); if (dead) { v.dispose(); return; } view = v; lw = 0; setLoad("ready"); }).catch(() => { if (!dead) setLoad("failed"); });
       const loop = now => {
         raf = requestAnimationFrame(loop);
         const dt = Math.min(0.05, (now - last) / 1000); last = now;
@@ -7994,7 +8250,7 @@ notify pgrst, 'reload schema';
           view.render(g, dt, now / 1000);
         }
         uiT += dt;
-        if (uiT > 0.1) { uiT = 0; setUi({ hp: g.f.map(f => f.hp), S: g.f[0].S, over: g.over, win: g.winTeam === 0, go: g.go > 0 }); }
+        if (uiT > 0.1) { uiT = 0; setUi({ hp: g.f.map(f => f.hp / (f.max || 100) * 100), rec: g.f.map(f => (f.rec || 0) / (f.max || 100) * 100), S: g.f[0].S, over: g.over, win: g.winTeam === 0, go: g.go > 0, myHp: g.f[0].hp }); }
       };
       raf = requestAnimationFrame(loop);
       kfSnd("go");
@@ -8019,23 +8275,44 @@ notify pgrst, 'reload schema';
     if (!n) return html`<div class="frpick">
       <button class="iconbtn light frx" onClick=${onClose} aria-label="Back"><${Ic.back} size=${24}/></button>
       <b class="frtitle">Arena</b>
-      <p class="frsub">Move anywhere. Hit them from behind.</p>
-      <button class="qtile" onClick=${() => setN(1)} aria-label="One against one"><span class="qemo">🥊</span><b>1 vs 1</b></button>
-      <button class="qtile" onClick=${() => setN(2)} aria-label="One against two"><span class="qemo">🔥</span><b>1 vs 2</b></button>
+      <p class="frsub">Move anywhere. They fight back hard: guard, roll, and don't keep doing the same thing.</p>
+      <button class="qtile tour" onClick=${() => { setTour(frTourNew(me, boss)); setN(1); }} aria-label="Tournament"><span class="qemo">🏆</span><b>Tournament<small>${KF_CHARS.length - 1} fighters, one after another${boss ? ", then your teacher" : ""}. Win them all to be crowned.</small></b></button>
+      <button class=${"gamesw" + (boss ? " on" : "")} onClick=${() => setBoss(!boss)}><span class="knob"></span><span>The teacher waits at the end (the final boss)</span></button>
+      <button class="qtile" onClick=${() => { setTour(null); setN(1); }} aria-label="One against one"><span class="qemo">🥊</span><b>1 vs 1</b></button>
+      <button class="qtile" onClick=${() => { setTour(null); setN(2); }} aria-label="One against two"><span class="qemo">🔥</span><b>1 vs 2</b></button>
     </div>`;
-    const u = ui || { hp: [100, 100, 100], S: 50 };
+    const u = ui || { hp: [100, 100, 100], rec: [0, 0, 0], S: 50 };
+    const bout = tour ? frTourBout(tour) : null, last = tour && tour.i >= frTourLen(tour) - 1;
+    const bar = (h, r, cls) => html`<div class=${"frbar " + cls}><em style=${"left:" + h + "%;width:" + Math.min(100 - h, r || 0) + "%"}></em><i style=${"width:" + h + "%"}></i></div>`;
+    function nextBout() {
+      const t = tourRef.current, won = u.win;
+      if (!won) { setTour(Object.assign({}, t, { me: 100 })); setUi(null); setRound(r => r + 1); return; }   // try that fighter again
+      if (paid !== t.i) { gCoins(t.i === frTourLen(t) - 1 ? 200 : 50); setPaid(t.i); }
+      if (t.i >= frTourLen(t) - 1) { setTour(Object.assign({}, t, { done: true })); return; }
+      setTour(Object.assign({}, t, { i: t.i + 1, me: Math.min(100, Math.round((u.myHp || 0) + 45)) })); setUi(null); setRound(r => r + 1);
+    }
+    if (tour && tour.done) return html`<div class="frpick frcrown">
+      <div class="crown">👑</div><b class="frtitle">CHAMPION!</b>
+      <p class="frsub">You beat ${tour.order.length} fighters${tour.boss ? " and your teacher" : ""}. +${50 * (frTourLen(tour) - 1) + 200} 🪙</p>
+      <${FrBench} t=${Object.assign({}, tour, { i: frTourLen(tour) })} big=${true}/>
+      <div class="frendb static"><button class="btn" onClick=${() => { setTour(frTourNew(me, tour.boss)); setPaid(null); setUi(null); setRound(r => r + 1); }}>Again</button><button class="btn quiet" onClick=${onClose}>Done</button></div>
+    </div>`;
     return html`<div class="frwrap">
       <canvas ref=${glRef} class="frcv" aria-label="The arena"></canvas>
       <div class="frhud">
         <button class="iconbtn light" onClick=${onClose} aria-label="Leave"><${Ic.x} size=${24}/></button>
         <div class="frbars">
-          <div class="frbar me"><i style=${"width:" + u.hp[0] + "%"}></i></div>
+          ${bar(u.hp[0], u.rec && u.rec[0], "me")}
           <div class="frbar str"><i style=${"width:" + u.S + "%"}></i></div>
         </div>
-        <div class="frbars them">${u.hp.slice(1).map(h => html`<div class="frbar foe"><i style=${"width:" + h + "%"}></i></div>`)}</div>
+        <div class="frbars them">${bout ? html`<span class="frname">${bout.name}${bout.boss ? " 👑" : ""}</span>` : null}${u.hp.slice(1).map((h, k) => bar(h, u.rec && u.rec[k + 1], "foe"))}</div>
       </div>
+      ${tour ? html`<${FrBench} t=${tour}/>` : null}
       ${load !== "ready" ? html`<div class="frmsg">${load === "failed" ? "This phone can't show the 3D arena." : "Loading the arena…"}</div>` : u.go ? html`<div class="frmsg frbig">FIGHT!</div>` : null}
-      ${u.over ? html`<div class="frend">
+      ${u.over && tour ? html`<div class="frend">
+        <div class="frmsg frbig">${u.win ? (last ? "YOU WIN IT ALL!" : "YOU BEAT " + bout.name.toUpperCase() + "!") : "K.O."}</div>
+        <div class="frendb"><button class="btn" onClick=${nextBout}>${u.win ? (last ? "👑 Take the crown" : "Next: " + frTourBout(Object.assign({}, tour, { i: tour.i + 1 })).name) : "Fight " + bout.name + " again"}</button><button class="btn quiet" onClick=${() => { setTour(null); setN(null); }}>Leave the tournament</button></div>
+      </div>` : u.over ? html`<div class="frend">
         <div class="frmsg frbig">${u.win ? "YOU WIN" : "K.O."}</div>
         <div class="frendb"><button class="btn" onClick=${() => { setUi(null); setRound(r => r + 1); }}>Again</button><button class="btn quiet" onClick=${() => setN(null)}>Change</button></div>
       </div>` : null}
@@ -8060,15 +8337,16 @@ notify pgrst, 'reload schema';
     const n = roster.length;
     const f = roster.map((r, i) => {
       const a = (i / n) * Math.PI * 2 + Math.PI / 2, x = Math.sin(a) * 3.2, z = Math.cos(a) * 3.2;
-      const team = mode === "vs" ? (r.owner === "teacher" ? 1 : 0) : i;
-      const o = frFighter(team, x, z, Math.atan2(-x, -z), false);
-      return Object.assign(o, { human: true, S: 50, owner: r.owner, name: r.name });
+      const team = mode === "tour" ? (r.cpu ? 1 : 0) : mode === "vs" ? (r.owner === "teacher" ? 1 : 0) : i;
+      const o = frFighter(team, x, z, Math.atan2(-x, -z), !!r.cpu);
+      if (r.cpu) return Object.assign(o, { owner: "cpu", name: r.name, hp: r.hp || 100, max: r.hp || 100, skill: r.skill });   // a tournament fighter, against the team
+      return Object.assign(o, { human: true, S: 50, owner: r.owner, name: r.name }, r.hp != null ? { hp: r.hp } : {});
     });
-    return { f, S: 50, over: false, winTeam: -1, fx: [], fxId: 0, reading: false, slowT: 0, wt: 0, T: 0, go: 2, lv: 1, cpuDmg: 0.75, mode };
+    return { f, S: 50, over: false, winTeam: -1, fx: [], fxId: 0, reading: false, slowT: 0, wt: 0, T: 0, go: 2, lv: 1, cpuDmg: mode === "tour" ? FR_DIFF[gDiff()].dmg * 1.15 : 0.75, diff: gDiff(), mode };
   }
-  const frPack = g => ({ f: g.f.map(f => [Math.round(f.x * 100) / 100, Math.round(f.z * 100) / 100, Math.round(f.ang * 100) / 100, f.act, Math.round(f.t * 100) / 100, Math.round(f.hp), Math.round(f.S || 0), Math.round((f.y || 0) * 100) / 100, f.team, Math.round((f.spd || 0) * 10) / 10, f.mv || 0, Math.round((f.cs || 1) * 100) / 100]), fx: g.fx.slice(-8), ob: (g.orbs || []).map(o => [o.id, Math.round(o.x * 100) / 100, Math.round(o.z * 100) / 100]), over: g.over, wt: g.winTeam, go: g.go });
+  const frPack = g => ({ f: g.f.map(f => [Math.round(f.x * 100) / 100, Math.round(f.z * 100) / 100, Math.round(f.ang * 100) / 100, f.act, Math.round(f.t * 100) / 100, Math.round(f.hp), Math.round(f.S || 0), Math.round((f.y || 0) * 100) / 100, f.team, Math.round((f.spd || 0) * 10) / 10, f.mv || 0, Math.round((f.cs || 1) * 100) / 100, Math.round(f.max || 100), Math.round(f.rec || 0)]), fx: g.fx.slice(-8), ob: (g.orbs || []).map(o => [o.id, Math.round(o.x * 100) / 100, Math.round(o.z * 100) / 100]), over: g.over, wt: g.winTeam, go: g.go });
   function frApply(g, p) {
-    p.f.forEach((a, i) => { const f = g.f[i]; if (!f) return; f.tx = a[0]; f.tz = a[1]; f.ang = a[2]; f.act = a[3]; f.t = a[4]; f.hp = a[5]; f.S = a[6]; f.y = a[7]; f.team = a[8]; f.spd = a[9]; f.mv = a[10] || 0; f.cs = a[11] || 1; });
+    p.f.forEach((a, i) => { const f = g.f[i]; if (!f) return; f.tx = a[0]; f.tz = a[1]; f.ang = a[2]; f.act = a[3]; f.t = a[4]; f.hp = a[5]; f.S = a[6]; f.y = a[7]; f.team = a[8]; f.spd = a[9]; f.mv = a[10] || 0; f.cs = a[11] || 1; f.max = a[12] || 100; f.rec = a[13] || 0; });
     g.fx = p.fx || []; g.over = p.over; g.winTeam = p.wt; g.go = p.go; g.orbs = (p.ob || []).map(a => ({ id: a[0], x: a[1], z: a[2] }));
   }
   function ArenaLive({ role, s, student, lessons, ix, uIdx, onClose }) {
@@ -8083,7 +8361,7 @@ notify pgrst, 'reload schema';
     useEffect(() => {
       const f = m => {
         if (!host) {
-          if (m.type === "fr-start") { startRef.current = m; setSetup({ mode: m.mode, roster: m.roster, n: m.n }); }
+          if (m.type === "fr-start") { startRef.current = m; setSetup({ mode: m.mode, roster: m.roster, n: m.n, bench: m.bench || null }); }
           else if (m.type === "fr-end") onClose();
           else if (m.type === "fr-st" && gRef.current) frApply(gRef.current, m.g);
           else if (m.type === "fr-orb" && m.to === me) openBook();
@@ -8104,17 +8382,24 @@ notify pgrst, 'reload schema';
       if (!host) live.send({ type: "fr-hello" });
       return () => frBus.subs.delete(f);
     }, []);
-    function startHost(mode) {
+    const tourL = useRef(null);
+    function startHost(mode, carry) {
       const ids = [live.st.sid].concat(live.st.group || []).filter(Boolean);
       const t = frLook();
       const roster = [{ owner: "teacher", name: "Teacher", look: t }].concat(ids.map((id, i) => { const st = s.students.find(x => x.id === id); return { owner: id, name: st ? st.name : "Student", look: (t + 1 + i) % KF_CHARS.length }; }));
-      setSetup({ mode, roster, n: 1 });
+      if (mode !== "tour") { tourL.current = null; setSetup({ mode, roster, n: 1 }); return; }
+      // the tournament together: you and your students as one team, against every fighter nobody picked, one after another
+      if (!carry) { const used = roster.map(r => r.look % KF_CHARS.length), order = KF_CHARS.map((_, i) => i).filter(i => !used.includes(i)); tourL.current = { order: order.length ? order : [((t + 2) % KF_CHARS.length)], i: 0 }; }
+      const T = tourL.current, k = T.order[T.i], st = FR_TOUR[Math.min(FR_TOUR.length - 1, T.i)], humans = roster.length;
+      roster.forEach(r => { if (carry && carry[r.owner] != null) r.hp = carry[r.owner]; });
+      roster.push({ owner: "cpu", cpu: true, name: KF_CHARS[k].name, look: k, hp: Math.round(st.hp * (0.7 + 0.45 * humans)), skill: Math.min(1, FR_DIFF[gDiff()].skill + st.sk + 0.1) });
+      setSetup({ mode, roster, n: T.i + 1, bench: T.order.map((c, j) => ({ name: KF_CHARS[c].name, st: j < T.i ? "beat" : j === T.i ? "now" : "wait" })) });
     }
     useEffect(() => {
       if (!setup) return;
       const g = frLive(setup.mode, setup.roster); gRef.current = g; window.__frl = gRef; window.__frApi = { frPress, frHit, FRM, frStep, frNew, frCpu };
       g.f.forEach(f => { f.tx = f.x; f.tz = f.z; });
-      if (host) { startRef.current = { type: "fr-start", mode: setup.mode, roster: setup.roster, n: round }; live.send(startRef.current); }
+      if (host) { startRef.current = { type: "fr-start", mode: setup.mode, roster: setup.roster, n: round + (setup.n || 0) * 100, bench: setup.bench || null }; live.send(startRef.current); }
       poolRef.current = qPool(lessons, uIdx, ix);
       const mi = Math.max(0, g.f.findIndex(f => f.owner === me));
       const gl = glRef.current, chars = setup.roster.map(r => KF_CHARS[r.look % KF_CHARS.length]);
@@ -8131,7 +8416,7 @@ notify pgrst, 'reload schema';
           g.f[mi].keys = keysRef.current;
           // the match keeps pace with real time even if this phone draws few frames
           let left = real;
-          while (left > 1e-4) { const st = Math.min(0.05, left); left -= st; const sl = g.slowT > 0 ? 0.35 : 1; g.slowT = Math.max(0, g.slowT - st); frStep(g, st * sl, kfSnd); }
+          while (left > 1e-4) { const st = Math.min(0.05, left); left -= st; const sl = g.slowT > 0 ? 0.35 : 1; g.slowT = Math.max(0, g.slowT - st); if (g.mode === "tour") frCpu(g, st * sl); frStep(g, st * sl, kfSnd); }
           for (const f of g.f) if (f.orbWant) { f.orbWant = false; if (f.owner && f.owner !== me) live.send({ type: "fr-orb", to: f.owner }); }
           if (sendT > 0.066) { sendT = 0; live.send({ type: "fr-st", g: frPack(g) }); }
         } else {
@@ -8141,7 +8426,7 @@ notify pgrst, 'reload schema';
         }
         if (view) view.render(g, dt, now / 1000, mi);
         uiT += dt;
-        if (uiT > 0.1) { uiT = 0; const M = g.f[mi]; setUi({ list: g.f.map((f, i) => ({ name: setup.roster[i].name, hp: f.hp, mine: i === mi, mate: f.team === M.team })), S: M.S || 0, over: g.over, win: g.winTeam === M.team, go: g.go > 0, out: M.act === "ko" }); }
+        if (uiT > 0.1) { uiT = 0; const M = g.f[mi]; setUi({ list: g.f.map((f, i) => ({ name: setup.roster[i].name, hp: f.hp / (f.max || 100) * 100, own: f.hp, owner: setup.roster[i].owner, mine: i === mi, mate: f.team === M.team })), S: M.S || 0, over: g.over, win: g.winTeam === M.team, go: g.go > 0, out: M.act === "ko" }); }
       };
       raf = requestAnimationFrame(loop);
       kfSnd("go");
@@ -8168,7 +8453,8 @@ notify pgrst, 'reload schema';
       <b class="frtitle">Arena</b>
       ${host ? html`<p class="frsub">Everyone in the class joins.</p>
         <button class="qtile" onClick=${() => startHost("vs")} aria-label="Students against me"><span class="qemo">🧑‍🏫</span><b>Students vs me</b></button>
-        <button class="qtile" onClick=${() => startHost("ffa")} aria-label="Everyone for themselves"><span class="qemo">🔥</span><b>Everyone for themselves</b></button>`
+        <button class="qtile" onClick=${() => startHost("ffa")} aria-label="Everyone for themselves"><span class="qemo">🔥</span><b>Everyone for themselves</b></button>
+        <button class="qtile tour" onClick=${() => startHost("tour")} aria-label="Tournament together"><span class="qemo">🏆</span><b>Tournament together<small>You and your students as one team, against every other fighter, one after another</small></b></button>`
         : html`<p class="frsub">Waiting for your teacher…</p>`}
     </div>`;
     const u = ui || { list: [], S: 50 };
@@ -8182,9 +8468,12 @@ notify pgrst, 'reload schema';
         </div>
       </div>
       ${load !== "ready" ? html`<div class="frmsg">${load === "failed" ? "This phone can't show the 3D arena." : "Loading the arena…"}</div>` : u.go ? html`<div class="frmsg big">FIGHT!</div>` : u.out && !u.over ? html`<div class="frmsg">You're out. Watch the others!</div>` : null}
+      ${setup.bench ? html`<div class="frbench">${setup.bench.map((b, k) => html`<span key=${k} class=${"frseat " + b.st}><i style="background:#555">${b.name[0]}</i><small>${b.name}</small><b>${b.st === "beat" ? "✓" : b.st === "now" ? "🥊" : "🪑"}</b></span>`)}</div>` : null}
       ${u.over ? html`<div class="frend">
-        <div class="frmsg big">${u.win ? "YOU WIN" : "K.O."}</div>
-        ${host ? html`<div class="frendb"><button class="btn" onClick=${() => { setUi(null); setRound(r => r + 1); }}>Again</button><button class="btn quiet" onClick=${onClose}>End</button></div>` : null}
+        <div class="frmsg big">${setup.mode === "tour" && u.win && tourL.current && tourL.current.i >= tourL.current.order.length - 1 ? "👑 CHAMPIONS!" : u.win ? "YOU WIN" : "K.O."}</div>
+        ${host ? html`<div class="frendb">${setup.mode === "tour" && u.win && tourL.current && tourL.current.i < tourL.current.order.length - 1
+            ? html`<button class="btn" onClick=${() => { const carry = {}; u.list.forEach(x => { if (x.owner !== "cpu") carry[x.owner] = Math.min(100, Math.round(x.own + 45)); }); tourL.current.i++; setUi(null); startHost("tour", carry); }}>Next fighter</button>`
+            : html`<button class="btn" onClick=${() => { setUi(null); if (setup.mode === "tour") { tourL.current = null; startHost("tour"); } else setRound(r => r + 1); }}>Again</button>`}<button class="btn quiet" onClick=${onClose}>End</button></div>` : null}
       </div>` : null}
       ${ch ? html`<div class="frread"><${WordChallenge} timed=${true} c=${ch} ix=${ix} lessons=${lessons} onDone=${ok => answer(ok)} onCancel=${() => { setCh(null); readMsg({ type: "fr-read", on: false }); }}/></div>` : html`<div class="frpad">
         <${FrStick} keys=${keysRef}/>
@@ -8287,6 +8576,7 @@ notify pgrst, 'reload schema';
     if (view === "fight") return html`<${Fight} mode="solo" student=${student} lessons=${lessons} ix=${ix} uIdx=${uIdx} onClose=${() => { refresh(); setView("home"); }}/>`;
     if (view === "city") return html`<${City} student=${student} lessons=${lessons} ix=${ix} uIdx=${uIdx} onClose=${() => { refresh(); setView("home"); }}/>`;
     if (view === "arena") return html`<${Arena} student=${student} lessons=${lessons} ix=${ix} uIdx=${uIdx} onClose=${() => { refresh(); setView("home"); }}/>`;
+    if (view === "tour") return html`<${Arena} student=${student} lessons=${lessons} ix=${ix} uIdx=${uIdx} tourStart="boss" onClose=${() => { refresh(); setView("home"); }}/>`;
     if (view === "play") return html`<${ChapterPlay} key=${key} n=${chap} student=${student} lessons=${lessons} ix=${ix} uIdx=${uIdx}
       onExit=${() => { refresh(); setView("map"); }}
       onNext=${() => { const g = gLoad(); refresh(); if (chap + 1 < QCH.length && qOpen(chap + 1, g, uIdx)) { setChap(chap + 1); setKey(x => x + 1); } else setView("map"); }}/>`;
@@ -8297,6 +8587,7 @@ notify pgrst, 'reload schema';
       </div>
       ${view === "home" ? html`<div class="qhome">
           <div class="diffrow" role="group" aria-label="Difficulty">${[[1, "Normal"], [2, "Hard"], [3, "Brutal"]].map(([v, nm]) => html`<button class=${"diffb" + (gDiff() === v ? " on" : "")} onClick=${() => { setDiff(v); setDiffTick(t => t + 1); }}>${nm}</button>`)}</div>
+          <button class="qtile tour" onClick=${() => setView("tour")} aria-label="Tournament"><span class="qemo">🏆</span><b>Tournament<small>Beat every fighter, then the teacher, to be crowned</small></b></button>
           <button class="qtile" onClick=${() => setView("arena")} aria-label="Arena"><span class="qemo">🏟️</span><b>Arena</b><small>3D</small></button>
           <button class="qtile" onClick=${() => setView("fight")} aria-label="Fight"><span class="qemo">🥊</span><b>Fight</b></button>
         </div>`
@@ -8652,6 +8943,7 @@ notify pgrst, 'reload schema';
     if (t.indexOf("webm") >= 0) return "audio/webm";
     if (t.indexOf("mp4") >= 0 || t.indexOf("m4a") >= 0) return "audio/mp4";
     if (t === "image/jpeg" || t === "image/png" || t === "image/webp" || t === "image/gif") return t;
+    if (t === "application/pdf") return t;   // a book, to download
     return null;
   }
   // Pictures for the board: phone photos are huge; 1600 px is plenty.
@@ -9099,7 +9391,7 @@ notify pgrst, 'reload schema';
     </div>`;
   }
 
-  function Rail({ lessons, uIdx, vIdx, unreadBy, teacher, onPick, onBook, onFight, onMushaf, onWords, bell }) {
+  function Rail({ lessons, uIdx, vIdx, unreadBy, teacher, onPick, onBook, onFight, onMushaf, onWords, onBooks, bell }) {
     const ref = useRef(null);
     useEffect(() => {
       const rail = ref.current; if (!rail) return;
@@ -9107,7 +9399,7 @@ notify pgrst, 'reload schema';
       const left = el.offsetLeft - rail.clientWidth / 2 + el.clientWidth / 2;
       try { rail.scrollTo({ left, behavior: "smooth" }); } catch (e) { rail.scrollLeft = left; }
     }, [vIdx, lessons.length]);
-    return html`<nav class="rail" ref=${ref} aria-label="Lessons">${bell ? html`<${PushBell} studentId=${bell} rail=${true}/>` : null}${onBook ? html`<button class="railbook railw" onClick=${onBook} aria-label="My exercise book"><${Ic.book} size=${20}/><span>Book</span></button>` : null}${onMushaf ? html`<button class="railbook railw" onClick=${onMushaf} aria-label="The Mushaf"><span class="railic">📖</span><span>Mushaf</span></button>` : null}${onWords ? html`<button class="railbook railw" onClick=${onWords} aria-label="Vocabulary"><span class="railic">📗</span><span>Vocabulary</span></button>` : null}${!teacher ? html`<${ThemeBtn} rail=${true}/>` : null}${onFight ? html`<button class="railbook railfight railw" onClick=${onFight} aria-label="Games">🎮<span>Game</span></button>` : null}${onBook || onFight ? html`<span class="raillbl">Lessons</span>` : null}${lessons.map((l, i) => {
+    return html`<nav class="rail" ref=${ref} aria-label="Lessons">${bell ? html`<${PushBell} studentId=${bell} rail=${true}/>` : null}${onBook ? html`<button class="railbook railw" onClick=${onBook} aria-label="My exercise book"><${Ic.book} size=${20}/><span>Book</span></button>` : null}${onMushaf ? html`<button class="railbook railw" onClick=${onMushaf} aria-label="The Mushaf"><span class="railic">📖</span><span>Mushaf</span></button>` : null}${onWords ? html`<button class="railbook railw" onClick=${onWords} aria-label="Vocabulary"><span class="railic">📗</span><span>Vocabulary</span></button>` : null}${onBooks ? html`<button class="railbook railw" onClick=${onBooks} aria-label="Books"><span class="railic">📕</span><span>Books</span></button>` : null}${!teacher ? html`<${ThemeBtn} rail=${true}/>` : null}${onFight ? html`<button class="railbook railfight railw" onClick=${onFight} aria-label="Games">🎮<span>Game</span></button>` : null}${onBook || onFight ? html`<span class="raillbl">Lessons</span>` : null}${lessons.map((l, i) => {
       const state = i < uIdx ? "done" : i === uIdx ? "cur" : "locked";
       const can = teacher || i <= uIdx;
       return html`<button key=${l.id} class=${"dot " + state + (i === vIdx ? " view" : "") + (teacher && i === vIdx ? " tview" : "")} disabled=${!can} onClick=${() => onPick(l.id)} aria-label=${"Lesson " + (i + 1)} aria-current=${i === vIdx ? "true" : null}>
@@ -9600,7 +9892,7 @@ notify pgrst, 'reload schema';
 
     const who = student.name || "your student";
 
-    return html`<div class="room">
+    return html`<div class="room"><div class="rtop">
       ${!teacher && L.on ? html`<div class="livebar" role="status" aria-label="Live class"><span class="livedot"></span>LIVE</div>` : null}
       ${!teacher && L.on ? html`<${StudentCall} L=${L}/>` : null}
       ${teacher ? html`<header class="rhead">
@@ -9618,7 +9910,7 @@ notify pgrst, 'reload schema';
         const asked = mine.some(m => m.from === "student" && m.lesson === m0.lesson && m.at < m0.at);
         return html`<button class="answerbar" onClick=${() => { setViewId(m0.lesson); flashMsg(m0.id); }}>🔔 <b>${asked ? "Teacher answered" : "New from teacher"}</b><span>Lesson ${li + 1}</span><${Ic.down} size=${18}/></button>`;
       })() : null}
-      <${Rail} lessons=${lessons} uIdx=${uIdx} vIdx=${vIdx} unreadBy=${unreadBy} teacher=${teacher} onPick=${setViewId} onBook=${teacher ? null : () => setBookOpen(true)} onFight=${teacher || ar || !student.games ? null : () => setFight("hub")} onMushaf=${ar && !teacher ? () => setArOpen("mushaf") : null} onWords=${ar && !teacher ? () => setArOpen("words") : null} bell=${teacher ? null : student.id}/>
+      <${Rail} lessons=${lessons} uIdx=${uIdx} vIdx=${vIdx} unreadBy=${unreadBy} teacher=${teacher} onPick=${setViewId} onBook=${teacher ? null : () => setBookOpen(true)} onFight=${teacher || ar || !student.games ? null : () => setFight("hub")} onMushaf=${ar && !teacher ? () => setArOpen("mushaf") : null} onWords=${ar && !teacher ? () => setArOpen("words") : null} onBooks=${ar && !teacher && (s.books || []).some(b => b.shared && (b.course || "ar") === "ar") ? () => setArOpen("books") : null} bell=${teacher ? null : student.id}/></div><div class="rs1">
       ${teacher ? html`<div class="tact">
         ${vIdx === uIdx
           ? html`<button class="btn pass" onClick=${pass}><${Ic.tick} size=${20} sw=${2.8}/>Pass lesson ${vIdx + 1}</button>`
@@ -9633,6 +9925,7 @@ notify pgrst, 'reload schema';
       ${teacher && L.on ? html`<${ClassPanel} s=${s} who=${who} lessonTitle=${lesson.title} lessonNo=${vIdx + 1} studentId=${student.id}/>` : null}
       ${teacher && L.on && L.mode !== "write" ? html`<${LiveTools} lesson=${lesson} tool=${ltool} setTool=${setLtool} pen=${lpen} setPen=${setLpen} stage=${liveStage}/>` : null}
       ${turn && !teacher ? html`<div class="turnbar" role="status"><span class="tbh">✋</span><div><b>Your turn!</b><span>${turn.cue.tile ? "Say the answer out loud, then tap it on the board." + (turn.tries >= 2 ? " Look — it's glowing." : "") : "Say it out loud: read it, or answer the teacher's question. Then tap ▶ Continue."}</span></div>${turn.cue.tile ? null : html`<button class="btn slim" onClick=${resume}>▶ Continue</button>`}</div>` : null}
+      </div><div class="rmain">
       ${ar && showClass && nPages > 1 ? html`<div class="pgbar arpg"><button class="chip" disabled=${pgNow <= 0} onClick=${() => goPage(pgNow - 1)} aria-label="The concept before">‹</button><b><span dir="auto">${pageNow.title || "Concept " + (pgNow + 1)}</span><small dir="ltr">${pgNow + 1} of ${nPages}${following ? " · follows the explanation" : ""}</small></b><button class="chip" disabled=${pgNow >= nPages - 1} onClick=${() => goPage(pgNow + 1)} aria-label="The next concept">›</button></div>` : null}
       ${showClass ? html`<${ClassroomPlayer} lesson=${lesson} number=${vIdx + 1} k=${"explain:" + lid} src=${srcFor(lesson.explain)} secs=${lesson.explainSecs} cues=${lesson.cues || []} ix=${ix}
         onTile=${onTile} waiting=${!!turn} cheer=${flash && flash.ok ? flash : null} page=${ar ? pgNow : null}/>` : null}
@@ -9647,6 +9940,7 @@ notify pgrst, 'reload schema';
         stage=${(showClass ? null : explFx.stage) || liveStage} clip=${(showClass ? null : explFx.clip) || (L.on && L.clip) || null} onClipEnd=${explFx.clip && !showClass ? explFx.endClip : () => live.set({ clip: null })} strip=${!showClass && hasStrip(lesson.cues)}
         onPen=${teacher && L.on && ltool === "pen" ? d => live.fx({ k: "o", s: "pen", col: lpen, r: d.r, c: d.c, pts: d.pts, dur: round2(d.dur) }) : null} penCol=${lpen}
         voice=${!showClass && lesson.explain && pst.key === "explain:" + lid ? { src: srcFor(lesson.explain), secs: lesson.explainSecs, k: "explain:" + lid } : null}/>`}
+      </div><div class="rs2">
       ${ar ? html`<${ArLessonExtras} s=${s} lesson=${lesson} student=${student} teacher=${teacher}/>` : null}
       <section class="book" aria-label="Messages">
         <div class="thread">${nodes}</div>
@@ -9655,11 +9949,11 @@ notify pgrst, 'reload schema';
       <div class="spacer"></div>
       ${!endVis && unreadHere ? html`<button class="newpill" onClick=${scrollEnd} aria-label="New messages"><${Ic.chat} size=${20}/><${Ic.down} size=${18}/></button>` : null}
       <${Composer} teacher=${teacher} lesson=${lesson} pst=${pst} canSend=${teacher || s.canSend} onSend=${send}
-        points=${points} setPoints=${setPoints} hw=${hw} setHw=${setHw} turn=${teacher ? null : turn} onResume=${resume}/>
+        points=${points} setPoints=${setPoints} hw=${hw} setHw=${setHw} turn=${teacher ? null : turn} onResume=${resume}/></div>
       ${lightbox ? html`<div class="lb" role="dialog" aria-label="Photo" onClick=${() => setLightbox(null)}><div class="imgwrap"><img src=${lightbox} alt="Photo"/></div></div>` : null}
       ${editing ? html`<${StudentSheet} student=${student} onClose=${() => setEditing(false)} onDeleted=${() => { setEditing(false); onBack && onBack(); }}/>` : null}
       ${hwEdit ? html`<${HwEditor} lesson=${lesson} number=${vIdx + 1} student=${student} ar=${ar} onClose=${() => setHwEdit(false)}/>` : null}
-      ${arOpen === "mushaf" ? html`<${Mushaf} onClose=${() => setArOpen(null)}/>` : arOpen === "words" ? html`<${ArVocab} s=${s} student=${student} lessons=${lessons.slice(0, uIdx + 1)} onClose=${() => setArOpen(null)}/>` : null}
+      ${arOpen === "mushaf" ? html`<${Mushaf} onClose=${() => setArOpen(null)}/>` : arOpen === "words" ? html`<${ArVocab} s=${s} student=${student} lessons=${lessons.slice(0, uIdx + 1)} onClose=${() => setArOpen(null)}/>` : arOpen === "books" ? html`<${BooksShelf} s=${s} course="ar" onClose=${() => setArOpen(null)}/>` : null}
       ${arena ? html`<${ArenaLive} role=${arena} s=${s} student=${student} lessons=${lessons} ix=${ix} uIdx=${uIdx} onClose=${() => setArena(null)}/>` : null}
       ${fight === "hub" ? html`<${GameHub} student=${student} lessons=${lessons} ix=${ix} uIdx=${uIdx} onClose=${() => setFight(null)}/>` : fight ? html`<${Fight} key=${fight} mode=${fight} student=${student} lessons=${lessons} ix=${ix} uIdx=${uIdx} onClose=${() => setFight(null)}/>` : null}
       ${hwRun ? html`<${HwRunner} key=${hwRun.hw.id} hw=${hwRun.hw} msgs=${mine} student=${student} ix=${ix} lessons=${lessons} preview=${!!hwRun.preview} onClose=${() => setHwRun(null)}/>` : null}
@@ -9713,6 +10007,7 @@ notify pgrst, 'reload schema';
         <button class=${"btn slim" + (d.test ? "" : " quiet")} onClick=${() => setTest(d, !d.test)}>${d.test ? "My test phone ✓" : "This is my test phone"}</button></li>`)}</ul>`}
       <p class="help">Checking how things look for ${student.name || "your student"}? Open this link on your own second phone instead: it opens as them, but nothing it does counts, and it never notifies you.</p>
       <button class="btn sec" onClick=${testLink}>${copied ? html`<${Ic.tick} size=${18}/>Test link copied` : "🧪 Copy my test-phone link"}</button>
+      <button class="btn sec" onClick=${() => openDemo(student)}>🎬 Demo screen: your side and ${student.name || "the student"}'s, to record (on a computer)</button>
       ${code && !copied ? html`<input class="vmsearch" readonly value=${joinLink(code)} onFocus=${e => e.target.select()}/>` : null}
     </div>`;
   }
@@ -10323,9 +10618,9 @@ notify pgrst, 'reload schema';
     ${lesson.explain ? html`<p class="help">${cues.length ? "On the board: " + cueCount(cues) + "." : "Nothing happens on the board in this one. Record with the board to add pointing, circles, words and pictures."}</p>` : null}`;
   }
 
-  const STUDIO_TOOLS = [["stick", "👉", "Point"], ["circle", "⭕", "Circle"], ["under", "〰️", "Underline"], ["pen", "✏️", "Draw"], ["word", "🔤", "Word"], ["erase", "🧽", "Rub out"]];
+  const STUDIO_TOOLS = [["stick", "👉", "Point"], ["cam", "🔍", "Zoom"], ["circle", "⭕", "Circle"], ["under", "〰️", "Underline"], ["pen", "✏️", "Draw"], ["hl", "🖍", "Highlight"], ["word", "🔤", "Word"], ["erase", "🧽", "Rub out"]];
   const PEN_COLS = ["#F1ECDC", "#FFE27A", "#FF9E9E", "#8FD0FF"];
-  const AR_TOOLS = [["stick", "👉", "Point"], ["zoom", "🔍", "Bring up"], ["circle", "⭕", "Circle"], ["under", "〰️", "Underline"], ["pen", "✏️", "Draw"], ["word", "✍️", "Write"], ["erase", "🧽", "Rub out"]];
+  const AR_TOOLS = [["stick", "👉", "Point"], ["cam", "🔍", "Zoom"], ["zoom", "⤢", "Bring up"], ["circle", "⭕", "Circle"], ["under", "〰️", "Underline"], ["pen", "✏️", "Draw"], ["hl", "🖍", "Highlight"], ["word", "✍️", "Write"], ["erase", "🧽", "Rub out"]];
   // an Arabic word, a letter at a time: each letter with its harakat
   const arChunks = w => { const out = []; for (const ch of String(w || "")) { if (/[\u064B-\u0652\u0670\u0640]/.test(ch) && out.length) out[out.length - 1] += ch; else out.push(ch); } return out; };
   // a map, flag or journey from the video maker, as a still picture for the lesson board (how it looks once it has zoomed in)
@@ -10437,12 +10732,12 @@ notify pgrst, 'reload schema';
       if (!rec) { if (it) { const snd = soundFor(ix, lesson.id, it.t.t); if (snd) tilePlayer.play("tile:" + lesson.id + ":" + it.t.t, srcFor(snd.rec.audio)); } return; }
       if (armRef.current != null) { if (it) { add({ t: armRef.current, k: "w", tile: it.t.t, r: it.r, c: it.c }); armRef.current = null; setArming(null); } return; }
       const t = elapsed();
-      if (tool === "zoom") {   // bring a word to the middle; tap again to put it back
-        const b = board();
-        if (b.zm) { add({ t, k: "zmx" }); return; }
+      if (board().zm) { add({ t, k: "zmx" }); return; }   // a word is up: any tap puts it back, whatever tool you're on
+      if (tool === "zoom") {   // bring a word to the middle
         if (it) add({ t, k: "zm", r: it.r, c: it.c }); else toast("Tap a word to bring it to the middle.");
         return;
       }
+      if (tool === "cam") { add({ t, k: "cam", x: Math.round(x), y: Math.round(y), s: 2 }); setTool("stick"); return; }   // the camera in close on that part; then you point as usual
       if (tool === "erase") {   // rub out just the thing under your finger
         const b = board(), pic = b.img ? crPic(b.img.a) : null, A = crAssets(lesson, number, hasStrip(cuesRef.current) || tool === "word", b.page);
         const hit = crPickAt(b, A.lay, x, y, pic);
@@ -10461,10 +10756,10 @@ notify pgrst, 'reload schema';
       if (tool === "word") { if (it) add(arL ? { t, k: "sa", ch: it.t.t, wd: 1, r: it.r, c: it.c } : { t, k: "sa", ch: it.t.t, r: it.r, c: it.c }); return; }
       add(it ? { t, k: "p", tile: it.t.t, r: it.r, c: it.c } : { t, k: "pf", x: Math.round(x), y: Math.round(y) });
     }
-    function onStroke(d) { if (rec) add({ t: elapsed(d.at), k: "o", s: "pen", col: penCol, P: d.P.reduce((o, q) => o.concat(Math.round(q[0]), Math.round(q[1])), []), dur: round2(Math.min(3, d.dur)) }); }
+    function onStroke(d) { if (rec) add({ t: elapsed(d.at), k: "o", s: "pen", col: tool === "hl" ? null : penCol, hl: tool === "hl" ? 1 : undefined, P: d.P.reduce((o, q) => o.concat(Math.round(q[0]), Math.round(q[1])), []), dur: round2(Math.min(3, d.dur)) }); }
     // take back the last thing put on the board
     function undo() {
-      const b = board(), all = b.marks.concat(b.strip, b.img ? [b.img] : [], b.hideList || [], b.zm ? [b.zm] : [], b.rv ? [b.rv] : []).sort((p, q) => p.t - q.t);
+      const b = board(), all = b.marks.concat(b.strip, b.img ? [b.img] : [], b.hideList || [], b.zm ? [b.zm] : [], b.rv ? [b.rv] : [], b.cam && b.cam.s > 1 ? [b.cam] : []).sort((p, q) => p.t - q.t);
       const last = all[all.length - 1];
       if (!last) { toast("Nothing to take back."); return; }
       add({ t: elapsed(), k: "rm", ref: last.id });
@@ -10481,6 +10776,7 @@ notify pgrst, 'reload schema';
       if (b.strip.length) add({ t, k: "sx" });
       if (b.img) add({ t, k: "imgx" });
       if (b.zm) add({ t, k: "zmx" });
+      if (b.cam && b.cam.s > 1) add({ t, k: "camx" });
       setSpell(null);
     }
     function typeWord() {
@@ -10665,8 +10961,8 @@ notify pgrst, 'reload schema';
     }
     const counts = cueCount(cues);
     const helpText = arL
-      ? html`<p class="help">This is the board your students see. Press record and talk them through it, concept by concept. <b>👉 Point</b> at a word. <b>🔍 Bring up</b> a word to the middle of the board (tap again to put it back). <b>⭕ Circle</b>, <b>〰️ Underline</b> or <b>✏️ Draw</b>. <b>✍️ Write</b> a word with the Arabic keyboard, or tap words on the board to join them. <b>🧽 Rub out</b> a mark, or a word on the board (rub the same place again and it's back). On a practice board, <b>✔ Answers</b> shows the answers once you've solved it together. Tap the tool you're on again to go back to pointing.</p>`
-      : html`<p class="help">This is the board your students will see. Press record and talk them through it. While recording: <b>👉 Point</b> at a word (or anywhere, even on a picture), <b>⭕ Circle</b> or <b>〰️ Underline</b> it (tap it again to take it off), <b>✏️ Draw</b> with your finger, <b>🔤 Make a word</b> by tapping its letters. <b>🧽 Rub out</b> one thing by tapping it, <b>↶ Undo</b> takes back the last thing. <b>⏸ Pause</b> any time, for example to add a picture. <b>✋ Your turn</b> makes students answer: ask a question, tap Your turn, then tap the right answer — the lesson stops for them until they tap it. Tap the tool you're on again to go back to pointing.</p>`;
+      ? html`<p class="help">This is the board your students see. Press record and talk them through it, concept by concept. <b>👉 Point</b> at a word. <b>🔍 Zoom</b>: tap the part of the board to go in close on (the video goes in close too); <b>Zoom out</b> on the board takes you back. <b>⤢ Bring up</b> one word to the middle of the board; tap anywhere (or <b>Put it back</b>) and it goes back. <b>⭕ Circle</b>, <b>〰️ Underline</b> or <b>✏️ Draw</b>. <b>✍️ Write</b> a word with the Arabic keyboard, or tap words on the board to join them. <b>🧽 Rub out</b> a mark, or a word on the board (rub the same place again and it's back). On a practice board, <b>✔ Answers</b> shows the answers once you've solved it together. Tap the tool you're on again to go back to pointing.</p>`
+      : html`<p class="help">This is the board your students will see. Press record and talk them through it. While recording: <b>👉 Point</b> at a word (or anywhere, even on a picture), <b>🔍 Zoom</b> in close on part of the board (<b>Zoom out</b> on the board takes you back), <b>⭕ Circle</b> or <b>〰️ Underline</b> it (tap it again to take it off), <b>✏️ Draw</b> with your finger, <b>🔤 Make a word</b> by tapping its letters. <b>🧽 Rub out</b> one thing by tapping it, <b>↶ Undo</b> takes back the last thing. <b>⏸ Pause</b> any time, for example to add a picture. <b>✋ Your turn</b> makes students answer: ask a question, tap Your turn, then tap the right answer — the lesson stops for them until they tap it. Tap the tool you're on again to go back to pointing.</p>`;
     return html`<div class=${"full studio lessonstudio" + (arL ? " arstudio" : "")} ref=${studioRef} role="dialog" aria-label="Record the explanation">
       <div class="fhead">
         <span>${talk ? "🎙️ " + (lesson.title || "Free board") : "Lesson " + number + ": " + lesson.title}</span>
@@ -10683,6 +10979,8 @@ notify pgrst, 'reload schema';
               ${recClip ? html`<div class="crclip"><${BoardClip} c=${{ id: "rc" + recClip.t, a: recClip.m.a }} onEnd=${clipDone} label="Back to the board"/></div>` : null}
               ${peek && peek.type === "vid" ? html`<div class="crclip"><${BoardClip} c=${{ id: "pk" + peek.a, a: peek.a }} onEnd=${() => setPeek(null)}/></div>` : null}
               ${rec && paused && !recClip ? html`<div class="pausedtag">⏸ Paused</div>` : null}
+              ${rec && board().zm ? html`<button class="crfloat" onClick=${() => add({ t: elapsed(), k: "zmx" })}>↩ Put it back</button>` : null}
+              ${rec && !board().zm && board().cam && board().cam.s > 1 ? html`<button class="crfloat" onClick=${() => add({ t: elapsed(), k: "camx" })}>🔍 Zoom out</button>` : null}
             </div></div>`}
         ${rec ? html`<div class="btools" role="toolbar" aria-label="Tools">
             ${TOOLS.map(([k, ic, lbl]) => html`<button key=${k} class=${"tool" + (tool === k ? " on" : "")} aria-pressed=${tool === k ? "true" : "false"} onClick=${() => pickTool(k)}><span>${ic}</span>${lbl}</button>`)}
@@ -14525,6 +14823,7 @@ notify pgrst, 'reload schema';
   function tsDrawRect(c, L, S) {
     c.save(); c.translate(L.x, L.y); c.rotate((L.rot || 0) * Math.PI / 180); c.globalAlpha = L.op == null ? 1 : L.op;
     if (L.shadow) { c.shadowColor = "rgba(0,0,0,.5)"; c.shadowBlur = 30 * S.px; c.shadowOffsetY = 10 * S.px; }
+    if (L.glow) { c.shadowColor = L.glow.col; c.shadowBlur = L.glow.size * S.px; c.shadowOffsetY = 0; }   // a bar that shines
     tsRR(c, -L.w / 2, -L.h / 2, L.w, L.h, L.r || 0);
     if (L.fill) { if (L.fade) { const r = L.fadeRev ? -1 : 1, g = L.fade === "h" ? c.createLinearGradient(-L.w / 2 * r, 0, L.w / 2 * r, 0) : c.createLinearGradient(0, -L.h / 2 * r, 0, L.h / 2 * r); g.addColorStop(0, tsHexA(L.fill, 0)); g.addColorStop(L.fadeAt || 0.55, tsHexA(L.fill, 1)); g.addColorStop(1, tsHexA(L.fill, 1)); c.fillStyle = g; } else c.fillStyle = L.fill; c.fill(); }
     c.shadowColor = "transparent"; if (L.stroke && L.sw) { c.strokeStyle = L.stroke; c.lineWidth = L.sw; c.stroke(); }
@@ -14787,6 +15086,18 @@ notify pgrst, 'reload schema';
   };
 
 
+  // your own signature styles: one of them becomes "My style", the first design every time
+  const TS_SIGS = {
+    sig_ember: { name: "Ember Edge", tip: "Dark and warm: glowing corner brackets in your orange, you lit by it, one word on fire" },
+    sig_gold: { name: "Gold Script", tip: "Deep green and gold like your Arabic logo: a fine gold frame, a quiet star pattern, an elegant title card" },
+    sig_copper: { name: "Copper Slab", tip: "The story behind, a tilted slab of your colour with the Zambian flag's stripes, you breaking out of it" },
+    sig_chalk: { name: "Chalk Talk", tip: "The teacher's board: words in chalk, a chalk circle on the story, you cut out like a sticker" },
+    sig_case: { name: "Case File", tip: "A desk of evidence: the story as a taped photo, a red stamp, plain black type" },
+    sig_mono: { name: "One Colour", tip: "Everything black and white except your colour: the word that matters, a ring, a light on you" },
+  };
+  const TS_MYKEY = "ts.mystyle";
+  const tsMyStyle = () => { try { const v = localStorage.getItem(TS_MYKEY); return v && (TS_SIGS[v] || TS_TPLS[v]) ? v : null; } catch (e) { return null; } };
+  const tsSetMyStyle = k => { try { if (k) localStorage.setItem(TS_MYKEY, k); else localStorage.removeItem(TS_MYKEY); } catch (e) {} };
   // put the strongest word in colour (*like this*) if you haven't chosen one
   function tsAccent(text) {
     const t = String(text || "").trim(); if (!t || t.indexOf("*") >= 0) return t;
@@ -14830,6 +15141,116 @@ notify pgrst, 'reload schema';
     };
     const sub = S || null, word3 = t => { const w = String(t).split(/\s+/).filter(Boolean); return w.slice(0, 4).join(" "); };
     switch (tpl) {
+      // ---- your own signature styles: designed for you, not copied from anyone ----
+      case "sig_ember": {   // Ember Edge: dark and warm, glowing corner brackets in your orange, you lit from the side by it, one word on fire
+        bg = sub && !sub.cut ? photoBg(sub, { dim: 0.62, grade: "cinema", blur: 8, vig: 0.7, grain: 0.035 }) : { kind: "grad", g: ["#1A1D22", "#050607"], radial: true, gx: T ? 0.5 : 0.72, gy: 0.5, spot: { x: T ? 0.5 : 0.74, y: T ? 0.7 : 0.55, r: 0.5, col: acc, a: 0.38 }, vig: 0.6, grain: 0.035 };
+        const G = { col: acc, size: 26 }, bt = T ? 12 : 11, m = T ? W * 0.05 : W * 0.03;
+        const bracket = (x, y, sx, sy) => { rect(x + sx * W * 0.07, y, W * 0.14, bt, { fill: acc, glow: G }); rect(x, y + sy * H * (T ? 0.04 : 0.07), bt, H * (T ? 0.08 : 0.14), { fill: acc, glow: G }); };
+        bracket(m + W * 0.0, m, 1, 1); bracket(W - m, H - m, -1, -1);
+        const HOT = PRO("anton", { acc, color: "#FFFFFF", glow: { col: acc, size: 46 } });
+        if (!T) {
+          face(W * 0.75, H * 1.02, H * 1.0, lit("left", acc));
+          const t = words(tsLines(word3(text), 2), W * 0.33, H * 0.47, W * 0.55, H * 0.5, HOT);
+          rect(W * 0.3, H * 0.47 + (t ? tsTextBox(t).h / 2 : H * 0.2) + H * 0.035, W * 0.36, 12, { fill: acc, glow: G, rot: -1.5, r: 6 });
+        } else {
+          const t = words(tsLines(word3(text), 2), W * 0.5, H * 0.2, W * 0.86, H * 0.22, HOT);
+          rect(W * 0.5, H * 0.2 + (t ? tsTextBox(t).h / 2 : H * 0.1) + H * 0.02, W * 0.5, 12, { fill: acc, glow: G, rot: -1.5, r: 6 });
+          face(W * 0.5, H * 1.01, H * 0.6, lit("left", acc));
+        }
+        break;
+      }
+      case "sig_gold": {   // Gold Script: deep green and gold like your Arabic logo, a fine gold frame, a quiet star pattern, a title card that feels expensive
+        const GOLD = "#D9B25F";
+        bg = { kind: "grad", g: ["#0E2E25", "#020806"], radial: true, gx: T ? 0.5 : 0.3, gy: 0.5, spot: { x: T ? 0.5 : 0.28, y: T ? 0.68 : 0.5, r: 0.45, col: GOLD, a: 0.18 }, vig: 0.65, grain: 0.03 };
+        const star = (x, y, s, a) => { rect(x, y, s, s, { fill: null, stroke: GOLD, sw: 3, op: a }); rect(x, y, s, s, { fill: null, stroke: GOLD, sw: 3, op: a, rot: 45 }); };
+        for (const [x, y, s] of T ? [[0.15, 0.08, 0.2], [0.88, 0.3, 0.26], [0.1, 0.55, 0.16]] : [[0.62, 0.14, 0.12], [0.93, 0.62, 0.16], [0.52, 0.9, 0.09]]) star(W * x, H * y, (T ? W : H) * s, 0.12);
+        rect(W / 2, H / 2, W - (T ? 70 : 64), H - (T ? 70 : 64), { fill: null, stroke: GOLD, sw: 5, op: 0.95 });
+        rect(W / 2, H / 2, W - (T ? 96 : 88), H - (T ? 96 : 88), { fill: null, stroke: GOLD, sw: 1.5, op: 0.6 });
+        const TITLE = { font: "bebas", upper: true, color: "#FFFFFF", acc: GOLD, accGrad: "gold", stroke: { w: 0, col: "#000" }, shadow: { kind: "soft", col: "rgba(0,0,0,.9)" }, ls: 0.02, lh: 0.95 };
+        const KICK = { font: "cinzel", upper: true, color: GOLD, acc: GOLD, stroke: { w: 0, col: "#000" }, shadow: { kind: "none" }, ls: 0.18 };
+        if (!T) {
+          face(W * 0.27, H * 1.02, H * 0.98, lit("right", "#FFD27A", { adj: { c: 0.1, s: 0.1, b: 0.02 } }));
+          const ty = sub ? H * 0.34 : H * 0.48, t = words(tsLines(word3(text), 2), W * 0.7, ty, W * 0.5, sub ? H * 0.36 : H * 0.5, TITLE), th = t ? tsTextBox(t).h : H * 0.3;
+          rect(W * 0.7, ty - th / 2 - H * 0.04, W * 0.16, 4, { fill: GOLD }); rect(W * 0.7, ty + th / 2 + H * 0.04, W * 0.16, 4, { fill: GOLD });
+          if (A.label) words(A.label, W * 0.7, ty - th / 2 - H * 0.09, W * 0.4, H * 0.045, KICK);
+          if (sub) img(sub, W * 0.7, H * 0.74, W * 0.3, sub.cut ? { fx: { shadow: { blur: 40, dist: 14, a: 0.55 } }, role: "subj" } : { crop: tsCoverCrop(sub, W * 0.3, W * 0.3 * 0.5625), frame: { w: 7, col: GOLD }, rot: 2, fx: { shadow: { blur: 30, dist: 10, a: 0.5 }, adj: { c: 0.06, s: 0.06 } }, role: "subj" });
+        } else {
+          if (A.label) words(A.label, W * 0.5, H * 0.07, W * 0.6, H * 0.03, KICK);
+          const t = words(tsLines(word3(text), 2), W * 0.5, H * 0.17, W * 0.8, H * 0.16, TITLE), th = t ? tsTextBox(t).h : H * 0.12;
+          rect(W * 0.5, H * 0.17 + th / 2 + H * 0.02, W * 0.3, 4, { fill: GOLD });
+          if (sub) img(sub, W * 0.5, H * 0.38, W * 0.64, sub.cut ? { fx: { shadow: { blur: 40, dist: 14, a: 0.55 } }, role: "subj" } : { crop: tsCoverCrop(sub, W * 0.64, W * 0.36), frame: { w: 7, col: GOLD }, fx: { shadow: { blur: 30, dist: 10, a: 0.5 } }, role: "subj" });
+          face(W * 0.5, H * 1.01, H * 0.52, lit("right", "#FFD27A"));
+        }
+        break;
+      }
+      case "sig_copper": {   // Copper Slab: the story behind, a tilted slab of your colour cutting through, the colours of the Zambian flag along its edge, you breaking out of it
+        bg = sub && !sub.cut ? photoBg(sub, { dim: 0.28, grade: "pop", vig: 0.5, grain: 0.03, fx: T ? 0.5 : 0.35 }) : { kind: "grad", g: ["#0E3B2E", "#03130E"], radial: true, gx: 0.3, vig: 0.55, grain: 0.03 };
+        const BIG = PRO("anton", { color: "#FFFFFF", acc: "#FFD400" });
+        if (!T) {
+          const sx = W * 0.8, rot = -12;
+          rect(sx - W * 0.155, H * 0.5, W * 0.022, H * 1.7, { fill: "#198A00", rot }); rect(sx - W * 0.135, H * 0.5, W * 0.016, H * 1.7, { fill: "#DE2010", rot }); rect(sx - W * 0.12, H * 0.5, W * 0.014, H * 1.7, { fill: "#111111", rot });
+          rect(sx + W * 0.08, H * 0.5, W * 0.4, H * 1.7, { fill: acc, rot, shadow: true });
+          face(W * 0.78, H * 1.03, H * 1.03, lit("left", "#FFFFFF", { shadow: { blur: 60, dist: 10, a: 0.65 } }));
+          words(tsLines(word3(text), 2), W * 0.33, H * 0.5, W * 0.56, H * 0.56, BIG);
+        } else {
+          rect(W * 0.5, H * 0.66, W * 1.6, H * 0.5, { fill: acc, rot: -10, shadow: true });
+          rect(W * 0.5, H * 0.66 - H * 0.265, W * 1.6, H * 0.012, { fill: "#198A00", rot: -10 }); rect(W * 0.5, H * 0.66 - H * 0.252, W * 1.6, H * 0.01, { fill: "#DE2010", rot: -10 }); rect(W * 0.5, H * 0.66 - H * 0.241, W * 1.6, H * 0.009, { fill: "#111111", rot: -10 });
+          words(tsLines(word3(text), 2), W * 0.5, H * 0.2, W * 0.86, H * 0.24, BIG);
+          face(W * 0.5, H * 1.01, H * 0.58, lit("left", "#FFFFFF", { shadow: { blur: 60, dist: 10, a: 0.65 } }));
+        }
+        break;
+      }
+      case "sig_chalk": {   // Chalk Talk: the teacher's board, words written in chalk, a chalk circle and arrow on the story, you cut out like a sticker
+        bg = { kind: "chalk", vig: 0.45, grain: 0.04 };
+        const CH = { font: "marker", upper: true, color: "#F4F1E8", acc: "#FFE45C", chalk: true, stroke: { w: 0, col: "#000" }, shadow: { kind: "none" }, lh: 1.02 };
+        const sticker = { outline: { w: 16, col: "#FFFFFF" }, shadow: { blur: 40, dist: 14, a: 0.55 }, adj: { c: 0.08, s: 0.12 } };
+        if (!T) {
+          const tx = sub ? W * 0.3 : W * 0.33;
+          words(tsLines(word3(text), 2), tx, H * 0.27, W * 0.52, H * 0.4, CH, { rot: -3 });
+          if (sub) { img(sub, W * 0.3, H * 0.7, W * 0.3, sub.cut ? { fx: { shadow: { blur: 30, dist: 10, a: 0.5 } }, role: "subj" } : { crop: tsCoverCrop(sub, W * 0.3, H * 0.34), frame: { w: 10, col: "#FFFFFF" }, rot: -4, fx: { shadow: { blur: 26, dist: 10, a: 0.5 } }, role: "subj" }); ring(W * 0.3, H * 0.7, W * 0.36, H * 0.46, { col: "#F4F1E8", outline: null, rot: -6 }); }
+          else arrow(W * 0.5, H * 0.52, W * 0.6, H * 0.7, 0.35, { col: "#F4F1E8", outline: null });
+          face(W * 0.75, H * 1.02, H * 0.98, sticker);
+        } else {
+          words(tsLines(word3(text), 2), W * 0.5, H * 0.15, W * 0.86, H * 0.2, CH, { rot: -3 });
+          if (sub) { img(sub, W * 0.5, H * 0.4, W * 0.64, sub.cut ? { role: "subj" } : { crop: tsCoverCrop(sub, W * 0.64, W * 0.4), frame: { w: 10, col: "#FFFFFF" }, rot: -3, fx: { shadow: { blur: 26, dist: 10, a: 0.5 } }, role: "subj" }); ring(W * 0.5, H * 0.4, W * 0.78, W * 0.56, { col: "#F4F1E8", outline: null }); }
+          face(W * 0.5, H * 1.01, H * 0.52, sticker);
+        }
+        break;
+      }
+      case "sig_case": {   // Case File: a desk of evidence — the story as a taped photo, a red stamp, plain black type, you looking on
+        bg = { kind: "solid", col: "#ECE5D6", vig: 0.32, grain: 0.07 };
+        const RED = "#C8102E", INK = { font: "archivo", upper: true, color: "#15130F", acc: RED, stroke: { w: 0, col: "#000" }, shadow: { kind: "none" }, lh: 0.98 };
+        const stampWord = String(A.label || (text.match(/\*([^*]+)\*/) || [])[1] || "TRUE?").replace(/\*/g, "").toUpperCase().slice(0, 12);
+        const tape = (x, y, r) => rect(x, y, W * (T ? 0.16 : 0.08), H * (T ? 0.022 : 0.038), { fill: "#F0DC96", op: 0.85, rot: r });
+        const stamp = (x, y, w, h) => { const s = words(stampWord, x, y, w, h, { font: "staat", upper: true, color: RED, acc: RED, stroke: { w: 0, col: "#000" }, shadow: { kind: "none" }, ls: 0.06 }, { rot: -9 }); if (s) { const b = tsTextBox(s); rect(x, y, b.w + h * 0.5, b.h + h * 0.25, { fill: null, stroke: RED, sw: Math.max(6, h * 0.08), r: h * 0.12, rot: -9 }); } };
+        if (!T) {
+          if (sub) { const pw = W * 0.36, ph = sub.cut ? pw * sub.ar : pw * 0.72; img(sub, W * 0.3, H * 0.42, pw, sub.cut ? { fx: { shadow: { blur: 30, dist: 12, a: 0.4 } }, role: "subj" } : { crop: tsCoverCrop(sub, pw, ph), frame: { w: 20, col: "#FFFFFF" }, rot: -4, fx: { shadow: { blur: 34, dist: 16, a: 0.38 }, adj: { s: -0.1, c: 0.05 } }, role: "subj" }); tape(W * 0.18, H * 0.42 - ph / 2 - 6, -18); tape(W * 0.43, H * 0.42 - ph / 2 + 4, 14); stamp(W * 0.38, H * 0.62, W * 0.22, H * 0.12); }
+          else stamp(W * 0.3, H * 0.36, W * 0.36, H * 0.2);
+          words(tsLines(word3(text), 2), W * 0.33, H * 0.86, W * 0.56, H * 0.2, INK);
+          face(W * 0.76, H * 1.02, H * 0.98, { shadow: { blur: 60, dist: 18, a: 0.35 }, adj: { c: 0.06, s: 0.04 } });
+        } else {
+          words(tsLines(word3(text), 2), W * 0.5, H * 0.12, W * 0.86, H * 0.16, INK);
+          if (sub) { const pw = W * 0.74, ph = sub.cut ? pw * sub.ar : pw * 0.72; img(sub, W * 0.5, H * 0.38, pw, sub.cut ? { role: "subj" } : { crop: tsCoverCrop(sub, pw, ph), frame: { w: 20, col: "#FFFFFF" }, rot: -3, fx: { shadow: { blur: 34, dist: 16, a: 0.38 } }, role: "subj" }); tape(W * 0.3, H * 0.38 - ph / 2, -18); tape(W * 0.72, H * 0.38 - ph / 2, 14); }
+          stamp(W * 0.62, H * 0.53, W * 0.5, H * 0.07);
+          face(W * 0.5, H * 1.01, H * 0.48, { shadow: { blur: 60, dist: 18, a: 0.35 } });
+        }
+        break;
+      }
+      case "sig_mono": {   // One Colour: everything black and white except your colour — the word that matters, a ring, a light on you
+        bg = sub && !sub.cut ? photoBg(sub, { grade: "bw", dim: 0.42, vig: 0.65, grain: 0.05 }) : { kind: "grad", g: ["#2A2A2A", "#050505"], radial: true, gx: T ? 0.5 : 0.35, vig: 0.6, grain: 0.05 };
+        const MONO = PRO("anton", { color: "#FFFFFF", acc, stroke: { rel: 0.05, col: "#000000" } });
+        const bwFace = { bw: true, rim: { col: acc, side: "left" }, shadow: { blur: 70, dist: 18, a: 0.6 }, adj: { c: 0.2 } };
+        if (!T) {
+          face(W * 0.74, H * 1.02, H * 1.0, bwFace);
+          words(tsLines(word3(text), 3), W * 0.32, H * 0.5, W * 0.54, H * 0.62, MONO);
+          ring(W * 0.32, H * 0.52, W * 0.62, H * 0.86, { col: acc, outline: null, sw: 9, style: "scribble", rot: -7, op: 0.95, behind: true });
+        } else {
+          words(tsLines(word3(text), 2), W * 0.5, H * 0.22, W * 0.84, H * 0.22, MONO);
+          ring(W * 0.5, H * 0.22, W * 0.96, H * 0.3, { col: acc, outline: null, sw: 9, style: "scribble", rot: -5, op: 0.95, behind: true });
+          face(W * 0.5, H * 1.01, H * 0.6, bwFace);
+        }
+        break;
+      }
       // ---- the formats of the channels you showed me, as close as they are ----
       case "dylan": {   // Dylan Page: you on a light wall, the story in a red frame with a red tab, a red arrow
         bg = { kind: "solid", col: "#E6E8EB", vig: 0.12, grain: 0.015 };
@@ -15105,7 +15526,8 @@ notify pgrst, 'reload schema';
     }
     // the label you chose (BREAKING, NEW…) if the design doesn't already have one
     if (A.label && tpl !== "breaking") { const rightTop = !T && /^(reaction|doc|calm|bignum|minimal|story|rwj|inscene|label)$/.test(tpl); if (/^(dylan|omar)$/.test(tpl) && !T) { words(A.label, W * 0.19, H * 0.07, W * 0.2, H * 0.05, TS_STYLES.tag(acc), {}); } else words(A.label, T ? W * 0.5 : rightTop ? W * 0.86 : W * 0.12, T ? H * 0.035 : tpl === "beforeafter" ? H * 0.9 : H * 0.075, T ? W * 0.4 : W * 0.18, T ? H * 0.028 : H * 0.05, TS_STYLES.tag(A.label === "BREAKING" ? "#E3262E" : acc), tpl === "beforeafter" && !T ? { x: W * 0.5 } : {}); }
-    if (A.logo) { const lw = T ? W * 0.17 : W * 0.1, top = T || tpl === "breaking" || tpl === "story" || tpl === "beforeafter"; layers.push({ id: tsUid(), type: "logo", src: A.logo.id, x: top ? W - W * 0.03 - lw / 2 : W * 0.035 + lw / 2, y: top ? (tpl === "cinema" && !T ? H * 0.05 : H * 0.03) + lw * A.logo.ar / 2 : H * 0.955 - lw * A.logo.ar / 2, w: lw, rot: 0, op: 0.92, fx: { shadow: { blur: 12, dist: 3, a: 0.6 } } }); }
+    if (A.logo && /^sig_/.test(tpl)) { const lw = T ? W * 0.2 : W * 0.115, inset = tpl === "sig_gold" ? (T ? 70 : 64) : 0, low = tpl === "sig_ember" && !T; layers.push({ id: tsUid(), type: "logo", src: A.logo.id, x: T ? W / 2 : W * 0.035 + inset + lw / 2, y: T ? H * 0.965 - lw * A.logo.ar / 2 - inset : low ? H * 0.95 - lw * A.logo.ar / 2 : H * 0.04 + inset + lw * A.logo.ar / 2, w: lw, rot: 0, op: 0.95, fx: { shadow: { blur: 14, dist: 3, a: 0.6 } } }); }   // your logo, always in the same place: part of the look
+    else if (A.logo) { const lw = T ? W * 0.17 : W * 0.1, top = T || tpl === "breaking" || tpl === "story" || tpl === "beforeafter"; layers.push({ id: tsUid(), type: "logo", src: A.logo.id, x: top ? W - W * 0.03 - lw / 2 : W * 0.035 + lw / 2, y: top ? (tpl === "cinema" && !T ? H * 0.05 : H * 0.03) + lw * A.logo.ar / 2 : H * 0.955 - lw * A.logo.ar / 2, w: lw, rot: 0, op: 0.92, fx: { shadow: { blur: 12, dist: 3, a: 0.6 } } }); }
     // the words always sit in front of the photos, so a face never covers them (a giant word made to stand behind you stays behind)
     const rank = L => (L.type === "logo" ? 3 : (L.type === "text" || L.type === "arrow" || L.type === "ring") && !L.behind ? 2 : 0);
     const ordered = layers.map((L, i) => [L, i]).sort((a, b) => rank(a[0]) - rank(b[0]) || a[1] - b[1]).map(x => x[0]);
@@ -15717,18 +16139,20 @@ notify pgrst, 'reload schema';
       })();
       return () => { alive = false; };
     }, [tk && tk.voice]);
-    const ORD = useMemo(() => vmThumbOrder(proj), [proj.id, proj.title]);
+    const ORD = useMemo(() => { const o = vmThumbOrder(proj), my = tsMyStyle(); return my ? [my].concat(o.filter(k => k !== my)) : o; }, [proj.id, proj.title]);
     const doc = useMemo(() => (A ? tsMake(ORD[i % ORD.length], { tall, face: A.face, subj: A.subj || A.bgPhoto, bgPhoto: A.bgPhoto, text: (proj.title || "WATCH THIS").toUpperCase(), acc: st.acc || "#FF7A00", logo: A.logo }) : null), [A, i, proj.title, tall, ORD]);
     async function save() { if (!doc) return; setBusy("Saving…"); try { const b = await tsExport(doc, 1.95e6); tsLib.put(doc).catch(() => {}); const a = document.createElement("a"); a.href = URL.createObjectURL(b); a.download = (String(proj.title || "thumbnail").toLowerCase().replace(/[^a-z0-9]+/g, "-").slice(0, 40) || "thumbnail") + ".jpg"; document.body.appendChild(a); a.click(); a.remove(); toast("Thumbnail saved. It's also in your thumbnail designs."); } catch (e) { toast("Couldn't save it. Try again."); } setBusy(""); }
     return html`<div class="autothumb">
       <b>🖼 Your thumbnail is ready</b>
       ${!doc ? html`<p class="help">${busy}</p>` : html`<div class="atrow"><button class="chip" onClick=${() => setI(x => (x + ORD.length - 1) % ORD.length)} aria-label="Previous design">◀</button><${TSPreview} doc=${doc} w=${tall ? 150 : 260} cls="atimg"/><button class="chip" onClick=${() => setI(x => x + 1)} aria-label="Next design">▶</button></div>
-        <small>${(TS_TPLS[doc.tpl] || {}).name || ""} · ${(i % ORD.length) + 1} of ${ORD.length}${A && !A.face ? " · tip: add a photo of yourself in Thumbnails for the best ones" : ""}</small>
+        <small>${doc.tpl === tsMyStyle() ? "⭐ My style · " : ""}${(TS_TPLS[doc.tpl] || TS_SIGS[doc.tpl] || {}).name || ""} · ${(i % ORD.length) + 1} of ${ORD.length}${A && !A.face ? " · tip: add a photo of yourself in Thumbnails for the best ones" : ""}</small>
         <div class="vmchips c"><button class="btn slim" disabled=${!!busy} onClick=${save}>⬇ Save this thumbnail</button><button class="btn slim quiet" onClick=${() => onOpen(A && A.subj ? A.subj.blob : null)}>✏️ Change it</button></div>`}
     </div>`;
   }
   function VMThumbs({ onClose, from, lesson }) {
     const st = useMemo(() => vmStyle(), []);
+    const [myStyle, setMyStyleS] = useState(tsMyStyle), [pickStyle, setPickStyle] = useState(false);
+    const chooseStyle = k => { tsSetMyStyle(k); setMyStyleS(k); setPickStyle(false); toast(k ? "“" + (TS_SIGS[k] || TS_TPLS[k]).name + "” is your style now: it's the first design every time, and your automatic thumbnails use it." : "No style chosen."); };
     useEffect(() => { tsUserFonts(); }, []);
     const LI = useMemo(() => (lesson ? { n: lesson.n, ar: !!lesson.ar, title: (lesson.les.title || "Lesson " + lesson.n).trim(), words: lesson.ar && (lesson.les.words || []).length ? lesson.les.words.map(w => w.ar).slice(0, 6) : tsLWords(lesson.les.board).filter(w => !lesson.ar || w.split(/\s+/).length <= 3) } : null), [lesson]);
     const [lng, setLng] = useState(() => { try { return JSON.parse(localStorage.getItem("ts.lang") || "null") || { code: "", flag: "" }; } catch (e) { return { code: "", flag: "" }; } }), [flagA, setFlagA] = useState(null);
@@ -15760,15 +16184,15 @@ notify pgrst, 'reload schema';
       if (!d) return []; const A = { tall: d.fmt === "short", face: lesson ? null : assets.face, subj: lesson ? assets.subj || boardA : assets.subj, text: d.text, label: d.label, acc: st.acc || "#FF7A00", logo: logoA.current };
       if (lesson && (lng.code || flagA)) A.lang = { name: lng.code ? (lng.code === "en" ? "ENGLISH" : "IN " + langName(lng.code).toUpperCase()) : "", flag: flagA };
       if (!lesson && d.forWho === "client") { A.acc = d.clientAcc || "#FFD400"; A.logo = assets.clogo || null; }   // a client's thumbnail: their colour and their logo, never yours
-      if (!lesson) return Object.keys(TS_TPLS).map(k => tsMake(k, A));
+      if (!lesson) { const my = myStyle; return (my ? [my] : []).concat(Object.keys(TS_SIGS).filter(k => k !== my), Object.keys(TS_TPLS).filter(k => k !== my)).map(k => tsMake(k, A)); }   // your style first, then the others made for you, then every other design
       const L2 = Object.assign({}, LI, { title: String(d.text || LI.title).replace(/\*/g, "") }), out = [];
       const lk = !LI.ar && look && look[d.fmt === "short" ? "short" : "yt"]; if (lk) out.push(Object.assign(tsApplyLesson(lk, L2, boardA), { id: tsUid(), tpl: "series", updated: Date.now() }));
       if (LI.ar) { for (const k of Object.keys(TS_ARTPLS)) out.push(tsMakeLesson(k, Object.assign({}, A, { boardPic: boardA }), L2)); return out; }   // an Arabic lesson: Arabic designs only
       for (const k of Object.keys(TS_LTPLS)) out.push(tsMakeLesson(k, Object.assign({}, A, { boardPic: boardA }), L2));
       for (const k of Object.keys(TS_TPLS)) out.push(tsMake(k, A));
       return out;
-    }, [d && d.fmt, d && d.text, d && d.label, assets, boardA, look, d && d.forWho, d && d.clientAcc, lng.code, flagA]);
-    const tplName = k => (TS_TPLS[k] || TS_LTPLS[k] || TS_ARTPLS[k] || { name: "⭐ Your series look", tip: "The look you chose for all your lessons, with this lesson's number and words" });
+    }, [d && d.fmt, d && d.text, d && d.label, assets, boardA, look, d && d.forWho, d && d.clientAcc, lng.code, flagA, myStyle]);
+    const tplName = k => (k === myStyle && !lesson ? { name: "⭐ My style · " + (TS_SIGS[k] || TS_TPLS[k]).name, tip: (TS_SIGS[k] || TS_TPLS[k]).tip } : TS_SIGS[k] ? { name: "✦ " + TS_SIGS[k].name, tip: TS_SIGS[k].tip } : TS_TPLS[k] || TS_LTPLS[k] || TS_ARTPLS[k] || { name: "⭐ Your series look", tip: "The look you chose for all your lessons, with this lesson's number and words" });
     async function addFace(src, mood) {
       setBusy(tsStageText("prepare"));
       let cutBlob = null; try { cutBlob = await tsCutOut(src, "person", (s2, p2) => setBusy(tsStageText(s2, p2))); } catch (e) { toast(e && e.message === "nobody" ? "Couldn't find you in that photo. Try one where your face and shoulders are clear." : "Couldn't cut it out just now (the tool downloads once — check the connection). Saved the photo as it is."); }
@@ -15851,6 +16275,10 @@ notify pgrst, 'reload schema';
           ${d.subj ? html`<button class=${"chip" + (d.subjCut === "keep" ? " on" : "")} onClick=${() => setSubj(d.subj, "keep")}>Keep the photo</button><button class=${"chip" + (d.subjCut === "person" ? " on" : "")} onClick=${() => setSubj(d.subj, "person")}>✂️ Cut out a person</button><button class=${"chip" + (d.subjCut === "thing" ? " on" : "")} onClick=${() => setSubj(d.subj, "thing")}>✂️ Cut out a thing</button><button class="chip" onClick=${() => up({ subj: null, subjCutBlob: null })}>Remove</button>` : null}
         </div>
         `}
+        ${!lesson && d.forWho !== "client" ? html`<div class=${"mystyle" + (myStyle ? " set" : "")}>
+          ${myStyle ? html`<span>⭐ <b>Your style: ${(TS_SIGS[myStyle] || TS_TPLS[myStyle]).name}</b><small>The first design every time, and what your automatic thumbnails use.</small></span><button class="btn slim quiet" onClick=${() => setPickStyle(true)}>Change</button>`
+            : html`<span>⭐ <b>Find your own style</b><small>${Object.keys(TS_SIGS).length} looks made for you, not copied from anyone. Pick one and it becomes yours: the same recognisable look on every video.</small></span><button class="btn slim" onClick=${() => setPickStyle(true)}>Choose my style</button>`}
+        </div>` : null}
         <h4 class="vmh">Design it your way <small>start blank, or from a design below — then move, resize, recolour, add pictures, words, arrows, shapes, emoji, anything</small></h4>
         <div class=${"tsgal" + (d.fmt === "short" ? " tall" : "")}>
           <div class="tsgi blank" onClick=${async () => { const W = d.fmt === "short" ? 1080 : 1920, H = d.fmt === "short" ? 1920 : 1080; const n = await saveDesign({ id: tsUid(), tpl: "blank", W, H, fmt: d.fmt, bg: { kind: "look", look: "smoke", col: st.acc || "#3B82F6", vig: 0.45, grain: 0.03 }, layers: [], assets: {}, text: d.text, updated: Date.now() }); setOpen(n); }}><div class=${"tsblank" + (d.fmt === "short" ? " tall" : "")}>＋</div><small><b>✏️ Blank: design your own</b> · an empty canvas, add anything</small></div>
@@ -15858,6 +16286,18 @@ notify pgrst, 'reload schema';
           
         </div>
       </div>
+      ${pickStyle ? html`<div class="full sheetpage" role="dialog" aria-label="Choose your style">
+        <div class="fhead"><span>⭐ Your own style</span><button class="iconbtn" onClick=${() => setPickStyle(false)} aria-label="Close"><${Ic.x}/></button></div>
+        <div class="sbody"><div class="ed stylepick">
+          <p class="help">Each one is shown with your photo, your words and your logo. The one you choose becomes your style: viewers learn to spot it. You can still use any other design whenever you like.</p>
+          ${docs.filter(x => TS_SIGS[x.tpl]).map(x => html`<div key=${x.tpl} class=${"stylecard" + (x.tpl === myStyle ? " on" : "")}>
+            <${TSPreview} doc=${x} w=${d.fmt === "short" ? 220 : 560} cls="tsgcv"/>
+            <div class="stylemeta"><b>${TS_SIGS[x.tpl].name}</b><small>${TS_SIGS[x.tpl].tip}</small></div>
+            <button class=${"btn" + (x.tpl === myStyle ? " quiet" : "")} disabled=${x.tpl === myStyle} onClick=${() => chooseStyle(x.tpl)}>${x.tpl === myStyle ? "✓ Your style" : "Make this my style"}</button>
+          </div>`)}
+          ${myStyle ? html`<button class="linkbtn" onClick=${() => chooseStyle(null)}>Don't use a style of my own</button>` : null}
+        </div></div>
+      </div>` : null}
       ${fin ? html`<div class="scrim" onClick=${e => { if (e.target === e.currentTarget) setFin(null); }}><div class="sheet tsfin" role="dialog" aria-label="Your thumbnail">
         <${TSPreview} doc=${fin} w=${fin.fmt === "short" ? 240 : 640} cls=${"tsfincv" + (fin.fmt === "short" ? " tall" : "")}/>
         ${fin.fmt !== "short" ? html`<${TSFeed} doc=${fin} title=${d.title || String(fin.text || "").replace(/\*/g, "")} channel=${fin.client ? fin.channel || fin.client : st.name || "Your channel"}/>` : null}
@@ -18814,7 +19254,7 @@ notify pgrst, 'reload schema';
   function Recordings({ course }) {
     const R = useRec(), stS = useStore().students;
     const [talk, setTalk] = useState(false);
-    const [maker, setMaker] = useState(false);
+    const [maker, setMaker] = useState(false), [sbs, setSbs] = useState(false);
     const [list, setList] = useState(null);
     const [arm, setArm] = useState(null);
     const [busy, setBusy] = useState(null);
@@ -18867,7 +19307,9 @@ notify pgrst, 'reload schema';
     const mb = n => (n / 1048576).toFixed(n > 10485760 ? 0 : 1) + " MB";
     return html`<section class="list">
       ${course === "studio" || !course ? html`<button class="btn talkbtn" onClick=${() => setMaker(true)}>🎬 Video maker: YouTube, TikTok, Reels, Shorts</button>
-      <button class="btn quiet talkbtn" onClick=${() => setTalk(true)}>🎙️ Talk about anything (a free board)</button>` : null}
+      <button class="btn quiet talkbtn" onClick=${() => setTalk(true)}>🎙️ Talk about anything (a free board)</button>
+      <button class="btn quiet talkbtn" onClick=${() => setSbs(true)}>📱📱 Teacher and student side by side (two screen recordings)</button>` : null}
+      ${sbs ? html`<${SideBySide} onClose=${() => { setSbs(false); load(); }}/>` : null}
       ${maker ? html`<${VideoMaker} onClose=${() => { setMaker(false); load(); }}/>` : null}
       ${talk ? html`<${TalkBoard} onClose=${() => setTalk(false)}/>` : null}
       ${list === null ? html`<div class="empty"><p>Loading…</p></div>`
@@ -18926,10 +19368,12 @@ notify pgrst, 'reload schema';
       ${CLASSES.map(c => html`<button key=${c.k} class=${"classcard " + c.k} onClick=${() => onPick(c.k)}>
         <span class="cname">${c.name}${unread(c.k) ? html`<span class="count">${unread(c.k)}</span>` : null}</span><small>${c.sub}</small><small class="cmeta">${count(c.k)} student${count(c.k) === 1 ? "" : "s"}</small></button>`)}
       <button class="classcard studio" onClick=${() => onPick("studio")}><span class="cname">Your studio</span><small>Video maker, thumbnails, free board: your YouTube, TikTok and Reels</small></button>
+      <button class="classcard games" onClick=${() => onPick("games")}><span class="cname">Games</span><small>Play the Arena and the tournament yourself, to see how hard it is</small></button>
     </section>`;
   }
   function Teacher({ s, ix }) {
     const [cls, setClsS] = useState(() => { try { return localStorage.getItem("rc.class") || null; } catch (e) { return null; } });
+    const [games, setGames] = useState(false);
     const setCls = k => { setClsS(k); setTab("students"); try { if (k) localStorage.setItem("rc.class", k); else localStorage.removeItem("rc.class"); } catch (e) {} };
     const [tab, setTab] = useState("students");
     const [setupOpen, setSetupOpen] = useState(false);
@@ -18981,7 +19425,8 @@ notify pgrst, 'reload schema';
         </header>
         ${s.needsUpdate ? html`<${UpdateBanner}/>` : null}
         ${setupOpen ? html`<${SetupCheck} onClose=${() => setSetupOpen(false)}/>` : null}
-        ${!cls ? html`<${ClassPicker} s=${s} onPick=${setCls}/>`
+        ${games ? html`<${GameHub} student=${null} lessons=${[]} ix=${AR_IX()} uIdx=${0} onClose=${() => setGames(false)}/>` : null}
+        ${!cls ? html`<${ClassPicker} s=${s} onPick=${k => (k === "games" ? setGames(true) : setCls(k))}/>`
           : cls === "studio" ? html`<${Recordings} course="studio"/>`
           : cls === "ar" ? ((s.schemaVer || 0) < 11 ? html`<section class="list"><div class="empty"><p>Run the one-time database update first (the box above). Then your Arabic class opens here.</p></div></section>`
             : tab === "students" ? html`<${ArStudents} s=${s} onStudent=${(id, fresh, focus) => setArOpen({ student: id, fresh, focus })}/>`
@@ -19030,18 +19475,19 @@ notify pgrst, 'reload schema';
     if (V.length) {
       const nb = Math.ceil(V.length / 6), per = Math.ceil(V.length / nb);
       for (let i = 0; i < V.length; i += per) { const g = V.slice(i, i + per); out.push({ kind: "words", title: "اَلْكَلِمَاتُ", words: g.map(v => v.ar), say: g.map(v => v.ar + " — " + v.en).join("\n") }); }
-      const M = V.filter(v => v.en).slice(0, 5);
+      const M = V.filter(v => v.en).slice(0, 4);   // four pairs at most, so the words stay big
       if (M.length >= 3) out.push({ kind: "match", title: "صِلْ", pairs: M.map(v => [v.ar, String(v.en).replace(/\s*\(.*?\)\s*/g, " ").trim()]), say: "Match each word to its meaning together. Draw the lines, then show the answers." });
     }
     // the rule: its Arabic, a few lines to a board; what Fusha says to explain it becomes your script
     const seen = new Set(); let cur = null;
     for (const t of bl.teach || []) {
-      const lines = String(t.show || "").split(/\n/).map(clean).filter(l => /[؀-ۿ]/.test(l) && !seen.has(bare(l)));
+      const lines = [];   // a long list (a · b · c · d · e) goes on as short lines of three, so the words stay big
+      String(t.show || "").split(/\n/).map(clean).filter(l => /[؀-ۿ]/.test(l) && !seen.has(bare(l))).forEach(l => { const parts = l.split(/\s*[·•،]\s*/).filter(Boolean); if (parts.length > 3) for (let i = 0; i < parts.length; i += 3) lines.push(parts.slice(i, i + 3).join("  ·  ")); else { const w = l.split(/\s+/); if (w.length > 7) for (let i = 0; i < w.length; i += 7) lines.push(w.slice(i, i + 7).join(" ")); else lines.push(l); } });
       lines.forEach(l => seen.add(bare(l)));
       if (!lines.length) { if (cur && t.say) cur.say += "\n" + t.say; continue; }
       const nRule = out.filter(x => x.lines).length;
-      if (!cur || (cur.lines.length + lines.length > 4 && nRule < 5)) { cur = { lines: [], say: "", more: [] }; out.push(cur); }
-      if (cur.lines.length + lines.length > 4 && cur.lines.length) cur.more.push(...lines); else cur.lines.push(...lines);   // a few boards for the rule; the rest of its examples stay in your script
+      if (!cur || (cur.lines.length + lines.length > 3 && nRule < 6)) { cur = { lines: [], say: "", more: [] }; out.push(cur); }
+      if (cur.lines.length + lines.length > 3 && cur.lines.length) cur.more.push(...lines); else cur.lines.push(...lines.slice(0, 3)), cur.more.push(...lines.slice(3));   // a few boards for the rule; the rest of its examples stay in your script
       if (t.say) cur.say += (cur.say ? "\n" : "") + t.say;
     }
     out.forEach(x => { if (x.more && x.more.length) x.say += "\n\nMore examples (add a board if you want them): " + x.more.join(" · "); });
@@ -19128,23 +19574,25 @@ notify pgrst, 'reload schema';
     return html`<canvas class="arpeekcv" ref=${ref} aria-label="How the board looks"></canvas>`;
   }
   // what's on one concept's board, to change: depends on the kind of board it is
-  function ArPageEdit({ p, up, words, onPic }) {
-    const K = p.kind || "text";
+  function ArPageEdit({ p, up, words, onPic, onSplit }) {
+    const K = p.kind || "text", taRef = useRef(null);
+    const many = K === "text" ? String(p.board || "").split("\n").filter(l => l.trim()).length > 3 : K === "match" ? (p.pairs || []).length > 4 : K === "words" ? (p.words || []).length > 6 : K === "fill" ? (p.rows || []).length > 3 : false;
+    const big = many ? html`<div class="arbig"><span>So much on one board makes the words small.</span><button class="chip" onClick=${onSplit}>Split it into two concepts</button></div>` : null;
     if (K === "words") {
       const sel = p.words || [];
-      return html`<p class="help">Tap the words to put on this board (up to 8; 4 to 6 look best). Their pictures show with them.</p>
+      return html`${big}<p class="help">Tap the words to put on this board (up to 8; 4 to 6 look best). Their pictures show with them.</p>
         <div class="arwordchips">${words.map(w => html`<button key=${w.ar} class=${"arwchip add" + (sel.includes(w.ar) ? " on" : "")} onClick=${() => up({ words: sel.includes(w.ar) ? sel.filter(x => x !== w.ar) : sel.concat(w.ar).slice(0, 8) })}>${w.img ? html`<img class="arwimg" src=${srcFor(w.img)} alt=""/>` : null}<b class="arabic">${w.ar}</b></button>`)}</div>
         ${!words.length ? html`<p class="help">Add words to the lesson first (further down).</p>` : null}`;
     }
     if (K === "match") {
       const P = p.pairs || [];
-      return html`<p class="help">Arabic on the right; its match (a meaning, a plural, an opposite…) on the left. The left side gets mixed up on the board.</p>
+      return html`${big}<p class="help">Arabic on the right; its match (a meaning, a plural, an opposite…) on the left. The left side gets mixed up on the board.</p>
         ${P.map((x, k) => html`<div key=${k} class="arqopte"><input class="arin" dir="rtl" value=${x[0]} placeholder="كَلِمَةٌ" onInput=${e => up({ pairs: P.map((y, j) => (j === k ? [e.target.value, y[1]] : y)) })}/><span>↔</span><input class="arin" dir="auto" value=${x[1]} placeholder="its match" onInput=${e => up({ pairs: P.map((y, j) => (j === k ? [y[0], e.target.value] : y)) })}/><button class="iconbtn" onClick=${() => up({ pairs: P.filter((_, j) => j !== k) })} aria-label="Remove">✕</button></div>`)}
         <div class="row2">${P.length < 6 ? html`<button class="chip" onClick=${() => up({ pairs: P.concat([["", ""]]) })}>＋ A pair</button>` : null}${words.some(w => w.en) ? html`<button class="chip" onClick=${() => up({ pairs: words.filter(w => w.en).slice(0, 5).map(w => [w.ar, w.en]) })}>Use the lesson's words</button>` : null}</div>`;
     }
     if (K === "fill") {
       const R = p.rows || [];
-      return html`<p class="help">Write the sentence with ___ where the gap is, and what goes in it. You fill it in together; <b>✔ Answers</b> shows it on the board.</p>
+      return html`${big}<p class="help">Write the sentence with ___ where the gap is, and what goes in it. You fill it in together; <b>✔ Answers</b> shows it on the board.</p>
         ${R.map((x, k) => html`<div key=${k} class="arqopte"><input class="arin" dir="rtl" value=${x.q} placeholder="هَذَا ___ كَبِيرٌ" onInput=${e => up({ rows: R.map((y, j) => (j === k ? Object.assign({}, y, { q: e.target.value }) : y)) })}/><input class="arin arshort" dir="rtl" value=${x.a} placeholder="بَيْتٌ" onInput=${e => up({ rows: R.map((y, j) => (j === k ? Object.assign({}, y, { a: e.target.value }) : y)) })}/><button class="iconbtn" onClick=${() => up({ rows: R.filter((_, j) => j !== k) })} aria-label="Remove">✕</button></div>`)}
         ${R.length < 4 ? html`<button class="chip" onClick=${() => up({ rows: R.concat({ q: "", a: "" }) })}>＋ A sentence</button>` : null}`;
     }
@@ -19163,7 +19611,8 @@ notify pgrst, 'reload schema';
     if (K === "pic") return html`<p class="help">A page of a book, a photo, anything to read or explain. It fills the board; point and draw on it while you record.</p>
       ${p.pic ? html`<img class="arpicprev" src=${srcFor(p.pic)} alt="The picture on this board"/>` : null}
       <button class="btn sec" onClick=${onPic}>${p.pic ? "Change the picture" : "📷 Choose the picture"}</button>`;
-    return html`<textarea dir="rtl" class="arboardin" rows=${Math.max(3, String(p.board || "").split("\n").length + 1)} placeholder="اُكْتُبْ هُنَا… (each line is a line on the board)" value=${p.board || ""} onInput=${e => up({ board: e.target.value })}></textarea>`;
+    return html`${big}<textarea dir="rtl" class="arboardin" rows=${Math.max(3, String(p.board || "").split("\n").length + 1)} placeholder="اُكْتُبْ هُنَا… (each line is a line on the board; 3 lines keep the words big)" value=${p.board || ""} ref=${taRef} onInput=${e => up({ board: e.target.value })}></textarea>
+      <${ArHarakat} get=${() => taRef.current} set=${v => up({ board: v })}/>`;
   }
 
   // ---- one of your Arabic lessons: its concepts (the boards you'll record), its summary, the words to learn, your recording, its video
@@ -19171,7 +19620,7 @@ notify pgrst, 'reload schema';
     const norm = P => (P || []).map(p => { const o = arPg(p); if (o.say == null) o.say = o.note || ""; delete o.note; return o; });
     const [title, setTitle] = useState(lesson.title || ""), [summary, setSummary] = useState(lesson.summary || ""), [pages, setPages] = useState(() => norm(lesson.pages)), [words, setWords] = useState(lesson.words || []), [src, setSrc] = useState(lesson.src || []);
     const [dirty, setDirty] = useState(false), [busy, setBusy] = useState(false), [studio, setStudio] = useState(false), [wq, setWq] = useState(""), [own, setOwn] = useState({ ar: "", en: "" }), [thumb, setThumb] = useState(false), [arm, setArm] = useState(false);
-    const [ins, setIns] = useState(null), [bankAt, setBankAt] = useState(null), [ayatAt, setAyatAt] = useState(null), [peekPg, setPeekPg] = useState(null), [seeW, setSeeW] = useState(null), [recW, setRecW] = useState(null), [canUndo, setCanUndo] = useState(false);
+    const [ins, setIns] = useState(null), [bankAt, setBankAt] = useState(null), [ayatAt, setAyatAt] = useState(null), [bookAt, setBookAt] = useState(null), [peekPg, setPeekPg] = useState(null), [seeW, setSeeW] = useState(null), [recW, setRecW] = useState(null), [canUndo, setCanUndo] = useState(false);
     const { b } = useArBank();
     // undo: what it all was before each change (typing in one box counts as one change)
     const cur = useRef(null); cur.current = { title, summary, pages, words, src };
@@ -19180,6 +19629,17 @@ notify pgrst, 'reload schema';
     function undo() { const h = hist.current.pop(); if (!h) return; setTitle(h.title); setSummary(h.summary); setPages(h.pages); setWords(h.words); setSrc(h.src); setDirty(true); lastK.current = { k: null, at: 0 }; setCanUndo(hist.current.length > 0); toast("Undone."); }
     const upP = (i, o, key) => set(() => setPages(P => P.map((p, k) => (k === i ? Object.assign({}, p, o) : p))), key);
     const moveP = (i, d) => set(() => setPages(P => { const n = P.slice(), j = i + d; if (j < 0 || j >= n.length) return P; [n[i], n[j]] = [n[j], n[i]]; return n; }));
+    // one crowded board into two, each half as full, so the words are twice as big
+    function splitP(i) {
+      const p = pages[i], half = (a) => [a.slice(0, Math.ceil(a.length / 2)), a.slice(Math.ceil(a.length / 2))];
+      let A, B;
+      if (p.kind === "match") { const [x, y] = half(p.pairs || []); A = { pairs: x }; B = { pairs: y }; }
+      else if (p.kind === "words") { const [x, y] = half(p.words || []); A = { words: x }; B = { words: y }; }
+      else if (p.kind === "fill") { const [x, y] = half(p.rows || []); A = { rows: x }; B = { rows: y }; }
+      else { const [x, y] = half(String(p.board || "").split("\n").filter(l => l.trim())); A = { board: x.join("\n") }; B = { board: y.join("\n") }; }
+      set(() => setPages(P => P.slice(0, i).concat(Object.assign({}, p, A), Object.assign({}, p, B, { say: "" }), P.slice(i + 1))));
+      toast("Split in two. Undo puts it back.");
+    }
     const insertAt = (at, list) => set(() => setPages(P => P.slice(0, at).concat(list, P.slice(at))));
     async function save(quiet) { setBusy(true); try { await update("ar_lessons/" + lesson.id, { title: title.trim() || "Lesson", summary, pages, words, src, updatedAt: Date.now() }); setDirty(false); if (!quiet) toast("Saved."); } catch (e) { toast(errText(e)); } setBusy(false); }
     async function back() { if (dirty) await save(true); onBack(); }
@@ -19216,6 +19676,7 @@ notify pgrst, 'reload schema';
       setIns(null);
       if (kind === "bank") { setBankAt(at); return; }
       if (kind === "ayat") { setAyatAt(at); return; }
+      if (kind === "book") { setBookAt(at); return; }
       const base = { kind, title: "", say: "" };
       const fresh = kind === "words" ? { words: words.slice(0, 6).map(w => w.ar) } : kind === "match" ? { pairs: words.filter(w => w.en).slice(0, 4).map(w => [w.ar, w.en]).concat(words.some(w => w.en) ? [] : [["", ""], ["", ""], ["", ""]]) }
         : kind === "fill" ? { rows: [{ q: "", a: "" }] } : kind === "choose" ? { q: "", opts: ["", "", ""], a: "" } : kind === "table" ? { table: { head: [], rows: [] } } : kind === "pic" ? { pic: null } : { board: "" };
@@ -19241,7 +19702,7 @@ notify pgrst, 'reload schema';
     async function saveRec(patch) { await update("ar_lessons/" + lesson.id, { title: title.trim() || "Lesson", summary, pages, words, src, explain: patch.explain, explainSecs: patch.explainSecs, cues: patch.cues, updatedAt: Date.now() }); setDirty(false); if (lesson.explain && lesson.explain !== patch.explain && rt.assets) rt.assets.delete(lesson.explain).catch(() => {}); }
     const recorded = !!lesson.explain;
     const plus = at => html`<button class="arins" onClick=${() => setIns(at)} aria-label="Add a board here">＋ ${at === 0 ? "Add a concept at the top (an introduction…)" : "Add a concept here"}</button>`;
-    const KINDS = [["text", "📝", "Text", "Lines of Arabic"], ["words", "🖼", "Words", "Big, with their pictures"], ["match", "↔", "Match", "Solve it together"], ["fill", "▁", "Fill the blank", "Sentences with a gap"], ["choose", "☑", "Choose", "A question and its answers"], ["table", "▦", "Table", "Conjugation and the like"], ["pic", "📷", "Picture", "A book page or a photo"], ["ayat", "📖", "Ayat", "From the Mushaf, or a whole page"], ["bank", "📚", "From the bank", "Another Fusha lesson's boards"]];
+    const KINDS = [["text", "📝", "Text", "Lines of Arabic"], ["words", "🖼", "Words", "Big, with their pictures"], ["match", "↔", "Match", "Solve it together"], ["fill", "▁", "Fill the blank", "Sentences with a gap"], ["choose", "☑", "Choose", "A question and its answers"], ["table", "▦", "Table", "Conjugation and the like"], ["book", "📕", "Book pages", "From a book you added, as printed"], ["pic", "📷", "Picture", "A photo or a page you snap"], ["ayat", "📖", "Ayat", "From the Mushaf, or a whole page"], ["bank", "📚", "From the bank", "Another Fusha lesson's boards"]];
     return html`<div class="page">
       <header class="rhead"><button class="iconbtn" onClick=${back} aria-label="Back"><${Ic.back}/></button>
         <div class="rtitle"><b>Arabic lesson ${number}</b><small>${recorded ? "Recorded · " + fmtDur(lesson.explainSecs || 0) : "Not recorded yet"}</small></div>
@@ -19260,7 +19721,7 @@ notify pgrst, 'reload schema';
               ${pages.length > 1 ? html`<button class="iconbtn" onClick=${() => set(() => setPages(P => P.filter((_, k) => k !== i)))} aria-label="Remove"><${Ic.trash} size=${18}/></button>` : null}</span></div>
             ${peekPg === i ? html`<${ArBoardPeek} lesson=${L} page=${i} number=${number}/>` : null}
             <input dir="auto" class="arin" placeholder="Its name on the board (optional), e.g. هَذَا وَهَذِهِ" value=${p.title || ""} onInput=${e => upP(i, { title: e.target.value }, "t" + i)}/>
-            <${ArPageEdit} p=${p} words=${words} up=${o => upP(i, o, "p" + i + Object.keys(o).join())} onPic=${() => choosePic({ page: i })}/>
+            <${ArPageEdit} p=${p} words=${words} up=${o => upP(i, o, "p" + i + Object.keys(o).join())} onPic=${() => choosePic({ page: i })} onSplit=${() => splitP(i)}/>
             <details open=${!!p.say}><summary>What you'll say (only you see this)</summary><textarea dir="auto" rows="3" class="arnote" value=${p.say || ""} onInput=${e => upP(i, { say: e.target.value }, "s" + i)}></textarea></details>
           </div>${plus(i + 1)}</div>`)}
         </div>
@@ -19295,6 +19756,7 @@ notify pgrst, 'reload schema';
         <div class="row2"><button class="btn sec" onClick=${() => { setSeeW(null); choosePic({ word: w.ar }); }}>Change the picture</button><button class="btn quiet" onClick=${() => { setW(w.ar, { img: null }); setSeeW(null); }}>Remove it</button><button class="btn" onClick=${() => setSeeW(null)}>Done</button></div></div>` : null; })() : null}
       ${bankAt != null ? html`<${ArBank} s=${s} onClose=${() => setBankAt(null)} onAdd=${addBank}/>` : null}
       ${ayatAt != null ? html`<${ArAyatPick} boards=${true} onClose=${() => setAyatAt(null)} onAdd=${addAyat}/>` : null}
+      ${bookAt != null ? html`<${ArBookPick} s=${s} onClose=${() => setBookAt(null)} onAdd=${(list, how) => { const at = bookAt; setBookAt(null); insertAt(at, list); toast(how === "text" ? "The words are on the boards. Correct them and add the harakat (the row of harakat is under each)." : list.length + " pages on the boards. Use 🔍 Zoom while you record to go in close."); }}/>` : null}
       ${studio ? html`<${ExplainStudio} ix=${AR_IX()} lesson=${L} number=${number} onSave=${saveRec} onClose=${() => setStudio(false)}/>` : null}
       ${thumb ? html`<${VMThumbs} onClose=${() => setThumb(false)} lesson=${{ n: number, les: Object.assign({}, L, { title: title || L.title, board: L.pages.map(p => p.board || (p.words || []).join(" ") || p.q || "").join("\n") }), ar: true }}/>` : null}
     </div>`;
@@ -19357,7 +19819,9 @@ notify pgrst, 'reload schema';
     const [o, setO] = useState(null);
     return html`<section class="list">
       <button class="row" onClick=${() => setO("mushaf")}><span class="av arav">📖</span><span class="rowmain"><b>The Mushaf</b><small>What your students read: the Quran page by page, with recitation and bookmarks</small></span></button>
+      <button class="row" onClick=${() => setO("books")}><span class="av arav">📕</span><span class="rowmain"><b>Books</b><small>Real books, exactly as printed: teach from their pages, and share them for students to read</small></span></button>
       <button class="row" onClick=${() => setO("words")}><span class="av arav">📗</span><span class="rowmain"><b>Vocabulary and dictionary</b><small>The word bank by theme, your lessons' tables, and a search with Lisan al-Arab</small></span></button>
+      ${o === "books" ? html`<${BooksShelf} s=${s} course="ar" teacher=${true} onClose=${() => setO(null)}/>` : null}
       ${o === "mushaf" ? html`<${Mushaf} onClose=${() => setO(null)}/>` : o === "words" ? html`<${ArVocab} s=${s} lessons=${arView(s).s.lessons} onClose=${() => setO(null)}/>` : null}
     </section>`;
   }
@@ -19629,6 +20093,259 @@ notify pgrst, 'reload schema';
     </div></div>`;
   }
 
+
+  /* ================= books: a real book, page by page, exactly as printed =================
+     Upload a PDF or photos of the pages. Every page becomes a picture (its pictures and layout untouched), the PDF is kept for downloading.
+     You teach from its pages on the board; students read the ones you share, in their Books. */
+  // (pdf.js comes in through loadPdfJs, the same one the reading passages use)
+  const isPdf = f => /pdf/i.test(f.type || "") || /\.pdf$/i.test(f.name || "");
+  // every page of a PDF, as a sharp picture (1600 px wide), one at a time so the phone keeps up
+  async function pdfPages(file, each, onCount) {
+    const lib = await loadPdfJs(), doc = await lib.getDocument({ data: await file.arrayBuffer() }).promise, n = Math.min(doc.numPages, 400);
+    if (onCount) onCount(n);
+    for (let i = 1; i <= n; i++) {
+      const pg = await doc.getPage(i), v0 = pg.getViewport({ scale: 1 }), sc = Math.min(3, 1600 / v0.width), vp = pg.getViewport({ scale: sc });
+      const cv = document.createElement("canvas"); cv.width = Math.round(vp.width); cv.height = Math.round(vp.height);
+      const c = cv.getContext("2d"); c.fillStyle = "#fff"; c.fillRect(0, 0, cv.width, cv.height);
+      await pg.render({ canvasContext: c, viewport: vp }).promise;
+      const blob = await new Promise(r => cv.toBlob(r, "image/jpeg", 0.84)); cv.width = cv.height = 0; pg.cleanup();
+      await each(blob, i, n);
+    }
+    try { doc.destroy(); } catch (e) {}
+  }
+  // a new book from a PDF or from photos of its pages; the pages go up as they're ready, so a long book shows its first pages straight away
+  async function addBook(s, course, files, title, onP) {
+    const ord = Math.max(0, ...(s.books || []).map(b => b.order || 0)) + 1, ref = rt.db.collection("books").doc("b" + newId()), id = ref.id, pages = [];
+    await ref.set({ course, order: ord, title: title || "Book", pages: [], file: null, shared: false, updatedAt: Date.now() });
+    let last = Date.now();
+    const put = async (blob, i, n) => { pages.push(await uploadBlob(blob)); onP(i, n); if (Date.now() - last > 2500 || i === n) { last = Date.now(); await update("books/" + id, { pages: pages.slice(), updatedAt: Date.now() }); } };
+    const pdf = files.find(isPdf);
+    if (pdf) {
+      await pdfPages(pdf, put, n => onP(0, n));
+      if (pdf.size < 45 * 1048576) { try { const f = await uploadBlob(new Blob([pdf], { type: "application/pdf" })); await update("books/" + id, { file: f }); } catch (e) {} }
+    } else {
+      const imgs = files.filter(f => /^image\//.test(f.type || "")).sort((a, b) => String(a.name).localeCompare(String(b.name), undefined, { numeric: true }));
+      for (let i = 0; i < imgs.length; i++) await put(await shrinkImage(imgs[i]).catch(() => imgs[i]), i + 1, imgs.length);
+    }
+    await update("books/" + id, { pages, updatedAt: Date.now() });
+    return id;
+  }
+  // the words on a page, read by the phone (Arabic), for you to correct and give their harakat
+  let arOcrW = null;
+  async function arOcr(src, onP) {
+    const T = "https://cdn.jsdelivr.net/npm/tesseract.js@5.1.1/dist/";
+    if (!window.Tesseract) await new Promise((res, rej) => { const sc = document.createElement("script"); sc.src = T + "tesseract.min.js"; sc.onload = res; sc.onerror = () => rej(new Error("load")); document.head.appendChild(sc); });
+    if (!arOcrW) arOcrW = window.Tesseract.createWorker("ara", 1, { workerPath: T + "worker.min.js", corePath: "https://cdn.jsdelivr.net/npm/tesseract.js-core@5.1.1", langPath: "https://cdn.jsdelivr.net/npm/@tesseract.js-data/ara@1.0.0/4.0.0_best_int", logger: m => { if (onP && m && m.status === "recognizing text") onP(m.progress || 0); } });
+    const w = await arOcrW, r = await w.recognize(src);
+    return String((r && r.data && r.data.text) || "").split(/\n/).map(l => l.replace(/\s+/g, " ").trim()).filter(l => /[؀-ۿ]/.test(l)).join("\n");
+  }
+
+  // ---- the books of a class: you add them and choose who reads them; students open the ones you share
+  function BooksShelf({ s, course, teacher, onClose }) {
+    const books = (s.books || []).filter(b => (b.course || "ar") === course && (teacher || b.shared));
+    const [busy, setBusy] = useState(null), [open, setOpen] = useState(null), [arm, setArm] = useState(null), [name, setName] = useState(null);
+    const fileRef = useRef(null);
+    async function onFiles(e) {
+      const files = Array.from(e.target.files || []); e.target.value = ""; if (!files.length) return;
+      if ((s.schemaVer || 0) < 12) { toast("Run the database update first (the blue box on your home screen)."); return; }
+      const t = (files.find(isPdf) || files[0]).name.replace(/\.[a-z0-9]+$/i, "").replace(/[_-]+/g, " ").trim();
+      setBusy({ i: 0, n: 0 });
+      try { await addBook(s, course, files, t, (i, n) => setBusy({ i, n })); toast("Book added. Tap “Students can read it” to share it."); }
+      catch (er) { toast(er && er.message === "pdf" ? "That PDF couldn't be opened here. Try again, or add photos of the pages." : errText(er)); }
+      setBusy(null);
+    }
+    async function del(b) { if (arm !== b.id) { setArm(b.id); setTimeout(() => setArm(null), 3500); return; } try { await remove("books/" + b.id); if (rt.assets) [...b.pages, b.file].filter(Boolean).forEach(a => rt.assets.delete(a).catch(() => {})); } catch (e) { toast(errText(e)); } }
+    const body = html`<section class="list">
+      ${teacher ? html`<p class="help">A real book, exactly as printed: its pages, pictures and all. Add a PDF, or photos of the pages. Teach from it on the board (Lessons → a lesson → ＋ → Book pages), and share it so students can read it and download it.</p>` : html`<p class="help">Books from your teacher. Tap one to read it; pinch to zoom.</p>`}
+      ${books.length ? books.map(b => html`<div key=${b.id} class="row bookrow">
+          <button class="bookcover" onClick=${() => setOpen(b)} aria-label=${"Open " + b.title}>${b.pages[0] ? html`<img src=${srcFor(b.pages[0])} alt="" loading="lazy"/>` : html`<span>📕</span>`}</button>
+          <span class="rowmain"><b dir="auto">${b.title}</b><small>${b.pages.length} pages${b.file ? " · PDF" : ""}${teacher ? (b.shared ? " · students can read it" : " · only you") : ""}</small>
+            ${teacher ? html`<span class="bookops">
+              <button class=${"gamesw slim" + (b.shared ? " on" : "")} onClick=${() => update("books/" + b.id, { shared: !b.shared }).catch(e => toast(errText(e)))} aria-pressed=${b.shared ? "true" : "false"}><span class="knob"></span><span>Students can read it</span></button>
+              <button class="chip" onClick=${() => setName({ b, v: b.title })}>Rename</button>
+              <button class=${"chip" + (arm === b.id ? " danger" : "")} onClick=${() => del(b)}>${arm === b.id ? "Tap again to delete" : "Delete"}</button></span>` : null}</span>
+        </div>`) : html`<div class="empty"><p>${teacher ? "No books yet." : "No books yet. Your teacher will add some."}</p></div>`}
+      ${teacher ? html`${busy ? html`<div class="bookbusy"><b>Adding the book…</b><span>${busy.n ? "Page " + busy.i + " of " + busy.n : "Opening it…"}</span><div class="vmbar"><i style=${"width:" + (busy.n ? Math.round(busy.i / busy.n * 100) : 3) + "%"}></i></div><small>Keep this screen open until it's done.</small></div>`
+          : html`<button class="btn" onClick=${() => fileRef.current && fileRef.current.click()}>📕 Add a book (PDF or photos of its pages)</button>`}
+        <input ref=${fileRef} type="file" accept="application/pdf,image/*" multiple style="display:none" onChange=${onFiles}/>` : null}
+    </section>`;
+    return html`${onClose ? html`<div class="full sheetpage" role="dialog" aria-label="Books"><div class="fhead"><span>📚 Books</span><button class="iconbtn" onClick=${onClose} aria-label="Close"><${Ic.x}/></button></div><div class="sbody">${body}</div></div>` : body}
+      ${open ? html`<${BookReader} book=${(s.books || []).find(b => b.id === open.id) || open} onClose=${() => setOpen(null)}/>` : null}
+      ${name ? html`<div class="scrim" onClick=${e => { if (e.target === e.currentTarget) setName(null); }}><div class="sheet" role="dialog" aria-label="Rename">
+        <h3 style="margin:0">The book's name</h3><input class="arin" dir="auto" value=${name.v} onInput=${e => setName(Object.assign({}, name, { v: e.target.value }))}/>
+        <button class="btn" disabled=${!name.v.trim()} onClick=${() => { update("books/" + name.b.id, { title: name.v.trim() }).catch(e => toast(errText(e))); setName(null); }}>Save</button></div></div>` : null}`;
+  }
+  // reading a book: one page at a time, swipe or the arrows, pinch to zoom, download it
+  function BookReader({ book, onClose }) {
+    const key = "rc.book." + book.id, N = book.pages.length;
+    const [pg, setPg] = useState(() => { try { return Math.min(N - 1, Math.max(0, +localStorage.getItem(key) || 0)); } catch (e) { return 0; } });
+    const [jump, setJump] = useState(null);
+    const vz = useViewZoom(), sw = useRef(null);
+    useEffect(() => { try { localStorage.setItem(key, String(pg)); } catch (e) {} vz.reset(); }, [pg]);
+    const go = p => setPg(Math.max(0, Math.min(N - 1, p)));
+    useEffect(() => { const k = e => { if (e.key === "ArrowLeft") go(pg + (book.rtl === false ? -1 : 1)); if (e.key === "ArrowRight") go(pg - (book.rtl === false ? -1 : 1)); }; window.addEventListener("keydown", k); return () => window.removeEventListener("keydown", k); }, [pg]);
+    const down = e => { vz.on.onPointerDown(e); sw.current = vz.v.z > 1 ? null : { x: e.clientX, y: e.clientY }; };
+    const up = e => { vz.on.onPointerUp(e); const s0 = sw.current; sw.current = null; if (!s0 || vz.v.z > 1) return; const dx = e.clientX - s0.x; if (Math.abs(dx) > 60 && Math.abs(dx) > Math.abs(e.clientY - s0.y)) go(pg + (dx > 0 ? 1 : -1)); };   // Arabic books: swipe right for the next page
+    return html`<div class="full bookread" role="dialog" aria-label=${book.title}>
+      <div class="fhead"><span dir="auto">${book.title}</span>
+        <a class="iconbtn" href=${srcFor(book.file || book.pages[pg])} download=${(book.title || "book") + (book.file ? ".pdf" : "-" + (pg + 1) + ".jpg")} target="_blank" rel="noopener" aria-label=${book.file ? "Download the book" : "Download this page"} title=${book.file ? "Download the book" : "Download this page"}>⬇</a>
+        <button class="iconbtn" onClick=${onClose} aria-label="Close"><${Ic.x}/></button></div>
+      <div class="bookpage" ref=${vz.box} onPointerDown=${down} onPointerMove=${vz.on.onPointerMove} onPointerUp=${up} onPointerCancel=${vz.on.onPointerCancel}>
+        ${N ? html`<img key=${pg} src=${srcFor(book.pages[pg])} alt=${"Page " + (pg + 1)} style=${vz.style} draggable="false"/>` : html`<p class="help c">The pages are still being added…</p>`}
+        ${pg + 1 < N ? html`<link rel="prefetch" href=${srcFor(book.pages[pg + 1])}/>` : null}
+      </div>
+      <div class="booknav">
+        <button class="btn sec slim" disabled=${pg >= N - 1} onClick=${() => go(pg + 1)} aria-label="Next page">‹ Next</button>
+        ${jump != null ? html`<input class="arin bookjump" type="number" min="1" max=${N} value=${jump} onInput=${e => setJump(e.target.value)} onKeyDown=${e => { if (e.key === "Enter") { go((+jump || 1) - 1); setJump(null); } }} onBlur=${() => { go((+jump || 1) - 1); setJump(null); }} autofocus/>`
+          : html`<button class="linkbtn" onClick=${() => setJump(pg + 1)}>Page ${pg + 1} of ${N}</button>`}
+        <button class=${"btn sec slim" + (vz.v.z > 1 ? " on" : "")} onClick=${vz.toggle} aria-label="Zoom">${vz.v.z > 1 ? "1×" : "🔍"}</button>
+        <button class="btn sec slim" disabled=${pg <= 0} onClick=${() => go(pg - 1)} aria-label="Previous page">Back ›</button>
+      </div>
+    </div>`;
+  }
+  // pages of a book, onto the boards of a lesson: the page itself (to point at, circle, highlight), or its words (to correct and give harakat)
+  function ArBookPick({ s, onClose, onAdd }) {
+    const books = (s.books || []).filter(b => (b.course || "ar") === "ar");
+    const [b, setB] = useState(books.length === 1 ? books[0] : null), [pick, setPick] = useState([]), [ocr, setOcr] = useState(null);
+    const tog = i => setPick(p => (p.includes(i) ? p.filter(x => x !== i) : p.concat(i).sort((x, y) => x - y)));
+    async function asText() {
+      const out = [];
+      try {
+        for (let k = 0; k < pick.length; k++) { setOcr({ k, n: pick.length, p: 0 }); const t = await arOcr(srcFor(b.pages[pick[k]]), p => setOcr({ k, n: pick.length, p })); const L = t.split("\n").filter(Boolean); for (let i = 0; i < Math.max(1, L.length); i += 3) out.push({ kind: "text", title: i ? "" : b.title + " · " + (pick[k] + 1), board: L.slice(i, i + 3).join("\n"), say: "" }); }
+        onAdd(out, "text");
+      } catch (e) { setOcr(null); toast("Couldn't read the words on that page. Check the connection and try again."); }
+    }
+    return html`<div class="full sheetpage" role="dialog" aria-label="Book pages">
+      <div class="fhead"><span>📕 ${b ? b.title : "Book pages"}</span><button class="iconbtn" onClick=${() => (b && books.length > 1 ? (setB(null), setPick([])) : onClose())} aria-label="Back"><${b && books.length > 1 ? Ic.back : Ic.x}/></button></div>
+      <div class="sbody"><div class="ed">
+        ${!books.length ? html`<p class="help">No books yet. Add one in Library → Books (a PDF, or photos of its pages), then come back here.</p>`
+          : !b ? books.map(x => html`<button key=${x.id} class="row bookrow" onClick=${() => setB(x)}><span class="bookcover">${x.pages[0] ? html`<img src=${srcFor(x.pages[0])} alt="" loading="lazy"/>` : "📕"}</span><span class="rowmain"><b dir="auto">${x.title}</b><small>${x.pages.length} pages</small></span></button>`)
+          : html`<p class="help">Tick the pages to teach from. Each one goes on its own board, exactly as printed.</p>
+            <div class="pagegrid">${b.pages.map((a, i) => html`<button key=${a} class=${"pagebtn" + (pick.includes(i) ? " on" : "")} onClick=${() => tog(i)}><img src=${srcFor(a)} alt="" loading="lazy"/><span>${pick.includes(i) ? "✓ " : ""}${i + 1}</span></button>`)}</div>`}
+      </div></div>
+      ${b && pick.length ? html`<div class="bankbar">${ocr ? html`<span>Reading page ${ocr.k + 1} of ${ocr.n}… ${Math.round(ocr.p * 100)}%</span>`
+        : html`<span>${pick.length} picked</span><button class="btn sec" onClick=${asText}>📝 Its words</button><button class="btn" onClick=${() => onAdd(pick.map(i => ({ kind: "pic", title: b.title + " · " + (i + 1), pic: b.pages[i], say: "" })), "pic")}>📕 The pages</button>`}</div>` : null}
+    </div>`;
+  }
+  // the harakat, one tap each, into what you're writing (for the words a book page gave you, and anything else)
+  function ArHarakat({ get, set }) {
+    const H = ["َ", "ً", "ُ", "ٌ", "ِ", "ٍ", "ْ", "ّ", "ٰ"];
+    const ins = h => { const el = get(); if (!el) return; const a = el.selectionStart != null ? el.selectionStart : el.value.length, z = el.selectionEnd != null ? el.selectionEnd : a; const v = el.value.slice(0, a) + h + el.value.slice(z); set(v); requestAnimationFrame(() => { try { el.focus(); el.setSelectionRange(a + h.length, a + h.length); } catch (e) {} }); };
+    return html`<div class="harabar" aria-label="Harakat">${H.map(h => html`<button key=${h} type="button" onPointerDown=${e => e.preventDefault()} onClick=${() => ins(h)} aria-label="Haraka">${"ـ" + h}</button>`)}</div>`;
+  }
+
+
+  /* ================= showing how it works: your side and the student's, at the same time =================
+     On a computer: one screen with your app on the left and the student's on the right (your test phone, so nothing counts), live-linked; record the screen.
+     With two phones: record each phone's screen, then put the two recordings side by side here. */
+  function DemoScreen() {
+    const P = new URLSearchParams(location.search), link = P.get("link") || "", who = P.get("name") || "Student";
+    const [labels, setLabels] = useState(true), [swap, setSwap] = useState(false), [tips, setTips] = useState(true), [h, setH] = useState(window.innerHeight);
+    useEffect(() => { const f = () => setH(window.innerHeight); window.addEventListener("resize", f); return () => window.removeEventListener("resize", f); }, []);
+    const stu = (() => { try { const u = new URL(link); u.search = "?demo=student"; return u.href; } catch (e) { return ""; } })();
+    const tea = location.pathname + "?demo=teacher";
+    const top = (labels ? 50 : 0) + (tips ? 96 : 0) + 40, sc = Math.min(1.25, Math.max(0.45, (h - top) / 844));
+    const phone = (src, label, k) => html`<div class="demoside" key=${k}>${labels ? html`<div class="demolabel">${label}</div>` : null}
+      <div class="demophone" style=${"width:" + Math.round(390 * sc) + "px;height:" + Math.round(844 * sc) + "px"}><iframe src=${src} title=${label} allow="microphone; camera; autoplay; fullscreen; clipboard-write" style=${"transform:scale(" + sc + ")"}></iframe></div></div>`;
+    const sides = [phone(tea, "Teacher", "t"), phone(stu, "Student · " + who, "s")];
+    return html`<div class="demoscreen">
+      ${tips ? html`<div class="demotips"><b>Record this screen while you teach.</b> Windows: <kbd>Win</kbd>+<kbd>Alt</kbd>+<kbd>R</kbd> (or the Snipping Tool's Record). Mac: <kbd>Cmd</kbd>+<kbd>Shift</kbd>+<kbd>5</kbd>. On the left you're the teacher; on the right is ${who}'s screen, opened as your test phone so nothing counts. Start a class on the left and the right follows. Use headphones in a live call, so the sound doesn't echo.
+        <span class="demobtns"><button onClick=${() => setLabels(!labels)}>${labels ? "Hide" : "Show"} the labels</button><button onClick=${() => setSwap(!swap)}>Swap sides</button><button onClick=${() => setTips(false)}>Hide this</button></span></div>` : html`<button class="demoshow" onClick=${() => setTips(true)} aria-label="Show the tips">?</button>`}
+      <div class="demorow">${swap ? sides.reverse() : sides}</div>
+    </div>`;
+  }
+  async function openDemo(student) {
+    try {
+      const c = await q(sb.rpc("test_link", { sid: student.id }));
+      const u = location.pathname + "?demo=show&link=" + encodeURIComponent(joinLink(c)) + "&name=" + encodeURIComponent(student.name || "Student");
+      const w = window.open(u, "_blank"); if (!w) location.href = u;
+    } catch (e) { toast(errText(e)); }
+  }
+
+  // two screen recordings (yours and the student's) side by side in one video, for YouTube or to show other teachers
+  function SideBySide({ onClose }) {
+    const [A, setA] = useState(null), [B, setB] = useState(null), [off, setOff] = useState(0), [labels, setLabels] = useState(true), [la, setLa] = useState("Teacher"), [lb, setLb] = useState("Student"), [title, setTitle] = useState("");
+    const [sound, setSound] = useState("a"), [busy, setBusy] = useState(null), [playing, setPlaying] = useState(false);
+    const va = useRef(null), vb = useRef(null), cvRef = useRef(null), stop = useRef(false), fa = useRef(null), fb = useRef(null);
+    const S = useRef({}); S.current = { off, labels, la, lb, title };
+    const pick = (set, ref) => e => { const f = e.target.files && e.target.files[0]; e.target.value = ""; if (!f) return; set({ f, url: URL.createObjectURL(f) }); };
+    // one frame: both phones, side by side, on a dark background
+    function draw(c, W, H) {
+      const R = S.current, a = va.current, b = vb.current;
+      const g = c.createLinearGradient(0, 0, 0, H); g.addColorStop(0, "#151a22"); g.addColorStop(1, "#0b0e13"); c.fillStyle = g; c.fillRect(0, 0, W, H);
+      const top = R.title ? H * 0.11 : H * 0.04, lab = R.labels ? H * 0.07 : 0, colW = W / 2, maxH = H - top - lab - H * 0.04;
+      if (R.title) { c.fillStyle = "#fff"; c.font = "800 " + Math.round(H * 0.055) + "px Poppins, Andika, sans-serif"; c.textAlign = "center"; c.textBaseline = "middle"; c.fillText(R.title, W / 2, top / 2 + H * 0.01); }
+      [[a, R.la, 0], [b, R.lb, 1]].forEach(([v, lbl, i]) => {
+        const vw = v && v.videoWidth || 9, vh = v && v.videoHeight || 19.5, s = Math.min((colW - W * 0.06) / vw, maxH / vh), w = vw * s, h = vh * s, x = i * colW + (colW - w) / 2, y = top + lab;
+        c.fillStyle = "rgba(0,0,0,.45)"; crRR(c, x - 10, y - 10 + 8, w + 20, h + 20, 28); c.fill();
+        c.fillStyle = "#000"; crRR(c, x - 10, y - 10, w + 20, h + 20, 28); c.fill();
+        if (v && v.readyState >= 2) { c.save(); crRR(c, x, y, w, h, 20); c.clip(); c.drawImage(v, x, y, w, h); c.restore(); }
+        if (R.labels && lbl) { c.fillStyle = i ? "#4FC3F7" : "#FFB74D"; c.font = "800 " + Math.round(H * 0.042) + "px Poppins, Andika, sans-serif"; c.textAlign = "center"; c.textBaseline = "middle"; c.fillText(lbl, x + w / 2, top + lab / 2); }
+      });
+    }
+    // the preview, drawn all the time
+    useEffect(() => {
+      let raf = 0; const tick = () => { raf = requestAnimationFrame(tick); const cv = cvRef.current; if (!cv || busy) return; const c = cv.getContext("2d"); draw(c, cv.width, cv.height); };
+      raf = requestAnimationFrame(tick); return () => cancelAnimationFrame(raf);
+    }, [busy]);
+    // the student's video follows yours, moved by the offset
+    useEffect(() => { const a = va.current, b = vb.current; if (!a || !b) return; const t = setInterval(() => { if (!playing || busy) return; const want = a.currentTime + S.current.off; if (want >= 0 && Math.abs(b.currentTime - want) > 0.25) b.currentTime = want; if (want >= 0 && b.paused) b.play().catch(() => {}); }, 250); return () => clearInterval(t); }, [A, B, playing, busy]);
+    function playPrev() { const a = va.current, b = vb.current; if (!a || !b) return; if (playing) { a.pause(); b.pause(); setPlaying(false); return; } b.currentTime = Math.max(0, a.currentTime + off); a.play(); b.play(); setPlaying(true); }
+    async function make() {
+      const a = va.current, b = vb.current; if (!a || !b) return;
+      a.pause(); b.pause(); setPlaying(false); stop.current = false;
+      const t0a = Math.max(0, -off), t0b = t0a + off, dur = Math.max(0, Math.min(a.duration - t0a, b.duration - t0b));
+      if (dur < 1) { toast("The two videos don't overlap. Move the student's video with the slider."); return; }
+      const W = 1920, H = 1080, cv = document.createElement("canvas"); cv.width = W; cv.height = H; const c = cv.getContext("2d");
+      let ac = null, rec = null;
+      try {
+        ac = new (window.AudioContext || window.webkitAudioContext)(); const dest = ac.createMediaStreamDestination();
+        for (const [v, k] of [[a, "a"], [b, "b"]]) { const src = v.__src || (v.__src = ac.createMediaElementSource(v)); try { src.disconnect(); } catch (e) {} const gn = ac.createGain(); gn.gain.value = sound === "both" || sound === k ? 1 : 0; src.connect(gn); gn.connect(dest); }
+        const stream = cv.captureStream(30); dest.stream.getAudioTracks().forEach(tr => stream.addTrack(tr));
+        const mime = classRec.pickMime ? classRec.pickMime() : "video/webm";
+        rec = new MediaRecorder(stream, Object.assign({ videoBitsPerSecond: 8000000 }, mime ? { mimeType: mime } : {}));
+        const parts = []; rec.ondataavailable = e => { if (e.data && e.data.size) parts.push(e.data); };
+        const done = new Promise(r => { rec.onstop = r; });
+        a.currentTime = t0a; b.currentTime = t0b; await new Promise(r => setTimeout(r, 400));
+        awake.on("sbs"); setBusy({ p: 0 });
+        rec.start(1000); await Promise.all([a.play(), b.play()]);
+        await new Promise(res => { const tick = () => { const t = a.currentTime - t0a; draw(c, W, H); if (Math.abs(b.currentTime - (a.currentTime + off)) > 0.3) b.currentTime = a.currentTime + off; setBusy({ p: Math.min(1, t / dur) }); if (stop.current || t >= dur || a.ended) return res(); requestAnimationFrame(tick); }; tick(); });
+        a.pause(); b.pause(); rec.stop(); await done;
+        if (stop.current) { setBusy(null); return; }
+        const blob = new Blob(parts, { type: (rec.mimeType || "video/webm").split(";")[0] }), id = "sbs-" + uid();
+        await classRec.put("recs", { id, course: "studio", startedAt: Date.now(), title: title || "Teacher and student, side by side", lessonNo: null, student: null, part: 1, mime: blob.type, status: "done", fixed: false, size: blob.size, secs: Math.round(dur) });
+        await classRec.put("chunks", { rec: id, seq: 0, blob });
+        toast("Made. It's in Your studio's recordings, ready to download for YouTube."); onClose();
+      } catch (e) { toast("Couldn't make the video on this phone. Try it on a computer (Chrome)."); setBusy(null); }
+      finally { awake.off("sbs"); try { a.muted = false; } catch (x) {} }
+    }
+    return html`<div class="full sheetpage" role="dialog" aria-label="Side by side">
+      <div class="fhead"><span>📱📱 Teacher and student, side by side</span><button class="iconbtn" onClick=${() => { stop.current = true; onClose(); }} aria-label="Close"><${Ic.x}/></button></div>
+      <div class="sbody"><div class="ed">
+        <p class="help">Record your phone's screen while you teach, and a second phone (your test phone) as the student. Then put the two recordings here: they play side by side in one video. Each phone has its own screen recorder: swipe down from the top and tap <b>Screen record</b> (on iPhone: Control Centre → ⏺).</p>
+        <canvas class="sbscv" ref=${cvRef} width="1280" height="720" aria-label="How the video will look"></canvas>
+        <div class="row2">
+          <button class="btn sec" onClick=${() => fa.current && fa.current.click()}>${A ? "✓ Your screen" : "📱 Your screen (teacher)"}</button>
+          <button class="btn sec" onClick=${() => fb.current && fb.current.click()}>${B ? "✓ The student's screen" : "📱 The student's screen"}</button>
+        </div>
+        <input ref=${fa} type="file" accept="video/*" style="display:none" onChange=${pick(setA)}/><input ref=${fb} type="file" accept="video/*" style="display:none" onChange=${pick(setB)}/>
+        <video ref=${va} src=${A ? A.url : ""} playsinline preload="auto" style="display:none" onEnded=${() => setPlaying(false)}></video>
+        <video ref=${vb} src=${B ? B.url : ""} playsinline preload="auto" style="display:none"></video>
+        ${A && B ? html`
+          <button class="btn quiet" onClick=${playPrev}>${playing ? "⏸ Pause" : "▶ Play them together"}</button>
+          <label class="vml">Match them up: the student's video ${off === 0 ? "starts with yours" : off > 0 ? "starts " + off.toFixed(1) + " s later in its recording" : "starts " + (-off).toFixed(1) + " s earlier"}
+            <input type="range" min="-20" max="20" step="0.1" value=${off} onInput=${e => setOff(+e.target.value)}/></label>
+          <p class="help">Tip: tap something on your phone at the start of both recordings, then slide until it happens at the same moment on both.</p>
+          <div class="field"><label>Title on top (optional)</label><input value=${title} onInput=${e => setTitle(e.target.value)} placeholder="How my class works"/></div>
+          <button class=${"gamesw" + (labels ? " on" : "")} onClick=${() => setLabels(!labels)}><span class="knob"></span><span>Names above the phones</span></button>
+          ${labels ? html`<div class="row2"><input value=${la} onInput=${e => setLa(e.target.value)}/><input value=${lb} onInput=${e => setLb(e.target.value)}/></div>` : null}
+          <div class="field"><span class="lbl">Sound from</span><div class="segsmall">${[["a", "Your phone"], ["b", "The student's"], ["both", "Both"]].map(([k, l]) => html`<button key=${k} class=${sound === k ? "on" : ""} onClick=${() => setSound(k)}>${l}</button>`)}</div></div>
+          ${busy ? html`<div class="bookbusy"><b>Making the video…</b><div class="vmbar"><i style=${"width:" + Math.round(busy.p * 100) + "%"}></i></div><small>It plays through once while it's made. Keep this screen open.</small><button class="btn quiet slim" onClick=${() => { stop.current = true; }}>Stop</button></div>`
+            : html`<button class="btn" onClick=${make}>🎬 Make the video</button>`}` : null}
+      </div></div>
+    </div>`;
+  }
+
   function StudentHome({ s, ix }) {
     const st = s.students.find(x => x.id === s.sid);
     if (!st) return html`<${NoLink}/>`;
@@ -19658,6 +20375,7 @@ notify pgrst, 'reload schema';
   window.__kfArt = { kfBody, KF_CHARS, kfHit };
   window.__kfApi = { kfCpu, kfTap, kfPress, kfStep, kfNew, kfSnd, kfAnn, annRec };
   window.__ink = { hitInk, inkGroup, straighten };
+  window.__frSim = { frNew, frStep, frCpu, frPress, FR_DIFF, frTourBout, frTourNew, frAngTo };
   window.__mux = { lessonVideo, fixVideo, loadMux, vidJob, awake, player, cleanVoice };
   window.__AsksT = VMAsks; window.__PlacesT = VMPlaces; window.__RoomT = Room; window.__HwT = HwRunner; window.__FightT = Fight; window.__crx = { vmChroma, vmClothColour, crMapPic, crJoinVoice, vmTrip, vmMap, vmWaterDb, vmWaterFind, vmWaterItem, vmVehicle };
   window.__ui = { vmMatte, vmRvm, vmMore, loadMux, vmFindSwears, vmNoMusic, vmBleep, vmAvSync, vmLag, vmPcmOf, vmGrab, vmShrinkPic, VMBlurSheet, vmBlurApply, vmFindFaces, vmOcr, cleanVoice, vmKeyDraw, vmSeg, vmVbgPaint, vmVbgLib, vmVbgPrep, vmKeyer, vmLogoPaint, vmLogoBg, vmLogo, LessonsList, PacksSheet, RulesGuide, LESSON_PACKS, crFrame, crSorted, stageAt0: stageAt, PushBell, SetupCheck, VidJobPill, html, render, store, Board, ExplainStudio, LiveTools, stageAt, buildSound, live, player, ClassroomPlayer, crAssets, CR_W, CR_H, TalkBoard, vidJob, VideoMaker, vmExport, vmDb, vmNew, vmAt, vmFrame, vmGeo, VM_LOOKS, vmStyle, vmSaveStyle, VMStyle, vmIntro, vmOutro, vmLook, vmElemSrc, vmPrepClip, vmWorld, vmTrack, vmUntrack, VME, vmKeep, vmSrcAt, thLib, VMThumbs, thInfo, tsMake, tsRender, tsLoadAll, tsExport, tsCutOut, tsLib, TS_TPLS };
@@ -19665,6 +20383,7 @@ notify pgrst, 'reload schema';
   root.innerHTML = "";
   const duoLink = readDuoLink();
   if (duoLink) render(html`<${ReactGuest} link=${duoLink}/>`, root);
+  else if (new URLSearchParams(location.search).get("demo") === "show") render(html`<${DemoScreen}/>`, root);   // your side and the student's, side by side, to record
   else { render(html`<${App}/>`, root); boot(); }
 })();
 </script>
