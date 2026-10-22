@@ -24,7 +24,7 @@ export default async (req) => {
   if (!who || !who.ok) return json({ error: "sign in" }, 401);
   // paid tools are yours alone: academies' teachers and students can't spend your keys
   const w = await fetch(url + "/rest/v1/rpc/whoami", { method: "POST", headers: { apikey: anon, authorization: auth, "content-type": "application/json" }, body: "{}" }).then(r => (r.ok ? r.json() : null)).catch(() => null);
-  if (!w || !(w.owner === true || (w.owner === undefined && w.teacher === true))) return json({ error: "owner only" }, 403);
+  if (!w || !(w.owner === true || w.paid === true || (w.owner === undefined && w.teacher === true))) return json({ error: "owner only" }, 403);   // you, or your own media manager when you allow it
   let b = {};
   try { b = await req.json(); } catch (e) { return json({ error: "bad body" }, 400); }
   const clip = (v, n) => String(v || "").replace(/[\u0000-\u001f]/g, " ").slice(0, n);

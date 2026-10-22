@@ -1,11 +1,11 @@
 {
-  "name": "Reading class",
-  "short_name": "Reading",
+  "name": "Al-Halaqa",
+  "short_name": "Al-Halaqa",
   "start_url": "./",
   "scope": "./",
   "display": "standalone",
-  "background_color": "#F5F7F3",
-  "theme_color": "#233A2F",
+  "background_color": "#0B1728",
+  "theme_color": "#10233F",
   "icons": [
     {
       "src": "icon-192.png",
@@ -25,5 +25,6 @@
       "type": "image/png",
       "purpose": "maskable"
     }
-  ]
+  ],
+  "description": "Academies, classes, lessons and exams in one place"
 }

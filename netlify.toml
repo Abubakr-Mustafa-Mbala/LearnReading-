@@ -6,3 +6,30 @@
 # Netlify only runs these when the site is deployed from GitHub (or the Netlify CLI), not by drag and drop.
 [functions]
   directory = "netlify/functions"
+
+# Short links: a student's own link, an academy's join code, a teacher invite, a parent's link, a certificate check, an academy's page.
+# (Real files always win, so these never hide the app's own files.)
+[[redirects]]
+  from = "/s/:code"
+  to = "/?i=:code"
+  status = 302
+[[redirects]]
+  from = "/j/:code"
+  to = "/?code=:code"
+  status = 302
+[[redirects]]
+  from = "/t/:code"
+  to = "/?st=:code"
+  status = 302
+[[redirects]]
+  from = "/p/:code"
+  to = "/?pa=:code"
+  status = 302
+[[redirects]]
+  from = "/c/:no"
+  to = "/?cert=:no"
+  status = 302
+[[redirects]]
+  from = "/:slug"
+  to = "/?ac=:slug"
+  status = 302

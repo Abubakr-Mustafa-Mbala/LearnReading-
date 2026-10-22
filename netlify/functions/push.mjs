@@ -1,5 +1,5 @@
 // Netlify Function: sends a phone notification (Web Push) when a student asks a question or the
-// teacher answers. Who may notify whom is decided by the database (push_targets), using the
+// teacher answers (and marks, notices, fees, media work). Each phone chooses its topics. Who may notify whom is decided by the database (push_targets), using the
 // sender's own sign-in, so a stranger can't send anything.
 // Netlify environment variables: SUPABASE_URL, SUPABASE_KEY, VAPID_PUBLIC_KEY, VAPID_PRIVATE_KEY,
 // VAPID_SUBJECT (for example mailto:you@example.com).
@@ -43,10 +43,17 @@ export default async (req) => {
   if (!/^Bearer \S+/.test(auth)) return json({ error: "sign in" }, 401);
   let b = {};
   try { b = await req.json(); } catch (e) { return json({ error: "bad body" }, 400); }
-  const to = b.to === "student" ? "student" : b.to === "class" ? "class" : "teacher";
-  const msg = JSON.stringify({ title: String(b.title || "Reading class").slice(0, 80), body: String(b.body || "").slice(0, 160), url: String(b.url || "./").slice(0, 300), tag: String(b.tag || "rc").slice(0, 60) });
+  const to = b.to === "student" ? "student" : b.to === "class" ? "class" : b.to === "qa" ? "qa" : b.to === "media" ? "media" : b.to === "team" ? "team" : "teacher";
+  const vars = o => { const r = {}; if (o && typeof o === "object") for (const k of Object.keys(o).slice(0, 6)) if (/^[a-z]{1,8}$/.test(k)) r[k] = String(o[k] == null ? "" : o[k]).slice(0, 100); return r; };
+  const msg = JSON.stringify({ title: String(b.title || "Reading class").slice(0, 80), body: String(b.body || "").slice(0, 160), url: String(b.url || "./").slice(0, 300), tag: String(b.tag || "rc").slice(0, 60),
+    tk: String(b.tk || "").slice(0, 120), tv: vars(b.tv), bk: String(b.bk || "").slice(0, 120), bv: vars(b.bv) });
   // the database decides who this person may notify
-  const r = await fetch(url + "/rest/v1/rpc/push_targets", { method: "POST", headers: { apikey: key, authorization: auth, "content-type": "application/json" }, body: JSON.stringify({ p_to: to, p_student: (to === "class" ? b.course : b.student) || null }) });
+  // each phone can switch topics off (questions, marks, fees…): push_targets2 leaves those phones out
+  const topic = /^[a-z]{2,12}$/.test(String(b.topic || "")) ? b.topic : null;
+  const args = { p_to: to, p_student: (to === "class" ? b.course : to === "qa" ? b.question : to === "media" ? b.org : b.student) || null };
+  const ask = (fn, body) => fetch(url + "/rest/v1/rpc/" + fn, { method: "POST", headers: { apikey: key, authorization: auth, "content-type": "application/json" }, body: JSON.stringify(body) });
+  let r = topic ? await ask("push_targets2", Object.assign({ p_topic: topic }, args)) : null;
+  if (!r || r.status === 404) r = await ask("push_targets", args);   // a database not updated yet
   if (!r.ok) return json({ error: "not allowed" }, 403);
   const subs = await r.json();
   let sent = 0;
