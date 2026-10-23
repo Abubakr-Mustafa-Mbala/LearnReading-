@@ -1883,6 +1883,11 @@ details.script>div{white-space:pre-wrap;margin-top:6px;max-height:30vh;overflow:
 .qawho{display:flex;flex-direction:column;gap:6px;padding:12px;border-radius:14px;background:var(--paper);border:1px solid var(--line)}.qawho small{color:var(--ink-3)}
 .qawho .chip.on{background:var(--blue-soft);color:var(--blue);box-shadow:inset 0 0 0 1.5px var(--blue)}
 .dsimple{grid-column:1/-1;margin:0}
+
+.sdpill{flex:0 0 auto;font:700 11px var(--font);font-style:normal;color:var(--on-blue);background:var(--blue);border-radius:99px;padding:3px 9px}.sdpill.warn{background:#E3A008;color:#1B1B1B}
+.subj .sart{position:relative}.subjnew{position:absolute;top:8px;right:8px;font:700 11px var(--font);font-style:normal;background:#fff;color:var(--navy);border-radius:99px;padding:2px 8px}
+.sendto .sendlist{display:flex;flex-direction:column;max-height:40vh;overflow:auto;gap:2px}.sendto .row.on{background:var(--blue-soft)}
+.hwsend{display:inline-flex;align-items:center;gap:5px;margin-top:6px;font-size:13px}
 /* ================= the week and the plan ================= */
 .week{background:var(--card);border:1px solid var(--line);border-radius:var(--r-card);padding:12px;display:flex;flex-direction:column;gap:10px;box-shadow:var(--lift)}
 .wkstrip{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:4px}
@@ -12922,6 +12927,11 @@ notify pgrst, 'reload schema';
     </div>`;
   }
 
+  function HwSend({ m }) {
+    const s = useStore(), [open, setOpen] = useState(false), st = (s.students || []).find(x => x.id === m.student);
+    return html`<button class="linkbtn hwsend" onClick=${() => setOpen(true)}><${Ic.send} size=${14}/>Send this to other students</button>
+      ${open ? html`<${SendTo} s=${s} course=${st ? st.course || "read" : null} title=${exLabel(hwData(m))} what="A homework" skip=${m.student} onSend=${(L, note) => sendHomework(s, m, L, note)} onClose=${() => setOpen(false)}/>` : null}`;
+  }
   function HwCard({ m, msgs, teacher, onOpen }) {
     const d = hwData(m), items = d.items || [];
     const ans = answersFor(m.id, msgs), mk = ans ? marksFor(ans.id, msgs) : null, sc = scoreOf(mk);
@@ -17340,7 +17350,7 @@ notify pgrst, 'reload schema';
     if (m.kind === "hw" || m.kind === "hwans") {
       const mine = m.from === role;
       return html`<div data-mid=${m.id} class=${"msg " + (mine ? "me" : "them")}>
-        ${m.kind === "hw" ? html`<${HwCard} m=${m} msgs=${msgs || []} teacher=${teacher} onOpen=${() => onHw && onHw(m)}/>` : html`<${AnsChip} m=${m} msgs=${msgs || []} teacher=${teacher} onOpen=${() => onAns && onAns(m)}/>`}
+        ${m.kind === "hw" ? html`<${HwCard} m=${m} msgs=${msgs || []} teacher=${teacher} onOpen=${() => onHw && onHw(m)}/>${teacher ? html`<${HwSend} m=${m}/>` : null}` : html`<${AnsChip} m=${m} msgs=${msgs || []} teacher=${teacher} onOpen=${() => onAns && onAns(m)}/>`}
         <${Meta} m=${m} me=${mine} teacher=${teacher} onDel=${onDel} onRetry=${onRetry}/>
       </div>`;
     }
@@ -32299,19 +32309,29 @@ notify pgrst, 'reload schema';
       <b>${x.t.at}</b><span><span dir="auto">${x.c.name}</span><small>${x.t.mins} min${x.t.host ? " · " + x.t.host : ""}${x.t.note ? " · " + x.t.note : ""}${x.t.link ? " · online" : ""}</small></span>
       ${clashes.has(x.t.id) ? html`<i class="cl">Clash</i>` : now && x === upNext ? html`<i>Next</i>` : null}</button>`;
 
+    let lastId = null; try { lastId = localStorage.getItem("rc.lastClass"); } catch (e) {}
+    const lastC = cls.find(c => c.id === lastId);
+    const sumLine = [today.length ? today.length + " class" + (today.length === 1 ? "" : "es") + " today" : "No classes today", s.students.length + " student" + (s.students.length === 1 ? "" : "s"), waiting.length ? waiting.length + " waiting for you" : null].filter(Boolean).join(" · ");
+    const qaHere = qaNew && qaMine(s, me);
     const home = html`
-      <div class="dhello"><small>${new Date().toLocaleDateString(undefined, { weekday: "long", day: "numeric", month: "long" })}</small><h1>${dashGreeting()}</h1></div>
-      ${s.platform && noVapid ? html`<button class="dwarn" onClick=${() => setSheet("setup")}><${Ic.bell} size=${20}/><span class="dcm"><b>Phone notifications aren't set up</b><small>Students' phones won't ring when a class starts, or when you answer. Tap to set them up.</small></span><${Ic.chev} size=${18}/></button>` : null}
-      <${StaffPushCard} s=${s} hide=${s.platform && noVapid}/>
+      <section class="shero pattern-bg"><small>${new Date().toLocaleDateString(undefined, { weekday: "long", day: "numeric", month: "long" })}</small>
+        <h1>${dashGreeting()}</h1><p>${sumLine}</p></section>
       ${s.roles ? html`<${RoleHello} s=${s}/>` : null}
-      <section aria-labelledby="dnh"><h2 id="dnh">Needs you</h2>
-        ${needs.length ? html`<div class="dpanel">${needs.map(n => html`<button key=${n.k} class="dneed" onClick=${n.go}><${Ic[n.icon]} size=${18}/><span>${n.t}${n.sub ? html`<span class="dsub" dir="auto">${n.sub}</span>` : null}</span><${Ic.chev} size=${16}/></button>`)}</div>`
-          : html`<div class="dclear"><${Ic.tick} size=${18}/><span>All caught up. Nothing is waiting for you.</span></div>`}
-      </section>
-      <section aria-labelledby="dth"><div class="dsech"><h2 id="dth">Today</h2><button class="linkbtn" onClick=${() => go("week")}>The whole week</button></div>
-        <div class="dpanel">${today.length ? today.map(x => html`<${Slot} key=${x.t.id} x=${x} now=${true}/>`)
-          : html`<p class="help dnone">No classes today.${cls.length ? "" : " Add a class first, then its times."}</p>`}</div>
-      </section>`;
+      <${StaffPushCard} s=${s} hide=${s.platform && noVapid}/>
+      ${upNext ? html`<button class="scont" onClick=${() => onPick(upNext.c.id)}><${DashIcon} name=${upNext.c.icon} tint=${upNext.c.tint}/><span class="dcm"><small>Up next · today at ${upNext.t.at}</small><b dir="auto">${upNext.c.name}</b></span><span class="btn slim">Open</span></button>`
+        : lastC ? html`<button class="scont" onClick=${() => onPick(lastC.id)}><${DashIcon} name=${lastC.icon} tint=${lastC.tint}/><span class="dcm"><small>Continue where you left off</small><b dir="auto">${lastC.name}</b></span><span class="btn slim">Open</span></button>` : null}
+      <div class="lsech"><h2>Today</h2><button class="btn slim sec" onClick=${() => go("week")}><${Ic.cal} size=${15}/>Whole week</button></div>
+      <div class="sday">
+        ${today.map(x => html`<button class="sdrow" key=${x.t.id} onClick=${() => onPick(x.c.id)}><span class="sdt"><b>${x.t.at}</b><small>${x.t.mins} min</small></span><span class="dcm"><b dir="auto">${x.c.name}</b><small dir="auto">${[x.t.host, x.t.note, x.t.link ? "online" : ""].filter(Boolean).join(" · ") || "Class time"}</small></span>${clashes.has(x.t.id) ? html`<i class="sdpill warn">Clash</i>` : x === upNext ? html`<i class="sdpill">Next</i>` : null}</button>`)}
+        ${qs ? html`<button class="sdrow" onClick=${() => setSheet("wait")}><span class="sdt"><${Ic.msg} size=${20}/></span><span class="dcm"><b>Students' questions</b><small>${qs} waiting for your answer</small></span><${Ic.chev} size=${18}/></button>` : null}
+        ${hw ? html`<button class="sdrow" onClick=${() => setSheet("wait")}><span class="sdt"><${Ic.book} size=${20}/></span><span class="dcm"><b>Homework to mark</b><small>${hw} handed in</small></span><${Ic.chev} size=${18}/></button>` : null}
+        ${qaHere ? html`<button class="sdrow" onClick=${() => onPick("qa")}><span class="sdt"><${Ic.qa} size=${20}/></span><span class="dcm"><b>Questions & answers</b><small>${qaNew} new</small></span><${Ic.chev} size=${18}/></button>` : null}
+        ${!today.length && !qs && !hw && !qaHere ? html`<p class="help sdnone">No classes today.${cls.length ? "" : " Add a class first, then its times."}</p>` : null}
+      </div>
+      ${seeClasses(s) ? html`<div class="lsech"><h2>My classes</h2>${(s.schemaVer || 0) >= 13 && can(s, "site") ? html`<button class="btn slim sec" onClick=${() => onPick("academy")}><${Ic.plus} size=${15}/>New class</button>` : null}</div>
+      ${cls.length ? html`<div class="subjrow">${cls.map((c, i) => { const n = count(c.id), u = unread(c.id);
+          return html`<button key=${c.id} class="subj" onClick=${() => onPick(c.id)}><span class=${"sart art-" + ["green", "purple", "blue", "navy"][i % 4]}><b dir="auto">${c.name}</b>${u ? html`<i class="subjnew">${u} new</i>` : null}</span><span class="scb"><small>${n} student${n === 1 ? "" : "s"}</small></span></button>`; })}</div>`
+        : html`<div class="dempty"><p>No classes yet.</p>${can(s, "site") ? html`<button class="btn" onClick=${() => onPick("academy")}>Add your first class</button>` : null}</div>`}` : null}`;
 
     const classes = html`
       <div class="dsech"><h2>Classes</h2>${(s.schemaVer || 0) >= 13 && can(s, "site") ? html`<button class="btn slim sec" onClick=${() => onPick("academy")}><${Ic.plus} size=${16}/>New class</button>` : null}</div>
@@ -32341,6 +32361,7 @@ notify pgrst, 'reload schema';
     const tools = dashTools(s).filter(x => !simple || ["qa", "settings", "mediawork", "games"].includes(x.k));
     const more = html`
       <h2>More</h2>
+      ${s.platform && noVapid ? html`<button class="dwarn" onClick=${() => setSheet("setup")}><${Ic.bell} size=${20}/><span class="dcm"><b>Phone notifications aren't set up</b><small>Students' phones won't ring when a class starts, or when you answer. Tap to set them up.</small></span><${Ic.chev} size=${18}/></button>` : null}
       <div class="dtgrid">${tools.map(x => html`<button key=${x.k} class="dtile dtool" onClick=${() => tap(x.k)}><${DashIcon} name=${x.icon} tint="navy"/><b>${x.t}</b><small>${x.d}</small></button>`)}
         ${simple ? html`<p class="help dsimple">Showing just your teaching. <button class="linkbtn" onClick=${() => { lsSet("rc.simple", null); setSimple(false); }}>Show everything</button></p>` : null}
         ${s.platform ? html`<button class="dtile" onClick=${() => setSheet("setup")}><${DashIcon} name="tick" tint="green"/><b>Website setup</b><small>Check the keys: notifications, AI, calls</small></button>` : null}</div>`;
@@ -33774,10 +33795,43 @@ notify pgrst, 'reload schema';
   }
 
   // ---- the books of a class: you add them and choose who reads them; students open the ones you share
+  // pick students (one, several, or the whole class) to send something to
+  function SendTo({ s, course, title, what, onSend, onClose, skip }) {
+    useBack(onClose, true);
+    const L = (s.students || []).filter(x => x.id !== skip).filter(x => !course || (x.course || "read") === course || (s.enrolments || []).some(e => e.student === x.id && e.course === course));
+    const [pick, setPick] = useState([]), [note, setNote] = useState(""), [busy, setBusy] = useState(false);
+    const tog = id => setPick(pick.includes(id) ? pick.filter(x => x !== id) : pick.concat(id));
+    async function go() { setBusy(true); try { await onSend(L.filter(x => pick.includes(x.id)), note.trim()); toast("Sent to " + (pick.length === 1 ? "1 student" : pick.length + " students") + "."); onClose(); } catch (e) { toast(errText(e)); setBusy(false); } }
+    return html`<div class="scrim" onClick=${e => { if (e.target === e.currentTarget) onClose(); }}><div class="sheet sendto" role="dialog" aria-label="Send to students">
+      <div class="sethead"><b>Send to students</b><button class="iconbtn" onClick=${onClose} aria-label="Close"><${Ic.x} size=${20}/></button></div>
+      <p class="help" dir="auto">${what}: <b>${title}</b>. It goes straight to their home screen, and their phone is told.</p>
+      ${L.length > 1 ? html`<button class="row allrow" onClick=${() => setPick(pick.length === L.length ? [] : L.map(x => x.id))}><span class="av allav">${L.length}</span><b>${pick.length === L.length ? "Nobody" : "Everyone in this class"}</b></button>` : null}
+      <div class="sendlist">${L.map(x => html`<button key=${x.id} class=${"row" + (pick.includes(x.id) ? " on" : "")} role="checkbox" aria-checked=${pick.includes(x.id) ? "true" : "false"} onClick=${() => tog(x.id)}><span class="av" style=${"background:" + (x.color || COLORS[0])}>${pick.includes(x.id) ? "✓" : initial(x.name)}</span><span dir="auto">${x.name}</span></button>`)}</div>
+      ${!L.length ? html`<p class="help">No students in this class yet.</p>` : null}
+      <input class="qain" dir="auto" value=${note} maxlength="200" placeholder="A note with it (optional)" onInput=${e => setNote(e.target.value)}/>
+      <button class="btn" disabled=${busy || !pick.length} onClick=${go}>${busy ? "Sending…" : pick.length ? "Send to " + (pick.length === 1 ? "1 student" : pick.length + " students") : "Choose who gets it"}</button>
+    </div></div>`;
+  }
+  const SENT_BOOK = "📚 ";
+  const lessonFor = (s, st) => st.unlocked || ((st.course || "read") === "read" ? (s.lessons[0] || {}).id : ((s.ar_lessons || []).find(l => (l.course || "ar") === st.course) || {}).id) || "-";
+  async function sendBook(s, b, list, note) {
+    if (!b.shared) await update("books/" + b.id, { shared: true });
+    for (const st of list) {
+      await retry(() => rt.db.collection("msgs").doc().set({ student: st.id, lesson: lessonFor(s, st), from: "teacher", kind: "text", text: SENT_BOOK + b.title + (note ? "\n" + note : ""), hw: false, point: [], seen: false, secs: 0, asset: null, cid: uid() }));
+      pushSend({ topic: "reply", to: "student", student: st.id, title: "📚 A book from your teacher", body: b.title, url: "./", tag: "book-" + b.id });
+    }
+  }
+  async function sendHomework(s, m, list, note) {
+    for (const st of list) {
+      if (st.id === m.student) continue;
+      await sendRow({ student: st.id, lesson: m.lesson, from: "teacher", kind: "hw", hw: true, asset: m.asset || null, secs: m.secs || 0, text: m.text });
+      if (note) await sendRow({ student: st.id, lesson: m.lesson, from: "teacher", kind: "text", text: note });
+    }
+  }
   function BooksShelf({ s, course, teacher, onClose }) {
     useBack(onClose, !!onClose);
     const books = (s.books || []).filter(b => (b.course || "ar") === course && (b.kind || "book") === "book" && (teacher || b.shared));
-    const [busy, setBusy] = useState(null), [open, setOpen] = useState(null), [arm, setArm] = useState(null), [name, setName] = useState(null);
+    const [busy, setBusy] = useState(null), [open, setOpen] = useState(null), [arm, setArm] = useState(null), [name, setName] = useState(null), [sendB, setSendB] = useState(null);
     const fileRef = useRef(null);
     async function onFiles(e) {
       const files = Array.from(e.target.files || []); e.target.value = ""; if (!files.length) return;
@@ -33789,12 +33843,15 @@ notify pgrst, 'reload schema';
       setBusy(null);
     }
     async function del(b) { if (arm !== b.id) { setArm(b.id); setTimeout(() => setArm(null), 3500); return; } try { await remove("books/" + b.id); if (rt.assets) [...b.pages, b.file].filter(Boolean).forEach(a => rt.assets.delete(a).catch(() => {})); } catch (e) { toast(errText(e)); } }
+    const sendSheet = sendB ? html`<${SendTo} s=${s} course=${course} title=${sendB.title} what="A book" onSend=${(L, note) => sendBook(s, sendB, L, note)} onClose=${() => setSendB(null)}/>` : null;
     const body = html`<section class="list">
+      ${sendSheet}
       ${teacher ? html`<p class="help">A real book, exactly as printed: its pages, pictures and all. Add a PDF, or photos of the pages. Teach from it on the board (Lessons → a lesson → ＋ → Book pages), and share it so students can read it and download it.</p>` : html`<p class="help">Books from your teacher. Tap one to read it; pinch to zoom.</p>`}
       ${books.length ? books.map(b => html`<div key=${b.id} class="row bookrow">
           <button class="bookcover" onClick=${() => setOpen(b)} aria-label=${"Open " + b.title}>${b.pages[0] ? html`<img src=${srcFor(b.pages[0])} alt="" loading="lazy"/>` : html`<span>📕</span>`}</button>
           <span class="rowmain"><b dir="auto">${b.title}</b><small>${b.pages.length} pages${b.file ? " · PDF" : ""}${teacher ? (b.shared ? " · students can read it" : " · only you") + (b.status === "finished" ? " · finished" : "") : ""}</small>
             ${teacher ? html`<span class="bookops">
+              <button class="btn slim sec" onClick=${() => setSendB(b)}><${Ic.send} size=${15}/>Send to students</button>
               <button class=${"gamesw slim" + (b.shared ? " on" : "")} onClick=${() => update("books/" + b.id, { shared: !b.shared }).catch(e => toast(errText(e)))} aria-pressed=${b.shared ? "true" : "false"}><span class="knob"></span><span>Students can read it</span></button>
               ${(s.schemaVer || 0) >= 15 ? html`<span class="seg mini bkst" role="radiogroup" aria-label="Where the class is with it"><button role="radio" aria-checked=${b.status !== "finished" ? "true" : "false"} class=${b.status !== "finished" ? "on" : ""} onClick=${() => update("books/" + b.id, { status: "current" }).catch(e => toast(errText(e)))}>Studying now</button><button role="radio" aria-checked=${b.status === "finished" ? "true" : "false"} class=${b.status === "finished" ? "on" : ""} onClick=${() => update("books/" + b.id, { status: "finished" }).catch(e => toast(errText(e)))}>Finished</button></span>
                 ${(s.units || []).some(u => u.course === course) ? html`<select class="chipsel" value=${b.unit || ""} aria-label="Its recorded explanation" onChange=${e => update("books/" + b.id, { unit: e.target.value || null }).catch(er => toast(errText(er)))}><option value="">Explanation: no unit linked</option>${(s.units || []).filter(u => u.course === course).map(u => html`<option key=${u.id} value=${u.id}>Explanation: ${u.title}</option>`)}</select>` : null}` : null}
@@ -34088,6 +34145,9 @@ notify pgrst, 'reload schema';
       ${exams.filter(x => x.k !== "marked" || Date.now() - (x.a ? x.a.startedAt : 0) < 14 * 864e5).length ? html`<div class="lsech"><h2>Exams</h2></div><div class="sday">${exams.map(exRow)}</div>` : null}
       ${(s.schemaVer || 0) >= 17 ? html`<${ReciteStudent} s=${s} st=${st} subjects=${subjects}/>` : null}
       ${(s.schemaVer || 0) >= 19 ? html`<${ComingUp} s=${s} courses=${subjects}/>` : null}
+      ${(() => { const B = mine.filter(m => m.from === "teacher" && m.kind === "text" && String(m.text || "").indexOf(SENT_BOOK) === 0 && Date.now() - (m.at || 0) < 21 * 864e5).slice(-3).reverse();
+        return B.length ? html`<div class="lsech"><h2>Sent to you</h2></div><div class="sday">${B.map(m => { const [t, ...rest] = String(m.text).slice(SENT_BOOK.length).split("\n");
+          return html`<button class="sdrow" key=${m.id} onClick=${() => { if (!m.seen) update("msgs/" + m.id, { seen: true }).catch(() => {}); setTab("library"); }}><span class="sdt"><${Ic.library} size=${20}/></span><span class="dcm"><b dir="auto">${t}</b><small dir="auto">${rest.join(" ") || "A book from your teacher · in your Library"}</small></span>${!m.seen ? html`<i class="sdpill">New</i>` : html`<${Ic.chev} size=${18}/>`}</button>`; })}</div>` : null; })()}
       ${notes.length ? html`<div class="lsech"><h2>From your teacher</h2></div>${notes.map(n => html`<div class="snote" key=${n.id}><${Ic.mega} size=${20}/><span class="dcm"><b dir="auto">${n.title}</b>${n.body ? html`<small dir="auto">${n.body}</small>` : null}<small>${courseName(n.course)} · ${fmtWhen(n.at)}</small></span></div>`)}` : null}
       ${subjCards || html`<div class="lsech"><h2>My class</h2></div>
         <button class="scls" onClick=${() => setTab("learn")}><span class=${"sart art-" + (board ? "green" : "navy")}><b dir="auto">${cname}</b></span><span class="scb"><small>${doneN} of ${L.length} lessons</small><span class="sbar"><i style=${"width:" + (L.length ? Math.round(doneN / L.length * 100) : 0) + "%"}></i></span></span></button>`}`;
